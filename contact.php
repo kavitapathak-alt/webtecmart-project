@@ -32,7 +32,7 @@ $contactInfo = [
 
 <style>
     /* ============================================================
-       CONTACT PAGE — Pixel-perfect Next.js clone
+       CONTACT PAGE — Webtecmart Next.js clone
        ============================================================ */
     .cp-main {
         min-height: 100vh;

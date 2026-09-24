@@ -4,7 +4,7 @@ function renderHeroSection(): void
     ?>
     <style>
         /* ============================================================
-           HERO SECTION — Pixel-perfect Next.js clone
+           HERO SECTION — Webtecmart Next.js clone
         ============================================================ */
         .hero {
             position: relative;

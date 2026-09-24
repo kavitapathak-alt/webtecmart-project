@@ -65,7 +65,7 @@ function apIcon(string $name): string {
 
 <style>
     /* ============================================================
-       ABOUT PAGE — Pixel-perfect Next.js clone
+       ABOUT PAGE — Webtecmart Next.js clone
        ============================================================ */
     .ap-section {
         position: relative;

@@ -56,7 +56,7 @@ function bpIcon(string $name): string {
 
 <style>
     /* ============================================================
-       BLOG POST PAGE — Pixel-perfect Next.js clone
+       BLOG POST PAGE — Webtecmart Next.js clone
        ============================================================ */
     .bp-main {
         min-height: 100vh;

@@ -129,7 +129,7 @@ $trustBadges = [
 
 <style>
     /* ============================================================
-       PACKAGES PAGE — Pixel-perfect Next.js clone
+       PACKAGES PAGE — Webtecmart Next.js clone
        ============================================================ */
     .pkg-page {
         position: relative;

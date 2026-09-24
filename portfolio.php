@@ -169,7 +169,7 @@ $categoryIconMap = [
 
 <style>
     /* ============================================================
-       PORTFOLIO PAGE — Pixel-perfect Next.js clone
+       PORTFOLIO PAGE — Webtecmart Next.js clone
        ============================================================ */
     .port-page {
         position: relative;

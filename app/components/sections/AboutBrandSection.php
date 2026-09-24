@@ -64,7 +64,7 @@ function renderAboutBrandSection(): void
     ?>
     <style>
         /* ============================================================
-           ABOUT SECTION — Pixel-perfect Next.js clone
+           ABOUT SECTION — Webtecmart Next.js clone
         ============================================================ */
         .about-section {
             position: relative;

@@ -53,7 +53,7 @@ function renderContactFormSection(): void
     ?>
     <style>
         /* ============================================================
-           CONTACT FORM SECTION — Pixel-perfect Next.js clone
+           CONTACT FORM SECTION — Webtecmart Next.js clone
         ============================================================ */
         .cfs-section {
             position: relative;

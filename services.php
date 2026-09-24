@@ -79,7 +79,7 @@ $faqs = [
 
 <style>
     /* ============================================================
-       SERVICES PAGE — Pixel-perfect Next.js clone
+       SERVICES PAGE — Webtecmart Next.js clone
        ============================================================ */
     .sp-page {
         position: relative;

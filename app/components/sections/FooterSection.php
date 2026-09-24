@@ -74,7 +74,7 @@ function renderFooterSection(): void
     ?>
     <style>
         /* ============================================================
-           FOOTER — Pixel-perfect Next.js clone
+           FOOTER — Webtecmart Next.js clone
         ============================================================ */
         .site-footer {
             position: relative;
