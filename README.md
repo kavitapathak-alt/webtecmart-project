@@ -1,4 +1,4 @@
-# PixelPulse Digital Marketing PHP Project
+# 'WebTecMart Digital Marketing PHP Project
 
 A simple digital marketing agency website built with PHP and SQLite. It includes:
 

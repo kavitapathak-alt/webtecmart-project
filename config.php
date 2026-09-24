@@ -2,7 +2,7 @@
 session_start();
 date_default_timezone_set('Asia/Kolkata');
 
-const APP_NAME = 'PixelPulse Digital';
+const APP_NAME = 'WebTecMart Digital';
 const APP_URL = 'http://localhost:8000';
 const DB_PATH = __DIR__ . '/storage/site.db';
 
