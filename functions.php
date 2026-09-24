@@ -85,6 +85,70 @@ function testimonials(): array
     return cmsContent('testimonial', $defaults);
 }
 
+function successStories(): array
+{
+    $defaults = [
+        [
+            'id' => 1,
+            'title' => 'Bharat Tex Fair 2026',
+            'industry' => 'Global Textile Event',
+            'flag' => '🇮🇳',
+            'country' => 'India',
+            'duration' => '9 Months',
+            'result' => '400% Organic Growth',
+            'description' => 'Global textile event supported by the Ministry of Textiles, Government of India. Transformed organic visibility and established dominance in global textile search space.',
+            'image' => '/assets/images/case-study-1.jpg',
+            'imageFit' => 'cover',
+            'website' => 'https://bharat-tex.com/',
+            'accentFrom' => '#C4007A',
+            'accentTo' => '#E0398F',
+            'metrics' => [
+                ['icon' => 'trending', 'value' => 400, 'suffix' => '%', 'label' => 'Organic Growth'],
+                ['icon' => 'search', 'value' => 200, 'suffix' => '+', 'label' => 'Keywords Ranked'],
+                ['icon' => 'trophy', 'value' => 80, 'suffix' => '+', 'label' => 'Top 3 Rankings'],
+                ['icon' => 'chart', 'value' => 180, 'suffix' => '+', 'label' => 'Leads / Month'],
+            ],
+            'keywords' => [
+                ['text' => 'World largest textile fair 2026', 'top' => true],
+                ['text' => 'Global textile Fair', 'top' => true],
+                ['text' => 'Global textile sourcing fair 2026', 'top' => true],
+                ['text' => 'Website Development'],
+                ['text' => 'Digital Marketing Agency'],
+            ],
+        ],
+        [
+            'id' => 2,
+            'title' => 'Autumn fair 2026',
+            'industry' => 'Local Business',
+            'flag' => '🇦🇪',
+            'country' => 'UAE',
+            'duration' => '4 Months',
+            'result' => 'Top 3 Rankings',
+            'description' => 'India is a trusted global sourcing partner, with the 62nd IHGF Delhi Autumn Fair 2026 serving as a one-stop sourcing destination.',
+            'image' => '/assets/images/case-study-2.jpg',
+            'imageFit' => 'contain',
+            'website' => 'https://ihgfdelhifair.in/',
+            'accentFrom' => '#C4007A',
+            'accentTo' => '#E0398F',
+            'metrics' => [
+                ['icon' => 'trending', 'value' => 300, 'suffix' => '%', 'label' => 'Footfall Increase'],
+                ['icon' => 'search', 'value' => 85, 'suffix' => '+', 'label' => 'Keywords Ranked'],
+                ['icon' => 'trophy', 'value' => 22, 'suffix' => '', 'label' => 'Top 3 Rankings'],
+                ['icon' => 'chart', 'value' => 10, 'suffix' => '', 'label' => 'Locations Ranked #1'],
+            ],
+            'keywords' => [
+                ['text' => 'Autumn Fair', 'top' => true],
+                ['text' => 'Autumn Fair 2026', 'top' => true],
+                ['text' => 'Autumn Fair Dates 2026', 'top' => true],
+                ['text' => 'Autumn Fair Asia 2026'],
+                ['text' => 'Autumn Sourcing Fair 2026'],
+            ],
+        ],
+    ];
+
+    return cmsContent('success_story', $defaults);
+}
+
 function blogPosts(): array
 {
     $defaults = [
@@ -201,15 +265,38 @@ function cmsAllContent(): array
     return db()->query('SELECT * FROM content_items ORDER BY content_type ASC, sort_order ASC, id ASC')->fetchAll();
 }
 
-function cmsSave(string $type, string $title, string $summary, string $body, array $metadata = []): void
+function cmsGetById(int $id): ?array
 {
+    $stmt = db()->prepare('SELECT * FROM content_items WHERE id = :id LIMIT 1');
+    $stmt->execute([':id' => $id]);
+    $row = $stmt->fetch();
+    return $row ?: null;
+}
+
+function cmsSave(string $type, string $title, string $summary, string $body, array $metadata = [], ?int $id = null): void
+{
+    $payload = json_encode($metadata, JSON_UNESCAPED_UNICODE);
+
+    if ($id !== null) {
+        $stmt = db()->prepare('UPDATE content_items SET content_type = :type, title = :title, summary = :summary, body = :body, metadata = :metadata, updated_at = CURRENT_TIMESTAMP WHERE id = :id');
+        $stmt->execute([
+            ':type' => $type,
+            ':title' => $title,
+            ':summary' => $summary,
+            ':body' => $body,
+            ':metadata' => $payload,
+            ':id' => $id,
+        ]);
+        return;
+    }
+
     $stmt = db()->prepare('INSERT INTO content_items (content_type, title, summary, body, metadata, sort_order) VALUES (:type, :title, :summary, :body, :metadata, :sort_order)');
     $stmt->execute([
         ':type' => $type,
         ':title' => $title,
         ':summary' => $summary,
         ':body' => $body,
-        ':metadata' => json_encode($metadata, JSON_UNESCAPED_UNICODE),
+        ':metadata' => $payload,
         ':sort_order' => 999,
     ]);
 }
