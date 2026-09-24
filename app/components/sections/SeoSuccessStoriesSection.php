@@ -1058,7 +1058,7 @@ function renderSeoSuccessStoriesSection(): void
                             <!-- Client Badge -->
                             <div class="spo-client-badge">
                                 <div class="spo-client-avatar" style="background: linear-gradient(135deg, <?= $item['accentFrom'] ?>, <?= $item['accentTo'] ?>)">
-                                    <?= htmlspecialchars(_substr($item['title'], 0, 1)) ?>
+                                    <?= htmlspecialchars(substr($item['title'], 0, 1)) ?>
                                 </div>
                                 <div>
                                     <div class="spo-client-name"><?= htmlspecialchars($item['title']) ?></div>
