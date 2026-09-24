@@ -3,17 +3,17 @@ function renderTrustedPartnersSection(): void
 {
     // Aapke logos — yahan apne actual logo paths daalein
     $logos = [
-        ['name' => 'Client Logo 1',  'src' => '/logo-1.png'],
-        ['name' => 'Client Logo 2',  'src' => '/logos-2.png'],
-        ['name' => 'Client Logo 3',  'src' => '/logos-3.jpeg'],
-        ['name' => 'Client Logo 4',  'src' => '/logos-4.jpeg'],
-        ['name' => 'Client Logo 5',  'src' => '/logos-5.jpeg'],
-        ['name' => 'Client Logo 6',  'src' => '/logos-6.jpeg'],
-        ['name' => 'Client Logo 7',  'src' => '/logos-7.jpeg'],
-        ['name' => 'Client Logo 8',  'src' => '/logos-8.jpeg'],
-        ['name' => 'Client Logo 9',  'src' => '/logos-9.jpeg'],
-        ['name' => 'Client Logo 10', 'src' => '/logos-10.jpeg'],
-        ['name' => 'Client Logo 11', 'src' => '/logos-11.jpeg'],
+        ['name' => 'Client Logo 1',  'src' => '/assets/images/logo-1.png'],
+        ['name' => 'Client Logo 2',  'src' => '/assets/images/logos-2.png'],
+        ['name' => 'Client Logo 3',  'src' => '/assets/images/logos-3.jpeg'],
+        ['name' => 'Client Logo 4',  'src' => '/assets/images/logos-4.jpeg'],
+        ['name' => 'Client Logo 5',  'src' => '/assets/images/logos-5.jpeg'],
+        ['name' => 'Client Logo 6',  'src' => '/assets/images/logos-6.jpeg'],
+        ['name' => 'Client Logo 7',  'src' => '/assets/images/logos-7.jpeg'],
+        ['name' => 'Client Logo 8',  'src' => '/assets/images/logos-8.jpeg'],
+        ['name' => 'Client Logo 9',  'src' => '/assets/images/logos-9.jpeg'],
+        ['name' => 'Client Logo 10', 'src' => '/assets/images/logos-10.jpeg'],
+        ['name' => 'Client Logo 11', 'src' => '/assets/images/logos-11.jpeg'],
     ];
 
     $groupSize = 3;
