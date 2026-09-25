@@ -46,6 +46,7 @@ function renderContactFormSection(): void
             'user'       => '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
             'message'    => '<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>',
             'send'       => '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
+            'service'    => '<path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/>',
         ];
         $path = $icons[$name] ?? '';
         return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
@@ -468,7 +469,8 @@ function renderContactFormSection(): void
         }
 
         .cfs-input,
-        .cfs-textarea {
+        .cfs-textarea,
+        .cfs-select {
             width: 100%;
             border-radius: 8px;
             border: 1px solid #E5E7EB;
@@ -485,13 +487,42 @@ function renderContactFormSection(): void
             color: #9CA3AF;
         }
         .cfs-input:focus,
-        .cfs-textarea:focus {
+        .cfs-textarea:focus,
+        .cfs-select:focus {
             border-color: #C4007A;
             box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
         }
         .cfs-textarea {
             resize: none;
             min-height: 60px;
+        }
+
+        /* Service Select */
+        .cfs-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C4007A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px 12px;
+            padding-right: 28px;
+            cursor: pointer;
+            accent-color: #C4007A;
+            color-scheme: light;
+        }
+        .cfs-select:invalid {
+            color: #9CA3AF;
+        }
+        .cfs-select option {
+            color: #111827;
+            background: #fff;
+        }
+        .cfs-select option:checked,
+        .cfs-select option:hover,
+        .cfs-select option:focus {
+            background: #C4007A;
+            color: #fff;
         }
 
         /* Message Field — grows */
@@ -643,7 +674,8 @@ function renderContactFormSection(): void
             .cfs-required-note { font-size: 12px; margin-bottom: 16px; }
             .cfs-form-row { gap: 12px; margin-bottom: 12px; }
             .cfs-field-label { font-size: 12px; margin-bottom: 4px; }
-            .cfs-input, .cfs-textarea { padding: 10px 12px 10px 36px; font-size: 0.875rem; }
+            .cfs-input, .cfs-textarea, .cfs-select { padding: 10px 12px 10px 36px; font-size: 0.875rem; }
+            .cfs-select { padding-right: 32px; }
             .cfs-input-wrap svg { width: 16px; height: 16px; left: 12px; }
             .cfs-input-wrap.textarea-wrap svg { top: 12px; }
             .cfs-textarea { min-height: 70px; }
@@ -675,7 +707,8 @@ function renderContactFormSection(): void
             .cfs-contact-text .label { font-size: 11px; }
             .cfs-contact-text .value { font-size: 0.875rem; }
             .cfs-form-card { padding: 24px; }
-            .cfs-input, .cfs-textarea { padding: 10px 12px 10px 36px; font-size: 0.875rem; }
+            .cfs-input, .cfs-textarea, .cfs-select { padding: 10px 12px 10px 36px; font-size: 0.875rem; }
+            .cfs-select { padding-right: 32px; }
             .cfs-textarea { min-height: 80px; }
         }
 
@@ -694,7 +727,8 @@ function renderContactFormSection(): void
             .cfs-contact-item { padding: 10px 12px; }
             .cfs-contact-icon { width: 36px; height: 36px; }
             .cfs-form-card { padding: 32px; border-radius: 16px; }
-            .cfs-input, .cfs-textarea { padding: 10px 12px 10px 36px; }
+            .cfs-input, .cfs-textarea, .cfs-select { padding: 10px 12px 10px 36px; }
+            .cfs-select { padding-right: 32px; }
             .cfs-textarea { min-height: 80px; }
         }
 
@@ -864,6 +898,27 @@ function renderContactFormSection(): void
                                     <div class="cfs-input-wrap">
                                         <?= cfsIcon('globe') ?>
                                         <input type="text" name="company" class="cfs-input" placeholder="Your company name">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 3: Service Required -->
+                            <div class="cfs-form-row" style="grid-template-columns: 1fr;">
+                                <div>
+                                    <label class="cfs-field-label">
+                                        Service Required <span>*</span>
+                                    </label>
+                                    <div class="cfs-input-wrap">
+                                        <?= cfsIcon('service') ?>
+                                        <select name="service" class="cfs-select" required>
+                                            <option value="" disabled selected>Select a service</option>
+                                            <option value="digital-business-branding">Digital Business Branding</option>
+                                            <option value="website-design-development">Website Design &amp; Development</option>
+                                            <option value="search-engine-optimization">Search Engine Optimization</option>
+                                            <option value="social-media-optimization">Social Media Optimization</option>
+                                            <option value="search-engine-marketing">Search Engine Marketing</option>
+                                            <option value="mobile-app-development">Mobile App Development</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>

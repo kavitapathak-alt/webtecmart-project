@@ -372,7 +372,8 @@ function renderHeroSection(): void
         }
 
         .hero-input,
-        .hero-textarea {
+        .hero-textarea,
+        .hero-select {
             width: 100%;
             border-radius: 8px;
             border: 1px solid rgba(196, 0, 122, 0.15);
@@ -385,13 +386,44 @@ function renderHeroSection(): void
             outline: none;
         }
 
+        .hero-select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C4007A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 14px 14px;
+            padding-right: 32px;
+            cursor: pointer;
+            accent-color: #C4007A;
+            color-scheme: light;
+        }
+
+        .hero-select:invalid {
+            color: #9CA3AF;
+        }
+
+        .hero-select option {
+            color: #111111;
+            background: #fff;
+        }
+
+        .hero-select option:checked,
+        .hero-select option:hover,
+        .hero-select option:focus {
+            background: #C4007A;
+            color: #fff;
+        }
+
         .hero-input::placeholder,
         .hero-textarea::placeholder {
             color: #9CA3AF;
         }
 
         .hero-input:focus,
-        .hero-textarea:focus {
+        .hero-textarea:focus,
+        .hero-select:focus {
             border-color: rgba(196, 0, 122, 0.5);
             box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
         }
@@ -707,8 +739,27 @@ function renderHeroSection(): void
                                 </div>
                             </div>
 
+                            <!-- Row 3: Service Required -->
+                            <div class="hero-form-row" style="grid-template-columns: 1fr;">
+                                <div class="hero-input-wrap">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
+                                    <select name="service" class="hero-select" required>
+                                        <option value="" disabled selected>Select Service Required *</option>
+                                        <option value="seo">SEO (Search Engine Optimization)</option>
+                                        <option value="ppc">PPC / Google Ads</option>
+                                        <option value="web-design-dev">Website Design &amp; Development</option>
+                                        <option value="social-media">Social Media Optimization</option>
+                                        <option value="digital-branding">Digital Business Branding</option>
+                                        <option value="ecommerce-seo">E-commerce SEO</option>
+                                        <option value="content-marketing">Content Marketing</option>
+                                        <option value="mobile-app-dev">Mobile App Development</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
                             <!-- Message -->
-                            <div class="hero-form-row" style="margin-bottom: 16px;">
+                            <div class="hero-form-row" style="grid-template-columns: 1fr; margin-bottom: 16px;">
                                 <div class="hero-input-wrap textarea-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
                                     <textarea name="message" class="hero-textarea" rows="3" placeholder="Enter your message here"></textarea>
