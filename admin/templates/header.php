@@ -14,14 +14,14 @@ $adminPage = basename($_SERVER['PHP_SELF']);
         :root { --admin-pink:#c4007a; --admin-pink-light:#e0398f; --admin-cream:#fbf8f1; --admin-ink:#211a29; --admin-muted:#716979; --admin-border:rgba(196,0,122,.13); }
         * { box-sizing:border-box; }
         html, body { margin:0; min-height:100%; }
-        body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--admin-cream); color:var(--admin-ink); }
+        body { font-family:var(--font-family-base); background:var(--admin-cream); color:var(--admin-ink); }
         a { color:inherit; text-decoration:none; }
         .admin-shell-header { position:sticky; top:0; z-index:100; background:rgba(255,255,255,.94); border-bottom:1px solid var(--admin-border); box-shadow:0 8px 24px rgba(44,20,40,.06); backdrop-filter:blur(16px); }
         .admin-shell-inner { max-width:1280px; min-height:78px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
         .admin-brand { display:flex; align-items:center; gap:10px; min-width:0; color:var(--admin-ink); font-weight:800; }
         .admin-brand-mark { width:48px; height:48px; flex:0 0 48px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--admin-pink-light),var(--admin-pink)); color:#fff; }
         .admin-brand-text { display:block; min-width:0; line-height:1.15; }
-        .admin-brand small { display:block; margin-top:2px; color:var(--admin-pink); font-size:.62rem; line-height:1; letter-spacing:.16em; }
+        .admin-brand small { display:block; margin-top:2px; color:var(--admin-pink); font-size:.7rem; line-height:1.2; letter-spacing:.12em; }
         .admin-nav { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
         .admin-nav a { padding:9px 13px; border-radius:999px; color:var(--admin-muted); font-size:.82rem; font-weight:700; }
         .admin-nav a:hover, .admin-nav a.active { color:#fff; background:linear-gradient(90deg,var(--admin-pink),var(--admin-pink-light)); }
@@ -36,6 +36,7 @@ $adminPage = basename($_SERVER['PHP_SELF']);
             .admin-brand small { letter-spacing:.12em; }
         }
     </style>
+    <link rel="stylesheet" href="/assets/css/typography.css">
 </head>
 <body>
 <header class="admin-shell-header">

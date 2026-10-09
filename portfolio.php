@@ -485,10 +485,7 @@ $categoryIconMap = [
         color: #4B5563;
         line-height: 1.625;
         margin: 0 0 16px;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
+        overflow-wrap: break-word;
     }
 
     .port-results {

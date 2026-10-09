@@ -153,7 +153,7 @@ function renderFooterSection(): void
         }
         .ft-brand-name .accent { color: #C4007A; }
         .ft-brand-tagline {
-            font-size: 10px;
+            font-size: 12px;
             color: rgba(196, 0, 122, 0.7);
             letter-spacing: 0.25em;
             text-transform: uppercase;
@@ -457,10 +457,10 @@ function renderFooterSection(): void
                         <a href="/index.php" class="ft-brand-link" aria-label="WebTecMart Home">
                             <img src="/assets/images/webtecmart-logo.png" alt="WebTecMart Logo" loading="lazy">
                             <div class="ft-brand-text">
-                                <h2 class="ft-brand-name">
+                                <span class="ft-brand-name">
                                     Web<span class="accent">TecMart</span>
-                                </h2>
-                                <p class="ft-brand-tagline">Digital Branding Agency</p>
+                                </span>
+                                <span class="ft-brand-tagline">Digital Branding Agency</span>
                             </div>
                         </a>
 
@@ -488,7 +488,7 @@ function renderFooterSection(): void
 
                     <!-- Column 2 — Quick Links -->
                     <div>
-                        <h3 class="ft-heading">Quick Links</h3>
+                        <h4 class="ft-heading">Quick Links</h4>
                         <ul class="ft-links">
                             <?php foreach ($quickLinks as $link): ?>
                                 <li>
@@ -503,7 +503,7 @@ function renderFooterSection(): void
 
                     <!-- Column 3 — Services -->
                     <div>
-                        <h3 class="ft-heading">Our Services</h3>
+                        <h4 class="ft-heading">Our Services</h4>
                         <ul class="ft-links">
                             <?php foreach ($services as $service): ?>
                                 <li>
@@ -518,7 +518,7 @@ function renderFooterSection(): void
 
                     <!-- Column 4 — Contact -->
                     <div>
-                        <h3 class="ft-heading">Get In Touch</h3>
+                        <h4 class="ft-heading">Get In Touch</h4>
 
                         <ul class="ft-contact-list">
                             <li>

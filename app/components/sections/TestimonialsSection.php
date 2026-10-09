@@ -344,10 +344,6 @@ function renderTestimonialsSection(): void
             color: #4B5563;
             line-height: 1.625;
             margin: 0 0 12px;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
         }
 
         /* Stars */

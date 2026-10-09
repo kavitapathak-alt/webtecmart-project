@@ -22,7 +22,7 @@ $navItems = [
     <meta name="description" content="WebTecMart helps brands grow through SEO, paid media, social campaigns, and conversion-focused web design.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
@@ -51,7 +51,7 @@ $navItems = [
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: var(--font-family-base);
             background: var(--bg);
             color: var(--deep);
             line-height: 1.6;
@@ -634,7 +634,7 @@ $navItems = [
             .brand-logo-wrap { margin-right: -12px; }
             .brand-name { font-size: 1.25rem; }
             .brand-tagline { font-size: 9px; letter-spacing: 0.2em; }
-            .brand-name .reg-mark { font-size: 7px; top: -3px; right: -10px; padding: 1px 4px; }
+            .brand-name .reg-mark { font-size: 8px; top: -3px; right: -10px; padding: 1px 4px; }
         }
 
         @media (max-width: 767px) {
@@ -651,8 +651,8 @@ $navItems = [
             .brand-logo { height: 64px; width: 64px; max-width: 64px; }
             .brand-logo-wrap { margin-right: -10px; }
             .brand-name { font-size: 1.1rem; }
-            .brand-tagline { font-size: 8px; letter-spacing: 0.15em; }
-            .brand-name .reg-mark { font-size: 6px; top: -2px; right: -8px; padding: 1px 3px; }
+            .brand-tagline { font-size: 10px; letter-spacing: 0.15em; }
+            .brand-name .reg-mark { font-size: 8px; top: -2px; right: -8px; padding: 1px 3px; }
 
             .menu-toggle { width: 40px; height: 40px; }
             .menu-toggle svg { width: 18px; height: 18px; }
@@ -662,9 +662,10 @@ $navItems = [
             .brand-logo { height: 56px; width: 56px; max-width: 56px; }
             .brand-logo-wrap { margin-right: -9px; }
             .brand-name { font-size: 1rem; }
-            .brand-tagline { font-size: 7px; }
+            .brand-tagline { font-size: 10px; }
         }
     </style>
+    <link rel="stylesheet" href="/assets/css/typography.css">
 </head>
 <body>
     <!-- ===== TOP BAR (hidden on mobile, like Next.js `hidden md:block`) ===== -->
@@ -704,10 +705,10 @@ $navItems = [
                 <span class="brand-icon" style="display:none;">W</span>
 
                 <div class="brand-text">
-                    <h1 class="brand-name">
+                    <span class="brand-name">
                         Web<span class="accent">TecMart<span class="reg-mark">®</span></span>
-                    </h1>
-                    <p class="brand-tagline">Digital Branding Agency</p>
+                    </span>
+                    <span class="brand-tagline">Digital Branding Agency</span>
                 </div>
             </a>
 

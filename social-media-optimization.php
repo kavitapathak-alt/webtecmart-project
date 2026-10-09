@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../app/templates/header.php';
-require_once __DIR__ . '/../app/templates/service-page-layout.php';
+require_once __DIR__ . '/app/templates/header.php';
+require_once __DIR__ . '/app/templates/service-page-layout.php';
 
 renderServicePageLayout([
     'icon' => 'share',
@@ -73,4 +73,4 @@ renderServicePageLayout([
     ],
 ]);
 
-require_once __DIR__ . '/../app/templates/footer.php';
+require_once __DIR__ . '/app/templates/footer.php';
