@@ -22,6 +22,10 @@ http://localhost:8000
 - Email: admin@pixelpulse.digital
 - Password: admin123
 
+## Contact form email notifications
+
+Contact form submissions are saved to SQLite before an email notification is sent to `info@webtecmart.com` by default. Set `CONTACT_NOTIFICATION_EMAIL` to change the recipient and `CONTACT_FROM_EMAIL` to set the sender address. PHP `mail()` must be configured to use a working SMTP/sendmail transport on the server; a saved lead is retained even if sending the notification fails.
+
 ## Files
 
 - index.php: landing page

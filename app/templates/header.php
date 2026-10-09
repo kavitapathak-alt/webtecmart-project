@@ -187,7 +187,7 @@ $navItems = [
             align-items: center;
             justify-content: space-between;
             gap: 18px;
-            padding: 8px 0;
+            padding: 6px 0;
             min-height: var(--header-h);
         }
 
@@ -195,7 +195,7 @@ $navItems = [
         .brand {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             color: var(--deep);
             flex-shrink: 0;
             transition: all 0.3s ease;
@@ -206,6 +206,8 @@ $navItems = [
             display: inline-flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+            margin-right: -14px;
         }
 
         .brand-logo-wrap::before {
@@ -224,9 +226,9 @@ $navItems = [
         }
 
         .brand-logo {
-            height: 64px;
-            width: auto;
-            max-width: 64px;
+            height: 72px;
+            width: 72px;
+            max-width: 72px;
             object-fit: contain;
             position: relative;
             z-index: 10;
@@ -628,14 +630,15 @@ $navItems = [
 
             .top-bar { font-size: 0.75rem; }
             .top-bar-inner { gap: 16px; }
-            .brand-logo { height: 56px; max-width: 56px; }
+            .brand-logo { height: 62px; width: 62px; max-width: 62px; }
+            .brand-logo-wrap { margin-right: -12px; }
             .brand-name { font-size: 1.25rem; }
             .brand-tagline { font-size: 9px; letter-spacing: 0.2em; }
             .brand-name .reg-mark { font-size: 7px; top: -3px; right: -10px; padding: 1px 4px; }
         }
 
         @media (max-width: 767px) {
-            :root { --topbar-h: 34px; --header-h: 70px; }
+            :root { --topbar-h: 34px; --header-h: 76px; }
 
             /* Hide top bar on mobile (matches Next.js `hidden md:block`) */
             .top-bar { display: none; }
@@ -645,7 +648,8 @@ $navItems = [
             .site-header { top: 0; }
             .site-header.scrolled { top: 0; }
 
-            .brand-logo { height: 48px; max-width: 48px; }
+            .brand-logo { height: 64px; width: 64px; max-width: 64px; }
+            .brand-logo-wrap { margin-right: -10px; }
             .brand-name { font-size: 1.1rem; }
             .brand-tagline { font-size: 8px; letter-spacing: 0.15em; }
             .brand-name .reg-mark { font-size: 6px; top: -2px; right: -8px; padding: 1px 3px; }
@@ -655,7 +659,8 @@ $navItems = [
         }
 
         @media (max-width: 380px) {
-            .brand-logo { height: 42px; max-width: 42px; }
+            .brand-logo { height: 56px; width: 56px; max-width: 56px; }
+            .brand-logo-wrap { margin-right: -9px; }
             .brand-name { font-size: 1rem; }
             .brand-tagline { font-size: 7px; }
         }

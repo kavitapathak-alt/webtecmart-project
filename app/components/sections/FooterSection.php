@@ -125,20 +125,23 @@ function renderFooterSection(): void
         .ft-brand-link {
             display: inline-flex;
             align-items: center;
+            gap: 10px;
             margin-bottom: 16px;
             text-decoration: none;
             transition: transform 0.3s ease;
         }
         .ft-brand-link img {
-            width: 48px;
-            height: 48px;
+            width: 60px;
+            height: 60px;
+            flex-shrink: 0;
+            margin-right: -10px;
             object-fit: contain;
             transition: transform 0.3s ease;
         }
         .ft-brand-link:hover img {
             transform: scale(1.1) rotate(2deg);
         }
-        .ft-brand-text { margin-left: 12px; }
+        .ft-brand-text { margin-left: 0; }
         .ft-brand-name {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
             font-size: 1.25rem;
@@ -394,10 +397,16 @@ function renderFooterSection(): void
            RESPONSIVE
         ============================================================ */
 
+        /* Very small phones < 380px */
+        @media (max-width: 379px) {
+            .ft-brand-link img { width: 54px; height: 54px; margin-right: -9px; }
+            .ft-brand-name { font-size: 1.15rem; }
+        }
+
         /* Small phones ≥ 480px */
         @media (min-width: 480px) {
             .ft-inner { padding: 56px 0; }
-            .ft-brand-link img { width: 52px; height: 52px; }
+            .ft-brand-link img { width: 68px; height: 68px; margin-right: -12px; }
             .ft-brand-name { font-size: 1.375rem; }
             .ft-brand-tagline { font-size: 11px; }
         }

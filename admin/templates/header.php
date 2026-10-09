@@ -18,14 +18,23 @@ $adminPage = basename($_SERVER['PHP_SELF']);
         a { color:inherit; text-decoration:none; }
         .admin-shell-header { position:sticky; top:0; z-index:100; background:rgba(255,255,255,.94); border-bottom:1px solid var(--admin-border); box-shadow:0 8px 24px rgba(44,20,40,.06); backdrop-filter:blur(16px); }
         .admin-shell-inner { max-width:1280px; min-height:78px; margin:0 auto; padding:12px 20px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
-        .admin-brand { display:flex; align-items:center; gap:10px; color:var(--admin-ink); font-weight:800; }
-        .admin-brand-mark { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--admin-pink-light),var(--admin-pink)); color:#fff; }
-        .admin-brand small { display:block; color:var(--admin-pink); font-size:.62rem; letter-spacing:.16em; }
+        .admin-brand { display:flex; align-items:center; gap:10px; min-width:0; color:var(--admin-ink); font-weight:800; }
+        .admin-brand-mark { width:48px; height:48px; flex:0 0 48px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(135deg,var(--admin-pink-light),var(--admin-pink)); color:#fff; }
+        .admin-brand-text { display:block; min-width:0; line-height:1.15; }
+        .admin-brand small { display:block; margin-top:2px; color:var(--admin-pink); font-size:.62rem; line-height:1; letter-spacing:.16em; }
         .admin-nav { display:flex; align-items:center; gap:6px; flex-wrap:wrap; }
         .admin-nav a { padding:9px 13px; border-radius:999px; color:var(--admin-muted); font-size:.82rem; font-weight:700; }
         .admin-nav a:hover, .admin-nav a.active { color:#fff; background:linear-gradient(90deg,var(--admin-pink),var(--admin-pink-light)); }
         .admin-user { color:var(--admin-muted); font-size:.8rem; }
         @media (max-width:850px) { .admin-shell-inner { align-items:flex-start; flex-direction:column; } .admin-nav { width:100%; overflow-x:auto; flex-wrap:nowrap; padding-bottom:2px; } .admin-user { display:none; } }
+        @media (max-width:480px) {
+            .admin-shell-inner { padding:10px 16px; }
+            .admin-brand-mark { width:46px; height:46px; flex-basis:46px; }
+        }
+        @media (max-width:340px) {
+            .admin-brand-mark { width:42px; height:42px; flex-basis:42px; }
+            .admin-brand small { letter-spacing:.12em; }
+        }
     </style>
 </head>
 <body>
@@ -33,7 +42,7 @@ $adminPage = basename($_SERVER['PHP_SELF']);
     <div class="admin-shell-inner">
         <a class="admin-brand" href="/admin/dashboard.php">
             <span class="admin-brand-mark">W</span>
-            <span>WebTecMart<small>ADMIN PANEL</small></span>
+            <span class="admin-brand-text">WebTecMart<small>ADMIN PANEL</small></span>
         </a>
         <nav class="admin-nav" aria-label="Admin navigation">
             <a class="<?= $adminPage === 'dashboard.php' ? 'active' : '' ?>" href="/admin/dashboard.php">Dashboard</a>

@@ -1,4 +1,45 @@
-<?php require_once __DIR__ . '/app/templates/header.php'; ?>
+<?php
+require_once __DIR__ . '/functions.php';
+
+$formStatus = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $field = static fn(string $name): string => is_string($_POST[$name] ?? null)
+        ? trim($_POST[$name])
+        : '';
+    $lead = [
+        'name' => $field('name'),
+        'email' => $field('email'),
+        'phone' => $field('phone'),
+        'company' => $field('company'),
+        'service' => $field('service'),
+        'budget' => $field('budget'),
+        'message' => $field('message'),
+    ];
+
+    if ($lead['name'] === '' || $lead['phone'] === '' || !filter_var($lead['email'], FILTER_VALIDATE_EMAIL)) {
+        $_SESSION['contact_form_status'] = 'invalid';
+    } else {
+        try {
+            $leadId = createLead($lead);
+            $_SESSION['contact_form_status'] = sendLeadNotification($lead, $leadId)
+                ? 'success'
+                : 'email_failed';
+            if ($_SESSION['contact_form_status'] === 'email_failed') {
+                error_log('Lead notification email failed for lead #' . $leadId);
+            }
+        } catch (Throwable $error) {
+            error_log('Lead could not be saved: ' . $error->getMessage());
+            $_SESSION['contact_form_status'] = 'error';
+        }
+    }
+
+    redirect('/contact.php');
+}
+
+$formStatus = $_SESSION['contact_form_status'] ?? '';
+unset($_SESSION['contact_form_status']);
+require_once __DIR__ . '/app/templates/header.php';
+?>
 
 <?php
 // ===== Icon Helper =====
@@ -471,6 +512,13 @@ $contactInfo = [
     @media (min-width: 640px) { .cp-required-note { font-size: 12px; margin-bottom: 16px; } }
     .cp-required-note span { color: #C4007A; }
 
+    .cp-form-error {
+        margin: 0 0 12px;
+        color: #B42318;
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
     .cp-form-row {
         display: grid;
         grid-template-columns: 1fr;
@@ -794,19 +842,33 @@ $contactInfo = [
                 <div class="cp-form-card">
 
                     <!-- Success State (hidden by default) -->
-                    <div class="cp-success" id="cpSuccess" style="display: none;">
+                    <div class="cp-success" id="cpSuccess" style="display: <?= in_array($formStatus, ['success', 'email_failed'], true) ? 'flex' : 'none' ?>;">
                         <div class="cp-success-icon">
                             <?= cpIcon('check') ?>
                         </div>
-                        <h3>Message Sent!</h3>
-                        <p>Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                        <h3><?= $formStatus === 'success' ? 'Enquiry Received' : 'Enquiry Saved' ?></h3>
+                        <p>
+                            <?php if ($formStatus === 'success'): ?>
+                                Your enquiry was saved successfully. We'll get back to you within 24 hours.
+                            <?php elseif ($formStatus === 'email_failed'): ?>
+                                Your enquiry was saved, but our email notification could not be sent. Please contact us by phone.
+                            <?php endif; ?>
+                        </p>
                         <button type="button" class="cp-success-again" onclick="cpResetForm()">
                             Send another message
                         </button>
                     </div>
 
                     <!-- Form -->
-                    <form class="cp-form" id="cpForm" method="POST" action="/contact.php">
+                    <form class="cp-form" id="cpForm" method="POST" action="/contact.php" style="display: <?= in_array($formStatus, ['success', 'email_failed'], true) ? 'none' : 'flex' ?>;">
+
+                        <?php if (in_array($formStatus, ['invalid', 'error'], true)): ?>
+                            <p class="cp-form-error" role="alert">
+                                <?= $formStatus === 'invalid'
+                                    ? 'Please enter your name, phone number, and a valid email address.'
+                                    : 'We could not save your enquiry. Please try again or contact us by phone.' ?>
+                            </p>
+                        <?php endif; ?>
 
                         <p class="cp-required-note">
                             <span>*</span> required fields

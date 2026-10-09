@@ -346,3 +346,53 @@ function latestLeads(): array
     $stmt = db()->query('SELECT * FROM leads ORDER BY created_at DESC LIMIT 5');
     return $stmt->fetchAll();
 }
+
+function createLead(array $lead): int
+{
+    $stmt = db()->prepare(
+        'INSERT INTO leads (name, email, phone, company, service, budget, message)
+         VALUES (:name, :email, :phone, :company, :service, :budget, :message)'
+    );
+    $stmt->execute([
+        ':name' => $lead['name'],
+        ':email' => $lead['email'],
+        ':phone' => $lead['phone'],
+        ':company' => $lead['company'],
+        ':service' => $lead['service'],
+        ':budget' => $lead['budget'],
+        ':message' => $lead['message'],
+    ]);
+
+    return (int) db()->lastInsertId();
+}
+
+function sendLeadNotification(array $lead, int $leadId): bool
+{
+    $recipient = getenv('CONTACT_NOTIFICATION_EMAIL') ?: 'info@webtecmart.com';
+    $fromAddress = getenv('CONTACT_FROM_EMAIL') ?: $recipient;
+    if (!filter_var($recipient, FILTER_VALIDATE_EMAIL) || !filter_var($fromAddress, FILTER_VALIDATE_EMAIL)) {
+        return false;
+    }
+
+    $subject = 'New website enquiry #' . $leadId;
+    $message = implode("\r\n", [
+        'A new enquiry was saved on the WebTecMart website.',
+        '',
+        'Name: ' . $lead['name'],
+        'Email: ' . $lead['email'],
+        'Phone: ' . $lead['phone'],
+        'Company / Website: ' . $lead['company'],
+        'Service: ' . $lead['service'],
+        'Budget: ' . $lead['budget'],
+        '',
+        'Message:',
+        $lead['message'],
+    ]);
+    $headers = [
+        'From' => 'WebTecMart <' . $fromAddress . '>',
+        'Reply-To' => $lead['email'],
+        'Content-Type' => 'text/plain; charset=UTF-8',
+    ];
+
+    return mail($recipient, $subject, $message, $headers);
+}
