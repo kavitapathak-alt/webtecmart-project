@@ -84,6 +84,13 @@ function initDatabase(): void
         )'
     );
 
+    $db->exec(
+        'CREATE TABLE IF NOT EXISTS cms_content_type_state (
+            content_type TEXT PRIMARY KEY,
+            initialized_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        )'
+    );
+
     $adminCount = (int) $db->query('SELECT COUNT(*) FROM admin_users')->fetchColumn();
     if ($adminCount === 0) {
         $stmt = $db->prepare('INSERT INTO admin_users (name, email, password_hash) VALUES (:name, :email, :password_hash)');

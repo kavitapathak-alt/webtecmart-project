@@ -48,6 +48,9 @@ function renderWhatWeDoSection(): void
     ];
 
     $managedServices = serviceCards();
+    if (!$managedServices && cmsContentTypeInitialized('service')) {
+        return;
+    }
     if ($managedServices) {
         $services = array_map(static function (array $service): array {
             return [

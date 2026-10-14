@@ -223,6 +223,20 @@ function cmsContent(string $type, array $defaults): array
     $rows = $stmt->fetchAll();
 
     if (!$rows) {
+        $existingCount = db()->prepare('SELECT COUNT(*) FROM content_items WHERE content_type = :type');
+        $existingCount->execute([':type' => $type]);
+        if ((int) $existingCount->fetchColumn() > 0) {
+            $initialized = db()->prepare('INSERT OR IGNORE INTO cms_content_type_state (content_type) VALUES (:type)');
+            $initialized->execute([':type' => $type]);
+            return [];
+        }
+
+        $state = db()->prepare('SELECT 1 FROM cms_content_type_state WHERE content_type = :type');
+        $state->execute([':type' => $type]);
+        if ($state->fetchColumn()) {
+            return [];
+        }
+
         $insert = db()->prepare('INSERT INTO content_items (content_type, title, summary, body, metadata, sort_order) VALUES (:type, :title, :summary, :body, :metadata, :sort_order)');
         foreach ($defaults as $index => $item) {
             $insert->execute([
@@ -234,8 +248,13 @@ function cmsContent(string $type, array $defaults): array
                 ':sort_order' => $index,
             ]);
         }
+        $initialized = db()->prepare('INSERT OR IGNORE INTO cms_content_type_state (content_type) VALUES (:type)');
+        $initialized->execute([':type' => $type]);
         return $defaults;
     }
+
+    $initialized = db()->prepare('INSERT OR IGNORE INTO cms_content_type_state (content_type) VALUES (:type)');
+    $initialized->execute([':type' => $type]);
 
     return array_map(function (array $row) use ($type): array {
         $item = json_decode($row['metadata'] ?? '', true);
@@ -263,6 +282,13 @@ function cmsContent(string $type, array $defaults): array
 function cmsAllContent(): array
 {
     return db()->query('SELECT * FROM content_items ORDER BY content_type ASC, sort_order ASC, id ASC')->fetchAll();
+}
+
+function cmsContentTypeInitialized(string $type): bool
+{
+    $stmt = db()->prepare('SELECT 1 FROM cms_content_type_state WHERE content_type = :type LIMIT 1');
+    $stmt->execute([':type' => $type]);
+    return (bool) $stmt->fetchColumn();
 }
 
 function cmsGetById(int $id): ?array
@@ -307,14 +333,29 @@ function cmsDelete(int $id): void
     $stmt->execute([':id' => $id]);
 }
 
+function cmsSetActive(int $id, bool $isActive): void
+{
+    $stmt = db()->prepare('UPDATE content_items SET is_active = :is_active, updated_at = CURRENT_TIMESTAMP WHERE id = :id');
+    $stmt->execute([
+        ':is_active' => $isActive ? 1 : 0,
+        ':id' => $id,
+    ]);
+}
+
 function uploadCmsImage(array $file): string
 {
     if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
         return '';
     }
 
-    if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK || ($file['size'] ?? 0) > 5 * 1024 * 1024) {
-        return '';
+    if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
+        throw new RuntimeException('The image upload failed. Please try again.');
+    }
+    if (($file['size'] ?? 0) > 5 * 1024 * 1024) {
+        throw new RuntimeException('Images must be 5 MB or smaller.');
+    }
+    if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
+        throw new RuntimeException('The uploaded image could not be verified.');
     }
 
     $mime = (new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']);
@@ -325,17 +366,19 @@ function uploadCmsImage(array $file): string
         'image/gif' => 'gif',
     ];
     if (!isset($extensions[$mime])) {
-        return '';
+        throw new RuntimeException('Use a JPG, PNG, WEBP, or GIF image.');
     }
 
     $directory = __DIR__ . '/public/assets/uploads/content';
     if (!is_dir($directory)) {
-        mkdir($directory, 0777, true);
+        if (!mkdir($directory, 0755, true) && !is_dir($directory)) {
+            throw new RuntimeException('The image upload directory is not available.');
+        }
     }
 
     $filename = bin2hex(random_bytes(12)) . '.' . $extensions[$mime];
     if (!move_uploaded_file($file['tmp_name'], $directory . '/' . $filename)) {
-        return '';
+        throw new RuntimeException('The uploaded image could not be saved.');
     }
 
     return '/public/assets/uploads/content/' . $filename;

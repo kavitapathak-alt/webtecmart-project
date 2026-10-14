@@ -2,6 +2,9 @@
 function renderSeoSuccessStoriesSection(): void
 {
     $portfolioItems = successStories();
+    if (!$portfolioItems && cmsContentTypeInitialized('success_story')) {
+        return;
+    }
     if (!$portfolioItems) {
         $portfolioItems = [
             [

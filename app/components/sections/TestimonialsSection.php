@@ -54,6 +54,9 @@ function renderTestimonialsSection(): void
     ];
 
     $managedTestimonials = testimonials();
+    if (!$managedTestimonials && cmsContentTypeInitialized('testimonial')) {
+        return;
+    }
     if ($managedTestimonials) {
         $testimonials = array_map(static function (array $item, int $index): array {
             return [
@@ -62,7 +65,7 @@ function renderTestimonialsSection(): void
                 'quote' => $item['quote'] ?? $item['summary'] ?? '',
                 'image' => $item['image'] ?? 'https://randomuser.me/api/portraits/lego/' . ($index + 1) . '.jpg',
                 'elevated' => $index % 2 === 0,
-                'rating' => 5,
+                'rating' => max(1, min(5, (int) ($item['rating'] ?? 5))),
             ];
         }, $managedTestimonials, array_keys($managedTestimonials));
     }
