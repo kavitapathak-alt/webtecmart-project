@@ -1,4 +1,34 @@
 <?php
+/*
+ * PHP 7.2 compatibility: str_starts_with / str_ends_with / str_contains PHP 8.0 ke functions hain.
+ * Ye polyfill purane PHP pe unhe define kar deta hai. Naye PHP pe apne aap skip ho jata hai.
+ * Ye require_once se pehle rakha hai taaki functions.php ke liye bhi available rahe.
+ */
+if (!function_exists('str_starts_with')) {
+    function str_starts_with($haystack, $needle)
+    {
+        $haystack = (string) $haystack;
+        $needle = (string) $needle;
+        return $needle === '' || strncmp($haystack, $needle, strlen($needle)) === 0;
+    }
+}
+if (!function_exists('str_ends_with')) {
+    function str_ends_with($haystack, $needle)
+    {
+        $haystack = (string) $haystack;
+        $needle = (string) $needle;
+        return $needle === '' || substr($haystack, -strlen($needle)) === $needle;
+    }
+}
+if (!function_exists('str_contains')) {
+    function str_contains($haystack, $needle)
+    {
+        $haystack = (string) $haystack;
+        $needle = (string) $needle;
+        return $needle === '' || strpos($haystack, $needle) !== false;
+    }
+}
+
 require_once __DIR__ . '/../functions.php';
 ensureAdmin();
 
@@ -142,7 +172,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 serviceCards(); pricingPlans(); testimonials(); blogPosts(); successStories(); homepageSections();
 
 $allItems = cmsAllContent();
-$homepageRecords = array_values(array_filter($allItems, static fn (array $item): bool => $item['content_type'] === 'homepage'));
+
+// PHP 7.2 fix: arrow function (fn) ki jagah normal anonymous function
+$homepageRecords = array_values(array_filter($allItems, static function (array $item): bool {
+    return $item['content_type'] === 'homepage';
+}));
+
 $homepageSectionTargets = ['Hero Section' => 'registry:hero', 'Trusted Partners' => 'registry:partners', 'About WebTecMart' => 'registry:about', 'What We Do' => 'collection:service', 'Search Visibility' => 'registry:visibility', 'SEO Portfolio' => 'collection:success_story', 'Testimonials' => 'collection:testimonial', 'Contact Form' => 'registry:contact'];
 $items = array_values(array_filter($allItems, static function (array $item) use ($sectionType, $sectionPage, $isRegistry): bool {
     if ($item['content_type'] !== $sectionType) return false;
