@@ -1,6 +1,23 @@
 <?php
 function renderHeroSection(): void
 {
+    $content = homepageHeroContent();
+    $benefits = preg_split('/\r\n|\r|\n/', trim((string) ($content['benefits'] ?? '')));
+    $benefits = is_array($benefits) ? array_values(array_filter(array_map('trim', $benefits), static function (string $benefit): bool {
+        return $benefit !== '';
+    })) : [];
+    $serviceOptions = preg_split('/\r\n|\r|\n/', trim((string) ($content['service_options'] ?? '')));
+    $serviceOptions = is_array($serviceOptions) ? array_values(array_filter(array_map('trim', $serviceOptions), static function (string $option): bool {
+        return $option !== '';
+    })) : [];
+    $mainDescription = trim(implode(' ', array_filter([
+        trim((string) ($content['summary'] ?? '')),
+        trim((string) ($content['body'] ?? '')),
+    ], static function (string $part): bool {
+        return $part !== '';
+    })));
+    $phoneNumber = trim((string) ($content['phone_number'] ?? ''));
+    $phoneHref = preg_replace('/[^0-9+]/', '', $phoneNumber);
     ?>
     <style>
         /* ============================================================
@@ -636,62 +653,49 @@ function renderHeroSection(): void
                     <!-- Badge -->
                     <div class="hero-badge">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-                        <span>AI-Powered Digital Agency</span>
+                        <span><?= e((string) ($content['badge'] ?? '')) ?></span>
                     </div>
 
                     <!-- Main Heading -->
                     <h1 class="hero-heading">
-                        Boost Your
-                        <span class="underline-wrap">
-                            <span class="text accent">AI-Powered</span>
-                            <svg class="underline-svg" viewBox="0 0 300 12" preserveAspectRatio="none">
-                                <path d="M2 6C60 2 240 2 298 6" stroke="#C4007A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.3"/>
-                            </svg>
-                        </span>
-                        <span class="highlight-wrap">
-                            <span class="text">Digital Marketing</span>
-                            <span class="highlight"></span>
-                        </span>
-                        <span class="accent">With Us</span>
+                        <?= e((string) ($content['heading_prefix'] ?? '')) ?>
+                        <?php if (!empty($content['heading_underline'])): ?>
+                            <span class="underline-wrap">
+                                <span class="text accent"><?= e((string) $content['heading_underline']) ?></span>
+                                <svg class="underline-svg" viewBox="0 0 300 12" preserveAspectRatio="none">
+                                    <path d="M2 6C60 2 240 2 298 6" stroke="#C4007A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.3"/>
+                                </svg>
+                            </span>
+                        <?php endif; ?>
+                        <?php if (!empty($content['heading_highlight'])): ?>
+                            <span class="highlight-wrap">
+                                <span class="text"><?= e((string) $content['heading_highlight']) ?></span>
+                                <span class="highlight"></span>
+                            </span>
+                        <?php endif; ?>
+                        <span class="accent"><?= e((string) ($content['heading_suffix'] ?? '')) ?></span>
                     </h1>
 
                     <!-- Description -->
-                    <p class="hero-desc">
-                        WebTecMart delivers AI-powered SEO and Performance Marketing solutions to increase visibility, attract quality leads, and accelerate business growth.
-                    </p>
+                    <?php if ($mainDescription !== ''): ?>
+                        <p class="hero-desc"><?= e($mainDescription) ?></p>
+                    <?php endif; ?>
 
-                    <p class="hero-desc-sm">
-                        Whether you run a startup, enterprise, B2B event platform, local business, or service-based company, strong online visibility is more important than ever.
-                    </p>
+                    <?php if (!empty($content['description_secondary'])): ?>
+                        <p class="hero-desc-sm"><?= e((string) $content['description_secondary']) ?></p>
+                    <?php endif; ?>
 
                     <!-- Benefits Checklist -->
                     <ul class="hero-benefits">
+                        <?php foreach ($benefits as $benefit): ?>
                         <li>
                             <div class="check-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
                             </div>
-                            <span class="text">Generate high-quality leads that drive business growth</span>
+                            <span class="text"><?= e($benefit) ?></span>
                         </li>
-                        <li>
-                            <div class="check-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                            </div>
-                            <span class="text">Attract the right audience to your website</span>
-                        </li>
-                        <li>
-                            <div class="check-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                            </div>
-                            <span class="text">Build brand credibility with a powerful online presence</span>
-                        </li>
-                        <li>
-                            <div class="check-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-                            </div>
-                            <span class="text">Convert visitors into loyal, long-term customers</span>
-                        </li>
+                        <?php endforeach; ?>
                     </ul>
-
                 </div>
 
                 <!-- RIGHT SIDE — Contact Form -->
@@ -704,11 +708,11 @@ function renderHeroSection(): void
                         <div class="hero-form-header">
                             <div class="title-row">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
-                                <h2>Boost Your ROI</h2>
+                                <h2><?= e((string) ($content['form_title'] ?? '')) ?></h2>
                             </div>
-                            <p class="subtitle">Get a customized growth strategy to boost visibility and conversions.</p>
+                            <p class="subtitle"><?= e((string) ($content['form_subtitle'] ?? '')) ?></p>
                             <p class="contact-for">
-                                <span class="label">Contact for:</span> Digital, Ecommerce, Creative, PR &amp; Websites
+                                <span class="label"><?= e((string) ($content['contact_for_label'] ?? '')) ?></span> <?= e((string) ($content['contact_for'] ?? '')) ?>
                             </p>
                         </div>
 
@@ -719,11 +723,11 @@ function renderHeroSection(): void
                             <div class="hero-form-row">
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                                    <input type="text" name="name" class="hero-input" placeholder="Full Name *" required>
+                                    <input type="text" name="name" class="hero-input" placeholder="<?= e((string) ($content['name_placeholder'] ?? '')) ?>" required>
                                 </div>
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                                    <input type="email" name="email" class="hero-input" placeholder="Email Address *" required>
+                                    <input type="email" name="email" class="hero-input" placeholder="<?= e((string) ($content['email_placeholder'] ?? '')) ?>" required>
                                 </div>
                             </div>
 
@@ -731,11 +735,11 @@ function renderHeroSection(): void
                             <div class="hero-form-row">
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                                    <input type="tel" name="phone" class="hero-input" placeholder="Phone Number *" required>
+                                    <input type="tel" name="phone" class="hero-input" placeholder="<?= e((string) ($content['phone_placeholder'] ?? '')) ?>" required>
                                 </div>
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
-                                    <input type="text" name="company" class="hero-input" placeholder="Company / Website *" required>
+                                    <input type="text" name="company" class="hero-input" placeholder="<?= e((string) ($content['company_placeholder'] ?? '')) ?>" required>
                                 </div>
                             </div>
 
@@ -744,16 +748,10 @@ function renderHeroSection(): void
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
                                     <select name="service" class="hero-select" required>
-                                        <option value="" disabled selected>Select Service Required *</option>
-                                        <option value="seo">SEO (Search Engine Optimization)</option>
-                                        <option value="ppc">PPC / Google Ads</option>
-                                        <option value="web-design-dev">Website Design &amp; Development</option>
-                                        <option value="social-media">Social Media Optimization</option>
-                                        <option value="digital-branding">Digital Business Branding</option>
-                                        <option value="ecommerce-seo">E-commerce SEO</option>
-                                        <option value="content-marketing">Content Marketing</option>
-                                        <option value="mobile-app-dev">Mobile App Development</option>
-                                        <option value="other">Other</option>
+                                        <option value="" disabled selected><?= e((string) ($content['service_placeholder'] ?? '')) ?></option>
+                                        <?php foreach ($serviceOptions as $serviceOption): ?>
+                                            <option value="<?= e($serviceOption) ?>"><?= e($serviceOption) ?></option>
+                                        <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -762,7 +760,7 @@ function renderHeroSection(): void
                             <div class="hero-form-row" style="grid-template-columns: 1fr; margin-bottom: 16px;">
                                 <div class="hero-input-wrap textarea-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                                    <textarea name="message" class="hero-textarea" rows="3" placeholder="Enter your message here"></textarea>
+                                    <textarea name="message" class="hero-textarea" rows="3" placeholder="<?= e((string) ($content['message_placeholder'] ?? '')) ?>"></textarea>
                                 </div>
                             </div>
 
@@ -770,25 +768,25 @@ function renderHeroSection(): void
                             <div class="hero-checks">
                                 <label class="hero-check-label">
                                     <input type="checkbox" checked>
-                                    <span>Yes, I'm happy for you to use my information</span>
+                                    <span><?= e((string) ($content['consent_text'] ?? '')) ?></span>
                                 </label>
 
                                 <div class="hero-check-box">
                                     <input type="checkbox" id="notRobot">
-                                    <label for="notRobot" class="text">I'm not a robot</label>
-                                    <span class="recaptcha">reCAPTCHA</span>
+                                    <label for="notRobot" class="text"><?= e((string) ($content['robot_text'] ?? '')) ?></label>
+                                    <span class="recaptcha"><?= e((string) ($content['recaptcha_text'] ?? '')) ?></span>
                                 </div>
                             </div>
 
                             <!-- Submit Button -->
                             <button type="submit" class="hero-submit">
-                                Submit
+                                <?= e((string) ($content['submit_label'] ?? 'Submit')) ?>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             </button>
 
                             <!-- Phone CTA -->
                             <p class="hero-callout">
-                                or call us on <a href="tel:+919999674255">+91-9999674255</a>
+                                <?= e((string) ($content['phone_label'] ?? 'or call us on')) ?> <a href="tel:<?= e((string) $phoneHref) ?>"><?= e($phoneNumber) ?></a>
                             </p>
 
                         </form>
@@ -799,21 +797,21 @@ function renderHeroSection(): void
                                 <div class="hero-trust-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                                 </div>
-                                <span class="label">Quick Response</span>
+                                <span class="label"><?= e((string) ($content['trust_first'] ?? '')) ?></span>
                             </div>
 
                             <div class="hero-trust-item">
                                 <div class="hero-trust-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
                                 </div>
-                                <span class="label">No Spam, Ever</span>
+                                <span class="label"><?= e((string) ($content['trust_second'] ?? '')) ?></span>
                             </div>
 
                             <div class="hero-trust-item">
                                 <div class="hero-trust-icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
                                 </div>
-                                <span class="label">Free Consultation</span>
+                                <span class="label"><?= e((string) ($content['trust_third'] ?? '')) ?></span>
                             </div>
                         </div>
 

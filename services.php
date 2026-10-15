@@ -2,6 +2,14 @@
 
 <?php
 // ===== Icon Helper =====
+$servicesContent = servicesPageContent();
+$mainServices = $servicesContent['main_services'];
+$seoServices = $servicesContent['seo_services'];
+$stats = $servicesContent['stats'];
+$process = $servicesContent['process'];
+$resultsDriven = $servicesContent['results'];
+$faqs = $servicesContent['faqs'];
+
 function spIcon(string $name): string {
     $icons = [
         'sparkles'   => '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
@@ -31,50 +39,6 @@ function spIcon(string $name): string {
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
 }
 
-// ===== DATA =====
-$mainServices = [
-    ['icon' => 'paintbrush', 'title' => 'Digital Business Branding', 'description' => 'Any web business can flourish and develop only if it is rightly promoted. "BRANDING" is highly crucial for a digital business\'s success, and you can assure a well-framed campaign with our digital marketing experts.', 'features' => ['Brand Strategy', 'Visual Identity', 'Brand Positioning', 'Brand Guidelines']],
-    ['icon' => 'code',       'title' => 'Website Design & Development', 'description' => 'We help make the first impression of the website memorable and robust. By providing a mix of relevant content and graphics, we provide responsive, easy-to-use websites.', 'features' => ['Responsive Design', 'UI/UX', 'E-Commerce', 'CMS Integration']],
-    ['icon' => 'search',     'title' => 'Search Engine Optimization', 'description' => '75% of online users refer to the search engines\' first page. Hence, it has become essential for businesses to be on the very first page. We help you rank higher on search.', 'features' => ['On-Page SEO', 'Off-Page SEO', 'Technical SEO', 'Keyword Research']],
-    ['icon' => 'share',      'title' => 'Social Media Optimization', 'description' => 'Now is the correct time that the audience starts craving for your content. This is only possible with engaging and innovative social media campaigns that our experts are well-versed with.', 'features' => ['Content Strategy', 'Social Media Management', 'Influencer Marketing', 'Community Building']],
-    ['icon' => 'megaphone',  'title' => 'Search Engine Marketing', 'description' => 'Our professionals have the relevant practice of marketing businesses that use paid advertisements on SERPs. Our strategies help businesses increase visibility two folds.', 'features' => ['PPC Campaigns', 'Google Ads', 'Bing Ads', 'Retargeting']],
-    ['icon' => 'smartphone', 'title' => 'Performance Marketing', 'description' => 'There are 2 million + mobile users today, which means having apps have become the need of the hour. Businesses are left with no choice but to come up with easy-to-use apps.', 'features' => ['iOS Development', 'Android Development', 'Cross-Platform', 'App Store Optimization']],
-];
-
-$seoServices = [
-    ['icon' => 'mappin', 'title' => 'Local SEO', 'description' => 'We work on the organic factors that help a business grow locally. With our Local SEO strategies, customers searching nearby for what you offer will find you first.', 'benefits' => ['Local Visibility', 'Google Maps Ranking', 'Local Citations']],
-    ['icon' => 'globe',  'title' => 'National SEO', 'description' => 'Looking to grow your business across your own country? National SEO is the right fit — we sharpen your website\'s ranking in a way that turns visibility into real leads and sales.', 'benefits' => ['National Reach', 'Lead Generation', 'Brand Awareness']],
-    ['icon' => 'earth',  'title' => 'International SEO', 'description' => 'Reaching clients across borders is tough without the right approach. Our International SEO services help you rank for the right keywords and earn backlinks from relevant global sites.', 'benefits' => ['Global Reach', 'Multi-Language', 'International Backlinks']],
-];
-
-$stats = [
-    ['icon' => 'award', 'value' => '13+',   'label' => 'Years of Excellence'],
-    ['icon' => 'users', 'value' => '1000+', 'label' => 'Happy Clients'],
-    ['icon' => 'trending', 'value' => '500+', 'label' => 'Projects Delivered'],
-    ['icon' => 'clock', 'value' => '98%',   'label' => 'Client Retention'],
-];
-
-$process = [
-    ['step' => '01', 'title' => 'Discovery',    'description' => 'We understand your business goals, target audience, and market landscape.'],
-    ['step' => '02', 'title' => 'Strategy',     'description' => 'We craft a customized strategy tailored to your unique business needs.'],
-    ['step' => '03', 'title' => 'Execution',    'description' => 'Our experts implement the strategy with precision and attention to detail.'],
-    ['step' => '04', 'title' => 'Optimization', 'description' => 'We continuously monitor, analyze, and optimize for better results.'],
-];
-
-$resultsDriven = [
-    ['title' => 'Expert Teams, Proven Results',             'description' => 'At WebTecMart, our professionals are experts in delivering quality digital services that produce measurable results. With experience across industries like e-commerce, healthcare, automotive, and more, we help brands achieve their marketing objectives with confidence.'],
-    ['title' => 'Deep Understanding of the Market',         'description' => 'With years of on-ground experience, WebTecMart is well-versed in local market trends, culture, and consumer behavior. This insight allows us to create highly contextual and relevant campaigns that speak to your target audience.'],
-    ['title' => 'Data-Driven Strategies with Real-Time Optimization', 'description' => 'We use cutting-edge data intelligence to optimize campaigns in real time. Our solutions are driven by real-time analytics, ensuring your budget is used efficiently for maximum return on investment.'],
-    ['title' => 'Complete In-House Team',                   'description' => 'With strategy, design, content, and analytics experts, WebTecMart provides a balanced, cohesive approach. This in-house team structure enables smooth execution and quick campaign adjustments.'],
-    ['title' => 'Innovative Tech Solutions',                'description' => 'Always improving, WebTecMart adopts the newest marketing technologies, such as AI-powered tools for hyper-targeted campaigns and automated processes that maximize personalization and scalability.'],
-];
-
-$faqs = [
-    ['q' => 'Why is digital marketing more critical today?',     'a' => 'As one of the fastest-growing digital economies, India represents tremendous potential for digital marketing success. Businesses that establish visibility early gain a significant competitive edge.'],
-    ['q' => 'How does WebTecMart help brands grow?',             'a' => 'We combine strategy, design, and data-driven execution across SEO, paid media, and web development to deliver measurable growth — leads, traffic, and revenue — not just vanity metrics.'],
-    ['q' => 'How do you keep pace with evolving trends?',        'a' => 'Our team continuously tracks algorithm updates, consumer behavior shifts, and emerging platforms, adapting strategies in real time to keep your brand ahead of the competition.'],
-    ['q' => 'Why should I choose WebTecMart for my business?',   'a' => 'With 13+ years of experience, a 98% client retention rate, and a fully in-house team, we deliver end-to-end digital solutions tailored to your specific goals and industry.'],
-];
 ?>
 
 <style>
@@ -1231,53 +1195,48 @@ $faqs = [
                 <div class="sp-hero-left">
                     <div class="sp-pill">
                         <?= spIcon('sparkles') ?>
-                        <span>What We Offer</span>
+                        <span><?= e((string) $servicesContent['hero_badge']) ?></span>
                     </div>
 
                     <h1 class="sp-hero-h1">
-                        Boost Your Growth with Strategic
-                        <span class="accent">Digital Marketing Services</span>
+                        <?= e((string) $servicesContent['hero_heading_prefix']) ?>
+                        <span class="accent"><?= e((string) $servicesContent['hero_heading_highlight']) ?></span>
                     </h1>
 
-                    <p class="sp-hero-sub">
-                        Fill your sales pipeline using digital marketing services that
-                        combine targeted campaigns, high-converting websites, and
-                        AI-powered optimization to attract high-intent customers ready
-                        to convert.
-                    </p>
+                    <p class="sp-hero-sub"><?= e((string) $servicesContent['summary']) ?></p>
 
                     <div class="sp-hero-btns">
-                        <a href="/contact.php" class="sp-btn-primary">
-                            Contact Us
+                        <a href="<?= e((string) $servicesContent['hero_primary_href']) ?>" class="sp-btn-primary">
+                            <?= e((string) $servicesContent['hero_primary_label']) ?>
                             <?= spIcon('arrow') ?>
                         </a>
-                        <span class="sp-or-badge">OR</span>
-                        <a href="tel:+919999674255" class="sp-btn-dark">
+                        <span class="sp-or-badge"><?= e((string) $servicesContent['button_separator_label']) ?></span>
+                        <a href="tel:<?= e((string) $servicesContent['hero_phone']) ?>" class="sp-btn-dark">
                             <?= spIcon('phone') ?>
-                            Call Now
+                            <?= e((string) $servicesContent['hero_phone_label']) ?>
                         </a>
                     </div>
                 </div>
 
                 <!-- Right — Quote Form -->
                 <div class="sp-quote-card">
-                    <h2>Request A Quote</h2>
+                    <h2><?= e((string) $servicesContent['quote_title']) ?></h2>
                     <form class="sp-quote-form" method="POST" action="/contact.php">
-                        <input type="text" name="name" placeholder="Name*" class="sp-quote-input" required>
-                        <input type="tel" name="phone" placeholder="Phone No*" class="sp-quote-input" required>
-                        <input type="email" name="email" placeholder="Email*" class="sp-quote-input" required>
-                        <textarea name="message" placeholder="Type Your Message*" rows="3" class="sp-quote-textarea" required></textarea>
+                        <input type="text" name="name" placeholder="<?= e((string) $servicesContent['quote_name_placeholder']) ?>" class="sp-quote-input" required>
+                        <input type="tel" name="phone" placeholder="<?= e((string) $servicesContent['quote_phone_placeholder']) ?>" class="sp-quote-input" required>
+                        <input type="email" name="email" placeholder="<?= e((string) $servicesContent['quote_email_placeholder']) ?>" class="sp-quote-input" required>
+                        <textarea name="message" placeholder="<?= e((string) $servicesContent['quote_message_placeholder']) ?>" rows="3" class="sp-quote-textarea" required></textarea>
 
                         <label class="sp-recaptcha">
                             <span class="sp-recaptcha-left">
                                 <input type="checkbox" required>
-                                <span>I'm not a robot</span>
+                                <span><?= e((string) $servicesContent['robot_label']) ?></span>
                             </span>
-                            <span class="sp-recaptcha-brand">reCAPTCHA</span>
+                            <span class="sp-recaptcha-brand"><?= e((string) $servicesContent['recaptcha_label']) ?></span>
                         </label>
 
                         <button type="submit" class="sp-submit">
-                            Submit
+                            <?= e((string) $servicesContent['quote_submit_label']) ?>
                             <?= spIcon('send') ?>
                         </button>
                     </form>
@@ -1290,31 +1249,16 @@ $faqs = [
     <section class="sp-intro">
         <div class="sp-container">
             <div class="sp-intro-inner">
-                <p class="sp-intro-eyebrow">Smart. Scalable. Secure.</p>
+                <p class="sp-intro-eyebrow"><?= e((string) $servicesContent['intro_eyebrow']) ?></p>
                 <h2 class="sp-intro-h2">
-                    Transform Your Digital Strategy with
-                    <span class="accent">ROI-Focused Marketing Services</span>
+                    <?= e((string) $servicesContent['intro_heading_prefix']) ?>
+                    <span class="accent"><?= e((string) $servicesContent['intro_heading_highlight']) ?></span>
                 </h2>
 
                 <div class="sp-intro-body">
-                    <p>
-                        In today's fast-changing digital ecosystem, results-driven
-                        marketing has become the hallmark of quantifiable business
-                        achievement. At WebTecMart, we deliver data-driven,
-                        ROI-oriented digital marketing services designed to address the
-                        evolving demands of modern brands. As one of India's
-                        top-performing agencies, we enable companies to grow faster
-                        through calculated strategy, intelligent automation, and
-                        cross-channel execution.
-                    </p>
-                    <p>
-                        Our skilled team makes sure every rupee spent on marketing is
-                        leveraged to drive maximum impact. We design highly converting
-                        campaigns for search, social, and paid platforms — all
-                        supported by rich analytics and performance data. Unlike
-                        conventional marketing, our approach is solely about
-                        measurable results: leads, clicks, conversions, and sales.
-                    </p>
+                    <?php foreach ($servicesContent['intro_paragraphs'] as $paragraph): ?>
+                        <?php if (trim((string) $paragraph) !== ''): ?><p><?= e((string) $paragraph) ?></p><?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -1325,33 +1269,29 @@ $faqs = [
         <div class="sp-container">
             <div class="sp-website-grid">
                 <div>
-                    <p class="sp-website-pre">Want A Professional Website</p>
+                    <p class="sp-website-pre"><?= e((string) $servicesContent['website_pre']) ?></p>
                     <h2 class="sp-website-h2">
-                        That Converts Visitors Into Customers?
+                        <?= e((string) $servicesContent['website_heading']) ?>
                     </h2>
-                    <p class="sp-website-sub">
-                        Partner with our expert web design services to build a
-                        responsive, high-converting website. Contact us now and get a
-                        free quote tailored to your business needs.
-                    </p>
+                    <p class="sp-website-sub"><?= e((string) $servicesContent['website_description']) ?></p>
 
                     <div class="sp-website-btns">
-                        <a href="/contact.php" class="sp-btn-primary">
-                            Request Proposal
+                        <a href="<?= e((string) $servicesContent['website_primary_href']) ?>" class="sp-btn-primary">
+                            <?= e((string) $servicesContent['website_primary_label']) ?>
                             <?= spIcon('arrow') ?>
                         </a>
-                        <span class="sp-or-badge">OR</span>
-                        <a href="tel:+919999674255" class="sp-btn-dark">
+                        <span class="sp-or-badge"><?= e((string) $servicesContent['button_separator_label']) ?></span>
+                        <a href="tel:<?= e((string) $servicesContent['website_phone']) ?>" class="sp-btn-dark">
                             <?= spIcon('phone') ?>
-                            Contact Now
+                            <?= e((string) $servicesContent['website_phone_label']) ?>
                         </a>
                     </div>
                 </div>
 
                 <div class="sp-website-image">
                     <img
-                        src="https://images.unsplash.com/photo-1556157382-97eda2d62296?w=700&h=800&fit=crop&q=80"
-                        alt="Professional consultant with laptop"
+                        src="<?= e((string) $servicesContent['website_image']) ?>"
+                        alt="<?= e((string) $servicesContent['website_image_alt']) ?>"
                         loading="lazy"
                     >
                 </div>
@@ -1377,9 +1317,9 @@ $faqs = [
             <!-- ===== CORE SERVICES ===== -->
             <div class="sp-block">
                 <div class="sp-block-header">
-                    <p class="sp-block-eyebrow">What We Offer</p>
-                    <h2 class="sp-block-title">Our <span class="accent">Core Services</span></h2>
-                    <p class="sp-block-sub">End-to-end digital solutions to help your business thrive</p>
+                    <p class="sp-block-eyebrow"><?= e((string) $servicesContent['services_eyebrow']) ?></p>
+                    <h2 class="sp-block-title"><?= e((string) $servicesContent['services_heading_prefix']) ?> <span class="accent"><?= e((string) $servicesContent['services_heading_highlight']) ?></span></h2>
+                    <p class="sp-block-sub"><?= e((string) $servicesContent['services_subtitle']) ?></p>
                 </div>
 
                 <div class="sp-services-grid">
@@ -1393,13 +1333,13 @@ $faqs = [
                                 <p class="sp-service-desc"><?= htmlspecialchars($service['description']) ?></p>
 
                                 <div class="sp-service-tags">
-                                    <?php foreach ($service['features'] as $f): ?>
+                                    <?php foreach (($service['features'] ?? []) as $f): ?>
                                         <span class="sp-service-tag"><?= htmlspecialchars($f) ?></span>
                                     <?php endforeach; ?>
                                 </div>
 
-                                <a href="/contact.php" class="sp-service-link">
-                                    Learn More
+                                <a href="<?= e((string) $servicesContent['main_service_link_href']) ?>" class="sp-service-link">
+                                    <?= e((string) $servicesContent['main_service_link_label']) ?>
                                     <?= spIcon('arrow') ?>
                                 </a>
                             </div>
@@ -1413,15 +1353,13 @@ $faqs = [
                 <div class="sp-block-header">
                     <div class="sp-pill" style="margin-bottom: 12px;">
                         <?= spIcon('chart') ?>
-                        <span>SEO Services</span>
+                        <span><?= e((string) $servicesContent['seo_badge']) ?></span>
                     </div>
                     <h2 class="sp-block-title">
-                        Increase Your Business's
-                        <span class="accent">Search Visibility</span>
+                        <?= e((string) $servicesContent['seo_heading_prefix']) ?>
+                        <span class="accent"><?= e((string) $servicesContent['seo_heading_highlight']) ?></span>
                     </h2>
-                    <p class="sp-block-sub">
-                        Our SEO strategies help you rank higher and reach your target audience effectively
-                    </p>
+                    <p class="sp-block-sub"><?= e((string) $servicesContent['seo_subtitle']) ?></p>
                 </div>
 
                 <div class="sp-seo-grid">
@@ -1434,7 +1372,7 @@ $faqs = [
                             <p class="sp-seo-desc"><?= htmlspecialchars($seo['description']) ?></p>
 
                             <div class="sp-seo-benefits">
-                                <?php foreach ($seo['benefits'] as $b): ?>
+                                <?php foreach (($seo['benefits'] ?? []) as $b): ?>
                                     <span class="sp-seo-benefit">
                                         <?= spIcon('check') ?>
                                         <?= htmlspecialchars($b) ?>
@@ -1446,8 +1384,8 @@ $faqs = [
                 </div>
 
                 <div class="sp-seo-cta">
-                    <a href="/contact.php">
-                        REQUEST FREE QUOTE
+                    <a href="<?= e((string) $servicesContent['seo_quote_href']) ?>">
+                        <?= e((string) $servicesContent['seo_quote_label']) ?>
                         <?= spIcon('arrow') ?>
                     </a>
                 </div>
@@ -1456,8 +1394,8 @@ $faqs = [
             <!-- ===== RESULTS DRIVEN ===== -->
             <div class="sp-results-section">
                 <h2 class="sp-results-h2">
-                    How Our Services
-                    <span class="accent">Drive Real Business Results</span>
+                    <?= e((string) $servicesContent['results_heading_prefix']) ?>
+                    <span class="accent"><?= e((string) $servicesContent['results_heading_highlight']) ?></span>
                 </h2>
 
                 <div class="sp-results-list">
@@ -1478,8 +1416,8 @@ $faqs = [
             <!-- ===== PROCESS ===== -->
             <div class="sp-block">
                 <div class="sp-block-header">
-                    <h2 class="sp-block-title">Our <span class="accent">Process</span></h2>
-                    <p class="sp-block-sub">How we deliver exceptional results for your business</p>
+                    <h2 class="sp-block-title"><?= e((string) $servicesContent['process_heading_prefix']) ?> <span class="accent"><?= e((string) $servicesContent['process_heading_highlight']) ?></span></h2>
+                    <p class="sp-block-sub"><?= e((string) $servicesContent['process_subtitle']) ?></p>
                 </div>
 
                 <div class="sp-process-grid">
@@ -1497,8 +1435,8 @@ $faqs = [
             <div class="sp-block">
                 <div class="sp-block-header">
                     <h2 class="sp-block-title">
-                        Frequently Asked
-                        <span class="accent">Questions</span>
+                        <?= e((string) $servicesContent['faq_heading_prefix']) ?>
+                        <span class="accent"><?= e((string) $servicesContent['faq_heading_highlight']) ?></span>
                     </h2>
                 </div>
 
@@ -1531,16 +1469,16 @@ $faqs = [
                 </div>
                 <div class="sp-cta-rocket-inner">
                     <?= spIcon('rocket') ?>
-                    <h2>Ready to Grow Your Business?</h2>
-                    <p>Let's work together to create digital experiences that help you grow.</p>
+                    <h2><?= e((string) $servicesContent['cta_title']) ?></h2>
+                    <p><?= e((string) $servicesContent['cta_description']) ?></p>
 
                     <div class="sp-cta-rocket-btns">
-                        <a href="/contact.php" class="sp-cta-rocket-btn-1">
-                            Get Free Consultation
+                        <a href="<?= e((string) $servicesContent['cta_primary_href']) ?>" class="sp-cta-rocket-btn-1">
+                            <?= e((string) $servicesContent['cta_primary_label']) ?>
                             <?= spIcon('arrow') ?>
                         </a>
-                        <a href="/portfolio.php" class="sp-cta-rocket-btn-2">
-                            View Our Portfolio
+                        <a href="<?= e((string) $servicesContent['cta_secondary_href']) ?>" class="sp-cta-rocket-btn-2">
+                            <?= e((string) $servicesContent['cta_secondary_label']) ?>
                         </a>
                     </div>
                 </div>
@@ -1567,26 +1505,26 @@ $faqs = [
         <div class="sp-container">
             <div class="sp-proposal-grid">
                 <div>
-                    <p class="sp-proposal-pre">Your Needs, Our Priority</p>
+                    <p class="sp-proposal-pre"><?= e((string) $servicesContent['proposal_pre']) ?></p>
                     <h2 class="sp-proposal-h2">
-                        Request a
-                        <span class="accent">Free Proposal</span> Today
+                        <?= e((string) $servicesContent['proposal_heading_prefix']) ?>
+                        <span class="accent"><?= e((string) $servicesContent['proposal_heading_highlight']) ?></span> <?= e((string) $servicesContent['proposal_heading_suffix']) ?>
                     </h2>
                 </div>
 
                 <form class="sp-proposal-form" method="POST" action="/contact.php">
-                    <input type="text" name="name" placeholder="Name*" class="sp-proposal-input" required>
-                    <input type="tel" name="phone" placeholder="Phone No*" class="sp-proposal-input" required>
-                    <input type="email" name="email" placeholder="Email*" class="sp-proposal-input" required>
-                    <textarea name="message" placeholder="Type Your Message*" rows="1" class="sp-proposal-textarea" required></textarea>
+                    <input type="text" name="name" placeholder="<?= e((string) $servicesContent['proposal_name_placeholder']) ?>" class="sp-proposal-input" required>
+                    <input type="tel" name="phone" placeholder="<?= e((string) $servicesContent['proposal_phone_placeholder']) ?>" class="sp-proposal-input" required>
+                    <input type="email" name="email" placeholder="<?= e((string) $servicesContent['proposal_email_placeholder']) ?>" class="sp-proposal-input" required>
+                    <textarea name="message" placeholder="<?= e((string) $servicesContent['proposal_message_placeholder']) ?>" rows="1" class="sp-proposal-textarea" required></textarea>
 
                     <label class="sp-proposal-recaptcha">
                         <input type="checkbox" required>
-                        <span>I'm not a robot</span>
-                        <span class="brand">reCAPTCHA</span>
+                        <span><?= e((string) $servicesContent['proposal_robot_label']) ?></span>
+                        <span class="brand"><?= e((string) $servicesContent['proposal_recaptcha_label']) ?></span>
                     </label>
 
-                    <button type="submit" class="sp-proposal-submit">Submit</button>
+                    <button type="submit" class="sp-proposal-submit"><?= e((string) $servicesContent['proposal_submit_label']) ?></button>
                 </form>
             </div>
         </div>

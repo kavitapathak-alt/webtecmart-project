@@ -2,44 +2,11 @@
 
 <?php
 // ===== Data =====
-$stats = [
-    ['icon' => 'award',       'value' => '13+',   'label' => 'Years Experience', 'description' => 'Industry leaders since 2013'],
-    ['icon' => 'users',       'value' => '1000+', 'label' => 'Happy Clients',    'description' => 'Businesses strengthened online'],
-    ['icon' => 'briefcase',   'value' => '50+',   'label' => 'Expert Team',      'description' => 'Passionate professionals'],
-    ['icon' => 'trending',    'value' => '500+',  'label' => 'Brands Trust Us',  'description' => 'Across diverse industries'],
-];
-
-$coreValues = [
-    [
-        'icon' => 'target',
-        'title' => 'Concept is King',
-        'description' => 'We believe every great digital success starts with a powerful, unique concept that sets your brand apart from the competition.',
-    ],
-    [
-        'icon' => 'lightbulb',
-        'title' => 'Innovative Solutions',
-        'description' => 'Our futuristic strategies help you stay ahead in competitive markets with cutting-edge digital solutions and creative thinking.',
-    ],
-    [
-        'icon' => 'handshake',
-        'title' => 'Client-Centric Approach',
-        'description' => 'We listen to your vision and transform your ideas into customized, growth-focused digital strategies that deliver results.',
-    ],
-    [
-        'icon' => 'rocket',
-        'title' => 'Results-Driven',
-        'description' => 'Data-driven decisions and analytical expertise ensure your business achieves measurable, sustainable growth and ROI.',
-    ],
-];
-
-$journeyMilestones = [
-    ['year' => '2013', 'title' => 'Founded',           'description' => 'WebTecMart was established with a vision to revolutionize digital branding.'],
-    ['year' => '2015', 'title' => 'First 100 Clients', 'description' => 'Reached the milestone of 100+ satisfied clients across various industries.'],
-    ['year' => '2018', 'title' => 'Expansion',         'description' => 'Expanded services to include SEO, SMO, and Performance Marketing.'],
-    ['year' => '2020', 'title' => '500+ Brands',       'description' => 'Trusted by 500+ brands and startups for digital marketing solutions.'],
-    ['year' => '2023', 'title' => 'Global Reach',      'description' => 'Expanded reach to international clients across 15+ countries.'],
-    ['year' => '2026', 'title' => '1000+ Success',     'description' => 'Strengthened 1000+ online businesses with comprehensive solutions.'],
-];
+$aboutContent = aboutPageContent();
+$stats = $aboutContent['stats'];
+$coreValues = $aboutContent['core_values'];
+$journeyMilestones = $aboutContent['milestones'];
+$uspItems = $aboutContent['usp_items'];
 
 // ===== Icon Helper =====
 function apIcon(string $name): string {
@@ -917,23 +884,24 @@ function apIcon(string $name): string {
         <div class="ap-hero">
             <div class="ap-pill">
                 <?= apIcon('sparkles') ?>
-                <span>About WebTecMart</span>
+                <span><?= e((string) $aboutContent['badge']) ?></span>
             </div>
 
             <h1 class="ap-h1">
-                Complete
-                <span class="accent">
-                    Digital Branding
-                    <svg viewBox="0 0 300 8" preserveAspectRatio="none">
-                        <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
-                    </svg>
-                </span>
-                Agency
+                <?= e((string) $aboutContent['hero_prefix']) ?>
+                <?php if ($aboutContent['hero_highlight'] !== ''): ?>
+                    <span class="accent">
+                        <?= e((string) $aboutContent['hero_highlight']) ?>
+                        <svg viewBox="0 0 300 8" preserveAspectRatio="none">
+                            <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                        </svg>
+                    </span>
+                <?php endif; ?>
+                <?= e((string) $aboutContent['hero_suffix']) ?>
             </h1>
 
             <p class="ap-subtitle">
-                We set new standards to develop the branding of digital businesses with innovative strategies and proven results.
-                For over 13 years, we've been the trusted partner for 1000+ businesses worldwide.
+                <?= e((string) $aboutContent['summary']) ?>
             </p>
         </div>
 
@@ -952,16 +920,10 @@ function apIcon(string $name): string {
         <!-- ===== OUR STORY ===== -->
         <div class="ap-story">
             <div class="ap-story-text">
-                <h2>Our <span class="accent">Story</span></h2>
-                <p>
-                    WebTecMart is the <span class="bold">No.1 digital service provider</span> from the last 13 years in the industry, strengthening over <span class="bold">1000+</span> online businesses with comprehensive digital marketing solutions.
-                </p>
-                <p>
-                    We aim at transforming every idea into the proposition that results in revolutionary business growth. IT, Digital Marketing, and Online Reputation Management services offered by us are at par with industry standards.
-                </p>
-                <p>
-                    We come up with innovative and futuristic options that help you sustain in a competitive market environment. Our team is dedicated to delivering excellence and driving measurable growth for your business.
-                </p>
+                <h2><?= e((string) $aboutContent['story_heading_prefix']) ?> <span class="accent"><?= e((string) $aboutContent['story_heading_highlight']) ?></span></h2>
+                <?php foreach ($aboutContent['story_paragraphs'] as $paragraph): ?>
+                    <?php if (trim((string) $paragraph) !== ''): ?><p><?= e((string) $paragraph) ?></p><?php endif; ?>
+                <?php endforeach; ?>
             </div>
 
             <div class="ap-story-visual">
@@ -971,8 +933,8 @@ function apIcon(string $name): string {
                             <div class="ap-story-quote-wrap">
                                 <?= apIcon('quote') ?>
                             </div>
-                            <h3 class="ap-story-brand">WebTecMart</h3>
-                            <p class="ap-story-tagline">Digital Branding Agency</p>
+                            <h3 class="ap-story-brand"><?= e((string) $aboutContent['story_visual_brand']) ?></h3>
+                            <p class="ap-story-tagline"><?= e((string) $aboutContent['story_visual_tagline']) ?></p>
                             <div class="ap-story-dots">
                                 <span></span><span></span><span></span><span></span><span></span>
                             </div>
@@ -985,8 +947,8 @@ function apIcon(string $name): string {
         <!-- ===== CORE VALUES ===== -->
         <div class="ap-values-section">
             <div class="ap-section-header">
-                <h2>Our <span class="accent">Core Values</span></h2>
-                <p>The principles that guide everything we do at WebTecMart</p>
+                <h2><?= e((string) $aboutContent['values_heading_prefix']) ?> <span class="accent"><?= e((string) $aboutContent['values_heading_highlight']) ?></span></h2>
+                <p><?= e((string) $aboutContent['values_subtitle']) ?></p>
             </div>
 
             <div class="ap-values-grid">
@@ -1005,8 +967,8 @@ function apIcon(string $name): string {
         <!-- ===== JOURNEY TIMELINE ===== -->
         <div class="ap-journey-section">
             <div class="ap-section-header">
-                <h2>Our <span class="accent">Journey</span></h2>
-                <p>Milestones that have shaped our success story</p>
+                <h2><?= e((string) $aboutContent['journey_heading_prefix']) ?> <span class="accent"><?= e((string) $aboutContent['journey_heading_highlight']) ?></span></h2>
+                <p><?= e((string) $aboutContent['journey_subtitle']) ?></p>
             </div>
 
             <div class="ap-journey-wrap">
@@ -1036,35 +998,13 @@ function apIcon(string $name): string {
         <!-- ===== USP SECTION ===== -->
         <div class="ap-usp-section">
             <div class="ap-usp-grid">
-                <div class="ap-usp-item">
-                    <div class="ap-usp-icon">
-                        <?= apIcon('handshake') ?>
+                <?php foreach ($uspItems as $usp): ?>
+                    <div class="ap-usp-item">
+                        <div class="ap-usp-icon"><?= apIcon((string) ($usp['icon'] ?? 'sparkles')) ?></div>
+                        <h3 class="ap-usp-title"><?= e((string) ($usp['title'] ?? '')) ?></h3>
+                        <p class="ap-usp-desc"><?= e((string) ($usp['description'] ?? '')) ?></p>
                     </div>
-                    <h3 class="ap-usp-title">Our USP</h3>
-                    <p class="ap-usp-desc">
-                        We host a very qualified team, which are great listeners as well. Our digital wizard experts possess analytical skills to build customized and innovative plans for clients.
-                    </p>
-                </div>
-
-                <div class="ap-usp-item">
-                    <div class="ap-usp-icon">
-                        <?= apIcon('shield') ?>
-                    </div>
-                    <h3 class="ap-usp-title">Quality Commitment</h3>
-                    <p class="ap-usp-desc">
-                        We deliver excellence in every project, ensuring your brand stands out with innovative strategies and exceptional execution.
-                    </p>
-                </div>
-
-                <div class="ap-usp-item">
-                    <div class="ap-usp-icon">
-                        <?= apIcon('zap') ?>
-                    </div>
-                    <h3 class="ap-usp-title">Fast & Reliable</h3>
-                    <p class="ap-usp-desc">
-                        We deliver projects on time with transparent communication and measurable results that drive business growth.
-                    </p>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -1081,16 +1021,16 @@ function apIcon(string $name): string {
                 </svg>
             </div>
             <div class="ap-cta-inner">
-                <h2>Ready to Start Your Digital Journey?</h2>
-                <p>Let's work together to create digital experiences that help you grow.</p>
+                <h2><?= e((string) $aboutContent['cta_title']) ?></h2>
+                <p><?= e((string) $aboutContent['cta_description']) ?></p>
 
                 <div class="ap-cta-buttons">
-                    <a href="/contact.php" class="ap-cta-btn primary">
-                        Get Free Consultation
+                    <a href="<?= e((string) $aboutContent['cta_primary_href']) ?>" class="ap-cta-btn primary">
+                        <?= e((string) $aboutContent['cta_primary_label']) ?>
                         <?= apIcon('arrow') ?>
                     </a>
-                    <a href="/services.php" class="ap-cta-btn secondary">
-                        Explore Our Services
+                    <a href="<?= e((string) $aboutContent['cta_secondary_href']) ?>" class="ap-cta-btn secondary">
+                        <?= e((string) $aboutContent['cta_secondary_label']) ?>
                     </a>
                 </div>
             </div>

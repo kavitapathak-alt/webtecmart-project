@@ -24,107 +24,11 @@ function pkgIcon(string $name): string {
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
 }
 
-// ===== Data =====
-$packages = [
-    [
-        'id' => 'basic',
-        'name' => 'Basic',
-        'icon' => 'zap',
-        'price' => ['monthly' => 9999, 'yearly' => 99990],
-        'description' => 'Perfect for startups and small businesses looking to establish their digital presence.',
-        'features' => [
-            'Website Design & Development',
-            'Basic SEO (10 Keywords)',
-            'Social Media Setup (3 Platforms)',
-            'Monthly Performance Report',
-            'Email Support',
-            '1 GB Hosting',
-            '5 Pages Website',
-            'Mobile Responsive Design',
-        ],
-        'popular' => false,
-        'buttonText' => 'Get Started',
-    ],
-    [
-        'id' => 'professional',
-        'name' => 'Professional',
-        'icon' => 'rocket',
-        'price' => ['monthly' => 24999, 'yearly' => 249990],
-        'description' => 'Ideal for growing businesses that need comprehensive digital marketing solutions.',
-        'features' => [
-            'Advanced Website Design & Development',
-            'Advanced SEO (30 Keywords)',
-            'Social Media Management (5 Platforms)',
-            'Content Marketing (4 Posts/Month)',
-            'Email & WhatsApp Support',
-            '5 GB Hosting',
-            '15 Pages Website',
-            'Mobile Responsive Design',
-            'Google Analytics Setup',
-            'Monthly Strategy Call',
-        ],
-        'popular' => true,
-        'buttonText' => 'Start Now',
-    ],
-    [
-        'id' => 'enterprise',
-        'name' => 'Enterprise',
-        'icon' => 'crown',
-        'price' => ['monthly' => 49999, 'yearly' => 499990],
-        'description' => 'Complete solution for large businesses and enterprises with advanced needs.',
-        'features' => [
-            'Custom Website Development',
-            'Premium SEO (50+ Keywords)',
-            'Social Media Management (All Platforms)',
-            'Content Marketing (8 Posts/Month)',
-            '24/7 Priority Support',
-            'Unlimited Hosting',
-            'Unlimited Pages',
-            'Mobile App Integration',
-            'Advanced Analytics & Reporting',
-            'Dedicated Account Manager',
-            'Quarterly Strategy Review',
-            'Custom Development',
-        ],
-        'popular' => false,
-        'buttonText' => 'Contact Sales',
-    ],
-];
-
-$addons = [
-    ['name' => 'Additional SEO Keywords',      'price' => '₹500/keyword'],
-    ['name' => 'Social Media Ads Management',  'price' => '₹15,000/month'],
-    ['name' => 'Email Marketing Setup',        'price' => '₹10,000'],
-    ['name' => 'Content Writing (Per Blog)',   'price' => '₹2,500'],
-    ['name' => 'Advanced Analytics Dashboard', 'price' => '₹5,000/month'],
-    ['name' => 'Dedicated Account Manager',    'price' => '₹20,000/month'],
-];
-
-$faqs = [
-    [
-        'question' => 'Can I upgrade my package later?',
-        'answer'   => 'Yes, you can upgrade your package at any time. We\'ll prorate the difference and ensure a smooth transition.',
-    ],
-    [
-        'question' => 'What happens if I need to cancel?',
-        'answer'   => 'You can cancel your subscription anytime. We offer a 30-day money-back guarantee if you\'re not satisfied with our services.',
-    ],
-    [
-        'question' => 'Do you offer custom packages?',
-        'answer'   => 'Yes, we offer custom packages tailored to your specific business needs. Contact us for a personalized quote.',
-    ],
-    [
-        'question' => 'How long does it take to see results?',
-        'answer'   => 'Results vary depending on the service. SEO typically takes 3-6 months, while website development can be completed in 4-8 weeks.',
-    ],
-];
-
-$trustBadges = [
-    ['icon' => 'award', 'title' => '13+ Years', 'subtitle' => 'of Excellence'],
-    ['icon' => 'users', 'title' => '1000+',     'subtitle' => 'Happy Clients'],
-    ['icon' => 'shield', 'title' => '98%',      'subtitle' => 'Satisfaction Rate'],
-    ['icon' => 'clock', 'title' => '24/7',      'subtitle' => 'Support Available'],
-];
+$packagesPage = packagesPageContent();
+$packages = $packagesPage['packages'];
+$addons = $packagesPage['addons'];
+$faqs = $packagesPage['faqs'];
+$trustBadges = $packagesPage['trust_badges'];
 ?>
 
 <style>
@@ -718,7 +622,12 @@ $trustBadges = [
     }
 </style>
 
-<main class="pkg-page" id="packagesPage">
+<main
+    class="pkg-page"
+    id="packagesPage"
+    data-monthly-period="<?= e((string) $packagesPage['monthly_period_label']) ?>"
+    data-yearly-period="<?= e((string) $packagesPage['yearly_period_label']) ?>"
+>
 
     <!-- Decorative Background -->
     <div class="pkg-bg">
@@ -738,33 +647,31 @@ $trustBadges = [
         <div class="pkg-hero">
             <div class="pkg-pill">
                 <?= pkgIcon('sparkles') ?>
-                <span>Pricing Plans</span>
+                <span><?= e((string) $packagesPage['hero_badge']) ?></span>
             </div>
 
             <h1 class="pkg-h1">
-                Choose Your
+                <?= e((string) $packagesPage['heading_prefix']) ?>
                 <span class="accent">
-                    Package
+                    <?= e((string) $packagesPage['heading_highlight']) ?>
                     <svg viewBox="0 0 300 8" preserveAspectRatio="none">
                         <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                     </svg>
                 </span>
             </h1>
 
-            <p class="pkg-subtitle">
-                Select the perfect plan for your business needs. All packages include our expert support and proven strategies.
-            </p>
+            <p class="pkg-subtitle"><?= e((string) $packagesPage['summary']) ?></p>
         </div>
 
         <!-- ===== Billing Toggle ===== -->
         <div class="pkg-toggle-wrap">
-            <span class="pkg-toggle-label <?= 'active' ?>" id="pkgLabelMonthly">Monthly</span>
+            <span class="pkg-toggle-label active" id="pkgLabelMonthly"><?= e((string) $packagesPage['monthly_label']) ?></span>
             <button type="button" class="pkg-toggle" id="pkgToggle" onclick="pkgToggleBilling()" aria-label="Toggle billing cycle">
                 <span class="pkg-toggle-knob"></span>
             </button>
             <span class="pkg-toggle-label inactive" id="pkgLabelYearly">
-                Yearly
-                <span class="pkg-save-badge">Save 20%</span>
+                <?= e((string) $packagesPage['yearly_label']) ?>
+                <span class="pkg-save-badge"><?= e((string) $packagesPage['save_badge']) ?></span>
             </span>
         </div>
 
@@ -775,12 +682,12 @@ $trustBadges = [
             ?>
                 <div class="pkg-card <?= $isPopular ? 'popular' : '' ?>"
                      data-pkg-id="<?= htmlspecialchars($pkg['id']) ?>"
-                     data-price-monthly="<?= (int) $pkg['price']['monthly'] ?>"
-                     data-price-yearly="<?= (int) $pkg['price']['yearly'] ?>"
+                     data-price-monthly="<?= (int) $pkg['monthly'] ?>"
+                     data-price-yearly="<?= (int) $pkg['yearly'] ?>"
                      data-popular="<?= $isPopular ? '1' : '0' ?>">
 
                     <?php if ($isPopular): ?>
-                        <div class="pkg-popular-badge">Most Popular</div>
+                        <div class="pkg-popular-badge"><?= e((string) $packagesPage['popular_badge']) ?></div>
                     <?php endif; ?>
 
                     <div class="pkg-card-head">
@@ -792,12 +699,12 @@ $trustBadges = [
                     </div>
 
                     <div class="pkg-price-wrap">
-                        <span class="pkg-price" data-pkg-price>₹<?= number_format($pkg['price']['monthly']) ?></span>
-                        <span class="pkg-price-label" data-pkg-label>/month</span>
+                        <span class="pkg-price" data-pkg-price>₹<?= number_format((int) $pkg['monthly']) ?></span>
+                        <span class="pkg-price-label" data-pkg-label><?= e((string) $packagesPage['monthly_period_label']) ?></span>
                     </div>
 
                     <ul class="pkg-features">
-                        <?php foreach ($pkg['features'] as $feature): ?>
+                        <?php foreach (($pkg['features'] ?? []) as $feature): ?>
                             <li class="pkg-feature">
                                 <?= pkgIcon('check') ?>
                                 <?= htmlspecialchars($feature) ?>
@@ -805,8 +712,8 @@ $trustBadges = [
                         <?php endforeach; ?>
                     </ul>
 
-                    <a href="/contact.php" class="pkg-cta <?= $isPopular ? 'popular' : 'regular' ?>">
-                        <?= htmlspecialchars($pkg['buttonText']) ?>
+                    <a href="<?= e((string) ($pkg['buttonHref'] ?? '/contact.php')) ?>" class="pkg-cta <?= $isPopular ? 'popular' : 'regular' ?>">
+                        <?= e((string) $pkg['buttonText']) ?>
                     </a>
                 </div>
             <?php endforeach; ?>
@@ -816,12 +723,10 @@ $trustBadges = [
         <div class="pkg-addons">
             <div class="pkg-addons-header">
                 <h2 class="pkg-addons-h2">
-                    Customize Your
-                    <span class="accent">Package</span>
+                    <?= e((string) $packagesPage['addons_heading_prefix']) ?>
+                    <span class="accent"><?= e((string) $packagesPage['addons_heading_highlight']) ?></span>
                 </h2>
-                <p class="pkg-addons-sub">
-                    Add these services to create a package that perfectly fits your needs
-                </p>
+                <p class="pkg-addons-sub"><?= e((string) $packagesPage['addons_subtitle']) ?></p>
             </div>
 
             <div class="pkg-addons-grid">
@@ -848,12 +753,10 @@ $trustBadges = [
         <!-- ===== FAQ ===== -->
         <div class="pkg-faq-header">
             <h2 class="pkg-faq-h2">
-                Frequently Asked
-                <span class="accent">Questions</span>
+                <?= e((string) $packagesPage['faq_heading_prefix']) ?>
+                <span class="accent"><?= e((string) $packagesPage['faq_heading_highlight']) ?></span>
             </h2>
-            <p class="pkg-faq-sub">
-                Everything you need to know about our packages and services
-            </p>
+            <p class="pkg-faq-sub"><?= e((string) $packagesPage['faq_subtitle']) ?></p>
         </div>
 
         <div class="pkg-faq-grid">
@@ -878,19 +781,17 @@ $trustBadges = [
                 </svg>
             </div>
             <div class="pkg-cta-inner">
-                <h2 class="pkg-cta-h2">Need a Custom Package?</h2>
-                <p class="pkg-cta-sub">
-                    Contact us and we'll create a package tailored specifically for your business needs.
-                </p>
+                <h2 class="pkg-cta-h2"><?= e((string) $packagesPage['cta_title']) ?></h2>
+                <p class="pkg-cta-sub"><?= e((string) $packagesPage['cta_description']) ?></p>
 
                 <div class="pkg-cta-btns">
-                    <a href="/contact.php" class="pkg-cta-btn-1">
-                        Contact Us
+                    <a href="<?= e((string) $packagesPage['cta_primary_href']) ?>" class="pkg-cta-btn-1">
+                        <?= e((string) $packagesPage['cta_primary_label']) ?>
                         <?= pkgIcon('arrow') ?>
                     </a>
-                    <a href="tel:+919999674255" class="pkg-cta-btn-2">
+                    <a href="tel:<?= e((string) $packagesPage['cta_phone']) ?>" class="pkg-cta-btn-2">
                         <?= pkgIcon('phone') ?>
-                        Call: +91-9999674255
+                        <?= e((string) $packagesPage['cta_phone_label']) ?>
                     </a>
                 </div>
             </div>
@@ -913,6 +814,11 @@ $trustBadges = [
 <script>
     // ===== Billing toggle =====
     let pkgBillingCycle = 'monthly';
+    const pkgPage = document.getElementById('packagesPage');
+    const pkgPeriodLabels = {
+        monthly: pkgPage.dataset.monthlyPeriod,
+        yearly: pkgPage.dataset.yearlyPeriod,
+    };
     const pkgInrFormatter = new Intl.NumberFormat('en-IN', {
         style: 'currency',
         currency: 'INR',
@@ -952,10 +858,10 @@ $trustBadges = [
 
             if (pkgBillingCycle === 'monthly') {
                 priceEl.textContent = pkgInrFormatter.format(monthly);
-                labelEl.textContent = '/month';
+                labelEl.textContent = pkgPeriodLabels.monthly;
             } else {
                 priceEl.textContent = pkgInrFormatter.format(yearly);
-                labelEl.textContent = '/year';
+                labelEl.textContent = pkgPeriodLabels.yearly;
             }
         });
     }

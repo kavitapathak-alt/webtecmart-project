@@ -10,7 +10,7 @@ function renderFooterSection(): void
         ['label' => 'Our Services',  'href' => '/services.php'],
         ['label' => 'Packages',      'href' => '/packages.php'],
         ['label' => 'Portfolio',     'href' => '/portfolio.php'],
-        ['label' => 'Blog',          'href' => '/blog.php'],
+        ['label' => 'Blog',          'href' => '/blogs.php'],
         ['label' => 'Contact Us',    'href' => '/contact.php'],
     ];
 

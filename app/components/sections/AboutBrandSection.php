@@ -1,45 +1,10 @@
 <?php
 function renderAboutBrandSection(): void
 {
-    // ===== Stats data =====
-    $stats = [
-        ['icon' => 'award',     'value' => '13+',       'label' => 'Years Experience'],
-        ['icon' => 'shield',    'value' => '100%',      'label' => 'Ethical Agency'],
-        ['icon' => 'dollar',    'value' => 'Affordable','label' => 'Agency Fee'],
-        ['icon' => 'users2',    'value' => '11',        'label' => 'In-House Team'],
-    ];
-
-    // ===== Why Choose Us =====
-    $whyChooseUs = [
-        '👤 Dedicated Account Manager',
-        '📊 Transparent Reporting',
-        '📈 ROI-Driven Strategies',
-        '⚡ Fast Support & Execution',
-    ];
-
-    // ===== Features =====
-    $features = [
-        [
-            'icon' => 'rocket',
-            'title' => '360° Digital Solutions',
-            'description' => 'From website development and SEO to branding, social media, paid advertising, and mobile apps—we provide everything your business needs to grow under one roof.',
-        ],
-        [
-            'icon' => 'target',
-            'title' => 'Growth-Focused Strategies',
-            'description' => 'Every campaign is built with one goal in mind: attracting qualified traffic, generating leads, increasing conversions, and maximizing your ROI.',
-        ],
-        [
-            'icon' => 'brain',
-            'title' => 'Innovation Meets Performance',
-            'description' => 'We combine creative thinking, AI-powered insights, and data-driven strategies to deliver digital solutions that keep your brand ahead of the competition.',
-        ],
-        [
-            'icon' => 'handshake',
-            'title' => 'Your Long-Term Growth Partner',
-            'description' => "We don't just complete projects—we build lasting partnerships. Our team works as an extension of your business, providing transparent communication, continuous optimization, and dedicated support.",
-        ],
-    ];
+    $content = homepageAboutContent();
+    $stats = $content['stats'];
+    $whyChooseUs = $content['why_points'];
+    $features = $content['features'];
 
     // Icon SVG helper
     function abIcon(string $name): string {
@@ -767,22 +732,24 @@ function renderAboutBrandSection(): void
             <div class="about-header">
                 <div class="about-pill">
                     <?= abIcon('sparkles') ?>
-                    <span>About WebTecMart</span>
+                    <span><?= e((string) $content['badge']) ?></span>
                 </div>
 
                 <h2 class="about-heading">
-                    Complete
-                    <span class="accent">
-                        Digital Branding
-                        <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                            <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
-                        </svg>
-                    </span>
-                    Agency
+                    <?= e((string) $content['heading_prefix']) ?>
+                    <?php if ($content['heading_highlight'] !== ''): ?>
+                        <span class="accent">
+                            <?= e((string) $content['heading_highlight']) ?>
+                            <svg viewBox="0 0 300 6" preserveAspectRatio="none">
+                                <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                            </svg>
+                        </span>
+                    <?php endif; ?>
+                    <?= e((string) $content['heading_suffix']) ?>
                 </h2>
 
                 <p class="about-subtitle">
-                    Helping Your Business Get Found, Get Clicked, and Grow
+                    <?= e((string) $content['summary']) ?>
                 </p>
             </div>
 
@@ -796,16 +763,16 @@ function renderAboutBrandSection(): void
                     <div class="about-image-card">
                         <div class="about-image-inner">
                             <img
-                                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
-                                alt="WebTecMart digital branding agency team collaborating"
+                                src="<?= e((string) $content['image_src']) ?>"
+                                alt="<?= e((string) $content['image_alt']) ?>"
                                 loading="lazy"
                             >
                             <div class="about-image-overlay"></div>
 
                             <!-- Floating Brand Badge -->
                             <div class="about-brand-badge">
-                                <h3>WebTecMart</h3>
-                                <p>Digital Branding Agency</p>
+                                <h3><?= e((string) $content['brand_name']) ?></h3>
+                                <p><?= e((string) $content['brand_tagline']) ?></p>
                             </div>
                         </div>
                     </div>
@@ -823,12 +790,12 @@ function renderAboutBrandSection(): void
 
                     <!-- Why Choose Us -->
                     <div class="about-why">
-                        <h4>Why Businesses Choose WebTecMart</h4>
+                        <h4><?= e((string) $content['why_heading']) ?></h4>
                         <ul>
                             <?php foreach ($whyChooseUs as $point): ?>
                                 <li>
                                     <?= abIcon('check') ?>
-                                    <span><?= htmlspecialchars($point) ?></span>
+                                    <span><?= e((string) $point) ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
@@ -840,7 +807,7 @@ function renderAboutBrandSection(): void
                                 <?php endfor; ?>
                             </div>
                             <p class="about-trust-text">
-                                Trusted by <span class="bold">500+ brands</span> across industries
+                                <?= e((string) $content['trust_prefix']) ?> <span class="bold"><?= e((string) $content['trust_highlight']) ?></span> <?= e((string) $content['trust_suffix']) ?>
                             </p>
                         </div>
                     </div>
@@ -852,17 +819,13 @@ function renderAboutBrandSection(): void
 
                     <div>
                         <h3>
-                            Your Trusted Partner in
-                            <span class="accent">Digital Growth</span>
+                            <?= e((string) $content['content_heading_prefix']) ?>
+                            <span class="accent"><?= e((string) $content['content_heading_highlight']) ?></span>
                         </h3>
 
-                        <p>
-                            WebTecMart is the <span class="bold">No.1 digital service provider</span> from the last 13 years in the industry, strengthening over <span class="bold">1000+</span> online businesses with comprehensive digital marketing solutions.
-                        </p>
-
-                        <p>
-                            We aim at transforming every idea into the proposition that results in revolutionary business growth. IT, Digital Marketing, and Online Reputation Management services offered by us are at par. We come up with innovative and futuristic options that help you sustain in a competitive market environment.
-                        </p>
+                        <?php foreach ($content['paragraphs'] as $paragraph): ?>
+                            <?php if (trim((string) $paragraph) !== ''): ?><p><?= e((string) $paragraph) ?></p><?php endif; ?>
+                        <?php endforeach; ?>
                     </div>
 
                     <!-- Features Grid -->
@@ -883,23 +846,21 @@ function renderAboutBrandSection(): void
                                 <?= abIcon('heart') ?>
                             </div>
                             <div>
-                                <h5>Our USP</h5>
-                                <p>
-                                    We host a very qualified team, which are great listeners as well. Our digital wizard experts possess analytical skills to build customized and innovative plans for clients.
-                                </p>
+                                <h5><?= e((string) $content['usp_title']) ?></h5>
+                                <p><?= e((string) $content['usp_description']) ?></p>
                             </div>
                         </div>
                     </div>
 
                     <!-- CTA -->
                     <div class="about-cta-row">
-                        <a href="/about.php" class="about-cta-btn">
-                            Learn More About Us
+                        <a href="<?= e((string) $content['cta_href']) ?>" class="about-cta-btn">
+                            <?= e((string) $content['cta_label']) ?>
                             <?= abIcon('arrow') ?>
                         </a>
                         <div class="about-cta-excellence">
                             <?= abIcon('check') ?>
-                            <span>13+ Years of Excellence</span>
+                            <span><?= e((string) $content['excellence_text']) ?></span>
                         </div>
                     </div>
 

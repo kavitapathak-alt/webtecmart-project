@@ -3,13 +3,27 @@ require_once __DIR__ . '/../../config.php';
 require_once __DIR__ . '/../../functions.php';
 
 $current = currentPage();
+$packagesPageMeta = $current === 'packages.php' ? packagesPageContent() : null;
+$serviceNavItems = [
+    ['label' => 'All Services', 'path' => '/services.php', 'description' => 'Explore our complete digital growth services.'],
+    ['label' => 'Digital Business Branding', 'path' => '/digital-business-branding.php', 'description' => 'Create a distinctive brand identity that earns recognition and trust.'],
+    ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Build a responsive website designed to turn visitors into customers.'],
+    ['label' => 'Search Engine Optimization', 'path' => '/search-engine-optimization.php', 'description' => 'Improve search visibility and attract high-intent organic traffic.'],
+    ['label' => 'Search Engine Marketing', 'path' => '/search-engine-marketing.php', 'description' => 'Reach customers with targeted paid search campaigns.'],
+    ['label' => 'Social Media Optimization', 'path' => '/social-media-optimization.php', 'description' => 'Grow your audience and engagement across social platforms.'],
+    ['label' => 'Mobile App Development', 'path' => '/mobile-app-development.php', 'description' => 'Deliver useful mobile experiences for your customers.'],
+];
+$servicePagePaths = array_map(static function (array $item): string {
+    return basename($item['path']);
+}, $serviceNavItems);
+$isServicesPage = in_array($current, $servicePagePaths, true);
 $navItems = [
     ['label' => 'Home',      'path' => '/index.php'],
     ['label' => 'About',     'path' => '/about.php'],
-    ['label' => 'Services',  'path' => '/services.php'],
+    ['label' => 'Services',  'path' => '/services.php', 'modal' => 'servicesModal'],
     ['label' => 'Packages',  'path' => '/packages.php'],
     ['label' => 'Portfolio', 'path' => '/portfolio.php'],
-    ['label' => 'Blog',      'path' => '/blog.php'],
+    ['label' => 'Blog',      'path' => '/blogs.php'],
     ['label' => 'Contact',   'path' => '/contact.php'],
 ];
 ?>
@@ -18,8 +32,8 @@ $navItems = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= APP_NAME ?> | Digital Growth Agency</title>
-    <meta name="description" content="WebTecMart helps brands grow through SEO, paid media, social campaigns, and conversion-focused web design.">
+    <title><?= e((string) ($packagesPageMeta['page_meta_title'] ?? (APP_NAME . ' | Digital Growth Agency'))) ?></title>
+    <meta name="description" content="<?= e((string) ($packagesPageMeta['page_meta_description'] ?? 'WebTecMart helps brands grow through SEO, paid media, social campaigns, and conversion-focused web design.')) ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -332,6 +346,104 @@ $navItems = [
 
         .nav-link.active {
             color: var(--primary);
+        }
+
+        .services-modal .modal-content {
+            overflow: hidden;
+            border: 1px solid rgba(196, 0, 122, 0.14);
+            border-radius: 24px;
+            background: #FBF8F1;
+            box-shadow: 0 24px 80px rgba(31, 27, 42, 0.22);
+        }
+
+        .services-modal .modal-header {
+            padding: 24px 28px 16px;
+            border: 0;
+        }
+
+        .services-modal-kicker {
+            margin: 0 0 5px;
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .services-modal-title {
+            margin: 0;
+            color: var(--deep);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.35rem, 3vw, 1.8rem);
+            font-weight: 800;
+        }
+
+        .services-modal .modal-body {
+            padding: 8px 28px 28px;
+        }
+
+        .services-modal-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .services-modal-link {
+            display: flex;
+            align-items: flex-start;
+            gap: 13px;
+            min-height: 94px;
+            padding: 16px;
+            border: 1px solid rgba(196, 0, 122, 0.12);
+            border-radius: 16px;
+            background: #fff;
+            color: var(--deep);
+            text-decoration: none;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .services-modal-link:hover,
+        .services-modal-link:focus-visible {
+            transform: translateY(-2px);
+            border-color: rgba(196, 0, 122, 0.42);
+            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.1);
+            color: var(--primary-dark);
+        }
+
+        .services-modal-icon {
+            display: grid;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            place-items: center;
+            border-radius: 12px;
+            background: rgba(196, 0, 122, 0.09);
+            color: var(--primary);
+            font-size: 1rem;
+            font-weight: 800;
+        }
+
+        .services-modal-link-title {
+            display: block;
+            margin: 0 0 4px;
+            font-size: 0.92rem;
+            font-weight: 700;
+            line-height: 1.35;
+        }
+
+        .services-modal-link-description {
+            display: block;
+            color: #6B7280;
+            font-size: 0.78rem;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 575px) {
+            .services-modal .modal-dialog { margin: 12px; }
+            .services-modal .modal-header { padding: 20px 20px 14px; }
+            .services-modal .modal-body { padding: 8px 20px 20px; }
+            .services-modal-grid { grid-template-columns: 1fr; gap: 9px; }
+            .services-modal-link { min-height: auto; padding: 13px; }
         }
 
         /* Active indicator */
@@ -715,7 +827,11 @@ $navItems = [
             <!-- DESKTOP NAV -->
             <nav class="main-nav" aria-label="Main navigation">
                 <?php foreach ($navItems as $item): ?>
-                    <a href="<?= $item['path'] ?>" class="nav-link <?= $current === basename($item['path']) ? 'active' : '' ?>">
+                    <a
+                        href="<?= $item['path'] ?>"
+                        class="nav-link <?= !empty($item['modal']) ? ($isServicesPage ? 'active' : '') : ($current === basename($item['path']) ? 'active' : '') ?>"
+                        <?= !empty($item['modal']) ? 'data-bs-toggle="modal" data-bs-target="#' . e($item['modal']) . '" aria-haspopup="dialog"' : '' ?>
+                    >
                         <?= $item['label'] ?>
                     </a>
                 <?php endforeach; ?>
@@ -740,7 +856,11 @@ $navItems = [
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-inner">
                 <?php foreach ($navItems as $item): ?>
-                    <a href="<?= $item['path'] ?>" class="nav-link <?= $current === basename($item['path']) ? 'active' : '' ?>">
+                    <a
+                        href="<?= $item['path'] ?>"
+                        class="nav-link <?= !empty($item['modal']) ? ($isServicesPage ? 'active' : '') : ($current === basename($item['path']) ? 'active' : '') ?>"
+                        <?= !empty($item['modal']) ? 'data-bs-toggle="modal" data-bs-target="#' . e($item['modal']) . '" aria-haspopup="dialog"' : '' ?>
+                    >
                         <?= $item['label'] ?>
                     </a>
                 <?php endforeach; ?>
@@ -783,6 +903,33 @@ $navItems = [
         </div>
     </header>
 
+    <div class="modal fade services-modal" id="servicesModal" tabindex="-1" aria-labelledby="servicesModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div>
+                        <p class="services-modal-kicker">WebTecMart</p>
+                        <h2 class="services-modal-title" id="servicesModalTitle">Explore Our Services</h2>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close services"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="services-modal-grid">
+                        <?php foreach ($serviceNavItems as $index => $service): ?>
+                            <a class="services-modal-link" href="<?= e($service['path']) ?>">
+                                <span class="services-modal-icon" aria-hidden="true"><?= $index === 0 ? '↗' : sprintf('%02d', $index) ?></span>
+                                <span>
+                                    <span class="services-modal-link-title"><?= e($service['label']) ?></span>
+                                    <span class="services-modal-link-description"><?= e($service['description']) ?></span>
+                                </span>
+                            </a>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <?php renderPageAddons($current); ?>
 
     <script>
@@ -791,9 +938,16 @@ $navItems = [
             const mobileMenu = document.getElementById('mobileMenu');
             const siteHeader = document.getElementById('siteHeader');
             const menuIcon = document.getElementById('menuIcon');
+            const servicesModal = document.getElementById('servicesModal');
 
             const menuIconSVG = `<line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/>`;
             const closeIconSVG = `<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>`;
+            const closeMobileMenu = () => {
+                mobileMenu.classList.remove('open');
+                menuToggle.classList.remove('open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                menuIcon.innerHTML = menuIconSVG;
+            };
 
             menuToggle.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -805,12 +959,11 @@ $navItems = [
 
             document.addEventListener('click', (e) => {
                 if (!siteHeader.contains(e.target) && mobileMenu.classList.contains('open')) {
-                    mobileMenu.classList.remove('open');
-                    menuToggle.classList.remove('open');
-                    menuToggle.setAttribute('aria-expanded', 'false');
-                    menuIcon.innerHTML = menuIconSVG;
+                    closeMobileMenu();
                 }
             });
+
+            servicesModal.addEventListener('hidden.bs.modal', closeMobileMenu);
 
             window.addEventListener('scroll', () => {
                 siteHeader.classList.toggle('scrolled', window.scrollY > 20);

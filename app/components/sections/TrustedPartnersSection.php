@@ -1,27 +1,15 @@
 <?php
 function renderTrustedPartnersSection(): void
 {
-    // Aapke logos — yahan apne actual logo paths daalein
-    $logos = [
-        ['name' => 'Client Logo 1',  'src' => '/assets/images/logo-1.png'],
-        ['name' => 'Client Logo 2',  'src' => '/assets/images/logos-2.png'],
-        ['name' => 'Client Logo 3',  'src' => '/assets/images/logos-3.jpeg'],
-        ['name' => 'Client Logo 4',  'src' => '/assets/images/logos-4.jpeg'],
-        ['name' => 'Client Logo 5',  'src' => '/assets/images/logos-5.jpeg'],
-        ['name' => 'Client Logo 6',  'src' => '/assets/images/logos-6.jpeg'],
-        ['name' => 'Client Logo 7',  'src' => '/assets/images/logos-7.jpeg'],
-        ['name' => 'Client Logo 8',  'src' => '/assets/images/logos-8.jpeg'],
-        ['name' => 'Client Logo 9',  'src' => '/assets/images/logos-9.jpeg'],
-        ['name' => 'Client Logo 10', 'src' => '/assets/images/logos-10.jpeg'],
-        ['name' => 'Client Logo 11', 'src' => '/assets/images/logos-11.jpeg'],
-    ];
+    $content = trustedPartnersContent();
+    $logos = trustedPartnerLogos();
 
     $groupSize = 3;
     $dotCount  = (int) ceil(count($logos) / $groupSize);
     $speedPxPerSec = 45;
 
     // Triple the logos for seamless infinite loop
-    $trackLogos = array_merge($logos, $logos, $logos);
+    $trackLogos = $logos ? array_merge($logos, $logos, $logos) : [];
     ?>
     <style>
         /* ============================================================
@@ -313,26 +301,29 @@ function renderTrustedPartnersSection(): void
             <div class="tp-header">
                 <div class="tp-badge">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-                    <span>Trusted Partners</span>
+                    <span><?= e((string) ($content['badge'] ?? '')) ?></span>
                 </div>
 
                 <h2 class="tp-heading">
-                    Trusted by
-                    <span class="brand-highlight">
-                        Leading Brands
-                        <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                            <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
-                        </svg>
-                    </span>
-                    &amp; Startups
+                    <?= e((string) ($content['heading_prefix'] ?? '')) ?>
+                    <?php if (!empty($content['heading_highlight'])): ?>
+                        <span class="brand-highlight">
+                            <?= e((string) $content['heading_highlight']) ?>
+                            <svg viewBox="0 0 300 6" preserveAspectRatio="none">
+                                <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                            </svg>
+                        </span>
+                    <?php endif; ?>
+                    <?= e((string) ($content['heading_suffix'] ?? '')) ?>
                 </h2>
 
                 <p class="tp-subtitle">
-                    Join 500+ businesses that trust WebTecMart for their digital growth
+                    <?= e((string) ($content['summary'] ?? '')) ?>
                 </p>
             </div>
 
             <!-- Marquee -->
+            <?php if ($logos): ?>
             <div class="tp-marquee-wrap" id="tpMarqueeWrap">
                 <div class="tp-marquee-fade tp-marquee-fade-left"></div>
                 <div class="tp-marquee-fade tp-marquee-fade-right"></div>
@@ -343,10 +334,9 @@ function renderTrustedPartnersSection(): void
                             <div class="tp-card">
                                 <div class="tp-card-inner">
                                     <img
-                                        src="<?= htmlspecialchars($logo['src']) ?>"
-                                        alt="<?= htmlspecialchars($logo['name']) ?>"
+                                        src="<?= e($logo['src']) ?>"
+                                        alt="<?= e($logo['alt']) ?>"
                                         loading="lazy"
-                                        onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=\'font-size:1.5rem;font-weight:800;color:#C4007A;\'>'+'<?= strtoupper(substr($logo['name'], -1)) ?>'+'</span>';"
                                     >
                                 </div>
                             </div>
@@ -354,8 +344,10 @@ function renderTrustedPartnersSection(): void
                     </div>
                 </div>
             </div>
+            <?php endif; ?>
 
             <!-- Navigation Dots -->
+            <?php if ($logos): ?>
             <div class="tp-dots" id="tpDots" aria-label="Partner navigation">
                 <div class="tp-dots-line"></div>
                 <div class="tp-dots-inner" id="tpDotsInner">
@@ -370,6 +362,7 @@ function renderTrustedPartnersSection(): void
                 </div>
                 <div class="tp-dots-line tp-dots-line-right"></div>
             </div>
+            <?php endif; ?>
 
         </div>
     </section>
