@@ -2,44 +2,8 @@
 
 function renderSearchVisibilitySection(): void
 {
-    $services = [
-        [
-            'number' => '01',
-            'icon' => 'map-pin',
-            'title' => 'Local SEO',
-            'text' => 'We work on the organic factors that help a business grow locally. With our Local SEO strategies, customers searching nearby for what you offer will find you first.',
-        ],
-        [
-            'number' => '02',
-            'icon' => 'flag',
-            'title' => 'National SEO',
-            'text' => "Looking to grow your business across your own country? National SEO is the right fit — we sharpen your website's ranking in a way that turns visibility into real leads and sales.",
-        ],
-        [
-            'number' => '03',
-            'icon' => 'globe',
-            'title' => 'International SEO',
-            'text' => 'Reaching clients across borders is tough without the right approach. Our International SEO services help you rank for the right keywords and earn backlinks from relevant global sites.',
-        ],
-        [
-            'number' => '04',
-            'icon' => 'shopping-cart',
-            'title' => 'E-Commerce SEO',
-            'text' => "For online stores, ranking on Google's first page isn't optional, it's essential. We make sure your products are easy to find so potential customers can discover and order them with ease.",
-        ],
-        [
-            'number' => '05',
-            'icon' => 'rocket',
-            'title' => 'SEO for Small Business',
-            'text' => 'Startups often struggle with weak visibility online and on social media. Our Startup SEO services target the right customers by identifying business-focused keywords and showcasing your offerings through a strong website.',
-        ],
-        [
-            'number' => '06',
-            'icon' => 'shield',
-            'title' => 'Online Presence & Reputation',
-            'text' => "Online Reputation Management is a key part of any SEO strategy, shaping how your brand is perceived by controlling what appears on Google's front page for your name and terms.",
-        ],
-    ];
+    $content = homepageVisibilityContent();
+    $services = $content['services'];
     ?>
 
     <style>
@@ -645,13 +609,13 @@ function renderSearchVisibilitySection(): void
                         <path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8L4 8.8h6.1z"/>
                     </svg>
 
-                    <span>Search Visibility</span>
+                    <span><?= e((string) $content['badge']) ?></span>
                 </div>
 
                 <h2>
-                    Increase Your Business's
+                    <?= e((string) $content['heading_prefix']) ?>
                     <span class="search-heading-highlight">
-                        Search Visibility
+                        <?= e((string) $content['heading_highlight']) ?>
 
                         <svg
                             viewBox="0 0 300 6"
@@ -663,10 +627,7 @@ function renderSearchVisibilitySection(): void
                     </span>
                 </h2>
 
-                <p class="search-visibility-intro">
-                    Target the right audience at the right time with our comprehensive
-                    search engine optimization strategies.
-                </p>
+                <p class="search-visibility-intro"><?= e((string) $content['summary']) ?></p>
 
             </div>
 
@@ -777,10 +738,10 @@ function renderSearchVisibilitySection(): void
 
                             <!-- Learn More -->
                             <a
-                                href="/services"
+                                href="<?= e((string) $service['href']) ?>"
                                 class="search-learn-more"
                             >
-                                <span>Learn More</span>
+                                <span><?= e((string) $content['learn_more_label']) ?></span>
 
                                 <svg
                                     viewBox="0 0 24 24"
@@ -808,10 +769,10 @@ function renderSearchVisibilitySection(): void
             <div class="search-center-cta">
 
                 <a
-                    href="/contact"
+                    href="<?= e((string) $content['quote_href']) ?>"
                     class="search-quote-btn"
                 >
-                    <span>REQUEST FREE QUOTE</span>
+                    <span><?= e((string) $content['quote_label']) ?></span>
 
                     <svg
                         viewBox="0 0 24 24"

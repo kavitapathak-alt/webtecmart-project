@@ -53,6 +53,7 @@ $collections = [
     'hero_content' => ['label' => 'Hero Section', 'page' => 'index.php', 'description' => 'Open this section to edit every visible hero heading, paragraph, checklist item, button, lead form label, service choice, phone detail and trust message.', 'icon' => '⌂'],
     'partner' => ['label' => 'Trusted Partners', 'page' => 'index.php', 'description' => 'Edit the Trusted Partners heading and subtitle, and add, update, publish or remove partner logos.', 'icon' => '◇'],
     'homepage_about' => ['label' => 'About WebTecMart', 'page' => 'index.php', 'description' => 'Edit every visible part of the homepage About section, including image, copy, metrics, checklist, feature cards, USP and CTA.', 'icon' => 'ⓘ'],
+    'homepage_visibility' => ['label' => 'Search Visibility', 'page' => 'index.php', 'description' => 'Edit the Search Visibility section heading, introduction, service cards, links, and quote button.', 'icon' => '⌕'],
     'about_page' => ['label' => 'About Page Content', 'page' => 'about.php', 'description' => 'Edit all About page copy, stats, story, values, milestones, highlights and calls to action.', 'icon' => 'ⓘ'],
     'service' => ['label' => 'Homepage Service Cards', 'page' => 'index.php', 'description' => 'Service cards shown in the homepage services section.', 'icon' => '◇'],
     'services_page' => ['label' => 'What We Do Page', 'page' => 'services.php', 'description' => 'Edit every section, text block, service list, form label, CTA, and SEO field on the public What We Do page.', 'icon' => '◇'],
@@ -61,13 +62,15 @@ $collections = [
     'blog' => ['label' => 'Blog / Insights', 'page' => 'blog.php', 'description' => 'Articles made available to the blog page.', 'icon' => '▤'],
     'pricing' => ['label' => 'Pricing Plans', 'page' => 'pricing.php', 'description' => 'Plans and feature lists used on the pricing pages.', 'icon' => '₹'],
     'packages_page' => ['label' => 'Packages Page Content', 'page' => 'packages.php', 'description' => 'Edit package plan prices and features, add-ons, trust badges, FAQs, page copy, and contact call-to-action.', 'icon' => '₹'],
+    'portfolio_page' => ['label' => 'Portfolio Page Content', 'page' => 'portfolio.php', 'description' => 'Edit the Portfolio page headings, stats, project categories, and calls to action.', 'icon' => '↗'],
+    'portfolio_project' => ['label' => 'Portfolio Projects', 'page' => 'portfolio.php', 'description' => 'Add, update, publish, or remove projects displayed on the Portfolio page.', 'icon' => '▧'],
 ];
 
 $homeSections = [
     'hero' => ['Hero Section', 'Edit all homepage hero text and lead form content in one place.'],
     'partners' => ['Trusted Partners', 'Edit the section text and partner logos displayed on the homepage.'],
     'about' => ['About WebTecMart', 'Edit all content in the homepage About WebTecMart section.'],
-    'visibility' => ['Search Visibility', 'Search visibility content is rendered by the homepage Search Visibility component.'],
+    'visibility' => ['Search Visibility', 'Edit the section heading, introduction, all service cards, links, and quote button.'],
     'contact' => ['Contact Form', 'The homepage contact form is handled by the existing contact workflow.'],
     'footer' => ['Footer', 'The public footer is shared from the site template.'],
 ];
@@ -75,6 +78,7 @@ $homeSections = [
 $selectedSection = trim($_GET['section'] ?? $_POST['section'] ?? 'collection:service');
 if ($selectedSection === 'registry:partners') $selectedSection = 'collection:partner';
 if ($selectedSection === 'registry:about') $selectedSection = 'collection:homepage_about';
+if ($selectedSection === 'registry:visibility') $selectedSection = 'collection:homepage_visibility';
 if ($selectedSection === 'page:services.php') $selectedSection = 'collection:services_page';
 if ($selectedSection === 'page:packages.php') $selectedSection = 'collection:packages_page';
 $sectionInfo = null;
@@ -112,6 +116,9 @@ $trustedPartnersSection = trustedPartnersContent();
 trustedPartnerLogos();
 $aboutPage = aboutPageContent();
 $homepageAbout = homepageAboutContent();
+$homepageVisibility = homepageVisibilityContent();
+$portfolioPage = portfolioPageContent();
+$portfolioProjects = portfolioProjects();
 $servicesPage = servicesPageContent();
 $packagesPage = packagesPageContent();
 
@@ -153,7 +160,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             cmsSave('trusted_partners_content', $settingsTitle, $settingsSummary, '', $settingsMetadata, $settingsId);
             $setFlash('success', 'Trusted Partners section text updated.');
         } elseif ($action === 'delete' || $action === 'toggle') {
-            if (in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true)) throw new RuntimeException('This page content cannot be unpublished or deleted. Edit its content instead.');
+            if (in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)) throw new RuntimeException('This page content cannot be unpublished or deleted. Edit its content instead.');
             $existing = $id > 0 ? cmsGetById($id) : null;
             if (!$existing || $existing['content_type'] !== $sectionType) throw new RuntimeException('The selected content could not be found in this section.');
             $existingMetadata = json_decode($existing['metadata'] ?? '', true);
@@ -162,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($action === 'delete') { cmsDelete($id); $setFlash('success', 'Content deleted.'); }
             else { cmsSetActive($id, empty($existing['is_active'])); $setFlash('success', empty($existing['is_active']) ? 'Content published.' : 'Content unpublished.'); }
         } elseif ($action === 'create' || $action === 'update') {
-            if (in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true) && $action !== 'update') throw new RuntimeException('This page has one content record. Edit its existing content instead of adding another.');
+            if (in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true) && $action !== 'update') throw new RuntimeException('This page has one content record. Edit its existing content instead of adding another.');
             $title = trim($_POST['title'] ?? '');
             if ($sectionType === 'hero_content') {
                 $headingParts = array_map(static function (string $field): string {
@@ -201,13 +208,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ], static function (string $part): bool {
                     return $part !== '';
                 })));
+            } elseif ($sectionType === 'homepage_visibility') {
+                $title = trim(implode(' ', array_filter([
+                    trim($_POST['heading_prefix'] ?? ''),
+                    trim($_POST['heading_highlight'] ?? ''),
+                ], static function (string $part): bool {
+                    return $part !== '';
+                })));
+            } elseif ($sectionType === 'portfolio_page') {
+                $title = trim(implode(' ', array_filter([
+                    trim($_POST['heading_prefix'] ?? ''),
+                    trim($_POST['heading_highlight'] ?? ''),
+                ], static function (string $part): bool {
+                    return $part !== '';
+                })));
             }
             if ($title === '') throw new RuntimeException('A title is required.');
             $existing = null; $metadata = [];
             if ($action === 'update') {
                 $existing = $id > 0 ? cmsGetById($id) : null;
                 if (!$existing || $existing['content_type'] !== $sectionType) throw new RuntimeException('The selected content could not be found in this section.');
-                if (in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true)) {
+                if (in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)) {
                     $canonical = db()->prepare('SELECT MIN(id) FROM content_items WHERE content_type = :type');
                     $canonical->execute([':type' => $sectionType]);
                     if ((int) $canonical->fetchColumn() !== $id) throw new RuntimeException('Only the main page content record can be edited here.');
@@ -473,6 +494,91 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         if (!in_array($badge['icon'], ['award', 'users', 'shield', 'clock'], true)) throw new RuntimeException('Choose award, users, shield, or clock as the trust badge icon.');
                     }
                     break;
+                case 'homepage_visibility':
+                    foreach (['badge', 'heading_prefix', 'heading_highlight', 'learn_more_label', 'quote_label', 'quote_href'] as $field) {
+                        $metadata[$field] = trim((string) ($_POST[$field] ?? ''));
+                    }
+                    $quoteHref = $metadata['quote_href'];
+                    if ($quoteHref !== '' && (str_starts_with($quoteHref, '//') || (!str_starts_with($quoteHref, '/') && (!filter_var($quoteHref, FILTER_VALIDATE_URL) || !in_array(parse_url($quoteHref, PHP_URL_SCHEME), ['http', 'https'], true))))) {
+                        throw new RuntimeException('Enter a valid quote button link using an http(s) URL or a site path.');
+                    }
+                    $metadata['services'] = [];
+                    $allowedVisibilityIcons = ['map-pin', 'flag', 'globe', 'shopping-cart', 'rocket', 'shield'];
+                    foreach (preg_split('/\r\n|\r|\n/', trim((string) ($_POST['services'] ?? ''))) as $line) {
+                        if (trim($line) === '') continue;
+                        $values = array_map('trim', explode('|', $line, 5));
+                        if (count($values) !== 5 || in_array('', $values, true)) {
+                            throw new RuntimeException('Each service card needs 5 fields: number | icon | title | description | link.');
+                        }
+                        if (!in_array($values[1], $allowedVisibilityIcons, true)) {
+                            throw new RuntimeException('Choose a supported service icon: map-pin, flag, globe, shopping-cart, rocket, or shield.');
+                        }
+                        $href = $values[4];
+                        if ($href !== '' && (str_starts_with($href, '//') || (!str_starts_with($href, '/') && (!filter_var($href, FILTER_VALIDATE_URL) || !in_array(parse_url($href, PHP_URL_SCHEME), ['http', 'https'], true))))) {
+                            throw new RuntimeException('Service card links must be an http(s) URL or a site path.');
+                        }
+                        $metadata['services'][] = ['number' => $values[0], 'icon' => $values[1], 'title' => $values[2], 'text' => $values[3], 'href' => $href];
+                    }
+                    if (!$metadata['services']) throw new RuntimeException('Add at least one Search Visibility service card.');
+                    break;
+                case 'portfolio_page':
+                    $pageFields = [
+                        'badge', 'heading_prefix', 'heading_highlight', 'all_projects_label', 'view_details_label', 'view_project_label',
+                        'empty_message', 'modal_results_label', 'modal_cta_label', 'cta_heading', 'cta_description',
+                        'cta_primary_label', 'cta_primary_href', 'cta_secondary_label', 'cta_secondary_href',
+                    ];
+                    foreach ($pageFields as $field) $metadata[$field] = trim((string) ($_POST[$field] ?? ''));
+                    foreach (['cta_primary_href', 'cta_secondary_href'] as $field) {
+                        $href = $metadata[$field];
+                        if ($href !== '' && (str_starts_with($href, '//') || (!str_starts_with($href, '/') && (!filter_var($href, FILTER_VALIDATE_URL) || !in_array(parse_url($href, PHP_URL_SCHEME), ['http', 'https'], true))))) {
+                            throw new RuntimeException('Enter a valid Portfolio CTA link using an http(s) URL or a site path.');
+                        }
+                    }
+                    $parsePortfolioRows = static function (string $input, array $columns, string $label): array {
+                        $rows = [];
+                        foreach (preg_split('/\r\n|\r|\n/', trim($input)) as $line) {
+                            if (trim($line) === '') continue;
+                            $values = array_map('trim', explode('|', $line, count($columns)));
+                            if (count($values) !== count($columns) || in_array('', $values, true)) {
+                                throw new RuntimeException($label . ' must have ' . count($columns) . ' non-empty fields per line, separated by |.');
+                            }
+                            $rows[] = array_combine($columns, $values);
+                        }
+                        return $rows;
+                    };
+                    $metadata['stats'] = $parsePortfolioRows((string) ($_POST['stats'] ?? ''), ['icon', 'value', 'label'], 'Portfolio stats');
+                    foreach ($metadata['stats'] as $stat) {
+                        if (!in_array($stat['icon'], ['briefcase', 'users', 'award', 'trending'], true)) throw new RuntimeException('Choose briefcase, users, award, or trending for each Portfolio stat icon.');
+                    }
+                    $metadata['categories'] = $parsePortfolioRows((string) ($_POST['categories'] ?? ''), ['id', 'label'], 'Project categories');
+                    $categoryIds = [];
+                    foreach ($metadata['categories'] as $category) {
+                        if (!preg_match('/^[a-z0-9-]+$/', $category['id'])) throw new RuntimeException('Category IDs may contain lowercase letters, numbers, and hyphens only.');
+                        if (in_array($category['id'], $categoryIds, true)) throw new RuntimeException('Each project category must have a unique ID.');
+                        $categoryIds[] = $category['id'];
+                    }
+                    $projectCategoryRows = db()->query("SELECT metadata FROM content_items WHERE content_type = 'portfolio_project' AND is_active = 1")->fetchAll(PDO::FETCH_COLUMN);
+                    foreach ($projectCategoryRows as $projectMetadataJson) {
+                        $projectMetadata = json_decode($projectMetadataJson ?? '', true);
+                        $usedCategory = is_array($projectMetadata) ? ($projectMetadata['category'] ?? '') : '';
+                        if ($usedCategory !== '' && !in_array($usedCategory, $categoryIds, true)) throw new RuntimeException('A category cannot be removed while an active project still uses it. Update or unpublish that project first.');
+                    }
+                    break;
+                case 'portfolio_project':
+                    $metadata['category'] = trim((string) ($_POST['category'] ?? ''));
+                    $metadata['categoryLabel'] = trim((string) ($_POST['categoryLabel'] ?? ''));
+                    $metadata['client'] = trim((string) ($_POST['client'] ?? ''));
+                    $metadata['year'] = trim((string) ($_POST['year'] ?? ''));
+                    $metadata['link'] = trim((string) ($_POST['link'] ?? ''));
+                    $metadata['image'] = trim((string) ($_POST['image_url'] ?? ($metadata['image'] ?? '')));
+                    $metadata['results'] = array_values(array_filter(array_map('trim', preg_split('/\r\n|\r|\n/', (string) ($_POST['results'] ?? ''))), static function (string $value): bool { return $value !== ''; }));
+                    if (!preg_match('/^[a-z0-9-]+$/', $metadata['category'])) throw new RuntimeException('Project category IDs may contain lowercase letters, numbers, and hyphens only.');
+                    $validCategoryIds = array_column($portfolioPage['categories'] ?? [], 'id');
+                    if (!in_array($metadata['category'], $validCategoryIds, true)) throw new RuntimeException('Add this category to Portfolio page settings before assigning a project to it.');
+                    if ($metadata['categoryLabel'] === '' || $metadata['client'] === '' || $metadata['year'] === '') throw new RuntimeException('Enter a category label, client name, and project year.');
+                    if ($metadata['link'] !== '' && $metadata['link'] !== '#' && (str_starts_with($metadata['link'], '//') || (!str_starts_with($metadata['link'], '/') && (!filter_var($metadata['link'], FILTER_VALIDATE_URL) || !in_array(parse_url($metadata['link'], PHP_URL_SCHEME), ['http', 'https'], true))))) throw new RuntimeException('Enter a valid project link using an http(s) URL or a site path.');
+                    if ($metadata['image'] !== '' && !str_starts_with($metadata['image'], '/') && (!filter_var($metadata['image'], FILTER_VALIDATE_URL) || !in_array(parse_url($metadata['image'], FILTER_VALIDATE_URL) ? parse_url($metadata['image'], PHP_URL_SCHEME) : '', ['http', 'https'], true))) throw new RuntimeException('Enter a valid project image URL beginning with http://, https://, or a site path.');
+                    break;
                 case 'pricing':
                     $price = trim($_POST['price'] ?? '');
                     if ($price === '') throw new RuntimeException('A plan price is required.');
@@ -496,6 +602,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 else $metadata['image'] = $uploadedImage;
             }
             if ($sectionType === 'partner' && empty($metadata['image'])) throw new RuntimeException('Choose a logo image before saving this partner.');
+            if ($sectionType === 'portfolio_project' && empty($metadata['image'])) throw new RuntimeException('Upload a project image or enter an image URL before saving this project.');
             cmsSave($sectionType, $title, $summary, $body, $metadata, $action === 'update' ? $id : null);
             $setFlash('success', $action === 'update' ? 'Content updated successfully.' : 'Content added successfully.');
         } else throw new RuntimeException('The requested action is not supported.');
@@ -515,7 +622,7 @@ $homepageRecords = array_values(array_filter($allItems, static function (array $
     return $item['content_type'] === 'homepage';
 }));
 
-$homepageSectionTargets = ['Hero Section' => 'collection:hero_content', 'Trusted Partners' => 'collection:partner', 'About WebTecMart' => 'collection:homepage_about', 'What We Do' => 'collection:service', 'Search Visibility' => 'registry:visibility', 'SEO Portfolio' => 'collection:success_story', 'Testimonials' => 'collection:testimonial', 'Contact Form' => 'registry:contact'];
+$homepageSectionTargets = ['Hero Section' => 'collection:hero_content', 'Trusted Partners' => 'collection:partner', 'About WebTecMart' => 'collection:homepage_about', 'What We Do' => 'collection:service', 'Search Visibility' => 'collection:homepage_visibility', 'SEO Portfolio' => 'collection:success_story', 'Testimonials' => 'collection:testimonial', 'Contact Form' => 'registry:contact'];
 $items = array_values(array_filter($allItems, static function (array $item) use ($sectionType, $sectionPage, $isRegistry): bool {
     if ($item['content_type'] !== $sectionType) return false;
     if ($sectionType === 'page') { $metadata = json_decode($item['metadata'] ?? '', true); return is_array($metadata) && ($metadata['page'] ?? '') === $sectionPage; }
@@ -540,6 +647,8 @@ $editingMetadata = is_array($editingMetadata) ? $editingMetadata : [];
 if ($sectionType === 'hero_content') $editingMetadata = array_merge($heroContent, $editingMetadata);
 if ($sectionType === 'about_page') $editingMetadata = array_merge($aboutPage, $editingMetadata);
 if ($sectionType === 'homepage_about') $editingMetadata = array_merge($homepageAbout, $editingMetadata);
+if ($sectionType === 'homepage_visibility') $editingMetadata = array_merge($homepageVisibility, $editingMetadata);
+if ($sectionType === 'portfolio_page') $editingMetadata = array_merge($portfolioPage, $editingMetadata);
 if ($sectionType === 'services_page') $editingMetadata = array_merge($servicesPage, $editingMetadata);
 if ($sectionType === 'packages_page') $editingMetadata = array_merge($packagesPage, $editingMetadata);
 if ($sectionType === 'blog' && $editingItem) {
@@ -742,12 +851,13 @@ require_once __DIR__ . '/templates/header.php';
                                         <span class="cms-count"><?= count($homepageRecords) + 1 ?></span>
                                     </a>
                                     <?php foreach ($homeSections as $key => [$homeSectionLabel]): ?>
-                                        <?php $homeSectionTarget = $key === 'hero' ? 'collection:hero_content' : ($key === 'partners' ? 'collection:partner' : ($key === 'about' ? 'collection:homepage_about' : 'registry:' . $key)); ?>
+                                        <?php $homeSectionTarget = $key === 'hero' ? 'collection:hero_content' : ($key === 'partners' ? 'collection:partner' : ($key === 'about' ? 'collection:homepage_about' : ($key === 'visibility' ? 'collection:homepage_visibility' : 'registry:' . $key))); ?>
                                         <a class="cms-link <?= $selectedSection === $homeSectionTarget ? 'active' : '' ?>" href="?section=<?= rawurlencode($homeSectionTarget) ?>">
                                             <span class="cms-ico"><i class="bi bi-dot fs-5"></i></span><?= e($homeSectionLabel) ?>
                                             <?php if ($key === 'hero'): ?><span class="cms-count"><?= (int) ($itemCountByType['hero_content'] ?? 0) ?></span><?php endif; ?>
                                             <?php if ($key === 'partners'): ?><span class="cms-count"><?= (int) ($itemCountByType['partner'] ?? 0) ?></span><?php endif; ?>
                                             <?php if ($key === 'about'): ?><span class="cms-count"><?= (int) ($itemCountByType['homepage_about'] ?? 0) ?></span><?php endif; ?>
+                                            <?php if ($key === 'visibility'): ?><span class="cms-count"><?= (int) ($itemCountByType['homepage_visibility'] ?? 0) ?></span><?php endif; ?>
                                         </a>
                                     <?php endforeach; ?>
                                     <?php foreach (['service', 'testimonial', 'success_story'] as $type): ?>
@@ -774,7 +884,8 @@ require_once __DIR__ . '/templates/header.php';
                                     || ($pageFile === 'blog.php' && $selectedSection === 'collection:blog')
                                     || ($pageFile === 'pricing.php' && $selectedSection === 'collection:pricing')
                                     || ($pageFile === 'services.php' && $selectedSection === 'collection:services_page')
-                                    || ($pageFile === 'packages.php' && $selectedSection === 'collection:packages_page');
+                                    || ($pageFile === 'packages.php' && $selectedSection === 'collection:packages_page')
+                                    || ($pageFile === 'portfolio.php' && in_array($selectedSection, ['collection:portfolio_page', 'collection:portfolio_project'], true));
                                 ?>
                                 <button class="cms-group-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#<?= e($groupId) ?>" aria-expanded="<?= $isSelectedPage ? 'true' : 'false' ?>" aria-controls="<?= e($groupId) ?>">
                                     <span class="cms-ico"><i class="bi bi-file-earmark-text"></i></span><?= e($pageLabel) ?>
@@ -807,6 +918,15 @@ require_once __DIR__ . '/templates/header.php';
                                                 <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Packages page content
                                                 <span class="cms-count"><?= (int) ($itemCountByType['packages_page'] ?? 0) ?></span>
                                             </a>
+                                        <?php elseif ($pageFile === 'portfolio.php'): ?>
+                                            <a class="cms-link <?= $selectedSection === 'collection:portfolio_page' ? 'active' : '' ?>" href="?section=collection%3Aportfolio_page">
+                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Portfolio page settings
+                                                <span class="cms-count"><?= (int) ($itemCountByType['portfolio_page'] ?? 0) ?></span>
+                                            </a>
+                                            <a class="cms-link <?= $selectedSection === 'collection:portfolio_project' ? 'active' : '' ?>" href="?section=collection%3Aportfolio_project">
+                                                <span class="cms-ico"><i class="bi bi-briefcase"></i></span>Portfolio projects
+                                                <span class="cms-count"><?= (int) ($itemCountByType['portfolio_project'] ?? 0) ?></span>
+                                            </a>
                                         <?php endif; ?>
                                         <a class="cms-link <?= $selectedSection === 'page:' . $pageFile ? 'active' : '' ?>" href="?section=page%3A<?= rawurlencode($pageFile) ?>">
                                             <span class="cms-ico"><i class="bi bi-plus-lg"></i></span>Page content blocks
@@ -832,7 +952,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <p class="text-body-secondary mb-0"><?= e($sectionInfo['description']) ?></p>
                             </div>
                         </div>
-                        <?php if (!$isRegistry && !in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true)): ?>
+                        <?php if (!$isRegistry && !in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
                             <button type="button" class="btn btn-primary px-3" id="cmsAddButton">
                                 <i class="bi bi-plus-lg me-1"></i> Add New
                             </button>
@@ -894,6 +1014,7 @@ require_once __DIR__ . '/templates/header.php';
                                         'badge' => 'Badge',
                                         'heading_prefix' => 'Heading — first part',
                                         'heading_highlight' => 'Heading — highlighted part',
+                                        'all_projects_label' => 'All projects filter label',
                                         'heading_suffix' => 'Heading — final part',
                                     ] as $field => $label): ?>
                                         <div class="col-md-6">
@@ -934,7 +1055,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <p class="text-body-secondary mx-auto mb-3" style="max-width:420px">
                                     <?= $search !== '' ? 'Try a different search term, or clear the search.' : 'Add content to this section to make it available on the public website.' ?>
                                 </p>
-                                <?php if ($search === '' && !in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true)): ?>
+                                <?php if ($search === '' && !in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
                                     <button type="button" class="btn btn-primary" data-cms-add>
                                         <i class="bi bi-plus-lg me-1"></i> Add your first item
                                     </button>
@@ -978,9 +1099,9 @@ require_once __DIR__ . '/templates/header.php';
 
                                         <div class="cms-record-actions d-flex flex-wrap align-items-center gap-2 flex-shrink-0">
                                             <a class="btn btn-sm btn-outline-secondary" href="?section=<?= rawurlencode($selectedSection) ?>&amp;edit=<?= (int) $item['id'] ?>">
-                                                <i class="bi bi-pencil me-1"></i><?= $sectionType === 'hero_content' ? 'Edit Hero Content' : (in_array($sectionType, ['about_page', 'homepage_about'], true) ? 'Edit About Content' : ($sectionType === 'services_page' ? 'Edit What We Do Content' : ($sectionType === 'packages_page' ? 'Edit Packages Page Content' : 'Edit'))) ?>
+                                                <i class="bi bi-pencil me-1"></i><?= $sectionType === 'hero_content' ? 'Edit Hero Content' : (in_array($sectionType, ['about_page', 'homepage_about'], true) ? 'Edit About Content' : ($sectionType === 'homepage_visibility' ? 'Edit Search Visibility Content' : ($sectionType === 'portfolio_page' ? 'Edit Portfolio Page Content' : ($sectionType === 'services_page' ? 'Edit What We Do Content' : ($sectionType === 'packages_page' ? 'Edit Packages Page Content' : 'Edit'))))) ?>
                                             </a>
-                                            <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true)): ?>
+                                            <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
                                             <form method="POST" class="d-flex">
                                                 <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
                                                 <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
@@ -1034,7 +1155,7 @@ require_once __DIR__ . '/templates/header.php';
                         <?php if ($editingItem): ?><input type="hidden" name="id" value="<?= (int) $editingItem['id'] ?>"><?php endif; ?>
 
                         <div class="row g-3">
-                            <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'services_page', 'packages_page'], true)): ?>
+                            <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-title">Title / name</label>
                                     <input type="text" class="form-control" id="f-title" name="title" required maxlength="250" value="<?= e($editingItem['title'] ?? '') ?>">
@@ -1042,7 +1163,7 @@ require_once __DIR__ . '/templates/header.php';
                             <?php endif; ?>
 
                             <div class="col-12">
-                                <label class="form-label fw-semibold" for="f-summary"><?= in_array($sectionType, ['hero_content', 'about_page', 'homepage_about'], true) ? ($sectionType === 'about_page' ? 'About page introduction' : ($sectionType === 'homepage_about' ? 'Section subtitle' : 'Hero subtitle')) : ($sectionType === 'services_page' ? 'Hero description' : ($sectionType === 'partner' ? 'Logo alt text' : ($sectionType === 'testimonial' ? 'Testimonial description' : ($sectionType === 'success_story' ? 'Project description' : ($sectionType === 'blog' ? 'Excerpt' : ($sectionType === 'pricing' ? 'Plan description' : 'Short description')))))) ?></label>
+                                <label class="form-label fw-semibold" for="f-summary"><?= in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'portfolio_page'], true) ? ($sectionType === 'about_page' ? 'About page introduction' : (in_array($sectionType, ['homepage_about', 'homepage_visibility'], true) ? 'Section introduction' : ($sectionType === 'portfolio_page' ? 'Portfolio page introduction' : 'Hero subtitle'))) : ($sectionType === 'services_page' ? 'Hero description' : ($sectionType === 'partner' ? 'Logo alt text' : ($sectionType === 'testimonial' ? 'Testimonial description' : ($sectionType === 'success_story' || $sectionType === 'portfolio_project' ? 'Project description' : ($sectionType === 'blog' ? 'Excerpt' : ($sectionType === 'pricing' ? 'Plan description' : 'Short description')))))) ?></label>
                                 <textarea class="form-control" id="f-summary" name="summary" rows="3" <?= in_array($sectionType, ['testimonial', 'partner'], true) ? 'required' : '' ?>><?= e($editingItem['summary'] ?? '') ?></textarea>
                             </div>
 
@@ -1225,6 +1346,129 @@ require_once __DIR__ . '/templates/header.php';
                                         <div class="form-text"><?= e($help) ?> Icons: award, shield, dollar, users2, rocket, target, brain, handshake.</div>
                                     </div>
                                 <?php endforeach; ?>
+
+                            <?php elseif ($sectionType === 'homepage_visibility'): ?>
+                                <?php
+                                $visibilityFields = [
+                                    'badge' => 'Badge above heading',
+                                    'heading_prefix' => 'Heading — first part',
+                                    'heading_highlight' => 'Heading — highlighted part',
+                                    'learn_more_label' => 'Service card link label',
+                                    'quote_label' => 'Quote button label',
+                                    'quote_href' => 'Quote button link',
+                                ];
+                                ?>
+                                <div class="col-12"><div class="form-text">Edit all Search Visibility text and card content. The existing design stays unchanged. Enter one service per line: number | icon | title | description | link. Supported icons: map-pin, flag, globe, shopping-cart, rocket, shield.</div></div>
+                                <?php foreach ($visibilityFields as $field => $label): ?>
+                                    <div class="<?= in_array($field, ['heading_prefix', 'heading_highlight'], true) ? 'col-md-6' : 'col-md-6' ?>">
+                                        <label class="form-label fw-semibold" for="f-visibility-<?= e($field) ?>"><?= e($label) ?></label>
+                                        <?php if ($field === 'quote_href'): ?>
+                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" placeholder="/contact.php">
+                                        <?php else: ?>
+                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e((string) ($formMeta[$field] ?? '')) ?>">
+                                        <?php endif; ?>
+                                    </div>
+                                <?php endforeach; ?>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-visibility-services">Search Visibility service cards</label>
+                                    <?php
+                                    $visibilityRows = array_map(static function (array $service): array {
+                                        return [
+                                            'number' => $service['number'] ?? '',
+                                            'icon' => $service['icon'] ?? '',
+                                            'title' => $service['title'] ?? '',
+                                            'text' => $service['text'] ?? '',
+                                            'href' => $service['href'] ?? '',
+                                        ];
+                                    }, $formMeta['services'] ?? []);
+                                    $visibilityRowsText = implode("\n", array_map(static function (array $row): string {
+                                        return implode(' | ', array_map(static function (string $field) use ($row): string {
+                                            return (string) ($row[$field] ?? '');
+                                        }, ['number', 'icon', 'title', 'text', 'href']));
+                                    }, $visibilityRows));
+                                    ?>
+                                    <textarea class="form-control" id="f-visibility-services" name="services" rows="12"><?= e($visibilityRowsText) ?></textarea>
+                                    <div class="form-text">One card per line. Keep the description and link on the same line, separated by |.</div>
+                                </div>
+
+                            <?php elseif ($sectionType === 'portfolio_page'): ?>
+                                <?php
+                                $portfolioTextFields = [
+                                    'badge' => 'Badge above heading',
+                                    'heading_prefix' => 'Heading — first part',
+                                    'heading_highlight' => 'Heading — highlighted part',
+                                    'view_details_label' => 'Project card overlay label',
+                                    'view_project_label' => 'Project card link label',
+                                    'empty_message' => 'No-results message',
+                                    'modal_results_label' => 'Project modal results heading',
+                                    'modal_cta_label' => 'Project modal button label',
+                                    'cta_heading' => 'Bottom CTA heading',
+                                    'cta_primary_label' => 'Bottom CTA primary button',
+                                    'cta_primary_href' => 'Bottom CTA primary link',
+                                    'cta_secondary_label' => 'Bottom CTA secondary button',
+                                    'cta_secondary_href' => 'Bottom CTA secondary link',
+                                ];
+                                $portfolioRowsText = static function (array $rows, array $columns): string {
+                                    return implode("\n", array_map(static function (array $row) use ($columns): string {
+                                        return implode(' | ', array_map(static function (string $column) use ($row): string {
+                                            return (string) ($row[$column] ?? '');
+                                        }, $columns));
+                                    }, $rows));
+                                };
+                                ?>
+                                <div class="col-12"><div class="form-text">Edit the Portfolio page headings, project filters, statistics and calls to action. The existing page layout remains unchanged.</div></div>
+                                <?php foreach ($portfolioTextFields as $field => $label): ?>
+                                    <div class="<?= in_array($field, ['cta_primary_href', 'cta_secondary_href'], true) ? 'col-md-6' : 'col-md-6' ?>">
+                                        <label class="form-label fw-semibold" for="f-portfolio-<?= e($field) ?>"><?= e($label) ?></label>
+                                        <input type="text" class="form-control" id="f-portfolio-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                    </div>
+                                <?php endforeach; ?>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-portfolio-cta-description">Bottom CTA description</label>
+                                    <textarea class="form-control" id="f-portfolio-cta-description" name="cta_description" rows="2"><?= e((string) ($formMeta['cta_description'] ?? '')) ?></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-portfolio-stats">Portfolio statistics</label>
+                                    <textarea class="form-control" id="f-portfolio-stats" name="stats" rows="4"><?= e($portfolioRowsText($formMeta['stats'] ?? [], ['icon', 'value', 'label'])) ?></textarea>
+                                    <div class="form-text">One per line: icon | value | label. Supported icons: briefcase, users, award, trending.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-portfolio-categories">Project categories</label>
+                                    <textarea class="form-control" id="f-portfolio-categories" name="categories" rows="5"><?= e($portfolioRowsText($formMeta['categories'] ?? [], ['id', 'label'])) ?></textarea>
+                                    <div class="form-text">One per line: category-id | label. Category IDs must match each project’s category ID.</div>
+                                </div>
+
+                            <?php elseif ($sectionType === 'portfolio_project'): ?>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-portfolio-category">Category ID</label>
+                                    <input type="text" class="form-control" id="f-portfolio-category" name="category" required value="<?= e((string) ($formMeta['category'] ?? '')) ?>" placeholder="branding">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-portfolio-category-label">Category label</label>
+                                    <input type="text" class="form-control" id="f-portfolio-category-label" name="categoryLabel" required value="<?= e((string) ($formMeta['categoryLabel'] ?? '')) ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-portfolio-client">Client name</label>
+                                    <input type="text" class="form-control" id="f-portfolio-client" name="client" required value="<?= e((string) ($formMeta['client'] ?? '')) ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-portfolio-year">Project year</label>
+                                    <input type="text" class="form-control" id="f-portfolio-year" name="year" required value="<?= e((string) ($formMeta['year'] ?? '')) ?>">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-portfolio-image-url">Project image URL / site path</label>
+                                    <input type="text" class="form-control" id="f-portfolio-image-url" name="image_url" value="<?= e((string) ($formMeta['image'] ?? '')) ?>" placeholder="/portfolio/project.jpg">
+                                    <div class="form-text">You can upload an image below instead. If both are provided, the uploaded image will be used.</div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-portfolio-link">Project link</label>
+                                    <input type="text" class="form-control" id="f-portfolio-link" name="link" value="<?= e((string) ($formMeta['link'] ?? '#')) ?>" placeholder="https:// or /page.php">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-semibold" for="f-portfolio-results">Project result tags</label>
+                                    <textarea class="form-control" id="f-portfolio-results" name="results" rows="3"><?= e(implode("\n", $formMeta['results'] ?? [])) ?></textarea>
+                                    <div class="form-text">One result tag per line.</div>
+                                </div>
 
                             <?php elseif ($sectionType === 'services_page'): ?>
                                 <?php
@@ -1494,10 +1738,11 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                             <?php endif; ?>
 
-                            <?php if (in_array($sectionType, ['page', 'success_story', 'testimonial', 'partner', 'blog'], true)): ?>
+                            <?php if (in_array($sectionType, ['page', 'success_story', 'portfolio_project', 'testimonial', 'partner', 'blog'], true)): ?>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold" for="f-image"><?= $sectionType === 'testimonial' ? 'Client photo' : ($sectionType === 'partner' ? 'Partner logo' : ($sectionType === 'blog' ? 'Upload blog image' : 'Image')) ?> <span class="text-body-secondary fw-normal small">· JPG, PNG, WEBP or GIF, max 5 MB</span></label>
+                                    <label class="form-label fw-semibold" for="f-image"><?= $sectionType === 'testimonial' ? 'Client photo' : ($sectionType === 'partner' ? 'Partner logo' : ($sectionType === 'blog' ? 'Upload blog image' : ($sectionType === 'portfolio_project' ? 'Upload project image' : 'Image'))) ?> <span class="text-body-secondary fw-normal small">· JPG, PNG, WEBP or GIF, max 5 MB</span></label>
                                     <input type="file" class="form-control" id="f-image" name="image" accept="image/jpeg,image/png,image/webp,image/gif" <?= $sectionType === 'partner' && empty($formMeta['image']) ? 'required' : '' ?>>
+                                    <?php if ($sectionType === 'portfolio_project'): ?><div class="form-text">Select an image from your device. For an existing project, its current image stays in place unless you choose a replacement.</div><?php endif; ?>
                                     <div class="d-flex align-items-center gap-3 mt-2" id="cmsImagePreviewWrap" <?= empty($formMeta['image']) ? 'hidden' : '' ?>>
                                         <img id="cmsImagePreview" class="rounded-3 border" style="width:64px;height:64px;object-fit:cover" src="<?= e($formMeta['image'] ?? '') ?>" alt="">
                                         <span class="small text-body-secondary"><?= !empty($formMeta['image']) ? 'Current image is retained unless you upload a replacement.' : 'Image preview.' ?></span>

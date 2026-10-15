@@ -907,10 +907,7 @@ $navItems = [
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <div>
-                        <p class="services-modal-kicker">WebTecMart</p>
-                        <h2 class="services-modal-title" id="servicesModalTitle">Explore Our Services</h2>
-                    </div>
+
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close services"></button>
                 </div>
                 <div class="modal-body">

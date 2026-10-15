@@ -17,14 +17,14 @@
 
 function renderServicePageLayout(array $config): void
 {
-    $icon           = $config['icon'] ?? 'sparkles';
-    $title          = $config['title'] ?? 'Service';
-    $tagline        = $config['tagline'] ?? '';
+    $icon            = $config['icon'] ?? 'sparkles';
+    $title           = $config['title'] ?? 'Service';
+    $tagline         = $config['tagline'] ?? '';
     $heroDescription = $config['heroDescription'] ?? '';
-    $overview       = $config['overview'] ?? '';
-    $features       = $config['features'] ?? [];
-    $process        = $config['process'] ?? [];
-    $faqs           = $config['faqs'] ?? [];
+    $overview        = $config['overview'] ?? '';
+    $features        = $config['features'] ?? [];
+    $process         = $config['process'] ?? [];
+    $faqs            = $config['faqs'] ?? [];
 
     // Icon helper
     function svcIcon(string $name): string {
@@ -48,12 +48,19 @@ function renderServicePageLayout(array $config): void
     ?>
     <style>
         /* ============================================================
-           SERVICE PAGE LAYOUT
+           SERVICE PAGE LAYOUT — FULLY RESPONSIVE
            ============================================================ */
         .svc-page {
             width: 100%;
             background: #FBF8F1;
             color: #1F1B2A;
+            overflow-x: hidden;
+        }
+
+        .svc-page *,
+        .svc-page *::before,
+        .svc-page *::after {
+            box-sizing: border-box;
         }
 
         .svc-container {
@@ -69,9 +76,10 @@ function renderServicePageLayout(array $config): void
         /* ===== HERO ===== */
         .svc-hero {
             position: relative;
-            padding: 48px 0 32px;
+            padding: 40px 0 28px;
             overflow: hidden;
         }
+        @media (min-width: 480px) { .svc-hero { padding: 48px 0 32px; } }
         @media (min-width: 768px) { .svc-hero { padding: 64px 0 48px; } }
 
         .svc-hero-bg {
@@ -95,24 +103,33 @@ function renderServicePageLayout(array $config): void
             text-align: center;
             max-width: 896px;
             margin: 0 auto;
+            padding: 0 4px;
         }
 
         .svc-hero-icon {
             display: inline-flex;
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
+            width: 64px;
+            height: 64px;
+            border-radius: 18px;
             background: linear-gradient(135deg, #C4007A, #E0398F);
             align-items: center;
             justify-content: center;
             box-shadow: 0 20px 30px -10px rgba(196, 0, 122, 0.3);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+        }
+        @media (min-width: 480px) {
+            .svc-hero-icon { width: 72px; height: 72px; border-radius: 20px; margin-bottom: 18px; }
+        }
+        @media (min-width: 768px) {
+            .svc-hero-icon { width: 80px; height: 80px; margin-bottom: 20px; }
         }
         .svc-hero-icon svg {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             color: #fff;
         }
+        @media (min-width: 480px) { .svc-hero-icon svg { width: 36px; height: 36px; } }
+        @media (min-width: 768px) { .svc-hero-icon svg { width: 40px; height: 40px; } }
 
         .svc-tagline {
             display: inline-flex;
@@ -120,112 +137,141 @@ function renderServicePageLayout(array $config): void
             gap: 8px;
             background: rgba(196, 0, 122, 0.1);
             color: #C4007A;
-            padding: 8px 16px;
+            padding: 6px 14px;
             border-radius: 9999px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        @media (min-width: 480px) {
+            .svc-tagline { font-size: 12px; padding: 8px 16px; margin-bottom: 18px; }
+        }
+        @media (min-width: 768px) {
+            .svc-tagline { margin-bottom: 20px; }
         }
         .svc-tagline .dot {
             width: 6px;
             height: 6px;
             border-radius: 9999px;
             background: #C4007A;
+            flex-shrink: 0;
         }
 
         .svc-h1 {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 800;
             color: #111827;
-            line-height: 1.15;
+            line-height: 1.18;
             letter-spacing: -0.02em;
-            margin: 0 0 20px;
+            margin: 0 0 16px;
+            overflow-wrap: anywhere;
+            word-wrap: break-word;
         }
+        @media (min-width: 480px) { .svc-h1 { font-size: 2rem; margin-bottom: 18px; } }
         @media (min-width: 640px) { .svc-h1 { font-size: 2.5rem; } }
-        @media (min-width: 768px) { .svc-h1 { font-size: 3rem; } }
+        @media (min-width: 768px) { .svc-h1 { font-size: 3rem; line-height: 1.15; margin-bottom: 20px; } }
 
         .svc-hero-desc {
-            font-size: 1rem;
+            font-size: 0.9375rem;
             color: #4B5563;
-            line-height: 1.625;
+            line-height: 1.6;
             margin: 0 0 24px;
             max-width: 720px;
             margin-left: auto;
             margin-right: auto;
+            padding: 0 4px;
         }
-        @media (min-width: 768px) { .svc-hero-desc { font-size: 1.125rem; } }
+        @media (min-width: 480px) { .svc-hero-desc { font-size: 1rem; } }
+        @media (min-width: 768px) { .svc-hero-desc { font-size: 1.125rem; line-height: 1.625; } }
 
         .svc-hero-cta {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             border-radius: 9999px;
             background: linear-gradient(90deg, #C4007A, #E0398F);
-            padding: 14px 28px;
+            padding: 13px 24px;
             font-weight: 700;
             color: #fff;
             text-decoration: none;
             box-shadow: 0 10px 20px -5px rgba(196, 0, 122, 0.35);
             transition: all 0.3s ease;
             font-size: 0.875rem;
+            max-width: 100%;
+            -webkit-tap-highlight-color: transparent;
         }
-        .svc-hero-cta:hover {
-            transform: scale(1.03);
-            box-shadow: 0 20px 30px -5px rgba(196, 0, 122, 0.45);
-            color: #fff;
+        @media (min-width: 480px) {
+            .svc-hero-cta { padding: 14px 28px; }
         }
-        .svc-hero-cta svg { width: 16px; height: 16px; }
+        @media (hover: hover) {
+            .svc-hero-cta:hover {
+                transform: scale(1.03);
+                box-shadow: 0 20px 30px -5px rgba(196, 0, 122, 0.45);
+                color: #fff;
+            }
+        }
+        .svc-hero-cta svg { width: 16px; height: 16px; flex-shrink: 0; }
 
         /* ===== OVERVIEW ===== */
         .svc-overview-section {
-            padding: 0 0 48px;
+            padding: 0 0 40px;
         }
         @media (min-width: 768px) { .svc-overview-section { padding: 0 0 64px; } }
 
         .svc-overview-card {
             background: #fff;
-            border-radius: 20px;
-            padding: 32px;
+            border-radius: 18px;
+            padding: 24px 20px;
             border: 1px solid rgba(196, 0, 122, 0.1);
             box-shadow: 0 10px 30px -15px rgba(196, 0, 122, 0.1);
         }
-        @media (min-width: 768px) { .svc-overview-card { padding: 48px; } }
+        @media (min-width: 480px) { .svc-overview-card { padding: 28px 24px; } }
+        @media (min-width: 768px) { .svc-overview-card { padding: 48px; border-radius: 20px; } }
 
         .svc-overview-title {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #111827;
-            margin: 0 0 20px;
+            margin: 0 0 16px;
             text-align: center;
+            line-height: 1.3;
         }
-        @media (min-width: 768px) { .svc-overview-title { font-size: 1.875rem; } }
+        @media (min-width: 480px) { .svc-overview-title { font-size: 1.375rem; } }
+        @media (min-width: 768px) { .svc-overview-title { font-size: 1.875rem; margin-bottom: 20px; } }
         .svc-overview-title .accent { color: #C4007A; }
 
         .svc-overview-text {
-            font-size: 1rem;
+            font-size: 0.9375rem;
             color: #4B5563;
-            line-height: 1.75;
+            line-height: 1.7;
             margin: 0;
             text-align: center;
             max-width: 720px;
             margin: 0 auto;
         }
-        @media (min-width: 768px) { .svc-overview-text { font-size: 1.0625rem; } }
+        @media (min-width: 480px) { .svc-overview-text { font-size: 1rem; } }
+        @media (min-width: 768px) { .svc-overview-text { font-size: 1.0625rem; line-height: 1.75; } }
 
         /* ===== FEATURES ===== */
         .svc-features-section {
-            padding: 0 0 64px;
+            padding: 0 0 48px;
         }
         @media (min-width: 768px) { .svc-features-section { padding: 0 0 80px; } }
 
         .svc-section-header {
             text-align: center;
             max-width: 672px;
-            margin: 0 auto 40px;
+            margin: 0 auto 32px;
+            padding: 0 4px;
         }
         @media (min-width: 768px) { .svc-section-header { margin-bottom: 56px; } }
 
@@ -233,91 +279,109 @@ function renderServicePageLayout(array $config): void
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin: 0 0 12px;
-            font-size: 0.75rem;
+            margin: 0 0 10px;
+            font-size: 0.6875rem;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.2em;
             color: #C4007A;
         }
+        @media (min-width: 480px) { .svc-eyebrow { font-size: 0.75rem; } }
         .svc-eyebrow .dot {
             width: 6px;
             height: 6px;
             border-radius: 9999px;
             background: #C4007A;
+            flex-shrink: 0;
         }
 
         .svc-section-title {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.875rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: #111827;
             margin: 0;
-            line-height: 1.15;
+            line-height: 1.2;
+            letter-spacing: -0.01em;
         }
-        @media (min-width: 768px) { .svc-section-title { font-size: 2.25rem; } }
+        @media (min-width: 480px) { .svc-section-title { font-size: 1.75rem; } }
+        @media (min-width: 768px) { .svc-section-title { font-size: 2.25rem; line-height: 1.15; } }
         .svc-section-title .accent { color: #C4007A; }
 
         .svc-features-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 16px;
         }
-        @media (min-width: 640px) { .svc-features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .svc-features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        @media (min-width: 640px) {
+            .svc-features-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+        }
+        @media (min-width: 1024px) {
+            .svc-features-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+        }
 
         .svc-feature {
             background: #fff;
             border-radius: 16px;
-            padding: 28px;
+            padding: 22px 20px;
             border: 1px solid rgba(196, 0, 122, 0.08);
             transition: all 0.3s ease;
         }
-        .svc-feature:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px -10px rgba(196, 0, 122, 0.15);
-            border-color: rgba(196, 0, 122, 0.25);
+        @media (min-width: 480px) { .svc-feature { padding: 24px; } }
+        @media (min-width: 768px) { .svc-feature { padding: 28px; } }
+
+        @media (hover: hover) {
+            .svc-feature:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 30px -10px rgba(196, 0, 122, 0.15);
+                border-color: rgba(196, 0, 122, 0.25);
+            }
+            .svc-feature:hover .svc-feature-icon {
+                transform: scale(1.1);
+            }
         }
 
         .svc-feature-icon {
             display: inline-flex;
-            width: 44px;
-            height: 44px;
+            width: 40px;
+            height: 40px;
             border-radius: 12px;
             background: rgba(196, 0, 122, 0.1);
             align-items: center;
             justify-content: center;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             transition: transform 0.3s ease;
         }
-        .svc-feature:hover .svc-feature-icon {
-            transform: scale(1.1);
-        }
+        @media (min-width: 480px) { .svc-feature-icon { width: 44px; height: 44px; margin-bottom: 16px; } }
         .svc-feature-icon svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             color: #C4007A;
         }
+        @media (min-width: 480px) { .svc-feature-icon svg { width: 22px; height: 22px; } }
 
         .svc-feature h3 {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.125rem;
+            font-size: 1.0625rem;
             font-weight: 700;
             color: #111827;
             margin: 0 0 8px;
             line-height: 1.3;
+            overflow-wrap: anywhere;
         }
+        @media (min-width: 480px) { .svc-feature h3 { font-size: 1.125rem; } }
 
         .svc-feature p {
-            font-size: 0.9375rem;
+            font-size: 0.9rem;
             color: #4B5563;
-            line-height: 1.625;
+            line-height: 1.6;
             margin: 0;
         }
+        @media (min-width: 480px) { .svc-feature p { font-size: 0.9375rem; line-height: 1.625; } }
 
         /* ===== PROCESS ===== */
         .svc-process-section {
-            padding: 64px 0;
+            padding: 48px 0;
             background: linear-gradient(180deg, rgba(196, 0, 122, 0.03), transparent);
         }
         @media (min-width: 768px) { .svc-process-section { padding: 80px 0; } }
@@ -325,51 +389,66 @@ function renderServicePageLayout(array $config): void
         .svc-process-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 16px;
         }
-        @media (min-width: 640px) { .svc-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (min-width: 1024px) { .svc-process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+        @media (min-width: 640px) {
+            .svc-process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+        }
+        @media (min-width: 1024px) {
+            .svc-process-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
 
         .svc-process-card {
             position: relative;
             background: #fff;
             border-radius: 16px;
-            padding: 28px;
+            padding: 22px 20px;
             border: 1px solid rgba(196, 0, 122, 0.1);
             transition: all 0.3s ease;
         }
-        .svc-process-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 30px -10px rgba(196, 0, 122, 0.15);
+        @media (min-width: 480px) { .svc-process-card { padding: 24px; } }
+        @media (min-width: 768px) { .svc-process-card { padding: 28px; } }
+
+        @media (hover: hover) {
+            .svc-process-card:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 20px 30px -10px rgba(196, 0, 122, 0.15);
+            }
         }
 
         .svc-process-step {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 800;
             color: rgba(196, 0, 122, 0.15);
             line-height: 1;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
+        @media (min-width: 480px) { .svc-process-step { font-size: 2.25rem; margin-bottom: 12px; } }
+        @media (min-width: 768px) { .svc-process-step { font-size: 2.5rem; } }
 
         .svc-process-card h3 {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.25rem;
+            font-size: 1.125rem;
             font-weight: 700;
             color: #111827;
-            margin: 0 0 10px;
+            margin: 0 0 8px;
+            line-height: 1.3;
+            overflow-wrap: anywhere;
         }
+        @media (min-width: 480px) { .svc-process-card h3 { font-size: 1.25rem; margin-bottom: 10px; } }
 
         .svc-process-card p {
-            font-size: 0.9375rem;
+            font-size: 0.9rem;
             color: #4B5563;
-            line-height: 1.625;
+            line-height: 1.6;
             margin: 0;
         }
+        @media (min-width: 480px) { .svc-process-card p { font-size: 0.9375rem; line-height: 1.625; } }
 
         /* ===== FAQ ===== */
         .svc-faq-section {
-            padding: 0 0 64px;
+            padding: 0 0 48px;
         }
         @media (min-width: 768px) { .svc-faq-section { padding: 0 0 80px; } }
 
@@ -378,8 +457,9 @@ function renderServicePageLayout(array $config): void
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
+        @media (min-width: 480px) { .svc-faq-list { gap: 12px; } }
 
         .svc-faq {
             background: #fff;
@@ -397,28 +477,38 @@ function renderServicePageLayout(array $config): void
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            padding: 20px 24px;
+            gap: 12px;
+            padding: 16px 18px;
             background: transparent;
             border: none;
             text-align: left;
             cursor: pointer;
             font-family: inherit;
             transition: background 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
         }
-        .svc-faq-btn:hover { background: rgba(196, 0, 122, 0.03); }
+        @media (min-width: 480px) { .svc-faq-btn { padding: 18px 22px; gap: 16px; } }
+        @media (min-width: 768px) { .svc-faq-btn { padding: 20px 24px; } }
+
+        @media (hover: hover) {
+            .svc-faq-btn:hover { background: rgba(196, 0, 122, 0.03); }
+        }
 
         .svc-faq-q {
-            font-size: 0.9375rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #111827;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+            flex: 1;
         }
+        @media (min-width: 480px) { .svc-faq-q { font-size: 0.9375rem; } }
         @media (min-width: 768px) { .svc-faq-q { font-size: 1rem; } }
 
         .svc-faq-icon {
             display: flex;
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             flex-shrink: 0;
             align-items: center;
             justify-content: center;
@@ -427,129 +517,208 @@ function renderServicePageLayout(array $config): void
             color: #C4007A;
             transition: all 0.3s ease;
         }
+        @media (min-width: 480px) { .svc-faq-icon { width: 28px; height: 28px; } }
+
         .svc-faq.active .svc-faq-icon {
             background: #C4007A;
             color: #fff;
             transform: rotate(180deg);
         }
         .svc-faq-icon svg {
-            width: 14px;
-            height: 14px;
+            width: 13px;
+            height: 13px;
         }
+        @media (min-width: 480px) { .svc-faq-icon svg { width: 14px; height: 14px; } }
 
         .svc-faq-body {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-            padding: 0 24px;
-            font-size: 0.9375rem;
+            transition: max-height 0.35s ease, padding 0.35s ease;
+            padding: 0 18px;
+            font-size: 0.9rem;
             color: #4B5563;
             line-height: 1.7;
         }
+        @media (min-width: 480px) { .svc-faq-body { padding: 0 22px; font-size: 0.9375rem; } }
+        @media (min-width: 768px) { .svc-faq-body { padding: 0 24px; } }
+
         .svc-faq.active .svc-faq-body {
-            max-height: 400px;
-            padding: 0 24px 20px;
+            max-height: 600px;
+            padding: 0 18px 18px;
+        }
+        @media (min-width: 480px) {
+            .svc-faq.active .svc-faq-body { padding: 0 22px 20px; }
+        }
+        @media (min-width: 768px) {
+            .svc-faq.active .svc-faq-body { padding: 0 24px 20px; }
         }
 
         /* ===== CTA ===== */
         .svc-cta {
             position: relative;
-            background: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
-            border-radius: 20px;
-            padding: 40px 24px;
+            background:
+                radial-gradient(circle at 90% 0%, rgba(245, 163, 207, .5), transparent 45%),
+                radial-gradient(circle at 10% 100%, rgba(224, 57, 143, .45), transparent 45%),
+                radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px) 0 0/20px 20px,
+                linear-gradient(135deg, #A3005F, #C4007A 50%, #E0398F);
+            border-radius: 18px;
+            padding: 36px 20px;
             text-align: center;
             overflow: hidden;
-            margin-bottom: 64px;
+            margin-bottom: 48px;
+            box-shadow: 0 24px 50px -20px rgba(196, 0, 122, 0.35);
         }
-        @media (min-width: 768px) { .svc-cta { padding: 56px 32px; } }
-
-        .svc-cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.4;
-            pointer-events: none;
+        @media (min-width: 480px) {
+            .svc-cta { padding: 40px 24px; border-radius: 20px; }
+        }
+        @media (min-width: 768px) {
+            .svc-cta { padding: 56px 32px; margin-bottom: 64px; }
         }
 
         .svc-cta-inner {
             position: relative;
             z-index: 10;
+            max-width: 720px;
+            margin: 0 auto;
         }
         .svc-cta-inner > svg {
-            width: 48px;
-            height: 48px;
+            width: 40px;
+            height: 40px;
             color: #fff;
-            margin: 0 auto 16px;
+            margin: 0 auto 14px;
             display: block;
+        }
+        @media (min-width: 480px) {
+            .svc-cta-inner > svg { width: 44px; height: 44px; margin-bottom: 16px; }
+        }
+        @media (min-width: 768px) {
+            .svc-cta-inner > svg { width: 48px; height: 48px; }
         }
 
         .svc-cta h2 {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
-            margin: 0 0 12px;
+            margin: 0 0 10px;
+            line-height: 1.3;
+            text-wrap: balance;
         }
-        @media (min-width: 768px) { .svc-cta h2 { font-size: 1.875rem; } }
+        @media (min-width: 480px) { .svc-cta h2 { font-size: 1.375rem; margin-bottom: 12px; } }
+        @media (min-width: 768px) { .svc-cta h2 { font-size: 1.875rem; line-height: 1.25; } }
 
         .svc-cta p {
-            color: rgba(255, 255, 255, 0.85);
-            font-size: 0.9375rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
             max-width: 640px;
-            margin: 0 auto 24px;
+            margin: 0 auto 22px;
             line-height: 1.6;
+            padding: 0 4px;
         }
+        @media (min-width: 480px) { .svc-cta p { font-size: 0.9375rem; margin-bottom: 24px; } }
         @media (min-width: 768px) { .svc-cta p { font-size: 1rem; } }
 
         .svc-cta-btns {
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: stretch;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
         }
-        @media (min-width: 640px) { .svc-cta-btns { flex-direction: row; } }
+        @media (min-width: 640px) {
+            .svc-cta-btns { flex-direction: row; align-items: center; gap: 12px; }
+        }
 
-        .svc-cta-btn-1 {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            border-radius: 9999px;
-            background: #fff;
-            padding: 14px 28px;
-            font-weight: 700;
-            color: #C4007A;
-            text-decoration: none;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s ease;
-            font-size: 0.875rem;
-        }
-        .svc-cta-btn-1:hover {
-            transform: scale(1.03);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-            color: #C4007A;
-        }
-        .svc-cta-btn-1 svg { width: 16px; height: 16px; }
-
+        .svc-cta-btn-1,
         .svc-cta-btn-2 {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
             border-radius: 9999px;
-            border: 2px solid rgba(255, 255, 255, 0.4);
-            padding: 12px 26px;
-            font-weight: 600;
-            color: #fff;
+            font-weight: 700;
             text-decoration: none;
             transition: all 0.3s ease;
             font-size: 0.875rem;
+            white-space: nowrap;
+            -webkit-tap-highlight-color: transparent;
+            max-width: 100%;
         }
-        .svc-cta-btn-2:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.6);
+
+        .svc-cta-btn-1 {
+            background: #fff;
+            padding: 13px 24px;
+            color: #C4007A;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+        @media (min-width: 480px) { .svc-cta-btn-1 { padding: 14px 28px; } }
+        @media (hover: hover) {
+            .svc-cta-btn-1:hover {
+                transform: scale(1.03);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+                color: #C4007A;
+            }
+        }
+        .svc-cta-btn-1 svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        .svc-cta-btn-2 {
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            padding: 11px 22px;
             color: #fff;
+        }
+        @media (min-width: 480px) { .svc-cta-btn-2 { padding: 12px 26px; } }
+        @media (hover: hover) {
+            .svc-cta-btn-2:hover {
+                background: rgba(255, 255, 255, 0.1);
+                border-color: rgba(255, 255, 255, 0.6);
+                color: #fff;
+            }
+        }
+        .svc-cta-btn-2 svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+        /* ===== VERY SMALL MOBILE (≤ 360px) ===== */
+        @media (max-width: 360px) {
+            .svc-container { padding-left: 12px; padding-right: 12px; }
+            .svc-hero { padding: 32px 0 24px; }
+            .svc-hero-icon { width: 56px; height: 56px; border-radius: 16px; }
+            .svc-hero-icon svg { width: 28px; height: 28px; }
+            .svc-h1 { font-size: 1.5rem; }
+            .svc-hero-desc { font-size: 0.9rem; }
+            .svc-overview-card { padding: 20px 16px; }
+            .svc-overview-title { font-size: 1.15rem; }
+            .svc-overview-text { font-size: 0.9rem; }
+            .svc-section-title { font-size: 1.35rem; }
+            .svc-feature { padding: 18px 16px; }
+            .svc-feature h3 { font-size: 1rem; }
+            .svc-feature p { font-size: 0.875rem; }
+            .svc-process-card { padding: 18px 16px; }
+            .svc-process-step { font-size: 1.75rem; }
+            .svc-process-card h3 { font-size: 1.0625rem; }
+            .svc-faq-btn { padding: 14px 16px; }
+            .svc-faq-q { font-size: 0.875rem; }
+            .svc-faq-body { padding: 0 16px; font-size: 0.875rem; }
+            .svc-faq.active .svc-faq-body { padding: 0 16px 16px; }
+            .svc-cta { padding: 32px 18px; border-radius: 16px; }
+            .svc-cta h2 { font-size: 1.15rem; }
+            .svc-cta p { font-size: 0.875rem; }
+            .svc-cta-btn-1, .svc-cta-btn-2 { padding: 12px 20px; font-size: 0.8125rem; }
+        }
+
+        /* ===== ACCESSIBILITY ===== */
+        .svc-page a:focus-visible,
+        .svc-page button:focus-visible {
+            outline: 3px solid #C4007A;
+            outline-offset: 3px;
+            border-radius: 6px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .svc-page *,
+            .svc-page *::before,
+            .svc-page *::after {
+                transition: none !important;
+                animation: none !important;
+            }
         }
     </style>
 

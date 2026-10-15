@@ -400,6 +400,103 @@ function trustedPartnerLogos(): array
     }, cmsContent('partner', $items));
 }
 
+function homepageVisibilityContent(): array
+{
+    $defaults = [
+        'title' => 'Increase Your Business\'s Search Visibility',
+        'summary' => 'Target the right audience at the right time with our comprehensive search engine optimization strategies.',
+        'badge' => 'Search Visibility',
+        'heading_prefix' => 'Increase Your Business\'s',
+        'heading_highlight' => 'Search Visibility',
+        'learn_more_label' => 'Learn More',
+        'quote_label' => 'REQUEST FREE QUOTE',
+        'quote_href' => '/contact',
+        'services' => [
+            ['number' => '01', 'icon' => 'map-pin', 'title' => 'Local SEO', 'text' => 'We work on the organic factors that help a business grow locally. With our Local SEO strategies, customers searching nearby for what you offer will find you first.', 'href' => '/services'],
+            ['number' => '02', 'icon' => 'flag', 'title' => 'National SEO', 'text' => 'Looking to grow your business across your own country? National SEO is the right fit — we sharpen your website\'s ranking in a way that turns visibility into real leads and sales.', 'href' => '/services'],
+            ['number' => '03', 'icon' => 'globe', 'title' => 'International SEO', 'text' => 'Reaching clients across borders is tough without the right approach. Our International SEO services help you rank for the right keywords and earn backlinks from relevant global sites.', 'href' => '/services'],
+            ['number' => '04', 'icon' => 'shopping-cart', 'title' => 'E-Commerce SEO', 'text' => 'For online stores, ranking on Google\'s first page isn\'t optional, it\'s essential. We make sure your products are easy to find so potential customers can discover and order them with ease.', 'href' => '/services'],
+            ['number' => '05', 'icon' => 'rocket', 'title' => 'SEO for Small Business', 'text' => 'Startups often struggle with weak visibility online and on social media. Our Startup SEO services target the right customers by identifying business-focused keywords and showcasing your offerings through a strong website.', 'href' => '/services'],
+            ['number' => '06', 'icon' => 'shield', 'title' => 'Online Presence & Reputation', 'text' => 'Online Reputation Management is a key part of any SEO strategy, shaping how your brand is perceived by controlling what appears on Google\'s front page for your name and terms.', 'href' => '/services'],
+        ],
+    ];
+    $items = cmsContent('homepage_visibility', [$defaults]);
+    $content = array_merge($defaults, $items[0] ?? []);
+    if (!isset($content['services']) || !is_array($content['services'])) $content['services'] = $defaults['services'];
+    foreach ($content['services'] as $index => &$service) {
+        $service = array_merge($defaults['services'][$index] ?? ['number' => sprintf('%02d', $index + 1), 'icon' => 'globe', 'title' => '', 'text' => '', 'href' => '/search-engine-optimization.php'], is_array($service) ? $service : []);
+    }
+    unset($service);
+    return $content;
+}
+
+function portfolioPageContent(): array
+{
+    $defaults = [
+        'title' => 'Our Work',
+        'summary' => 'Explore our portfolio of successful projects and see how we\'ve helped businesses achieve remarkable growth',
+        'badge' => 'Our Portfolio',
+        'heading_prefix' => 'Our',
+        'heading_highlight' => 'Work',
+        'all_projects_label' => 'All Projects',
+        'stats' => [
+            ['icon' => 'briefcase', 'value' => '500+', 'label' => 'Projects Delivered'],
+            ['icon' => 'users', 'value' => '300+', 'label' => 'Happy Clients'],
+            ['icon' => 'award', 'value' => '50+', 'label' => 'Awards Won'],
+            ['icon' => 'trending', 'value' => '98%', 'label' => 'Client Satisfaction'],
+        ],
+        'categories' => [
+            ['id' => 'branding', 'label' => 'Branding'],
+            ['id' => 'web', 'label' => 'Web Design'],
+            ['id' => 'seo', 'label' => 'SEO'],
+            ['id' => 'social', 'label' => 'Social Media'],
+            ['id' => 'app', 'label' => 'App Development'],
+        ],
+        'view_details_label' => 'View Details',
+        'view_project_label' => 'View Project',
+        'empty_message' => 'No projects found in this category.',
+        'modal_results_label' => 'Key Results',
+        'modal_cta_label' => 'Start Your Project',
+        'cta_heading' => 'Ready to Create Your Success Story?',
+        'cta_description' => 'Let\'s work together to create amazing digital experiences that help your business grow.',
+        'cta_primary_label' => 'Start Your Project',
+        'cta_primary_href' => '/contact.php',
+        'cta_secondary_label' => 'Explore Our Services',
+        'cta_secondary_href' => '/services.php',
+    ];
+    $items = cmsContent('portfolio_page', [$defaults]);
+    $content = array_merge($defaults, $items[0] ?? []);
+    if (!isset($content['stats']) || !is_array($content['stats'])) $content['stats'] = $defaults['stats'];
+    if (!isset($content['categories']) || !is_array($content['categories'])) $content['categories'] = $defaults['categories'];
+    return $content;
+}
+
+function portfolioProjects(): array
+{
+    $defaults = [
+        ['title' => 'TechSolutions India', 'summary' => 'Complete digital branding and identity design for a leading tech solutions company. We created a modern, professional brand identity that reflects their innovative approach.', 'category' => 'branding', 'categoryLabel' => 'Branding', 'image' => '/portfolio/project-1.jpg', 'results' => ['300% Brand Recognition', '50% Increase in Leads', 'Award Winning Design'], 'client' => 'TechSolutions India', 'year' => '2024', 'link' => '#'],
+        ['title' => 'StyleHub Fashion', 'summary' => 'Responsive e-commerce website design and development for a premium fashion brand. The website features seamless shopping experience and modern UI/UX.', 'category' => 'web', 'categoryLabel' => 'Web Design', 'image' => '/portfolio/project-2.jpg', 'results' => ['400% Increase in Sales', '200% More Traffic', '5-Star User Rating'], 'client' => 'StyleHub Fashion', 'year' => '2024', 'link' => '#'],
+        ['title' => 'GreenTech Solutions', 'summary' => 'Comprehensive SEO strategy that helped a green tech company rank #1 on Google for 50+ keywords and achieve 300% organic growth.', 'category' => 'seo', 'categoryLabel' => 'SEO', 'image' => '/portfolio/project-3.jpg', 'results' => ['50+ Keywords Ranked #1', '300% Organic Growth', '200% More Leads'], 'client' => 'GreenTech Solutions', 'year' => '2023', 'link' => '#'],
+        ['title' => 'Wellness World', 'summary' => 'Social media management and content strategy that grew a wellness brand\'s following from 5K to 50K+ followers with 5x engagement.', 'category' => 'social', 'categoryLabel' => 'Social Media', 'image' => '/portfolio/project-4.jpg', 'results' => ['50K+ Followers', '5x Engagement Rate', '200% More Traffic'], 'client' => 'Wellness World', 'year' => '2023', 'link' => '#'],
+        ['title' => 'FinTech Solutions', 'summary' => 'Cross-platform mobile app for a fintech startup. The app features secure payments, user-friendly interface, and real-time analytics.', 'category' => 'app', 'categoryLabel' => 'App Development', 'image' => '/portfolio/project-5.jpg', 'results' => ['10K+ Downloads', '4.8 Star Rating', '100K+ Transactions'], 'client' => 'FinTech Solutions', 'year' => '2024', 'link' => '#'],
+        ['title' => 'DigitalFirst Agency', 'summary' => 'Complete rebranding for a digital marketing agency including logo design, brand guidelines, and marketing collateral.', 'category' => 'branding', 'categoryLabel' => 'Branding', 'image' => '/portfolio/project-6.jpg', 'results' => ['200% Brand Recognition', '150% More Inquiries', 'Industry Award'], 'client' => 'DigitalFirst Agency', 'year' => '2024', 'link' => '#'],
+        ['title' => 'GreenEnergy Hub', 'summary' => 'Local SEO campaign for a green energy company that increased foot traffic and online inquiries by 300% across 10+ locations.', 'category' => 'seo', 'categoryLabel' => 'SEO', 'image' => '/portfolio/project-7.jpg', 'results' => ['10+ Locations Ranked #1', '300% Foot Traffic', '500% Online Inquiries'], 'client' => 'GreenEnergy Hub', 'year' => '2023', 'link' => '#'],
+        ['title' => 'ShopSmart App', 'summary' => 'E-commerce mobile app with AI-powered product recommendations, seamless checkout, and personalized shopping experience.', 'category' => 'app', 'categoryLabel' => 'App Development', 'image' => '/portfolio/project-8.jpg', 'results' => ['50K+ Downloads', '4.9 Star Rating', '200% More Sales'], 'client' => 'ShopSmart', 'year' => '2024', 'link' => '#'],
+        ['title' => 'EcoFriendly Living', 'summary' => 'Modern, sustainable website design for an eco-friendly lifestyle brand with focus on user experience and conversion optimization.', 'category' => 'web', 'categoryLabel' => 'Web Design', 'image' => '/portfolio/project-9.jpg', 'results' => ['150% More Conversions', '100% Traffic Increase', 'Best Design Award'], 'client' => 'EcoFriendly Living', 'year' => '2023', 'link' => '#'],
+    ];
+    $projects = cmsContent('portfolio_project', $defaults);
+    $projectIds = db()->query("SELECT id FROM content_items WHERE content_type = 'portfolio_project' AND is_active = 1 ORDER BY sort_order ASC, id ASC")->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($projects as $index => &$project) {
+        $project['id'] = (int) ($projectIds[$index] ?? 0);
+    }
+    foreach ($projects as &$project) {
+        $project['description'] = (string) ($project['summary'] ?? '');
+        if (!isset($project['results']) || !is_array($project['results'])) $project['results'] = [];
+    }
+    unset($project);
+    return $projects;
+}
+
 function aboutPageContent(): array
 {
     $defaults = [

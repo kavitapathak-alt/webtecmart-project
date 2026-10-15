@@ -165,6 +165,14 @@ $categoryIconMap = [
     'social'   => 'megaphone',
     'app'      => 'smartphone',
 ];
+
+$portfolioPage = portfolioPageContent();
+$projects = portfolioProjects();
+$stats = $portfolioPage['stats'];
+$categories = array_merge(
+    [['id' => 'all', 'label' => $portfolioPage['all_projects_label']]],
+    $portfolioPage['categories']
+);
 ?>
 
 <style>
@@ -386,6 +394,13 @@ $categoryIconMap = [
         align-items: center;
         justify-content: center;
         overflow: hidden;
+    }
+    .port-project-image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     .port-img-icon {
         position: absolute;
@@ -834,13 +849,13 @@ $categoryIconMap = [
         <div class="port-hero">
             <div class="port-pill">
                 <?= portIcon('sparkles') ?>
-                <span>Our Portfolio</span>
+                <span><?= e((string) $portfolioPage['badge']) ?></span>
             </div>
 
             <h1 class="port-h1">
-                Our
+                <?= e((string) $portfolioPage['heading_prefix']) ?>
                 <span class="accent">
-                    Work
+                    <?= e((string) $portfolioPage['heading_highlight']) ?>
                     <svg viewBox="0 0 300 8" preserveAspectRatio="none">
                         <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                     </svg>
@@ -848,7 +863,7 @@ $categoryIconMap = [
             </h1>
 
             <p class="port-subtitle">
-                Explore our portfolio of successful projects and see how we've helped businesses achieve remarkable growth
+                <?= e((string) $portfolioPage['summary']) ?>
             </p>
         </div>
 
@@ -856,9 +871,9 @@ $categoryIconMap = [
         <div class="port-stats">
             <?php foreach ($stats as $stat): ?>
                 <div class="port-stat">
-                    <?= portIcon($stat['icon']) ?>
-                    <div class="port-stat-value"><?= htmlspecialchars($stat['value']) ?></div>
-                    <div class="port-stat-label"><?= htmlspecialchars($stat['label']) ?></div>
+                    <?= portIcon((string) ($stat['icon'] ?? '')) ?>
+                    <div class="port-stat-value"><?= e((string) ($stat['value'] ?? '')) ?></div>
+                    <div class="port-stat-label"><?= e((string) ($stat['label'] ?? '')) ?></div>
                 </div>
             <?php endforeach; ?>
         </div>
@@ -872,7 +887,7 @@ $categoryIconMap = [
                     data-filter="<?= htmlspecialchars($cat['id']) ?>"
                     onclick="portSetFilter('<?= htmlspecialchars($cat['id']) ?>')"
                 >
-                    <?= htmlspecialchars($cat['label']) ?>
+                    <?= e((string) $cat['label']) ?>
                 </button>
             <?php endforeach; ?>
         </div>
@@ -882,43 +897,44 @@ $categoryIconMap = [
             <?php foreach ($projects as $p):
                 $icon = $categoryIconMap[$p['category']] ?? 'briefcase';
             ?>
-                <div class="port-card" data-category="<?= htmlspecialchars($p['category']) ?>">
+                <div class="port-card" data-category="<?= e((string) $p['category']) ?>">
                     <!-- Image / Icon area -->
                     <div class="port-img">
+                        <?php if (!empty($p['image'])): ?><img class="port-project-image" src="<?= e((string) $p['image']) ?>" alt="<?= e((string) $p['title']) ?>" onerror="this.remove()"><?php endif; ?>
                         <div class="port-img-icon">
                             <?= portIcon($icon) ?>
                         </div>
 
-                        <div class="port-cat-badge"><?= htmlspecialchars($p['categoryLabel']) ?></div>
-                        <div class="port-year-badge"><?= htmlspecialchars($p['year']) ?></div>
+                        <div class="port-cat-badge"><?= e((string) $p['categoryLabel']) ?></div>
+                        <div class="port-year-badge"><?= e((string) $p['year']) ?></div>
 
                         <button
                             type="button"
                             class="port-hover-overlay"
                             onclick="portOpenModal(<?= (int) $p['id'] ?>)"
-                            aria-label="View Details"
+                            aria-label="<?= e((string) $portfolioPage['view_details_label']) ?>"
                         >
-                            <span>View Details</span>
+                            <span><?= e((string) $portfolioPage['view_details_label']) ?></span>
                         </button>
                     </div>
 
                     <!-- Content -->
                     <div class="port-body">
                         <div class="port-title-row">
-                            <h3 class="port-title"><?= htmlspecialchars($p['title']) ?></h3>
-                            <span class="port-client"><?= htmlspecialchars($p['client']) ?></span>
+                            <h3 class="port-title"><?= e((string) $p['title']) ?></h3>
+                            <span class="port-client"><?= e((string) $p['client']) ?></span>
                         </div>
 
-                        <p class="port-desc"><?= htmlspecialchars($p['description']) ?></p>
+                        <p class="port-desc"><?= e((string) $p['description']) ?></p>
 
                         <div class="port-results">
                             <?php foreach ($p['results'] as $r): ?>
-                                <span class="port-result-tag"><?= htmlspecialchars($r) ?></span>
+                                <span class="port-result-tag"><?= e((string) $r) ?></span>
                             <?php endforeach; ?>
                         </div>
 
-                        <a href="<?= htmlspecialchars($p['link']) ?>" class="port-link" onclick="event.preventDefault(); portOpenModal(<?= (int) $p['id'] ?>);">
-                            View Project
+                        <a href="<?= e((string) $p['link']) ?>" class="port-link" onclick="event.preventDefault(); portOpenModal(<?= (int) $p['id'] ?>);">
+                            <?= e((string) $portfolioPage['view_project_label']) ?>
                             <?= portIcon('external') ?>
                         </a>
                     </div>
@@ -929,7 +945,7 @@ $categoryIconMap = [
         <!-- Empty state (hidden by default) -->
         <div class="port-empty" id="portEmpty" style="display: none;">
             <?= portIcon('search') ?>
-            <p>No projects found in this category.</p>
+            <p><?= e((string) $portfolioPage['empty_message']) ?></p>
         </div>
 
         <!-- ===== CTA ===== -->
@@ -946,18 +962,18 @@ $categoryIconMap = [
             </div>
             <div class="port-cta-inner">
                 <?= portIcon('rocket') ?>
-                <h2 class="port-cta-h2">Ready to Create Your Success Story?</h2>
+                <h2 class="port-cta-h2"><?= e((string) $portfolioPage['cta_heading']) ?></h2>
                 <p class="port-cta-sub">
-                    Let's work together to create amazing digital experiences that help your business grow.
+                    <?= e((string) $portfolioPage['cta_description']) ?>
                 </p>
 
                 <div class="port-cta-btns">
-                    <a href="/contact.php" class="port-cta-btn-1">
-                        Start Your Project
+                    <a href="<?= e((string) $portfolioPage['cta_primary_href']) ?>" class="port-cta-btn-1">
+                        <?= e((string) $portfolioPage['cta_primary_label']) ?>
                         <?= portIcon('arrow') ?>
                     </a>
-                    <a href="/services.php" class="port-cta-btn-2">
-                        Explore Our Services
+                    <a href="<?= e((string) $portfolioPage['cta_secondary_href']) ?>" class="port-cta-btn-2">
+                        <?= e((string) $portfolioPage['cta_secondary_label']) ?>
                     </a>
                 </div>
             </div>
@@ -985,7 +1001,18 @@ $categoryIconMap = [
 
 <script>
     // ===== Data for JS =====
-    const PORT_DATA = <?= json_encode($projects, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
+    const PORT_DATA = <?= json_encode($projects, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
+    const PORT_PAGE = <?= json_encode([
+        'modal_results_label' => $portfolioPage['modal_results_label'],
+        'modal_cta_label' => $portfolioPage['modal_cta_label'],
+        'view_project_label' => $portfolioPage['view_project_label'],
+        'cta_primary_href' => $portfolioPage['cta_primary_href'],
+    ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_HEX_AMP) ?>;
+    function portEscapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (character) => ({
+            '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;'
+        })[character]);
+    }
     const PORT_ICONS = {
         briefcase: `<?= portIcon('briefcase') ?>`,
         users:     `<?= portIcon('users') ?>`,
@@ -1044,10 +1071,10 @@ $categoryIconMap = [
         const iconKey = PORT_CATEGORY_ICON[project.category] || 'briefcase';
         const iconSvg = PORT_ICONS[iconKey] || '';
 
-        const resultsHtml = project.results.map((r) => `
+        const resultsHtml = (project.results || []).map((r) => `
             <div class="port-modal-result">
                 ${PORT_ICONS.check}
-                <span>${r}</span>
+                <span>${portEscapeHtml(r)}</span>
             </div>
         `).join('');
 
@@ -1062,18 +1089,19 @@ $categoryIconMap = [
             </div>
 
             <div class="port-modal-body">
-                <span class="port-modal-cat">${project.categoryLabel}</span>
-                <h3 class="port-modal-title">${project.title}</h3>
-                <p class="port-modal-meta">${project.client} &middot; ${project.year}</p>
-                <p class="port-modal-desc">${project.description}</p>
+                <span class="port-modal-cat">${portEscapeHtml(project.categoryLabel)}</span>
+                <h3 class="port-modal-title">${portEscapeHtml(project.title)}</h3>
+                <p class="port-modal-meta">${portEscapeHtml(project.client)} &middot; ${portEscapeHtml(project.year)}</p>
+                <p class="port-modal-desc">${portEscapeHtml(project.description)}</p>
+                ${project.link && project.link !== '#' ? `<p><a href="${portEscapeHtml(project.link)}" target="_blank" rel="noopener noreferrer">${portEscapeHtml(PORT_PAGE.view_project_label)}</a></p>` : ''}
 
-                <h4 class="port-modal-results-title">Key Results</h4>
+                <h4 class="port-modal-results-title">${portEscapeHtml(PORT_PAGE.modal_results_label)}</h4>
                 <div class="port-modal-results">
                     ${resultsHtml}
                 </div>
 
-                <a href="/contact.php" class="port-modal-cta">
-                    Start Your Project
+                <a href="${portEscapeHtml(PORT_PAGE.cta_primary_href)}" class="port-modal-cta">
+                    ${portEscapeHtml(PORT_PAGE.modal_cta_label)}
                     ${PORT_ICONS.arrow}
                 </a>
             </div>
