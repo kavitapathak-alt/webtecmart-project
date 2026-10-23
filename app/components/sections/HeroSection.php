@@ -10,6 +10,10 @@ function renderHeroSection(): void
     $serviceOptions = is_array($serviceOptions) ? array_values(array_filter(array_map('trim', $serviceOptions), static function (string $option): bool {
         return $option !== '';
     })) : [];
+    $serviceOptions = array_values(array_unique(array_merge($serviceOptions, [
+        'Meta / Google Ads',
+        'Social Media Advertising',
+    ])));
     $mainDescription = trim(implode(' ', array_filter([
         trim((string) ($content['summary'] ?? '')),
         trim((string) ($content['body'] ?? '')),

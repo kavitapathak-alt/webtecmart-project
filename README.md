@@ -25,7 +25,9 @@ http://localhost:8000
 
 ## Contact form email notifications
 
-Contact form submissions are saved to SQLite before an email notification is sent to `info@webtecmart.com` by default. Set `CONTACT_NOTIFICATION_EMAIL` to change the recipient and `CONTACT_FROM_EMAIL` to set the sender address. PHP `mail()` must be configured to use a working SMTP/sendmail transport on the server; a saved lead is retained even if sending the notification fails.
+Contact form submissions are saved to SQLite before an email notification is sent to `pathakkavita730@gmail.com` by default. Set `CONTACT_NOTIFICATION_EMAIL` to change the recipient. For reliable delivery, copy `.env.example` to `.env`, fill in the SMTP details for a mailbox hosted on your domain, and run `composer install` so PHPMailer is available. The application loads `.env` on startup; environment variables already set by the hosting control panel take precedence. `SMTP_ENCRYPTION` supports `tls`, `ssl`, or `none`. When SMTP is not configured, the site uses PHP `mail()` and depends on the hosting server's mail transport. A saved lead is retained even if its notification fails.
+
+Never commit `.env` or share mailbox passwords in chat. On cPanel, create the `.env` file privately in the deployed site directory (or set the variables in the hosting control panel), then run `composer install --no-dev --prefer-dist --optimize-autoloader` in that directory. Configure `MAIL_FROM_ADDRESS` as the authenticated domain mailbox and `CONTACT_NOTIFICATION_EMAIL` as the inbox that should receive the leads. New enquiries are also visible in the admin Leads page.
 
 ## Files
 

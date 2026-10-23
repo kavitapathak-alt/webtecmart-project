@@ -338,7 +338,7 @@ function homepageHeroContent(): array
         'phone_placeholder' => 'Phone Number *',
         'company_placeholder' => 'Company / Website *',
         'service_placeholder' => 'Select Service Required *',
-        'service_options' => "SEO (Search Engine Optimization)\nPPC / Google Ads\nWebsite Design & Development\nSocial Media Optimization\nDigital Business Branding\nE-commerce SEO\nContent Marketing\nMobile App Development\nOther",
+        'service_options' => "SEO (Search Engine Optimization)\nPPC / Google Ads\nMeta / Google Ads\nSocial Media Advertising\nWebsite Design & Development\nSocial Media Optimization\nDigital Business Branding\nE-commerce SEO\nContent Marketing\nMobile App Development\nOther",
         'message_placeholder' => 'Enter your message here',
         'consent_text' => "Yes, I'm happy for you to use my information",
         'robot_text' => "I'm not a robot",
@@ -979,14 +979,17 @@ function createLead(array $lead): int
 
 function sendLeadNotification(array $lead, int $leadId): bool
 {
-    $recipient = getenv('CONTACT_NOTIFICATION_EMAIL') ?: 'info@webtecmart.com';
-    $fromAddress = getenv('CONTACT_FROM_EMAIL') ?: $recipient;
+    $recipient = getenv('CONTACT_NOTIFICATION_EMAIL') ?: 'pathakkavita730@gmail.com';
+    $smtpHost = trim((string) (getenv('SMTP_HOST') ?: ''));
+    $fromAddress = getenv('MAIL_FROM_ADDRESS')
+        ?: (getenv('CONTACT_FROM_EMAIL') ?: (getenv('SMTP_USERNAME') ?: 'info@webtecmart.com'));
     if (!filter_var($recipient, FILTER_VALIDATE_EMAIL) || !filter_var($fromAddress, FILTER_VALIDATE_EMAIL)) {
+        error_log('Lead notification email configuration contains an invalid email address.');
         return false;
     }
 
     $subject = 'New website enquiry #' . $leadId;
-    $message = implode("\r\n", [
+    $body = implode("\r\n", [
         'A new enquiry was saved on the WebTecMart website.',
         '',
         'Name: ' . $lead['name'],
@@ -999,11 +1002,60 @@ function sendLeadNotification(array $lead, int $leadId): bool
         'Message:',
         $lead['message'],
     ]);
+
+    if ($smtpHost !== '') {
+        $autoload = __DIR__ . '/vendor/autoload.php';
+        if (!is_file($autoload)) {
+            error_log('Lead notification email could not be sent: Composer dependencies are not installed.');
+            return false;
+        }
+
+        require_once $autoload;
+        if (!class_exists(\PHPMailer\PHPMailer\PHPMailer::class)) {
+            error_log('Lead notification email could not be sent: PHPMailer is unavailable.');
+            return false;
+        }
+
+        try {
+            $mailer = new \PHPMailer\PHPMailer\PHPMailer(true);
+            $mailer->CharSet = 'UTF-8';
+            $mailer->isSMTP();
+            $mailer->Host = $smtpHost;
+            $mailer->Port = (int) (getenv('SMTP_PORT') ?: 587);
+            $mailer->SMTPAuth = (getenv('SMTP_USERNAME') ?: '') !== '';
+            if ($mailer->SMTPAuth) {
+                $mailer->Username = (string) getenv('SMTP_USERNAME');
+                $mailer->Password = (string) (getenv('SMTP_PASSWORD') ?: '');
+            }
+
+            $encryption = strtolower((string) (getenv('SMTP_ENCRYPTION') ?: 'tls'));
+            if ($encryption === 'tls') {
+                $mailer->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+            } elseif ($encryption === 'ssl') {
+                $mailer->SMTPSecure = \PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_SMTPS;
+            } elseif ($encryption !== '' && $encryption !== 'none') {
+                error_log('Lead notification email could not be sent: SMTP_ENCRYPTION must be tls, ssl, or none.');
+                return false;
+            }
+
+            $mailer->setFrom($fromAddress, getenv('MAIL_FROM_NAME') ?: 'WebTecMart');
+            $mailer->addAddress($recipient);
+            $mailer->addReplyTo($lead['email'], $lead['name']);
+            $mailer->Subject = $subject;
+            $mailer->Body = $body;
+
+            return $mailer->send();
+        } catch (\PHPMailer\PHPMailer\Exception $error) {
+            error_log('Lead notification email failed: ' . $error->getMessage());
+            return false;
+        }
+    }
+
     $headers = [
         'From' => 'WebTecMart <' . $fromAddress . '>',
         'Reply-To' => $lead['email'],
         'Content-Type' => 'text/plain; charset=UTF-8',
     ];
 
-    return mail($recipient, $subject, $message, $headers);
+    return mail($recipient, $subject, $body, $headers);
 }

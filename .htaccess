@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteCond %{THE_REQUEST} \s/+index\.php(?:[\s?]) [NC]
+RewriteRule ^index\.php$ https://webtecmart.com/ [R=301,L]
+
+RewriteCond %{HTTPS} !=on [OR]
+RewriteCond %{HTTP_HOST} ^www\.webtecmart\.com$ [NC]
+RewriteRule ^ https://webtecmart.com%{REQUEST_URI} [R=301,L]
+
+<FilesMatch "^\.env$">
+    Require all denied
+</FilesMatch>

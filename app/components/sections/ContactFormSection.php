@@ -915,6 +915,8 @@ function renderContactFormSection(): void
                                             <option value="digital-business-branding">Digital Business Branding</option>
                                             <option value="website-design-development">Website Design &amp; Development</option>
                                             <option value="search-engine-optimization">Search Engine Optimization</option>
+                                            <option value="meta-google-ads">Meta / Google Ads</option>
+                                            <option value="social-media-advertising">Social Media Advertising</option>
                                             <option value="social-media-optimization">Social Media Optimization</option>
                                             <option value="search-engine-marketing">Search Engine Marketing</option>
                                             <option value="mobile-app-development">Mobile App Development</option>

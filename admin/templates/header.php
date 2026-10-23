@@ -344,7 +344,7 @@ $adminPage = basename($_SERVER['PHP_SELF']);
             <a class="<?= $adminPage === 'dashboard.php' ? 'active' : '' ?>" href="/admin/dashboard.php">Dashboard</a>
             <a class="<?= $adminPage === 'content.php' ? 'active' : '' ?>" href="/admin/content.php">Website Content</a>
             <a class="<?= $adminPage === 'leads.php' ? 'active' : '' ?>" href="/admin/leads.php">Leads</a>
-            <a href="/index.php">View Website</a>
+            <a href="/">View Website</a>
             <?php if (!empty($_SESSION['admin_logged_in'])): ?>
                 <a href="/admin/logout.php">Logout</a>
             <?php endif; ?>
@@ -372,7 +372,7 @@ $adminPage = basename($_SERVER['PHP_SELF']);
         <a class="<?= $adminPage === 'dashboard.php' ? 'active' : '' ?>" href="/admin/dashboard.php">🏠 Dashboard</a>
         <a class="<?= $adminPage === 'content.php' ? 'active' : '' ?>" href="/admin/content.php">📝 Website Content</a>
         <a class="<?= $adminPage === 'leads.php' ? 'active' : '' ?>" href="/admin/leads.php">📊 Leads</a>
-        <a href="/index.php">🌐 View Website</a>
+        <a href="/">🌐 View Website</a>
         <?php if (!empty($_SESSION['admin_logged_in'])): ?>
             <a href="/admin/logout.php">🚪 Logout</a>
         <?php endif; ?>

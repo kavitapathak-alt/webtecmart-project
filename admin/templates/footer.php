@@ -8,7 +8,7 @@
 <footer class="admin-shell-footer">
     <div class="admin-shell-footer-inner">
         <span>&copy; <?= date('Y') ?> <strong>WebTecMart</strong> Admin Panel</span>
-        <a href="/index.php">Open Website</a>
+        <a href="/">Open Website</a>
     </div>
 </footer>
 </body>

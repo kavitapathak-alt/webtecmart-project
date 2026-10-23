@@ -1315,7 +1315,7 @@ function spIcon(string $name): string {
             </div>
 
             <!-- ===== CORE SERVICES ===== -->
-            <div class="sp-block">
+            <div class="sp-block" id="core-services">
                 <div class="sp-block-header">
                     <p class="sp-block-eyebrow"><?= e((string) $servicesContent['services_eyebrow']) ?></p>
                     <h2 class="sp-block-title"><?= e((string) $servicesContent['services_heading_prefix']) ?> <span class="accent"><?= e((string) $servicesContent['services_heading_highlight']) ?></span></h2>
@@ -1349,7 +1349,7 @@ function spIcon(string $name): string {
             </div>
 
             <!-- ===== SEO SERVICES ===== -->
-            <div class="sp-seo-section">
+            <div class="sp-seo-section" id="seo-services">
                 <div class="sp-block-header">
                     <div class="sp-pill" style="margin-bottom: 12px;">
                         <?= spIcon('chart') ?>

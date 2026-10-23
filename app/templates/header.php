@@ -8,17 +8,22 @@ $serviceNavItems = [
     ['label' => 'All Services', 'path' => '/services.php', 'description' => 'Explore our complete digital growth services.'],
     ['label' => 'Digital Business Branding', 'path' => '/digital-business-branding.php', 'description' => 'Create a distinctive brand identity that earns recognition and trust.'],
     ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Build a responsive website designed to turn visitors into customers.'],
-    ['label' => 'Search Engine Optimization', 'path' => '/search-engine-optimization.php', 'description' => 'Improve search visibility and attract high-intent organic traffic.'],
-    ['label' => 'Search Engine Marketing', 'path' => '/search-engine-marketing.php', 'description' => 'Reach customers with targeted paid search campaigns.'],
+    ['label' => 'Search Engine Optimization', 'path' => '/services.php#seo-services', 'description' => 'Improve search visibility and attract high-intent organic traffic.'],
+    ['label' => 'E-commerce SEO', 'path' => '/services.php#seo-services', 'description' => 'Grow product visibility and attract shoppers through organic search.'],
+    ['label' => 'Search Engine Marketing (Google Ads)', 'path' => '/search-engine-marketing.php', 'description' => 'Reach customers with targeted Google Ads and PPC campaigns.'],
+    ['label' => 'Meta Ads (Facebook & Instagram)', 'path' => '/social-media-optimization.php', 'description' => 'Promote your business with targeted Meta advertising campaigns.'],
+    ['label' => 'Social Media Advertising', 'path' => '/social-media-optimization.php', 'description' => 'Run paid social campaigns to reach and convert your audience.'],
     ['label' => 'Social Media Optimization', 'path' => '/social-media-optimization.php', 'description' => 'Grow your audience and engagement across social platforms.'],
-    ['label' => 'Mobile App Development', 'path' => '/mobile-app-development.php', 'description' => 'Deliver useful mobile experiences for your customers.'],
+    ['label' => 'Content Marketing', 'path' => '/social-media-optimization.php', 'description' => 'Connect with your audience through useful, engaging content.'],
+    ['label' => 'Performance Marketing', 'path' => '/services.php#core-services', 'description' => 'Drive measurable growth with data-led digital advertising.'],
+    ['label' => 'Mobile App Development', 'path' => '/services.php#core-services', 'description' => 'Explore digital solutions that help your business grow.'],
 ];
 $servicePagePaths = array_map(static function (array $item): string {
     return basename($item['path']);
 }, $serviceNavItems);
 $isServicesPage = in_array($current, $servicePagePaths, true);
 $navItems = [
-    ['label' => 'Home',      'path' => '/index.php'],
+    ['label' => 'Home',      'path' => '/'],
     ['label' => 'About',     'path' => '/about.php'],
     ['label' => 'Services',  'path' => '/services.php', 'modal' => 'servicesModal'],
     ['label' => 'Packages',  'path' => '/packages.php'],
@@ -349,11 +354,17 @@ $navItems = [
         }
 
         .services-modal .modal-content {
+            height: min(580px, calc(100vh - 40px));
             overflow: hidden;
             border: 1px solid rgba(196, 0, 122, 0.14);
             border-radius: 24px;
             background: #FBF8F1;
             box-shadow: 0 24px 80px rgba(31, 27, 42, 0.22);
+        }
+
+        .services-modal .modal-dialog {
+            width: calc(100% - 40px);
+            max-width: 860px;
         }
 
         .services-modal .modal-header {
@@ -439,7 +450,8 @@ $navItems = [
         }
 
         @media (max-width: 575px) {
-            .services-modal .modal-dialog { margin: 12px; }
+            .services-modal .modal-dialog { width: auto; margin: 12px; }
+            .services-modal .modal-content { height: auto; max-height: calc(100vh - 24px); }
             .services-modal .modal-header { padding: 20px 20px 14px; }
             .services-modal .modal-body { padding: 8px 20px 20px; }
             .services-modal-grid { grid-template-columns: 1fr; gap: 9px; }
@@ -805,7 +817,7 @@ $navItems = [
         <div class="container nav-wrap">
 
             <!-- LOGO -->
-            <a href="/index.php" class="brand" aria-label="WebTecMart Home">
+            <a href="/" class="brand" aria-label="WebTecMart Home">
                 <span class="brand-logo-wrap">
                     <img
                         src="/assets/images/webtecmart-logo.png"

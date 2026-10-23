@@ -5,7 +5,7 @@ function renderFooterSection(): void
 
     // Quick Links
     $quickLinks = [
-        ['label' => 'Home',          'href' => '/index.php'],
+        ['label' => 'Home',          'href' => '/'],
         ['label' => 'About Us',      'href' => '/about.php'],
         ['label' => 'Our Services',  'href' => '/services.php'],
         ['label' => 'Packages',      'href' => '/packages.php'],
@@ -454,7 +454,7 @@ function renderFooterSection(): void
 
                     <!-- Column 1 — Brand -->
                     <div class="ft-brand">
-                        <a href="/index.php" class="ft-brand-link" aria-label="WebTecMart Home">
+                        <a href="/" class="ft-brand-link" aria-label="WebTecMart Home">
                             <img src="/assets/images/webtecmart-logo.png" alt="WebTecMart Logo" loading="lazy">
                             <div class="ft-brand-text">
                                 <span class="ft-brand-name">
@@ -580,7 +580,7 @@ function renderFooterSection(): void
                             <span class="divider"></span>
                             <a href="/contact.php">Terms &amp; Conditions</a>
                             <span class="divider"></span>
-                            <a href="/index.php">Sitemap</a>
+                            <a href="/">Sitemap</a>
                         </div>
 
                         <p class="ft-made-with">
