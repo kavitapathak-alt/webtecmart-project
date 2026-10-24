@@ -453,4 +453,4 @@ function blImage(array $p, bool $lazy = true): string
     })();
 </script>
 
-<?php require_once __DIR__ . '/app/templates/footer.php'; ?>
+<?php require_once __DIR__ . '/app/templates/footer.php'; ?>Kyuki Espe multiple members kaam karege yr

@@ -363,8 +363,8 @@ $navItems = [
         }
 
         .services-modal .modal-dialog {
-            width: calc(100% - 40px);
-            max-width: 860px;
+            width: calc(100% - 48px);
+            max-width: 1320px;
         }
 
         .services-modal .modal-header {

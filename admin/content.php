@@ -36,6 +36,7 @@ $pages = [
     'index.php' => 'Homepage',
     'about.php' => 'About Us',
     'services.php' => 'Services',
+    'service.php' => 'Service Detail Pages',
     'packages.php' => 'Packages',
     'pricing.php' => 'Pricing',
     'portfolio.php' => 'Portfolio / Projects',
@@ -56,6 +57,7 @@ $collections = [
     'homepage_visibility' => ['label' => 'Search Visibility', 'page' => 'index.php', 'description' => 'Edit the Search Visibility section heading, introduction, service cards, links, and quote button.', 'icon' => '⌕'],
     'about_page' => ['label' => 'About Page Content', 'page' => 'about.php', 'description' => 'Edit all About page copy, stats, story, values, milestones, highlights and calls to action.', 'icon' => 'ⓘ'],
     'service' => ['label' => 'Homepage Service Cards', 'page' => 'index.php', 'description' => 'Service cards shown in the homepage services section.', 'icon' => '◇'],
+    'service_detail' => ['label' => 'Service Detail Pages', 'page' => 'service.php', 'description' => 'Create and edit the individual service pages opened by the Search Visibility cards.', 'icon' => '↗'],
     'services_page' => ['label' => 'What We Do Page', 'page' => 'services.php', 'description' => 'Edit every section, text block, service list, form label, CTA, and SEO field on the public What We Do page.', 'icon' => '◇'],
     'testimonial' => ['label' => 'Testimonials', 'page' => 'index.php', 'description' => 'Client reviews displayed in the homepage testimonial carousel.', 'icon' => '“'],
     'success_story' => ['label' => 'SEO Portfolio / Case Studies', 'page' => 'index.php', 'description' => 'SEO success stories shown in the homepage portfolio section.', 'icon' => '↗'],
@@ -127,6 +129,18 @@ $setFlash = static function (string $kind, string $message): void {
 };
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $postSizeLimit = trim((string) ini_get('post_max_size'));
+    if (preg_match('/^(\d+(?:\.\d+)?)\s*([KMG])?$/i', $postSizeLimit, $postSizeMatch)) {
+        $sizeUnits = ['' => 1, 'K' => 1024, 'M' => 1024 * 1024, 'G' => 1024 * 1024 * 1024];
+        $sizeUnit = strtoupper($postSizeMatch[2] ?? '');
+        $postSizeBytes = (int) ((float) $postSizeMatch[1] * ($sizeUnits[$sizeUnit] ?? 1));
+        $requestSize = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
+        if ($postSizeBytes > 0 && $requestSize > $postSizeBytes) {
+            $setFlash('error', 'This upload exceeds the server request limit. Choose a smaller image or ask your hosting provider to increase post_max_size.');
+            redirect('/admin/content.php?section=' . rawurlencode($selectedSection));
+        }
+    }
+
     $token = $_POST['csrf_token'] ?? '';
     if (!is_string($token) || !hash_equals($_SESSION['cms_csrf_token'], $token)) {
         http_response_code(400);
@@ -348,6 +362,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $href = trim($_POST['href'] ?? '');
                     if ($href !== '' && ((str_starts_with($href, '//')) || (!str_starts_with($href, '/') && (!filter_var($href, FILTER_VALIDATE_URL) || !in_array(parse_url($href, PHP_URL_SCHEME), ['http', 'https'], true))))) throw new RuntimeException('Enter a valid service link using an http(s) URL or a site path.');
                     $metadata['icon'] = trim($_POST['icon'] ?? ''); $metadata['href'] = $href; break;
+                case 'service_detail':
+                    $slug = strtolower(trim((string) ($_POST['slug'] ?? '')));
+                    if (!preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $slug)) throw new RuntimeException('Use a unique URL slug containing lowercase letters, numbers, and single hyphens.');
+                    foreach (db()->query("SELECT id, metadata FROM content_items WHERE content_type = 'service_detail'")->fetchAll() as $serviceRecord) {
+                        $savedMetadata = json_decode($serviceRecord['metadata'] ?? '', true);
+                        if (is_array($savedMetadata) && ($savedMetadata['slug'] ?? '') === $slug && (int) $serviceRecord['id'] !== $id) {
+                            throw new RuntimeException('That service URL slug is already in use.');
+                        }
+                    }
+                    $metadata['slug'] = $slug;
+                    $metadata['tagline'] = trim((string) ($_POST['tagline'] ?? ''));
+                    $metadata['hero_description'] = trim((string) ($_POST['hero_description'] ?? ''));
+                    $metadata['icon'] = trim((string) ($_POST['icon'] ?? 'sparkles'));
+                    if (!in_array($metadata['icon'], ['sparkles', 'layout', 'search', 'share', 'megaphone', 'smartphone', 'rocket', 'check', 'globe'], true)) {
+                        throw new RuntimeException('Choose a supported service icon.');
+                    }
+                    if ($summary === '' || $metadata['tagline'] === '' || $metadata['hero_description'] === '' || $body === '') {
+                        throw new RuntimeException('Add a short description, hero tagline, hero description, and service overview.');
+                    }
+                    $parseServiceDetailRows = static function (string $input, array $columns, string $label): array {
+                        $rows = [];
+                        foreach (preg_split('/\r\n|\r|\n/', trim($input)) as $line) {
+                            if (trim($line) === '') continue;
+                            $values = array_map('trim', explode('|', $line, count($columns)));
+                            if (count($values) !== count($columns) || in_array('', $values, true)) {
+                                throw new RuntimeException($label . ' must use ' . implode(' | ', $columns) . ' on each line.');
+                            }
+                            $rows[] = array_combine($columns, $values);
+                        }
+                        return $rows;
+                    };
+                    $metadata['features'] = $parseServiceDetailRows((string) ($_POST['features'] ?? ''), ['title', 'description'], 'Features');
+                    $metadata['process'] = $parseServiceDetailRows((string) ($_POST['process'] ?? ''), ['step', 'title', 'description'], 'Process');
+                    $metadata['faqs'] = $parseServiceDetailRows((string) ($_POST['faqs'] ?? ''), ['q', 'a'], 'FAQs');
+                    break;
                 case 'blog':
                     $metadata['category'] = trim((string) ($_POST['category'] ?? ''));
                     $metadata['author'] = trim((string) ($_POST['author'] ?? ''));
@@ -360,8 +409,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     if ($metadata['image'] !== '' && !str_starts_with($metadata['image'], '/') && (!filter_var($metadata['image'], FILTER_VALIDATE_URL) || !in_array(parse_url($metadata['image'], PHP_URL_SCHEME), ['http', 'https'], true))) {
                         throw new RuntimeException('Enter a valid image URL beginning with http://, https://, or a site path.');
                     }
-                    $hasUploadedImage = isset($_FILES['image']) && ($_FILES['image']['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
-                    if ($metadata['image'] === '' && !$hasUploadedImage) throw new RuntimeException('Add a blog image URL or upload an image.');
                     if ($summary === '') throw new RuntimeException('A blog excerpt is required.');
                     if ($body === '') throw new RuntimeException('Add the blog article content before saving.');
                     $metadata['body'] = $body;
@@ -601,6 +648,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($sectionType === 'homepage_about') $metadata['image_src'] = $uploadedImage;
                 else $metadata['image'] = $uploadedImage;
             }
+            if ($sectionType === 'blog' && empty($metadata['image'])) $metadata['image'] = '/assets/images/placeholder.jpg';
             if ($sectionType === 'partner' && empty($metadata['image'])) throw new RuntimeException('Choose a logo image before saving this partner.');
             if ($sectionType === 'portfolio_project' && empty($metadata['image'])) throw new RuntimeException('Upload a project image or enter an image URL before saving this project.');
             cmsSave($sectionType, $title, $summary, $body, $metadata, $action === 'update' ? $id : null);
@@ -613,7 +661,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     redirect('/admin/content.php?section=' . rawurlencode($selectedSection));
 }
 
-serviceCards(); pricingPlans(); testimonials(); $blogPosts = blogPosts(); successStories(); homepageSections();
+serviceCards(); $serviceDetailPages = serviceDetailPages(); pricingPlans(); testimonials(); $blogPosts = blogPosts(); successStories(); homepageSections();
 
 $allItems = cmsAllContent();
 
@@ -644,6 +692,23 @@ $editingItem = null;
 if ($editId > 0 && !$isRegistry) foreach ($items as $item) if ((int) $item['id'] === $editId) { $editingItem = $item; break; }
 $editingMetadata = json_decode($editingItem['metadata'] ?? '', true);
 $editingMetadata = is_array($editingMetadata) ? $editingMetadata : [];
+if ($sectionType === 'service_detail' && $editingItem) {
+    if (isset($editingMetadata['metadata']) && is_array($editingMetadata['metadata'])) {
+        $editingMetadata = array_merge($editingMetadata, $editingMetadata['metadata']);
+        unset($editingMetadata['metadata']);
+    }
+    foreach ($serviceDetailPages as $serviceDetailPage) {
+        if (($serviceDetailPage['slug'] ?? '') === ($editingMetadata['slug'] ?? '')) {
+            $editingMetadata = array_merge($serviceDetailPage, $editingMetadata);
+            foreach (['title', 'summary', 'body'] as $requiredField) {
+                if (trim((string) ($editingItem[$requiredField] ?? '')) === '') {
+                    $editingItem[$requiredField] = $serviceDetailPage[$requiredField] ?? '';
+                }
+            }
+            break;
+        }
+    }
+}
 if ($sectionType === 'hero_content') $editingMetadata = array_merge($heroContent, $editingMetadata);
 if ($sectionType === 'about_page') $editingMetadata = array_merge($aboutPage, $editingMetadata);
 if ($sectionType === 'homepage_about') $editingMetadata = array_merge($homepageAbout, $editingMetadata);
@@ -913,6 +978,10 @@ require_once __DIR__ . '/templates/header.php';
                                                 <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>What We Do page content
                                                 <span class="cms-count"><?= (int) ($itemCountByType['services_page'] ?? 0) ?></span>
                                             </a>
+                                            <a class="cms-link <?= $selectedSection === 'collection:service_detail' ? 'active' : '' ?>" href="?section=collection%3Aservice_detail">
+                                                <span class="cms-ico"><i class="bi bi-arrow-up-right-square"></i></span>Service detail pages
+                                                <span class="cms-count"><?= (int) ($itemCountByType['service_detail'] ?? 0) ?></span>
+                                            </a>
                                         <?php elseif ($pageFile === 'packages.php'): ?>
                                             <a class="cms-link <?= $selectedSection === 'collection:packages_page' ? 'active' : '' ?>" href="?section=collection%3Apackages_page">
                                                 <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Packages page content
@@ -1071,7 +1140,7 @@ require_once __DIR__ . '/templates/header.php';
                                     <article class="list-group-item cms-record d-flex flex-column flex-md-row align-items-md-center gap-3">
                                         <div class="d-flex align-items-start gap-3 flex-grow-1" style="min-width:0">
                                             <?php if (!empty($meta['image'])): ?>
-                                                <img class="cms-thumb" src="<?= e($meta['image']) ?>" alt="" loading="lazy">
+                                                <img class="cms-thumb" src="<?= e($meta['image']) ?>" alt="" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
                                             <?php else: ?>
                                                 <span class="cms-thumb cms-thumb-ph" aria-hidden="true"><?= e($sectionInfo['icon']) ?></span>
                                             <?php endif; ?>
@@ -1164,13 +1233,13 @@ require_once __DIR__ . '/templates/header.php';
 
                             <div class="col-12">
                                 <label class="form-label fw-semibold" for="f-summary"><?= in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'portfolio_page'], true) ? ($sectionType === 'about_page' ? 'About page introduction' : (in_array($sectionType, ['homepage_about', 'homepage_visibility'], true) ? 'Section introduction' : ($sectionType === 'portfolio_page' ? 'Portfolio page introduction' : 'Hero subtitle'))) : ($sectionType === 'services_page' ? 'Hero description' : ($sectionType === 'partner' ? 'Logo alt text' : ($sectionType === 'testimonial' ? 'Testimonial description' : ($sectionType === 'success_story' || $sectionType === 'portfolio_project' ? 'Project description' : ($sectionType === 'blog' ? 'Excerpt' : ($sectionType === 'pricing' ? 'Plan description' : 'Short description')))))) ?></label>
-                                <textarea class="form-control" id="f-summary" name="summary" rows="3" <?= in_array($sectionType, ['testimonial', 'partner'], true) ? 'required' : '' ?>><?= e($editingItem['summary'] ?? '') ?></textarea>
+                                <textarea class="form-control" id="f-summary" name="summary" rows="3" <?= in_array($sectionType, ['testimonial', 'partner', 'blog', 'service_detail'], true) ? 'required' : '' ?>><?= e($editingItem['summary'] ?? '') ?></textarea>
                             </div>
 
-                            <?php if (in_array($sectionType, ['blog', 'page', 'hero_content'], true)): ?>
+                            <?php if (in_array($sectionType, ['blog', 'page', 'hero_content', 'service_detail'], true)): ?>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold" for="f-body"><?= $sectionType === 'blog' ? 'Article content' : ($sectionType === 'hero_content' ? 'Main hero description' : 'Additional details') ?></label>
-                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>"><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
+                                    <label class="form-label fw-semibold" for="f-body"><?= $sectionType === 'blog' ? 'Article content' : ($sectionType === 'hero_content' ? 'Main hero description' : ($sectionType === 'service_detail' ? 'Service overview' : 'Additional details')) ?></label>
+                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
                                     <?php if ($sectionType === 'blog'): ?><div class="form-text">Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items.</div><?php endif; ?>
                                 </div>
                             <?php endif; ?>
@@ -1665,6 +1734,50 @@ require_once __DIR__ . '/templates/header.php';
                                     <input type="text" class="form-control" id="f-href" name="href" value="<?= e($formMeta['href'] ?? '') ?>" placeholder="/services.php">
                                 </div>
 
+                            <?php elseif ($sectionType === 'service_detail'): ?>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-service-slug">Page URL slug</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text">/service.php?slug=</span>
+                                        <input type="text" class="form-control" id="f-service-slug" name="slug" required pattern="[a-z0-9]+(-[a-z0-9]+)*" value="<?= e((string) ($formMeta['slug'] ?? '')) ?>" placeholder="local-seo">
+                                    </div>
+                                    <div class="form-text">Unique lowercase letters, numbers, and hyphens. Existing card links are connected automatically for the six SEO services.</div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-service-icon">Page icon</label>
+                                    <select class="form-select" id="f-service-icon" name="icon">
+                                        <?php foreach (['sparkles', 'layout', 'search', 'share', 'megaphone', 'smartphone', 'rocket', 'check', 'globe'] as $serviceIcon): ?>
+                                            <option value="<?= e($serviceIcon) ?>" <?= ($formMeta['icon'] ?? 'sparkles') === $serviceIcon ? 'selected' : '' ?>><?= e(ucfirst($serviceIcon)) ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-service-tagline">Hero tagline</label>
+                                    <input type="text" class="form-control" id="f-service-tagline" name="tagline" required maxlength="250" value="<?= e((string) ($formMeta['tagline'] ?? '')) ?>">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-semibold" for="f-service-hero-description">Hero description</label>
+                                    <textarea class="form-control" id="f-service-hero-description" name="hero_description" rows="3" required><?= e((string) ($formMeta['hero_description'] ?? '')) ?></textarea>
+                                </div>
+                                <?php foreach ([
+                                    'features' => ['Service features', ['title', 'description'], 'One per line: feature title | description.'],
+                                    'process' => ['Our process', ['step', 'title', 'description'], 'One per line: step number | title | description.'],
+                                    'faqs' => ['Frequently asked questions', ['q', 'a'], 'One per line: question | answer.'],
+                                ] as $field => [$label, $columns, $help]): ?>
+                                    <?php
+                                    $serviceDetailRows = array_map(static function (array $row) use ($columns): array {
+                                        return array_map(static function (string $column) use ($row): string {
+                                            return (string) ($row[$column] ?? '');
+                                        }, $columns);
+                                    }, is_array($formMeta[$field] ?? null) ? $formMeta[$field] : []);
+                                    ?>
+                                    <div class="col-12">
+                                        <label class="form-label fw-semibold" for="f-service-<?= e($field) ?>"><?= e($label) ?></label>
+                                        <textarea class="form-control" id="f-service-<?= e($field) ?>" name="<?= e($field) ?>" rows="<?= $field === 'features' ? '5' : '4' ?>"><?= e(implode("\n", array_map(static function (array $row): string { return implode(' | ', $row); }, $serviceDetailRows))) ?></textarea>
+                                        <div class="form-text"><?= e($help) ?></div>
+                                    </div>
+                                <?php endforeach; ?>
+
                             <?php elseif ($sectionType === 'blog'): ?>
                                 <?php foreach ([
                                     'category' => 'Category',
@@ -1682,6 +1795,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-blog-image-url">Blog image URL / site path</label>
                                     <input type="text" class="form-control" id="f-blog-image-url" name="image_url" value="<?= e($formMeta['image'] ?? '') ?>" placeholder="/assets/images/your-blog-image.jpg or https://...">
+                                    <div class="form-text">Upload a JPG, PNG, WEBP, or GIF below, or use an image URL. If no image is provided, a default image will be used.</div>
                                 </div>
 
                             <?php elseif ($sectionType === 'pricing'): ?>
@@ -1797,7 +1911,14 @@ require_once __DIR__ . '/templates/header.php';
     // Unsaved changes guard
     form.addEventListener('input', () => { dirty = true; });
     form.addEventListener('change', () => { dirty = true; });
-    form.addEventListener('submit', () => { dirty = false; });
+    form.addEventListener('submit', () => {
+        dirty = false;
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Saving...';
+        }
+    });
     modalEl.addEventListener('hide.bs.modal', e => {
         if (dirty && !window.confirm('Discard your unsaved changes?')) { e.preventDefault(); return; }
         dirty = false;

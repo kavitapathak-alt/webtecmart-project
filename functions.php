@@ -33,6 +33,220 @@ function serviceCards(): array
     return cmsContent('service', $defaults);
 }
 
+function serviceDetailPages(): array
+{
+    $defaults = [
+        [
+            'title' => 'Local SEO',
+            'summary' => 'Help nearby customers discover and choose your business with a stronger local search presence.',
+            'body' => 'Local SEO helps your business appear when nearby customers search for the products and services you offer. We improve your local listings, location pages, reviews, and website signals to turn relevant searches into calls, visits, and enquiries.',
+            'metadata' => [
+                'slug' => 'local-seo',
+                'icon' => 'search',
+                'tagline' => 'Be found by nearby customers',
+                'hero_description' => 'Build a stronger presence in local search and connect with customers ready to take action in your area.',
+                'features' => [
+                    ['title' => 'Google Business Profile', 'description' => 'Improve your profile, business information, services, and local visibility.'],
+                    ['title' => 'Local keyword strategy', 'description' => 'Target the searches customers use when looking for your services nearby.'],
+                    ['title' => 'Location pages', 'description' => 'Create useful location content that helps search engines and customers understand where you work.'],
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Audit', 'description' => 'Review your local listings, website, competitors, and current search visibility.'],
+                    ['step' => '02', 'title' => 'Improve', 'description' => 'Prioritize listing, content, and technical updates for your target locations.'],
+                    ['step' => '03', 'title' => 'Grow', 'description' => 'Track visibility and leads, then refine the strategy using real performance data.'],
+                ],
+                'faqs' => [
+                    ['q' => 'How long does local SEO take?', 'a' => 'Timing depends on your location, competition, and current presence. We track progress and focus on sustainable improvements.'],
+                    ['q' => 'Can you support multiple locations?', 'a' => 'Yes. We can plan location-specific listings and pages around the areas your business serves.'],
+                ],
+            ],
+        ],
+        [
+            'title' => 'National SEO',
+            'summary' => 'Grow organic visibility across your country with a strategy built around your market and customers.',
+            'body' => 'National SEO helps businesses reach customers across a country rather than focusing on one local area. We align technical foundations, useful content, and authority building with the search demand and competition in your market.',
+            'metadata' => [
+                'slug' => 'national-seo',
+                'icon' => 'search',
+                'tagline' => 'Reach customers nationwide',
+                'hero_description' => 'Build search visibility across your country with a focused strategy for the audiences and markets you want to reach.',
+                'features' => [
+                    ['title' => 'National keyword research', 'description' => 'Find valuable search opportunities across your products, services, and markets.'],
+                    ['title' => 'Content and landing pages', 'description' => 'Build helpful pages that match customer intent and support national reach.'],
+                    ['title' => 'Technical SEO', 'description' => 'Resolve crawl, indexation, speed, and site structure issues that limit organic growth.'],
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Research', 'description' => 'Understand your goals, audience, search demand, and national competitors.'],
+                    ['step' => '02', 'title' => 'Plan', 'description' => 'Create a prioritized roadmap across technical SEO, content, and authority.'],
+                    ['step' => '03', 'title' => 'Optimize', 'description' => 'Implement improvements and refine them using rankings, traffic, and lead data.'],
+                ],
+                'faqs' => [
+                    ['q' => 'Is national SEO different from local SEO?', 'a' => 'Yes. National SEO targets a broader market, while local SEO focuses on visibility in specific locations and local results.'],
+                    ['q' => 'Can a small business compete nationally?', 'a' => 'A focused niche and a realistic content and technical plan can help businesses compete for relevant national searches.'],
+                ],
+            ],
+        ],
+        [
+            'title' => 'International SEO',
+            'summary' => 'Reach customers in new countries with search content and technical signals tailored to each market.',
+            'body' => 'International SEO helps your website serve customers across countries and languages. We plan market-specific content, site structure, and technical signals so search engines can understand which pages are relevant to each audience.',
+            'metadata' => [
+                'slug' => 'international-seo',
+                'icon' => 'globe',
+                'tagline' => 'Expand into global markets',
+                'hero_description' => 'Make your website easier to discover in the countries and languages that matter to your business.',
+                'features' => [
+                    ['title' => 'Market research', 'description' => 'Evaluate search demand, customer intent, and competitors in each target market.'],
+                    ['title' => 'International site structure', 'description' => 'Plan country and language URLs and technical signals for a clear user experience.'],
+                    ['title' => 'Localized content', 'description' => 'Adapt content to local language, expectations, and search behavior.'],
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Select markets', 'description' => 'Prioritize target countries and understand their search opportunity.'],
+                    ['step' => '02', 'title' => 'Set foundations', 'description' => 'Plan site structure, technical setup, and localization requirements.'],
+                    ['step' => '03', 'title' => 'Grow visibility', 'description' => 'Publish and optimize market-specific pages while measuring performance.'],
+                ],
+                'faqs' => [
+                    ['q' => 'Do I need a separate website for each country?', 'a' => 'Not always. The best domain and URL structure depends on your markets, resources, and business goals.'],
+                    ['q' => 'Is translation enough for international SEO?', 'a' => 'Translation alone is rarely sufficient. Content should also reflect local search intent and audience expectations.'],
+                ],
+            ],
+        ],
+        [
+            'title' => 'E-Commerce SEO',
+            'summary' => 'Help shoppers discover your products through stronger product, category, and technical pages.',
+            'body' => 'E-commerce SEO improves how shoppers discover and navigate your online store from search. We focus on product and category page quality, site architecture, technical health, and useful content that supports product discovery and sales.',
+            'metadata' => [
+                'slug' => 'ecommerce-seo',
+                'icon' => 'search',
+                'tagline' => 'Turn product searches into sales',
+                'hero_description' => 'Make your products easier to find with a search strategy designed for online stores and their customers.',
+                'features' => [
+                    ['title' => 'Product and category SEO', 'description' => 'Improve page titles, descriptions, content, and internal links across your catalog.'],
+                    ['title' => 'Store technical health', 'description' => 'Address crawlability, indexation, duplicate URLs, and performance issues.'],
+                    ['title' => 'Product discovery', 'description' => 'Make it easier for shoppers and search engines to navigate your product range.'],
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Audit store', 'description' => 'Review your catalog, site structure, technical setup, and search performance.'],
+                    ['step' => '02', 'title' => 'Prioritize', 'description' => 'Identify the product and category opportunities with the strongest potential.'],
+                    ['step' => '03', 'title' => 'Optimize', 'description' => 'Improve priority pages and measure organic discovery and business outcomes.'],
+                ],
+                'faqs' => [
+                    ['q' => 'Can SEO help a large product catalog?', 'a' => 'Yes. A scalable approach to templates, categories, and technical controls can support larger catalogs.'],
+                    ['q' => 'Do product descriptions matter?', 'a' => 'Clear, useful, unique product information helps shoppers make decisions and helps search engines understand each page.'],
+                ],
+            ],
+        ],
+        [
+            'title' => 'SEO for Small Business',
+            'summary' => 'Build a practical SEO foundation that helps small businesses attract the right customers.',
+            'body' => 'Small business SEO focuses on the search opportunities that matter most to your customers and your capacity. We prioritize a clear website foundation, relevant content, and measurable improvements rather than unnecessary complexity.',
+            'metadata' => [
+                'slug' => 'small-business-seo',
+                'icon' => 'rocket',
+                'tagline' => 'Make every search opportunity count',
+                'hero_description' => 'A practical, focused SEO plan can help your small business reach the people looking for what you offer.',
+                'features' => [
+                    ['title' => 'SEO foundations', 'description' => 'Improve the technical and on-page basics that help search engines understand your website.'],
+                    ['title' => 'Customer-focused content', 'description' => 'Answer the questions your customers ask with clear and useful website content.'],
+                    ['title' => 'Progress reporting', 'description' => 'Track search visibility, website visits, and enquiries to guide ongoing priorities.'],
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Understand', 'description' => 'Learn about your business, customers, and the search terms that matter.'],
+                    ['step' => '02', 'title' => 'Prioritize', 'description' => 'Build an achievable plan around your highest-value opportunities.'],
+                    ['step' => '03', 'title' => 'Improve', 'description' => 'Make steady improvements and review outcomes with clear reporting.'],
+                ],
+                'faqs' => [
+                    ['q' => 'Does a small business need SEO?', 'a' => 'SEO can help customers discover your business when they are researching products or services like yours.'],
+                    ['q' => 'How much content do I need?', 'a' => 'Start with clear, useful pages for your core offerings and expand based on customer needs and search data.'],
+                ],
+            ],
+        ],
+        [
+            'title' => 'Online Presence & Reputation',
+            'summary' => 'Strengthen how customers find and perceive your brand across search and review platforms.',
+            'body' => 'A strong online reputation helps customers make informed decisions about your business. We help improve the accuracy and quality of your search presence, support responsible review practices, and create a clear process for monitoring brand visibility.',
+            'metadata' => [
+                'slug' => 'online-reputation-management',
+                'icon' => 'check',
+                'tagline' => 'Build trust across your online presence',
+                'hero_description' => 'Present a consistent, helpful brand presence and support customer trust across search and review platforms.',
+                'features' => [
+                    ['title' => 'Presence audit', 'description' => 'Review how your brand appears in search results, listings, and review platforms.'],
+                    ['title' => 'Review response guidance', 'description' => 'Create a thoughtful process for responding to customer feedback.'],
+                    ['title' => 'Brand content', 'description' => 'Improve useful, accurate pages that help customers understand your business.'],
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Review', 'description' => 'Assess your current brand presence and identify gaps or inconsistencies.'],
+                    ['step' => '02', 'title' => 'Improve', 'description' => 'Prioritize accurate information, useful content, and customer response processes.'],
+                    ['step' => '03', 'title' => 'Monitor', 'description' => 'Track feedback and visibility, then update your approach as needed.'],
+                ],
+                'faqs' => [
+                    ['q' => 'Can you remove negative reviews?', 'a' => 'We support responsible review management and accurate information, but do not promise removal of genuine customer feedback.'],
+                    ['q' => 'How can we build a stronger reputation?', 'a' => 'Consistent service, accurate business information, helpful content, and professional responses all support customer trust.'],
+                ],
+            ],
+        ],
+    ];
+
+    $defaults = array_map(static function (array $page): array {
+        $metadata = $page['metadata'] ?? [];
+        unset($page['metadata']);
+        return array_merge($page, is_array($metadata) ? $metadata : []);
+    }, $defaults);
+
+    $seedMarker = db()->prepare('SELECT 1 FROM cms_content_type_state WHERE content_type = :type');
+    $seedMarker->execute([':type' => 'service_detail_defaults_v1']);
+    if (!$seedMarker->fetchColumn()) {
+        $storedPages = db()->query("SELECT metadata FROM content_items WHERE content_type = 'service_detail'")->fetchAll(PDO::FETCH_COLUMN);
+        $storedSlugs = [];
+        foreach ($storedPages as $storedMetadata) {
+            $storedMetadata = json_decode($storedMetadata ?: '', true);
+            if (!is_array($storedMetadata)) continue;
+            if (isset($storedMetadata['metadata']) && is_array($storedMetadata['metadata'])) {
+                $storedMetadata = array_merge($storedMetadata, $storedMetadata['metadata']);
+            }
+            if (!empty($storedMetadata['slug'])) $storedSlugs[] = (string) $storedMetadata['slug'];
+        }
+
+        $nextOrder = (int) db()->query("SELECT COALESCE(MAX(sort_order), -1) + 1 FROM content_items WHERE content_type = 'service_detail'")->fetchColumn();
+        $insert = db()->prepare('INSERT INTO content_items (content_type, title, summary, body, metadata, sort_order) VALUES (:type, :title, :summary, :body, :metadata, :sort_order)');
+        foreach ($defaults as $page) {
+            if (in_array((string) $page['slug'], $storedSlugs, true)) continue;
+            $insert->execute([
+                ':type' => 'service_detail',
+                ':title' => $page['title'],
+                ':summary' => $page['summary'],
+                ':body' => $page['body'],
+                ':metadata' => json_encode($page, JSON_UNESCAPED_UNICODE),
+                ':sort_order' => $nextOrder++,
+            ]);
+        }
+        $markSeeded = db()->prepare('INSERT OR IGNORE INTO cms_content_type_state (content_type) VALUES (:type)');
+        $markSeeded->execute([':type' => 'service_detail_defaults_v1']);
+    }
+
+    $pages = cmsContent('service_detail', $defaults);
+    $defaultsBySlug = [];
+    foreach ($defaults as $defaultPage) $defaultsBySlug[$defaultPage['slug']] = $defaultPage;
+    foreach ($pages as &$page) {
+        if (isset($page['metadata']) && is_array($page['metadata'])) {
+            $page = array_merge($page, $page['metadata']);
+            unset($page['metadata']);
+        }
+        $slug = (string) ($page['slug'] ?? '');
+        if (isset($defaultsBySlug[$slug])) {
+            $page = array_merge($defaultsBySlug[$slug], $page);
+            foreach (['title', 'summary', 'body', 'tagline', 'hero_description'] as $requiredField) {
+                if (trim((string) ($page[$requiredField] ?? '')) === '') {
+                    $page[$requiredField] = $defaultsBySlug[$slug][$requiredField] ?? '';
+                }
+            }
+        }
+    }
+    unset($page);
+    return $pages;
+}
+
 function pricingPlans(): array
 {
     $defaults = [
@@ -423,8 +637,20 @@ function homepageVisibilityContent(): array
     $items = cmsContent('homepage_visibility', [$defaults]);
     $content = array_merge($defaults, $items[0] ?? []);
     if (!isset($content['services']) || !is_array($content['services'])) $content['services'] = $defaults['services'];
+    $detailSlugsByTitle = [];
+    foreach (serviceDetailPages() as $detailPage) {
+        $slug = (string) ($detailPage['slug'] ?? '');
+        $titleKey = strtolower(trim((string) ($detailPage['title'] ?? '')));
+        if ($slug !== '' && $titleKey !== '') $detailSlugsByTitle[$titleKey] = $slug;
+    }
     foreach ($content['services'] as $index => &$service) {
         $service = array_merge($defaults['services'][$index] ?? ['number' => sprintf('%02d', $index + 1), 'icon' => 'globe', 'title' => '', 'text' => '', 'href' => '/search-engine-optimization.php'], is_array($service) ? $service : []);
+        $titleKey = strtolower(trim((string) ($service['title'] ?? '')));
+        $legacyHref = strtolower((string) ($service['href'] ?? ''));
+        $isManagedDetailLink = in_array($legacyHref, ['/services', '/services.php', ''], true) || strpos($legacyHref, '/service.php?slug=') === 0;
+        if ($isManagedDetailLink && isset($detailSlugsByTitle[$titleKey])) {
+            $service['href'] = '/service.php?slug=' . rawurlencode($detailSlugsByTitle[$titleKey]);
+        }
     }
     unset($service);
     return $content;
@@ -912,12 +1138,21 @@ function cmsSetActive(int $id, bool $isActive): void
 
 function uploadCmsImage(array $file): string
 {
-    if (($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+    $error = (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE);
+    if ($error === UPLOAD_ERR_NO_FILE) {
         return '';
     }
 
-    if (($file['error'] ?? UPLOAD_ERR_OK) !== UPLOAD_ERR_OK) {
-        throw new RuntimeException('The image upload failed. Please try again.');
+    if ($error !== UPLOAD_ERR_OK) {
+        $uploadErrors = [
+            UPLOAD_ERR_INI_SIZE => 'The image is larger than this server allows. Choose a smaller image or ask your hosting provider to increase upload_max_filesize and post_max_size.',
+            UPLOAD_ERR_FORM_SIZE => 'The image exceeds the maximum size allowed by the form.',
+            UPLOAD_ERR_PARTIAL => 'The image upload was interrupted. Please try again.',
+            UPLOAD_ERR_NO_TMP_DIR => 'The server is missing its temporary upload folder. Please contact your hosting provider.',
+            UPLOAD_ERR_CANT_WRITE => 'The server could not save the uploaded image. Please contact your hosting provider.',
+            UPLOAD_ERR_EXTENSION => 'A server extension stopped the image upload. Please contact your hosting provider.',
+        ];
+        throw new RuntimeException($uploadErrors[$error] ?? 'The image upload failed. Please try again or use an image URL.');
     }
     if (($file['size'] ?? 0) > 5 * 1024 * 1024) {
         throw new RuntimeException('Images must be 5 MB or smaller.');
