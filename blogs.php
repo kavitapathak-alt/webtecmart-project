@@ -21,7 +21,8 @@ require_once __DIR__ . '/app/templates/header.php';
 
 function blDataAttrs(array $p): string
 {
-    $hay = mb_strtolower(trim(($p['title'] ?? '') . ' ' . ($p['summary'] ?? '') . ' ' . ($p['category'] ?? '')));
+    $searchText = trim(($p['title'] ?? '') . ' ' . ($p['summary'] ?? '') . ' ' . ($p['category'] ?? ''));
+    $hay = function_exists('mb_strtolower') ? mb_strtolower($searchText) : strtolower($searchText);
     return 'data-search="' . e($hay) . '" data-cat="' . e((string) ($p['category'] ?? '')) . '"';
 }
 
