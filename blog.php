@@ -3,15 +3,14 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/functions.php';
 
 $requestedPostId = filter_var($_GET['id'] ?? 0, FILTER_VALIDATE_INT) ?: 0;
+$requestedSlug = trim((string) ($_GET['slug'] ?? ''));
 $managedPosts = blogPosts();
 $post = null;
+
 if ($requestedPostId > 0) {
-    foreach ($managedPosts as $managedPost) {
-        if ((int) ($managedPost['id'] ?? 0) === $requestedPostId) {
-            $post = $managedPost;
-            break;
-        }
-    }
+    $post = getBlogPost($requestedPostId);
+} elseif ($requestedSlug !== '') {
+    $post = getBlogPost($requestedSlug);
 } else {
     $post = $managedPosts[0] ?? null;
 }
@@ -41,60 +40,144 @@ foreach ($managedPosts as $p) {
     if (count($relatedPosts) >= 3) break;
 }
 
+$pageMeta = [
+    'title' => (string) (!empty($post['title']) && !$isNotFound ? $post['title'] . ' | ' . APP_NAME : 'Article | ' . APP_NAME),
+    'description' => (string) (!empty($post['summary']) ? $post['summary'] : 'Read digital marketing and SEO insights from WebTecMart.'),
+];
 $blogPageMeta = [
-    'page_meta_title' => (string) ($post['title'] ?? APP_NAME),
-    'page_meta_description' => (string) ($post['summary'] ?? ''),
+    'page_meta_title' => $pageMeta['title'],
+    'page_meta_description' => $pageMeta['description'],
 ];
 require_once __DIR__ . '/app/templates/header.php';
 
-// Escape first, then allow **bold** only (safe)
+// Inline markdown formatting
 function blogInline(string $text): string
 {
-    return preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', e($text));
+    $text = htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    // Markdown links: [text](url)
+    $text = preg_replace_callback('/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^\s\)]+)\)/', static function ($m) {
+        return '<a href="' . $m[2] . '" target="_blank" rel="noopener noreferrer">' . $m[1] . '</a>';
+    }, $text);
+    // Bold **text**
+    $text = preg_replace('/\*\*(.+?)\*\*/s', '<strong>$1</strong>', $text);
+    // Italic *text*
+    $text = preg_replace('/(?<!\*)\*(?!\*)(.+?)(?<!\*)\*(?!\*)/s', '<em>$1</em>', $text);
+    // Inline code `code`
+    $text = preg_replace('/`([^`]+)`/', '<code>$1</code>', $text);
+    return $text;
 }
 
-function renderBlogContent(string $content): void
+function renderBlogContent(string $content, string $articleTitle = ''): void
 {
+    $lines = preg_split('/\r\n|\r|\n/', trim($content));
+    if (!$lines) return;
+
+    // Strip duplicate title if repeated as the very first line
+    $firstLine = trim($lines[0] ?? '');
+    $cleanFirst = ltrim($firstLine, '# ');
+    if ($articleTitle !== '' && (stripos($cleanFirst, $articleTitle) !== false || stripos($articleTitle, $cleanFirst) !== false)) {
+        array_shift($lines);
+    }
+
     $paragraph = [];
     $list = [];
     $listTag = 'ul';
+
     $flushParagraph = static function () use (&$paragraph): void {
         if (!$paragraph) return;
-        echo '<p>' . blogInline(implode(' ', $paragraph)) . '</p>';
+        $joined = implode(' ', $paragraph);
+        if (trim($joined) !== '') {
+            echo '<p>' . blogInline($joined) . '</p>' . "\n";
+        }
         $paragraph = [];
     };
+
     $flushList = static function () use (&$list, &$listTag): void {
         if (!$list) return;
-        echo '<' . $listTag . '>';
-        foreach ($list as $item) echo '<li>' . blogInline($item) . '</li>';
-        echo '</' . $listTag . '>';
+        echo '<' . $listTag . ' class="bp-list">' . "\n";
+        foreach ($list as $item) {
+            echo '  <li>' . blogInline($item) . '</li>' . "\n";
+        }
+        echo '</' . $listTag . '>' . "\n";
         $list = [];
     };
-    foreach (preg_split('/\r\n|\r|\n/', $content) as $line) {
-        $line = trim($line);
-        if ($line === '') {
+
+    foreach ($lines as $line) {
+        $trimmed = trim($line);
+
+        if ($trimmed === '') {
             $flushParagraph();
             $flushList();
-        } elseif (preg_match('/^(#{1,3})\s+(.+)$/', $line, $heading)) {
+            continue;
+        }
+
+        // Markdown image ![alt](url)
+        if (preg_match('/^!\[(.*?)\]\(((?:https?:\/\/|\/)[^\s\)]+)\)$/', $trimmed, $imgMatch)) {
             $flushParagraph();
             $flushList();
-            $level = strlen($heading[1]) + 1;
-            echo '<h' . $level . '>' . e($heading[2]) . '</h' . $level . '>';
-        } elseif (preg_match('/^[-*]\s+(.+)$/', $line, $item)) {
+            $alt = htmlspecialchars($imgMatch[1], ENT_QUOTES, 'UTF-8');
+            $src = htmlspecialchars($imgMatch[2], ENT_QUOTES, 'UTF-8');
+            echo '<figure class="bp-article-figure"><img src="' . $src . '" alt="' . $alt . '" loading="lazy" class="bp-article-img">';
+            if ($alt !== '') {
+                echo '<figcaption>' . $alt . '</figcaption>';
+            }
+            echo '</figure>' . "\n";
+            continue;
+        }
+
+        // Markdown headings (# H1, ## H2, ### H3, #### H4)
+        if (preg_match('/^(#{1,4})\s+(.+)$/', $trimmed, $heading)) {
+            $flushParagraph();
+            $flushList();
+            $hLevel = min(4, strlen($heading[1]) + 1);
+            $hText = trim($heading[2]);
+            $hId = slugify($hText);
+            echo '<h' . $hLevel . ' id="' . htmlspecialchars($hId, ENT_QUOTES, 'UTF-8') . '" class="bp-heading">' . htmlspecialchars($hText, ENT_QUOTES, 'UTF-8') . '</h' . $hLevel . '>' . "\n";
+            continue;
+        }
+
+        // Section step headings: "1. Perform Keyword Research"
+        if (preg_match('/^(\d+)[.)]\s+([A-Z0-9].{3,85})$/', $trimmed, $numberedSection) && !str_ends_with($trimmed, '.')) {
+            $flushParagraph();
+            $flushList();
+            $stepNum = $numberedSection[1];
+            $stepTitle = trim($numberedSection[2]);
+            $stepId = 'step-' . $stepNum . '-' . slugify($stepTitle);
+            echo '<h2 id="' . htmlspecialchars($stepId, ENT_QUOTES, 'UTF-8') . '" class="bp-step-heading"><span class="bp-step-num">' . htmlspecialchars($stepNum, ENT_QUOTES, 'UTF-8') . '</span> ' . htmlspecialchars($stepTitle, ENT_QUOTES, 'UTF-8') . '</h2>' . "\n";
+            continue;
+        }
+
+        // Blockquotes
+        if (preg_match('/^>\s*(.+)$/', $trimmed, $quoteMatch)) {
+            $flushParagraph();
+            $flushList();
+            echo '<blockquote class="bp-quote"><p>' . blogInline($quoteMatch[1]) . '</p></blockquote>' . "\n";
+            continue;
+        }
+
+        // Bullet lists
+        if (preg_match('/^[-*]\s+(.+)$/', $trimmed, $item)) {
             $flushParagraph();
             if ($list && $listTag !== 'ul') $flushList();
             $listTag = 'ul';
             $list[] = $item[1];
-        } elseif (preg_match('/^\d+[.)]\s+(.+)$/', $line, $item)) {
+            continue;
+        }
+
+        // Numbered list items
+        if (preg_match('/^\d+[.)]\s+(.+)$/', $trimmed, $item)) {
             $flushParagraph();
             if ($list && $listTag !== 'ol') $flushList();
             $listTag = 'ol';
             $list[] = $item[1];
-        } else {
-            $flushList();
-            $paragraph[] = $line;
+            continue;
         }
+
+        // Regular paragraph text
+        $flushList();
+        $paragraph[] = $trimmed;
     }
+
     $flushParagraph();
     $flushList();
 }
@@ -162,11 +245,75 @@ $imgErr = "onerror=\"this.closest('.has-fallback').classList.add('noimg')\"";
     .bp-wrap { padding-bottom: 70px; margin-top: -62px; position: relative; z-index: 3; }
     .bp-card { background: #fff; border-radius: 30px; overflow: hidden; border: 1.5px solid var(--p100); box-shadow: 0 30px 70px rgba(196,0,122,.16); }
 
-    /* Cover: full image, no crop, blurred backdrop for side gaps */
-    .bp-cover { position: relative; overflow: hidden; isolation: isolate; line-height: 0; background: linear-gradient(135deg, var(--p200), var(--p400)); }
-    .bp-cover .bg { position: absolute; inset: -24px; z-index: 0; width: calc(100% + 48px); height: calc(100% + 48px); max-width: none; object-fit: cover; filter: blur(26px) saturate(1.2); }
-    .bp-cover .main { position: relative; z-index: 1; display: block; width: 100%; height: auto; max-height: 420px; object-fit: contain; margin: 0 auto; }
+    /* Cover: clean modern responsive hero image */
+    .bp-cover {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        height: 420px;
+        max-height: 480px;
+        background: linear-gradient(135deg, var(--p100), var(--p50));
+        border-bottom: 1.5px solid var(--p100);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bp-cover .bg { display: none; }
+    .bp-cover .main {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        display: block;
+        transition: transform .5s ease;
+    }
     .bp-cover.noimg { display: none; }
+
+    .bp-step-heading {
+        margin: 1.8em 0 0.6em;
+        font-weight: 800;
+        font-size: 1.55rem;
+        line-height: 1.3;
+        color: var(--p900);
+        scroll-margin-top: 110px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .bp-step-num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--p500), var(--p400));
+        color: #fff;
+        font-size: 0.95rem;
+        font-weight: 800;
+        flex-shrink: 0;
+        box-shadow: 0 4px 12px rgba(196,0,122,.3);
+    }
+    .bp-article-figure {
+        margin: 32px auto;
+        text-align: center;
+        max-width: 100%;
+    }
+    .bp-article-img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin: 0 auto;
+        border-radius: 18px;
+        box-shadow: 0 12px 36px rgba(61,0,35,.12);
+        border: 1px solid var(--p100);
+    }
+    .bp-article-figure figcaption {
+        margin-top: 10px;
+        font-size: 0.88rem;
+        color: var(--p600);
+        font-style: italic;
+    }
 
     .bp-inner { padding: 32px 36px; }
     .bp-lead { margin: 0 0 22px; padding: 16px 22px; border-radius: 20px; font-size: 1.18rem; line-height: 1.75; font-weight: 600; color: var(--p700);
@@ -391,7 +538,7 @@ $imgErr = "onerror=\"this.closest('.has-fallback').classList.add('noimg')\"";
                                 <?php if (!empty($post['summary'])): ?><p class="bp-lead"><?= e((string) $post['summary']) ?></p><?php endif; ?>
 
                                 <div class="bp-content" id="bpContent">
-                                    <?php renderBlogContent(trim((string) ($post['body'] ?? ''))); ?>
+                                    <?php renderBlogContent(trim((string) ($post['body'] ?? '')), (string) ($post['title'] ?? '')); ?>
                                 </div>
 
                                 <div class="bp-actions">
@@ -440,7 +587,7 @@ $imgErr = "onerror=\"this.closest('.has-fallback').classList.add('noimg')\"";
                                 <div class="bp-box">
                                     <h4><i class="bi bi-journal-richtext"></i> Keep Reading</h4>
                                     <?php foreach ($relatedPosts as $rp): ?>
-                                        <a class="bp-rel" href="/blog.php?id=<?= (int) ($rp['id'] ?? 0) ?>">
+                                        <a class="bp-rel" href="<?= blogUrl($rp) ?>">
                                             <span class="th has-fallback">
                                                 <?php if (!empty($rp['image'])): ?>
                                                     <img class="bg" src="<?= e((string) $rp['image']) ?>" alt="" aria-hidden="true" loading="lazy" <?= $imgErr ?>>

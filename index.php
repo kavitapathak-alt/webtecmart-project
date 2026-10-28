@@ -7,6 +7,7 @@ require_once __DIR__ . '/app/components/sections/WhatWeDoSection.php';
 require_once __DIR__ . '/app/components/sections/SearchVisibilitySection.php';
 require_once __DIR__ . '/app/components/sections/SeoSuccessStoriesSection.php';
 require_once __DIR__ . '/app/components/sections/TestimonialsSection.php';
+require_once __DIR__ . '/app/components/sections/BlogSection.php';
 require_once __DIR__ . '/app/components/sections/ContactFormSection.php';
 require_once __DIR__ . '/app/components/sections/FooterSection.php';
 ?>
@@ -957,6 +958,8 @@ require_once __DIR__ . '/app/components/sections/FooterSection.php';
     <?php renderSeoSuccessStoriesSection(); ?>
 
     <?php renderTestimonialsSection(); ?>
+
+    <?php renderBlogSection(); ?>
 
     <?php renderContactFormSection(); ?>
 

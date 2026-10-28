@@ -729,7 +729,7 @@ function renderAboutBrandSection(): void
         <div class="container">
 
             <!-- Header -->
-            <div class="about-header">
+            <div class="about-header" data-wtm-reveal="fade-up">
                 <div class="about-pill">
                     <?= abIcon('sparkles') ?>
                     <span><?= e((string) $content['badge']) ?></span>
@@ -760,7 +760,7 @@ function renderAboutBrandSection(): void
                 <div class="about-left">
 
                     <!-- Image Card -->
-                    <div class="about-image-card">
+                    <div class="about-image-card" data-wtm-reveal="fade-right">
                         <div class="about-image-inner">
                             <img
                                 src="<?= e((string) $content['image_src']) ?>"
@@ -770,7 +770,7 @@ function renderAboutBrandSection(): void
                             <div class="about-image-overlay"></div>
 
                             <!-- Floating Brand Badge -->
-                            <div class="about-brand-badge">
+                            <div class="about-brand-badge wtm-float">
                                 <h3><?= e((string) $content['brand_name']) ?></h3>
                                 <p><?= e((string) $content['brand_tagline']) ?></p>
                             </div>
@@ -815,7 +815,7 @@ function renderAboutBrandSection(): void
                 </div>
 
                 <!-- RIGHT COLUMN -->
-                <div class="about-right">
+                <div class="about-right" data-wtm-reveal="fade-left">
 
                     <div>
                         <h3>
@@ -829,7 +829,7 @@ function renderAboutBrandSection(): void
                     </div>
 
                     <!-- Features Grid -->
-                    <div class="about-features">
+                    <div class="about-features" data-reveal-stagger>
                         <?php foreach ($features as $feature): ?>
                             <div class="about-feature">
                                 <?= abIcon($feature['icon']) ?>

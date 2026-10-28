@@ -2,9 +2,13 @@
 require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/functions.php';
 
+$pageMeta = [
+    'title' => 'Blog & Insights | ' . APP_NAME,
+    'description' => 'Read the latest digital marketing, SEO, web design, and business growth insights from WebTecMart.',
+];
 $blogPageMeta = [
-    'page_meta_title' => 'Blog & Insights | ' . APP_NAME,
-    'page_meta_description' => 'Read the latest digital marketing, SEO, web design, and business growth insights from WebTecMart.',
+    'page_meta_title' => $pageMeta['title'],
+    'page_meta_description' => $pageMeta['description'],
 ];
 $posts = blogPosts();
 
@@ -33,8 +37,7 @@ function blImage(array $p, bool $lazy = true): string
     $alt = e((string) ($p['title'] ?? ''));
     $loading = $lazy ? ' loading="lazy"' : '';
     $err = "onerror=\"this.closest('.bl-img').classList.add('noimg')\"";
-    return '<img class="bl-bgblur" src="' . $src . '" alt="" aria-hidden="true"' . $loading . ' ' . $err . '>'
-         . '<img class="bl-main" src="' . $src . '" alt="' . $alt . '"' . $loading . ' ' . $err . '>';
+    return '<img class="bl-main" src="' . $src . '" alt="' . $alt . '"' . $loading . ' ' . $err . '>';
 }
 ?>
 
@@ -123,13 +126,10 @@ function blImage(array $p, bool $lazy = true): string
         content: "\F4E5"; font-family: "bootstrap-icons"; position: absolute; inset: 0; z-index: 0;
         display: flex; align-items: center; justify-content: center; font-size: 3.2rem; color: rgba(255,255,255,.7);
     }
-    .bl-img .bl-bgblur {
-        position: absolute; inset: -20px; z-index: 1; width: calc(100% + 40px); height: calc(100% + 40px); max-width: none;
-        object-fit: cover; filter: blur(22px) saturate(1.2); opacity: .95;
-    }
+    .bl-img .bl-bgblur { display: none; }
     .bl-img .bl-main {
         position: relative; z-index: 2; display: block; width: 100%; height: 100%;
-        object-fit: contain; transition: transform .6s ease;
+        object-fit: cover; object-position: center; transition: transform .5s ease;
     }
     .bl-img.noimg .bl-main, .bl-img.noimg .bl-bgblur { display: none; }
     .bl-img::after { content: ""; position: absolute; inset: 0; z-index: 3; background: linear-gradient(180deg, rgba(92,0,53,.16), transparent 30%, transparent 70%, rgba(92,0,53,.2)); pointer-events: none; }
@@ -337,20 +337,20 @@ function blImage(array $p, bool $lazy = true): string
                     <?php $fid = (int) ($featured['id'] ?? 0); $fImg = !empty($featured['image']); $fAuthor = (string) ($featured['author'] ?? ''); ?>
                     <article class="bl-featured bl-item <?= $fImg ? '' : 'no-img' ?>" <?= blDataAttrs($featured) ?>>
                         <?php if ($fImg): ?>
-                            <a href="/blog.php?id=<?= $fid ?>" class="bl-img" aria-label="Read <?= e((string) $featured['title']) ?>">
+                            <a href="<?= blogUrl($featured) ?>" class="bl-img" aria-label="Read <?= e((string) $featured['title']) ?>">
                                 <?= blImage($featured, false) ?>
                                 <?php if (!empty($featured['readTime'])): ?><span class="bl-time"><i class="bi bi-clock"></i><?= e((string) $featured['readTime']) ?></span><?php endif; ?>
                             </a>
                         <?php endif; ?>
                         <div class="bl-feat-body">
                             <span class="bl-feat-tag"><i class="bi bi-lightning-charge-fill"></i> Featured<?= !empty($featured['category']) ? ' &middot; ' . e((string) $featured['category']) : '' ?></span>
-                            <h2 class="bl-title"><a href="/blog.php?id=<?= $fid ?>"><?= e((string) $featured['title']) ?></a></h2>
+                            <h2 class="bl-title"><a href="<?= blogUrl($featured) ?>"><?= e((string) $featured['title']) ?></a></h2>
                             <p class="bl-excerpt"><?= e((string) ($featured['summary'] ?? '')) ?></p>
                             <div class="bl-meta">
                                 <?php if ($fAuthor !== ''): ?><span><i class="bi bi-person-circle"></i><?= e($fAuthor) ?></span><?php endif; ?>
                                 <?php if (!empty($featured['date'])): ?><span><i class="bi bi-calendar3"></i><?= e((string) $featured['date']) ?></span><?php endif; ?>
                             </div>
-                            <a href="/blog.php?id=<?= $fid ?>" class="bl-btn">Read Article <i class="bi bi-arrow-right"></i></a>
+                            <a href="<?= blogUrl($featured) ?>" class="bl-btn">Read Article <i class="bi bi-arrow-right"></i></a>
                         </div>
                     </article>
                 <?php endif; ?>
@@ -366,21 +366,21 @@ function blImage(array $p, bool $lazy = true): string
                             <?php $pid = (int) ($post['id'] ?? 0); $pAuthor = (string) ($post['author'] ?? ''); ?>
                             <div class="col-12 col-md-6 col-lg-4 bl-item" <?= blDataAttrs($post) ?>>
                                 <article class="bl-card">
-                                    <a href="/blog.php?id=<?= $pid ?>" class="bl-img" aria-label="Read <?= e((string) $post['title']) ?>">
+                                    <a href="<?= blogUrl($post) ?>" class="bl-img" aria-label="Read <?= e((string) $post['title']) ?>">
                                         <?= blImage($post, true) ?>
                                         <?php if (!empty($post['category'])): ?><span class="bl-pill"><?= e((string) $post['category']) ?></span><?php endif; ?>
                                         <?php if (!empty($post['readTime'])): ?><span class="bl-time"><i class="bi bi-clock"></i><?= e((string) $post['readTime']) ?></span><?php endif; ?>
                                     </a>
                                     <div class="bl-body">
                                         <?php if (!empty($post['date'])): ?><div class="bl-date"><i class="bi bi-calendar3"></i><?= e((string) $post['date']) ?></div><?php endif; ?>
-                                        <h2 class="bl-title"><a href="/blog.php?id=<?= $pid ?>"><?= e((string) $post['title']) ?></a></h2>
+                                        <h2 class="bl-title"><a href="<?= blogUrl($post) ?>"><?= e((string) $post['title']) ?></a></h2>
                                         <p class="bl-excerpt"><?= e((string) ($post['summary'] ?? '')) ?></p>
                                         <div class="bl-foot">
                                             <span class="bl-author">
                                                 <span class="bl-ava"><?= e($pAuthor !== '' ? strtoupper(substr($pAuthor, 0, 1)) : 'W') ?></span>
                                                 <span class="bl-author-name"><?= e($pAuthor !== '' ? $pAuthor : 'WebTecMart') ?></span>
                                             </span>
-                                            <a class="bl-arrow" href="/blog.php?id=<?= $pid ?>" aria-label="Read more"><i class="bi bi-arrow-right"></i></a>
+                                            <a class="bl-arrow" href="<?= blogUrl($post) ?>" aria-label="Read more"><i class="bi bi-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </article>

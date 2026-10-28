@@ -594,7 +594,7 @@ function renderSearchVisibilitySection(): void
         <div class="container search-visibility-wrap">
 
             <!-- Header -->
-            <div class="search-section-header">
+            <div class="search-section-header" data-wtm-reveal="fade-up">
 
                 <div class="search-section-pill">
                     <svg
@@ -632,7 +632,7 @@ function renderSearchVisibilitySection(): void
             </div>
 
             <!-- Services -->
-            <div class="search-grid">
+            <div class="search-grid" data-reveal-stagger>
 
                 <?php foreach ($services as $service): ?>
 

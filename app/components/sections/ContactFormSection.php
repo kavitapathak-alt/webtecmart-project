@@ -748,7 +748,7 @@ function renderContactFormSection(): void
         <div class="container">
 
             <!-- Header -->
-            <div class="cfs-header">
+            <div class="cfs-header" data-wtm-reveal="fade-up">
                 <div class="cfs-pill">
                     <?= cfsIcon('sparkles') ?>
                     <span>Get In Touch</span>
@@ -774,7 +774,7 @@ function renderContactFormSection(): void
             <div class="cfs-grid">
 
                 <!-- LEFT — Info Card -->
-                <div class="cfs-info-wrap">
+                <div class="cfs-info-wrap" data-wtm-reveal="fade-right">
                     <div class="cfs-info-card">
 
                         <!-- Decorative shapes -->
@@ -839,7 +839,7 @@ function renderContactFormSection(): void
                 </div>
 
                 <!-- RIGHT — Form Card -->
-                <div class="cfs-form-wrap">
+                <div class="cfs-form-wrap" data-wtm-reveal="fade-left">
                     <div class="cfs-form-card">
 
                         <!-- Success State (hidden by default) -->
@@ -983,26 +983,69 @@ function renderContactFormSection(): void
             if (!form) return;
 
             form.addEventListener('submit', function (e) {
-                // Let the native form submit for real backend handling
-                // But show loading state briefly
-                submitBtn.disabled = true;
-                const textSpan = submitBtn.querySelector('.cfs-submit-text');
-                const originalHTML = submitBtn.innerHTML;
-
-                if (textSpan) {
-                    submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+                e.preventDefault();
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
                 }
 
-                // If you want AJAX submission, uncomment below and prevent default
-                // Otherwise, this loading state will disappear on page reload
+                submitBtn.disabled = true;
+                const originalHTML = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid #fff;border-right-color:transparent;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle;"></span> Sending...';
 
-                // Optional: Re-enable after 5s in case of failed submission
-                setTimeout(() => {
+                const formData = new FormData(form);
+                formData.append('ajax', '1');
+
+                const oldErr = form.querySelector('.cfs-ajax-error');
+                if (oldErr) oldErr.remove();
+
+                fetch('/contact.php', {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'Accept': 'application/json'
+                    },
+                    body: formData
+                })
+                .then(r => r.json())
+                .then(data => {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalHTML;
-                }, 5000);
+                    if (data.success) {
+                        form.reset();
+                        form.style.display = 'none';
+                        if (successBox) {
+                            successBox.style.display = 'flex';
+                            const p = successBox.querySelector('p');
+                            if (p && data.message) p.textContent = data.message;
+                            successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    } else {
+                        const err = document.createElement('div');
+                        err.className = 'cfs-ajax-error';
+                        err.style.cssText = 'background:#ffe6ea;border:1px solid #f5a3b8;color:#9e0034;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:600;font-size:0.92rem;';
+                        err.textContent = data.message || 'Please check your inputs.';
+                        form.insertBefore(err, form.firstChild);
+                        err.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                })
+                .catch(() => {
+                    form.submit();
+                });
             });
         })();
+
+        function cfsResetForm() {
+            const form = document.getElementById('cfsForm');
+            const successBox = document.getElementById('cfsSuccess');
+            if (form) {
+                form.reset();
+                form.style.display = 'flex';
+            }
+            if (successBox) {
+                successBox.style.display = 'none';
+            }
+        }
     </script>
     <?php
 }

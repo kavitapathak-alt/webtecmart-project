@@ -137,6 +137,9 @@ function renderTrustedPartnersSection(): void
         }
 
         /* Marquee track */
+        .tp-marquee:hover .tp-track { animation-play-state: paused; }
+        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
+        .tp-logo-item:hover { transform: scale(1.08); }
         .tp-track {
             display: flex;
             width: max-content;
@@ -247,7 +250,10 @@ function renderTrustedPartnersSection(): void
             .tp-badge span { font-size: 11px; }
             .tp-heading { font-size: 1.5rem; }
             .tp-subtitle { font-size: 0.875rem; margin-top: 8px; }
-            .tp-track { gap: 16px; padding: 16px 0; }
+            .tp-marquee:hover .tp-track { animation-play-state: paused; }
+        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
+        .tp-logo-item:hover { transform: scale(1.08); }
+        .tp-track { gap: 16px; padding: 16px 0; }
             .tp-card { width: 150px; height: 95px; padding: 10px 12px; border-radius: 18px; }
             .tp-marquee-fade { width: 48px; }
             .tp-dots { gap: 12px; margin-top: 28px; }
@@ -265,7 +271,10 @@ function renderTrustedPartnersSection(): void
             .tp-badge span { font-size: 14px; }
             .tp-heading { font-size: 1.875rem; }
             .tp-subtitle { font-size: 1rem; }
-            .tp-track { gap: 20px; }
+            .tp-marquee:hover .tp-track { animation-play-state: paused; }
+        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
+        .tp-logo-item:hover { transform: scale(1.08); }
+        .tp-track { gap: 20px; }
             .tp-card { width: 180px; height: 110px; padding: 12px 16px; border-radius: 20px; }
             .tp-marquee-fade { width: 64px; }
             .tp-dots { margin-top: 32px; }
@@ -276,14 +285,20 @@ function renderTrustedPartnersSection(): void
         /* Large (≥ 1024px) */
         @media (min-width: 1024px) {
             .tp-section { padding: 48px 0; }
-            .tp-track { gap: 24px; }
+            .tp-marquee:hover .tp-track { animation-play-state: paused; }
+        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
+        .tp-logo-item:hover { transform: scale(1.08); }
+        .tp-track { gap: 24px; }
             .tp-card { width: 210px; height: 130px; padding: 16px 20px; }
             .tp-marquee-fade { width: 96px; }
         }
 
         /* Extra Large (≥ 1280px) */
         @media (min-width: 1280px) {
-            .tp-track { gap: 28px; }
+            .tp-marquee:hover .tp-track { animation-play-state: paused; }
+        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
+        .tp-logo-item:hover { transform: scale(1.08); }
+        .tp-track { gap: 28px; }
             .tp-card { width: 240px; height: 145px; }
             .tp-marquee-fade { width: 128px; }
         }
@@ -298,7 +313,7 @@ function renderTrustedPartnersSection(): void
         <div class="container">
 
             <!-- Header -->
-            <div class="tp-header">
+            <div class="tp-header" data-wtm-reveal="fade-up">
                 <div class="tp-badge">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
                     <span><?= e((string) ($content['badge'] ?? '')) ?></span>

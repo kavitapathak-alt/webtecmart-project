@@ -1,12 +1,39 @@
 RewriteEngine On
+RewriteBase /
 
+# 1. Deny access to sensitive files and directories
+<FilesMatch "^(\.env|\.git|composer\.(json|lock)|.*\.db)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# 2. Canonical production domain redirects (Skip on localhost and local development)
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteCond %{THE_REQUEST} \s/+index\.php(?:[\s?]) [NC]
 RewriteRule ^index\.php$ https://webtecmart.com/ [R=301,L]
 
+RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
 RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.webtecmart\.com$ [NC]
 RewriteRule ^ https://webtecmart.com%{REQUEST_URI} [R=301,L]
 
-<FilesMatch "^\.env$">
-    Require all denied
-</FilesMatch>
+# 3. Blog Pretty Routing
+RewriteRule ^blogs/?$ blogs.php [QSA,L]
+RewriteRule ^blog/([0-9]+)/?$ blog.php?id=$1 [QSA,L]
+RewriteRule ^blog/([a-zA-Z0-9_-]+)/?$ blog.php?slug=$1 [QSA,L]
+
+# 4. Service Detail Pretty Routing
+RewriteRule ^service/([a-zA-Z0-9_-]+)/?$ service.php?slug=$1 [QSA,L]
+
+# 5. Delhi SEO shortcuts
+RewriteRule ^seo-company-in-delhi/?$ seo-services-delhi.php [QSA,L]
+RewriteRule ^seo-services-in-delhi/?$ seo-services-delhi.php [QSA,L]
+RewriteRule ^digital-marketing-agency-delhi/?$ seo-services-delhi.php [QSA,L]
+RewriteRule ^seo-services-delhi/?$ seo-services-delhi.php [QSA,L]
+RewriteRule ^(b2b-seo|exhibition-seo|b2b-exhibition-seo)/?$ b2b-exhibition-seo.php [QSA,L]
+
+# 6. Extensionless PHP URLs (e.g. /about -> /about.php, /contact -> /contact.php)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}/$1.php -f
+RewriteRule ^([^/]+)/?$ $1.php [QSA,L]

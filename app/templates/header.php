@@ -5,18 +5,19 @@ require_once __DIR__ . '/../../functions.php';
 $current = currentPage();
 $packagesPageMeta = $current === 'packages.php' ? packagesPageContent() : null;
 $serviceNavItems = [
-    ['label' => 'All Services', 'path' => '/services.php', 'description' => 'Explore our complete digital growth services.'],
-    ['label' => 'Digital Business Branding', 'path' => '/digital-business-branding.php', 'description' => 'Create a distinctive brand identity that earns recognition and trust.'],
-    ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Build a responsive website designed to turn visitors into customers.'],
-    ['label' => 'Search Engine Optimization', 'path' => '/services.php#seo-services', 'description' => 'Improve search visibility and attract high-intent organic traffic.'],
-    ['label' => 'E-commerce SEO', 'path' => '/services.php#seo-services', 'description' => 'Grow product visibility and attract shoppers through organic search.'],
-    ['label' => 'Search Engine Marketing (Google Ads)', 'path' => '/search-engine-marketing.php', 'description' => 'Reach customers with targeted Google Ads and PPC campaigns.'],
-    ['label' => 'Meta Ads (Facebook & Instagram)', 'path' => '/social-media-optimization.php', 'description' => 'Promote your business with targeted Meta advertising campaigns.'],
-    ['label' => 'Social Media Advertising', 'path' => '/social-media-optimization.php', 'description' => 'Run paid social campaigns to reach and convert your audience.'],
-    ['label' => 'Social Media Optimization', 'path' => '/social-media-optimization.php', 'description' => 'Grow your audience and engagement across social platforms.'],
-    ['label' => 'Content Marketing', 'path' => '/social-media-optimization.php', 'description' => 'Connect with your audience through useful, engaging content.'],
-    ['label' => 'Performance Marketing', 'path' => '/services.php#core-services', 'description' => 'Drive measurable growth with data-led digital advertising.'],
-    ['label' => 'Mobile App Development', 'path' => '/services.php#core-services', 'description' => 'Explore digital solutions that help your business grow.'],
+    ['label' => 'All Services', 'path' => '/services.php', 'description' => 'Explore our complete suite of digital marketing and growth services.'],
+    ['label' => 'Search Engine Optimization', 'path' => '/search-engine-optimization.php', 'description' => 'Rank higher on Google, capture intent traffic, and drive consistent inbound leads.'],
+    ['label' => 'B2B & Exhibition SEO', 'path' => '/b2b-exhibition-seo.php', 'description' => 'Specialized SEO for trade fairs, exhibitions, B2B exporters, and manufacturing brands.'],
+    ['label' => 'SEO Services in Delhi', 'path' => '/seo-services-delhi.php', 'description' => 'Top SEO company in Delhi NCR delivering #1 Google rankings & local customer growth.'],
+    ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Fast, conversion-focused, mobile-first websites engineered to turn visitors into buyers.'],
+    ['label' => 'Search Engine Marketing (Google Ads)', 'path' => '/search-engine-marketing.php', 'description' => 'High-ROI PPC and Google Search/Display ad campaigns managed by certified experts.'],
+    ['label' => 'Social Media Optimization & Marketing', 'path' => '/social-media-optimization.php', 'description' => 'Build an engaged community and scale your presence across Instagram, LinkedIn, and Meta.'],
+    ['label' => 'Digital Business Branding', 'path' => '/digital-business-branding.php', 'description' => 'Create a memorable brand identity, distinctive logo, and scalable brand positioning.'],
+    ['label' => 'Mobile App Development', 'path' => '/mobile-app-development.php', 'description' => 'Native and hybrid iOS & Android apps built for performance and user retention.'],
+    ['label' => 'E-commerce SEO', 'path' => '/ecommerce-seo.php', 'description' => 'Scale online store sales through product schema, category optimization, and technical search.'],
+    ['label' => 'Content Marketing', 'path' => '/content-marketing.php', 'description' => 'Authority-building articles, case studies, and content funnels that attract and educate buyers.'],
+    ['label' => 'Performance Marketing', 'path' => '/performance-marketing.php', 'description' => 'Data-driven paid ads across Meta, Google, and YouTube with relentless ROAS focus.'],
+    ['label' => 'Local SEO', 'path' => '/local-seo.php', 'description' => 'Dominate Google Maps & 3-pack local search results to drive calls and store visits.'],
 ];
 $servicePagePaths = array_map(static function (array $item): string {
     return basename($item['path']);
@@ -37,8 +38,8 @@ $navItems = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= e((string) ($packagesPageMeta['page_meta_title'] ?? (APP_NAME . ' | Digital Growth Agency'))) ?></title>
-    <meta name="description" content="<?= e((string) ($packagesPageMeta['page_meta_description'] ?? 'WebTecMart helps brands grow through SEO, paid media, social campaigns, and conversion-focused web design.')) ?>">
+    <title><?= e((string) ($pageMeta['title'] ?? $blogPageMeta['page_meta_title'] ?? $packagesPageMeta['page_meta_title'] ?? (APP_NAME . ' | Digital Growth Agency & SEO Experts'))) ?></title>
+    <meta name="description" content="<?= e((string) ($pageMeta['description'] ?? $blogPageMeta['page_meta_description'] ?? $packagesPageMeta['page_meta_description'] ?? 'WebTecMart helps brands grow through SEO, paid advertising, social campaigns, and conversion-focused web design.')) ?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -790,6 +791,8 @@ $navItems = [
         }
     </style>
     <link rel="stylesheet" href="/assets/css/typography.css">
+    <link rel="stylesheet" href="/assets/css/design-system.css">
+    <script defer src="/assets/js/webtecmart-motion.js"></script>
 </head>
 <body>
     <!-- ===== TOP BAR (hidden on mobile, like Next.js `hidden md:block`) ===== -->

@@ -16,12 +16,15 @@ function renderFooterSection(): void
 
     // Services
     $services = [
-        ['label' => 'Digital Business Branding',      'href' => '/digital-business-branding.php'],
-        ['label' => 'Website Design & Development',   'href' => '/website-design-development.php'],
         ['label' => 'Search Engine Optimization',     'href' => '/search-engine-optimization.php'],
+        ['label' => 'B2B & Exhibition SEO',           'href' => '/b2b-exhibition-seo.php'],
+        ['label' => 'SEO Services in Delhi NCR',      'href' => '/seo-services-delhi.php'],
+        ['label' => 'Website Design & Development',   'href' => '/website-design-development.php'],
+        ['label' => 'Digital Business Branding',      'href' => '/digital-business-branding.php'],
+        ['label' => 'Search Engine Marketing (PPC)',  'href' => '/search-engine-marketing.php'],
         ['label' => 'Social Media Optimization',      'href' => '/social-media-optimization.php'],
-        ['label' => 'Search Engine Marketing',        'href' => '/search-engine-marketing.php'],
         ['label' => 'Mobile App Development',         'href' => '/mobile-app-development.php'],
+        ['label' => 'E-Commerce SEO Services',        'href' => '/ecommerce-seo.php'],
     ];
 
     // Social Icons
@@ -59,6 +62,7 @@ function renderFooterSection(): void
     ];
 
     // Icon helper
+    if (!function_exists('ftIcon')) {
     function ftIcon(string $name): string {
         $icons = [
             'mail'       => '<rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>',
@@ -70,6 +74,7 @@ function renderFooterSection(): void
         ];
         $path = $icons[$name] ?? '';
         return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
+    }
     }
     ?>
     <style>

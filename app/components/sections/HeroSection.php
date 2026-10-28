@@ -652,7 +652,7 @@ function renderHeroSection(): void
             <div class="hero-inner">
 
                 <!-- LEFT SIDE -->
-                <div class="hero-left">
+                <div class="hero-left" data-wtm-reveal="fade-right">
 
                     <!-- Badge -->
                     <div class="hero-badge">
@@ -690,7 +690,7 @@ function renderHeroSection(): void
                     <?php endif; ?>
 
                     <!-- Benefits Checklist -->
-                    <ul class="hero-benefits">
+                    <ul class="hero-benefits" data-reveal-stagger>
                         <?php foreach ($benefits as $benefit): ?>
                         <li>
                             <div class="check-icon">
@@ -703,10 +703,11 @@ function renderHeroSection(): void
                 </div>
 
                 <!-- RIGHT SIDE — Contact Form -->
-                <div class="hero-right">
+                <div class="hero-right" data-wtm-reveal="fade-left">
                     <div class="hero-right-blob"></div>
 
                     <div class="hero-form-content">
+                        <div class="hero-floating-chip wtm-float" style="position:absolute;top:-14px;right:20px;background:#ffffff;border:1.5px solid #F1C6DC;border-radius:9999px;padding:6px 14px;font-size:0.76rem;font-weight:700;color:#111827;box-shadow:0 8px 20px rgba(196,0,122,0.15);display:flex;align-items:center;gap:6px;z-index:20;">⭐ <span>4.9/5 Rating</span> · 500+ Brands</div>
 
                         <!-- Form Header -->
                         <div class="hero-form-header">
@@ -825,5 +826,62 @@ function renderHeroSection(): void
             </div>
         </div>
     </section>
+<script>
+(function() {
+    const heroForm = document.querySelector('.hero-form');
+    if (!heroForm) return;
+
+    heroForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (!heroForm.checkValidity()) {
+            heroForm.reportValidity();
+            return;
+        }
+
+        const submitBtn = heroForm.querySelector('.hero-submit');
+        const origText = submitBtn ? submitBtn.innerHTML : 'Submit';
+        if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Sending...';
+        }
+
+        const formData = new FormData(heroForm);
+        formData.append('ajax', '1');
+
+        const oldMsg = heroForm.querySelector('.hero-ajax-msg');
+        if (oldMsg) oldMsg.remove();
+
+        fetch('/contact.php', {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Accept': 'application/json'
+            },
+            body: formData
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = origText;
+            }
+            const msgBox = document.createElement('div');
+            msgBox.className = 'hero-ajax-msg';
+            msgBox.style.cssText = data.success
+                ? 'background:#e6f9ed;border:1px solid #7be495;color:#155724;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:600;font-size:0.92rem;text-align:center;'
+                : 'background:#ffe6ea;border:1px solid #f5a3b8;color:#9e0034;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:600;font-size:0.92rem;text-align:center;';
+            msgBox.textContent = data.message || (data.success ? 'Consultation booked successfully!' : 'Please check your inputs.');
+            heroForm.insertBefore(msgBox, heroForm.firstChild);
+            if (data.success) {
+                heroForm.reset();
+            }
+            msgBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        })
+        .catch(() => {
+            heroForm.submit();
+        });
+    });
+})();
+</script>
     <?php
 }

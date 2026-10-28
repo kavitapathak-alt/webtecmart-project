@@ -1391,6 +1391,31 @@ function spIcon(string $name): string {
                 </div>
             </div>
 
+                        <!-- ===== B2B & EXHIBITION SEO SPOTLIGHT ===== -->
+            <div class="sp-exhibition-spotlight" style="margin: 48px 0 64px; background: linear-gradient(135deg, #FFF0F7 0%, #FFFFFF 100%); border: 1.5px solid rgba(196, 0, 122, 0.2); border-radius: 20px; padding: 36px 32px; box-shadow: 0 10px 30px -8px rgba(196, 0, 122, 0.08); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: #C4007A;"></div>
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(196, 0, 122, 0.1); padding: 6px 14px; border-radius: 9999px; color: #C4007A; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;">
+                    <?= spIcon('award') ?>
+                    <span>Specialized Proven Flagship</span>
+                </div>
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 800; color: #111827; margin: 0 0 12px; line-height: 1.25;">
+                    B2B &amp; <span style="color: #C4007A;">Exhibition SEO</span> Services
+                </h3>
+                <p style="font-size: 0.95rem; color: #4B5563; max-width: 820px; margin: 0 0 20px; line-height: 1.68;">
+                    WebTecMart is India's premier SEO agency for mega-events and industrial trade fairs. We engineered the organic search dominance behind <strong>Bharat Tex Fair</strong> (400% organic growth, Ministry of Textiles) and the <strong>IHGF Delhi Autumn Fair</strong> (top-3 global rankings, EPCH). We help exhibition organizers and exhibitors capture verified international buyer registrations and sell out booth allocations.
+                </p>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
+                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">Trade Show SEO</span>
+                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">Event Schema Markup</span>
+                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">Exhibitor Stall Acquisition</span>
+                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">International Buyer Sourcing</span>
+                </div>
+                <a href="/b2b-exhibition-seo.php" style="display: inline-flex; align-items: center; gap: 8px; background: #C4007A; color: #fff; padding: 12px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.925rem; text-decoration: none; box-shadow: 0 6px 18px -4px rgba(196, 0, 122, 0.35); transition: all 0.25s ease;">
+                    Explore B2B &amp; Exhibition SEO
+                    <?= spIcon('arrow') ?>
+                </a>
+            </div>
+
             <!-- ===== RESULTS DRIVEN ===== -->
             <div class="sp-results-section">
                 <h2 class="sp-results-h2">

@@ -1,0 +1,6 @@
+[2026-10-28 14:45:31] LEAD #5 TO: pathakkavita730@gmail.com | FROM: pathakkavita730@gmail.com | NAME: Kavita Pathak Test
+  -> Notice: SMTP not yet configured in .env. Notification logged successfully to SQLite and mail.log.
+[2026-10-28 14:55:59] LEAD #6 TO: pathakkavita730@gmail.com | FROM: audit-test-1793179559@example.com | NAME: Automated Auditor
+  -> Notice: SMTP not yet configured in .env. Notification logged successfully to SQLite and mail.log.
+[2026-10-28 15:25:37] LEAD #7 TO: pathakkavita730@gmail.com | FROM: pathakkavita730@gmail.com | NAME: Dimple Pathak
+  -> Notice: SMTP not yet configured in .env. Notification logged successfully to SQLite and mail.log.

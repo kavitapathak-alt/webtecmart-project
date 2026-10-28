@@ -1,74 +1,74 @@
 <?php
+$pageMeta = [
+    'title' => 'Search Engine Optimization (SEO) Services | WebTecMart Digital',
+    'description' => 'Drive sustainable organic traffic and #1 Google rankings with WebTecMart comprehensive SEO services, including technical audits, on-page SEO, and authority link building.',
+];
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
 renderServicePageLayout([
-    'icon' => 'megaphone',
-    'title' => 'Search Engine Marketing',
-    'tagline' => 'Ads That Actually Perform',
-    'heroDescription' => 'Google Ads and PPC campaigns engineered for maximum ROI and instant visibility — so your business shows up the moment customers start searching.',
-    'overview' => "Paid advertisements on search engine result pages remain one of the fastest ways to get noticed. Unlike SEO, which takes months to build momentum, SEM puts your business in front of high-intent buyers within hours. At WebTechMart, our experienced team builds strategies that can double a business's visibility through smart, targeted SERP campaigns — combining sharp keyword research, compelling ad copy, and relentless bid optimization. Over the last 13 years, we've managed crores in ad spend across 500+ brands, consistently delivering lower CPCs and higher conversion rates. Whether you're a local business fighting for the top spot or an ecommerce brand scaling nationally, we build SEM systems that turn clicks into customers.",
+    'icon' => 'trending',
+    'title' => 'Search Engine Optimization',
+    'tagline' => 'Rank Higher. Convert Better. Scale Organically.',
+    'heroDescription' => 'Data-backed SEO strategies that put your brand at the top of Google search results, capturing high-intent customers when they are ready to buy.',
+    'overview' => "Search engine optimization is the foundation of long-term digital business growth. Unlike paid ads that stop delivering the moment your budget runs out, a strong organic search presence compounds in value month after month. At WebTecMart, we take a rigorous, white-hat approach to SEO — combining deep technical audits, search intent mapping, content optimization, and authoritative backlink building. Over the past 13+ years, our SEO specialists have ranked 10,000+ keywords on Google Page 1 across competitive B2B, eCommerce, healthcare, real estate, and local service sectors. Whether you need to fix crawl errors, outrank legacy market leaders, or expand your market share, we deliver SEO solutions built for measurable revenue growth.",
 
     'features' => [
         [
-            'title' => 'Google Ads Management',
-            'description' => 'End-to-end management of Search, Display, Shopping, and Performance Max campaigns — built for maximum return on ad spend.',
+            'title' => 'Comprehensive Technical SEO',
+            'description' => 'Fix crawlability, indexation, XML sitemaps, Core Web Vitals, mobile responsiveness, and schema markup so Google ranks your pages effortlessly.',
         ],
         [
-            'title' => 'Keyword Research & Bidding',
-            'description' => 'Deep keyword research plus smart bidding strategies that put your ads in front of buyers while lowering cost-per-click.',
+            'title' => 'High-Intent Keyword Research',
+            'description' => 'Identify commercially valuable search queries and long-tail phrases that bring qualified buyers rather than vanity traffic.',
         ],
         [
-            'title' => 'Ad Copy & Creatives',
-            'description' => 'Compelling ad copy and creative assets engineered to win clicks — tested continuously to find the highest-performing combinations.',
+            'title' => 'On-Page Content Optimization',
+            'description' => 'Optimize title tags, meta descriptions, H1-H3 headings, internal link hierarchy, image alt attributes, and content depth for maximum relevance.',
         ],
         [
-            'title' => 'Landing Page Design',
-            'description' => 'High-converting landing pages purpose-built for your ads — aligned messaging, strong CTAs, and fast load times.',
+            'title' => 'Authority Link Building',
+            'description' => 'Earn high-authority, editorial backlinks from reputable industry publications and trusted domains to build rock-solid domain authority.',
         ],
         [
-            'title' => 'Conversion Tracking',
-            'description' => 'GA4 and Google Ads conversion setup so you know exactly where every rupee goes and which campaigns actually drive revenue.',
+            'title' => 'Local & National Search Strategy',
+            'description' => 'Geo-targeted landing pages, Google Business Profile synchronization, and localized citations to win local pack and national searches.',
         ],
         [
-            'title' => 'Competitor & Auction Insights',
-            'description' => "Ongoing competitor analysis and auction insights to identify gaps, outbid rivals, and capture traffic they're missing.",
+            'title' => 'Conversion Rate Optimization (CRO)',
+            'description' => 'Align organic landing page design, copy, and CTAs so that incoming search visitors actually turn into inquiries and sales.',
         ],
     ],
 
     'process' => [
-        ['step' => '01', 'title' => 'Research', 'description' => 'We study your goals, market, audience, and competitors — mapping keywords, intent, and the exact opportunities worth bidding on.'],
-        ['step' => '02', 'title' => 'Strategy', 'description' => "We build a clear campaign roadmap — channels, budgets, keyword groups, ad messaging, and the KPIs we'll track against."],
-        ['step' => '03', 'title' => 'Setup',    'description' => 'Campaign structure, keyword lists, ad creatives, landing pages, and conversion tracking are all built and connected.'],
-        ['step' => '04', 'title' => 'Launch',   'description' => 'Campaigns go live with tight monitoring — we watch impressions, clicks, CPC, and conversions from the very first hour.'],
-        ['step' => '05', 'title' => 'Optimize', 'description' => 'Daily monitoring and A/B testing — we refine keywords, bids, ads, and audiences to squeeze more results from every rupee.'],
-        ['step' => '06', 'title' => 'Scale',    'description' => "Scale what works, cut what doesn't. We double down on winning campaigns while protecting your ROAS and CPA."],
+        ['step' => '01', 'title' => 'Full SEO Audit', 'description' => 'We perform an exhaustive audit of your technical health, keyword positions, backlink profile, and direct competitors.'],
+        ['step' => '02', 'title' => 'Strategy & Roadmap', 'description' => 'We create a prioritized 3-to-6 month growth roadmap identifying quick wins and high-impact long-term organic opportunities.'],
+        ['step' => '03', 'title' => 'Technical Remediation', 'description' => 'Our developers and SEO engineers resolve speed bottlenecks, index errors, broken links, and metadata gaps.'],
+        ['step' => '04', 'title' => 'Content & Keyword Alignment', 'description' => 'We optimize existing landing pages and publish intent-driven pillar content engineered to capture targeted search terms.'],
+        ['step' => '05', 'title' => 'Authority & Link Acquisition', 'description' => 'We execute ethical digital PR, niche outreach, and content syndication to systematically grow your backlink profile.'],
+        ['step' => '06', 'title' => 'Tracking & Transparent Reporting', 'description' => 'Weekly tracking via Google Search Console and GA4 with monthly ranking, traffic, and lead attribution reports.'],
     ],
 
     'faqs' => [
         [
-            'q' => 'How is SEM different from SEO?',
-            'a' => 'SEO builds organic visibility over months through content and technical optimization. SEM (paid search) delivers instant visibility the moment you launch. Most businesses use both — SEM for immediate results and SEO for long-term compounding growth.',
+            'q' => 'How long does SEO take to produce measurable results?',
+            'a' => 'While initial technical improvements and indexation fixes often reflect within 4 to 8 weeks, significant ranking jumps and compounding organic traffic growth typically take 3 to 6 months depending on competition, website age, and domain authority.',
         ],
         [
-            'q' => 'What budget do I need to get started?',
-            'a' => 'Campaigns can start from small budgets and scale as they perform. For most small businesses, we recommend at least ₹20,000–₹30,000/month in ad spend to gather meaningful data — plus our management fee.',
+            'q' => 'Do you use white-hat SEO techniques?',
+            'a' => 'Yes, 100%. We strictly follow Google Search Essentials and Webmaster Guidelines. We do not use spammy PBNs, automated links, or keyword stuffing, ensuring your website remains secure and penalty-free through Google core algorithm updates.',
         ],
         [
-            'q' => 'How fast will I see results?',
-            'a' => 'Traffic starts almost immediately — often within 24–48 hours of launch. Optimization improves steadily over the first 4–8 weeks as we gather enough data to refine targeting, bids, and creatives.',
+            'q' => 'What is the difference between On-Page and Technical SEO?',
+            'a' => 'On-page SEO deals with visible content, keyword placement, headings, internal links, and user experience. Technical SEO ensures search engine crawlers can efficiently crawl, render, index, and interpret the architecture and code of your website.',
         ],
         [
-            'q' => 'Which platforms do you run SEM on?',
-            'a' => 'Primarily Google Ads — Search, Display, Shopping, YouTube, and Performance Max. We also run Microsoft Ads (Bing) when it makes sense for your audience and industry.',
+            'q' => 'Can SEO help my local business?',
+            'a' => 'Absolutely. Local SEO optimizes your Google Business Profile, local directory citations, and geographic keyword pages so customers in your city or vicinity discover your business in the Google Map Pack and top search results.',
         ],
         [
-            'q' => 'How do you report performance?',
-            'a' => 'You get a transparent dashboard plus weekly/monthly reports showing spend, impressions, clicks, CTR, CPC, conversions, CPA, and ROAS — with clear recommendations for the next cycle.',
-        ],
-        [
-            'q' => 'Do you offer a fixed fee or percentage of ad spend?',
-            'a' => "Both — a fixed monthly retainer or a percentage of ad spend (typically 10–15%). We'll recommend whichever fits your scale and goals best during the free consultation.",
+            'q' => 'Will I receive regular performance reports?',
+            'a' => 'Yes. Every client receives monthly reports covering keyword rankings, organic traffic trends, bounce rates, top-performing pages, and actual lead conversions.',
         ],
     ],
 ]);

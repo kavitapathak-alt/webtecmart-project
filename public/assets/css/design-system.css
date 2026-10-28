@@ -1,0 +1,356 @@
+/**
+ * WebTecMart Design System 2026
+ * Modern Agency UI Token System & Component Styles
+ * Color Palette: Deep Plum / Rich Magenta / Vibrant Rose / Cream / Crisp White
+ */
+
+:root {
+    /* Brand Colors */
+    --wtm-primary: #C4007A;
+    --wtm-primary-dark: #A3005F;
+    --wtm-primary-deep: #780045;
+    --wtm-primary-light: #E0398F;
+    --wtm-primary-soft: #FFF0F7;
+    --wtm-primary-tint: #FCE8F3;
+    --wtm-primary-glow: rgba(196, 0, 122, 0.18);
+    --wtm-primary-rgb: 196, 0, 122;
+
+    /* Neutrals & Surfaces */
+    --wtm-bg: #FBF8F1;
+    --wtm-bg-alt: #F6EFE9;
+    --wtm-surface: #FFFFFF;
+    --wtm-surface-muted: #F8FAFC;
+    --wtm-surface-elevated: #FFFFFF;
+    --wtm-border: #F1F4F8;
+    --wtm-border-strong: #E2E8F0;
+    --wtm-border-pink: rgba(196, 0, 122, 0.14);
+
+    /* Text Colors */
+    --wtm-text-headline: #111827;
+    --wtm-text-body: #4B5563;
+    --wtm-text-muted: #6B7280;
+    --wtm-text-light: #9CA3AF;
+    --wtm-text-inverse: #FFFFFF;
+
+    /* Accents */
+    --wtm-accent-gold: #F59E0B;
+    --wtm-accent-emerald: #10B981;
+    --wtm-accent-indigo: #6366F1;
+
+    /* Gradients */
+    --wtm-grad-primary: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+    --wtm-grad-dark: linear-gradient(135deg, #A3005F 0%, #C4007A 100%);
+    --wtm-grad-soft: linear-gradient(135deg, #FFF0F7 0%, #FFFFFF 100%);
+    --wtm-grad-surface: linear-gradient(180deg, #FFFFFF 0%, #FDFBF7 100%);
+    --wtm-grad-mesh: radial-gradient(at 0% 0%, rgba(196, 0, 122, 0.08) 0px, transparent 50%),
+                     radial-gradient(at 100% 100%, rgba(224, 57, 143, 0.06) 0px, transparent 50%);
+
+    /* Shadows & Elevation */
+    --wtm-shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --wtm-shadow-sm: 0 2px 8px -1px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    --wtm-shadow-md: 0 8px 24px -4px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+    --wtm-shadow-lg: 0 20px 35px -8px rgba(17, 24, 39, 0.08), 0 6px 12px -2px rgba(17, 24, 39, 0.03);
+    --wtm-shadow-xl: 0 28px 50px -12px rgba(17, 24, 39, 0.12);
+    --wtm-shadow-glow: 0 12px 30px -6px rgba(196, 0, 122, 0.3);
+    --wtm-shadow-card-hover: 0 22px 42px -10px rgba(196, 0, 122, 0.14), 0 0 0 1px rgba(196, 0, 122, 0.16);
+
+    /* Radii */
+    --wtm-radius-sm: 8px;
+    --wtm-radius-md: 14px;
+    --wtm-radius-lg: 20px;
+    --wtm-radius-xl: 26px;
+    --wtm-radius-pill: 9999px;
+
+    /* Transitions & Easing (Framer-Motion inspired physics) */
+    --wtm-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+    --wtm-ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --wtm-duration-fast: 0.2s;
+    --wtm-duration-normal: 0.35s;
+    --wtm-duration-slow: 0.6s;
+}
+
+/* ============================================================
+   GLOBAL REFINEMENTS & RESET ENHANCEMENTS
+   ============================================================ */
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+}
+
+body {
+    background-color: var(--wtm-bg);
+    color: var(--wtm-text-headline);
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.65;
+    overflow-x: clip;
+    width: 100%;
+}
+
+::selection {
+    background: #C4007A;
+    color: #FFFFFF;
+}
+
+/* Scrollbar polish */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track {
+    background: #FBF8F1;
+}
+::-webkit-scrollbar-thumb {
+    background: #E5C3D7;
+    border-radius: 999px;
+    border: 2px solid #FBF8F1;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #C4007A;
+}
+
+/* Accessibility: Focus Visible Ring */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--wtm-primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px var(--wtm-primary-glow) !important;
+}
+
+/* ============================================================
+   SHARED REUSABLE UI COMPONENTS
+   ============================================================ */
+
+/* Section Eyebrow / Badges */
+.wtm-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: var(--wtm-primary-soft);
+    color: var(--wtm-primary);
+    border: 1px solid var(--wtm-border-pink);
+    border-radius: var(--wtm-radius-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    transition: transform var(--wtm-duration-fast) var(--wtm-ease-spring),
+                box-shadow var(--wtm-duration-fast) var(--wtm-ease-spring);
+}
+.wtm-eyebrow:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--wtm-shadow-xs);
+}
+.wtm-eyebrow svg {
+    width: 14px;
+    height: 14px;
+    color: var(--wtm-primary);
+}
+
+/* Section Title & Subtitle */
+.wtm-section-header {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto 52px;
+}
+@media (min-width: 768px) {
+    .wtm-section-header {
+        margin-bottom: 64px;
+    }
+}
+.wtm-section-title {
+    font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    font-size: clamp(2rem, 3.8vw, 2.75rem);
+    font-weight: 800;
+    color: var(--wtm-text-headline);
+    letter-spacing: -0.025em;
+    line-height: 1.15;
+    margin: 0 0 14px;
+}
+.wtm-section-title .accent {
+    color: var(--wtm-primary);
+    position: relative;
+    display: inline-block;
+}
+.wtm-section-sub {
+    font-size: 1.05rem;
+    color: var(--wtm-text-body);
+    margin: 0 auto;
+    line-height: 1.65;
+    max-width: 620px;
+}
+
+/* Modern Agency Buttons */
+.wtm-btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--wtm-grad-primary);
+    color: #FFFFFF !important;
+    padding: 13px 28px;
+    border-radius: var(--wtm-radius-pill);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: none;
+    box-shadow: 0 8px 22px -4px rgba(196, 0, 122, 0.35);
+    transition: all var(--wtm-duration-normal) var(--wtm-ease-spring);
+    cursor: pointer;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+}
+.wtm-btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.6s ease;
+}
+.wtm-btn-primary:hover::after {
+    left: 140%;
+}
+.wtm-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -4px rgba(196, 0, 122, 0.45);
+    color: #FFFFFF !important;
+}
+.wtm-btn-primary:active {
+    transform: translateY(0);
+}
+
+.wtm-btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #FFFFFF;
+    color: var(--wtm-text-headline) !important;
+    padding: 12px 26px;
+    border-radius: var(--wtm-radius-pill);
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-decoration: none;
+    border: 1.5px solid var(--wtm-border-strong);
+    box-shadow: var(--wtm-shadow-xs);
+    transition: all var(--wtm-duration-normal) var(--wtm-ease-spring);
+    cursor: pointer;
+}
+.wtm-btn-secondary:hover {
+    border-color: var(--wtm-primary);
+    color: var(--wtm-primary) !important;
+    transform: translateY(-2px);
+    box-shadow: var(--wtm-shadow-sm);
+}
+
+/* Glassmorphism Surface Container */
+.wtm-card-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: var(--wtm-radius-lg);
+    box-shadow: var(--wtm-shadow-md);
+}
+
+/* ============================================================
+   MOTION & ANIMATION ENGINE CLASSES (Framer-Motion style)
+   ============================================================ */
+
+/* Initial states for scroll triggers */
+[data-wtm-reveal] {
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: opacity 0.7s var(--wtm-ease-spring), transform 0.7s var(--wtm-ease-spring);
+}
+
+[data-wtm-reveal="fade-up"] {
+    transform: translateY(32px);
+}
+[data-wtm-reveal="fade-down"] {
+    transform: translateY(-32px);
+}
+[data-wtm-reveal="fade-left"] {
+    transform: translateX(36px);
+}
+[data-wtm-reveal="fade-right"] {
+    transform: translateX(-36px);
+}
+[data-wtm-reveal="zoom-in"] {
+    transform: scale(0.92);
+}
+
+/* When in view */
+[data-wtm-reveal].wtm-revealed {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+}
+
+/* Stagger delay utilities */
+[data-wtm-delay="100"] { transition-delay: 0.1s; }
+[data-wtm-delay="200"] { transition-delay: 0.2s; }
+[data-wtm-delay="300"] { transition-delay: 0.3s; }
+[data-wtm-delay="400"] { transition-delay: 0.4s; }
+[data-wtm-delay="500"] { transition-delay: 0.5s; }
+[data-wtm-delay="600"] { transition-delay: 0.6s; }
+
+/* Subtle floating pulse animation */
+@keyframes wtmFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-7px); }
+}
+.wtm-float {
+    animation: wtmFloat 4s ease-in-out infinite;
+}
+
+@keyframes wtmPulseGlow {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.05); }
+}
+.wtm-pulse-glow {
+    animation: wtmPulseGlow 3s ease-in-out infinite;
+}
+
+/* Shimmer placeholder */
+@keyframes wtmShimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+.wtm-shimmer {
+    background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%);
+    background-size: 200% 100%;
+    animation: wtmShimmer 1.5s infinite;
+}
+
+/* ============================================================
+   REDUCED MOTION OVERRIDE (ACCESSIBILITY COMPLIANT)
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    [data-wtm-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    .wtm-float,
+    .wtm-pulse-glow {
+        animation: none !important;
+    }
+}

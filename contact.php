@@ -16,28 +16,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'message' => $field('message'),
     ];
 
+    $isAjax = (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+        || (strpos($_SERVER['HTTP_ACCEPT'] ?? '', 'application/json') !== false)
+        || isset($_POST['ajax']);
+
     if ($lead['name'] === '' || $lead['phone'] === '' || !filter_var($lead['email'], FILTER_VALIDATE_EMAIL)) {
+        if ($isAjax) {
+            header('Content-Type: application/json; charset=UTF-8');
+            echo json_encode([
+                'success' => false,
+                'status' => 'invalid',
+                'message' => 'Please enter your name, phone number, and a valid email address.',
+            ]);
+            exit;
+        }
         $_SESSION['contact_form_status'] = 'invalid';
     } else {
         try {
             $leadId = createLead($lead);
-            $_SESSION['contact_form_status'] = sendLeadNotification($lead, $leadId)
-                ? 'success'
-                : 'email_failed';
-            if ($_SESSION['contact_form_status'] === 'email_failed') {
-                error_log('Lead notification email failed for lead #' . $leadId);
+            $emailSent = sendLeadNotification($lead, $leadId);
+            if ($isAjax) {
+                header('Content-Type: application/json; charset=UTF-8');
+                echo json_encode([
+                    'success' => true,
+                    'status' => 'success',
+                    'lead_id' => $leadId,
+                    'message' => 'Thank you! Your enquiry has been received successfully. Our team will contact you within 24 hours.',
+                ]);
+                exit;
             }
+            $_SESSION['contact_form_status'] = $emailSent ? 'success' : 'email_failed';
         } catch (Throwable $error) {
             error_log('Lead could not be saved: ' . $error->getMessage());
+            if ($isAjax) {
+                header('Content-Type: application/json; charset=UTF-8');
+                echo json_encode([
+                    'success' => false,
+                    'status' => 'error',
+                    'message' => 'We could not save your enquiry. Please call us directly at +91-9999674255.',
+                ]);
+                exit;
+            }
             $_SESSION['contact_form_status'] = 'error';
         }
     }
 
-    redirect('/contact.php');
+    $redirectTo = !empty($_POST['redirect_to']) ? $_POST['redirect_to'] : '/contact.php';
+    if (!str_starts_with($redirectTo, '/')) {
+        $redirectTo = '/contact.php';
+    }
+    if (strpos($redirectTo, '#') === false) {
+        $redirectTo .= '#contact';
+    }
+    redirect($redirectTo);
 }
 
 $formStatus = $_SESSION['contact_form_status'] ?? '';
 unset($_SESSION['contact_form_status']);
+$pageMeta = [
+    'title' => 'Contact Us | WebTecMart Digital Growth Agency',
+    'description' => 'Get in touch with WebTecMart for SEO, web design, PPC advertising, branding, and digital growth services. Request a free consultation.',
+];
 require_once __DIR__ . '/app/templates/header.php';
 ?>
 
@@ -993,16 +1032,57 @@ $contactInfo = [
         if (!form) return;
 
         form.addEventListener('submit', function (e) {
-            // Show loading state briefly
+            e.preventDefault();
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
             submitBtn.disabled = true;
             const originalHTML = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="spinner"></span> Sending...';
+            submitBtn.innerHTML = '<span class="spinner" style="display:inline-block;width:16px;height:16px;border:2px solid #fff;border-right-color:transparent;border-radius:50%;animation:spin .6s linear infinite;margin-right:8px;vertical-align:middle;"></span> Sending...';
 
-            // Restore after 5s in case of failed submission (form submits normally otherwise)
-            setTimeout(() => {
+            const formData = new FormData(form);
+            formData.append('ajax', '1');
+
+            // Remove existing alert
+            const oldAlert = form.querySelector('.cp-ajax-alert');
+            if (oldAlert) oldAlert.remove();
+
+            fetch('/contact.php', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                },
+                body: formData
+            })
+            .then(res => res.json())
+            .then(data => {
                 submitBtn.disabled = false;
                 submitBtn.innerHTML = originalHTML;
-            }, 5000);
+                if (data.success) {
+                    form.reset();
+                    form.style.display = 'none';
+                    if (successBox) {
+                        successBox.style.display = 'flex';
+                        const p = successBox.querySelector('p');
+                        if (p) p.textContent = data.message;
+                        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                } else {
+                    const alertDiv = document.createElement('div');
+                    alertDiv.className = 'cp-ajax-alert cp-form-error alert alert-danger';
+                    alertDiv.style.cssText = 'padding:12px 16px;border-radius:12px;background:#ffe6ea;border:1px solid #f5a3b8;color:#9e0034;margin-bottom:16px;font-weight:600;font-size:0.92rem;';
+                    alertDiv.textContent = data.message || 'Please verify your information.';
+                    form.insertBefore(alertDiv, form.firstChild);
+                    alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            })
+            .catch(() => {
+                // If network/json fails, submit natively
+                form.submit();
+            });
         });
     })();
 

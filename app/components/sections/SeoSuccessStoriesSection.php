@@ -1023,7 +1023,7 @@ function renderSeoSuccessStoriesSection(): void
         <div class="container">
 
             <!-- Header -->
-            <div class="spo-header">
+            <div class="spo-header" data-wtm-reveal="fade-up">
                 <div class="spo-pill">
                     <?= spoIcon('sparkles') ?>
                     <span>Our SEO Portfolio</span>
@@ -1051,7 +1051,7 @@ function renderSeoSuccessStoriesSection(): void
                     $visibleKeywords = array_slice($item['keywords'], 0, $maxVisibleKeywords);
                     $hiddenCount = $totalKeywords - $maxVisibleKeywords;
                 ?>
-                    <div class="spo-case <?= $reversed ? 'reversed' : '' ?>" data-case-index="<?= $index ?>">
+                    <div class="spo-case <?= $reversed ? 'reversed' : '' ?>" data-case-index="<?= $index ?>" data-wtm-reveal="fade-up">
 
                         <!-- Mockup -->
                         <div class="spo-mockup-wrap">
@@ -1118,7 +1118,7 @@ function renderSeoSuccessStoriesSection(): void
                                 <?php foreach ($item['metrics'] as $m): ?>
                                     <div class="spo-metric" data-count-value="<?= $m['value'] ?>" data-count-suffix="<?= htmlspecialchars($m['suffix']) ?>">
                                         <?= spoIcon($m['icon']) ?>
-                                        <div class="value"><span class="count-num">0</span><?= htmlspecialchars($m['suffix']) ?></div>
+                                        <div class="value"><span class="count-num" data-counter="<?= $m['value'] ?>" data-counter-suffix="<?= htmlspecialchars($m['suffix']) ?>">0</span><?= htmlspecialchars($m['suffix']) ?></div>
                                         <div class="label"><?= htmlspecialchars($m['label']) ?></div>
                                     </div>
                                 <?php endforeach; ?>
