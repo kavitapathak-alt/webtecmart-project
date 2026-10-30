@@ -1389,29 +1389,51 @@ function spIcon(string $name): string {
                 </div>
             </div>
 
-                        <!-- ===== B2B & EXHIBITION SEO SPOTLIGHT ===== -->
-            <div class="sp-exhibition-spotlight" style="margin: 48px 0 64px; background: linear-gradient(135deg, #FFF0F7 0%, #FFFFFF 100%); border: 1.5px solid rgba(196, 0, 122, 0.2); border-radius: 20px; padding: 36px 32px; box-shadow: 0 10px 30px -8px rgba(196, 0, 122, 0.08); position: relative; overflow: hidden;">
-                <div style="position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: #C4007A;"></div>
-                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(196, 0, 122, 0.1); padding: 6px 14px; border-radius: 9999px; color: #C4007A; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;">
+            <!-- ===== B2B & EXHIBITION SEO SPOTLIGHT (Inspired by reference) ===== -->
+            <div class="sp-exhibition-spotlight" style="margin: 40px 0 52px; background: linear-gradient(135deg, #FFFFFF 0%, #FFF5FA 100%); border: 1.5px solid rgba(196, 0, 122, 0.22); border-radius: 24px; padding: 38px 30px; text-align: center; box-shadow: 0 16px 36px -10px rgba(196, 0, 122, 0.08); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #C4007A, #E0398F);"></div>
+                
+                <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(196, 0, 122, 0.08); border: 1px solid rgba(196, 0, 122, 0.18); padding: 5px 14px; border-radius: 9999px; color: #C4007A; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;">
                     <?= spIcon('award') ?>
-                    <span>Specialized Proven Flagship</span>
+                    <span>SPECIALIZED PROVEN FLAGSHIP</span>
                 </div>
-                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 800; color: #111827; margin: 0 0 12px; line-height: 1.25;">
-                    B2B &amp; <span style="color: #C4007A;">Exhibition SEO</span> Services
+
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.85rem, 3.4vw, 2.5rem); font-weight: 800; color: #111827; margin: 0 0 12px; line-height: 1.25;">
+                    Boost Your Event &amp; Exhibition <span style="color: #C4007A; text-decoration: underline; text-decoration-color: rgba(196, 0, 122, 0.35); text-underline-offset: 6px;">With SEO.</span>
                 </h3>
-                <p style="font-size: 0.95rem; color: #4B5563; max-width: 820px; margin: 0 0 20px; line-height: 1.68;">
-                    WebTecMart is India's premier SEO agency for mega-events and industrial trade fairs. We engineered the organic search dominance behind <strong>Bharat Tex Fair</strong> (400% organic growth, Ministry of Textiles) and the <strong>IHGF Delhi Autumn Fair</strong> (top-3 global rankings, EPCH). We help exhibition organizers and exhibitors capture verified international buyer registrations and sell out booth allocations.
+
+                <h4 style="font-size: clamp(1.05rem, 1.8vw, 1.25rem); font-weight: 700; color: #1F2937; margin: 0 auto 12px; max-width: 760px; line-height: 1.4;">
+                    Want to attract more attendees, sponsors, exhibitors, and increase revenue?
+                </h4>
+
+                <p style="font-size: 0.96rem; color: #4B5563; max-width: 800px; margin: 0 auto 10px; line-height: 1.65;">
+                    We'll help you uncover hidden opportunities and improve your exhibition website's performance with a customized Event SEO strategy that drives pre-registered trade buyers, sells out exhibitor stalls, and delivers measurable results.
                 </p>
-                <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px;">
-                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">Trade Show SEO</span>
-                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">Event Schema Markup</span>
-                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">Exhibitor Stall Acquisition</span>
-                    <span style="font-size: 0.775rem; font-weight: 600; background: #FFF0F7; color: #C4007A; padding: 6px 14px; border-radius: 9999px;">International Buyer Sourcing</span>
+
+                <p style="font-size: 0.88rem; color: #6B7280; max-width: 780px; margin: 0 auto 20px; line-height: 1.6;">
+                    The organic search engine partner behind <strong>Bharat Tex Fair (Ministry of Textiles)</strong> and <strong>IHGF Delhi Autumn Fair (EPCH)</strong>. If you have any questions about how to kick-start your SEO strategy get in touch today.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 24px;">
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Attract Global Attendees</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Sell Out Exhibitor Stalls</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Multi-Date Google Event Schema</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ 400%+ Organic Lift Proven</span>
                 </div>
-                <a href="/b2b-exhibition-seo.php" style="display: inline-flex; align-items: center; gap: 8px; background: #C4007A; color: #fff; padding: 12px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.925rem; text-decoration: none; box-shadow: 0 6px 18px -4px rgba(196, 0, 122, 0.35); transition: all 0.25s ease;">
-                    Explore B2B &amp; Exhibition SEO
-                    <?= spIcon('arrow') ?>
-                </a>
+
+                <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 16px;">
+                    <a href="/b2b-exhibition-seo.php" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%); color: #fff; padding: 13px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32); white-space: nowrap; transition: all 0.25s ease;">
+                        <span>Let's Talk Optimization</span>
+                        <?= spIcon('arrow') ?>
+                    </a>
+                    <a href="tel:+919999674255" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid rgba(196, 0, 122, 0.25); color: #C4007A; padding: 13px 24px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; transition: all 0.25s ease;">
+                        <span>Call: +91-9999674255</span>
+                    </a>
+                </div>
+
+                <p style="font-size: 0.78rem; color: #6B7280; line-height: 1.55; margin: 0 auto; max-width: 740px;">
+                    * While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.
+                </p>
             </div>
 
             <!-- ===== RESULTS DRIVEN ===== -->

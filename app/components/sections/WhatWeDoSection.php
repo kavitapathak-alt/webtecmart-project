@@ -313,113 +313,200 @@ function renderWhatWeDoSection(): void
 
         /* ===== B2B & Exhibition SEO Spotlight Banner ===== */
         .core-spotlight-banner {
-            margin-top: 24px;
-            background: linear-gradient(135deg, #FFF0F7 0%, #FFFFFF 100%);
-            border: 1.5px solid rgba(196, 0, 122, 0.18);
-            border-radius: 16px;
-            padding: 20px 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-            align-items: flex-start;
-            box-shadow: 0 4px 18px -4px rgba(196, 0, 122, 0.06);
+            margin-top: 36px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5FA 100%);
+            border: 1.5px solid rgba(196, 0, 122, 0.22);
+            border-radius: 24px;
+            padding: 38px 28px;
+            text-align: center;
+            box-shadow: 0 16px 36px -10px rgba(196, 0, 122, 0.08);
             position: relative;
             overflow: hidden;
         }
-        @media (min-width: 860px) {
-            .core-spotlight-banner {
-                flex-direction: row;
-                align-items: center;
-                justify-content: space-between;
-                padding: 22px 30px;
-            }
-        }
-
         .core-spotlight-banner::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 4px;
-            height: 100%;
-            background: #C4007A;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #C4007A, #E0398F);
         }
-
-        .core-spotlight-left {
-            max-width: 760px;
+        .core-spotlight-inner {
+            max-width: 860px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
-
-        .core-spotlight-badge {
+        .core-spotlight-eyebrow {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 4px 10px;
+            padding: 5px 14px;
             border-radius: 9999px;
-            background: #C4007A;
-            color: #fff;
-            font-size: 0.68rem;
-            font-weight: 700;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.18);
+            color: #C4007A;
+            font-size: 0.72rem;
+            font-weight: 800;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 14px;
         }
-
-        .core-spotlight-heading {
-            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            font-size: 1.22rem;
-            font-weight: 800;
-            color: #111827;
-            margin: 0 0 6px;
-            line-height: 1.28;
-        }
-
-        .core-spotlight-heading span {
+        .core-spotlight-eyebrow svg {
+            width: 13px;
+            height: 13px;
             color: #C4007A;
         }
-
-        .core-spotlight-desc {
-            font-size: 0.86rem;
-            color: #4B5563;
-            line-height: 1.55;
-            margin: 0;
-        }
-
-        .core-spotlight-desc strong {
+        .core-spotlight-heading {
+            font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+            font-size: clamp(1.85rem, 3.4vw, 2.5rem);
+            font-weight: 800;
             color: #111827;
-            font-weight: 600;
+            margin: 0 0 12px;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
         }
-
-        .core-spotlight-btn {
+        .core-spotlight-heading .accent {
+            color: #C4007A;
+            position: relative;
+            display: inline-block;
+        }
+        .core-spotlight-heading .accent svg {
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 6px;
+            overflow: visible;
+        }
+        .core-spotlight-subheading {
+            font-size: clamp(1.05rem, 1.8vw, 1.25rem);
+            font-weight: 700;
+            color: #1F2937;
+            margin: 0 auto 12px;
+            line-height: 1.4;
+        }
+        .core-spotlight-desc {
+            font-size: 0.96rem;
+            color: #4B5563;
+            line-height: 1.65;
+            margin: 0 auto 10px;
+            max-width: 800px;
+        }
+        .core-spotlight-subdesc {
+            font-size: 0.88rem;
+            color: #6B7280;
+            line-height: 1.6;
+            margin: 0 auto 20px;
+            max-width: 780px;
+        }
+        .core-spotlight-subdesc strong {
+            color: #111827;
+            font-weight: 700;
+        }
+        .core-spotlight-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+        .spotlight-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #C4007A;
-            color: #ffffff !important;
-            padding: 10px 20px;
-            border-radius: 9999px;
+            font-size: 0.78rem;
             font-weight: 700;
-            font-size: 0.85rem;
+            color: #C4007A;
+            background: #FFFFFF;
+            border: 1px solid rgba(196, 0, 122, 0.16);
+            padding: 5px 12px;
+            border-radius: 9999px;
+            box-shadow: 0 2px 8px rgba(196, 0, 122, 0.04);
+        }
+        .core-spotlight-actions {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .core-spotlight-btn-primary {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+            color: #FFFFFF !important;
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1;
+            padding: 13px 28px;
+            border-radius: 9999px;
             text-decoration: none;
-            white-space: nowrap;
-            box-shadow: 0 4px 14px -3px rgba(196, 0, 122, 0.3);
-            transition: all 0.2s ease;
+            white-space: nowrap !important;
+            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32);
+            transition: all 0.25s ease;
         }
-
-        .core-spotlight-btn:hover {
-            background: #A3005F;
+        .core-spotlight-btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 18px -4px rgba(196, 0, 122, 0.4);
+            box-shadow: 0 14px 28px rgba(196, 0, 122, 0.42);
+            color: #FFFFFF;
         }
-
-        .core-spotlight-btn svg {
-            width: 14px;
-            height: 14px;
-            stroke-width: 2.5;
+        .core-spotlight-btn-primary svg {
+            width: 16px !important;
+            height: 16px !important;
+            flex-shrink: 0;
             transition: transform 0.2s ease;
         }
-
-        .core-spotlight-btn:hover svg {
-            transform: translateX(4px);
+        .core-spotlight-btn-primary:hover svg {
+            transform: translateX(3px);
+        }
+        .core-spotlight-btn-secondary {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            gap: 8px !important;
+            background: #FFFFFF;
+            border: 1.5px solid rgba(196, 0, 122, 0.25);
+            color: #C4007A !important;
+            font-weight: 700;
+            font-size: 0.95rem;
+            line-height: 1;
+            padding: 13px 24px;
+            border-radius: 9999px;
+            text-decoration: none;
+            white-space: nowrap !important;
+            transition: all 0.25s ease;
+        }
+        .core-spotlight-btn-secondary:hover {
+            background: rgba(196, 0, 122, 0.06);
+            border-color: #C4007A;
+            transform: translateY(-2px);
+        }
+        .core-spotlight-footnote {
+            font-size: 0.78rem;
+            color: #6B7280;
+            line-height: 1.55;
+            margin: 0 auto;
+            max-width: 740px;
+        }
+        @media (max-width: 540px) {
+            .core-spotlight-banner {
+                padding: 28px 18px;
+            }
+            .core-spotlight-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .core-spotlight-btn-primary,
+            .core-spotlight-btn-secondary {
+                width: 100%;
+                text-align: center;
+            }
         }
     </style>
 
@@ -468,19 +555,53 @@ function renderWhatWeDoSection(): void
                 <?php endforeach; ?>
             </div>
 
-            <!-- B2B & Exhibition SEO Flagship Spotlight Callout -->
+            <!-- B2B & Exhibition SEO Flagship Spotlight Callout (Inspired by reference) -->
             <div class="core-spotlight-banner" data-wtm-reveal="fade-up">
-                <div class="core-spotlight-left">
-                    <span class="core-spotlight-badge">Specialized Flagship</span>
-                    <h3 class="core-spotlight-heading">B2B &amp; <span>Exhibition SEO</span> Services</h3>
+                <div class="core-spotlight-inner">
+
+                    <div class="core-spotlight-eyebrow">
+                        <?= coreSvcIcon('sparkles') ?>
+                        <span>SPECIALIZED FLAGSHIP</span>
+                    </div>
+
+                    <h3 class="core-spotlight-heading">
+                        Boost Your Event &amp; Exhibition <span class="accent">With SEO.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    </h3>
+
+                    <h4 class="core-spotlight-subheading">
+                        Want to attract more attendees, sponsors, exhibitors, and increase revenue?
+                    </h4>
+
                     <p class="core-spotlight-desc">
-                        The organic search engine behind <strong>Bharat Tex Fair</strong> (Ministry of Textiles) and <strong>IHGF Delhi Autumn Fair</strong> (EPCH). We help trade show organizers, international exporters, and B2B brands dominate high-intent Google search rankings, capture global buyers, and pack exhibition halls.
+                        We'll help you uncover hidden opportunities and improve your exhibition website's performance with a customized Event SEO strategy that drives pre-registered trade buyers, sells out stalls, and delivers measurable results.
                     </p>
+
+                    <p class="core-spotlight-subdesc">
+                        The organic search engine partner behind <strong>Bharat Tex Fair (Ministry of Textiles)</strong> and <strong>IHGF Delhi Autumn Fair (EPCH)</strong>. If you have any questions about how to kick-start your SEO strategy get in touch today.
+                    </p>
+
+                    <div class="core-spotlight-pills">
+                        <span class="spotlight-pill">✓ Attract Global Attendees</span>
+                        <span class="spotlight-pill">✓ Sell Out Exhibitor Stalls</span>
+                        <span class="spotlight-pill">✓ Multi-Date Google Event Schema</span>
+                        <span class="spotlight-pill">✓ 400%+ Organic Lift Proven</span>
+                    </div>
+
+                    <div class="core-spotlight-actions">
+                        <a href="/b2b-exhibition-seo.php" class="core-spotlight-btn-primary">
+                            <span>Let's Talk Optimization</span>
+                            <?= coreSvcIcon('arrow') ?>
+                        </a>
+                        <a href="tel:+919999674255" class="core-spotlight-btn-secondary">
+                            <span>Call: +91-9999674255</span>
+                        </a>
+                    </div>
+
+                    <p class="core-spotlight-footnote">
+                        * While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.
+                    </p>
+
                 </div>
-                <a href="/b2b-exhibition-seo.php" class="core-spotlight-btn">
-                    Explore Exhibition SEO
-                    <?= coreSvcIcon('arrow') ?>
-                </a>
             </div>
 
         </div>

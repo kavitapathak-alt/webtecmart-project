@@ -267,6 +267,10 @@ require_once __DIR__ . '/templates/header.php';
 
 <!-- Quick Actions -->
 <div class="dash-quick-actions">
+        <a href="/admin/services.php?edit=68" class="dash-action-btn" style="border-color: rgba(196, 0, 122, 0.35); background: #FFF5FA; color: #C4007A; font-weight: 700;">
+        <i class="bi bi-star-fill text-warning me-1"></i> B2B &amp; Exhibition SEO
+        <span class="badge ms-1" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem;">Flagship</span>
+    </a>
     <a href="/admin/services.php" class="dash-action-btn primary">
         <i class="bi bi-briefcase-fill"></i> Manage Services CMS (<?= $serviceCount ?>)
     </a>

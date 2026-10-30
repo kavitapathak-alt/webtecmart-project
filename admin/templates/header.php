@@ -426,11 +426,17 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             <p class="adm-nav-heading">Content Management</p>
             <ul class="adm-nav-list">
                 <li>
-                    <a href="/admin/services.php" class="adm-nav-link <?= $adminPage === 'services.php' ? 'active' : '' ?>">
+                    <a href="/admin/services.php" class="adm-nav-link <?= $adminPage === 'services.php' && empty($_GET['edit']) ? 'active' : '' ?>">
                         <span><i class="bi bi-briefcase-fill text-primary"></i> Services CMS</span>
                         <?php if (!empty($totalServicesCount)): ?>
                             <span class="adm-badge-count" style="background:#FFF0F7; color:#C4007A; border:1px solid rgba(196,0,122,0.2);"><?= $totalServicesCount ?></span>
                         <?php endif; ?>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/services.php?edit=68" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 68 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-calendar2-event text-danger"></i> B2B &amp; Exhibition SEO</span>
+                        <span class="badge" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
                     </a>
                 </li>
                 <li>
