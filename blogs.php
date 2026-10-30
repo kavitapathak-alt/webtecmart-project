@@ -81,7 +81,8 @@ function blImage(array $p, bool $lazy = true): string
         background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.3); backdrop-filter: blur(6px);
     }
     .bl-hero h1 { margin: 18px 0 14px; font-weight: 800; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.12; letter-spacing: -.02em; }
-    .bl-hero h1 span { color: var(--p200); }
+    .bl-hero h1 span { color: var(--p200); position: relative; display: inline-block; }
+    .bl-hero h1 span svg { position: absolute; left: 0; bottom: -4px; width: 100%; height: 6px; pointer-events: none; }
     .bl-hero p.sub { margin: 0 auto 30px; max-width: 620px; font-size: 1.1rem; line-height: 1.7; color: rgba(255,255,255,.9); }
     .bl-wave { position: absolute; left: 0; right: 0; bottom: -1px; line-height: 0; z-index: 1; }
     .bl-wave svg { display: block; width: 100%; height: 90px; }
@@ -304,7 +305,7 @@ function blImage(array $p, bool $lazy = true): string
         <span class="bl-blob b1"></span><span class="bl-blob b2"></span>
         <div class="container">
             <span class="bl-kicker"><i class="bi bi-stars"></i> WebTecMart Insights</span>
-            <h1>Latest <span>Blogs &amp; Insights</span></h1>
+            <h1>Latest <span>Blogs &amp; Insights<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#F4C4DE" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/></svg></span></h1>
             <p class="sub">Ideas, strategies, and practical guidance to support your digital growth.</p>
             <div class="bl-search">
                 <i class="bi bi-search"></i>

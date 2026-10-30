@@ -167,15 +167,32 @@ $contactInfo = [
     @media (min-width: 768px) { .cp-pill span { font-size: 14px; } }
 
     .cp-h1 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-        font-size: 1.875rem;
-        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
         color: #111827;
-        margin: 0;
-        line-height: 1.15;
+        margin: 0 0 8px;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
     }
-    @media (min-width: 640px) { .cp-h1 { font-size: 2.25rem; } }
-    @media (min-width: 1024px) { .cp-h1 { font-size: 2.25rem; } }
+    @media (min-width: 640px) { .cp-h1 {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
+        color: #111827;
+        margin: 0 0 8px;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+    } }
+    @media (min-width: 1024px) { .cp-h1 {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
+        color: #111827;
+        margin: 0 0 8px;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+    } }
     .cp-h1 .accent {
         color: #C4007A;
         position: relative;

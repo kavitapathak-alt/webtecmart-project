@@ -78,12 +78,12 @@ function renderTestimonialsSection(): void
         .testi-section {
             position: relative;
             width: 100%;
-            padding: 72px 0 84px;
+            padding: 32px 0 28px;
             background: #FBF8F1;
             overflow: hidden;
         }
         @media (min-width: 768px) {
-            .testi-section { padding: 96px 0 108px; }
+            .testi-section { padding: 36px 0 32px; }
         }
 
         .testi-container {
@@ -97,38 +97,52 @@ function renderTestimonialsSection(): void
         .testi-header {
             text-align: center;
             max-width: 720px;
-            margin: 0 auto 52px;
+            margin: 0 auto 22px;
         }
         .testi-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.1);
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
             color: #C4007A;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
-            letter-spacing: 0.14em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            padding: 6px 14px;
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        .testi-pill svg { width: 14px; height: 14px; color: #C4007A; }
+        .testi-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
         .testi-title {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: clamp(2rem, 3.8vw, 2.75rem);
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
             font-weight: 800;
             color: #111827;
-            margin: 0 0 12px;
+            margin: 0 0 8px;
             line-height: 1.18;
             letter-spacing: -0.02em;
         }
-        .testi-title span { color: #C4007A; }
+        .testi-title .accent {
+            color: #C4007A;
+            position: relative;
+            display: inline-block;
+        }
+        .testi-title .accent svg {
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 6px;
+            pointer-events: none;
+        }
         .testi-subtitle {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: #4B5563;
             margin: 0 auto;
-            line-height: 1.65;
+            line-height: 1.55;
+            max-width: 640px;
         }
 
         /* Slider Controls Header */
@@ -137,7 +151,7 @@ function renderTestimonialsSection(): void
             justify-content: flex-end;
             align-items: center;
             gap: 12px;
-            margin-bottom: 24px;
+            margin-bottom: 16px;
         }
         .testi-nav-btn {
             width: 44px;

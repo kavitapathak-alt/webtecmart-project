@@ -247,6 +247,16 @@ function serviceDetailPages(): array
     return $pages;
 }
 
+function getServiceBySlug(string $slug): ?array
+{
+    foreach (serviceDetailPages() as $sp) {
+        if (($sp['slug'] ?? '') === $slug) {
+            return $sp;
+        }
+    }
+    return null;
+}
+
 function pricingPlans(): array
 {
     $defaults = [

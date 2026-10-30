@@ -9,6 +9,7 @@ $totalLeadsCount = 0;
 if ($isLoggedIn && function_exists('db')) {
     try {
         $totalLeadsCount = (int) db()->query('SELECT COUNT(*) FROM leads')->fetchColumn();
+        $totalServicesCount = (int) db()->query("SELECT COUNT(*) FROM content_items WHERE content_type = 'service_detail'")->fetchColumn();
     } catch (\Throwable $e) {
         $totalLeadsCount = 0;
     }
@@ -18,6 +19,7 @@ $pageTitles = [
     'dashboard.php' => 'Dashboard Overview',
     'content.php'   => 'Website Content Manager',
     'leads.php'     => 'Leads & Enquiries',
+    'services.php'  => 'Services CMS & Page Engine',
     'login.php'     => 'Admin Sign In',
 ];
 $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
@@ -423,6 +425,14 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         <div class="adm-nav-section">
             <p class="adm-nav-heading">Content Management</p>
             <ul class="adm-nav-list">
+                <li>
+                    <a href="/admin/services.php" class="adm-nav-link <?= $adminPage === 'services.php' ? 'active' : '' ?>">
+                        <span><i class="bi bi-briefcase-fill text-primary"></i> Services CMS</span>
+                        <?php if (!empty($totalServicesCount)): ?>
+                            <span class="adm-badge-count" style="background:#FFF0F7; color:#C4007A; border:1px solid rgba(196,0,122,0.2);"><?= $totalServicesCount ?></span>
+                        <?php endif; ?>
+                    </a>
+                </li>
                 <li>
                     <a href="/admin/content.php" class="adm-nav-link <?= $adminPage === 'content.php' ? 'active' : '' ?>">
                         <span><i class="bi bi-pencil-square"></i> All Content Sections</span>

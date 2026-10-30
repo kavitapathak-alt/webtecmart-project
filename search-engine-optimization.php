@@ -6,7 +6,10 @@ $pageMeta = [
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('search-engine-optimization');
+
+$serviceData = [
     'icon' => 'trending',
     'title' => 'Search Engine Optimization',
     'tagline' => 'Rank Higher. Convert Better. Scale Organically.',
@@ -71,6 +74,14 @@ renderServicePageLayout([
             'a' => 'Yes. Every client receives monthly reports covering keyword rankings, organic traffic trends, bounce rates, top-performing pages, and actual lead conversions.',
         ],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 
 require_once __DIR__ . '/app/templates/footer.php';

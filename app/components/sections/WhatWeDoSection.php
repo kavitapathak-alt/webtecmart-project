@@ -72,17 +72,17 @@ function renderWhatWeDoSection(): void
     <style>
         /* ============================================================
            WHAT WE OFFER — OUR CORE SERVICES SECTION
-           Matches exact reference screenshot styling
+           Matches exact reference screenshot styling with compact spacing
            ============================================================ */
         .core-services-section {
             width: 100%;
             background: #FBF8F1;
-            padding: 72px 0 84px;
+            padding: 32px 0 24px;
             position: relative;
         }
         @media (min-width: 768px) {
             .core-services-section {
-                padding: 96px 0 108px;
+                padding: 40px 0 28px;
             }
         }
 
@@ -97,110 +97,138 @@ function renderWhatWeDoSection(): void
         /* ===== Header ===== */
         .core-services-header {
             text-align: center;
-            margin: 0 auto 52px;
-            max-width: 760px;
+            margin: 0 auto 22px;
+            max-width: 720px;
         }
         @media (min-width: 768px) {
             .core-services-header {
-                margin-bottom: 64px;
+                margin-bottom: 26px;
             }
         }
 
-        .core-services-eyebrow {
+        .core-services-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
+            border-radius: 9999px;
+            margin-bottom: 10px;
+        }
+
+        .core-services-pill svg {
+            width: 13px;
+            height: 13px;
             color: #C4007A;
-            font-size: 0.8125rem;
+            flex-shrink: 0;
+        }
+
+        .core-services-pill span {
+            font-size: 0.72rem;
+            color: #C4007A;
             font-weight: 700;
-            letter-spacing: 0.18em;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin: 0 0 14px;
-            display: inline-block;
         }
 
         .core-services-title {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: clamp(2rem, 3.8vw, 2.75rem);
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
             font-weight: 800;
             color: #111827;
-            letter-spacing: -0.025em;
-            line-height: 1.15;
-            margin: 0 0 14px;
+            letter-spacing: -0.02em;
+            line-height: 1.18;
+            margin: 0 0 8px;
         }
 
         .core-services-title .accent {
             color: #C4007A;
+            position: relative;
+            display: inline-block;
+        }
+
+        .core-services-title .accent svg {
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 6px;
+            pointer-events: none;
         }
 
         .core-services-subtitle {
-            font-size: 1.05rem;
+            font-size: 0.95rem;
             color: #4B5563;
             margin: 0 auto;
-            line-height: 1.6;
-            max-width: 620px;
+            line-height: 1.55;
+            max-width: 600px;
         }
 
         /* ===== 6-Card Grid ===== */
         .core-services-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 28px;
+            gap: 20px;
         }
         @media (min-width: 680px) {
             .core-services-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 22px;
             }
         }
         @media (min-width: 1024px) {
             .core-services-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 32px;
+                gap: 24px;
             }
         }
 
-        /* ===== Card ===== */
+        /* ===== Card (Exact design reference matching) ===== */
         .core-service-card {
             background: #FFFFFF;
-            border: 1.5px solid #F1F4F8;
-            border-radius: 24px;
-            padding: 36px 32px 32px 32px;
+            border: 1.5px solid #F1E5EC;
+            border-radius: 20px;
+            padding: 26px 22px 20px 22px;
             display: flex;
             flex-direction: column;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 4px 20px -2px rgba(17, 24, 39, 0.04);
-            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                        box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                        border-color 0.35s ease;
+            box-shadow: 0 4px 18px -2px rgba(17, 24, 39, 0.03);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.3s ease;
             position: relative;
         }
 
         .core-service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(196, 0, 122, 0.28);
-            box-shadow: 0 20px 35px -8px rgba(196, 0, 122, 0.12), 0 0 0 1px rgba(196, 0, 122, 0.15);
+            transform: translateY(-5px);
+            border-color: rgba(196, 0, 122, 0.32);
+            box-shadow: 0 16px 28px -8px rgba(196, 0, 122, 0.12), 0 0 0 1px rgba(196, 0, 122, 0.12);
         }
 
         /* Icon Container */
         .core-service-icon {
-            width: 52px;
-            height: 52px;
-            border-radius: 14px;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             background: #FFF0F7;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            transition: transform 0.3s ease, background 0.3s ease;
+            margin-bottom: 16px;
+            transition: transform 0.25s ease, background 0.25s ease;
             flex-shrink: 0;
         }
 
         .core-service-card:hover .core-service-icon {
-            transform: scale(1.08);
+            transform: scale(1.06);
             background: #FCE4EC;
         }
 
         .core-service-icon svg {
-            width: 24px;
-            height: 24px;
+            width: 20px;
+            height: 20px;
             color: #C4007A;
             stroke-width: 2;
         }
@@ -208,13 +236,13 @@ function renderWhatWeDoSection(): void
         /* Card Title */
         .core-service-heading {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.18rem;
             font-weight: 700;
             color: #111827;
-            margin: 0 0 14px;
-            line-height: 1.3;
+            margin: 0 0 10px;
+            line-height: 1.32;
             letter-spacing: -0.015em;
-            transition: color 0.25s ease;
+            transition: color 0.2s ease;
         }
 
         .core-service-card:hover .core-service-heading {
@@ -223,10 +251,10 @@ function renderWhatWeDoSection(): void
 
         /* Description */
         .core-service-desc {
-            font-size: 0.935rem;
+            font-size: 0.85rem;
             color: #4B5563;
-            line-height: 1.68;
-            margin: 0 0 24px;
+            line-height: 1.58;
+            margin: 0 0 18px;
             flex-grow: 1;
         }
 
@@ -234,21 +262,21 @@ function renderWhatWeDoSection(): void
         .core-service-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 28px;
+            gap: 6px;
+            margin-bottom: 20px;
         }
 
         .core-service-tag {
             display: inline-flex;
             align-items: center;
-            padding: 6px 14px;
+            padding: 4px 10px;
             background: #FFF0F7;
             color: #C4007A;
             border-radius: 9999px;
-            font-size: 0.775rem;
+            font-size: 0.72rem;
             font-weight: 600;
             letter-spacing: 0.01em;
-            transition: background 0.2s ease, transform 0.2s ease;
+            transition: background 0.2s ease;
         }
 
         .core-service-card:hover .core-service-tag {
@@ -262,17 +290,17 @@ function renderWhatWeDoSection(): void
             gap: 6px;
             color: #C4007A;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.88rem;
             text-decoration: none;
             margin-top: auto;
-            transition: gap 0.25s ease, color 0.25s ease;
+            transition: gap 0.2s ease, color 0.2s ease;
         }
 
         .core-service-cta svg {
-            width: 15px;
-            height: 15px;
+            width: 14px;
+            height: 14px;
             stroke-width: 2.5;
-            transition: transform 0.25s ease;
+            transition: transform 0.2s ease;
         }
 
         .core-service-card:hover .core-service-cta {
@@ -280,21 +308,21 @@ function renderWhatWeDoSection(): void
         }
 
         .core-service-card:hover .core-service-cta svg {
-            transform: translateX(5px);
+            transform: translateX(4px);
         }
 
         /* ===== B2B & Exhibition SEO Spotlight Banner ===== */
         .core-spotlight-banner {
-            margin-top: 48px;
+            margin-top: 24px;
             background: linear-gradient(135deg, #FFF0F7 0%, #FFFFFF 100%);
-            border: 1.5px solid rgba(196, 0, 122, 0.2);
-            border-radius: 20px;
-            padding: 28px 32px;
+            border: 1.5px solid rgba(196, 0, 122, 0.18);
+            border-radius: 16px;
+            padding: 20px 24px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             align-items: flex-start;
-            box-shadow: 0 8px 24px -6px rgba(196, 0, 122, 0.08);
+            box-shadow: 0 4px 18px -4px rgba(196, 0, 122, 0.06);
             position: relative;
             overflow: hidden;
         }
@@ -303,7 +331,7 @@ function renderWhatWeDoSection(): void
                 flex-direction: row;
                 align-items: center;
                 justify-content: space-between;
-                padding: 32px 40px;
+                padding: 22px 30px;
             }
         }
 
@@ -325,24 +353,24 @@ function renderWhatWeDoSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 5px 12px;
+            padding: 4px 10px;
             border-radius: 9999px;
             background: #C4007A;
             color: #fff;
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
 
         .core-spotlight-heading {
             font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.22rem;
             font-weight: 800;
             color: #111827;
-            margin: 0 0 8px;
-            line-height: 1.3;
+            margin: 0 0 6px;
+            line-height: 1.28;
         }
 
         .core-spotlight-heading span {
@@ -350,9 +378,9 @@ function renderWhatWeDoSection(): void
         }
 
         .core-spotlight-desc {
-            font-size: 0.925rem;
+            font-size: 0.86rem;
             color: #4B5563;
-            line-height: 1.6;
+            line-height: 1.55;
             margin: 0;
         }
 
@@ -364,30 +392,30 @@ function renderWhatWeDoSection(): void
         .core-spotlight-btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: #C4007A;
             color: #ffffff !important;
-            padding: 12px 24px;
+            padding: 10px 20px;
             border-radius: 9999px;
             font-weight: 700;
-            font-size: 0.925rem;
+            font-size: 0.85rem;
             text-decoration: none;
             white-space: nowrap;
-            box-shadow: 0 6px 18px -4px rgba(196, 0, 122, 0.35);
-            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px -3px rgba(196, 0, 122, 0.3);
+            transition: all 0.2s ease;
         }
 
         .core-spotlight-btn:hover {
             background: #A3005F;
             transform: translateY(-2px);
-            box-shadow: 0 10px 22px -4px rgba(196, 0, 122, 0.45);
+            box-shadow: 0 8px 18px -4px rgba(196, 0, 122, 0.4);
         }
 
         .core-spotlight-btn svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             stroke-width: 2.5;
-            transition: transform 0.25s ease;
+            transition: transform 0.2s ease;
         }
 
         .core-spotlight-btn:hover svg {
@@ -400,15 +428,26 @@ function renderWhatWeDoSection(): void
 
             <!-- Section Header -->
             <div class="core-services-header" data-wtm-reveal="fade-up">
-                <span class="core-services-eyebrow">WHAT WE OFFER</span>
-                <h2 class="core-services-title">Our <span class="accent">Core Services</span></h2>
+                <div class="core-services-pill">
+                    <?= coreSvcIcon('sparkles') ?>
+                    <span>WHAT WE OFFER</span>
+                </div>
+                <h2 class="core-services-title">
+                    Our
+                    <span class="accent">
+                        Core Services
+                        <svg viewBox="0 0 300 6" preserveAspectRatio="none">
+                            <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+                        </svg>
+                    </span>
+                </h2>
                 <p class="core-services-subtitle">End-to-end digital solutions to help your business thrive</p>
             </div>
 
-            <!-- 6 Services Grid -->
+            <!-- 6 Services Grid (matches exact reference design) -->
             <div class="core-services-grid" data-reveal-stagger>
                 <?php foreach ($services as $svc): ?>
-                    <div class="core-service-card">
+                    <a href="<?= htmlspecialchars($svc['href']) ?>" class="core-service-card">
                         <div class="core-service-icon">
                             <?= coreSvcIcon($svc['icon']) ?>
                         </div>
@@ -421,11 +460,11 @@ function renderWhatWeDoSection(): void
                             <?php endforeach; ?>
                         </div>
 
-                        <a href="<?= htmlspecialchars($svc['href']) ?>" class="core-service-cta">
+                        <span class="core-service-cta">
                             Learn More
                             <?= coreSvcIcon('arrow') ?>
-                        </a>
-                    </div>
+                        </span>
+                    </a>
                 <?php endforeach; ?>
             </div>
 

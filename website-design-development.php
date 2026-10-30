@@ -3,7 +3,10 @@
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('website-design-development');
+
+$serviceData = [
     'icon' => 'layout',
 
     'title' => 'Website Design & Development',
@@ -128,6 +131,14 @@ renderServicePageLayout([
             'a' => 'Yes. WebTecMart provides digital marketing services including SEO, search engine marketing, social media marketing, content marketing, branding, and other digital growth solutions to help businesses build and grow their online presence.',
         ],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 
 require_once __DIR__ . '/app/templates/footer.php';

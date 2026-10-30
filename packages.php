@@ -95,30 +95,40 @@ $trustBadges = $packagesPage['trust_badges'];
     .pkg-pill {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        background: rgba(196, 0, 122, 0.1);
-        padding: 8px 16px;
+        gap: 6px;
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.15);
+        padding: 5px 14px;
         border-radius: 9999px;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
     }
-    .pkg-pill svg { width: 16px; height: 16px; color: #C4007A; flex-shrink: 0; }
+    .pkg-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
     .pkg-pill span {
         color: #C4007A;
-        font-weight: 600;
-        font-size: 14px;
-        letter-spacing: 0.05em;
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
     }
 
     .pkg-h1 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-        font-size: 2.25rem;
-        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
         color: #111827;
-        line-height: 1.1;
-        margin: 0;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
     }
-    @media (min-width: 768px) { .pkg-h1 { font-size: 2.25rem; } }
+    @media (min-width: 768px) { .pkg-h1 {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+    } }
 
     .pkg-h1 .accent {
         color: #C4007A;

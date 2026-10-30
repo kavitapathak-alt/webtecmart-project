@@ -25,12 +25,12 @@ function renderHeroSection(): void
     ?>
     <style>
         /* ============================================================
-           HERO SECTION — Webtecmart Next.js clone
+           HERO SECTION — Compact, Premium, Non-overlapping Layout
         ============================================================ */
         .hero {
             position: relative;
             width: 100%;
-            padding: 32px 0;
+            padding: 24px 0 20px;
             overflow: hidden;
             background: #FBF8F1;
         }
@@ -46,8 +46,8 @@ function renderHeroSection(): void
             position: absolute;
             top: 0;
             right: 0;
-            width: 50%;
-            height: 50%;
+            width: 45%;
+            height: 45%;
             background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
             border-radius: 9999px;
             filter: blur(64px);
@@ -57,8 +57,8 @@ function renderHeroSection(): void
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 33.333%;
-            height: 33.333%;
+            width: 30%;
+            height: 30%;
             background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
             border-radius: 9999px;
             filter: blur(64px);
@@ -72,27 +72,27 @@ function renderHeroSection(): void
         }
 
         .hero-bg-svg-1 {
-            top: -40px;
+            top: -30px;
             right: 15%;
-            width: 128px;
-            height: 128px;
-            opacity: 0.4;
+            width: 110px;
+            height: 110px;
+            opacity: 0.35;
         }
 
         .hero-bg-svg-2 {
             top: 25%;
             right: 5%;
-            width: 80px;
-            height: 80px;
-            opacity: 0.3;
+            width: 70px;
+            height: 70px;
+            opacity: 0.25;
         }
 
         .hero-bg-svg-3 {
             bottom: 25%;
             right: 20%;
-            width: 96px;
-            height: 96px;
-            opacity: 0.25;
+            width: 80px;
+            height: 80px;
+            opacity: 0.2;
         }
 
         /* Grid Layout */
@@ -101,7 +101,8 @@ function renderHeroSection(): void
             z-index: 10;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: 24px;
+            align-items: stretch;
         }
 
         /* ============================================================
@@ -110,48 +111,53 @@ function renderHeroSection(): void
         .hero-left {
             display: flex;
             flex-direction: column;
-            background: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 16px;
-            padding: 24px;
-            border: 1px solid rgba(196, 0, 122, 0.05);
+            padding: 22px 20px;
+            border: 1px solid rgba(196, 0, 122, 0.08);
+            box-shadow: 0 4px 20px rgba(196, 0, 122, 0.03);
             height: 100%;
+            justify-content: center;
         }
 
         /* Badge */
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: rgba(196, 0, 122, 0.1);
-            padding: 8px 16px;
+            padding: 6px 12px;
             border-radius: 9999px;
             width: fit-content;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .hero-badge svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             color: #C4007A;
             flex-shrink: 0;
         }
 
         .hero-badge span {
             color: #C4007A;
-            font-weight: 600;
-            font-size: 0.875rem;
-            letter-spacing: 0.025em;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
         }
 
         /* Main Heading */
         .hero-heading {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-weight: 900;
+            font-weight: 800;
             color: #111111;
-            line-height: 1.05;
-            font-size: 1.875rem; /* 3xl */
-            margin: 0 0 16px;
+            line-height: 1.18;
+            font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
+            word-break: normal;
+            overflow-wrap: break-word;
         }
 
         .hero-heading .accent {
@@ -161,19 +167,16 @@ function renderHeroSection(): void
         .hero-heading .underline-wrap {
             position: relative;
             display: inline-block;
-        }
-
-        .hero-heading .underline-wrap .text {
-            position: relative;
-            z-index: 10;
+            color: #C4007A;
         }
 
         .hero-heading .underline-svg {
             position: absolute;
             left: 0;
-            bottom: -8px;
+            bottom: -3px;
             width: 100%;
-            height: 12px;
+            height: 8px;
+            pointer-events: none;
         }
 
         .hero-heading .highlight-wrap {
@@ -182,34 +185,28 @@ function renderHeroSection(): void
         }
 
         .hero-heading .highlight-wrap .text {
+            color: #C4007A;
             position: relative;
-            z-index: 10;
+            z-index: 2;
         }
 
         .hero-heading .highlight-wrap .highlight {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 4px;
-            height: 12px;
-            background: rgba(196, 0, 122, 0.2);
-            border-radius: 2px;
-            z-index: 0;
+            display: none;
         }
 
         /* Description */
         .hero-desc {
-            font-size: 1rem;
+            font-size: 0.935rem;
             color: #374151;
-            margin: 0 0 12px;
-            line-height: 1.625;
+            margin: 0 0 10px;
+            line-height: 1.58;
         }
 
         .hero-desc-sm {
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             color: #4B5563;
-            margin: 0 0 20px;
-            line-height: 1.625;
+            margin: 0 0 16px;
+            line-height: 1.55;
         }
 
         /* Benefits Checklist */
@@ -219,18 +216,18 @@ function renderHeroSection(): void
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 8px;
         }
 
         .hero-benefits li {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 8px;
         }
 
         .hero-benefits .check-icon {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border-radius: 9999px;
             background: rgba(196, 0, 122, 0.1);
             display: flex;
@@ -241,15 +238,15 @@ function renderHeroSection(): void
         }
 
         .hero-benefits .check-icon svg {
-            width: 14px;
-            height: 14px;
+            width: 12px;
+            height: 12px;
             color: #C4007A;
         }
 
         .hero-benefits .text {
-            font-size: 0.875rem;
+            font-size: 0.825rem;
             color: #374151;
-            line-height: 1.625;
+            line-height: 1.5;
         }
 
         /* ============================================================
@@ -260,12 +257,13 @@ function renderHeroSection(): void
             border-radius: 16px;
             overflow: hidden;
             background: #FDF0F6;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            padding: 24px;
-            box-shadow: 0 10px 40px rgba(196, 0, 122, 0.12);
+            border: 1px solid rgba(196, 0, 122, 0.12);
+            padding: 22px 20px;
+            box-shadow: 0 8px 30px rgba(196, 0, 122, 0.1);
             display: flex;
             flex-direction: column;
             height: 100%;
+            justify-content: center;
         }
 
         /* Decorative circles */
@@ -274,31 +272,31 @@ function renderHeroSection(): void
             position: absolute;
             top: -40px;
             right: -40px;
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             border-radius: 9999px;
-            border: 3px solid rgba(196, 0, 122, 0.1);
+            border: 2px solid rgba(196, 0, 122, 0.08);
             pointer-events: none;
         }
 
         .hero-right::after {
             content: '';
             position: absolute;
-            bottom: -40px;
-            left: -40px;
-            width: 128px;
-            height: 128px;
+            bottom: -30px;
+            left: -30px;
+            width: 110px;
+            height: 110px;
             border-radius: 9999px;
-            border: 3px solid rgba(196, 0, 122, 0.1);
+            border: 2px solid rgba(196, 0, 122, 0.08);
             pointer-events: none;
         }
 
         .hero-right-blob {
             position: absolute;
             top: 50%;
-            right: -40px;
-            width: 96px;
-            height: 96px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
             border-radius: 9999px;
             background: rgba(196, 0, 122, 0.05);
             filter: blur(40px);
@@ -313,45 +311,81 @@ function renderHeroSection(): void
             height: 100%;
         }
 
-        /* Form Header */
+        /* Form Header — Meta row placed physically ABOVE heading so it NEVER overlaps */
         .hero-form-header {
-            margin-bottom: 24px;
+            margin-bottom: 12px;
         }
 
-        .hero-form-header .title-row {
+        .hero-form-top-row {
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 8px;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
+            flex-wrap: wrap;
         }
 
-        .hero-form-header .title-row svg {
-            width: 16px;
-            height: 16px;
+        .hero-form-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #C4007A;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .hero-form-kicker svg {
+            width: 13px;
+            height: 13px;
             color: #C4007A;
             flex-shrink: 0;
         }
 
+        .hero-rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #FFFFFF;
+            border: 1px solid #F1C6DC;
+            border-radius: 9999px;
+            padding: 4px 10px;
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #374151;
+            box-shadow: 0 2px 6px rgba(196, 0, 122, 0.06);
+            white-space: nowrap;
+        }
+
+        .hero-rating-badge span {
+            color: #111827;
+            font-weight: 700;
+        }
+
         .hero-form-header h2 {
             font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-weight: 700;
+            font-weight: 800;
             color: #111111;
-            font-size: 1.125rem;
-            margin: 0;
-            line-height: 1.2;
+            font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+            margin: 0 0 4px;
+            line-height: 1.25;
+            display: block;
+            width: 100%;
         }
 
         .hero-form-header .subtitle {
             color: #4B5563;
-            font-size: 0.75rem;
-            line-height: 1.625;
-            margin: 0;
+            font-size: 0.8rem;
+            line-height: 1.5;
+            margin: 0 0 4px;
         }
 
         .hero-form-header .contact-for {
-            font-size: 0.625rem;
+            font-size: 0.72rem;
             color: #6B7280;
-            margin: 8px 0 0;
+            margin: 0;
+            line-height: 1.4;
         }
 
         .hero-form-header .contact-for .label {
@@ -368,8 +402,8 @@ function renderHeroSection(): void
         .hero-form-row {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 16px;
+            gap: 10px;
+            margin-bottom: 10px;
         }
 
         .hero-input-wrap {
@@ -388,7 +422,7 @@ function renderHeroSection(): void
         }
 
         .hero-input-wrap.textarea-wrap svg {
-            top: 14px;
+            top: 13px;
             transform: none;
         }
 
@@ -399,12 +433,13 @@ function renderHeroSection(): void
             border-radius: 8px;
             border: 1px solid rgba(196, 0, 122, 0.15);
             background: #fff;
-            padding: 12px 12px 12px 32px;
-            font-size: 0.875rem;
+            padding: 9px 12px 9px 32px;
+            font-size: 0.84rem;
             color: #111111;
             font-family: inherit;
             transition: all 0.2s ease;
             outline: none;
+            box-sizing: border-box;
         }
 
         .hero-select {
@@ -430,13 +465,6 @@ function renderHeroSection(): void
             background: #fff;
         }
 
-        .hero-select option:checked,
-        .hero-select option:hover,
-        .hero-select option:focus {
-            background: #C4007A;
-            color: #fff;
-        }
-
         .hero-input::placeholder,
         .hero-textarea::placeholder {
             color: #9CA3AF;
@@ -451,16 +479,16 @@ function renderHeroSection(): void
 
         .hero-textarea {
             resize: none;
-            min-height: 80px;
-            padding-top: 12px;
+            min-height: 64px;
+            padding-top: 10px;
         }
 
         /* Checkboxes */
         .hero-checks {
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-bottom: 16px;
+            gap: 6px;
+            margin-bottom: 10px;
         }
 
         .hero-check-label {
@@ -484,11 +512,11 @@ function renderHeroSection(): void
         .hero-check-box {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             border-radius: 8px;
             border: 1px solid rgba(196, 0, 122, 0.15);
             background: #fff;
-            padding: 8px 12px;
+            padding: 6px 10px;
         }
 
         .hero-check-box input[type="checkbox"] {
@@ -500,7 +528,7 @@ function renderHeroSection(): void
         }
 
         .hero-check-box .text {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #4B5563;
         }
 
@@ -515,37 +543,37 @@ function renderHeroSection(): void
             width: 100%;
             border-radius: 9999px;
             background: linear-gradient(to right, #C4007A, #E0398F);
-            padding: 14px 24px;
+            padding: 11px 20px;
             font-weight: 700;
             color: #fff;
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 18px -3px rgba(196, 0, 122, 0.25);
+            transition: all 0.25s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 0.875rem;
+            font-size: 0.85rem;
             border: none;
             cursor: pointer;
             font-family: inherit;
         }
 
         .hero-submit:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
+            transform: translateY(-1px);
+            box-shadow: 0 12px 22px -4px rgba(196, 0, 122, 0.35);
         }
 
         .hero-submit svg {
-            width: 16px;
-            height: 16px;
+            width: 15px;
+            height: 15px;
         }
 
         /* Phone CTA */
         .hero-callout {
             text-align: center;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #6B7280;
-            margin: 16px 0 0;
+            margin: 8px 0 0;
         }
 
         .hero-callout a {
@@ -562,9 +590,9 @@ function renderHeroSection(): void
         .hero-trust {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-            padding-top: 24px;
-            margin-top: 24px;
+            gap: 6px;
+            padding-top: 12px;
+            margin-top: 12px;
             border-top: 1px solid rgba(196, 0, 122, 0.1);
         }
 
@@ -573,12 +601,12 @@ function renderHeroSection(): void
             flex-direction: column;
             align-items: center;
             text-align: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .hero-trust-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 9999px;
             background: rgba(196, 0, 122, 0.1);
             display: flex;
@@ -587,8 +615,8 @@ function renderHeroSection(): void
         }
 
         .hero-trust-icon svg {
-            width: 16px;
-            height: 16px;
+            width: 14px;
+            height: 14px;
             color: #C4007A;
         }
 
@@ -601,33 +629,19 @@ function renderHeroSection(): void
         /* ============================================================
            RESPONSIVE
         ============================================================ */
-
-        /* Small tablets and up */
         @media (min-width: 640px) {
-            .hero-heading { font-size: 2.25rem; }
-            .hero-desc { font-size: 1.125rem; }
-            .hero-desc-sm { font-size: 1rem; }
-            .hero-form-header h2 { font-size: 1.25rem; }
             .hero-form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .hero-heading .highlight-wrap .highlight { height: 16px; }
         }
 
-        /* Large tablets and up */
         @media (min-width: 1024px) {
-            .hero { padding: 32px 0; }
+            .hero { padding: 32px 0 28px; }
             .hero-inner {
-                grid-template-columns: 1.1fr 0.9fr;
-                gap: 48px;
+                grid-template-columns: 1.08fr 0.92fr;
+                gap: 32px;
                 align-items: stretch;
             }
-            .hero-left { padding: 32px; }
-            .hero-right { padding: 32px; }
-            .hero-heading { font-size: 3rem; }
-        }
-
-        /* Extra large desktop */
-        @media (min-width: 1280px) {
-            .hero-heading { font-size: 3rem; }
+            .hero-left { padding: 26px 28px; }
+            .hero-right { padding: 24px 28px; }
         }
     </style>
 
@@ -657,7 +671,7 @@ function renderHeroSection(): void
                     <!-- Badge -->
                     <div class="hero-badge">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-                        <span><?= e((string) ($content['badge'] ?? '')) ?></span>
+                        <span><?= e((string) ($content['badge'] ?? 'DIGITAL GROWTH AGENCY')) ?></span>
                     </div>
 
                     <!-- Main Heading -->
@@ -667,14 +681,13 @@ function renderHeroSection(): void
                             <span class="underline-wrap">
                                 <span class="text accent"><?= e((string) $content['heading_underline']) ?></span>
                                 <svg class="underline-svg" viewBox="0 0 300 12" preserveAspectRatio="none">
-                                    <path d="M2 6C60 2 240 2 298 6" stroke="#C4007A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.3"/>
+                                    <path d="M2 6C60 2 240 2 298 6" stroke="#C4007A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/>
                                 </svg>
                             </span>
                         <?php endif; ?>
                         <?php if (!empty($content['heading_highlight'])): ?>
                             <span class="highlight-wrap">
                                 <span class="text"><?= e((string) $content['heading_highlight']) ?></span>
-                                <span class="highlight"></span>
                             </span>
                         <?php endif; ?>
                         <span class="accent"><?= e((string) ($content['heading_suffix'] ?? '')) ?></span>
@@ -707,17 +720,19 @@ function renderHeroSection(): void
                     <div class="hero-right-blob"></div>
 
                     <div class="hero-form-content">
-                        <div class="hero-floating-chip wtm-float" style="position:absolute;top:-14px;right:20px;background:#ffffff;border:1.5px solid #F1C6DC;border-radius:9999px;padding:6px 14px;font-size:0.76rem;font-weight:700;color:#111827;box-shadow:0 8px 20px rgba(196,0,122,0.15);display:flex;align-items:center;gap:6px;z-index:20;">⭐ <span>4.9/5 Rating</span> · 500+ Brands</div>
-
-                        <!-- Form Header -->
+                        <!-- Form Header (Rating Badge positioned in dedicated meta row, NEVER overlapping heading) -->
                         <div class="hero-form-header">
-                            <div class="title-row">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
-                                <h2><?= e((string) ($content['form_title'] ?? '')) ?></h2>
+                            <div class="hero-form-top-row">
+                                <div class="hero-form-kicker">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                                    <span>Free Strategy Call</span>
+                                </div>
+                                <div class="hero-rating-badge">⭐ <span>4.9/5 Rating</span> · 500+ Brands</div>
                             </div>
+                            <h2><?= e((string) ($content['form_title'] ?? 'Get Your Free Consultation')) ?></h2>
                             <p class="subtitle"><?= e((string) ($content['form_subtitle'] ?? '')) ?></p>
                             <p class="contact-for">
-                                <span class="label"><?= e((string) ($content['contact_for_label'] ?? '')) ?></span> <?= e((string) ($content['contact_for'] ?? '')) ?>
+                                <span class="label"><?= e((string) ($content['contact_for_label'] ?? 'Contact for:')) ?></span> <?= e((string) ($content['contact_for'] ?? '')) ?>
                             </p>
                         </div>
 
@@ -762,10 +777,10 @@ function renderHeroSection(): void
                             </div>
 
                             <!-- Message -->
-                            <div class="hero-form-row" style="grid-template-columns: 1fr; margin-bottom: 16px;">
+                            <div class="hero-form-row" style="grid-template-columns: 1fr; margin-bottom: 10px;">
                                 <div class="hero-input-wrap textarea-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                                    <textarea name="message" class="hero-textarea" rows="3" placeholder="<?= e((string) ($content['message_placeholder'] ?? '')) ?>"></textarea>
+                                    <textarea name="message" class="hero-textarea" rows="2" placeholder="<?= e((string) ($content['message_placeholder'] ?? '')) ?>"></textarea>
                                 </div>
                             </div>
 

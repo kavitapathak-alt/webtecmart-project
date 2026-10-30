@@ -55,34 +55,36 @@ function renderTrustedPartnersSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.1);
-            padding: 6px 10px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .tp-badge svg {
-            width: 12px;
-            height: 12px;
+            width: 13px;
+            height: 13px;
             color: #C4007A;
             flex-shrink: 0;
         }
 
         .tp-badge span {
-            font-size: 10px;
+            font-size: 0.72rem;
             color: #C4007A;
-            font-weight: 600;
-            letter-spacing: 0.025em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
         .tp-heading {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-weight: 800;
             color: #111827;
-            margin: 0;
-            line-height: 1.3;
+            margin: 0 0 8px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
         }
 
         .tp-heading .brand-highlight {
@@ -97,12 +99,15 @@ function renderTrustedPartnersSection(): void
             bottom: -4px;
             width: 100%;
             height: 6px;
+            pointer-events: none;
         }
 
         .tp-subtitle {
-            font-size: 0.75rem;
-            color: #6B7280;
-            margin: 6px 0 0;
+            font-size: 0.95rem;
+            color: #4B5563;
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.55;
         }
 
         /* ===== Marquee ===== */

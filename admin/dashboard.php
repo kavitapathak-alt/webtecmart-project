@@ -6,6 +6,7 @@ ensureAdmin();
 $leadCount = (int) db()->query('SELECT COUNT(*) as total FROM leads')->fetch()['total'];
 $contactCount = (int) db()->query('SELECT COUNT(*) as total FROM contacts')->fetch()['total'];
 
+$serviceCount = (int) db()->query("SELECT COUNT(*) FROM content_items WHERE content_type = 'service_detail'")->fetchColumn();
 $blogCount = (int) db()->query("SELECT COUNT(*) as total FROM content_items WHERE content_type = 'blog'")->fetch()['total'];
 $partnerCount = (int) db()->query("SELECT COUNT(*) as total FROM content_items WHERE content_type = 'partner'")->fetch()['total'];
 $totalContentItems = (int) db()->query('SELECT COUNT(*) as total FROM content_items')->fetch()['total'];
@@ -235,11 +236,11 @@ require_once __DIR__ . '/templates/header.php';
 
     <div class="adm-card dash-stat-card">
         <div class="dash-stat-icon blue">
-            <i class="bi bi-chat-left-dots-fill"></i>
+            <i class="bi bi-briefcase-fill"></i>
         </div>
         <div class="dash-stat-info">
-            <div class="num"><?= $contactCount ?></div>
-            <div class="label">Direct Messages</div>
+            <div class="num"><?= $serviceCount ?></div>
+            <div class="label">Live Service Pages</div>
         </div>
     </div>
 
@@ -266,8 +267,11 @@ require_once __DIR__ . '/templates/header.php';
 
 <!-- Quick Actions -->
 <div class="dash-quick-actions">
-    <a href="/admin/content.php?section=collection:blog" class="dash-action-btn primary">
-        <i class="bi bi-plus-circle-fill"></i> Manage Blog Articles
+    <a href="/admin/services.php" class="dash-action-btn primary">
+        <i class="bi bi-briefcase-fill"></i> Manage Services CMS (<?= $serviceCount ?>)
+    </a>
+    <a href="/admin/content.php?section=collection:blog" class="dash-action-btn">
+        <i class="bi bi-journal-check"></i> Blog Articles
     </a>
     <a href="/admin/content.php?section=collection:hero_content" class="dash-action-btn">
         <i class="bi bi-lightning-charge"></i> Edit Homepage Hero

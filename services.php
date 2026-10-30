@@ -127,28 +127,26 @@ function spIcon(string $name): string {
     .sp-pill {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        background: rgba(196, 0, 122, 0.1);
-        padding: 8px 16px;
+        gap: 6px;
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.15);
+        padding: 5px 14px;
         border-radius: 9999px;
-        margin-bottom: 16px;
+        margin-bottom: 10px;
     }
-    @media (min-width: 640px) { .sp-pill { margin-bottom: 20px; } }
-
     .sp-pill svg {
-        width: 16px;
-        height: 16px;
+        width: 13px;
+        height: 13px;
         color: #C4007A;
         flex-shrink: 0;
     }
     .sp-pill span {
         color: #C4007A;
-        font-weight: 600;
-        font-size: 12px;
-        letter-spacing: 0.05em;
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
     }
-    @media (min-width: 640px) { .sp-pill span { font-size: 14px; } }
 
     .sp-hero-h1 {
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;

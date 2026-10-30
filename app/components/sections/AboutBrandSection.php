@@ -89,35 +89,37 @@ function renderAboutBrandSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.1);
-            padding: 4px 10px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .about-pill svg {
-            width: 12px;
-            height: 12px;
+            width: 13px;
+            height: 13px;
             color: #C4007A;
             flex-shrink: 0;
         }
 
         .about-pill span {
-            font-size: 10px;
+            font-size: 0.72rem;
             color: #C4007A;
-            font-weight: 600;
-            letter-spacing: 0.025em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
         .about-heading {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-weight: 800;
             color: #111827;
-            margin: 0;
-            line-height: 1.3;
-            padding: 0 8px;
+            margin: 0 0 8px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+            padding: 0;
         }
 
         .about-heading .accent {
@@ -135,11 +137,12 @@ function renderAboutBrandSection(): void
         }
 
         .about-subtitle {
-            font-size: 0.75rem;
-            color: #6B7280;
+            font-size: 0.95rem;
+            color: #4B5563;
             max-width: 640px;
-            margin: 8px auto 0;
-            padding: 0 16px;
+            margin: 0 auto;
+            line-height: 1.55;
+            padding: 0;
         }
 
         /* ===== Main Grid ===== */
@@ -535,7 +538,7 @@ function renderAboutBrandSection(): void
 
         /* Small (≥ 480px) — mini improvements */
         @media (min-width: 480px) {
-            .about-section { padding: 20px 0; }
+            .about-section { padding: 24px 0 22px; }
             .about-header { margin-bottom: 32px; }
             .about-pill { gap: 8px; padding: 6px 12px; margin-bottom: 12px; }
             .about-pill svg { width: 14px; height: 14px; }
@@ -584,13 +587,13 @@ function renderAboutBrandSection(): void
 
         /* Medium (≥ 768px) */
         @media (min-width: 768px) {
-            .about-section { padding: 24px 0; }
-            .about-header { margin-bottom: 40px; }
+            .about-section { padding: 28px 0 24px; }
+            .about-header { margin-bottom: 22px; }
             .about-pill svg { width: 16px; height: 16px; }
             .about-pill span { font-size: 14px; }
             .about-heading { font-size: 1.875rem; }
             .about-subtitle { font-size: 1rem; }
-            .about-grid { gap: 40px; }
+            .about-grid { gap: 28px; }
             .about-brand-badge { bottom: 16px; left: 16px; padding: 10px 16px; }
             .about-brand-badge h3 { font-size: 1rem; }
             .about-brand-badge p { font-size: 12px; }
@@ -630,8 +633,8 @@ function renderAboutBrandSection(): void
 
         /* Large (≥ 1024px) — 2-col layout */
         @media (min-width: 1024px) {
-            .about-section { padding: 32px 0; }
-            .about-header { margin-bottom: 48px; }
+            .about-section { padding: 32px 0 28px; }
+            .about-header { margin-bottom: 24px; }
             .about-heading { font-size: 2.25rem; }
             .about-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));

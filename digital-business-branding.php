@@ -2,7 +2,10 @@
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('digital-business-branding');
+
+$serviceData = [
     'icon' => 'sparkles',
     'title' => 'Digital Business Branding',
     'tagline' => 'Build a Brand That Sticks',
@@ -52,6 +55,14 @@ renderServicePageLayout([
         ['q' => 'Do you help with brand rollout?',                       'a' => 'Yes, we assist with applying your new identity across your website, social media, packaging, and other touchpoints.'],
         ['q' => 'How much does branding cost?',                          'a' => 'Pricing depends on scope — a simple logo project vs. a full rebrand. Contact us for a free consultation and custom quote.'],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 
 require_once __DIR__ . '/app/templates/footer.php';

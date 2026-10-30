@@ -107,43 +107,92 @@ function apIcon(string $name): string {
     .ap-pill {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        background: rgba(196, 0, 122, 0.1);
-        padding: 6px 12px;
+        gap: 6px;
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.15);
+        padding: 5px 14px;
         border-radius: 9999px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
     .ap-pill svg {
-        width: 12px;
-        height: 12px;
+        width: 13px;
+        height: 13px;
         color: #C4007A;
         flex-shrink: 0;
     }
     .ap-pill span {
         color: #C4007A;
-        font-weight: 600;
-        font-size: 0.75rem;
-        letter-spacing: 0.025em;
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
         text-transform: uppercase;
     }
     @media (min-width: 640px) {
-        .ap-pill { padding: 8px 16px; gap: 8px; }
-        .ap-pill svg { width: 16px; height: 16px; }
-        .ap-pill span { font-size: 0.875rem; }
+        .ap-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.15);
+        padding: 5px 14px;
+        border-radius: 9999px;
+        margin-bottom: 10px;
+    }
+    .ap-pill svg {
+        width: 13px;
+        height: 13px;
+        color: #C4007A;
+        flex-shrink: 0;
+    }
+    .ap-pill span {
+        color: #C4007A;
+        font-weight: 700;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
     }
 
     .ap-h1 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
         color: #111827;
-        line-height: 1.2;
-        margin: 0;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
         padding: 0 8px;
     }
-    @media (min-width: 640px) { .ap-h1 { font-size: 1.875rem; line-height: 1.1; } }
-    @media (min-width: 768px) { .ap-h1 { font-size: 2.25rem; } }
-    @media (min-width: 1024px) { .ap-h1 { font-size: 3rem; } }
+    @media (min-width: 640px) { .ap-h1 {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+        padding: 0 8px;
+    } }
+    @media (min-width: 768px) { .ap-h1 {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+        padding: 0 8px;
+    } }
+    @media (min-width: 1024px) { .ap-h1 {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
+        color: #111827;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
+        margin: 0 0 8px;
+        padding: 0 8px;
+    } }
 
     .ap-h1 .accent {
         color: #C4007A;
@@ -388,16 +437,29 @@ function apIcon(string $name): string {
     @media (min-width: 640px) { .ap-section-header { margin-bottom: 40px; } }
 
     .ap-section-header h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-        font-size: 1.25rem;
-        font-weight: 700;
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+        font-weight: 800;
         color: #111827;
-        margin: 0;
+        margin: 0 0 8px;
+        line-height: 1.18;
+        letter-spacing: -0.02em;
     }
-    @media (min-width: 640px) { .ap-section-header h2 { font-size: 1.5rem; } }
-    @media (min-width: 768px) { .ap-section-header h2 { font-size: 1.875rem; } }
-
-    .ap-section-header h2 .accent { color: #C4007A; }
+    .ap-section-header h2 .accent,
+    .ap-story-text h2 .accent {
+        color: #C4007A;
+        position: relative;
+        display: inline-block;
+    }
+    .ap-section-header h2 .accent svg,
+    .ap-story-text h2 .accent svg {
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 6px;
+        pointer-events: none;
+    }
 
     .ap-section-header p {
         color: #6B7280;

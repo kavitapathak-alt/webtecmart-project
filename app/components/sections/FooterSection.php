@@ -113,7 +113,7 @@ function renderFooterSection(): void
         .ft-inner {
             position: relative;
             z-index: 10;
-            padding: 48px 0;
+            padding: 36px 0 24px;
         }
 
         /* Grid */
@@ -418,7 +418,7 @@ function renderFooterSection(): void
 
         /* Tablets ≥ 768px — 2 columns */
         @media (min-width: 768px) {
-            .ft-inner { padding: 64px 0; }
+            .ft-inner { padding: 40px 0 28px; }
             .ft-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 32px;
@@ -436,7 +436,7 @@ function renderFooterSection(): void
 
         /* Desktop ≥ 1024px — 4 columns */
         @media (min-width: 1024px) {
-            .ft-inner { padding: 64px 0; }
+            .ft-inner { padding: 40px 0 28px; }
             .ft-grid {
                 grid-template-columns: repeat(4, minmax(0, 1fr));
                 gap: 40px;

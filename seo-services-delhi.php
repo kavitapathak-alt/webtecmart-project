@@ -64,7 +64,10 @@ require_once __DIR__ . '/app/templates/service-page-layout.php';
 </script>
 
 <?php
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('seo-services-delhi');
+
+$serviceData = [
     'icon' => 'trending',
     'title' => 'Top SEO Company in Delhi NCR',
     'tagline' => 'Rank #1 on Google. Dominate Delhi NCR Search Traffic.',
@@ -135,7 +138,15 @@ At WebTecMart, we are a premier SEO company in Delhi with over 13+ years of expe
             'a' => 'Simply fill out our free consultation form or call us directly at +91-9999674255. Our SEO specialist will review your website and provide a free SEO audit and custom growth proposal within 24 hours.',
         ],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 ?>
 
 <!-- Local Delhi Testimonial & Trust Highlights -->

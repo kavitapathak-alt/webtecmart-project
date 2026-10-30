@@ -6,7 +6,10 @@ $pageMeta = [
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('performance-marketing');
+
+$serviceData = [
     'icon' => 'target',
     'title' => 'Performance Marketing',
     'tagline' => 'Data-Driven Advertising Focused Relentlessly on ROAS & Revenue',
@@ -69,6 +72,14 @@ At WebTecMart, we combine quantitative media buying with psychological creative 
             'a' => 'After our initial onboarding strategy session, campaigns, tracking infrastructure, and creative assets are typically live within 5 to 7 business days.',
         ],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 
 require_once __DIR__ . '/app/templates/footer.php';

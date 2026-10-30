@@ -251,26 +251,28 @@ function renderSeoSuccessStoriesSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.1);
-            padding: 6px 10px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        .spo-pill svg { width: 12px; height: 12px; color: #C4007A; flex-shrink: 0; }
+        .spo-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
         .spo-pill span {
-            font-size: 10px;
+            font-size: 0.72rem;
             color: #C4007A;
-            font-weight: 600;
-            letter-spacing: 0.025em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
         .spo-heading {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-weight: 800;
             color: #111827;
-            margin: 0;
-            line-height: 1.2;
+            margin: 0 0 8px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
         }
         .spo-heading .accent {
             color: #C4007A;
@@ -285,10 +287,11 @@ function renderSeoSuccessStoriesSection(): void
             height: 6px;
         }
         .spo-subtitle {
-            font-size: 0.75rem;
-            color: #6B7280;
-            max-width: 576px;
-            margin: 12px auto 0;
+            font-size: 0.95rem;
+            color: #4B5563;
+            max-width: 640px;
+            margin: 0 auto;
+            line-height: 1.55;
         }
 
         /* Case Studies Container */
@@ -882,13 +885,13 @@ function renderSeoSuccessStoriesSection(): void
         ============================================================ */
 
         @media (min-width: 480px) {
-            .spo-section { padding: 12px 0; }
+            .spo-section { padding: 24px 0 22px; }
             .spo-pill { gap: 8px; padding: 8px 12px; }
             .spo-pill svg { width: 14px; height: 14px; }
             .spo-pill span { font-size: 11px; }
             .spo-heading { font-size: 1.875rem; }
             .spo-subtitle { font-size: 0.875rem; }
-            .spo-list { gap: 48px; }
+            .spo-list { gap: 24px; }
             .spo-browser { gap: 6px; padding: 10px 14px; }
             .spo-browser-dot { width: 10px; height: 10px; }
             .spo-browser-url { font-size: 9px; }
@@ -912,7 +915,7 @@ function renderSeoSuccessStoriesSection(): void
             .spo-keyword, .spo-keyword-more { font-size: 10px; padding: 6px 10px; }
             .spo-view-link { font-size: 0.875rem; }
             .spo-view-link svg { width: 14px; height: 14px; }
-            .spo-cta { margin-top: 48px; padding: 24px; border-radius: 24px; }
+            .spo-cta { margin-top: 24px; padding: 24px; border-radius: 24px; }
             .spo-cta-icon { width: 48px; height: 48px; }
             .spo-cta-icon svg { width: 24px; height: 24px; }
             .spo-cta h3 { font-size: 1.5rem; }
@@ -938,10 +941,10 @@ function renderSeoSuccessStoriesSection(): void
         }
 
         @media (min-width: 768px) {
-            .spo-section { padding: 12px 0; }
+            .spo-section { padding: 24px 0 22px; }
             .spo-heading { font-size: 1.875rem; }
             .spo-subtitle { font-size: 1rem; }
-            .spo-list { gap: 56px; }
+            .spo-list { gap: 28px; }
             .spo-browser { gap: 6px; padding: 12px 16px; }
             .spo-browser-dot { width: 10px; height: 10px; }
             .spo-browser-url { font-size: 10px; margin-left: 12px; }
@@ -964,7 +967,7 @@ function renderSeoSuccessStoriesSection(): void
             .spo-keywords-title { font-size: 12px; margin-bottom: 12px; }
             .spo-keyword, .spo-keyword-more { font-size: 12px; padding: 8px 12px; }
             .spo-view-link { font-size: 0.875rem; margin-top: 24px; }
-            .spo-cta { margin-top: 56px; padding: 32px; }
+            .spo-cta { margin-top: 28px; padding: 32px; }
             .spo-cta-icon { width: 56px; height: 56px; margin-bottom: 20px; }
             .spo-cta-icon svg { width: 28px; height: 28px; }
             .spo-cta h3 { font-size: 1.875rem; margin-bottom: 12px; }
@@ -983,12 +986,12 @@ function renderSeoSuccessStoriesSection(): void
         }
 
         @media (min-width: 1024px) {
-            .spo-section { padding: 24px 0; }
-            .spo-header { margin-bottom: 48px; }
+            .spo-section { padding: 28px 0 26px; }
+            .spo-header { margin-bottom: 24px; }
             .spo-heading { font-size: 2.25rem; }
             .spo-bg-shape-1 { width: 128px; height: 128px; top: 80px; left: 40px; }
             .spo-bg-shape-2 { width: 160px; height: 160px; bottom: 80px; right: 40px; }
-            .spo-list { gap: 64px; }
+            .spo-list { gap: 32px; }
             .spo-preview { height: 384px; }
             .spo-case {
                 grid-template-columns: repeat(2, minmax(0, 1fr));

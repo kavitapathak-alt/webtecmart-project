@@ -6,7 +6,10 @@ $pageMeta = [
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('ecommerce-seo');
+
+$serviceData = [
     'icon' => 'globe',
     'title' => 'E-Commerce SEO Services',
     'tagline' => 'Turn Product Searches into Consistent Store Sales',
@@ -69,6 +72,14 @@ At WebTecMart, we specialize in high-impact eCommerce SEO architectures. We opti
             'a' => 'Most eCommerce stores see notable indexation improvements and long-tail traffic growth within 60 to 90 days, with significant revenue and category ranking expansion kicking in between months 4 and 6.',
         ],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 
 require_once __DIR__ . '/app/templates/footer.php';

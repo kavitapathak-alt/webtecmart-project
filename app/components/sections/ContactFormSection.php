@@ -98,27 +98,29 @@ function renderContactFormSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.1);
-            padding: 6px 10px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        .cfs-pill svg { width: 12px; height: 12px; color: #C4007A; flex-shrink: 0; }
+        .cfs-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
         .cfs-pill span {
-            font-size: 10px;
+            font-size: 0.72rem;
             color: #C4007A;
-            font-weight: 600;
-            letter-spacing: 0.025em;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
         .cfs-heading {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-weight: 800;
             color: #111827;
-            margin: 0;
-            line-height: 1.2;
+            margin: 0 0 8px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
         }
         .cfs-heading .accent {
             color: #C4007A;
@@ -134,10 +136,11 @@ function renderContactFormSection(): void
         }
 
         .cfs-subtitle {
-            font-size: 0.75rem;
-            color: #6B7280;
+            font-size: 0.95rem;
+            color: #4B5563;
             max-width: 640px;
-            margin: 12px auto 0;
+            margin: 0 auto;
+            line-height: 1.55;
         }
 
         /* Grid */
@@ -640,7 +643,7 @@ function renderContactFormSection(): void
 
         /* Small phones ≥ 480px */
         @media (min-width: 480px) {
-            .cfs-section { padding: 32px 0; }
+            .cfs-section { padding: 28px 0 24px; }
             .cfs-pill { gap: 8px; padding: 8px 12px; }
             .cfs-pill svg { width: 14px; height: 14px; }
             .cfs-pill span { font-size: 11px; }
@@ -695,8 +698,8 @@ function renderContactFormSection(): void
 
         /* Large tablets ≥ 768px */
         @media (min-width: 768px) {
-            .cfs-section { padding: 40px 0; }
-            .cfs-header { margin-bottom: 40px; }
+            .cfs-section { padding: 32px 0 28px; }
+            .cfs-header { margin-bottom: 22px; }
             .cfs-heading { font-size: 1.875rem; }
             .cfs-subtitle { font-size: 1rem; margin-top: 12px; }
             .cfs-grid { gap: 24px; }
@@ -714,7 +717,7 @@ function renderContactFormSection(): void
 
         /* Desktop ≥ 1024px — 5-col grid (2 + 3) */
         @media (min-width: 1024px) {
-            .cfs-section { padding: 48px 0; }
+            .cfs-section { padding: 36px 0 32px; }
             .cfs-grid {
                 grid-template-columns: repeat(5, minmax(0, 1fr));
                 gap: 32px;

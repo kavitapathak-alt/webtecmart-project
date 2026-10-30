@@ -5,42 +5,57 @@ function renderBlogSection(): void
     $posts = array_slice($allPosts, 0, 3);
     if (!$posts) return;
     ?>
-    <section class="home-blog-section" id="blog" style="padding: 72px 0 80px; background: #FBF8F1; position: relative;">
+    <section class="home-blog-section" id="blog" style="padding: 36px 0 32px; background: #FBF8F1; position: relative;">
         <style>
             .home-blog-header {
                 text-align: center;
                 max-width: 720px;
-                margin: 0 auto 48px;
+                margin: 0 auto 22px;
             }
             .home-blog-pill {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                background: rgba(196, 0, 122, 0.1);
+                background: rgba(196, 0, 122, 0.08);
+                border: 1px solid rgba(196, 0, 122, 0.15);
                 color: #C4007A;
-                font-size: 0.75rem;
+                font-size: 0.72rem;
                 font-weight: 700;
-                letter-spacing: 0.1em;
+                letter-spacing: 0.08em;
                 text-transform: uppercase;
-                padding: 6px 14px;
+                padding: 5px 14px;
                 border-radius: 999px;
-                margin-bottom: 14px;
+                margin-bottom: 10px;
             }
+            .home-blog-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
             .home-blog-heading {
-                font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                font-size: clamp(1.85rem, 3.2vw, 2.5rem);
                 font-weight: 800;
                 color: #111827;
-                line-height: 1.2;
-                margin: 0 0 14px;
+                line-height: 1.18;
+                margin: 0 0 8px;
+                letter-spacing: -0.02em;
             }
-            .home-blog-heading span {
+            .home-blog-heading .accent {
                 color: #C4007A;
+                position: relative;
+                display: inline-block;
+            }
+            .home-blog-heading .accent svg {
+                position: absolute;
+                left: 0;
+                bottom: -4px;
+                width: 100%;
+                height: 6px;
+                pointer-events: none;
             }
             .home-blog-desc {
-                font-size: 1.05rem;
+                font-size: 0.95rem;
                 color: #4B5563;
-                line-height: 1.6;
-                margin: 0;
+                line-height: 1.55;
+                margin: 0 auto;
+                max-width: 640px;
             }
             .home-blog-card {
                 background: #ffffff;
@@ -179,11 +194,17 @@ function renderBlogSection(): void
 
         <div class="container" style="max-width: 1240px; margin: 0 auto; padding: 0 20px;">
             <div class="home-blog-header" data-wtm-reveal="fade-up">
-                <span class="home-blog-pill">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                    Marketing Insights
-                </span>
-                <h2 class="home-blog-heading">Latest <span>Articles &amp; SEO Strategies</span></h2>
+                <div class="home-blog-pill">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
+                    <span>LATEST INSIGHTS</span>
+                </div>
+                <h2 class="home-blog-heading">
+                    Latest
+                    <span class="accent">
+                        Articles &amp; Strategies
+                        <svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg>
+                    </span>
+                </h2>
                 <p class="home-blog-desc">Practical tips, search algorithms, and proven digital growth methodologies from WebTecMart's strategists.</p>
             </div>
 

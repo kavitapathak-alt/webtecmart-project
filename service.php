@@ -38,7 +38,7 @@ $packagesPageMeta = [
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
-renderServicePageLayout([
+renderServicePageLayout(array_merge($service, [
     'icon' => $service['icon'] ?? 'sparkles',
     'title' => $service['title'] ?? 'Service',
     'tagline' => $service['tagline'] ?? '',
@@ -47,6 +47,6 @@ renderServicePageLayout([
     'features' => $service['features'] ?? [],
     'process' => $service['process'] ?? [],
     'faqs' => $service['faqs'] ?? [],
-]);
+]));
 
 require_once __DIR__ . '/app/templates/footer.php';

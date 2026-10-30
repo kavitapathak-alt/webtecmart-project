@@ -15,7 +15,7 @@ function renderSearchVisibilitySection(): void
         .search-visibility-section {
             position: relative;
             width: 100%;
-            padding: 32px 0;
+            padding: 24px 0 28px;
             background: #FBF8F1;
             overflow: hidden;
         }
@@ -84,36 +84,43 @@ function renderSearchVisibilitySection(): void
 
         /* Header */
         .search-section-header {
-            margin-bottom: 48px;
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-bottom: 22px;
         }
 
         .search-section-pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            margin-bottom: 16px;
-            border-radius: 999px;
-            background: rgba(196, 0, 122, 0.10);
+            gap: 6px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
+            border-radius: 9999px;
+            margin-bottom: 10px;
             color: #C4007A;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
             text-transform: uppercase;
         }
 
         .search-section-pill svg {
-            width: 15px;
-            height: 15px;
+            width: 13px;
+            height: 13px;
+            color: #C4007A;
+            flex-shrink: 0;
         }
 
         .search-visibility-wrap h2 {
-            margin: 0;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-weight: 800;
             color: #111827;
-            font-size: clamp(2rem, 4vw, 2.5rem);
-            line-height: 1.2;
-            font-weight: 700;
-            letter-spacing: -0.025em;
+            margin: 0 0 8px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
         }
 
         .search-heading-highlight {
@@ -125,32 +132,33 @@ function renderSearchVisibilitySection(): void
         .search-heading-highlight svg {
             position: absolute;
             left: 0;
-            bottom: -8px;
+            bottom: -4px;
             width: 100%;
             height: 6px;
+            pointer-events: none;
         }
 
         .search-heading-highlight path {
             fill: none;
             stroke: #C4007A;
-            stroke-width: 2;
+            stroke-width: 2.5;
             stroke-linecap: round;
-            opacity: 0.3;
+            opacity: 0.35;
         }
 
         .search-visibility-intro {
-            max-width: 672px;
-            margin: 12px auto 0;
-            color: #6B7280;
-            font-size: 1rem;
-            line-height: 1.6;
+            font-size: 0.95rem;
+            line-height: 1.55;
+            color: #4B5563;
+            max-width: 640px;
+            margin: 0 auto;
         }
 
         /* Grid */
         .search-grid {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 32px;
+            gap: 24px;
         }
 
         /* Card */
@@ -307,7 +315,7 @@ function renderSearchVisibilitySection(): void
 
         /* CTA */
         .search-center-cta {
-            margin-top: 48px;
+            margin-top: 24px;
             text-align: center;
         }
 
@@ -348,7 +356,7 @@ function renderSearchVisibilitySection(): void
             align-items: center;
             justify-content: center;
             gap: 12px;
-            margin-top: 40px;
+            margin-top: 24px;
         }
 
         .search-bottom-line {
@@ -406,13 +414,13 @@ function renderSearchVisibilitySection(): void
             }
 
             .search-section-header {
-                margin-bottom: 40px;
+                margin-bottom: 22px;
             }
         }
 
         @media (max-width: 767px) {
             .search-visibility-section {
-                padding: 34px 0 28px;
+                padding: 20px 0 22px;
             }
 
             .search-bg-diamond {
@@ -430,24 +438,44 @@ function renderSearchVisibilitySection(): void
             }
 
             .search-section-header {
-                margin-bottom: 32px;
-            }
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            margin-bottom: 22px;
+        }
 
-            .search-section-pill {
-                gap: 6px;
-                padding: 6px 10px;
-                margin-bottom: 12px;
-                font-size: 0.625rem;
-            }
+        .search-section-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
+            border-radius: 9999px;
+            margin-bottom: 10px;
+            color: #C4007A;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
 
-            .search-section-pill svg {
-                width: 12px;
-                height: 12px;
-            }
+        .search-section-pill svg {
+            width: 13px;
+            height: 13px;
+            color: #C4007A;
+            flex-shrink: 0;
+        }
 
-            .search-visibility-wrap h2 {
-                font-size: clamp(1.75rem, 8vw, 2.25rem);
-            }
+        .search-visibility-wrap h2 {
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-weight: 800;
+            color: #111827;
+            margin: 0 0 8px;
+            line-height: 1.18;
+            letter-spacing: -0.02em;
+        }
 
             .search-heading-highlight svg {
                 bottom: -5px;
@@ -597,17 +625,7 @@ function renderSearchVisibilitySection(): void
             <div class="search-section-header" data-wtm-reveal="fade-up">
 
                 <div class="search-section-pill">
-                    <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        aria-hidden="true"
-                    >
-                        <path d="M12 3l1.9 5.8H20l-4.9 3.6 1.9 5.8-5-3.6-5 3.6 1.9-5.8L4 8.8h6.1z"/>
-                    </svg>
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
 
                     <span><?= e((string) $content['badge']) ?></span>
                 </div>

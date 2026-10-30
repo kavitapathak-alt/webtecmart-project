@@ -5,8 +5,12 @@ $pageMeta = [
 ];
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
+require_once __DIR__ . '/app/components/sections/FooterSection.php';
 
-renderServicePageLayout([
+require_once __DIR__ . '/functions.php';
+$dbService = getServiceBySlug('b2b-exhibition-seo');
+
+$serviceData = [
     'icon' => 'globe',
     'title' => 'B2B & Exhibition SEO Services',
     'tagline' => 'Pack Exhibition Halls & Capture High-Value Global B2B Buyers',
@@ -71,6 +75,14 @@ WebTecMart is India's leading SEO partner for international trade fairs. As the 
             'a' => 'We build evergreen URL structures (e.g., /dates, /exhibitors, /register) alongside annual archive slugs. Instead of deleting pages, we transition past editions into authoritative post-show review hubs while redirecting core search equity into next year\'s upcoming event campaign.',
         ],
     ],
-]);
+];
+
+renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
+    'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
+    'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
+    'process' => !empty($dbService['process']) ? $dbService['process'] : ($serviceData['process'] ?? []),
+    'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
+]) : $serviceData);
 
 renderFooterSection();
