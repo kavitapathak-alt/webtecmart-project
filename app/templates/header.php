@@ -20,6 +20,21 @@ $serviceNavItems = [
     ['label' => 'Performance Marketing', 'path' => '/performance-marketing.php', 'description' => 'Data-driven paid ads across Meta, Google, and YouTube with relentless ROAS focus.'],
     ['label' => 'Local SEO', 'path' => '/local-seo.php', 'description' => 'Dominate Google Maps & 3-pack local search results to drive calls and store visits.'],
 ];
+
+// Dynamically enrich navigation items with live database records
+$dbPagesBySlugNav = [];
+foreach (serviceDetailPages() as $dp) {
+    if (!empty($dp['slug'])) $dbPagesBySlugNav[$dp['slug']] = $dp;
+}
+foreach ($serviceNavItems as &$sni) {
+    $baseName = basename($sni['path'], '.php');
+    if ($baseName !== 'services' && isset($dbPagesBySlugNav[$baseName])) {
+        $dbItem = $dbPagesBySlugNav[$baseName];
+        if (!empty($dbItem['title'])) $sni['label'] = $dbItem['title'];
+        if (!empty($dbItem['summary'])) $sni['description'] = $dbItem['summary'];
+    }
+}
+unset($sni);
 $servicePagePaths = array_map(static function (array $item): string {
     return basename($item['path']);
 }, $serviceNavItems);

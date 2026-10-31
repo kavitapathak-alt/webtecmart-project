@@ -5,6 +5,7 @@ function renderWhatWeDoSection(): void
     $services = [
         [
             'id' => 'branding',
+            'slug' => 'digital-business-branding',
             'href' => '/digital-business-branding.php',
             'icon' => 'pen',
             'title' => 'Digital Business Branding',
@@ -13,6 +14,7 @@ function renderWhatWeDoSection(): void
         ],
         [
             'id' => 'website',
+            'slug' => 'website-design-development',
             'href' => '/website-design-development.php',
             'icon' => 'code',
             'title' => 'Website Design & Development',
@@ -21,6 +23,7 @@ function renderWhatWeDoSection(): void
         ],
         [
             'id' => 'seo',
+            'slug' => 'search-engine-optimization',
             'href' => '/search-engine-optimization.php',
             'icon' => 'search',
             'title' => 'Search Engine Optimization',
@@ -29,6 +32,7 @@ function renderWhatWeDoSection(): void
         ],
         [
             'id' => 'smo',
+            'slug' => 'social-media-optimization',
             'href' => '/social-media-optimization.php',
             'icon' => 'share',
             'title' => 'Social Media Optimization',
@@ -37,6 +41,7 @@ function renderWhatWeDoSection(): void
         ],
         [
             'id' => 'sem',
+            'slug' => 'search-engine-marketing',
             'href' => '/search-engine-marketing.php',
             'icon' => 'megaphone',
             'title' => 'Search Engine Marketing',
@@ -45,6 +50,7 @@ function renderWhatWeDoSection(): void
         ],
         [
             'id' => 'performance',
+            'slug' => 'performance-marketing',
             'href' => '/performance-marketing.php',
             'icon' => 'smartphone',
             'title' => 'Performance Marketing',
@@ -52,6 +58,24 @@ function renderWhatWeDoSection(): void
             'tags' => ['iOS Development', 'Android Development', 'Cross-Platform', 'AppStore Optimization'],
         ],
     ];
+
+    // Synchronize core services with live database records
+    foreach ($services as &$svc) {
+        $slug = $svc['slug'] ?? '';
+        if ($slug !== '') {
+            $dbSvc = getServiceBySlug($slug);
+            if ($dbSvc) {
+                if (!empty($dbSvc['title'])) $svc['title'] = $dbSvc['title'];
+                if (!empty($dbSvc['summary'])) $svc['description'] = $dbSvc['summary'];
+                if (!empty($dbSvc['features'])) {
+                    $svc['tags'] = array_map(function($f) {
+                        return is_array($f) ? ($f['title'] ?? '') : (string) $f;
+                    }, $dbSvc['features']);
+                }
+            }
+        }
+    }
+    unset($svc);
 
     // Icon helper matching exact reference designs
     function coreSvcIcon(string $name): string {

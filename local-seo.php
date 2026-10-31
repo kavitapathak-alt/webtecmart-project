@@ -75,6 +75,8 @@ At WebTecMart, we implement comprehensive local search growth campaigns. We opti
 ];
 
 renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
+    'title' => !empty($dbService['title']) ? $dbService['title'] : $serviceData['title'],
+    'tagline' => !empty($dbService['tagline']) ? $dbService['tagline'] : $serviceData['tagline'],
     'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? ($serviceData['heroDescription'] ?? '')),
     'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
     'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),

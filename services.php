@@ -1336,7 +1336,7 @@ function spIcon(string $name): string {
                                     <?php endforeach; ?>
                                 </div>
 
-                                <a href="<?= e((string) $servicesContent['main_service_link_href']) ?>" class="sp-service-link">
+                                <a href="<?= htmlspecialchars(!empty($service['href']) ? $service['href'] : $servicesContent['main_service_link_href']) ?>" class="sp-service-link">
                                     <?= e((string) $servicesContent['main_service_link_label']) ?>
                                     <?= spIcon('arrow') ?>
                                 </a>
@@ -1362,12 +1362,7 @@ function spIcon(string $name): string {
 
                 <div class="sp-seo-grid">
                     <?php foreach ($seoServices as $seo): 
-                        $cardSlug = '';
-                        $st = strtolower($seo['title']);
-                        if (str_contains($st, 'local')) $cardSlug = '/local-seo.php';
-                        elseif (str_contains($st, 'national')) $cardSlug = '/national-seo.php';
-                        elseif (str_contains($st, 'international')) $cardSlug = '/international-seo.php';
-                        else $cardSlug = '/seo-services-delhi.php';
+                        $cardSlug = !empty($seo['href']) ? $seo['href'] : (!empty($seo['slug']) ? '/' . $seo['slug'] . '.php' : '/seo-services-delhi.php');
                     ?>
                         <div class="sp-seo-card" style="display: flex; flex-direction: column;">
                             <div class="sp-seo-icon">

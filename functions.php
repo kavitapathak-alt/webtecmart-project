@@ -249,11 +249,33 @@ function serviceDetailPages(): array
 
 function getServiceBySlug(string $slug): ?array
 {
+    $cleanSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $slug), '-'));
     foreach (serviceDetailPages() as $sp) {
-        if (($sp['slug'] ?? '') === $slug) {
+        $s = strtolower(trim((string) ($sp['slug'] ?? '')));
+        if ($s === $cleanSlug || $s === strtolower($slug)) {
             return $sp;
         }
     }
+    // Direct DB fallback by metadata slug or title
+    try {
+        $stmt = db()->prepare('SELECT id, title, summary, body, metadata, is_active FROM content_items WHERE content_type = "service_detail" AND (metadata LIKE :s1 OR metadata LIKE :s2 OR title LIKE :s3) LIMIT 1');
+        $stmt->execute([
+            ':s1' => '%"slug":"' . $cleanSlug . '"%',
+            ':s2' => '%"slug":"' . $slug . '"%',
+            ':s3' => '%' . $slug . '%',
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            $meta = json_decode($row['metadata'] ?: '', true);
+            if (is_array($meta)) {
+                if (isset($meta['metadata']) && is_array($meta['metadata'])) {
+                    $meta = array_merge($meta, $meta['metadata']);
+                }
+                $row = array_merge($row, $meta);
+            }
+            return $row;
+        }
+    } catch (\Throwable $e) {}
     return null;
 }
 
@@ -699,19 +721,35 @@ function homepageVisibilityContent(): array
     $items = cmsContent('homepage_visibility', [$defaults]);
     $content = array_merge($defaults, $items[0] ?? []);
     if (!isset($content['services']) || !is_array($content['services'])) $content['services'] = $defaults['services'];
-    $detailSlugsByTitle = [];
+    $visibilitySlugMap = [
+        0 => 'local-seo',
+        1 => 'national-seo',
+        2 => 'international-seo',
+        3 => 'ecommerce-seo',
+        4 => 'small-business-seo',
+        5 => 'online-reputation-management',
+    ];
+    $dbPagesBySlug = [];
     foreach (serviceDetailPages() as $detailPage) {
         $slug = (string) ($detailPage['slug'] ?? '');
-        $titleKey = strtolower(trim((string) ($detailPage['title'] ?? '')));
-        if ($slug !== '' && $titleKey !== '') $detailSlugsByTitle[$titleKey] = $slug;
+        if ($slug !== '') $dbPagesBySlug[$slug] = $detailPage;
     }
     foreach ($content['services'] as $index => &$service) {
         $service = array_merge($defaults['services'][$index] ?? ['number' => sprintf('%02d', $index + 1), 'icon' => 'globe', 'title' => '', 'text' => '', 'href' => '/search-engine-optimization.php'], is_array($service) ? $service : []);
-        $titleKey = strtolower(trim((string) ($service['title'] ?? '')));
-        $legacyHref = strtolower((string) ($service['href'] ?? ''));
-        $isManagedDetailLink = in_array($legacyHref, ['/services', '/services.php', ''], true) || strpos($legacyHref, '/service.php?slug=') === 0;
-        if ($isManagedDetailLink && isset($detailSlugsByTitle[$titleKey])) {
-            $service['href'] = '/service.php?slug=' . rawurlencode($detailSlugsByTitle[$titleKey]);
+        $targetSlug = $visibilitySlugMap[$index] ?? '';
+        if ($targetSlug && isset($dbPagesBySlug[$targetSlug])) {
+            $dbItem = $dbPagesBySlug[$targetSlug];
+            if (!empty($dbItem['title'])) {
+                $service['title'] = $dbItem['title'];
+            }
+            if (!empty($dbItem['summary'])) {
+                $service['text'] = $dbItem['summary'];
+            }
+            if (file_exists(__DIR__ . '/' . $targetSlug . '.php')) {
+                $service['href'] = '/' . $targetSlug . '.php';
+            } else {
+                $service['href'] = '/service.php?slug=' . rawurlencode($targetSlug);
+            }
         }
     }
     unset($service);
@@ -1025,6 +1063,86 @@ function servicesPageContent(): array
     foreach (['intro_paragraphs', 'stats', 'main_services', 'seo_services', 'results', 'process', 'faqs'] as $field) {
         if (!isset($content[$field]) || !is_array($content[$field])) $content[$field] = $defaults[$field];
     }
+
+    // Dynamically synchronize main_services and seo_services with database records from service_detail
+    $dbPages = serviceDetailPages();
+    $dbPagesBySlug = [];
+    foreach ($dbPages as $dp) {
+        if (!empty($dp['slug'])) {
+            $dbPagesBySlug[$dp['slug']] = $dp;
+        }
+    }
+
+    $coreSlugMap = [
+        0 => 'digital-business-branding',
+        1 => 'website-design-development',
+        2 => 'search-engine-optimization',
+        3 => 'social-media-optimization',
+        4 => 'search-engine-marketing',
+        5 => 'performance-marketing',
+    ];
+    foreach ($content['main_services'] as $idx => &$ms) {
+        $slug = $coreSlugMap[$idx] ?? '';
+        if (!$slug || !isset($dbPagesBySlug[$slug])) {
+            foreach ($dbPagesBySlug as $s => $dp) {
+                if (stripos($dp['title'], $ms['title']) !== false || stripos($ms['title'], $dp['title']) !== false) {
+                    $slug = $s;
+                    break;
+                }
+            }
+        }
+        if ($slug && isset($dbPagesBySlug[$slug])) {
+            $dbItem = $dbPagesBySlug[$slug];
+            if (!empty($dbItem['title'])) $ms['title'] = $dbItem['title'];
+            if (!empty($dbItem['summary'])) $ms['description'] = $dbItem['summary'];
+            if (!empty($dbItem['features'])) {
+                $ms['features'] = array_map(function($f) {
+                    return is_array($f) ? ($f['title'] ?? '') : (string) $f;
+                }, $dbItem['features']);
+            }
+            if (file_exists(__DIR__ . '/' . $slug . '.php')) {
+                $ms['href'] = '/' . $slug . '.php';
+            } else {
+                $ms['href'] = '/service.php?slug=' . rawurlencode($slug);
+            }
+        }
+    }
+    unset($ms);
+
+    $seoSlugMap = [
+        0 => 'local-seo',
+        1 => 'national-seo',
+        2 => 'international-seo',
+    ];
+    foreach ($content['seo_services'] as $idx => &$ss) {
+        $slug = $seoSlugMap[$idx] ?? '';
+        if (!$slug || !isset($dbPagesBySlug[$slug])) {
+            foreach ($dbPagesBySlug as $s => $dp) {
+                if (stripos($dp['title'], $ss['title']) !== false || stripos($ss['title'], $dp['title']) !== false) {
+                    $slug = $s;
+                    break;
+                }
+            }
+        }
+        if ($slug && isset($dbPagesBySlug[$slug])) {
+            $dbItem = $dbPagesBySlug[$slug];
+            if (!empty($dbItem['title'])) $ss['title'] = $dbItem['title'];
+            if (!empty($dbItem['summary'])) $ss['description'] = $dbItem['summary'];
+            if (!empty($dbItem['features'])) {
+                $ss['benefits'] = array_map(function($f) {
+                    return is_array($f) ? ($f['title'] ?? '') : (string) $f;
+                }, array_slice($dbItem['features'], 0, 3));
+            }
+            $ss['slug'] = $slug;
+            if (file_exists(__DIR__ . '/' . $slug . '.php')) {
+                $ss['href'] = '/' . $slug . '.php';
+            } else {
+                $ss['href'] = '/service.php?slug=' . rawurlencode($slug);
+            }
+        }
+    }
+    unset($ss);
+
     return $content;
 }
 

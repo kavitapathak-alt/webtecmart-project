@@ -30,7 +30,7 @@ function renderServicePageLayout(array $config): void
     $category        = $config['category'] ?? '';
 
     // Smart Domain-Specific Defaults for Benefits if not explicitly passed
-    $benefits = $config['benefits'] ?? [
+    $benefits = !empty($config['benefits']) ? $config['benefits'] : [
         [
             'icon' => 'trending',
             'title' => 'High-Intent Customer Acquisition',
@@ -1223,14 +1223,19 @@ function renderServicePageLayout(array $config): void
                             <span><?= htmlspecialchars($tagline !== '' ? $tagline : 'DIGITAL GROWTH AGENCY') ?></span>
                         </div>
 
+                        <?php
+                        $rawTitle = trim((string) $title);
+                        $titleWords = preg_split('/\s+/', $rawTitle);
+                        if (count($titleWords) > 1) {
+                            $lastWord = array_pop($titleWords);
+                            $firstPart = implode(' ', $titleWords);
+                            $heroHeadingHtml = htmlspecialchars($firstPart) . ' <span class="accent">' . htmlspecialchars($lastWord) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>';
+                        } else {
+                            $heroHeadingHtml = '<span class="accent">' . htmlspecialchars($rawTitle) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>';
+                        }
+                        ?>
                         <h1 class="svc-hero-title">
-                            <?= htmlspecialchars($title) ?>
-                            <span class="accent">
-                                Excellence
-                                <svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true">
-                                    <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/>
-                                </svg>
-                            </span>
+                            <?= $heroHeadingHtml ?>
                         </h1>
 
                         <p class="svc-hero-desc">

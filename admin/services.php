@@ -143,6 +143,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Build Metadata payload
         $metadata = [
+            'title'            => $title,
+            'summary'          => $summary,
+            'body'             => $body,
             'slug'             => $slug,
             'category'         => $category,
             'icon'             => $icon,
