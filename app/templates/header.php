@@ -9,7 +9,6 @@ $serviceNavItems = [
     ['label' => 'Search Engine Optimization', 'path' => '/search-engine-optimization.php', 'description' => 'Rank higher on Google, capture intent traffic, and drive consistent inbound leads.'],
     ['label' => 'B2B & Exhibition SEO', 'path' => '/b2b-exhibition-seo.php', 'description' => 'Specialized SEO for trade fairs, exhibitions, B2B exporters, and manufacturing brands.'],
     ['label' => 'SEO Services in Delhi', 'path' => '/seo-services-delhi.php', 'description' => 'Top SEO company in Delhi NCR delivering #1 Google rankings & local customer growth.'],
-    ['label' => 'SEO Audit Services', 'path' => '/seo-audit.php', 'description' => 'Forensic 100+ checkpoint diagnostic uncovering crawl, speed, and indexing bottlenecks.'],
     ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Fast, conversion-focused, mobile-first websites engineered to turn visitors into buyers.'],
     ['label' => 'Search Engine Marketing (Google Ads)', 'path' => '/search-engine-marketing.php', 'description' => 'High-ROI PPC and Google Search/Display ad campaigns managed by certified experts.'],
     ['label' => 'Social Media Optimization & Marketing', 'path' => '/social-media-optimization.php', 'description' => 'Build an engaged community and scale your presence across Instagram, LinkedIn, and Meta.'],

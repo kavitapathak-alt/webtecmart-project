@@ -440,9 +440,9 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/services.php?edit=77" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 77 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
-                        <span><i class="bi bi-search text-primary"></i> SEO Audit Services</span>
-                        <span class="badge" style="background: #111827; color: #fff; font-size: 0.62rem; padding: 2px 6px;">100+ Check</span>
+                    <a href="/admin/services.php?edit=69" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 69 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-geo-alt text-primary"></i> SEO Services in Delhi</span>
+                        <span class="badge" style="background: #C4007A; color: #fff; font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
                     </a>
                 </li>
                 <li>
