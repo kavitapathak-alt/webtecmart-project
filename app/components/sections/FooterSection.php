@@ -618,4 +618,6 @@ function renderFooterSection(): void
         }
     </script>
     <?php
+    require_once __DIR__ . '/../modals/EnquiryModal.php';
+    renderEnquiryModal();
 }

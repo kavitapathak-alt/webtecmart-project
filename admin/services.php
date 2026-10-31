@@ -227,6 +227,16 @@ if ($editingId) {
 }
 $isNew = isset($_GET['action']) && $_GET['action'] === 'new';
 
+function getSvcPublicUrl(string $slug): string {
+    $slug = trim($slug);
+    if ($slug === '') return '/services.php';
+    if ($slug === 'b2b-exhibition-seo') return '/b2b-exhibition-seo.php';
+    if (file_exists(dirname(__DIR__) . '/' . $slug . '.php')) {
+        return '/' . $slug . '.php';
+    }
+    return '/service.php?slug=' . urlencode($slug);
+}
+
 require_once __DIR__ . '/templates/header.php';
 ?>
 
@@ -761,7 +771,7 @@ require_once __DIR__ . '/templates/header.php';
                 </h2>
                 <div>
                     <?php if (!empty($item['slug'])): ?>
-                        <a href="<?= ($item['slug'] ?? '') === 'b2b-exhibition-seo' ? '/b2b-exhibition-seo.php' : '/service.php?slug=' . urlencode($item['slug']) ?>" target="_blank" class="btn btn-sm btn-outline-primary">
+                        <a href="<?= getSvcPublicUrl($item['slug'] ?? '') ?>" target="_blank" class="btn btn-sm btn-outline-primary">
                             <i class="bi bi-box-arrow-up-right me-1"></i> Preview Live Page
                         </a>
                     <?php endif; ?>
@@ -1025,7 +1035,7 @@ require_once __DIR__ . '/templates/header.php';
                                                 <?php endif; ?>
                                             </div>
                                             <div class="scms-svc-tagline"><?= htmlspecialchars($svc['tagline'] ?? '') ?></div>
-                                            <div class="scms-svc-slug"><?= ($svc['slug'] ?? '') === 'b2b-exhibition-seo' ? '/b2b-exhibition-seo.php' : '/service.php?slug=' . htmlspecialchars($slug) ?></div>
+                                            <div class="scms-svc-slug"><?= htmlspecialchars(getSvcPublicUrl($slug)) ?></div>
                                         </div>
                                     </div>
                                 </td>
@@ -1050,7 +1060,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </td>
                                 <td>
                                     <div class="scms-actions-cell justify-content-end">
-                                        <a href="<?= ($svc['slug'] ?? '') === 'b2b-exhibition-seo' ? '/b2b-exhibition-seo.php' : '/service.php?slug=' . urlencode($slug) ?>" target="_blank" class="scms-btn-action" title="Preview Public Page">
+                                        <a href="<?= htmlspecialchars(getSvcPublicUrl($slug)) ?>" target="_blank" class="scms-btn-action" title="Preview Public Page">
                                             <i class="bi bi-box-arrow-up-right"></i>
                                         </a>
                                         <a href="/admin/services.php?edit=<?= (int) $svc['id'] ?>" class="scms-btn-action edit" title="Edit Service">

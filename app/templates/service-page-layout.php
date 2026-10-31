@@ -1238,7 +1238,7 @@ function renderServicePageLayout(array $config): void
                         </p>
 
                         <div class="svc-hero-actions">
-                            <a href="/contact.php" class="svc-btn-primary">
+                            <a href="/contact.php" class="svc-btn-primary trigger-enquiry-modal" data-service="<?= htmlspecialchars($title) ?>">
                                 <span>Get Free Consultation</span>
                                 <?= svcIcon('arrow', 16) ?>
                             </a>
@@ -1612,7 +1612,7 @@ function renderServicePageLayout(array $config): void
                     </p>
 
                     <div class="svc-cta-btns">
-                        <a href="/contact.php" class="svc-cta-btn-main">
+                        <a href="/contact.php" class="svc-cta-btn-main trigger-enquiry-modal" data-service="<?= htmlspecialchars($title) ?>">
                             <span>Get Free Consultation</span>
                             <?= svcIcon('arrow', 18) ?>
                         </a>

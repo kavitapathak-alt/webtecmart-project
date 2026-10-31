@@ -1361,15 +1361,22 @@ function spIcon(string $name): string {
                 </div>
 
                 <div class="sp-seo-grid">
-                    <?php foreach ($seoServices as $seo): ?>
-                        <div class="sp-seo-card">
+                    <?php foreach ($seoServices as $seo): 
+                        $cardSlug = '';
+                        $st = strtolower($seo['title']);
+                        if (str_contains($st, 'local')) $cardSlug = '/local-seo.php';
+                        elseif (str_contains($st, 'national')) $cardSlug = '/national-seo.php';
+                        elseif (str_contains($st, 'international')) $cardSlug = '/international-seo.php';
+                        else $cardSlug = '/seo-services-delhi.php';
+                    ?>
+                        <div class="sp-seo-card" style="display: flex; flex-direction: column;">
                             <div class="sp-seo-icon">
                                 <?= spIcon($seo['icon']) ?>
                             </div>
                             <h4 class="sp-seo-title"><?= htmlspecialchars($seo['title']) ?></h4>
                             <p class="sp-seo-desc"><?= htmlspecialchars($seo['description']) ?></p>
 
-                            <div class="sp-seo-benefits">
+                            <div class="sp-seo-benefits" style="margin-bottom: 18px;">
                                 <?php foreach (($seo['benefits'] ?? []) as $b): ?>
                                     <span class="sp-seo-benefit">
                                         <?= spIcon('check') ?>
@@ -1377,14 +1384,24 @@ function spIcon(string $name): string {
                                     </span>
                                 <?php endforeach; ?>
                             </div>
+
+                            <div style="margin-top: auto; padding-top: 14px;">
+                                <a href="<?= $cardSlug ?>" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.88rem; color: #C4007A; text-decoration: none;">
+                                    <span>Explore <?= htmlspecialchars($seo['title']) ?></span>
+                                    <?= spIcon('arrow') ?>
+                                </a>
+                            </div>
                         </div>
                     <?php endforeach; ?>
                 </div>
 
-                <div class="sp-seo-cta">
-                    <a href="<?= e((string) $servicesContent['seo_quote_href']) ?>">
-                        <?= e((string) $servicesContent['seo_quote_label']) ?>
+                <div class="sp-seo-cta" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 28px;">
+                    <a href="/seo-services-delhi.php" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%); color: #fff; padding: 13px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 24px rgba(196, 0, 122, 0.28); white-space: nowrap;">
+                        <span>View All SEO Services in Delhi Hub</span>
                         <?= spIcon('arrow') ?>
+                    </a>
+                    <a href="javascript:void(0)" class="trigger-enquiry-modal" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid rgba(196, 0, 122, 0.35); color: #C4007A; padding: 13px 26px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap;">
+                        <?= e((string) $servicesContent['seo_quote_label']) ?>
                     </a>
                 </div>
             </div>

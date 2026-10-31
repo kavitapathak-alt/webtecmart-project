@@ -440,6 +440,12 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
                     </a>
                 </li>
                 <li>
+                    <a href="/admin/services.php?edit=77" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 77 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-search text-primary"></i> SEO Audit Services</span>
+                        <span class="badge" style="background: #111827; color: #fff; font-size: 0.62rem; padding: 2px 6px;">100+ Check</span>
+                    </a>
+                </li>
+                <li>
                     <a href="/admin/content.php" class="adm-nav-link <?= $adminPage === 'content.php' ? 'active' : '' ?>">
                         <span><i class="bi bi-pencil-square"></i> All Content Sections</span>
                     </a>
