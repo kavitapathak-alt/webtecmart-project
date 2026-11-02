@@ -781,6 +781,138 @@ $bodyCopy  = $dbService['body'] ?? '';
         font-size: 0.8rem;
         color: rgba(255, 255, 255, 0.7);
     }
+
+    /* ===== LIVE ORGANIC RANKINGS SHOWCASE (B2B & Exhibition Proof) ===== */
+    .del-rankings-section {
+        padding: 52px 0 44px;
+        background: #FFFFFF;
+        border-top: 1px solid rgba(196, 0, 122, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
+    }
+    .del-rankings-header {
+        text-align: center;
+        margin-bottom: 32px;
+    }
+    .del-rankings-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-bottom: 40px;
+    }
+    @media (min-width: 768px) {
+        .del-rankings-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    .del-rank-card {
+        background: #FFFFFF;
+        border: 1.5px solid rgba(196, 0, 122, 0.22);
+        border-radius: 18px;
+        padding: 22px;
+        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.06);
+        position: relative;
+    }
+    .del-rank-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #F3F4F6;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+    }
+    .del-rank-domain {
+        font-size: 0.96rem;
+        font-weight: 800;
+        color: #111827;
+    }
+    .del-rank-badge {
+        font-size: 0.72rem;
+        font-weight: 700;
+        background: #FFF0F7;
+        color: #C4007A;
+        border: 1px solid rgba(196, 0, 122, 0.2);
+        padding: 2px 8px;
+        border-radius: 9999px;
+    }
+    .del-rank-metrics-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 14px;
+        text-align: center;
+    }
+    .del-rank-metric {
+        background: #F9FAFB;
+        border-radius: 10px;
+        padding: 8px 4px;
+    }
+    .del-rank-metric .val {
+        font-size: 1.08rem;
+        font-weight: 800;
+        color: #C4007A;
+    }
+    .del-rank-metric .lbl {
+        font-size: 0.68rem;
+        color: #6B7280;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .del-rank-top-pos {
+        background: #FFF5FA;
+        border: 1px dashed rgba(196, 0, 122, 0.3);
+        border-radius: 10px;
+        padding: 9px 12px;
+        font-size: 0.8rem;
+        color: #111827;
+        font-weight: 600;
+    }
+    .del-rank-top-pos span {
+        color: #C4007A;
+        font-weight: 800;
+    }
+    .del-keywords-table-wrap {
+        border: 1.5px solid rgba(196, 0, 122, 0.2);
+        border-radius: 18px;
+        overflow-x: auto;
+        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.05);
+        margin-bottom: 28px;
+    }
+    .del-kw-table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 640px;
+        background: #FFFFFF;
+    }
+    .del-kw-table th {
+        background: #FFF0F7;
+        color: #850053;
+        font-weight: 800;
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        padding: 12px 16px;
+        border-bottom: 1.5px solid rgba(196, 0, 122, 0.2);
+    }
+    .del-kw-table td {
+        padding: 12px 16px;
+        font-size: 0.88rem;
+        color: #1F2937;
+        border-bottom: 1px solid #F3F4F6;
+    }
+    .del-kw-rank-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 28px;
+        border-radius: 8px;
+        background: #C4007A;
+        color: #FFFFFF;
+        font-weight: 800;
+        font-size: 0.88rem;
+    }
+    .del-kw-gain {
+        color: #059669;
+        font-weight: 700;
+        font-size: 0.82rem;
+    }
 </style>
 
 <main class="ev-page">
@@ -1060,6 +1192,175 @@ $bodyCopy  = $dbService['body'] ?? '';
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- ========================================================
+         4B. LIVE ORGANIC RANKINGS PROOF (Exact Match to User Request)
+    ======================================================== -->
+    <section class="del-rankings-section">
+        <div class="ev-container">
+            <div class="del-rankings-header" data-wtm-reveal="fade-up">
+                <div class="ev-eyebrow">LIVE GOOGLE RANKINGS PROOF</div>
+                <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; color: #111827; margin: 0 0 10px;">
+                    Organic Rankings That Drive Real Inbound Revenue
+                </h3>
+                <p style="font-size: 0.96rem; color: #6B7280; max-width: 720px; margin: 0 auto;">
+                    Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and B2B exporters:
+                </p>
+            </div>
+
+            <!-- 3 Organic Rankings Tracker Cards -->
+            <div class="del-rankings-grid">
+                <!-- Card 1: Bharat Tex -->
+                <div class="del-rank-card" data-wtm-reveal="fade-up">
+                    <div class="del-rank-card-header">
+                        <span class="del-rank-domain">bharat-tex.com 🇮🇳</span>
+                        <span class="del-rank-badge">Govt / Mega Fair</span>
+                    </div>
+                    <div class="del-rank-metrics-row">
+                        <div class="del-rank-metric">
+                            <div class="val">771</div>
+                            <div class="lbl">Keywords</div>
+                        </div>
+                        <div class="del-rank-metric">
+                            <div class="val">137K+</div>
+                            <div class="lbl">Traffic/Mo</div>
+                        </div>
+                        <div class="del-rank-metric">
+                            <div class="val">₹18.4L</div>
+                            <div class="lbl">Traffic Cost</div>
+                        </div>
+                    </div>
+                    <div class="del-rank-top-pos">
+                        Top 3 Positions: <span>80+ Commercial Keywords #1</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: IHGF Fair -->
+                <div class="del-rank-card" data-wtm-reveal="fade-up">
+                    <div class="del-rank-card-header">
+                        <span class="del-rank-domain">ihgfdelhifair.in 🇮🇳</span>
+                        <span class="del-rank-badge">B2B Trade Show</span>
+                    </div>
+                    <div class="del-rank-metrics-row">
+                        <div class="del-rank-metric">
+                            <div class="val">883</div>
+                            <div class="lbl">Keywords</div>
+                        </div>
+                        <div class="del-rank-metric">
+                            <div class="val">42.5K+</div>
+                            <div class="lbl">Traffic/Mo</div>
+                        </div>
+                        <div class="del-rank-metric">
+                            <div class="val">₹8.2L</div>
+                            <div class="lbl">Traffic Cost</div>
+                        </div>
+                    </div>
+                    <div class="del-rank-top-pos">
+                        Top 3 Positions: <span>22 Key Locations #1 Ranked</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Premier Logistics -->
+                <div class="del-rank-card" data-wtm-reveal="fade-up">
+                    <div class="del-rank-card-header">
+                        <span class="del-rank-domain">premier-logistics.in 🏢</span>
+                        <span class="del-rank-badge">B2B Industrial</span>
+                    </div>
+                    <div class="del-rank-metrics-row">
+                        <div class="del-rank-metric">
+                            <div class="val">1.3K+</div>
+                            <div class="lbl">Keywords</div>
+                        </div>
+                        <div class="del-rank-metric">
+                            <div class="val">68.2K+</div>
+                            <div class="lbl">Traffic/Mo</div>
+                        </div>
+                        <div class="del-rank-metric">
+                            <div class="val">$12.5K</div>
+                            <div class="lbl">Traffic Cost</div>
+                        </div>
+                    </div>
+                    <div class="del-rank-top-pos">
+                        Top 10 Positions: <span>140+ High-Intent Keywords</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Keyword Proof Table -->
+            <div class="del-keywords-table-wrap" data-wtm-reveal="fade-up">
+                <table class="del-kw-table">
+                    <thead>
+                        <tr>
+                            <th>Target Search Keyword</th>
+                            <th>Ranking URL</th>
+                            <th style="text-align: center;">Google Rank</th>
+                            <th>Rank Movement</th>
+                            <th>Monthly Searches</th>
+                            <th>Search Intent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Bharat Tex 2026 Fair</strong></td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">bharat-tex.com</td>
+                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
+                            <td><span class="del-kw-gain">↑ +17 Positions</span></td>
+                            <td>49,500/mo</td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Commercial</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Best SEO Company in Delhi NCR</strong></td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/seo-services-delhi.php</td>
+                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
+                            <td><span class="del-kw-gain">↑ +13 Positions</span></td>
+                            <td>14,800/mo</td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>IHGF Autumn Fair Dates 2026</strong></td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">ihgfdelhifair.in</td>
+                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
+                            <td><span class="del-kw-gain">↑ +25 Positions</span></td>
+                            <td>22,200/mo</td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Buyer Intent</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>B2B Exhibition SEO Services</strong></td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/b2b-exhibition-seo.php</td>
+                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
+                            <td><span class="del-kw-gain">↑ +30 Positions</span></td>
+                            <td>8,100/mo</td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">B2B Commercial</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Local SEO Services in Delhi</strong></td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/local-seo.php</td>
+                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
+                            <td><span class="del-kw-gain">↑ +23 Positions</span></td>
+                            <td>12,100/mo</td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Local Intent</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Technical SEO Services Delhi</strong></td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/technical-seo.php</td>
+                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
+                            <td><span class="del-kw-gain">↑ +19 Positions</span></td>
+                            <td>6,400/mo</td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Technical</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Call Specialists Button -->
+            <div style="text-align: center;">
+                <a href="tel:+919999674255" class="ev-btn-primary" style="padding: 14px 34px; font-size: 1rem;">
+                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span>Call Our SEO Specialists (+91-9999674255)</span>
+                </a>
+            </div>
         </div>
     </section>
 

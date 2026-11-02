@@ -6,7 +6,6 @@ $current = currentPage();
 $packagesPageMeta = $current === 'packages.php' ? packagesPageContent() : null;
 $serviceNavItems = [
     ['label' => 'All Services', 'path' => '/services.php', 'description' => 'Explore our complete suite of digital marketing and growth services.'],
-    ['label' => 'Search Engine Optimization', 'path' => '/search-engine-optimization.php', 'description' => 'Rank higher on Google, capture intent traffic, and drive consistent inbound leads.'],
     ['label' => 'B2B & Exhibition SEO', 'path' => '/b2b-exhibition-seo.php', 'description' => 'Specialized SEO for trade fairs, exhibitions, B2B exporters, and manufacturing brands.'],
     ['label' => 'SEO Services in Delhi', 'path' => '/seo-services-delhi.php', 'description' => 'Top SEO company in Delhi NCR delivering #1 Google rankings & local customer growth.'],
     ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Fast, conversion-focused, mobile-first websites engineered to turn visitors into buyers.'],

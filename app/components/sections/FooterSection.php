@@ -16,7 +16,6 @@ function renderFooterSection(): void
 
     // Services
     $services = [
-        ['label' => 'Search Engine Optimization',     'href' => '/search-engine-optimization.php'],
         ['label' => 'B2B & Exhibition SEO',           'href' => '/b2b-exhibition-seo.php'],
         ['label' => 'SEO Services in Delhi NCR',      'href' => '/seo-services-delhi.php'],
         ['label' => 'Website Design & Development',   'href' => '/website-design-development.php'],
