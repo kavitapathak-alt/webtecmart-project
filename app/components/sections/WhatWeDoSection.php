@@ -23,12 +23,12 @@ function renderWhatWeDoSection(): void
         ],
         [
             'id' => 'seo',
-            'slug' => 'search-engine-optimization',
-            'href' => '/search-engine-optimization.php',
+            'slug' => 'seo-services-delhi',
+            'href' => '/seo-services-delhi.php',
             'icon' => 'search',
-            'title' => 'Search Engine Optimization',
-            'description' => '75% of online users refer to the search engines\' first page. Hence, it has become essential for businesses to be on the very first page. We help you rank higher on search.',
-            'tags' => ['On-Page SEO', 'Off-Page SEO', 'Technical SEO', 'Keyword Research'],
+            'title' => 'SEO Services in Delhi',
+            'description' => 'Target high-intent search queries and dominate local and national search results with specialized SEO strategies.',
+            'tags' => ['Local SEO', 'National SEO', 'Technical SEO', 'Keyword Research'],
         ],
         [
             'id' => 'smo',

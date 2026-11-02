@@ -115,7 +115,7 @@ $recentPosts = blogPosts();
             <div class="sm-card">
                 <h2 class="sm-title"><i class="bi bi-gear-wide-connected"></i> Digital Services</h2>
                 <ul class="sm-list">
-                    <li><a href="/search-engine-optimization.php">Search Engine Optimization</a></li>
+                    <li><a href="/seo-services-delhi.php">SEO Services in Delhi</a></li>
                     <li><a href="/website-design-development.php">Website Design &amp; Development</a></li>
                     <li><a href="/digital-business-branding.php">Digital Business Branding</a></li>
                     <li><a href="/search-engine-marketing.php">Search Engine Marketing (PPC)</a></li>

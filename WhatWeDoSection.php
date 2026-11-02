@@ -37,11 +37,11 @@ const services: Service[] = [
   },
   {
     id: 'seo',
-    href: '/services/search-engine-optimization',
+    href: '/services/seo-services-delhi',
     icon: Search,
-    title: 'Search Engine Optimization',
+    title: 'SEO Services in Delhi',
     description:
-      "Nearly 75% of online users never go past the first page of search results, which makes ranking there essential for any business. Our SEO strategies work with Google's algorithm to help your pages climb higher and stay visible.",
+      "Target high-intent search queries and dominate local and national search results with specialized SEO strategies.",
   },
   {
     id: 'smo',

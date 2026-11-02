@@ -917,7 +917,7 @@ function renderContactFormSection(): void
                                             <option value="" disabled selected>Select a service</option>
                                             <option value="digital-business-branding">Digital Business Branding</option>
                                             <option value="website-design-development">Website Design &amp; Development</option>
-                                            <option value="search-engine-optimization">Search Engine Optimization</option>
+                                            <option value="seo-services-delhi">SEO Services in Delhi</option>
                                             <option value="meta-google-ads">Meta / Google Ads</option>
                                             <option value="social-media-advertising">Social Media Advertising</option>
                                             <option value="social-media-optimization">Social Media Optimization</option>

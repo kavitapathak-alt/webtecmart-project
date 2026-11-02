@@ -8,7 +8,7 @@ function serviceCards(): array
             'title' => 'SEO Growth',
             'summary' => 'Rank higher on Google and bring ready-to-buy traffic that converts.',
             'icon' => '📈',
-            'href' => '/search-engine-optimization.php',
+            'href' => '/seo-services-delhi.php',
         ],
         [
             'title' => 'Paid Ads',
@@ -735,7 +735,7 @@ function homepageVisibilityContent(): array
         if ($slug !== '') $dbPagesBySlug[$slug] = $detailPage;
     }
     foreach ($content['services'] as $index => &$service) {
-        $service = array_merge($defaults['services'][$index] ?? ['number' => sprintf('%02d', $index + 1), 'icon' => 'globe', 'title' => '', 'text' => '', 'href' => '/search-engine-optimization.php'], is_array($service) ? $service : []);
+        $service = array_merge($defaults['services'][$index] ?? ['number' => sprintf('%02d', $index + 1), 'icon' => 'globe', 'title' => '', 'text' => '', 'href' => '/seo-services-delhi.php'], is_array($service) ? $service : []);
         $targetSlug = $visibilitySlugMap[$index] ?? '';
         if ($targetSlug && isset($dbPagesBySlug[$targetSlug])) {
             $dbItem = $dbPagesBySlug[$targetSlug];
@@ -998,7 +998,7 @@ function servicesPageContent(): array
         'main_services' => [
             ['icon' => 'paintbrush', 'title' => 'Digital Business Branding', 'description' => 'Any web business can flourish and develop only if it is rightly promoted. "BRANDING" is highly crucial for a digital business\'s success, and you can assure a well-framed campaign with our digital marketing experts.', 'features' => ['Brand Strategy', 'Visual Identity', 'Brand Positioning', 'Brand Guidelines']],
             ['icon' => 'code', 'title' => 'Website Design & Development', 'description' => 'We help make the first impression of the website memorable and robust. By providing a mix of relevant content and graphics, we provide responsive, easy-to-use websites.', 'features' => ['Responsive Design', 'UI/UX', 'E-Commerce', 'CMS Integration']],
-            ['icon' => 'search', 'title' => 'Search Engine Optimization', 'description' => '75% of online users refer to the search engines\' first page. Hence, it has become essential for businesses to be on the very first page. We help you rank higher on search.', 'features' => ['On-Page SEO', 'Off-Page SEO', 'Technical SEO', 'Keyword Research']],
+            ['icon' => 'search', 'title' => 'SEO Services in Delhi', 'description' => 'Target high-intent search queries and dominate local and national search results with specialized SEO strategies.', 'features' => ['Local SEO', 'National SEO', 'Technical SEO', 'Keyword Research']],
             ['icon' => 'share', 'title' => 'Social Media Optimization', 'description' => 'Now is the correct time that the audience starts craving for your content. This is only possible with engaging and innovative social media campaigns that our experts are well-versed with.', 'features' => ['Content Strategy', 'Social Media Management', 'Influencer Marketing', 'Community Building']],
             ['icon' => 'megaphone', 'title' => 'Search Engine Marketing', 'description' => 'Our professionals have the relevant practice of marketing businesses that use paid advertisements on SERPs. Our strategies help businesses increase visibility two folds.', 'features' => ['PPC Campaigns', 'Google Ads', 'Bing Ads', 'Retargeting']],
             ['icon' => 'smartphone', 'title' => 'Performance Marketing', 'description' => 'There are 2 million + mobile users today, which means having apps have become the need of the hour. Businesses are left with no choice but to come up with easy-to-use apps.', 'features' => ['iOS Development', 'Android Development', 'Cross-Platform', 'App Store Optimization']],
@@ -1076,7 +1076,7 @@ function servicesPageContent(): array
     $coreSlugMap = [
         0 => 'digital-business-branding',
         1 => 'website-design-development',
-        2 => 'search-engine-optimization',
+        2 => 'seo-services-delhi',
         3 => 'social-media-optimization',
         4 => 'search-engine-marketing',
         5 => 'performance-marketing',
