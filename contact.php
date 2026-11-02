@@ -116,7 +116,7 @@ $contactInfo = [
        ============================================================ */
     .cp-main {
         min-height: 100vh;
-        background: #FFFFFF;
+        background: #FBF8F1;
         padding: 32px 0;
     }
     @media (min-width: 1024px) { .cp-main { padding: 48px 0; } }
@@ -147,18 +147,18 @@ $contactInfo = [
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(255, 45, 117, 0.1);
+        background: rgba(196, 0, 122, 0.1);
         padding: 6px 10px;
         border-radius: 9999px;
         margin-bottom: 12px;
     }
     @media (min-width: 640px) { .cp-pill { gap: 8px; padding: 8px 12px; margin-bottom: 16px; } }
-    .cp-pill svg { width: 12px; height: 12px; color: #FF2D75; flex-shrink: 0; }
+    .cp-pill svg { width: 12px; height: 12px; color: #C4007A; flex-shrink: 0; }
     @media (min-width: 640px) { .cp-pill svg { width: 14px; height: 14px; } }
     @media (min-width: 768px) { .cp-pill svg { width: 16px; height: 16px; } }
     .cp-pill span {
         font-size: 10px;
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 600;
         letter-spacing: 0.05em;
         text-transform: uppercase;
@@ -170,7 +170,7 @@ $contactInfo = [
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
         line-height: 1.18;
         letter-spacing: -0.02em;
@@ -179,7 +179,7 @@ $contactInfo = [
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
         line-height: 1.18;
         letter-spacing: -0.02em;
@@ -188,13 +188,13 @@ $contactInfo = [
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
         line-height: 1.18;
         letter-spacing: -0.02em;
     } }
     .cp-h1 .accent {
-        color: #FF2D75;
+        color: #C4007A;
         position: relative;
         display: inline-block;
     }
@@ -210,7 +210,7 @@ $contactInfo = [
     }
 
     .cp-subtitle {
-        color: #666666;
+        color: #6B7280;
         font-size: 0.875rem;
         max-width: 672px;
         margin: 8px auto 0;
@@ -246,7 +246,7 @@ $contactInfo = [
         background: linear-gradient(to bottom right, #1a1a1a, #111111, #2a1420);
         border-radius: 16px;
         padding: 16px;
-        border: 1px solid rgba(255, 45, 117, 0.2);
+        border: 1px solid rgba(196, 0, 122, 0.2);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
         overflow: hidden;
         display: flex;
@@ -264,7 +264,7 @@ $contactInfo = [
         width: 224px;
         height: 224px;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.2);
+        background: rgba(196, 0, 122, 0.2);
         filter: blur(48px);
         pointer-events: none;
     }
@@ -276,7 +276,7 @@ $contactInfo = [
         width: 192px;
         height: 192px;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.1);
+        background: rgba(196, 0, 122, 0.1);
         filter: blur(48px);
         pointer-events: none;
     }
@@ -344,7 +344,7 @@ $contactInfo = [
     }
     @media (min-width: 640px) { .cp-info-title { font-size: 1.25rem; } }
     @media (min-width: 768px) { .cp-info-title { font-size: 1.5rem; } }
-    .cp-info-title .accent { color: #FF2D75; }
+    .cp-info-title .accent { color: #C4007A; }
 
     .cp-info-desc {
         font-size: 0.75rem;
@@ -403,15 +403,15 @@ $contactInfo = [
     @media (min-width: 640px) { .cp-contact-item { gap: 12px; padding: 10px; } }
     .cp-contact-item:hover {
         background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 45, 117, 0.3);
+        border-color: rgba(196, 0, 122, 0.3);
     }
 
     .cp-contact-icon {
         width: 28px;
         height: 28px;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.2);
-        color: #FF2D75;
+        background: rgba(196, 0, 122, 0.2);
+        color: #C4007A;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -492,7 +492,7 @@ $contactInfo = [
         background: #fff;
         border-radius: 16px;
         padding: 16px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         width: 100%;
         display: flex;
@@ -533,13 +533,13 @@ $contactInfo = [
     .cp-success h3 {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 6px;
     }
     @media (min-width: 640px) { .cp-success h3 { font-size: 1.25rem; margin-bottom: 8px; } }
     .cp-success p {
         font-size: 0.75rem;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0;
     }
     @media (min-width: 640px) { .cp-success p { font-size: 0.875rem; } }
@@ -548,7 +548,7 @@ $contactInfo = [
         margin-top: 16px;
         background: none;
         border: none;
-        color: #FF2D75;
+        color: #C4007A;
         font-size: 0.875rem;
         font-weight: 600;
         cursor: pointer;
@@ -566,7 +566,7 @@ $contactInfo = [
         margin: 0 0 12px;
     }
     @media (min-width: 640px) { .cp-required-note { font-size: 12px; margin-bottom: 16px; } }
-    .cp-required-note span { color: #FF2D75; }
+    .cp-required-note span { color: #C4007A; }
 
     .cp-form-error {
         margin: 0 0 12px;
@@ -592,7 +592,7 @@ $contactInfo = [
         color: #1F2937;
     }
     @media (min-width: 640px) { .cp-field-label { font-size: 12px; margin-bottom: 4px; } }
-    .cp-field-label span { color: #FF2D75; }
+    .cp-field-label span { color: #C4007A; }
 
     .cp-input-wrap {
         position: relative;
@@ -619,10 +619,10 @@ $contactInfo = [
         width: 100%;
         border-radius: 8px;
         border: 1px solid #E5E7EB;
-        background: #FFFFFF;
+        background: #FBF8F1;
         padding: 8px 10px 8px 28px;
         font-size: 0.75rem;
-        color: #111111;
+        color: #111827;
         font-family: inherit;
         transition: all 0.2s ease;
         outline: none;
@@ -634,8 +634,8 @@ $contactInfo = [
     .cp-textarea::placeholder { color: #9CA3AF; }
     .cp-input:focus,
     .cp-textarea:focus {
-        border-color: #FF2D75;
-        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.1);
+        border-color: #C4007A;
+        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
     }
     .cp-textarea {
         resize: none;
@@ -666,7 +666,7 @@ $contactInfo = [
         align-items: flex-start;
         gap: 6px;
         font-size: 10px;
-        color: #4A4A4A;
+        color: #4B5563;
         margin-bottom: 10px;
     }
     @media (min-width: 640px) { .cp-consent { gap: 8px; font-size: 12px; margin-bottom: 12px; } }
@@ -674,7 +674,7 @@ $contactInfo = [
         margin-top: 2px;
         width: 12px;
         height: 12px;
-        accent-color: #FF2D75;
+        accent-color: #C4007A;
         flex-shrink: 0;
         cursor: pointer;
     }
@@ -688,11 +688,11 @@ $contactInfo = [
         gap: 6px;
         width: 100%;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #C4007A, #E0398F);
         padding: 10px 20px;
         font-weight: 600;
         color: #fff;
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
         transition: all 0.3s ease;
         font-size: 0.75rem;
         border: none;
@@ -702,7 +702,7 @@ $contactInfo = [
     @media (min-width: 640px) { .cp-submit { padding: 12px 24px; font-size: 0.875rem; gap: 8px; } }
     .cp-submit:hover:not(:disabled) {
         transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.4);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.4);
     }
     .cp-submit:disabled {
         opacity: 0.7;
@@ -747,7 +747,7 @@ $contactInfo = [
     .cp-trust-item svg {
         width: 10px;
         height: 10px;
-        color: #FF2D75;
+        color: #C4007A;
     }
     @media (min-width: 640px) { .cp-trust-item svg { width: 12px; height: 12px; } }
     .cp-trust-divider {
@@ -768,7 +768,7 @@ $contactInfo = [
         background: #fff;
         border-radius: 16px;
         padding: 16px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         overflow: hidden;
     }
@@ -779,11 +779,11 @@ $contactInfo = [
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 12px;
     }
     @media (min-width: 640px) { .cp-map-title { font-size: 1.25rem; margin-bottom: 16px; } }
-    .cp-map-title .accent { color: #FF2D75; }
+    .cp-map-title .accent { color: #C4007A; }
 
     .cp-map-iframe {
         width: 100%;
@@ -813,7 +813,7 @@ $contactInfo = [
                     <span class="accent">
                         Work Together
                         <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                            <path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                            <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                         </svg>
                     </span>
                 </h1>

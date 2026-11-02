@@ -446,8 +446,8 @@ function successStories(): array
             'image' => '/assets/images/case-study-1.jpg',
             'imageFit' => 'cover',
             'website' => 'https://bharat-tex.com/',
-            'accentFrom' => '#FF2D75',
-            'accentTo' => '#F65A91',
+            'accentFrom' => '#C4007A',
+            'accentTo' => '#E0398F',
             'metrics' => [
                 ['icon' => 'trending', 'value' => 400, 'suffix' => '%', 'label' => 'Organic Growth'],
                 ['icon' => 'search', 'value' => 200, 'suffix' => '+', 'label' => 'Keywords Ranked'],
@@ -474,8 +474,8 @@ function successStories(): array
             'image' => '/assets/images/case-study-2.jpg',
             'imageFit' => 'contain',
             'website' => 'https://ihgfdelhifair.in/',
-            'accentFrom' => '#FF2D75',
-            'accentTo' => '#F65A91',
+            'accentFrom' => '#C4007A',
+            'accentTo' => '#E0398F',
             'metrics' => [
                 ['icon' => 'trending', 'value' => 300, 'suffix' => '%', 'label' => 'Footfall Increase'],
                 ['icon' => 'search', 'value' => 85, 'suffix' => '+', 'label' => 'Keywords Ranked'],
@@ -1164,8 +1164,8 @@ function renderPageAddons(string $page): void
     }
     ?>
     <style>
-        .cms-page-addons { background:#fff7fa; padding:34px 0; border-bottom:1px solid rgba(255, 45, 117,.1); }
-        .cms-page-addon { max-width:900px; margin:0 auto 16px; padding:22px; border:1px solid rgba(255, 45, 117,.14); border-radius:18px; background:#fff; }
+        .cms-page-addons { background:#fff7fa; padding:34px 0; border-bottom:1px solid rgba(196,0,122,.1); }
+        .cms-page-addon { max-width:900px; margin:0 auto 16px; padding:22px; border:1px solid rgba(196,0,122,.14); border-radius:18px; background:#fff; }
         .cms-page-addon:last-child { margin-bottom:0; }
         .cms-page-addon h2 { margin:0 0 8px; color:#1a1425; font-size:1.6rem; }
         .cms-page-addon p { margin:8px 0 0; color:#6b6478; line-height:1.7; }
@@ -1491,21 +1491,21 @@ function sendLeadNotification(array $lead, int $leadId): bool
 <meta charset="utf-8">
 <style>
 body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f7f3f6; margin: 0; padding: 24px; color: #2d242c; }
-.card { max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(255, 45, 117,0.12); border: 1px solid #fce8f3; }
-.header { background: linear-gradient(135deg, #111111, #FF2D75, #F65A91); padding: 32px 28px; color: #ffffff; }
+.card { max-width: 620px; margin: 0 auto; background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(196,0,122,0.12); border: 1px solid #fce8f3; }
+.header { background: linear-gradient(135deg, #A3005F, #C4007A, #E0398F); padding: 32px 28px; color: #ffffff; }
 .header h1 { margin: 0 0 6px 0; font-size: 24px; font-weight: 800; }
 .header p { margin: 0; font-size: 14px; opacity: 0.9; }
 .badge { display: inline-block; background: rgba(255,255,255,0.22); padding: 4px 12px; border-radius: 50px; font-size: 12px; font-weight: 700; margin-bottom: 12px; }
 .body { padding: 28px; }
-.section-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #FF2D75; margin: 0 0 14px 0; border-bottom: 2px solid #fce8f3; padding-bottom: 6px; }
+.section-title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #C4007A; margin: 0 0 14px 0; border-bottom: 2px solid #fce8f3; padding-bottom: 6px; }
 .info-table { width: 100%; border-collapse: collapse; margin-bottom: 22px; }
 .info-table td { padding: 9px 0; vertical-align: top; font-size: 14px; line-height: 1.5; border-bottom: 1px solid #f8f1f5; }
 .info-table td.label { width: 140px; font-weight: 700; color: #6b5866; }
 .info-table td.val { color: #1a1519; font-weight: 500; }
-.info-table td.val a { color: #FF2D75; text-decoration: none; font-weight: 700; }
-.msg-box { background: #fff5fa; border: 1px solid #fbcfe6; border-left: 4px solid #FF2D75; border-radius: 10px; padding: 16px; font-size: 14px; line-height: 1.6; margin-bottom: 24px; color: #3d0023; }
+.info-table td.val a { color: #C4007A; text-decoration: none; font-weight: 700; }
+.msg-box { background: #fff5fa; border: 1px solid #fbcfe6; border-left: 4px solid #C4007A; border-radius: 10px; padding: 16px; font-size: 14px; line-height: 1.6; margin-bottom: 24px; color: #3d0023; }
 .btn-wrap { text-align: center; margin: 24px 0 10px; }
-.reply-btn { display: inline-block; background: linear-gradient(90deg, #FF2D75, #F65A91); color: #ffffff !important; text-decoration: none; padding: 12px 28px; border-radius: 50px; font-weight: 700; font-size: 14px; box-shadow: 0 6px 18px rgba(255, 45, 117,0.35); }
+.reply-btn { display: inline-block; background: linear-gradient(90deg, #C4007A, #E0398F); color: #ffffff !important; text-decoration: none; padding: 12px 28px; border-radius: 50px; font-weight: 700; font-size: 14px; box-shadow: 0 6px 18px rgba(196,0,122,0.35); }
 .footer { background: #faf5f8; padding: 18px 28px; font-size: 12px; color: #8e7a88; text-align: center; border-top: 1px solid #fce8f3; }
 </style>
 </head>
@@ -1536,7 +1536,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background-color: #f7f3f6; ma
     </div>
   </div>
   <div class="footer">
-    WebTecMart Digital Growth Agency &bull; <a href="https://webtecmart.com" style="color:#FF2D75;">webtecmart.com</a> &bull; Saved to SQLite Leads
+    WebTecMart Digital Growth Agency &bull; <a href="https://webtecmart.com" style="color:#C4007A;">webtecmart.com</a> &bull; Saved to SQLite Leads
   </div>
 </div>
 </body>

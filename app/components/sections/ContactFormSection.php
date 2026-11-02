@@ -54,15 +54,14 @@ function renderContactFormSection(): void
     ?>
     <style>
         /* ============================================================
-           CONTACT FORM SECTION — Camps Radiant Rose & Charcoal Edition
+           CONTACT FORM SECTION — Webtecmart Next.js clone
         ============================================================ */
         .cfs-section {
             position: relative;
             width: 100%;
-            padding: 48px 0 40px;
-            background: #FAFAFC;
+            padding: 24px 0;
+            background: #FBF8F1;
             overflow: hidden;
-            border-bottom: 1px solid #ECEFF4;
         }
 
         /* Decorative Background */
@@ -74,18 +73,18 @@ function renderContactFormSection(): void
         .cfs-bg-blob-1 {
             position: absolute;
             top: 0; right: 0;
-            width: 45%; height: 45%;
-            background: radial-gradient(circle, rgba(255, 51, 102, 0.06), transparent 70%);
+            width: 50%; height: 50%;
+            background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
             border-radius: 9999px;
-            filter: blur(50px);
+            filter: blur(64px);
         }
         .cfs-bg-blob-2 {
             position: absolute;
             bottom: 0; left: 0;
-            width: 35%; height: 45%;
-            background: radial-gradient(circle, rgba(255, 107, 91, 0.06), transparent 70%);
+            width: 33.333%; height: 50%;
+            background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
             border-radius: 9999px;
-            filter: blur(50px);
+            filter: blur(64px);
         }
 
         /* Header */
@@ -93,22 +92,22 @@ function renderContactFormSection(): void
             position: relative;
             z-index: 10;
             text-align: center;
-            margin-bottom: 36px;
+            margin-bottom: 32px;
         }
         .cfs-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #FFF0F3;
-            border: 1px solid rgba(255, 51, 102, 0.2);
-            padding: 6px 16px;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
-        .cfs-pill svg { width: 14px; height: 14px; color: #FF3366; flex-shrink: 0; }
+        .cfs-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
         .cfs-pill span {
-            font-size: 0.75rem;
-            color: #FF3366;
+            font-size: 0.72rem;
+            color: #C4007A;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -118,15 +117,13 @@ function renderContactFormSection(): void
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: clamp(1.85rem, 3.2vw, 2.5rem);
             font-weight: 800;
-            color: #181B20;
-            margin: 0 0 10px;
-            line-height: 1.2;
+            color: #111827;
+            margin: 0 0 8px;
+            line-height: 1.18;
             letter-spacing: -0.02em;
         }
         .cfs-heading .accent {
-            background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #C4007A;
             position: relative;
             display: inline-block;
         }
@@ -139,11 +136,11 @@ function renderContactFormSection(): void
         }
 
         .cfs-subtitle {
-            font-size: 0.98rem;
-            color: #5E6977;
+            font-size: 0.95rem;
+            color: #4B5563;
             max-width: 640px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.55;
         }
 
         /* Grid */
@@ -152,7 +149,7 @@ function renderContactFormSection(): void
             z-index: 10;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 16px;
             align-items: stretch;
         }
 
@@ -163,11 +160,11 @@ function renderContactFormSection(): void
         .cfs-info-card {
             position: relative;
             width: 100%;
-            background: linear-gradient(145deg, #181B20 0%, #20242B 100%);
-            border: 1px solid rgba(255, 51, 102, 0.25);
-            border-radius: 20px;
-            padding: 24px;
-            box-shadow: 0 16px 36px rgba(24, 27, 32, 0.2);
+            background: linear-gradient(to bottom right, #1a1a1a, #111111, #2a1420);
+            border: 1px solid rgba(196, 0, 122, 0.2);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -181,7 +178,7 @@ function renderContactFormSection(): void
             width: 224px;
             height: 224px;
             border-radius: 9999px;
-            background: rgba(255, 51, 102, 0.2);
+            background: rgba(196, 0, 122, 0.2);
             filter: blur(48px);
             pointer-events: none;
         }
@@ -193,7 +190,7 @@ function renderContactFormSection(): void
             width: 192px;
             height: 192px;
             border-radius: 9999px;
-            background: rgba(255, 107, 91, 0.15);
+            background: rgba(196, 0, 122, 0.1);
             filter: blur(48px);
             pointer-events: none;
         }
@@ -211,7 +208,7 @@ function renderContactFormSection(): void
             width: 100%;
             height: 100%;
             fill: none;
-            stroke: #FF6B5B;
+            stroke: #F9A8D4;
             stroke-width: 2;
         }
 
@@ -235,14 +232,14 @@ function renderContactFormSection(): void
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.25em;
-            color: #FF825C;
+            color: #F9A8D4;
             margin: 0;
         }
         .cfs-connect .dot {
             width: 4px;
             height: 4px;
             border-radius: 9999px;
-            background: #FF825C;
+            background: #F9A8D4;
             display: inline-block;
         }
 
@@ -254,7 +251,7 @@ function renderContactFormSection(): void
             margin: 6px 0 0;
             line-height: 1.2;
         }
-        .cfs-info-title .accent { color: #FF3366; }
+        .cfs-info-title .accent { color: #C4007A; }
 
         .cfs-info-desc {
             font-size: 0.75rem;
@@ -276,7 +273,7 @@ function renderContactFormSection(): void
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            color: #FF825C;
+            color: #F9A8D4;
             margin: 0 0 2px;
         }
         .cfs-contact-for .value {
@@ -305,14 +302,14 @@ function renderContactFormSection(): void
         }
         .cfs-contact-item:hover {
             background: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 51, 102, 0.3);
+            border-color: rgba(196, 0, 122, 0.3);
         }
         .cfs-contact-icon {
             width: 28px;
             height: 28px;
             border-radius: 9999px;
-            background: rgba(255, 51, 102, 0.2);
-            color: #FF3366;
+            background: rgba(196, 0, 122, 0.2);
+            color: #C4007A;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -435,10 +432,10 @@ function renderContactFormSection(): void
         .cfs-required-note {
             font-size: 10px;
             font-weight: 500;
-            color: #8B95A5;
+            color: #9CA3AF;
             margin: 0 0 12px;
         }
-        .cfs-required-note span { color: #FF3366; }
+        .cfs-required-note span { color: #C4007A; }
 
         .cfs-form-row {
             display: grid;
@@ -452,9 +449,9 @@ function renderContactFormSection(): void
             margin-bottom: 4px;
             font-size: 10px;
             font-weight: 600;
-            color: #181B20;
+            color: #1F2937;
         }
-        .cfs-field-label span { color: #FF3366; }
+        .cfs-field-label span { color: #C4007A; }
 
         .cfs-input-wrap {
             position: relative;
@@ -466,7 +463,7 @@ function renderContactFormSection(): void
             transform: translateY(-50%);
             width: 14px;
             height: 14px;
-            color: #8B95A5;
+            color: #9CA3AF;
             pointer-events: none;
         }
         .cfs-input-wrap.textarea-wrap svg {
@@ -478,26 +475,25 @@ function renderContactFormSection(): void
         .cfs-textarea,
         .cfs-select {
             width: 100%;
-            border-radius: 10px;
-            border: 1px solid #ECEFF4;
-            background: #FAFAFC;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            background: #FBF8F1;
             padding: 8px 10px 8px 28px;
-            font-size: 0.78rem;
-            color: #181B20;
+            font-size: 0.75rem;
+            color: #111827;
             font-family: inherit;
             transition: all 0.2s ease;
             outline: none;
         }
         .cfs-input::placeholder,
         .cfs-textarea::placeholder {
-            color: #8B95A5;
+            color: #9CA3AF;
         }
         .cfs-input:focus,
         .cfs-textarea:focus,
         .cfs-select:focus {
-            background: #FFFFFF;
-            border-color: #FF3366;
-            box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.15);
+            border-color: #C4007A;
+            box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
         }
         .cfs-textarea {
             resize: none;
@@ -509,26 +505,26 @@ function renderContactFormSection(): void
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF3366' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C4007A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 10px center;
             background-size: 12px 12px;
             padding-right: 28px;
             cursor: pointer;
-            accent-color: #FF3366;
+            accent-color: #C4007A;
             color-scheme: light;
         }
         .cfs-select:invalid {
-            color: #8B95A5;
+            color: #9CA3AF;
         }
         .cfs-select option {
-            color: #181B20;
+            color: #111827;
             background: #fff;
         }
         .cfs-select option:checked,
         .cfs-select option:hover,
         .cfs-select option:focus {
-            background: #FF3366;
+            background: #C4007A;
             color: #fff;
         }
 
@@ -555,14 +551,14 @@ function renderContactFormSection(): void
             align-items: flex-start;
             gap: 6px;
             font-size: 10px;
-            color: #5E6977;
+            color: #4B5563;
             margin-bottom: 10px;
         }
         .cfs-consent input[type="checkbox"] {
             margin-top: 2px;
             width: 12px;
             height: 12px;
-            accent-color: #FF3366;
+            accent-color: #C4007A;
             flex-shrink: 0;
             cursor: pointer;
         }
@@ -575,21 +571,20 @@ function renderContactFormSection(): void
             gap: 6px;
             width: 100%;
             border-radius: 9999px;
-            background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
+            background: linear-gradient(to right, #C4007A, #E0398F);
             padding: 10px 20px;
             font-weight: 600;
             color: #fff;
-            box-shadow: 0 10px 18px -3px rgba(255, 51, 102, 0.35);
+            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
             transition: all 0.3s ease;
-            font-size: 0.78rem;
+            font-size: 0.75rem;
             border: none;
             cursor: pointer;
             font-family: inherit;
         }
         .cfs-submit:hover:not(:disabled) {
             transform: scale(1.02);
-            background: linear-gradient(135deg, #FF2055 0%, #FF5745 100%);
-            box-shadow: 0 16px 24px -5px rgba(255, 51, 102, 0.45);
+            box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.4);
         }
         .cfs-submit:disabled {
             opacity: 0.7;
@@ -623,7 +618,7 @@ function renderContactFormSection(): void
             gap: 8px;
             margin-top: 10px;
             font-size: 9px;
-            color: #8B95A5;
+            color: #9CA3AF;
             flex-wrap: wrap;
         }
         .cfs-trust-item {
@@ -634,12 +629,12 @@ function renderContactFormSection(): void
         .cfs-trust-item svg {
             width: 10px;
             height: 10px;
-            color: #FF3366;
+            color: #C4007A;
         }
         .cfs-trust-divider {
             width: 1px;
             height: 10px;
-            background: #ECEFF4;
+            background: #E5E7EB;
         }
 
         /* ============================================================
@@ -767,7 +762,7 @@ function renderContactFormSection(): void
                     <span class="accent">
                         Work Together
                         <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                            <path d="M2 3C60 1 240 1 298 3" stroke="#FF3366" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
+                            <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                         </svg>
                     </span>
                 </h2>

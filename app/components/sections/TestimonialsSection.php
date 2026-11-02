@@ -73,18 +73,17 @@ function renderTestimonialsSection(): void
 
     <style>
         /* ============================================================
-           MODERN TESTIMONIALS SLIDER SECTION — Black & Hot Pink Theme
+           MODERN TESTIMONIALS SLIDER SECTION
            ============================================================ */
         .testi-section {
             position: relative;
             width: 100%;
-            padding: 56px 0 44px;
-            background: #FFFFFF;
+            padding: 32px 0 28px;
+            background: #FBF8F1;
             overflow: hidden;
-            border-bottom: 1px solid #EAEAEA;
         }
         @media (min-width: 768px) {
-            .testi-section { padding: 68px 0 52px; }
+            .testi-section { padding: 36px 0 32px; }
         }
 
         .testi-container {
@@ -98,35 +97,35 @@ function renderTestimonialsSection(): void
         .testi-header {
             text-align: center;
             max-width: 720px;
-            margin: 0 auto 36px;
+            margin: 0 auto 22px;
         }
         .testi-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #FFF2F7;
-            border: 1px solid #EAEAEA;
-            color: #FF2D75;
-            font-size: 0.74rem;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            color: #C4007A;
+            font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            padding: 6px 16px;
+            padding: 5px 14px;
             border-radius: 9999px;
-            margin-bottom: 14px;
+            margin-bottom: 10px;
         }
-        .testi-pill svg { width: 14px; height: 14px; color: #FF2D75; flex-shrink: 0; }
+        .testi-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
         .testi-title {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
             font-weight: 800;
-            color: #111111;
-            margin: 0 0 12px;
-            line-height: 1.2;
+            color: #111827;
+            margin: 0 0 8px;
+            line-height: 1.18;
             letter-spacing: -0.02em;
         }
         .testi-title .accent {
-            color: #FF2D75;
+            color: #C4007A;
             position: relative;
             display: inline-block;
         }
@@ -139,10 +138,10 @@ function renderTestimonialsSection(): void
             pointer-events: none;
         }
         .testi-subtitle {
-            font-size: 1rem;
-            color: #4A4A4A;
+            font-size: 0.95rem;
+            color: #4B5563;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.55;
             max-width: 640px;
         }
 
@@ -159,21 +158,21 @@ function renderTestimonialsSection(): void
             height: 44px;
             border-radius: 50%;
             background: #FFFFFF;
-            border: 1.5px solid #EAEAEA;
-            color: #111111;
+            border: 1.5px solid #F1E5ED;
+            color: #111827;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
             transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .testi-nav-btn:hover {
-            background: #FF2D75;
+            background: #C4007A;
             color: #FFFFFF;
-            border-color: #FF2D75;
+            border-color: #C4007A;
             transform: scale(1.08);
-            box-shadow: 0 8px 20px rgba(255, 45, 117, 0.35);
+            box-shadow: 0 8px 18px rgba(196, 0, 122, 0.3);
         }
         .testi-nav-btn svg { width: 18px; height: 18px; stroke-width: 2.5; }
 
@@ -198,9 +197,9 @@ function renderTestimonialsSection(): void
         .testi-card-box {
             background: #FFFFFF;
             border-radius: 24px;
-            border: 1px solid #EAEAEA;
+            border: 1.5px solid #F1F4F8;
             padding: 44px 28px 28px;
-            box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 8px 24px -4px rgba(17, 24, 39, 0.05);
             position: relative;
             display: flex;
             flex-direction: column;
@@ -209,8 +208,8 @@ function renderTestimonialsSection(): void
         }
         .testi-card-box:hover {
             transform: translateY(-8px);
-            border-color: #FF2D75;
-            box-shadow: 0 20px 35px -8px rgba(255, 45, 117, 0.15);
+            border-color: rgba(196, 0, 122, 0.3);
+            box-shadow: 0 20px 35px -8px rgba(196, 0, 122, 0.12);
         }
 
         /* Avatar floating */
@@ -222,9 +221,9 @@ function renderTestimonialsSection(): void
             height: 60px;
             border-radius: 50%;
             border: 4px solid #FFFFFF;
-            box-shadow: 0 8px 18px rgba(255, 45, 117, 0.2);
+            box-shadow: 0 8px 18px rgba(196, 0, 122, 0.2);
             overflow: hidden;
-            background: #FFF2F7;
+            background: #FCE8F3;
         }
         .testi-avatar img {
             width: 100%;
@@ -235,8 +234,8 @@ function renderTestimonialsSection(): void
 
         /* Quote Icon */
         .testi-quote-mark {
-            color: rgba(255, 45, 117, 0.2);
-            font-size: 3.2rem;
+            color: #FCE8F3;
+            font-size: 3rem;
             line-height: 1;
             position: absolute;
             top: 14px;
@@ -247,7 +246,7 @@ function renderTestimonialsSection(): void
 
         .testi-quote-body {
             font-size: 0.95rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.7;
             margin: 0 0 24px;
             flex-grow: 1;
@@ -263,15 +262,15 @@ function renderTestimonialsSection(): void
         .testi-stars svg { width: 16px; height: 16px; fill: currentColor; }
 
         .testi-author-name {
-            font-size: 1.12rem;
-            font-weight: 800;
-            color: #111111;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #111827;
             margin: 0 0 4px;
         }
         .testi-author-role {
-            font-size: 0.85rem;
-            color: #FF2D75;
-            font-weight: 700;
+            font-size: 0.825rem;
+            color: #C4007A;
+            font-weight: 600;
         }
 
         /* Dots */
@@ -286,7 +285,7 @@ function renderTestimonialsSection(): void
             width: 10px;
             height: 10px;
             border-radius: 9999px;
-            background: #EAEAEA;
+            background: #E5D5DF;
             border: none;
             padding: 0;
             cursor: pointer;
@@ -294,8 +293,8 @@ function renderTestimonialsSection(): void
         }
         .wtm-slider-dot.active {
             width: 28px;
-            background: #FF2D75;
-            box-shadow: 0 2px 8px rgba(255, 45, 117, 0.4);
+            background: #C4007A;
+            box-shadow: 0 2px 8px rgba(196, 0, 122, 0.4);
         }
     </style>
 

@@ -81,13 +81,13 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     /* ============================================================
        PREMIER MAIN SEO LANDING PAGE STYLES (Delhi NCR Hub)
        Strict Theme: WebTecMart Magenta & Hot Pink ONLY
-       (#FF2D75, #F65A91, #FFF2F7, #FCE7F3, #850053, #111111)
+       (#C4007A, #E0398F, #FFF0F7, #FCE7F3, #850053, #111827)
        NO PURPLE / BLUE / VIOLET ACCENTS.
        ============================================================ */
     .del-seo-page {
         width: 100%;
         background: #FFFFFF;
-        color: #111111;
+        color: #1F1B2A;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         overflow: hidden;
     }
@@ -104,9 +104,9 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        background: #FFF2F7;
-        border: 1px solid rgba(255, 45, 117, 0.22);
-        color: #FF2D75;
+        background: #FFF0F7;
+        border: 1px solid rgba(196, 0, 122, 0.22);
+        color: #C4007A;
         padding: 6px 14px;
         border-radius: 9999px;
         font-size: 0.76rem;
@@ -118,18 +118,18 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-eyebrow svg {
         width: 14px;
         height: 14px;
-        color: #FF2D75;
+        color: #C4007A;
     }
     .del-section-title {
         font-size: clamp(1.85rem, 3.2vw, 2.65rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         line-height: 1.22;
         letter-spacing: -0.02em;
         margin: 0 0 14px;
     }
     .del-section-title .accent {
-        color: #FF2D75;
+        color: #C4007A;
         position: relative;
         display: inline-block;
     }
@@ -144,7 +144,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-section-sub {
         font-size: 1.02rem;
         line-height: 1.62;
-        color: #4A4A4A;
+        color: #4B5563;
         max-width: 760px;
         margin: 0 auto 36px;
     }
@@ -159,7 +159,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         align-items: center;
         justify-content: center;
         gap: 8px;
-        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
+        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
         color: #FFFFFF !important;
         font-weight: 700;
         font-size: 0.95rem;
@@ -167,13 +167,13 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         border-radius: 9999px;
         text-decoration: none;
         border: none;
-        box-shadow: 0 10px 22px rgba(255, 45, 117, 0.28);
+        box-shadow: 0 10px 22px rgba(196, 0, 122, 0.28);
         transition: all 0.25s ease;
         cursor: pointer;
     }
     .del-btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(255, 45, 117, 0.38);
+        box-shadow: 0 14px 28px rgba(196, 0, 122, 0.38);
         color: #FFFFFF !important;
     }
     .del-btn-secondary {
@@ -182,8 +182,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         justify-content: center;
         gap: 8px;
         background: #FFFFFF;
-        color: #111111 !important;
-        border: 1.5px solid rgba(255, 45, 117, 0.28);
+        color: #111827 !important;
+        border: 1.5px solid rgba(196, 0, 122, 0.28);
         font-weight: 700;
         font-size: 0.95rem;
         padding: 12px 24px;
@@ -193,9 +193,9 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         cursor: pointer;
     }
     .del-btn-secondary:hover {
-        background: #FFF2F7;
-        border-color: #FF2D75;
-        color: #FF2D75 !important;
+        background: #FFF0F7;
+        border-color: #C4007A;
+        color: #C4007A !important;
     }
 
     /* ========================================================
@@ -205,7 +205,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         position: relative;
         padding: 56px 0 52px;
         background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
-        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
     }
     .del-hero-grid {
         display: grid;
@@ -222,7 +222,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-hero-title {
         font-size: clamp(2.1rem, 3.8vw, 3.1rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         line-height: 1.16;
         letter-spacing: -0.025em;
         margin: 0 0 16px;
@@ -230,7 +230,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-hero-desc {
         font-size: 1.05rem;
         line-height: 1.64;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0 0 24px;
         max-width: 620px;
     }
@@ -252,15 +252,15 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         width: 22px;
         height: 22px;
         border-radius: 50%;
-        background: #FFF2F7;
-        color: #FF2D75;
+        background: #FFF0F7;
+        color: #C4007A;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         font-size: 0.82rem;
         font-weight: 800;
         flex-shrink: 0;
-        border: 1px solid rgba(255, 45, 117, 0.25);
+        border: 1px solid rgba(196, 0, 122, 0.25);
     }
     .del-hero-actions {
         display: flex;
@@ -274,16 +274,16 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         align-items: center;
         gap: 14px;
         background: #FFFFFF;
-        border: 1px solid rgba(255, 45, 117, 0.18);
+        border: 1px solid rgba(196, 0, 122, 0.18);
         border-radius: 16px;
         padding: 10px 18px;
-        box-shadow: 0 6px 18px rgba(255, 45, 117, 0.05);
+        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.05);
     }
     .del-author-avatar {
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #FF2D75, #F65A91);
+        background: linear-gradient(135deg, #C4007A, #E0398F);
         color: #FFFFFF;
         display: flex;
         align-items: center;
@@ -295,11 +295,11 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-author-meta .name {
         font-weight: 700;
         font-size: 0.92rem;
-        color: #111111;
+        color: #111827;
     }
     .del-author-meta .sub {
         font-size: 0.78rem;
-        color: #666666;
+        color: #6B7280;
     }
 
     /* Floating Hero Form Card (Image 1 Reference) */
@@ -307,20 +307,20 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         background: #FFFFFF;
         border-radius: 24px;
         padding: 32px 28px;
-        box-shadow: 0 20px 45px rgba(255, 45, 117, 0.12), 0 2px 8px rgba(0,0,0,0.04);
-        border: 1.5px solid rgba(255, 45, 117, 0.18);
+        box-shadow: 0 20px 45px rgba(196, 0, 122, 0.12), 0 2px 8px rgba(0,0,0,0.04);
+        border: 1.5px solid rgba(196, 0, 122, 0.18);
         position: relative;
     }
     .del-hero-form-card h3 {
         font-size: 1.45rem;
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 6px;
         letter-spacing: -0.01em;
     }
     .del-hero-form-card p {
         font-size: 0.86rem;
-        color: #666666;
+        color: #6B7280;
         margin: 0 0 20px;
     }
     .del-form-group {
@@ -334,16 +334,16 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         border: 1px solid #E5E7EB;
         background: #F9FAFB;
         font-size: 0.9rem;
-        color: #111111;
+        color: #111827;
         outline: none;
         transition: all 0.2s ease;
         font-family: inherit;
     }
     .del-form-group input:focus,
     .del-form-group textarea:focus {
-        border-color: #FF2D75;
+        border-color: #C4007A;
         background: #FFFFFF;
-        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.12);
+        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.12);
     }
     .del-recaptcha-box {
         display: flex;
@@ -360,13 +360,13 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         align-items: center;
         gap: 10px;
         font-size: 0.84rem;
-        color: #4A4A4A;
+        color: #374151;
         cursor: pointer;
     }
     .del-recaptcha-label input {
         width: 17px;
         height: 17px;
-        accent-color: #FF2D75;
+        accent-color: #C4007A;
         cursor: pointer;
     }
     .del-hero-submit {
@@ -404,7 +404,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-banner-eyebrow {
         font-size: 0.95rem;
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
         letter-spacing: 0.08em;
         margin-bottom: 12px;
         text-transform: uppercase;
@@ -412,20 +412,20 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-banner-title {
         font-size: clamp(1.8rem, 3.4vw, 2.7rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         line-height: 1.24;
         margin: 0 0 18px;
     }
     .del-banner-desc {
         font-size: 1.02rem;
         line-height: 1.68;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0 0 16px;
     }
     .del-banner-desc-sub {
         font-size: 0.94rem;
         line-height: 1.65;
-        color: #666666;
+        color: #6B7280;
         margin: 0 0 28px;
     }
 
@@ -435,8 +435,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-takeaways-section {
         padding: 60px 0;
         background: #FFF5FA;
-        border-top: 1px solid rgba(255, 45, 117, 0.08);
-        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
+        border-top: 1px solid rgba(196, 0, 122, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
     }
     .del-takeaways-grid {
         display: grid;
@@ -466,7 +466,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         line-height: 1.45;
     }
     .del-takeaway-item .chk {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 800;
         font-size: 1.05rem;
         flex-shrink: 0;
@@ -478,8 +478,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-serp-mockup {
         background: #FFFFFF;
         border-radius: 20px;
-        border: 1.5px solid rgba(255, 45, 117, 0.22);
-        box-shadow: 0 18px 40px rgba(255, 45, 117, 0.09);
+        border: 1.5px solid rgba(196, 0, 122, 0.22);
+        box-shadow: 0 18px 40px rgba(196, 0, 122, 0.09);
         padding: 22px;
         overflow: hidden;
     }
@@ -493,29 +493,29 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         padding: 8px 14px;
         margin-bottom: 14px;
         font-size: 0.85rem;
-        color: #4A4A4A;
+        color: #4B5563;
     }
     .del-serp-browser-bar .search-icon {
-        color: #FF2D75;
+        color: #C4007A;
     }
     .del-serp-tabs {
         display: flex;
         gap: 14px;
         font-size: 0.78rem;
-        color: #666666;
+        color: #6B7280;
         border-bottom: 1px solid #E5E7EB;
         padding-bottom: 10px;
         margin-bottom: 16px;
     }
     .del-serp-tabs .active {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 700;
-        border-bottom: 2px solid #FF2D75;
+        border-bottom: 2px solid #C4007A;
         padding-bottom: 8px;
     }
     .del-ai-overview-card {
-        background: #FFF2F7;
-        border: 1px solid rgba(255, 45, 117, 0.25);
+        background: #FFF0F7;
+        border: 1px solid rgba(196, 0, 122, 0.25);
         border-radius: 14px;
         padding: 14px 16px;
         margin-bottom: 16px;
@@ -526,18 +526,18 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         gap: 6px;
         font-size: 0.72rem;
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
         text-transform: uppercase;
         margin-bottom: 6px;
     }
     .del-ai-desc {
         font-size: 0.82rem;
-        color: #4A4A4A;
+        color: #374151;
         line-height: 1.48;
         margin: 0;
     }
     .del-serp-winner-card {
-        border: 2px solid #FF2D75;
+        border: 2px solid #C4007A;
         border-radius: 14px;
         padding: 14px 16px;
         background: #FFFFFF;
@@ -547,7 +547,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         position: absolute;
         top: -10px;
         right: 14px;
-        background: #FF2D75;
+        background: #C4007A;
         color: #FFFFFF;
         font-size: 0.68rem;
         font-weight: 800;
@@ -556,19 +556,19 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-winner-url {
         font-size: 0.76rem;
-        color: #666666;
+        color: #6B7280;
         margin-bottom: 4px;
     }
     .del-winner-title {
         font-size: 0.98rem;
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
         margin-bottom: 6px;
         text-decoration: underline;
     }
     .del-winner-snippet {
         font-size: 0.82rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.45;
         margin: 0 0 8px;
     }
@@ -578,7 +578,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         gap: 8px;
         font-size: 0.74rem;
         font-weight: 600;
-        color: #FF2D75;
+        color: #C4007A;
     }
 
     /* ========================================================
@@ -602,23 +602,23 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-shortfall-card {
         background: #FFFFFF;
-        border: 1px solid rgba(255, 45, 117, 0.16);
+        border: 1px solid rgba(196, 0, 122, 0.16);
         border-radius: 18px;
         padding: 24px;
         transition: all 0.25s ease;
-        box-shadow: 0 6px 16px rgba(255, 45, 117, 0.04);
+        box-shadow: 0 6px 16px rgba(196, 0, 122, 0.04);
     }
     .del-shortfall-card:hover {
         transform: translateY(-4px);
-        border-color: #FF2D75;
-        box-shadow: 0 14px 28px rgba(255, 45, 117, 0.12);
+        border-color: #C4007A;
+        box-shadow: 0 14px 28px rgba(196, 0, 122, 0.12);
     }
     .del-shortfall-icon {
         width: 44px;
         height: 44px;
         border-radius: 12px;
-        background: #FFF2F7;
-        color: #FF2D75;
+        background: #FFF0F7;
+        color: #C4007A;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -627,18 +627,18 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-shortfall-card h4 {
         font-size: 1.12rem;
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 10px;
     }
     .del-shortfall-card p {
         font-size: 0.9rem;
         line-height: 1.6;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0;
     }
     .del-shortfall-cta-bar {
         background: #FFF5FA;
-        border: 1.5px solid rgba(255, 45, 117, 0.22);
+        border: 1.5px solid rgba(196, 0, 122, 0.22);
         border-radius: 18px;
         padding: 20px 24px;
         display: flex;
@@ -658,7 +658,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         margin: 0;
         font-size: 0.96rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
     }
 
     /* ========================================================
@@ -667,15 +667,15 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-founder-section {
         padding: 56px 0;
         background: #FFF5FA;
-        border-top: 1px solid rgba(255, 45, 117, 0.08);
-        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
+        border-top: 1px solid rgba(196, 0, 122, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
     }
     .del-founder-card {
         background: #FFFFFF;
         border-radius: 24px;
-        border: 1.5px solid rgba(255, 45, 117, 0.22);
+        border: 1.5px solid rgba(196, 0, 122, 0.22);
         padding: 34px 30px;
-        box-shadow: 0 16px 36px rgba(255, 45, 117, 0.08);
+        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.08);
         display: grid;
         grid-template-columns: 1fr;
         gap: 28px;
@@ -691,13 +691,13 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-founder-left h2 {
         font-size: clamp(1.6rem, 2.8vw, 2.2rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 12px;
     }
     .del-founder-left p {
         font-size: 0.98rem;
         line-height: 1.62;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0 0 20px;
     }
     .del-founder-nameplate {
@@ -706,12 +706,12 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-founder-nameplate .founder-name {
         font-size: 1.28rem;
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
         letter-spacing: -0.01em;
     }
     .del-founder-nameplate .founder-role {
         font-size: 0.88rem;
-        color: #666666;
+        color: #6B7280;
         font-weight: 600;
     }
     .del-founder-stats {
@@ -721,20 +721,20 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         margin-bottom: 24px;
     }
     .del-fstat-item {
-        background: #FFF2F7;
-        border: 1px solid rgba(255, 45, 117, 0.2);
+        background: #FFF0F7;
+        border: 1px solid rgba(196, 0, 122, 0.2);
         border-radius: 12px;
         padding: 10px 16px;
     }
     .del-fstat-item .val {
         font-size: 1.35rem;
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
         line-height: 1;
     }
     .del-fstat-item .lbl {
         font-size: 0.74rem;
-        color: #4A4A4A;
+        color: #4B5563;
         font-weight: 600;
     }
     .del-founder-right {
@@ -747,9 +747,9 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         max-width: 320px;
         border-radius: 20px;
         overflow: hidden;
-        border: 3px solid #FFF2F7;
-        box-shadow: 0 14px 30px rgba(255, 45, 117, 0.15);
-        background: linear-gradient(135deg, #111111, #1F2937);
+        border: 3px solid #FFF0F7;
+        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.15);
+        background: linear-gradient(135deg, #111827, #1F2937);
         text-align: center;
         padding: 30px 20px;
         color: #FFFFFF;
@@ -769,7 +769,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-offer-card {
         background: #FFFFFF;
-        border: 1px solid rgba(255, 45, 117, 0.16);
+        border: 1px solid rgba(196, 0, 122, 0.16);
         border-radius: 18px;
         padding: 24px;
         transition: all 0.25s ease;
@@ -780,15 +780,15 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-offer-card:hover {
         transform: translateY(-4px);
-        border-color: #FF2D75;
-        box-shadow: 0 12px 28px rgba(255, 45, 117, 0.12);
+        border-color: #C4007A;
+        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
     }
     .del-offer-icon {
         width: 44px;
         height: 44px;
         border-radius: 12px;
-        background: #FFF2F7;
-        color: #FF2D75;
+        background: #FFF0F7;
+        color: #C4007A;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -797,20 +797,20 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-offer-card h4 {
         font-size: 1.15rem;
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
     }
     .del-offer-card p {
         font-size: 0.88rem;
         line-height: 1.58;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0 0 16px;
     }
     .del-offer-link {
         margin-top: auto;
         font-size: 0.86rem;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -829,8 +829,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         width: 100%;
         overflow-x: auto;
         border-radius: 18px;
-        border: 1.5px solid rgba(255, 45, 117, 0.2);
-        box-shadow: 0 10px 28px rgba(255, 45, 117, 0.05);
+        border: 1.5px solid rgba(196, 0, 122, 0.2);
+        box-shadow: 0 10px 28px rgba(196, 0, 122, 0.05);
         margin-bottom: 48px;
     }
     .del-results-table {
@@ -841,7 +841,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         text-align: left;
     }
     .del-results-table th {
-        background: linear-gradient(135deg, #850053 0%, #FF2D75 100%);
+        background: linear-gradient(135deg, #850053 0%, #C4007A 100%);
         color: #FFFFFF;
         font-weight: 800;
         font-size: 0.88rem;
@@ -863,7 +863,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-results-table .highlight-res {
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
     }
 
     /* Live Organic Rankings Cards (Image 5 Bottom Mockup) */
@@ -882,10 +882,10 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-rank-card {
         background: #FFFFFF;
-        border: 1.5px solid rgba(255, 45, 117, 0.22);
+        border: 1.5px solid rgba(196, 0, 122, 0.22);
         border-radius: 18px;
         padding: 22px;
-        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.06);
+        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.06);
         position: relative;
     }
     .del-rank-card-header {
@@ -899,14 +899,14 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-rank-domain {
         font-size: 0.96rem;
         font-weight: 800;
-        color: #111111;
+        color: #111827;
     }
     .del-rank-badge {
         font-size: 0.72rem;
         font-weight: 700;
-        background: #FFF2F7;
-        color: #FF2D75;
-        border: 1px solid rgba(255, 45, 117, 0.2);
+        background: #FFF0F7;
+        color: #C4007A;
+        border: 1px solid rgba(196, 0, 122, 0.2);
         padding: 2px 8px;
         border-radius: 9999px;
     }
@@ -925,34 +925,34 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-rank-metric .val {
         font-size: 1.08rem;
         font-weight: 800;
-        color: #FF2D75;
+        color: #C4007A;
     }
     .del-rank-metric .lbl {
         font-size: 0.68rem;
-        color: #666666;
+        color: #6B7280;
         font-weight: 600;
         text-transform: uppercase;
     }
     .del-rank-top-pos {
         background: #FFF5FA;
-        border: 1px dashed rgba(255, 45, 117, 0.3);
+        border: 1px dashed rgba(196, 0, 122, 0.3);
         border-radius: 10px;
         padding: 9px 12px;
         font-size: 0.8rem;
-        color: #111111;
+        color: #111827;
         font-weight: 600;
     }
     .del-rank-top-pos span {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 800;
     }
 
     /* Live Keyword Ranking Proof Table */
     .del-keywords-table-wrap {
-        border: 1.5px solid rgba(255, 45, 117, 0.2);
+        border: 1.5px solid rgba(196, 0, 122, 0.2);
         border-radius: 18px;
         overflow-x: auto;
-        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.05);
+        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.05);
         margin-bottom: 28px;
     }
     .del-kw-table {
@@ -962,13 +962,13 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         background: #FFFFFF;
     }
     .del-kw-table th {
-        background: #FFF2F7;
+        background: #FFF0F7;
         color: #850053;
         font-weight: 800;
         font-size: 0.82rem;
         text-transform: uppercase;
         padding: 12px 16px;
-        border-bottom: 1.5px solid rgba(255, 45, 117, 0.2);
+        border-bottom: 1.5px solid rgba(196, 0, 122, 0.2);
     }
     .del-kw-table td {
         padding: 12px 16px;
@@ -983,7 +983,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         width: 32px;
         height: 28px;
         border-radius: 8px;
-        background: #FF2D75;
+        background: #C4007A;
         color: #FFFFFF;
         font-weight: 800;
         font-size: 0.88rem;
@@ -1000,8 +1000,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-localities-section {
         padding: 56px 0;
         background: #FFF5FA;
-        border-top: 1px solid rgba(255, 45, 117, 0.08);
-        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
+        border-top: 1px solid rgba(196, 0, 122, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
     }
     .del-localities-pills {
         display: flex;
@@ -1013,19 +1013,19 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     }
     .del-loc-pill {
         background: #FFFFFF;
-        border: 1px solid rgba(255, 45, 117, 0.18);
+        border: 1px solid rgba(196, 0, 122, 0.18);
         padding: 9px 18px;
         border-radius: 9999px;
         font-size: 0.88rem;
         font-weight: 700;
         color: #1F2937;
-        box-shadow: 0 4px 10px rgba(255, 45, 117, 0.04);
+        box-shadow: 0 4px 10px rgba(196, 0, 122, 0.04);
         transition: all 0.2s ease;
     }
     .del-loc-pill:hover {
-        background: #FFF2F7;
-        border-color: #FF2D75;
-        color: #FF2D75;
+        background: #FFF0F7;
+        border-color: #C4007A;
+        color: #C4007A;
         transform: translateY(-2px);
     }
 
@@ -1045,8 +1045,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         transition: all 0.2s ease;
     }
     .del-faq-item.active {
-        border-color: #FF2D75;
-        box-shadow: 0 6px 18px rgba(255, 45, 117, 0.06);
+        border-color: #C4007A;
+        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.06);
     }
     .del-faq-btn {
         width: 100%;
@@ -1060,14 +1060,14 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         text-align: left;
         font-size: 1.02rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         cursor: pointer;
         font-family: inherit;
     }
     .del-faq-btn .icon {
         font-size: 1.3rem;
         font-weight: 400;
-        color: #FF2D75;
+        color: #C4007A;
         transition: transform 0.2s ease;
         line-height: 1;
     }
@@ -1079,7 +1079,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         padding: 0 20px 18px;
         font-size: 0.92rem;
         line-height: 1.62;
-        color: #4A4A4A;
+        color: #4B5563;
     }
     .del-faq-item.active .del-faq-answer {
         display: block;
@@ -1090,7 +1090,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
        ======================================================== */
     .del-cta-section {
         padding: 60px 0;
-        background: linear-gradient(135deg, #850053 0%, #FF2D75 50%, #F65A91 100%);
+        background: linear-gradient(135deg, #850053 0%, #C4007A 50%, #E0398F 100%);
         color: #FFFFFF;
         text-align: center;
         position: relative;
@@ -1102,7 +1102,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         margin: 0 0 14px;
     }
     .del-cta-box h2 span {
-        color: #FFF2F7;
+        color: #FFF0F7;
         text-decoration: underline;
         text-underline-offset: 6px;
     }
@@ -1138,7 +1138,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                     </div>
 
                     <h1 class="del-hero-title">
-                        Build Search Visibility That <span style="color: #FF2D75; position: relative; display: inline-block;">Drives Real Business Growth<svg viewBox="0 0 300 6" preserveAspectRatio="none" style="position: absolute; left: 0; bottom: -4px; width: 100%; height: 6px;"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        Build Search Visibility That <span style="color: #C4007A; position: relative; display: inline-block;">Drives Real Business Growth<svg viewBox="0 0 300 6" preserveAspectRatio="none" style="position: absolute; left: 0; bottom: -4px; width: 100%; height: 6px;"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h1>
 
                     <p class="del-hero-desc">
@@ -1211,7 +1211,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                                     <input type="checkbox" required checked>
                                     <span>I'm not a robot</span>
                                 </label>
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF2D75" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                             </div>
 
                             <button type="submit" class="del-btn-primary del-hero-submit" id="delHeroSubmitBtn">
@@ -1239,7 +1239,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                 <div class="del-banner-eyebrow">Smart. Scalable. Secure.</div>
                 
                 <h2 class="del-banner-title">
-                    SEO Services in Delhi for <span style="color: #FF2D75;">Google Rankings, Qualified Traffic &amp; AI Search Visibility</span>
+                    SEO Services in Delhi for <span style="color: #C4007A;">Google Rankings, Qualified Traffic &amp; AI Search Visibility</span>
                 </h2>
 
                 <p class="del-banner-desc">
@@ -1268,14 +1268,14 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                 <!-- Left Column: Content & Checkmarks -->
                 <div class="del-takeaways-left" data-wtm-reveal="fade-up">
                     <h2 class="del-section-title" style="text-align: left; margin-bottom: 14px;">
-                        Key <span class="accent">Takeaways<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        Key <span class="accent">Takeaways<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h2>
 
-                    <p style="font-size: 0.98rem; line-height: 1.65; color: #4A4A4A; margin-bottom: 16px;">
-                        <strong style="color: #111111;">SEO Services</strong> are professional search optimization solutions that help businesses improve their visibility across search engines and AI-powered search platforms. Whether you're a startup, a local business, or an established enterprise, our SEO consultants in Delhi NCR combine technical optimization, keyword strategy, content enhancement, authority building, and AI SEO to improve search rankings, attract qualified traffic, and support measurable growth.
+                    <p style="font-size: 0.98rem; line-height: 1.65; color: #4B5563; margin-bottom: 16px;">
+                        <strong style="color: #111827;">SEO Services</strong> are professional search optimization solutions that help businesses improve their visibility across search engines and AI-powered search platforms. Whether you're a startup, a local business, or an established enterprise, our SEO consultants in Delhi NCR combine technical optimization, keyword strategy, content enhancement, authority building, and AI SEO to improve search rankings, attract qualified traffic, and support measurable growth.
                     </p>
 
-                    <div style="font-weight: 800; font-size: 0.98rem; color: #111111; margin-bottom: 8px;">
+                    <div style="font-weight: 800; font-size: 0.98rem; color: #111827; margin-bottom: 8px;">
                         What's included in our SEO services:
                     </div>
 
@@ -1373,7 +1373,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         <div class="del-container">
             <div class="del-section-head" data-wtm-reveal="fade-up">
                 <h2 class="del-section-title">
-                    Why Are Your SEO Efforts Falling Short Without an <span class="accent">Experienced SEO Agency Delhi?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Why Are Your SEO Efforts Falling Short Without an <span class="accent">Experienced SEO Agency Delhi?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
                     Most SEO efforts fall short for three reasons: no clear keyword strategy, inconsistent content publishing, and no way to measure what's actually driving leads. Many companies take a lot of time making their websites, placing paid ads, and creating quality content, but do not know how to evaluate the performance of their digital marketing efforts. As an award-winning SEO agency in Delhi NCR, we help our clients develop ROI-focused strategies that optimize your website presence and produce qualified sales leads.
@@ -1456,7 +1456,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
             <!-- Founder Showcase Card (Image 4 Top) -->
             <div class="del-founder-card" data-wtm-reveal="fade-up">
                 <div class="del-founder-left">
-                    <h2>Looking for SEO Services That <span style="color: #FF2D75;">Drive Real Business Growth?</span></h2>
+                    <h2>Looking for SEO Services That <span style="color: #C4007A;">Drive Real Business Growth?</span></h2>
                     <p>From technical optimization to content strategy and authority building, our comprehensive SEO services help businesses increase visibility, drive quality traffic, and convert many visitors into loyal customers. Speak with our experts!</p>
 
                     <div class="del-founder-nameplate">
@@ -1480,7 +1480,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                     </div>
 
                     <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-                        <a href="https://linkedin.com" target="_blank" class="del-btn-secondary" style="border-color: #FF2D75; color: #FF2D75 !important;">
+                        <a href="https://linkedin.com" target="_blank" class="del-btn-secondary" style="border-color: #C4007A; color: #C4007A !important;">
                             <span>View LinkedIn Profile</span>
                         </a>
                         <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
@@ -1492,7 +1492,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
 
                 <div class="del-founder-right">
                     <div class="del-founder-photo-box">
-                        <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #FF2D75, #F65A91); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: #fff;">
+                        <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #C4007A, #E0398F); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: #fff;">
                             MS
                         </div>
                         <h4 style="color: #FFFFFF; font-size: 1.15rem; margin: 0 0 4px;"><?= htmlspecialchars($founderName) ?></h4>
@@ -1508,7 +1508,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
             <div class="del-section-head" data-wtm-reveal="fade-up">
                 <div class="del-eyebrow">WHAT WE OFFER</div>
                 <h2 class="del-section-title">
-                    What Do Professional SEO Services in Delhi Include for <span class="accent">Long-Term Business Growth?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    What Do Professional SEO Services in Delhi Include for <span class="accent">Long-Term Business Growth?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
                     SEO services include a mix of technical SEO, keyword research, on-page optimization, content strategy, link building, local SEO, and regular performance tracking. Discover what's included in our AI-ready SEO solutions:
@@ -1589,7 +1589,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
             <div class="del-section-head" data-wtm-reveal="fade-up">
                 <div class="del-eyebrow">VERIFIED PERFORMANCE DATA</div>
                 <h2 class="del-section-title">
-                    Real Results: How Businesses Grew with the <span class="accent">Best SEO Service Providers in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Real Results: How Businesses Grew with the <span class="accent">Best SEO Service Providers in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
                     We don't just promise rankings but deliver measurable business outcomes. We have a proven track record of developing effective SEO strategies for many clients with a focus on creating solutions that are based on results rather than vanity metrics. What makes our SEO service in Delhi different is our ability to combine technical precision, search intent optimization, and authority building into one cohesive strategy.
@@ -1644,10 +1644,10 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
             <!-- ORGANIC RANKINGS SHOWCASE (Image 5 Bottom & User Explicit Request) -->
             <div class="del-rankings-header" data-wtm-reveal="fade-up">
                 <div class="del-eyebrow">LIVE GOOGLE RANKINGS PROOF</div>
-                <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; color: #111111; margin: 0 0 10px;">
+                <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; color: #111827; margin: 0 0 10px;">
                     Organic Rankings That Drive Real Inbound Revenue
                 </h3>
-                <p style="font-size: 0.96rem; color: #666666; max-width: 720px; margin: 0 auto;">
+                <p style="font-size: 0.96rem; color: #6B7280; max-width: 720px; margin: 0 auto;">
                     Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and Delhi NCR businesses:
                 </p>
             </div>
@@ -1746,51 +1746,51 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                     <tbody>
                         <tr>
                             <td><strong>Bharat Tex 2026 Fair</strong></td>
-                            <td style="color: #666666; font-size: 0.82rem;">bharat-tex.com</td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">bharat-tex.com</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +17 Positions</span></td>
                             <td>49,500/mo</td>
-                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Commercial</span></td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Commercial</span></td>
                         </tr>
                         <tr>
                             <td><strong>Best SEO Company in Delhi NCR</strong></td>
-                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/seo-services-delhi.php</td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/seo-services-delhi.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +13 Positions</span></td>
                             <td>14,800/mo</td>
-                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
                         </tr>
                         <tr>
                             <td><strong>IHGF Autumn Fair Dates 2026</strong></td>
-                            <td style="color: #666666; font-size: 0.82rem;">ihgfdelhifair.in</td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">ihgfdelhifair.in</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +25 Positions</span></td>
                             <td>22,200/mo</td>
-                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Buyer Intent</span></td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Buyer Intent</span></td>
                         </tr>
                         <tr>
                             <td><strong>B2B Exhibition SEO Services</strong></td>
-                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/b2b-exhibition-seo.php</td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/b2b-exhibition-seo.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +30 Positions</span></td>
                             <td>8,100/mo</td>
-                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">B2B Commercial</span></td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">B2B Commercial</span></td>
                         </tr>
                         <tr>
                             <td><strong>Local SEO Services in Delhi</strong></td>
-                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/local-seo.php</td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/local-seo.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +23 Positions</span></td>
                             <td>12,100/mo</td>
-                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Local Intent</span></td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Local Intent</span></td>
                         </tr>
                         <tr>
                             <td><strong>Technical SEO Services Delhi</strong></td>
-                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/technical-seo.php</td>
+                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/technical-seo.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +19 Positions</span></td>
                             <td>6,400/mo</td>
-                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Technical</span></td>
+                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Technical</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1815,7 +1815,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
             <div class="del-section-head" data-wtm-reveal="fade-up">
                 <div class="del-eyebrow">HYPER-LOCAL DELHI REACH</div>
                 <h2 class="del-section-title">
-                    Dominating Search Across <span class="accent">Delhi NCR Commercial Hubs<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Dominating Search Across <span class="accent">Delhi NCR Commercial Hubs<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
                     We engineer geo-targeted organic visibility across major commercial and industrial hubs:
@@ -1847,7 +1847,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
             <div class="del-section-head" data-wtm-reveal="fade-up">
                 <div class="del-eyebrow">FREQUENTLY ASKED QUESTIONS</div>
                 <h2 class="del-section-title">
-                    Questions About <span class="accent">SEO in Delhi NCR<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Questions About <span class="accent">SEO in Delhi NCR<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
                     Clear, transparent answers to help you make an informed decision for your digital growth:
@@ -1920,7 +1920,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                 </p>
 
                 <div class="del-cta-btns">
-                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #FF2D75 !important; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
                         <span>Get Free Consultation</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>

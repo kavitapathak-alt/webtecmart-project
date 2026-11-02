@@ -31,13 +31,13 @@ require_once __DIR__ . '/templates/header.php';
     .dash-greeting h1 {
         font-size: clamp(1.5rem, 2.5vw, 1.85rem) !important;
         font-weight: 800 !important;
-        color: #111111;
+        color: #0F172A;
         letter-spacing: -0.02em;
         margin: 0 0 6px !important;
     }
     .dash-greeting p {
         font-size: 0.95rem !important;
-        color: #4A4A4A;
+        color: #64748B;
         margin: 0 !important;
     }
 
@@ -57,7 +57,7 @@ require_once __DIR__ . '/templates/header.php';
 
     .adm-card {
         background: #FFFFFF;
-        border: 1px solid #EAEAEA;
+        border: 1px solid #E2E8F0;
         border-radius: 16px;
         padding: 24px;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
@@ -82,7 +82,7 @@ require_once __DIR__ . '/templates/header.php';
         font-size: 1.4rem;
         flex-shrink: 0;
     }
-    .dash-stat-icon.pink { background: #FFF2F7; color: #FF2D75; }
+    .dash-stat-icon.pink { background: #FFF0F7; color: #C4007A; }
     .dash-stat-icon.blue { background: #EFF6FF; color: #2563EB; }
     .dash-stat-icon.green { background: #ECFDF5; color: #059669; }
     .dash-stat-icon.amber { background: #FFFBEB; color: #D97706; }
@@ -90,14 +90,14 @@ require_once __DIR__ . '/templates/header.php';
     .dash-stat-info .num {
         font-size: 1.75rem;
         font-weight: 800;
-        color: #111111;
+        color: #0F172A;
         line-height: 1.15;
         letter-spacing: -0.02em;
     }
     .dash-stat-info .label {
         font-size: 0.825rem;
         font-weight: 600;
-        color: #4A4A4A;
+        color: #64748B;
         margin-top: 2px;
     }
 
@@ -115,30 +115,30 @@ require_once __DIR__ . '/templates/header.php';
         padding: 10px 18px;
         border-radius: 12px;
         background: #FFFFFF;
-        border: 1.5px solid #EAEAEA;
-        color: #111111;
+        border: 1.5px solid #E2E8F0;
+        color: #1E293B;
         font-size: 0.875rem;
         font-weight: 700;
         text-decoration: none;
         transition: all 0.2s ease;
     }
-    .dash-action-btn i { font-size: 1.05rem; color: #FF2D75; }
+    .dash-action-btn i { font-size: 1.05rem; color: #C4007A; }
     .dash-action-btn:hover {
-        background: #FFF2F7;
-        border-color: #FF2D75;
-        color: #FF2D75;
+        background: #FFF0F7;
+        border-color: #F1C6DC;
+        color: #C4007A;
         transform: translateY(-1px);
     }
     .dash-action-btn.primary {
-        background: #FF2D75;
+        background: #C4007A;
         color: #FFFFFF !important;
-        border-color: #FF2D75;
-        box-shadow: 0 4px 14px rgba(255, 45, 117, 0.25);
+        border-color: #C4007A;
+        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.25);
     }
     .dash-action-btn.primary i { color: #FFFFFF; }
     .dash-action-btn.primary:hover {
-        background: #111111;
-        border-color: #111111;
+        background: #A3005F;
+        border-color: #A3005F;
     }
 
     /* Leads Table Card */
@@ -147,18 +147,18 @@ require_once __DIR__ . '/templates/header.php';
         align-items: center;
         justify-content: space-between;
         padding: 20px 24px;
-        border-bottom: 1px solid #EAEAEA;
+        border-bottom: 1px solid #E2E8F0;
     }
     .dash-table-head h2 {
         font-size: 1.15rem !important;
         font-weight: 800 !important;
-        color: #111111;
+        color: #0F172A;
         margin: 0 !important;
     }
     .dash-table-head a {
         font-size: 0.85rem;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
         text-decoration: none;
     }
     .dash-table-head a:hover { text-decoration: underline; }
@@ -174,14 +174,14 @@ require_once __DIR__ . '/templates/header.php';
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.08em;
-        color: #4A4A4A;
+        color: #64748B;
         text-align: left;
-        border-bottom: 1px solid #EAEAEA;
+        border-bottom: 1px solid #E2E8F0;
     }
     .adm-table td {
         padding: 16px 24px;
         font-size: 0.88rem;
-        color: #111111;
+        color: #1E293B;
         border-bottom: 1px solid #F1F5F9;
         vertical-align: middle;
     }
@@ -197,8 +197,8 @@ require_once __DIR__ . '/templates/header.php';
         width: 38px;
         height: 38px;
         border-radius: 50%;
-        background: #FFF2F7;
-        color: #FF2D75;
+        background: #FCE8F3;
+        color: #C4007A;
         font-weight: 800;
         font-size: 0.9rem;
         display: grid;
@@ -210,8 +210,8 @@ require_once __DIR__ . '/templates/header.php';
         align-items: center;
         padding: 4px 10px;
         border-radius: 9999px;
-        background: #FFF2F7;
-        color: #FF2D75;
+        background: #FFF0F7;
+        color: #C4007A;
         font-size: 0.76rem;
         font-weight: 700;
     }
@@ -267,13 +267,13 @@ require_once __DIR__ . '/templates/header.php';
 
 <!-- Quick Actions -->
 <div class="dash-quick-actions">
-        <a href="/admin/services.php?edit=68" class="dash-action-btn" style="border-color: rgba(255, 45, 117, 0.35); background: #FFF2F7; color: #FF2D75; font-weight: 700;">
+        <a href="/admin/services.php?edit=68" class="dash-action-btn" style="border-color: rgba(196, 0, 122, 0.35); background: #FFF5FA; color: #C4007A; font-weight: 700;">
         <i class="bi bi-star-fill text-warning me-1"></i> B2B &amp; Exhibition SEO
-        <span class="badge ms-1" style="background: linear-gradient(135deg, #FF2D75, #F65A91); font-size: 0.65rem;">Flagship</span>
+        <span class="badge ms-1" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem;">Flagship</span>
     </a>
-    <a href="/admin/services.php?edit=69" class="dash-action-btn" style="border-color: rgba(255, 45, 117, 0.35); background: #FFF2F7; color: #FF2D75; font-weight: 700;">
+    <a href="/admin/services.php?edit=69" class="dash-action-btn" style="border-color: rgba(196, 0, 122, 0.35); background: #FFF5FA; color: #C4007A; font-weight: 700;">
         <i class="bi bi-geo-alt-fill text-danger me-1"></i> SEO Services in Delhi
-        <span class="badge ms-1" style="background: linear-gradient(135deg, #FF2D75, #F65A91); font-size: 0.65rem;">Flagship Hub</span>
+        <span class="badge ms-1" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem;">Flagship Hub</span>
     </a>
     <a href="/admin/services.php" class="dash-action-btn primary">
         <i class="bi bi-briefcase-fill"></i> Manage Services CMS (<?= $serviceCount ?>)
@@ -304,11 +304,11 @@ require_once __DIR__ . '/templates/header.php';
 
     <?php if (empty($recentLeads)): ?>
         <div style="padding: 48px 24px; text-align: center;">
-            <div style="width: 56px; height: 56px; border-radius: 16px; background: #FFF2F7; color: #FF2D75; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 12px;">
+            <div style="width: 56px; height: 56px; border-radius: 16px; background: #FFF0F7; color: #C4007A; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 12px;">
                 <i class="bi bi-inbox"></i>
             </div>
-            <h4 style="font-size: 1rem; font-weight: 700; color: #111111; margin: 0 0 4px;">No inquiries logged yet</h4>
-            <p style="font-size: 0.85rem; color: #4A4A4A; margin: 0;">New consultation requests submitted from the website forms will appear here.</p>
+            <h4 style="font-size: 1rem; font-weight: 700; color: #0F172A; margin: 0 0 4px;">No inquiries logged yet</h4>
+            <p style="font-size: 0.85rem; color: #64748B; margin: 0;">New consultation requests submitted from the website forms will appear here.</p>
         </div>
     <?php else: ?>
         <div style="overflow-x: auto;">
@@ -329,9 +329,9 @@ require_once __DIR__ . '/templates/header.php';
                                 <div class="lead-avatar-cell">
                                     <div class="lead-avatar-circle"><?= e($initial((string) $lead['name'])) ?></div>
                                     <div>
-                                        <div style="font-weight: 700; color: #111111;"><?= e($lead['name']) ?></div>
+                                        <div style="font-weight: 700; color: #0F172A;"><?= e($lead['name']) ?></div>
                                         <?php if (!empty($lead['company'])): ?>
-                                            <div style="font-size: 0.76rem; color: #4A4A4A;"><?= e($lead['company']) ?></div>
+                                            <div style="font-size: 0.76rem; color: #64748B;"><?= e($lead['company']) ?></div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -357,7 +357,7 @@ require_once __DIR__ . '/templates/header.php';
                                     <span style="color: #94A3B8;">General Inquiry</span>
                                 <?php endif; ?>
                             </td>
-                            <td style="color: #4A4A4A; font-size: 0.825rem; white-space: nowrap;">
+                            <td style="color: #64748B; font-size: 0.825rem; white-space: nowrap;">
                                 <?= date('d M Y, h:i A', strtotime($lead['created_at'])) ?>
                             </td>
                         </tr>

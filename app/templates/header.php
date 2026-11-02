@@ -61,23 +61,17 @@ $navItems = [
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         :root {
-            --bg: #FFFFFF;
-            --primary: #FF2D75;
-            --primary-dark: #E01C60;
-            --primary-light: #F65A91;
-            --primary-soft: #FFF2F7;
-            --deep: #111111;
-            --charcoal: #292929;
-            --plum: #111111;
-            --muted: #737373;
-            --gold: #F59E0B;
-            --border-soft: #EAEAEA;
-            --border: #EAEAEA;
-            --white: #FFFFFF;
+            --bg: #FBF8F1;
+            --primary: #C4007A;
+            --primary-dark: #A3005F;
+            --primary-light: #E0398F;
+            --deep: #1A1A1A;
+            --muted: #6B7280;
+            --gold: #F4C430;
+            --border-soft: rgba(196, 0, 122, 0.1);
 
-            --gradient-primary: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
-            --gradient-topbar: linear-gradient(90deg, #111111 0%, #292929 55%, #111111 100%);
-            --gradient-hero: linear-gradient(135deg, #111111 0%, #292929 100%);
+            --gradient-primary: linear-gradient(90deg, #C4007A, #E0398F);
+            --gradient-topbar: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
 
             --topbar-h: 36px;
             --header-h: 84px;
@@ -91,7 +85,7 @@ $navItems = [
         }
 
         body {
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            font-family: var(--font-family-base);
             background: var(--bg);
             color: var(--deep);
             line-height: 1.6;
@@ -129,9 +123,9 @@ $navItems = [
             content: '';
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(255,255,255,0.18) 1px, transparent 1px);
-            background-size: 18px 18px;
-            opacity: 0.35;
+            background-image: radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.3;
             pointer-events: none;
         }
 
@@ -151,14 +145,14 @@ $navItems = [
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: rgba(255, 255, 255, 0.92);
-            transition: all 0.25s ease;
+            color: rgba(255, 255, 255, 0.9);
+            transition: all 0.3s ease;
             white-space: nowrap;
         }
 
         .top-bar-item:hover {
-            color: var(--primary-light);
-            transform: translateY(-1px);
+            color: var(--gold);
+            transform: scale(1.05);
         }
 
         .top-bar-item svg {
@@ -170,16 +164,16 @@ $navItems = [
         .top-bar-divider {
             width: 1px;
             height: 16px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
         }
 
         /* ===== HEADER ===== */
         .site-header {
-            background: rgba(255, 255, 255, 0.94);
+            background: rgba(251, 248, 241, 0.95);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--border-soft);
-            box-shadow: 0 4px 20px rgba(24, 27, 32, 0.04);
+            box-shadow: 0 4px 20px rgba(196, 0, 122, 0.10);
             position: fixed;
             top: var(--topbar-h);
             left: 0;
@@ -192,8 +186,8 @@ $navItems = [
         }
 
         .site-header.scrolled {
-            background: rgba(255, 255, 255, 0.98);
-            box-shadow: 0 8px 30px rgba(24, 27, 32, 0.08);
+            background: rgba(251, 248, 241, 0.98);
+            box-shadow: 0 4px 30px rgba(196, 0, 122, 0.15);
         }
 
         /* Animated bottom accent line */
@@ -201,8 +195,8 @@ $navItems = [
             content: '';
             position: absolute;
             left: 0; right: 0; bottom: 0;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--primary), var(--primary-light), transparent);
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
         }
 
         .site-header::before {
@@ -255,7 +249,7 @@ $navItems = [
             position: absolute;
             inset: 0;
             border-radius: 9999px;
-            background: rgba(255, 45, 117, 0.12);
+            background: rgba(196, 0, 122, 0.1);
             filter: blur(20px);
             transform: scale(0.75);
             transition: transform 0.5s ease;
@@ -266,9 +260,9 @@ $navItems = [
         }
 
         .brand-logo {
-            height: 68px;
-            width: 68px;
-            max-width: 68px;
+            height: 72px;
+            width: 72px;
+            max-width: 72px;
             object-fit: contain;
             position: relative;
             z-index: 10;
@@ -276,7 +270,7 @@ $navItems = [
         }
 
         .brand:hover .brand-logo {
-            transform: scale(1.06);
+            transform: scale(1.1) rotate(3deg);
         }
 
         .brand-text {
@@ -286,14 +280,18 @@ $navItems = [
         }
 
         .brand-name {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-            font-size: 1.45rem;
+            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--deep);
             letter-spacing: -0.02em;
             line-height: 1;
             margin: 0;
-            transition: color 0.3s ease;
+            transition: letter-spacing 0.3s ease;
+        }
+
+        .brand:hover .brand-name {
+            letter-spacing: 0;
         }
 
         .brand-name .accent {
@@ -316,8 +314,8 @@ $navItems = [
 
         .brand-tagline {
             font-size: 10px;
-            color: var(--muted);
-            letter-spacing: 0.22em;
+            color: rgba(196, 0, 122, 0.7);
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             margin-top: 4px;
             font-weight: 600;
@@ -325,21 +323,21 @@ $navItems = [
         }
 
         .brand:hover .brand-tagline {
-            color: var(--primary);
+            color: rgba(196, 0, 122, 0.9);
         }
 
         /* Fallback icon */
         .brand-icon {
-            width: 52px;
-            height: 52px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: var(--gradient-primary);
             color: #fff;
             display: grid;
             place-items: center;
             font-weight: 800;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 16px rgba(255, 45, 117, 0.3);
+            font-size: 1.7rem;
+            box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.2), 0 10px 25px -5px rgba(163, 19, 79, 0.22);
             flex-shrink: 0;
         }
 
@@ -352,32 +350,31 @@ $navItems = [
 
         .nav-link {
             color: var(--deep);
-            font-weight: 600;
+            font-weight: 500;
             font-size: 14px;
             padding: 8px 16px;
-            border-radius: 10px;
+            border-radius: 8px;
             white-space: nowrap;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             position: relative;
         }
 
         .nav-link:hover {
             color: var(--primary);
-            background: var(--primary-soft);
+            background: rgba(196, 0, 122, 0.05);
         }
 
         .nav-link.active {
             color: var(--primary);
-            background: var(--primary-soft);
         }
 
         .services-modal .modal-content {
-            height: min(590px, calc(100vh - 40px));
+            height: min(580px, calc(100vh - 40px));
             overflow: hidden;
-            border: 1px solid var(--border-soft);
+            border: 1px solid rgba(196, 0, 122, 0.14);
             border-radius: 24px;
-            background: #FFFFFF;
-            box-shadow: 0 24px 80px rgba(17, 17, 17, 0.16);
+            background: #FBF8F1;
+            box-shadow: 0 24px 80px rgba(31, 27, 42, 0.22);
         }
 
         .services-modal .modal-dialog {
@@ -388,8 +385,6 @@ $navItems = [
         .services-modal .modal-header {
             padding: 24px 28px 16px;
             border: 0;
-            background: var(--primary-soft);
-            border-bottom: 1px solid var(--border-soft);
         }
 
         .services-modal-kicker {
@@ -410,8 +405,7 @@ $navItems = [
         }
 
         .services-modal .modal-body {
-            padding: 16px 28px 28px;
-            background: #FFFFFF;
+            padding: 8px 28px 28px;
         }
 
         .services-modal-grid {
@@ -423,59 +417,49 @@ $navItems = [
         .services-modal-link {
             display: flex;
             align-items: flex-start;
-            gap: 14px;
+            gap: 13px;
             min-height: 94px;
             padding: 16px;
-            border: 1px solid var(--border-soft);
+            border: 1px solid rgba(196, 0, 122, 0.12);
             border-radius: 16px;
-            background: #FFFFFF;
+            background: #fff;
             color: var(--deep);
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         .services-modal-link:hover,
         .services-modal-link:focus-visible {
             transform: translateY(-2px);
-            border-color: var(--primary-light);
-            background: var(--primary-soft);
-            box-shadow: 0 10px 24px rgba(255, 45, 117, 0.12);
-            color: var(--primary);
+            border-color: rgba(196, 0, 122, 0.42);
+            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.1);
+            color: var(--primary-dark);
         }
 
         .services-modal-icon {
             display: grid;
-            width: 40px;
-            height: 40px;
-            flex: 0 0 40px;
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
             place-items: center;
             border-radius: 12px;
-            background: var(--primary-soft);
-            border: 1px solid var(--border-soft);
+            background: rgba(196, 0, 122, 0.09);
             color: var(--primary);
             font-size: 1rem;
             font-weight: 800;
-            transition: all 0.25s ease;
-        }
-
-        .services-modal-link:hover .services-modal-icon {
-            background: var(--primary);
-            color: #FFFFFF;
-            border-color: var(--primary);
         }
 
         .services-modal-link-title {
             display: block;
             margin: 0 0 4px;
-            font-size: 0.94rem;
+            font-size: 0.92rem;
             font-weight: 700;
             line-height: 1.35;
-            color: var(--deep);
         }
 
         .services-modal-link-description {
             display: block;
-            color: var(--muted);
+            color: #6B7280;
             font-size: 0.78rem;
             line-height: 1.5;
         }
@@ -483,8 +467,8 @@ $navItems = [
         @media (max-width: 575px) {
             .services-modal .modal-dialog { width: auto; margin: 12px; }
             .services-modal .modal-content { height: auto; max-height: calc(100vh - 24px); }
-            .services-modal .modal-header { padding: 18px 18px 12px; }
-            .services-modal .modal-body { padding: 12px 18px 18px; }
+            .services-modal .modal-header { padding: 20px 20px 14px; }
+            .services-modal .modal-body { padding: 8px 20px 20px; }
             .services-modal-grid { grid-template-columns: 1fr; gap: 9px; }
             .services-modal-link { min-height: auto; padding: 13px; }
         }
@@ -526,14 +510,14 @@ $navItems = [
             align-items: center;
             gap: 8px;
             border-radius: 9999px;
-            background: var(--primary);
+            background: linear-gradient(90deg, #C4007A, #E0398F);
             padding: 12px 28px;
-            font-weight: 700;
+            font-weight: 600;
             font-size: 14px;
             color: #fff;
-            box-shadow: 0 8px 22px rgba(255, 45, 117, 0.35);
+            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.3);
             transition: all 0.3s ease;
-            border: none;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
@@ -544,7 +528,7 @@ $navItems = [
         .header-cta .cta-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, #E01C60, #FF2D75);
+            background: linear-gradient(90deg, #A3005F, #C4007A);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
@@ -560,13 +544,12 @@ $navItems = [
         .header-cta svg {
             width: 14px;
             height: 14px;
-            transition: transform 0.4s ease;
+            transition: transform 0.5s ease;
         }
 
         .header-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(255, 45, 117, 0.45);
-            color: #fff;
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.4);
         }
 
         .header-cta:hover .cta-overlay {
@@ -582,15 +565,15 @@ $navItems = [
             display: none;
             width: 44px;
             height: 44px;
-            border-radius: 12px;
-            background: var(--primary-soft);
-            border: 1px solid var(--border-soft);
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(196, 0, 122, 0.2);
             color: var(--primary);
             cursor: pointer;
             align-items: center;
             justify-content: center;
             padding: 0;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
             flex-shrink: 0;
         }
 
@@ -598,7 +581,7 @@ $navItems = [
             background: var(--primary);
             color: #fff;
             border-color: var(--primary);
-            box-shadow: 0 6px 18px rgba(255, 45, 117, 0.25);
+            box-shadow: 0 8px 20px -4px rgba(196, 0, 122, 0.25);
         }
 
         .menu-toggle svg {
@@ -614,10 +597,10 @@ $navItems = [
         /* ===== MOBILE MENU PANEL ===== */
         .mobile-menu {
             display: none;
-            background: #FFFFFF;
+            background: #FBF8F1;
             border-top: 1px solid var(--border-soft);
             padding: 16px 0 24px;
-            box-shadow: 0 25px 50px -12px rgba(17, 17, 17, 0.12);
+            box-shadow: 0 25px 50px -12px rgba(31, 27, 42, 0.18);
             animation: slideDown 0.3s ease-out;
             max-height: calc(100vh - var(--header-h) - var(--topbar-h));
             overflow-y: auto;
@@ -647,7 +630,7 @@ $navItems = [
             padding: 12px 16px;
             border-radius: 12px;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             color: var(--deep);
             text-align: left;
         }
@@ -659,12 +642,12 @@ $navItems = [
 
         .mobile-menu .nav-link:hover {
             color: var(--primary);
-            background: var(--primary-soft);
+            background: rgba(196, 0, 122, 0.05);
         }
 
         .mobile-menu .nav-link.active {
             color: var(--primary);
-            background: var(--primary-soft);
+            background: rgba(196, 0, 122, 0.08);
         }
 
         .mobile-cta-wrap {
@@ -675,19 +658,19 @@ $navItems = [
             display: block;
             width: 100%;
             border-radius: 9999px;
-            background: var(--primary);
+            background: linear-gradient(90deg, #C4007A, #E0398F);
             padding: 14px 20px;
             text-align: center;
-            font-weight: 700;
+            font-weight: 600;
             color: #fff;
             font-size: 0.95rem;
-            box-shadow: 0 8px 20px rgba(255, 45, 117, 0.35);
+            box-shadow: 0 8px 15px -3px rgba(196, 0, 122, 0.3);
             transition: all 0.3s ease;
         }
 
         .mobile-cta:hover {
             transform: scale(1.02);
-            box-shadow: 0 12px 25px rgba(255, 45, 117, 0.45);
+            box-shadow: 0 12px 20px -4px rgba(196, 0, 122, 0.4);
             color: #fff;
         }
 
@@ -705,15 +688,15 @@ $navItems = [
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 9px 12px;
-            border-radius: 10px;
+            padding: 8px;
+            border-radius: 8px;
             font-size: 0.875rem;
-            color: var(--deep);
-            transition: all 0.25s ease;
+            color: rgba(26, 26, 26, 0.8);
+            transition: all 0.3s ease;
         }
 
         .mobile-contact a:hover {
-            background: var(--primary-soft);
+            background: rgba(196, 0, 122, 0.05);
             color: var(--primary);
         }
 

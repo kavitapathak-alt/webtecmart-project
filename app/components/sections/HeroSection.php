@@ -25,19 +25,17 @@ function renderHeroSection(): void
     ?>
     <style>
         /* ============================================================
-           HERO SECTION — Premium Black, White & Hot Pink (Appwrite Style)
+           HERO SECTION — Compact, Premium, Non-overlapping Layout
         ============================================================ */
         .hero {
             position: relative;
             width: 100%;
-            padding: 44px 0 36px;
+            padding: 24px 0 20px;
             overflow: hidden;
-            background-color: #FFFFFF;
-            background-image: radial-gradient(#EAEAEA 1.5px, transparent 1.5px);
-            background-size: 26px 26px;
+            background: #FBF8F1;
         }
 
-        /* Decorative Glow Elements */
+        /* Decorative Background Elements */
         .hero-bg {
             position: absolute;
             inset: 0;
@@ -46,55 +44,55 @@ function renderHeroSection(): void
 
         .hero-bg-blob-1 {
             position: absolute;
-            top: -60px;
-            right: -60px;
-            width: 48%;
-            height: 48%;
-            background: radial-gradient(circle, rgba(255, 45, 117, 0.08) 0%, transparent 70%);
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 45%;
+            background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
             border-radius: 9999px;
-            filter: blur(60px);
+            filter: blur(64px);
         }
 
         .hero-bg-blob-2 {
             position: absolute;
-            bottom: -60px;
-            left: -60px;
-            width: 42%;
-            height: 42%;
-            background: radial-gradient(circle, rgba(17, 17, 17, 0.04) 0%, transparent 70%);
+            bottom: 0;
+            left: 0;
+            width: 30%;
+            height: 30%;
+            background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
             border-radius: 9999px;
-            filter: blur(60px);
+            filter: blur(64px);
         }
 
         .hero-bg-svg {
             position: absolute;
             fill: none;
-            stroke: #FF2D75;
+            stroke: #C4007A;
             stroke-width: 1.5;
         }
 
         .hero-bg-svg-1 {
-            top: -20px;
-            right: 14%;
-            width: 100px;
-            height: 100px;
-            opacity: 0.14;
+            top: -30px;
+            right: 15%;
+            width: 110px;
+            height: 110px;
+            opacity: 0.35;
         }
 
         .hero-bg-svg-2 {
             top: 25%;
-            right: 4%;
-            width: 60px;
-            height: 60px;
-            opacity: 0.12;
+            right: 5%;
+            width: 70px;
+            height: 70px;
+            opacity: 0.25;
         }
 
         .hero-bg-svg-3 {
-            bottom: 20%;
-            right: 22%;
-            width: 70px;
-            height: 70px;
-            opacity: 0.1;
+            bottom: 25%;
+            right: 20%;
+            width: 80px;
+            height: 80px;
+            opacity: 0.2;
         }
 
         /* Grid Layout */
@@ -103,7 +101,7 @@ function renderHeroSection(): void
             z-index: 10;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 32px;
+            gap: 24px;
             align-items: stretch;
         }
 
@@ -113,65 +111,63 @@ function renderHeroSection(): void
         .hero-left {
             display: flex;
             flex-direction: column;
-            background: #FFFFFF;
-            border-radius: 24px;
-            padding: 32px 28px;
-            border: 1px solid #EAEAEA;
-            box-shadow: 0 14px 40px rgba(17, 17, 17, 0.05);
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
+            padding: 22px 20px;
+            border: 1px solid rgba(196, 0, 122, 0.08);
+            box-shadow: 0 4px 20px rgba(196, 0, 122, 0.03);
             height: 100%;
             justify-content: center;
         }
 
-        /* Badge (Appwrite capsule) */
+        /* Badge */
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #FFF2F7;
-            padding: 7px 16px;
+            gap: 6px;
+            background: rgba(196, 0, 122, 0.1);
+            padding: 6px 12px;
             border-radius: 9999px;
-            border: 1px solid rgba(255, 45, 117, 0.22);
             width: fit-content;
-            margin-bottom: 16px;
-            box-shadow: 0 2px 10px rgba(255, 45, 117, 0.08);
+            margin-bottom: 12px;
         }
 
         .hero-badge svg {
             width: 14px;
             height: 14px;
-            color: #FF2D75;
+            color: #C4007A;
             flex-shrink: 0;
         }
 
         .hero-badge span {
-            color: #FF2D75;
+            color: #C4007A;
             font-weight: 700;
             font-size: 0.78rem;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.03em;
             text-transform: uppercase;
         }
 
-        /* Main Heading (Appwrite bold modern agency scale) */
+        /* Main Heading */
         .hero-heading {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
             font-weight: 800;
             color: #111111;
-            line-height: 1.15;
-            font-size: clamp(2rem, 3.6vw, 3rem);
-            margin: 0 0 14px;
-            letter-spacing: -0.03em;
+            line-height: 1.18;
+            font-size: clamp(1.85rem, 3.2vw, 2.75rem);
+            margin: 0 0 12px;
+            letter-spacing: -0.02em;
             word-break: normal;
             overflow-wrap: break-word;
         }
 
         .hero-heading .accent {
-            color: #FF2D75;
+            color: #C4007A;
         }
 
         .hero-heading .underline-wrap {
             position: relative;
             display: inline-block;
-            color: #FF2D75;
+            color: #C4007A;
         }
 
         .hero-heading .underline-svg {
@@ -189,7 +185,7 @@ function renderHeroSection(): void
         }
 
         .hero-heading .highlight-wrap .text {
-            color: #FF2D75;
+            color: #C4007A;
             position: relative;
             z-index: 2;
         }
@@ -198,27 +194,19 @@ function renderHeroSection(): void
             display: none;
         }
 
-        /* Appwrite Cursor Underscore */
-        .hero-heading .wtm-cursor-underscore {
-            color: #FF2D75;
-            font-weight: 800;
-            margin-left: 2px;
-            animation: wtmBlink 1.1s infinite;
-        }
-
         /* Description */
         .hero-desc {
-            font-size: 1.02rem;
-            color: #4A4A4A;
-            margin: 0 0 14px;
-            line-height: 1.65;
+            font-size: 0.935rem;
+            color: #374151;
+            margin: 0 0 10px;
+            line-height: 1.58;
         }
 
         .hero-desc-sm {
-            font-size: 0.9rem;
-            color: #737373;
-            margin: 0 0 18px;
-            line-height: 1.6;
+            font-size: 0.85rem;
+            color: #4B5563;
+            margin: 0 0 16px;
+            line-height: 1.55;
         }
 
         /* Benefits Checklist */
@@ -228,21 +216,20 @@ function renderHeroSection(): void
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
 
         .hero-benefits li {
             display: flex;
             align-items: flex-start;
-            gap: 10px;
+            gap: 8px;
         }
 
         .hero-benefits .check-icon {
-            width: 22px;
-            height: 22px;
+            width: 18px;
+            height: 18px;
             border-radius: 9999px;
-            background: #FFF2F7;
-            border: 1px solid rgba(255, 45, 117, 0.2);
+            background: rgba(196, 0, 122, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -251,36 +238,35 @@ function renderHeroSection(): void
         }
 
         .hero-benefits .check-icon svg {
-            width: 13px;
-            height: 13px;
-            color: #FF2D75;
+            width: 12px;
+            height: 12px;
+            color: #C4007A;
         }
 
         .hero-benefits .text {
-            font-size: 0.88rem;
-            color: #111111;
+            font-size: 0.825rem;
+            color: #374151;
             line-height: 1.5;
-            font-weight: 600;
         }
 
         /* ============================================================
-           RIGHT SIDE — Contact Form (Appwrite Card Style)
+           RIGHT SIDE — Contact Form
         ============================================================ */
         .hero-right {
             position: relative;
-            border-radius: 24px;
+            border-radius: 16px;
             overflow: hidden;
-            background: #FFFFFF;
-            border: 1px solid #EAEAEA;
-            padding: 28px 26px;
-            box-shadow: 0 18px 48px rgba(17, 17, 17, 0.08);
+            background: #FDF0F6;
+            border: 1px solid rgba(196, 0, 122, 0.12);
+            padding: 22px 20px;
+            box-shadow: 0 8px 30px rgba(196, 0, 122, 0.1);
             display: flex;
             flex-direction: column;
             height: 100%;
             justify-content: center;
         }
 
-        /* Decorative ambient circles */
+        /* Decorative circles */
         .hero-right::before {
             content: '';
             position: absolute;
@@ -289,7 +275,7 @@ function renderHeroSection(): void
             width: 140px;
             height: 140px;
             border-radius: 9999px;
-            border: 2px solid rgba(255, 45, 117, 0.08);
+            border: 2px solid rgba(196, 0, 122, 0.08);
             pointer-events: none;
         }
 
@@ -301,7 +287,7 @@ function renderHeroSection(): void
             width: 110px;
             height: 110px;
             border-radius: 9999px;
-            border: 2px solid rgba(17, 17, 17, 0.05);
+            border: 2px solid rgba(196, 0, 122, 0.08);
             pointer-events: none;
         }
 
@@ -312,8 +298,8 @@ function renderHeroSection(): void
             width: 80px;
             height: 80px;
             border-radius: 9999px;
-            background: radial-gradient(circle, rgba(255, 45, 117, 0.1), transparent 70%);
-            filter: blur(30px);
+            background: rgba(196, 0, 122, 0.05);
+            filter: blur(40px);
             pointer-events: none;
         }
 
@@ -325,7 +311,7 @@ function renderHeroSection(): void
             height: 100%;
         }
 
-        /* Form Header */
+        /* Form Header — Meta row placed physically ABOVE heading so it NEVER overlaps */
         .hero-form-header {
             margin-bottom: 12px;
         }
@@ -343,17 +329,17 @@ function renderHeroSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: #FF2D75;
+            color: #C4007A;
             font-size: 0.72rem;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.06em;
+            letter-spacing: 0.04em;
         }
 
         .hero-form-kicker svg {
             width: 13px;
             height: 13px;
-            color: #FF2D75;
+            color: #C4007A;
             flex-shrink: 0;
         }
 
@@ -361,27 +347,27 @@ function renderHeroSection(): void
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            background: #FFF2F7;
-            border: 1px solid #EAEAEA;
+            background: #FFFFFF;
+            border: 1px solid #F1C6DC;
             border-radius: 9999px;
             padding: 4px 10px;
             font-size: 0.72rem;
             font-weight: 600;
-            color: #111111;
-            box-shadow: 0 2px 6px rgba(255, 45, 117, 0.06);
+            color: #374151;
+            box-shadow: 0 2px 6px rgba(196, 0, 122, 0.06);
             white-space: nowrap;
         }
 
         .hero-rating-badge span {
-            color: #FF2D75;
+            color: #111827;
             font-weight: 700;
         }
 
         .hero-form-header h2 {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
             font-weight: 800;
             color: #111111;
-            font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+            font-size: clamp(1.2rem, 1.8vw, 1.45rem);
             margin: 0 0 4px;
             line-height: 1.25;
             display: block;
@@ -389,22 +375,22 @@ function renderHeroSection(): void
         }
 
         .hero-form-header .subtitle {
-            color: #4A4A4A;
-            font-size: 0.84rem;
+            color: #4B5563;
+            font-size: 0.8rem;
             line-height: 1.5;
             margin: 0 0 4px;
         }
 
         .hero-form-header .contact-for {
-            font-size: 0.76rem;
-            color: #737373;
+            font-size: 0.72rem;
+            color: #6B7280;
             margin: 0;
             line-height: 1.4;
         }
 
         .hero-form-header .contact-for .label {
-            font-weight: 700;
-            color: #FF2D75;
+            font-weight: 600;
+            color: #C4007A;
         }
 
         /* Form */
@@ -431,7 +417,7 @@ function renderHeroSection(): void
             transform: translateY(-50%);
             width: 14px;
             height: 14px;
-            color: #737373;
+            color: #C4007A;
             pointer-events: none;
         }
 
@@ -444,11 +430,11 @@ function renderHeroSection(): void
         .hero-textarea,
         .hero-select {
             width: 100%;
-            border-radius: 12px;
-            border: 1.5px solid #EAEAEA;
-            background: #FAFAFC;
-            padding: 10px 12px 10px 34px;
-            font-size: 0.85rem;
+            border-radius: 8px;
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            background: #fff;
+            padding: 9px 12px 9px 32px;
+            font-size: 0.84rem;
             color: #111111;
             font-family: inherit;
             transition: all 0.2s ease;
@@ -460,18 +446,18 @@ function renderHeroSection(): void
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23FF2D75' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C4007A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 12px center;
             background-size: 14px 14px;
             padding-right: 32px;
             cursor: pointer;
-            accent-color: #FF2D75;
+            accent-color: #C4007A;
             color-scheme: light;
         }
 
         .hero-select:invalid {
-            color: #A3A3A3;
+            color: #9CA3AF;
         }
 
         .hero-select option {
@@ -481,15 +467,14 @@ function renderHeroSection(): void
 
         .hero-input::placeholder,
         .hero-textarea::placeholder {
-            color: #A3A3A3;
+            color: #9CA3AF;
         }
 
         .hero-input:focus,
         .hero-textarea:focus,
         .hero-select:focus {
-            background: #FFFFFF;
-            border-color: #FF2D75;
-            box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.18);
+            border-color: rgba(196, 0, 122, 0.5);
+            box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
         }
 
         .hero-textarea {
@@ -511,15 +496,15 @@ function renderHeroSection(): void
             cursor: pointer;
             align-items: flex-start;
             gap: 8px;
-            font-size: 0.72rem;
-            color: #4A4A4A;
+            font-size: 0.6875rem;
+            color: #4B5563;
         }
 
         .hero-check-label input[type="checkbox"] {
             margin-top: 2px;
             width: 14px;
             height: 14px;
-            accent-color: #FF2D75;
+            accent-color: #C4007A;
             cursor: pointer;
             flex-shrink: 0;
         }
@@ -528,56 +513,54 @@ function renderHeroSection(): void
             display: flex;
             align-items: center;
             gap: 10px;
-            border-radius: 12px;
-            border: 1px solid #EAEAEA;
-            background: #FFF2F7;
-            padding: 7px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(196, 0, 122, 0.15);
+            background: #fff;
+            padding: 6px 10px;
         }
 
         .hero-check-box input[type="checkbox"] {
             width: 14px;
             height: 14px;
-            accent-color: #FF2D75;
+            accent-color: #C4007A;
             cursor: pointer;
             flex-shrink: 0;
         }
 
         .hero-check-box .text {
-            font-size: 0.74rem;
-            color: #111111;
-            font-weight: 500;
+            font-size: 0.72rem;
+            color: #4B5563;
         }
 
         .hero-check-box .recaptcha {
             margin-left: auto;
-            font-size: 0.58rem;
-            color: #A3A3A3;
+            font-size: 0.5625rem;
+            color: #9CA3AF;
         }
 
-        /* Submit Button (Hot Pink Appwrite Style) */
+        /* Submit Button */
         .hero-submit {
             width: 100%;
             border-radius: 9999px;
-            background: #FF2D75;
-            padding: 13px 22px;
+            background: linear-gradient(to right, #C4007A, #E0398F);
+            padding: 11px 20px;
             font-weight: 700;
             color: #fff;
-            box-shadow: 0 8px 24px rgba(255, 45, 117, 0.4);
+            box-shadow: 0 8px 18px -3px rgba(196, 0, 122, 0.25);
             transition: all 0.25s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            font-size: 0.92rem;
+            font-size: 0.85rem;
             border: none;
             cursor: pointer;
             font-family: inherit;
         }
 
         .hero-submit:hover {
-            transform: translateY(-2px);
-            background: #E01C60;
-            box-shadow: 0 14px 28px rgba(255, 45, 117, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 12px 22px -4px rgba(196, 0, 122, 0.35);
         }
 
         .hero-submit svg {
@@ -588,14 +571,14 @@ function renderHeroSection(): void
         /* Phone CTA */
         .hero-callout {
             text-align: center;
-            font-size: 0.74rem;
-            color: #4A4A4A;
-            margin: 9px 0 0;
+            font-size: 0.72rem;
+            color: #6B7280;
+            margin: 8px 0 0;
         }
 
         .hero-callout a {
-            color: #FF2D75;
-            font-weight: 700;
+            color: #C4007A;
+            font-weight: 600;
             text-decoration: none;
         }
 
@@ -610,7 +593,7 @@ function renderHeroSection(): void
             gap: 6px;
             padding-top: 12px;
             margin-top: 12px;
-            border-top: 1px solid #EAEAEA;
+            border-top: 1px solid rgba(196, 0, 122, 0.1);
         }
 
         .hero-trust-item {
@@ -622,11 +605,10 @@ function renderHeroSection(): void
         }
 
         .hero-trust-icon {
-            width: 32px;
-            height: 32px;
+            width: 28px;
+            height: 28px;
             border-radius: 9999px;
-            background: #FFF2F7;
-            border: 1px solid rgba(255, 45, 117, 0.2);
+            background: rgba(196, 0, 122, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -635,14 +617,13 @@ function renderHeroSection(): void
         .hero-trust-icon svg {
             width: 14px;
             height: 14px;
-            color: #FF2D75;
+            color: #C4007A;
         }
 
         .hero-trust-item .label {
-            font-size: 0.68rem;
-            color: #111111;
-            line-height: 1.25;
-            font-weight: 600;
+            font-size: 0.625rem;
+            color: #4B5563;
+            line-height: 1.2;
         }
 
         /* ============================================================
@@ -653,14 +634,14 @@ function renderHeroSection(): void
         }
 
         @media (min-width: 1024px) {
-            .hero { padding: 48px 0 38px; }
+            .hero { padding: 32px 0 28px; }
             .hero-inner {
                 grid-template-columns: 1.08fr 0.92fr;
-                gap: 36px;
+                gap: 32px;
                 align-items: stretch;
             }
-            .hero-left { padding: 34px 34px; }
-            .hero-right { padding: 30px 32px; }
+            .hero-left { padding: 26px 28px; }
+            .hero-right { padding: 24px 28px; }
         }
     </style>
 
@@ -700,7 +681,7 @@ function renderHeroSection(): void
                             <span class="underline-wrap">
                                 <span class="text accent"><?= e((string) $content['heading_underline']) ?></span>
                                 <svg class="underline-svg" viewBox="0 0 300 12" preserveAspectRatio="none">
-                                    <path d="M2 6C60 2 240 2 298 6" stroke="#FF2D75" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.45"/>
+                                    <path d="M2 6C60 2 240 2 298 6" stroke="#C4007A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/>
                                 </svg>
                             </span>
                         <?php endif; ?>
@@ -709,7 +690,7 @@ function renderHeroSection(): void
                                 <span class="text"><?= e((string) $content['heading_highlight']) ?></span>
                             </span>
                         <?php endif; ?>
-                        <span class="accent"><?= e((string) ($content['heading_suffix'] ?? '')) ?></span><span class="wtm-cursor-underscore">_</span>
+                        <span class="accent"><?= e((string) ($content['heading_suffix'] ?? '')) ?></span>
                     </h1>
 
                     <!-- Description -->

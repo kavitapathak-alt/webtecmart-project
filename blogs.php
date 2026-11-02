@@ -53,8 +53,8 @@ function blImage(array $p, bool $lazy = true): string
 
 <style>
     :root {
-        --p50:#FFF5FA; --p100:#FDE7F3; --p200:#FBCFE6; --p300:#F5A3CF; --p400:#F65A91;
-        --p500:#FF2D75; --p600:#111111; --p700:#7A0047; --p800:#5C0035; --p900:#3D0023;
+        --p50:#FFF5FA; --p100:#FDE7F3; --p200:#FBCFE6; --p300:#F5A3CF; --p400:#E0398F;
+        --p500:#C4007A; --p600:#A3005F; --p700:#7A0047; --p800:#5C0035; --p900:#3D0023;
     }
     main { background: var(--p50); font-family: inherit; overflow-x: hidden; }
     main ::selection { background: var(--p300); color: var(--p900); }
@@ -110,7 +110,7 @@ function blImage(array $p, bool $lazy = true): string
         -webkit-tap-highlight-color: transparent;
     }
     .bl-chip:hover { border-color: var(--p400); color: var(--p500); transform: translateY(-2px); }
-    .bl-chip.active { color: #fff; border-color: transparent; background: linear-gradient(90deg, var(--p500), var(--p400)); box-shadow: 0 10px 22px rgba(255, 45, 117,.35); }
+    .bl-chip.active { color: #fff; border-color: transparent; background: linear-gradient(90deg, var(--p500), var(--p400)); box-shadow: 0 10px 22px rgba(196,0,122,.35); }
 
     /* Section title */
     .bl-sec-title { display: flex; align-items: center; gap: 14px; margin: 0 0 26px; flex-wrap: wrap; }
@@ -138,7 +138,7 @@ function blImage(array $p, bool $lazy = true): string
         position: absolute; z-index: 4; top: 14px; left: 14px; max-width: calc(100% - 28px); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         padding: 6px 14px; border-radius: 50px; font-size: .72rem; font-weight: 800;
         letter-spacing: .06em; text-transform: uppercase; color: #fff; background: linear-gradient(90deg, var(--p500), var(--p400));
-        box-shadow: 0 6px 16px rgba(255, 45, 117,.45);
+        box-shadow: 0 6px 16px rgba(196,0,122,.45);
     }
     .bl-time {
         position: absolute; z-index: 4; bottom: 12px; right: 12px; padding: 5px 12px; border-radius: 50px; font-size: .75rem; font-weight: 600;
@@ -149,10 +149,10 @@ function blImage(array $p, bool $lazy = true): string
     /* Cards */
     .bl-card {
         height: 100%; display: flex; flex-direction: column; background: #fff; border-radius: 24px; overflow: hidden;
-        border: 1.5px solid var(--p100); box-shadow: 0 10px 30px rgba(255, 45, 117,.08);
+        border: 1.5px solid var(--p100); box-shadow: 0 10px 30px rgba(196,0,122,.08);
         transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
     }
-    .bl-card:hover { transform: translateY(-8px); border-color: var(--p300); box-shadow: 0 28px 55px rgba(255, 45, 117,.22); }
+    .bl-card:hover { transform: translateY(-8px); border-color: var(--p300); box-shadow: 0 28px 55px rgba(196,0,122,.22); }
     .bl-card .bl-img { aspect-ratio: 16 / 10; flex-shrink: 0; }
     .bl-card:hover .bl-img .bl-main, .bl-featured:hover .bl-img .bl-main { transform: scale(1.03); }
     .bl-body { display: flex; flex-direction: column; flex: 1; padding: 24px; min-width: 0; }
@@ -173,15 +173,15 @@ function blImage(array $p, bool $lazy = true): string
         flex-shrink: 0; width: 42px; height: 42px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; text-decoration: none;
         color: var(--p500); background: var(--p100); transition: all .3s ease;
     }
-    .bl-card:hover .bl-arrow { color: #fff; background: linear-gradient(135deg, var(--p500), var(--p400)); transform: rotate(-45deg); box-shadow: 0 8px 18px rgba(255, 45, 117,.4); }
+    .bl-card:hover .bl-arrow { color: #fff; background: linear-gradient(135deg, var(--p500), var(--p400)); transform: rotate(-45deg); box-shadow: 0 8px 18px rgba(196,0,122,.4); }
 
     /* Featured */
     .bl-featured {
         display: grid; grid-template-columns: 1.1fr 1fr; background: #fff; border-radius: 30px; overflow: hidden; margin-bottom: 56px;
-        border: 1.5px solid var(--p100); box-shadow: 0 25px 60px rgba(255, 45, 117,.16);
+        border: 1.5px solid var(--p100); box-shadow: 0 25px 60px rgba(196,0,122,.16);
         transition: box-shadow .35s ease, transform .35s ease;
     }
-    .bl-featured:hover { transform: translateY(-5px); box-shadow: 0 35px 70px rgba(255, 45, 117,.26); }
+    .bl-featured:hover { transform: translateY(-5px); box-shadow: 0 35px 70px rgba(196,0,122,.26); }
     .bl-featured .bl-img { min-height: 380px; height: 100%; }
     .bl-featured.no-img { grid-template-columns: 1fr; }
     .bl-feat-body { padding: 46px; display: flex; flex-direction: column; justify-content: center; min-width: 0; }
@@ -197,9 +197,9 @@ function blImage(array $p, bool $lazy = true): string
     .bl-btn {
         align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; padding: 14px 30px; border-radius: 50px; text-decoration: none;
         font-weight: 700; color: #fff; background: linear-gradient(90deg, var(--p500), var(--p400)); transition: all .3s ease;
-        box-shadow: 0 12px 26px rgba(255, 45, 117,.35);
+        box-shadow: 0 12px 26px rgba(196,0,122,.35);
     }
-    .bl-btn:hover { color: #fff; transform: translateY(-3px); box-shadow: 0 18px 34px rgba(255, 45, 117,.5); }
+    .bl-btn:hover { color: #fff; transform: translateY(-3px); box-shadow: 0 18px 34px rgba(196,0,122,.5); }
     .bl-btn i { transition: transform .3s ease; }
     .bl-btn:hover i { transform: translateX(5px); }
 
@@ -210,7 +210,7 @@ function blImage(array $p, bool $lazy = true): string
             radial-gradient(circle at 90% 0%, rgba(245,163,207,.5), transparent 45%),
             radial-gradient(rgba(255,255,255,.12) 1.5px, transparent 1.5px) 0 0/26px 26px,
             linear-gradient(135deg, var(--p800), var(--p500) 60%, var(--p400));
-        box-shadow: 0 30px 60px rgba(255, 45, 117,.3);
+        box-shadow: 0 30px 60px rgba(196,0,122,.3);
     }
     .bl-cta h3 { margin: 0 0 10px; font-weight: 800; font-size: clamp(1.4rem, 3vw, 2.2rem); }
     .bl-cta p { margin: 0 auto 26px; max-width: 540px; color: rgba(255,255,255,.9); line-height: 1.7; }
@@ -305,7 +305,7 @@ function blImage(array $p, bool $lazy = true): string
         <span class="bl-blob b1"></span><span class="bl-blob b2"></span>
         <div class="container">
             <span class="bl-kicker"><i class="bi bi-stars"></i> WebTecMart Insights</span>
-            <h1>Latest <span>Blogs &amp; Insights<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#F65A91" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/></svg></span></h1>
+            <h1>Latest <span>Blogs &amp; Insights<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#F4C4DE" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.6"/></svg></span></h1>
             <p class="sub">Ideas, strategies, and practical guidance to support your digital growth.</p>
             <div class="bl-search">
                 <i class="bi bi-search"></i>

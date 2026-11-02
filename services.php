@@ -48,9 +48,9 @@ function spIcon(string $name): string {
     .sp-page {
         position: relative;
         width: 100%;
-        background: #FFFFFF;
+        background: #FBF8F1;
         overflow: hidden;
-        color: #111111;
+        color: #1F1B2A;
     }
 
     .sp-container {
@@ -73,7 +73,7 @@ function spIcon(string $name): string {
         position: absolute;
         top: 0; right: 0;
         width: 50%; height: 50%;
-        background: linear-gradient(to bottom left, rgba(255, 45, 117, 0.05), transparent);
+        background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
@@ -81,14 +81,14 @@ function spIcon(string $name): string {
         position: absolute;
         bottom: 0; left: 0;
         width: 33.333%; height: 50%;
-        background: linear-gradient(to top right, rgba(255, 45, 117, 0.05), transparent);
+        background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
     .sp-bg-shape {
         position: absolute;
         fill: none;
-        stroke: #FF2D75;
+        stroke: #C4007A;
         opacity: 0.1;
         display: none;
     }
@@ -128,8 +128,8 @@ function spIcon(string $name): string {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(255, 45, 117, 0.08);
-        border: 1px solid rgba(255, 45, 117, 0.15);
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.15);
         padding: 5px 14px;
         border-radius: 9999px;
         margin-bottom: 10px;
@@ -137,11 +137,11 @@ function spIcon(string $name): string {
     .sp-pill svg {
         width: 13px;
         height: 13px;
-        color: #FF2D75;
+        color: #C4007A;
         flex-shrink: 0;
     }
     .sp-pill span {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 700;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
@@ -152,16 +152,16 @@ function spIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
         font-size: 1.875rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         line-height: 1.15;
         margin: 0 0 16px;
     }
     @media (min-width: 640px) { .sp-hero-h1 { font-size: 2.25rem; margin-bottom: 20px; } }
     @media (min-width: 768px) { .sp-hero-h1 { font-size: 2.75rem; } }
-    .sp-hero-h1 .accent { color: #FF2D75; }
+    .sp-hero-h1 .accent { color: #C4007A; }
 
     .sp-hero-sub {
-        color: #4A4A4A;
+        color: #4B5563;
         font-size: 0.875rem;
         line-height: 1.625;
         margin: 0 0 24px;
@@ -182,19 +182,19 @@ function spIcon(string $name): string {
         align-items: center;
         gap: 8px;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #C4007A, #E0398F);
         padding: 12px 24px;
         font-size: 0.875rem;
         font-weight: 600;
         color: #fff;
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
         text-decoration: none;
         transition: all 0.3s ease;
     }
     @media (min-width: 640px) { .sp-btn-primary { padding: 14px 28px; } }
     .sp-btn-primary:hover {
         transform: scale(1.03);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.35);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
         color: #fff;
     }
     .sp-btn-primary svg { width: 16px; height: 16px; }
@@ -206,11 +206,11 @@ function spIcon(string $name): string {
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        border: 1px solid rgba(255, 45, 117, 0.2);
+        border: 1px solid rgba(196, 0, 122, 0.2);
         background: #fff;
         font-size: 12px;
         font-weight: 600;
-        color: #FF2D75;
+        color: #C4007A;
         flex-shrink: 0;
     }
 
@@ -238,8 +238,8 @@ function spIcon(string $name): string {
     .sp-quote-card {
         border-radius: 16px;
         background: #fff;
-        box-shadow: 0 25px 50px -12px rgba(255, 45, 117, 0.1);
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        box-shadow: 0 25px 50px -12px rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         padding: 24px;
     }
     @media (min-width: 640px) {
@@ -249,7 +249,7 @@ function spIcon(string $name): string {
     .sp-quote-card h2 {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 20px;
     }
     @media (min-width: 640px) { .sp-quote-card h2 { font-size: 1.5rem; margin-bottom: 24px; } }
@@ -265,11 +265,11 @@ function spIcon(string $name): string {
     .sp-quote-textarea {
         width: 100%;
         border-radius: 12px;
-        border: 1px solid rgba(255, 45, 117, 0.15);
+        border: 1px solid rgba(196, 0, 122, 0.15);
         background: rgba(251, 248, 241, 0.6);
         padding: 12px 16px;
         font-size: 0.875rem;
-        color: #111111;
+        color: #111827;
         font-family: inherit;
         outline: none;
         transition: all 0.3s ease;
@@ -278,8 +278,8 @@ function spIcon(string $name): string {
     .sp-quote-textarea::placeholder { color: #9CA3AF; }
     .sp-quote-input:focus,
     .sp-quote-textarea:focus {
-        border-color: rgba(255, 45, 117, 0.4);
-        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.15);
+        border-color: rgba(196, 0, 122, 0.4);
+        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.15);
     }
     .sp-quote-textarea { resize: none; }
 
@@ -289,7 +289,7 @@ function spIcon(string $name): string {
         justify-content: space-between;
         gap: 10px;
         border-radius: 12px;
-        border: 1px dashed rgba(255, 45, 117, 0.2);
+        border: 1px dashed rgba(196, 0, 122, 0.2);
         background: rgba(251, 248, 241, 0.6);
         padding: 12px 16px;
         cursor: pointer;
@@ -303,13 +303,13 @@ function spIcon(string $name): string {
     .sp-recaptcha input[type="checkbox"] {
         width: 16px;
         height: 16px;
-        accent-color: #FF2D75;
+        accent-color: #C4007A;
         cursor: pointer;
         flex-shrink: 0;
     }
     .sp-recaptcha-left span {
         font-size: 12px;
-        color: #666666;
+        color: #6B7280;
     }
     @media (min-width: 640px) { .sp-recaptcha-left span { font-size: 13px; } }
     .sp-recaptcha-brand {
@@ -324,7 +324,7 @@ function spIcon(string $name): string {
         justify-content: center;
         gap: 8px;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #C4007A, #E0398F);
         padding: 14px;
         font-size: 0.875rem;
         font-weight: 700;
@@ -332,14 +332,14 @@ function spIcon(string $name): string {
         border: none;
         cursor: pointer;
         font-family: inherit;
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
         transition: all 0.3s ease;
         margin-top: 4px;
     }
     @media (min-width: 640px) { .sp-submit { font-size: 1rem; } }
     .sp-submit:hover {
         transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.35);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
     }
     .sp-submit svg { width: 16px; height: 16px; }
 
@@ -360,7 +360,7 @@ function spIcon(string $name): string {
     }
 
     .sp-intro-eyebrow {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 600;
         font-size: 0.75rem;
         text-transform: uppercase;
@@ -374,13 +374,13 @@ function spIcon(string $name): string {
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;
-        color: #111111;
+        color: #111827;
         line-height: 1.3;
         margin: 0 0 24px;
     }
     @media (min-width: 640px) { .sp-intro-h2 { font-size: 1.875rem; margin-bottom: 32px; } }
     @media (min-width: 768px) { .sp-intro-h2 { font-size: 2.25rem; } }
-    .sp-intro-h2 .accent { color: #FF2D75; }
+    .sp-intro-h2 .accent { color: #C4007A; }
 
     .sp-intro-body {
         display: flex;
@@ -394,7 +394,7 @@ function spIcon(string $name): string {
 
     .sp-intro-body p {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
         margin: 0;
     }
@@ -404,7 +404,7 @@ function spIcon(string $name): string {
     .sp-website-cta {
         position: relative;
         width: 100%;
-        background: #FFFFFF;
+        background: #FBF8F1;
         padding: 40px 0;
         overflow: hidden;
     }
@@ -424,7 +424,7 @@ function spIcon(string $name): string {
 
     .sp-website-pre {
         font-size: 1.125rem;
-        color: #4A4A4A;
+        color: #374151;
         margin: 0 0 4px;
     }
     @media (min-width: 640px) { .sp-website-pre { font-size: 1.25rem; } }
@@ -434,7 +434,7 @@ function spIcon(string $name): string {
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;
-        color: #FF2D75;
+        color: #C4007A;
         line-height: 1.2;
         margin: 0 0 16px;
     }
@@ -443,7 +443,7 @@ function spIcon(string $name): string {
 
     .sp-website-sub {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
         margin: 0 0 24px;
         max-width: 512px;
@@ -466,7 +466,7 @@ function spIcon(string $name): string {
         inset: -24px;
         z-index: -1;
         border-radius: 24px;
-        background: linear-gradient(to bottom right, rgba(255, 45, 117, 0.1), transparent);
+        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.1), transparent);
         filter: blur(24px);
     }
     .sp-website-image img {
@@ -483,7 +483,7 @@ function spIcon(string $name): string {
     .sp-stats-section {
         position: relative;
         width: 100%;
-        background: #FFFFFF;
+        background: #FBF8F1;
         overflow: hidden;
     }
 
@@ -506,31 +506,31 @@ function spIcon(string $name): string {
         border-radius: 16px;
         padding: 24px;
         text-align: center;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
     }
     .sp-stat:hover {
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
         transform: translateY(-4px);
     }
     .sp-stat svg {
         width: 24px;
         height: 24px;
-        color: #FF2D75;
+        color: #C4007A;
         margin: 0 auto 8px;
         display: block;
     }
     .sp-stat-value {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
     }
     @media (min-width: 768px) { .sp-stat-value { font-size: 1.875rem; } }
     .sp-stat-label {
         font-size: 0.875rem;
         font-weight: 600;
-        color: #111111;
+        color: #111827;
     }
 
     /* ===== CORE SERVICES ===== */
@@ -543,7 +543,7 @@ function spIcon(string $name): string {
         margin-bottom: 40px;
     }
     .sp-block-eyebrow {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 600;
         font-size: 0.75rem;
         text-transform: uppercase;
@@ -555,13 +555,13 @@ function spIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0;
     }
     @media (min-width: 768px) { .sp-block-title { font-size: 1.875rem; } }
-    .sp-block-title .accent { color: #FF2D75; }
+    .sp-block-title .accent { color: #C4007A; }
     .sp-block-sub {
-        color: #666666;
+        color: #6B7280;
         font-size: 0.875rem;
         max-width: 672px;
         margin: 8px auto 0;
@@ -580,21 +580,21 @@ function spIcon(string $name): string {
         background: #fff;
         border-radius: 16px;
         padding: 24px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.5s ease;
         overflow: hidden;
     }
     .sp-service-card:hover {
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.1);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.1);
         transform: translateY(-8px);
-        border-color: rgba(255, 45, 117, 0.3);
+        border-color: rgba(196, 0, 122, 0.3);
     }
     .sp-service-card::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: linear-gradient(to bottom right, rgba(255, 45, 117, 0.05), transparent);
+        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.05), transparent);
         opacity: 0;
         transition: opacity 0.5s ease;
         pointer-events: none;
@@ -618,22 +618,22 @@ function spIcon(string $name): string {
     .sp-service-icon svg {
         width: 28px;
         height: 28px;
-        color: #FF2D75;
+        color: #C4007A;
     }
 
     .sp-service-title {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
         transition: color 0.3s ease;
     }
     @media (min-width: 768px) { .sp-service-title { font-size: 1.25rem; } }
-    .sp-service-card:hover .sp-service-title { color: #FF2D75; }
+    .sp-service-card:hover .sp-service-title { color: #C4007A; }
 
     .sp-service-desc {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
         margin: 0 0 16px;
     }
@@ -647,7 +647,7 @@ function spIcon(string $name): string {
     .sp-service-tag {
         font-size: 0.75rem;
         background: #FDF0F6;
-        color: #FF2D75;
+        color: #C4007A;
         padding: 4px 12px;
         border-radius: 9999px;
     }
@@ -658,7 +658,7 @@ function spIcon(string $name): string {
         gap: 4px;
         font-size: 0.875rem;
         font-weight: 600;
-        color: #FF2D75;
+        color: #C4007A;
         text-decoration: none;
         transition: gap 0.3s ease;
     }
@@ -670,7 +670,7 @@ function spIcon(string $name): string {
         background: linear-gradient(to bottom right, #FDF0F6, #fff);
         border-radius: 16px;
         padding: 32px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         margin-bottom: 64px;
     }
@@ -687,12 +687,12 @@ function spIcon(string $name): string {
         background: #fff;
         border-radius: 12px;
         padding: 24px;
-        border: 1px solid rgba(255, 45, 117, 0.05);
+        border: 1px solid rgba(196, 0, 122, 0.05);
         transition: all 0.3s ease;
     }
     .sp-seo-card:hover {
-        border-color: rgba(255, 45, 117, 0.2);
-        box-shadow: 0 4px 6px -1px rgba(255, 45, 117, 0.1);
+        border-color: rgba(196, 0, 122, 0.2);
+        box-shadow: 0 4px 6px -1px rgba(196, 0, 122, 0.1);
     }
 
     .sp-seo-icon {
@@ -707,17 +707,17 @@ function spIcon(string $name): string {
         transition: transform 0.3s ease;
     }
     .sp-seo-card:hover .sp-seo-icon { transform: scale(1.1); }
-    .sp-seo-icon svg { width: 24px; height: 24px; color: #FF2D75; }
+    .sp-seo-icon svg { width: 24px; height: 24px; color: #C4007A; }
 
     .sp-seo-title {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
     }
     .sp-seo-desc {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
         margin: 0 0 12px;
     }
@@ -731,9 +731,9 @@ function spIcon(string $name): string {
         align-items: center;
         gap: 4px;
         font-size: 0.75rem;
-        color: #666666;
+        color: #6B7280;
     }
-    .sp-seo-benefit svg { width: 12px; height: 12px; color: #FF2D75; }
+    .sp-seo-benefit svg { width: 12px; height: 12px; color: #C4007A; }
 
     .sp-seo-cta {
         text-align: center;
@@ -744,17 +744,17 @@ function spIcon(string $name): string {
         align-items: center;
         gap: 8px;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #C4007A, #E0398F);
         padding: 14px 32px;
         font-weight: 700;
         color: #fff;
         text-decoration: none;
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
         transition: all 0.3s ease;
     }
     .sp-seo-cta a:hover {
         transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.35);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
         color: #fff;
     }
     .sp-seo-cta svg { width: 16px; height: 16px; }
@@ -763,7 +763,7 @@ function spIcon(string $name): string {
     .sp-results-section {
         background: #fff;
         border-radius: 16px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         padding: 32px;
         margin-bottom: 64px;
@@ -775,11 +775,11 @@ function spIcon(string $name): string {
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;
-        color: #111111;
+        color: #111827;
         margin: 0 0 32px;
     }
     @media (min-width: 768px) { .sp-results-h2 { font-size: 1.875rem; margin-bottom: 40px; } }
-    .sp-results-h2 .accent { color: #FF2D75; }
+    .sp-results-h2 .accent { color: #C4007A; }
 
     .sp-results-list {
         display: flex;
@@ -803,21 +803,21 @@ function spIcon(string $name): string {
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.1);
+        background: rgba(196, 0, 122, 0.1);
         margin-top: 2px;
     }
-    .sp-result-check svg { width: 16px; height: 16px; color: #FF2D75; }
+    .sp-result-check svg { width: 16px; height: 16px; color: #C4007A; }
 
     .sp-result-text {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
         margin: 0;
     }
     @media (min-width: 640px) { .sp-result-text { font-size: 15px; } }
     .sp-result-text .bold {
         font-weight: 700;
-        color: #111111;
+        color: #111827;
     }
 
     /* ===== PROCESS ===== */
@@ -834,30 +834,30 @@ function spIcon(string $name): string {
         background: #fff;
         border-radius: 16px;
         padding: 24px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
         text-align: center;
     }
     .sp-process-card:hover {
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
         transform: translateY(-4px);
     }
     .sp-process-num {
         font-size: 2.25rem;
         font-weight: 700;
-        color: rgba(255, 45, 117, 0.1);
+        color: rgba(196, 0, 122, 0.1);
         margin-bottom: 12px;
     }
     .sp-process-title {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
     }
     .sp-process-desc {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
         margin: 0;
     }
@@ -873,7 +873,7 @@ function spIcon(string $name): string {
 
     .sp-faq {
         border-radius: 12px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         background: #fff;
         overflow: hidden;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
@@ -888,7 +888,7 @@ function spIcon(string $name): string {
         padding: 16px 20px;
         text-align: left;
         background: #fff;
-        color: #111111;
+        color: #111827;
         border: none;
         cursor: pointer;
         font-family: inherit;
@@ -915,12 +915,12 @@ function spIcon(string $name): string {
         align-items: center;
         justify-content: center;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.1);
-        color: #FF2D75;
+        background: rgba(196, 0, 122, 0.1);
+        color: #C4007A;
         transition: all 0.3s ease;
     }
     .sp-faq.active .sp-faq-icon {
-        background: #FF2D75;
+        background: #C4007A;
         color: #fff;
     }
     .sp-faq-icon svg { width: 14px; height: 14px; }
@@ -929,9 +929,9 @@ function spIcon(string $name): string {
         display: none;
         padding: 16px 20px;
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         line-height: 1.625;
-        border-top: 1px solid rgba(255, 45, 117, 0.1);
+        border-top: 1px solid rgba(196, 0, 122, 0.1);
     }
     @media (min-width: 640px) { .sp-faq-body { padding: 20px 24px; } }
     .sp-faq.active .sp-faq-body { display: block; }
@@ -939,7 +939,7 @@ function spIcon(string $name): string {
     /* ===== CTA ROCKET ===== */
     .sp-cta-rocket {
         position: relative;
-        background: linear-gradient(90deg, #111111, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
         border-radius: 16px;
         padding: 32px;
         text-align: center;
@@ -1002,7 +1002,7 @@ function spIcon(string $name): string {
         background: #fff;
         padding: 14px 32px;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
         text-decoration: none;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
@@ -1010,7 +1010,7 @@ function spIcon(string $name): string {
     .sp-cta-rocket-btn-1:hover {
         transform: scale(1.02);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-        color: #FF2D75;
+        color: #C4007A;
     }
     .sp-cta-rocket-btn-1 svg { width: 16px; height: 16px; }
 
@@ -1082,7 +1082,7 @@ function spIcon(string $name): string {
     }
     @media (min-width: 640px) { .sp-proposal-h2 { font-size: 1.875rem; } }
     @media (min-width: 768px) { .sp-proposal-h2 { font-size: 2.25rem; } }
-    .sp-proposal-h2 .accent { color: #F65A91; }
+    .sp-proposal-h2 .accent { color: #F4C4DE; }
 
     .sp-proposal-form {
         display: grid;
@@ -1125,7 +1125,7 @@ function spIcon(string $name): string {
     .sp-proposal-recaptcha input[type="checkbox"] {
         width: 16px;
         height: 16px;
-        accent-color: #F65A91;
+        accent-color: #E0398F;
         cursor: pointer;
         flex-shrink: 0;
     }
@@ -1147,7 +1147,7 @@ function spIcon(string $name): string {
         justify-content: center;
         gap: 8px;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #C4007A, #E0398F);
         padding: 14px;
         font-size: 0.875rem;
         font-weight: 700;
@@ -1155,7 +1155,7 @@ function spIcon(string $name): string {
         border: none;
         cursor: pointer;
         font-family: inherit;
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.3);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.3);
         transition: all 0.3s ease;
         grid-column: span 1;
     }
@@ -1164,7 +1164,7 @@ function spIcon(string $name): string {
     }
     .sp-proposal-submit:hover {
         transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.4);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.4);
     }
 
     /* ===== Bottom spacing ===== */
@@ -1381,7 +1381,7 @@ function spIcon(string $name): string {
                             </div>
 
                             <div style="margin-top: auto; padding-top: 14px;">
-                                <a href="<?= $cardSlug ?>" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.88rem; color: #FF2D75; text-decoration: none;">
+                                <a href="<?= $cardSlug ?>" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 0.88rem; color: #C4007A; text-decoration: none;">
                                     <span>Explore <?= htmlspecialchars($seo['title']) ?></span>
                                     <?= spIcon('arrow') ?>
                                 </a>
@@ -1391,59 +1391,59 @@ function spIcon(string $name): string {
                 </div>
 
                 <div class="sp-seo-cta" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-top: 28px;">
-                    <a href="/seo-services-delhi.php" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%); color: #fff; padding: 13px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 24px rgba(255, 45, 117, 0.28); white-space: nowrap;">
+                    <a href="/seo-services-delhi.php" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%); color: #fff; padding: 13px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 24px rgba(196, 0, 122, 0.28); white-space: nowrap;">
                         <span>View All SEO Services in Delhi Hub</span>
                         <?= spIcon('arrow') ?>
                     </a>
-                    <a href="javascript:void(0)" class="trigger-enquiry-modal" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid rgba(255, 45, 117, 0.35); color: #FF2D75; padding: 13px 26px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap;">
+                    <a href="javascript:void(0)" class="trigger-enquiry-modal" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid rgba(196, 0, 122, 0.35); color: #C4007A; padding: 13px 26px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap;">
                         <?= e((string) $servicesContent['seo_quote_label']) ?>
                     </a>
                 </div>
             </div>
 
             <!-- ===== B2B & EXHIBITION SEO SPOTLIGHT (Inspired by reference) ===== -->
-            <div class="sp-exhibition-spotlight" style="margin: 40px 0 52px; background: linear-gradient(135deg, #FFFFFF 0%, #FFF5FA 100%); border: 1.5px solid rgba(255, 45, 117, 0.22); border-radius: 24px; padding: 38px 30px; text-align: center; box-shadow: 0 16px 36px -10px rgba(255, 45, 117, 0.08); position: relative; overflow: hidden;">
-                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #FF2D75, #F65A91);"></div>
+            <div class="sp-exhibition-spotlight" style="margin: 40px 0 52px; background: linear-gradient(135deg, #FFFFFF 0%, #FFF5FA 100%); border: 1.5px solid rgba(196, 0, 122, 0.22); border-radius: 24px; padding: 38px 30px; text-align: center; box-shadow: 0 16px 36px -10px rgba(196, 0, 122, 0.08); position: relative; overflow: hidden;">
+                <div style="position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #C4007A, #E0398F);"></div>
                 
-                <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(255, 45, 117, 0.08); border: 1px solid rgba(255, 45, 117, 0.18); padding: 5px 14px; border-radius: 9999px; color: #FF2D75; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;">
+                <div style="display: inline-flex; align-items: center; gap: 6px; background: rgba(196, 0, 122, 0.08); border: 1px solid rgba(196, 0, 122, 0.18); padding: 5px 14px; border-radius: 9999px; color: #C4007A; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;">
                     <?= spIcon('award') ?>
                     <span>SPECIALIZED PROVEN FLAGSHIP</span>
                 </div>
 
-                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.85rem, 3.4vw, 2.5rem); font-weight: 800; color: #111111; margin: 0 0 12px; line-height: 1.25;">
-                    Boost Your Event &amp; Exhibition <span style="color: #FF2D75; text-decoration: underline; text-decoration-color: rgba(255, 45, 117, 0.35); text-underline-offset: 6px;">With SEO.</span>
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: clamp(1.85rem, 3.4vw, 2.5rem); font-weight: 800; color: #111827; margin: 0 0 12px; line-height: 1.25;">
+                    Boost Your Event &amp; Exhibition <span style="color: #C4007A; text-decoration: underline; text-decoration-color: rgba(196, 0, 122, 0.35); text-underline-offset: 6px;">With SEO.</span>
                 </h3>
 
                 <h4 style="font-size: clamp(1.05rem, 1.8vw, 1.25rem); font-weight: 700; color: #1F2937; margin: 0 auto 12px; max-width: 760px; line-height: 1.4;">
                     Want to attract more attendees, sponsors, exhibitors, and increase revenue?
                 </h4>
 
-                <p style="font-size: 0.96rem; color: #4A4A4A; max-width: 800px; margin: 0 auto 10px; line-height: 1.65;">
+                <p style="font-size: 0.96rem; color: #4B5563; max-width: 800px; margin: 0 auto 10px; line-height: 1.65;">
                     We'll help you uncover hidden opportunities and improve your exhibition website's performance with a customized Event SEO strategy that drives pre-registered trade buyers, sells out exhibitor stalls, and delivers measurable results.
                 </p>
 
-                <p style="font-size: 0.88rem; color: #666666; max-width: 780px; margin: 0 auto 20px; line-height: 1.6;">
+                <p style="font-size: 0.88rem; color: #6B7280; max-width: 780px; margin: 0 auto 20px; line-height: 1.6;">
                     The organic search engine partner behind <strong>Bharat Tex Fair (Ministry of Textiles)</strong> and <strong>IHGF Delhi Autumn Fair (EPCH)</strong>. If you have any questions about how to kick-start your SEO strategy get in touch today.
                 </p>
 
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 24px;">
-                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #FF2D75; border: 1px solid rgba(255, 45, 117, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Attract Global Attendees</span>
-                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #FF2D75; border: 1px solid rgba(255, 45, 117, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Sell Out Exhibitor Stalls</span>
-                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #FF2D75; border: 1px solid rgba(255, 45, 117, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Multi-Date Google Event Schema</span>
-                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #FF2D75; border: 1px solid rgba(255, 45, 117, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ 400%+ Organic Lift Proven</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Attract Global Attendees</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Sell Out Exhibitor Stalls</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ Multi-Date Google Event Schema</span>
+                    <span style="font-size: 0.78rem; font-weight: 700; background: #FFFFFF; color: #C4007A; border: 1px solid rgba(196, 0, 122, 0.16); padding: 5px 14px; border-radius: 9999px;">✓ 400%+ Organic Lift Proven</span>
                 </div>
 
                 <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 16px;">
-                    <a href="/b2b-exhibition-seo.php" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%); color: #fff; padding: 13px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 24px rgba(255, 45, 117, 0.32); white-space: nowrap; transition: all 0.25s ease;">
+                    <a href="/b2b-exhibition-seo.php" style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%); color: #fff; padding: 13px 28px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32); white-space: nowrap; transition: all 0.25s ease;">
                         <span>Let's Talk Optimization</span>
                         <?= spIcon('arrow') ?>
                     </a>
-                    <a href="tel:+919999674255" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid rgba(255, 45, 117, 0.25); color: #FF2D75; padding: 13px 24px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; transition: all 0.25s ease;">
+                    <a href="tel:+919999674255" style="display: inline-flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1.5px solid rgba(196, 0, 122, 0.25); color: #C4007A; padding: 13px 24px; border-radius: 9999px; font-weight: 700; font-size: 0.95rem; text-decoration: none; white-space: nowrap; transition: all 0.25s ease;">
                         <span>Call: +91-9999674255</span>
                     </a>
                 </div>
 
-                <p style="font-size: 0.78rem; color: #666666; line-height: 1.55; margin: 0 auto; max-width: 740px;">
+                <p style="font-size: 0.78rem; color: #6B7280; line-height: 1.55; margin: 0 auto; max-width: 740px;">
                     * While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.
                 </p>
             </div>

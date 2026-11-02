@@ -151,8 +151,8 @@ function renderServicePageLayout(array $config): void
            ============================================================ */
         .svc-page {
             width: 100%;
-            background: #FFFFFF;
-            color: #111111;
+            background: #FBF8F1;
+            color: #1F1B2A;
             overflow: hidden;
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
@@ -176,12 +176,12 @@ function renderServicePageLayout(array $config): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(255, 45, 117, 0.08);
-            border: 1px solid #EAEAEA;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
             padding: 5px 14px;
             border-radius: 9999px;
             margin-bottom: 10px;
-            color: #FF2D75;
+            color: #C4007A;
             font-size: 0.72rem;
             font-weight: 700;
             letter-spacing: 0.08em;
@@ -190,20 +190,20 @@ function renderServicePageLayout(array $config): void
         .svc-eyebrow svg {
             width: 13px;
             height: 13px;
-            color: #FF2D75;
+            color: #C4007A;
             flex-shrink: 0;
         }
         .svc-section-title {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: clamp(1.85rem, 3.2vw, 2.5rem);
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 8px;
             line-height: 1.18;
             letter-spacing: -0.02em;
         }
         .svc-section-title .accent {
-            color: #FF2D75;
+            color: #C4007A;
             position: relative;
             display: inline-block;
         }
@@ -217,7 +217,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-section-sub {
             font-size: 0.95rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.55;
             max-width: 640px;
             margin: 0 auto;
@@ -227,8 +227,8 @@ function renderServicePageLayout(array $config): void
         .svc-hero {
             position: relative;
             padding: 36px 0 32px;
-            background: linear-gradient(180deg, rgba(255, 242, 247, 0.6) 0%, rgba(251, 248, 241, 0) 100%);
-            border-bottom: 1px solid rgba(234, 234, 234, 0.8);
+            background: linear-gradient(180deg, rgba(252, 232, 243, 0.4) 0%, rgba(251, 248, 241, 0) 100%);
+            border-bottom: 1px solid rgba(196, 0, 122, 0.06);
         }
         .svc-hero-grid {
             display: grid;
@@ -251,13 +251,13 @@ function renderServicePageLayout(array $config): void
         .svc-hero-title {
             font-size: clamp(2rem, 3.6vw, 3.1rem);
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             line-height: 1.15;
             letter-spacing: -0.02em;
             margin: 0 0 14px;
         }
         .svc-hero-title .accent {
-            color: #FF2D75;
+            color: #C4007A;
             position: relative;
             display: inline-block;
         }
@@ -272,7 +272,7 @@ function renderServicePageLayout(array $config): void
         .svc-hero-desc {
             font-size: 1.02rem;
             line-height: 1.62;
-            color: #4A4A4A;
+            color: #4B5563;
             margin: 0 0 24px;
             max-width: 620px;
         }
@@ -288,7 +288,7 @@ function renderServicePageLayout(array $config): void
             align-items: center;
             justify-content: center;
             gap: 8px;
-            background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
+            background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
             color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.92rem;
@@ -296,7 +296,7 @@ function renderServicePageLayout(array $config): void
             padding: 13px 26px;
             border-radius: 9999px;
             text-decoration: none;
-            box-shadow: 0 10px 24px rgba(255, 45, 117, 0.35);
+            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.28);
             transition: all 0.25s ease;
             white-space: nowrap !important;
             word-break: keep-all !important;
@@ -304,7 +304,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 28px rgba(255, 45, 117, 0.45);
+            box-shadow: 0 14px 28px rgba(196, 0, 122, 0.38);
             color: #FFFFFF;
         }
         .svc-btn-primary svg {
@@ -327,8 +327,8 @@ function renderServicePageLayout(array $config): void
             justify-content: center;
             gap: 8px;
             background: #FFFFFF;
-            border: 1.5px solid #EAEAEA;
-            color: #FF2D75 !important;
+            border: 1.5px solid rgba(196, 0, 122, 0.2);
+            color: #C4007A !important;
             font-weight: 700;
             font-size: 0.92rem;
             line-height: 1;
@@ -342,7 +342,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-btn-secondary:hover {
             background: rgba(196, 0, 122, 0.05);
-            border-color: #FF2D75;
+            border-color: #C4007A;
             transform: translateY(-2px);
         }
         .svc-btn-secondary svg {
@@ -362,7 +362,7 @@ function renderServicePageLayout(array $config): void
             flex-wrap: wrap;
             gap: 16px;
             padding-top: 14px;
-            border-top: 1px solid rgba(234, 234, 234, 1);
+            border-top: 1px solid rgba(196, 0, 122, 0.1);
             width: 100%;
         }
         .svc-trust-item {
@@ -371,22 +371,22 @@ function renderServicePageLayout(array $config): void
             gap: 6px;
             font-size: 0.78rem;
             font-weight: 700;
-            color: #4A4A4A;
+            color: #374151;
         }
         .svc-trust-item svg {
             width: 14px;
             height: 14px;
-            color: #FF2D75;
+            color: #C4007A;
             flex-shrink: 0;
         }
 
         /* Hero Right Preview Card */
         .svc-preview-card {
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1.5px solid rgba(196, 0, 122, 0.12);
             border-radius: 24px;
             padding: 28px;
-            box-shadow: 0 16px 40px rgba(255, 45, 117, 0.08);
+            box-shadow: 0 16px 40px rgba(196, 0, 122, 0.08);
             position: relative;
             overflow: hidden;
         }
@@ -397,7 +397,7 @@ function renderServicePageLayout(array $config): void
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #FF2D75, #F65A91);
+            background: linear-gradient(90deg, #C4007A, #E0398F);
         }
         .svc-preview-head {
             display: flex;
@@ -409,10 +409,10 @@ function renderServicePageLayout(array $config): void
             width: 48px;
             height: 48px;
             border-radius: 14px;
-            background: linear-gradient(135deg, rgba(234, 234, 234, 1), rgba(246, 90, 145, 0.08));
+            background: linear-gradient(135deg, rgba(196, 0, 122, 0.12), rgba(224, 57, 143, 0.06));
             display: grid;
             place-items: center;
-            color: #FF2D75;
+            color: #C4007A;
         }
         .svc-preview-icon-box svg {
             width: 24px;
@@ -446,12 +446,12 @@ function renderServicePageLayout(array $config): void
         .svc-preview-title {
             font-size: 1.15rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 6px;
         }
         .svc-preview-tagline {
             font-size: 0.85rem;
-            color: #666666;
+            color: #6B7280;
             margin: 0 0 18px;
             line-height: 1.45;
         }
@@ -469,17 +469,17 @@ function renderServicePageLayout(array $config): void
             gap: 8px;
             font-size: 0.84rem;
             font-weight: 600;
-            color: #4A4A4A;
+            color: #374151;
         }
         .svc-preview-points svg {
             width: 14px;
             height: 14px;
-            color: #FF2D75;
+            color: #C4007A;
             flex-shrink: 0;
         }
         .svc-preview-stat-card {
-            background: linear-gradient(135deg, #FFF2F7 0%, #FFF2F7 100%);
-            border: 1px solid #EAEAEA;
+            background: linear-gradient(135deg, #FFF0F7 0%, #FDF2F8 100%);
+            border: 1px solid rgba(196, 0, 122, 0.15);
             border-radius: 14px;
             padding: 14px;
             display: flex;
@@ -489,19 +489,19 @@ function renderServicePageLayout(array $config): void
         .svc-preview-stat-info .num {
             font-size: 1.35rem;
             font-weight: 800;
-            color: #FF2D75;
+            color: #C4007A;
             line-height: 1;
         }
         .svc-preview-stat-info .lbl {
             font-size: 0.72rem;
             font-weight: 600;
-            color: #666666;
+            color: #6B7280;
             margin-top: 3px;
         }
         .svc-preview-stat-badge {
             background: #FFFFFF;
-            border: 1px solid rgba(255, 45, 117, 0.3);
-            color: #FF2D75;
+            border: 1px solid rgba(196, 0, 122, 0.2);
+            color: #C4007A;
             font-size: 0.72rem;
             font-weight: 700;
             padding: 4px 10px;
@@ -513,7 +513,7 @@ function renderServicePageLayout(array $config): void
         .svc-benefits-section {
             padding: 36px 0 28px;
             background: #FFFFFF;
-            border-bottom: 1px solid rgba(234, 234, 234, 0.8);
+            border-bottom: 1px solid rgba(196, 0, 122, 0.06);
         }
         .svc-benefits-grid {
             display: grid;
@@ -526,8 +526,8 @@ function renderServicePageLayout(array $config): void
             }
         }
         .svc-benefit-card {
-            background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            background: #FDF9FB;
+            border: 1.5px solid rgba(196, 0, 122, 0.1);
             border-radius: 18px;
             padding: 24px;
             display: flex;
@@ -538,15 +538,15 @@ function renderServicePageLayout(array $config): void
         }
         .svc-benefit-card:hover {
             transform: translateY(-4px);
-            border-color: #FF2D75;
-            box-shadow: 0 14px 32px rgba(255, 45, 117, 0.08);
+            border-color: #C4007A;
+            box-shadow: 0 14px 32px rgba(196, 0, 122, 0.08);
         }
         .svc-benefit-icon {
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            background: rgba(234, 234, 234, 1);
-            color: #FF2D75;
+            background: rgba(196, 0, 122, 0.1);
+            color: #C4007A;
             display: grid;
             place-items: center;
             margin-bottom: 16px;
@@ -558,13 +558,13 @@ function renderServicePageLayout(array $config): void
         .svc-benefit-card h3 {
             font-size: 1.1rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 8px;
             line-height: 1.3;
         }
         .svc-benefit-card p {
             font-size: 0.88rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.6;
             margin: 0 0 16px;
             flex: 1;
@@ -575,37 +575,37 @@ function renderServicePageLayout(array $config): void
             gap: 6px;
             font-size: 0.76rem;
             font-weight: 700;
-            color: #FF2D75;
+            color: #C4007A;
             background: #FFFFFF;
             padding: 4px 10px;
             border-radius: 8px;
-            border: 1px solid #EAEAEA;
+            border: 1px solid rgba(196, 0, 122, 0.15);
             width: fit-content;
         }
 
         /* ===== APPROACH & METHODOLOGY ===== */
         .svc-approach-section {
             padding: 36px 0 28px;
-            background: #FFFFFF;
+            background: #FBF8F1;
         }
         .svc-overview-banner {
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1.5px solid rgba(196, 0, 122, 0.12);
             border-radius: 20px;
             padding: 26px;
             margin-bottom: 28px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+            box-shadow: 0 6px 20px rgba(196, 0, 122, 0.04);
         }
         .svc-overview-banner h3 {
             font-size: 1.15rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 10px;
         }
         .svc-overview-banner p {
             font-size: 0.94rem;
             line-height: 1.68;
-            color: #4A4A4A;
+            color: #4B5563;
             margin: 0;
         }
 
@@ -622,7 +622,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-approach-card {
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1.5px solid rgba(196, 0, 122, 0.08);
             border-radius: 18px;
             padding: 22px;
             transition: all 0.3s ease;
@@ -630,13 +630,13 @@ function renderServicePageLayout(array $config): void
         }
         .svc-approach-card:hover {
             transform: translateY(-4px);
-            border-color: #FF2D75;
-            box-shadow: 0 12px 28px rgba(255, 45, 117, 0.08);
+            border-color: #C4007A;
+            box-shadow: 0 12px 28px rgba(196, 0, 122, 0.08);
         }
         .svc-approach-num {
             font-size: 1.8rem;
             font-weight: 900;
-            color: rgba(255, 45, 117, 0.2);
+            color: rgba(196, 0, 122, 0.18);
             line-height: 1;
             margin-bottom: 12px;
             letter-spacing: -0.04em;
@@ -644,13 +644,13 @@ function renderServicePageLayout(array $config): void
         .svc-approach-card h4 {
             font-size: 1.02rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 8px;
             line-height: 1.3;
         }
         .svc-approach-card p {
             font-size: 0.84rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.55;
             margin: 0;
         }
@@ -659,8 +659,8 @@ function renderServicePageLayout(array $config): void
         .svc-features-section {
             padding: 36px 0 30px;
             background: #FFFFFF;
-            border-top: 1px solid rgba(234, 234, 234, 0.8);
-            border-bottom: 1px solid rgba(234, 234, 234, 0.8);
+            border-top: 1px solid rgba(196, 0, 122, 0.06);
+            border-bottom: 1px solid rgba(196, 0, 122, 0.06);
         }
         .svc-features-grid {
             display: grid;
@@ -674,8 +674,8 @@ function renderServicePageLayout(array $config): void
             .svc-features-grid { grid-template-columns: repeat(3, 1fr); }
         }
         .svc-feature-card {
-            background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            background: #FDF9FB;
+            border: 1.5px solid rgba(196, 0, 122, 0.08);
             border-radius: 20px;
             padding: 24px;
             display: flex;
@@ -684,9 +684,9 @@ function renderServicePageLayout(array $config): void
         }
         .svc-feature-card:hover {
             transform: translateY(-4px);
-            border-color: #FF2D75;
+            border-color: #C4007A;
             background: #FFFFFF;
-            box-shadow: 0 14px 34px rgba(255, 45, 117, 0.12);
+            box-shadow: 0 14px 34px rgba(196, 0, 122, 0.09);
         }
         .svc-feature-top {
             display: flex;
@@ -698,8 +698,8 @@ function renderServicePageLayout(array $config): void
             width: 40px;
             height: 40px;
             border-radius: 12px;
-            background: linear-gradient(135deg, rgba(234, 234, 234, 1), rgba(246, 90, 145, 0.08));
-            color: #FF2D75;
+            background: linear-gradient(135deg, rgba(196, 0, 122, 0.12), rgba(224, 57, 143, 0.06));
+            color: #C4007A;
             display: grid;
             place-items: center;
         }
@@ -710,9 +710,9 @@ function renderServicePageLayout(array $config): void
         .svc-feature-pill {
             font-size: 0.68rem;
             font-weight: 700;
-            color: #FF2D75;
+            color: #C4007A;
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1px solid rgba(196, 0, 122, 0.15);
             padding: 3px 8px;
             border-radius: 6px;
             letter-spacing: 0.04em;
@@ -721,13 +721,13 @@ function renderServicePageLayout(array $config): void
         .svc-feature-card h3 {
             font-size: 1.05rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 8px;
             line-height: 1.35;
         }
         .svc-feature-card p {
             font-size: 0.86rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.6;
             margin: 0;
             flex: 1;
@@ -736,7 +736,7 @@ function renderServicePageLayout(array $config): void
         /* ===== PROCESS ROADMAP ===== */
         .svc-process-section {
             padding: 36px 0 30px;
-            background: #FFFFFF;
+            background: #FBF8F1;
         }
         .svc-process-grid {
             display: grid;
@@ -751,7 +751,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-process-item {
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1.5px solid rgba(196, 0, 122, 0.1);
             border-radius: 18px;
             padding: 22px;
             position: relative;
@@ -759,8 +759,8 @@ function renderServicePageLayout(array $config): void
         }
         .svc-process-item:hover {
             transform: translateY(-4px);
-            border-color: #FF2D75;
-            box-shadow: 0 12px 28px rgba(255, 45, 117, 0.08);
+            border-color: #C4007A;
+            box-shadow: 0 12px 28px rgba(196, 0, 122, 0.08);
         }
         .svc-process-badge {
             display: inline-flex;
@@ -769,23 +769,23 @@ function renderServicePageLayout(array $config): void
             width: 36px;
             height: 36px;
             border-radius: 10px;
-            background: linear-gradient(135deg, #FF2D75, #F65A91);
+            background: linear-gradient(135deg, #C4007A, #E0398F);
             color: #FFFFFF;
             font-weight: 800;
             font-size: 0.82rem;
             margin-bottom: 12px;
-            box-shadow: 0 4px 12px rgba(255, 45, 117, 0.3);
+            box-shadow: 0 4px 12px rgba(196, 0, 122, 0.25);
         }
         .svc-process-item h3 {
             font-size: 0.98rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 6px;
             line-height: 1.3;
         }
         .svc-process-item p {
             font-size: 0.82rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.5;
             margin: 0;
         }
@@ -794,15 +794,15 @@ function renderServicePageLayout(array $config): void
         .svc-casestudy-section {
             padding: 36px 0 30px;
             background: #FFFFFF;
-            border-top: 1px solid rgba(234, 234, 234, 0.8);
-            border-bottom: 1px solid rgba(234, 234, 234, 0.8);
+            border-top: 1px solid rgba(196, 0, 122, 0.06);
+            border-bottom: 1px solid rgba(196, 0, 122, 0.06);
         }
         .svc-casestudy-card {
-            background: linear-gradient(135deg, #FFF2F7 0%, #FFFFFF 100%);
-            border: 1.5px solid rgba(255, 45, 117, 0.2);
+            background: linear-gradient(135deg, #FFF0F7 0%, #FFFFFF 100%);
+            border: 1.5px solid rgba(196, 0, 122, 0.18);
             border-radius: 24px;
             padding: 32px 28px;
-            box-shadow: 0 16px 40px rgba(234, 234, 234, 0.8);
+            box-shadow: 0 16px 40px rgba(196, 0, 122, 0.06);
         }
         .svc-casestudy-grid {
             display: grid;
@@ -820,8 +820,8 @@ function renderServicePageLayout(array $config): void
             align-items: center;
             gap: 6px;
             background: #FFFFFF;
-            border: 1px solid rgba(255, 45, 117, 0.3);
-            color: #FF2D75;
+            border: 1px solid rgba(196, 0, 122, 0.2);
+            color: #C4007A;
             font-weight: 700;
             font-size: 0.72rem;
             padding: 4px 10px;
@@ -832,13 +832,13 @@ function renderServicePageLayout(array $config): void
         .svc-casestudy-title {
             font-size: clamp(1.4rem, 2.4vw, 1.85rem);
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 10px;
             line-height: 1.25;
         }
         .svc-casestudy-desc {
             font-size: 0.94rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.62;
             margin: 0 0 20px;
         }
@@ -852,7 +852,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-metric-box {
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1px solid rgba(196, 0, 122, 0.15);
             border-radius: 14px;
             padding: 12px 14px;
             text-align: center;
@@ -860,20 +860,20 @@ function renderServicePageLayout(array $config): void
         .svc-metric-box .val {
             font-size: 1.35rem;
             font-weight: 800;
-            color: #FF2D75;
+            color: #C4007A;
             line-height: 1.1;
         }
         .svc-metric-box .lbl {
             font-size: 0.72rem;
             font-weight: 600;
-            color: #666666;
+            color: #6B7280;
             margin-top: 3px;
         }
 
         /* ===== WHY CHOOSE WEBTECMART ===== */
         .svc-why-section {
             padding: 36px 0 30px;
-            background: #FFFFFF;
+            background: #FBF8F1;
         }
         .svc-why-grid {
             display: grid;
@@ -888,7 +888,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-why-card {
             background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            border: 1.5px solid rgba(196, 0, 122, 0.1);
             border-radius: 18px;
             padding: 24px;
             display: flex;
@@ -897,15 +897,15 @@ function renderServicePageLayout(array $config): void
         }
         .svc-why-card:hover {
             transform: translateY(-4px);
-            border-color: #FF2D75;
-            box-shadow: 0 12px 30px rgba(255, 45, 117, 0.08);
+            border-color: #C4007A;
+            box-shadow: 0 12px 30px rgba(196, 0, 122, 0.08);
         }
         .svc-why-icon {
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            background: rgba(234, 234, 234, 1);
-            color: #FF2D75;
+            background: rgba(196, 0, 122, 0.1);
+            color: #C4007A;
             display: grid;
             place-items: center;
             margin-bottom: 14px;
@@ -917,13 +917,13 @@ function renderServicePageLayout(array $config): void
         .svc-why-card h4 {
             font-size: 1.05rem;
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 8px;
             line-height: 1.35;
         }
         .svc-why-card p {
             font-size: 0.85rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.55;
             margin: 0;
             flex: 1;
@@ -933,7 +933,7 @@ function renderServicePageLayout(array $config): void
         .svc-faq-section {
             padding: 36px 0 32px;
             background: #FFFFFF;
-            border-top: 1px solid rgba(234, 234, 234, 0.8);
+            border-top: 1px solid rgba(196, 0, 122, 0.06);
         }
         .svc-faq-wrap {
             max-width: 860px;
@@ -943,19 +943,19 @@ function renderServicePageLayout(array $config): void
             gap: 12px;
         }
         .svc-faq-item {
-            background: #FFFFFF;
-            border: 1px solid #EAEAEA;
+            background: #FDF9FB;
+            border: 1.5px solid rgba(196, 0, 122, 0.1);
             border-radius: 14px;
             overflow: hidden;
             transition: all 0.25s ease;
         }
         .svc-faq-item:hover {
-            border-color: rgba(255, 45, 117, 0.35);
+            border-color: rgba(196, 0, 122, 0.3);
         }
         .svc-faq-item.active {
-            border-color: #FF2D75;
+            border-color: #C4007A;
             background: #FFFFFF;
-            box-shadow: 0 8px 24px rgba(255, 45, 117, 0.1);
+            box-shadow: 0 8px 24px rgba(196, 0, 122, 0.07);
         }
         .svc-faq-btn {
             width: 100%;
@@ -969,27 +969,27 @@ function renderServicePageLayout(array $config): void
             font-family: inherit;
             font-size: 0.98rem;
             font-weight: 700;
-            color: #111111;
+            color: #111827;
             text-align: left;
             cursor: pointer;
             transition: color 0.2s ease;
         }
         .svc-faq-item.active .svc-faq-btn {
-            color: #FF2D75;
+            color: #C4007A;
         }
         .svc-faq-btn-icon {
             width: 28px;
             height: 28px;
             border-radius: 8px;
-            background: rgba(255, 45, 117, 0.08);
-            color: #FF2D75;
+            background: rgba(196, 0, 122, 0.08);
+            color: #C4007A;
             display: grid;
             place-items: center;
             flex-shrink: 0;
             transition: transform 0.25s ease, background 0.25s ease;
         }
         .svc-faq-item.active .svc-faq-btn-icon {
-            background: #FF2D75;
+            background: #C4007A;
             color: #FFFFFF;
             transform: rotate(45deg);
         }
@@ -1002,7 +1002,7 @@ function renderServicePageLayout(array $config): void
             overflow: hidden;
             transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
             font-size: 0.9rem;
-            color: #4A4A4A;
+            color: #4B5563;
             line-height: 1.65;
             padding: 0 20px;
         }
@@ -1014,10 +1014,10 @@ function renderServicePageLayout(array $config): void
         /* ===== CONVERSION CTA BANNER ===== */
         .svc-cta-section {
             padding: 32px 0 44px;
-            background: #FFFFFF;
+            background: #FBF8F1;
         }
         .svc-cta-box {
-            background: linear-gradient(135deg, #111111 0%, #181818 100%);
+            background: linear-gradient(135deg, #2D051E 0%, #0F172A 100%);
             border-radius: 26px;
             padding: 44px 32px;
             text-align: center;
@@ -1034,7 +1034,7 @@ function renderServicePageLayout(array $config): void
             width: 200px;
             height: 200px;
             border-radius: 50%;
-            background: radial-gradient(circle, rgba(255, 45, 117, 0.45), transparent 70%);
+            background: radial-gradient(circle, rgba(196, 0, 122, 0.45), transparent 70%);
             pointer-events: none;
         }
         .svc-cta-pill {
@@ -1058,7 +1058,7 @@ function renderServicePageLayout(array $config): void
             min-width: 13px !important;
             min-height: 13px !important;
             flex-shrink: 0 !important;
-            color: #F65A91;
+            color: #F4C4DE;
             display: inline-block;
         }
         .svc-cta-box h2 {
@@ -1069,7 +1069,7 @@ function renderServicePageLayout(array $config): void
             color: #FFFFFF;
         }
         .svc-cta-box h2 span {
-            color: #F65A91;
+            color: #F4C4DE;
         }
         .svc-cta-box p {
             font-size: 0.98rem;
@@ -1096,7 +1096,7 @@ function renderServicePageLayout(array $config): void
             gap: 10px !important;
             white-space: nowrap !important;
             word-break: keep-all !important;
-            background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
+            background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
             color: #FFFFFF !important;
             font-size: 0.95rem;
             font-weight: 700;
@@ -1104,7 +1104,7 @@ function renderServicePageLayout(array $config): void
             padding: 14px 28px;
             border-radius: 9999px;
             text-decoration: none;
-            box-shadow: 0 10px 24px rgba(255, 45, 117, 0.45);
+            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.4);
             transition: all 0.25s ease;
             flex-shrink: 0;
             box-sizing: border-box;
@@ -1126,7 +1126,7 @@ function renderServicePageLayout(array $config): void
         }
         .svc-cta-btn-main:hover {
             transform: translateY(-2px);
-            box-shadow: 0 14px 30px rgba(255, 45, 117, 0.55);
+            box-shadow: 0 14px 30px rgba(196, 0, 122, 0.5);
             color: #FFFFFF;
         }
         .svc-cta-btn-main:hover svg {
@@ -1191,7 +1191,7 @@ function renderServicePageLayout(array $config): void
             max-height: 15px !important;
             flex-shrink: 0 !important;
             display: inline-block;
-            color: #F65A91;
+            color: #F4C4DE;
         }
         @media (max-width: 520px) {
             .svc-cta-btns {
@@ -1229,9 +1229,9 @@ function renderServicePageLayout(array $config): void
                         if (count($titleWords) > 1) {
                             $lastWord = array_pop($titleWords);
                             $firstPart = implode(' ', $titleWords);
-                            $heroHeadingHtml = htmlspecialchars($firstPart) . ' <span class="accent">' . htmlspecialchars($lastWord) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>';
+                            $heroHeadingHtml = htmlspecialchars($firstPart) . ' <span class="accent">' . htmlspecialchars($lastWord) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>';
                         } else {
-                            $heroHeadingHtml = '<span class="accent">' . htmlspecialchars($rawTitle) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>';
+                            $heroHeadingHtml = '<span class="accent">' . htmlspecialchars($rawTitle) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none" aria-hidden="true"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>';
                         }
                         ?>
                         <h1 class="svc-hero-title">
@@ -1336,7 +1336,7 @@ function renderServicePageLayout(array $config): void
                         <span>WHY IT MATTERS</span>
                     </div>
                     <h2 class="svc-section-title">
-                        Why Your Business Needs <span class="accent">Professional <?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        Why Your Business Needs <span class="accent">Professional <?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         Digital competition is fierce. Here is how specialized execution compounds into lasting business value.
@@ -1383,7 +1383,7 @@ function renderServicePageLayout(array $config): void
                         <span>PROVEN METHODOLOGY</span>
                     </div>
                     <h2 class="svc-section-title">
-                        How WebTecMart Delivers <span class="accent">Real Impact<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        How WebTecMart Delivers <span class="accent">Real Impact<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         Our 4-pillar strategic delivery framework ensures every rupee and hour invested yields compound returns.
@@ -1416,7 +1416,7 @@ function renderServicePageLayout(array $config): void
                         <span>WHAT'S INCLUDED</span>
                     </div>
                     <h2 class="svc-section-title">
-                        Core Features &amp; <span class="accent">Deliverables<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        Core Features &amp; <span class="accent">Deliverables<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         Everything required to build, rank, scale, and convert. Fully managed with zero hidden costs.
@@ -1455,7 +1455,7 @@ function renderServicePageLayout(array $config): void
                         <span>EXECUTION ROADMAP</span>
                     </div>
                     <h2 class="svc-section-title">
-                        Our Step-by-Step <span class="accent">Working Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        Our Step-by-Step <span class="accent">Working Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         A structured, transparent delivery pipeline from initial discovery to compounding growth.
@@ -1488,7 +1488,7 @@ function renderServicePageLayout(array $config): void
                         <span>PROVEN RESULTS</span>
                     </div>
                     <h2 class="svc-section-title">
-                        Real Case Studies. <span class="accent">Verified Impact.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        Real Case Studies. <span class="accent">Verified Impact.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         We don't invent achievements. Here is how our strategic digital solutions delivered real milestones for our partners.
@@ -1537,7 +1537,7 @@ function renderServicePageLayout(array $config): void
                         <span>AGENCY ADVANTAGE</span>
                     </div>
                     <h2 class="svc-section-title">
-                        Why Forward-Thinking Brands <span class="accent">Choose Us<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        Why Forward-Thinking Brands <span class="accent">Choose Us<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         Authentic strengths, zero fluff, and a relentless focus on customer revenue.
@@ -1572,7 +1572,7 @@ function renderServicePageLayout(array $config): void
                         <span>COMMON QUESTIONS</span>
                     </div>
                     <h2 class="svc-section-title">
-                        Frequently Asked <span class="accent">Questions<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
+                        Frequently Asked <span class="accent">Questions<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg></span>
                     </h2>
                     <p class="svc-section-sub">
                         Clear answers to everything you need to know about our <?= htmlspecialchars($title) ?> workflows.

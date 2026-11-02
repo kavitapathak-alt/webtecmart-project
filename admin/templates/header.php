@@ -42,14 +42,14 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         :root {
             --adm-sidebar-w: 260px;
             --adm-topbar-h: 70px;
-            --adm-brand: #FF2D75;
-            --adm-brand-dark: #111111;
-            --adm-brand-soft: #FFF2F7;
+            --adm-brand: #C4007A;
+            --adm-brand-dark: #A3005F;
+            --adm-brand-soft: #FCE8F3;
             --adm-bg: #F8FAFC;
             --adm-surface: #FFFFFF;
-            --adm-border: #EAEAEA;
-            --adm-text: #111111;
-            --adm-muted: #666666;
+            --adm-border: #E2E8F0;
+            --adm-text: #0F172A;
+            --adm-muted: #64748B;
         }
 
         *, *::before, *::after { box-sizing: border-box; }
@@ -69,11 +69,11 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             width: 100%;
         }
 
-        /* ===== SIDEBAR (Sleek Dark Theme) ===== */
+        /* ===== SIDEBAR ===== */
         .adm-sidebar {
             width: var(--adm-sidebar-w);
-            background: #111111;
-            border-right: 1px solid #292929;
+            background: #FFFFFF;
+            border-right: 1px solid var(--adm-border);
             display: flex;
             flex-direction: column;
             position: fixed;
@@ -92,21 +92,21 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             align-items: center;
             gap: 12px;
             padding: 0 20px;
-            border-bottom: 1px solid #292929;
+            border-bottom: 1px solid var(--adm-border);
             text-decoration: none;
-            color: #FFFFFF;
+            color: var(--adm-text);
         }
         .adm-sidebar-logo {
             width: 40px;
             height: 40px;
             border-radius: 12px;
-            background: #FF2D75;
+            background: linear-gradient(135deg, #E0398F, #C4007A);
             color: #FFFFFF;
             display: grid;
             place-items: center;
             font-weight: 800;
             font-size: 1.15rem;
-            box-shadow: 0 4px 14px rgba(255, 45, 117, 0.4);
+            box-shadow: 0 4px 12px rgba(196, 0, 122, 0.3);
             flex-shrink: 0;
         }
         .adm-sidebar-title {
@@ -114,13 +114,12 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             font-weight: 800;
             line-height: 1.2;
             letter-spacing: -0.02em;
-            color: #FFFFFF;
         }
         .adm-sidebar-title small {
             display: block;
             font-size: 0.68rem;
             font-weight: 700;
-            color: #FF2D75;
+            color: var(--adm-brand);
             letter-spacing: 0.1em;
             text-transform: uppercase;
         }
@@ -132,7 +131,7 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         .adm-nav-heading {
             font-size: 0.68rem;
             font-weight: 800;
-            color: #777777;
+            color: #94A3B8;
             text-transform: uppercase;
             letter-spacing: 0.12em;
             padding: 0 10px 8px;
@@ -153,7 +152,7 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             gap: 10px;
             padding: 9px 12px;
             border-radius: 10px;
-            color: rgba(255, 255, 255, 0.75);
+            color: #475569;
             font-size: 0.875rem;
             font-weight: 600;
             text-decoration: none;
@@ -163,28 +162,28 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             font-size: 1.1rem;
             width: 22px;
             text-align: center;
-            color: rgba(255, 255, 255, 0.55);
+            color: #64748B;
             transition: color 0.2s ease;
         }
         .adm-nav-link:hover {
-            background: #1C1C1C;
-            color: #FFFFFF;
+            background: #F8FAFC;
+            color: var(--adm-brand);
         }
         .adm-nav-link:hover i {
-            color: #FF2D75;
+            color: var(--adm-brand);
         }
         .adm-nav-link.active {
-            background: rgba(255, 45, 117, 0.15);
-            color: #FF2D75;
+            background: linear-gradient(90deg, #FFF0F7, #FDF2F8);
+            color: var(--adm-brand);
             font-weight: 700;
-            border: 1px solid rgba(255, 45, 117, 0.3);
+            border: 1px solid rgba(196, 0, 122, 0.15);
         }
         .adm-nav-link.active i {
-            color: #FF2D75;
+            color: var(--adm-brand);
         }
 
         .adm-badge-count {
-            background: #FF2D75;
+            background: var(--adm-brand);
             color: #FFFFFF;
             font-size: 0.72rem;
             font-weight: 800;
@@ -196,18 +195,18 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         .adm-sidebar-user {
             margin-top: auto;
             padding: 16px;
-            border-top: 1px solid #292929;
+            border-top: 1px solid var(--adm-border);
             display: flex;
             align-items: center;
             gap: 12px;
-            background: #161616;
+            background: #FAFAFA;
         }
         .adm-user-avatar {
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background: rgba(255, 45, 117, 0.2);
-            color: #FF2D75;
+            background: var(--adm-brand-soft);
+            color: var(--adm-brand-dark);
             display: grid;
             place-items: center;
             font-weight: 800;
@@ -221,7 +220,7 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         .adm-user-name {
             font-size: 0.85rem;
             font-weight: 700;
-            color: #FFFFFF;
+            color: var(--adm-text);
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
@@ -229,22 +228,22 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         }
         .adm-user-email {
             font-size: 0.75rem;
-            color: #888888;
+            color: var(--adm-muted);
             margin: 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         .adm-logout-btn {
-            color: #888888;
+            color: #94A3B8;
             padding: 6px;
             border-radius: 8px;
             text-decoration: none;
             transition: color 0.2s, background 0.2s;
         }
         .adm-logout-btn:hover {
-            color: #FF2D75;
-            background: rgba(255, 45, 117, 0.15);
+            color: #EF4444;
+            background: #FEE2E2;
         }
 
         /* ===== MAIN WRAPPER ===== */
@@ -313,7 +312,7 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             align-items: center;
             gap: 6px;
             padding: 6px 12px;
-            background: #F3F3F3;
+            background: #F1F5F9;
             border-radius: 9999px;
             font-size: 0.775rem;
             font-weight: 600;
@@ -323,20 +322,19 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 7px 16px;
+            padding: 7px 14px;
             border-radius: 9999px;
             background: var(--adm-brand-soft);
-            color: #FF2D75 !important;
-            border: 1px solid rgba(255, 45, 117, 0.25);
+            color: var(--adm-brand-dark) !important;
+            border: 1px solid rgba(196, 0, 122, 0.15);
             font-size: 0.8125rem;
             font-weight: 700;
             text-decoration: none;
             transition: all 0.2s ease;
         }
         .adm-site-btn:hover {
-            background: #FF2D75;
+            background: var(--adm-brand);
             color: #FFFFFF !important;
-            border-color: #FF2D75;
             transform: translateY(-1px);
         }
 
@@ -431,20 +429,20 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
                     <a href="/admin/services.php" class="adm-nav-link <?= $adminPage === 'services.php' && empty($_GET['edit']) ? 'active' : '' ?>">
                         <span><i class="bi bi-briefcase-fill text-primary"></i> Services CMS</span>
                         <?php if (!empty($totalServicesCount)): ?>
-                            <span class="adm-badge-count" style="background:#FFF2F7; color:#FF2D75; border:1px solid rgba(255,45,117,0.3);"><?= $totalServicesCount ?></span>
+                            <span class="adm-badge-count" style="background:#FFF0F7; color:#C4007A; border:1px solid rgba(196,0,122,0.2);"><?= $totalServicesCount ?></span>
                         <?php endif; ?>
                     </a>
                 </li>
                 <li>
                     <a href="/admin/services.php?edit=68" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 68 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
                         <span><i class="bi bi-calendar2-event text-danger"></i> B2B &amp; Exhibition SEO</span>
-                        <span class="badge" style="background: #FF2D75; font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
+                        <span class="badge" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
                     </a>
                 </li>
                 <li>
                     <a href="/admin/services.php?edit=69" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 69 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
                         <span><i class="bi bi-geo-alt text-primary"></i> SEO Services in Delhi</span>
-                        <span class="badge" style="background: #FF2D75; color: #fff; font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
+                        <span class="badge" style="background: #C4007A; color: #fff; font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
                     </a>
                 </li>
                 <li>

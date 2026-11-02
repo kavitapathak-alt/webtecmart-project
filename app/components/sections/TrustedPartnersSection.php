@@ -13,16 +13,16 @@ function renderTrustedPartnersSection(): void
     ?>
     <style>
         /* ============================================================
-           TRUSTED PARTNERS SECTION — Infinite Marquee (Black & Hot Pink)
+           TRUSTED PARTNERS SECTION — Infinite Marquee
         ============================================================ */
         .tp-section {
             position: relative;
             width: 100%;
-            padding: 32px 0;
-            background: #FFFFFF;
+            padding: 24px 0;
+            background: #FBF8F1;
             overflow: hidden;
-            border-top: 1px solid #EAEAEA;
-            border-bottom: 1px solid #EAEAEA;
+            border-top: 1px solid rgba(196, 0, 122, 0.05);
+            border-bottom: 1px solid rgba(196, 0, 122, 0.05);
         }
 
         /* Edge fade overlays (full height) */
@@ -37,12 +37,12 @@ function renderTrustedPartnersSection(): void
 
         .tp-edge-left {
             left: 0;
-            background: linear-gradient(to right, #FFFFFF, transparent);
+            background: linear-gradient(to right, #FBF8F1, transparent);
         }
 
         .tp-edge-right {
             right: 0;
-            background: linear-gradient(to left, #FFFFFF, transparent);
+            background: linear-gradient(to left, #FBF8F1, transparent);
         }
 
         /* ===== Header ===== */
@@ -55,8 +55,8 @@ function renderTrustedPartnersSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: #FFF2F7;
-            border: 1px solid #EAEAEA;
+            background: rgba(196, 0, 122, 0.08);
+            border: 1px solid rgba(196, 0, 122, 0.15);
             padding: 5px 14px;
             border-radius: 9999px;
             margin-bottom: 10px;
@@ -65,13 +65,13 @@ function renderTrustedPartnersSection(): void
         .tp-badge svg {
             width: 13px;
             height: 13px;
-            color: #FF2D75;
+            color: #C4007A;
             flex-shrink: 0;
         }
 
         .tp-badge span {
             font-size: 0.72rem;
-            color: #FF2D75;
+            color: #C4007A;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -81,14 +81,14 @@ function renderTrustedPartnersSection(): void
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             font-size: clamp(1.85rem, 3.2vw, 2.5rem);
             font-weight: 800;
-            color: #111111;
+            color: #111827;
             margin: 0 0 8px;
             line-height: 1.18;
             letter-spacing: -0.02em;
         }
 
         .tp-heading .brand-highlight {
-            color: #FF2D75;
+            color: #C4007A;
             position: relative;
             display: inline-block;
         }
@@ -104,7 +104,7 @@ function renderTrustedPartnersSection(): void
 
         .tp-subtitle {
             font-size: 0.95rem;
-            color: #4A4A4A;
+            color: #4B5563;
             max-width: 640px;
             margin: 0 auto;
             line-height: 1.55;
@@ -127,12 +127,12 @@ function renderTrustedPartnersSection(): void
 
         .tp-marquee-fade-left {
             left: 0;
-            background: linear-gradient(to right, #FFFFFF, transparent);
+            background: linear-gradient(to right, #FBF8F1, transparent);
         }
 
         .tp-marquee-fade-right {
             right: 0;
-            background: linear-gradient(to left, #FFFFFF, transparent);
+            background: linear-gradient(to left, #FBF8F1, transparent);
         }
 
         /* Marquee viewport */
@@ -160,20 +160,20 @@ function renderTrustedPartnersSection(): void
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #FFFFFF;
+            background: #fff;
             border-radius: 16px;
-            border: 1px solid #EAEAEA;
+            border: 1px solid rgba(196, 0, 122, 0.1);
             padding: 8px 10px;
             width: 120px;
             height: 80px;
-            box-shadow: 0 4px 16px rgba(17, 17, 17, 0.04);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
             transition: all 0.3s ease;
         }
 
         .tp-card:hover {
-            box-shadow: 0 10px 24px rgba(255, 45, 117, 0.15);
+            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1), 0 4px 6px -2px rgba(196, 0, 122, 0.05);
             transform: translateY(-4px);
-            border-color: #FF2D75;
+            border-color: rgba(196, 0, 122, 0.3);
         }
 
         .tp-card-inner {
@@ -190,12 +190,11 @@ function renderTrustedPartnersSection(): void
             max-height: 100%;
             object-fit: contain;
             transition: all 0.3s ease;
-            filter: grayscale(20%);
         }
 
         .tp-card:hover img {
             transform: scale(1.05);
-            filter: grayscale(0%) brightness(1.02);
+            filter: brightness(1.1);
         }
 
         /* ===== Dots ===== */
@@ -210,11 +209,11 @@ function renderTrustedPartnersSection(): void
         .tp-dots-line {
             width: 32px;
             height: 1px;
-            background: linear-gradient(to right, transparent, #EAEAEA);
+            background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
         }
 
         .tp-dots-line-right {
-            background: linear-gradient(to left, transparent, #EAEAEA);
+            background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
         }
 
         .tp-dots-inner {
@@ -224,10 +223,10 @@ function renderTrustedPartnersSection(): void
         }
 
         .tp-dot {
-            height: 5px;
-            width: 5px;
+            height: 4px;
+            width: 4px;
             border-radius: 9999px;
-            background: #EAEAEA;
+            background: rgba(196, 0, 122, 0.2);
             border: none;
             padding: 0;
             cursor: pointer;
@@ -235,12 +234,12 @@ function renderTrustedPartnersSection(): void
         }
 
         .tp-dot:hover {
-            background: #F65A91;
+            background: rgba(196, 0, 122, 0.4);
         }
 
         .tp-dot.active {
-            width: 18px;
-            background: #FF2D75;
+            width: 16px;
+            background: #C4007A;
         }
 
         /* ============================================================
@@ -331,7 +330,7 @@ function renderTrustedPartnersSection(): void
                         <span class="brand-highlight">
                             <?= e((string) $content['heading_highlight']) ?>
                             <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                                <path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.45"/>
+                                <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                             </svg>
                         </span>
                     <?php endif; ?>

@@ -30,12 +30,12 @@ require_once __DIR__ . '/templates/header.php';
     :root {
         --auth-ink: #1f1b2a;
         --auth-muted: #6b6478;
-        --auth-pink: #FF2D75;
-        --auth-pink-deep: #F65A91;
-        --auth-plum: #111111;
-        --auth-plum-soft: #222222;
-        --auth-paper: #FFFFFF;
-        --auth-line: rgba(255, 45, 117, 0.18);
+        --auth-pink: #ec2c7a;
+        --auth-pink-deep: #d11869;
+        --auth-plum: #2a1233;
+        --auth-plum-soft: #4a1d52;
+        --auth-paper: #f6efe8;
+        --auth-line: rgba(209, 24, 105, 0.18);
     }
 
     .admin-auth-page {
@@ -44,7 +44,7 @@ require_once __DIR__ . '/templates/header.php';
         place-items: center;
         padding: 56px 0 80px;
         background:
-            radial-gradient(900px 400px at 85% -10%, rgba(255, 45, 117, 0.14), transparent 60%),
+            radial-gradient(900px 400px at 85% -10%, rgba(236, 44, 122, 0.14), transparent 60%),
             var(--auth-paper);
     }
 
@@ -80,7 +80,7 @@ require_once __DIR__ . '/templates/header.php';
         right: -120px;
         bottom: -120px;
         border-radius: 50%;
-        background: radial-gradient(circle, rgba(255, 45, 117, 0.55), transparent 70%);
+        background: radial-gradient(circle, rgba(236, 44, 122, 0.55), transparent 70%);
         pointer-events: none;
     }
 
@@ -208,7 +208,7 @@ require_once __DIR__ . '/templates/header.php';
     .input-wrap input:focus {
         outline: none;
         border-color: var(--auth-pink);
-        box-shadow: 0 0 0 4px rgba(255, 45, 117, 0.14);
+        box-shadow: 0 0 0 4px rgba(236, 44, 122, 0.14);
     }
 
     .input-wrap:focus-within > svg.lead { stroke: var(--auth-pink); }
@@ -229,7 +229,7 @@ require_once __DIR__ . '/templates/header.php';
         cursor: pointer;
     }
 
-    .toggle-pass:hover { color: var(--auth-pink-deep); background: rgba(255, 45, 117, 0.08); }
+    .toggle-pass:hover { color: var(--auth-pink-deep); background: rgba(236, 44, 122, 0.08); }
     .toggle-pass:focus-visible { outline: 2px solid var(--auth-pink); }
     .toggle-pass svg { width: 19px; height: 19px; }
     .toggle-pass .eye-off { display: none; }
@@ -247,13 +247,13 @@ require_once __DIR__ . '/templates/header.php';
         color: #fff;
         cursor: pointer;
         background: linear-gradient(135deg, var(--auth-pink) 0%, var(--auth-pink-deep) 100%);
-        box-shadow: 0 12px 24px rgba(255, 45, 117, 0.28);
+        box-shadow: 0 12px 24px rgba(236, 44, 122, 0.28);
         transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
     }
 
-    .auth-submit:hover { transform: translateY(-1px); box-shadow: 0 16px 28px rgba(255, 45, 117, 0.34); }
+    .auth-submit:hover { transform: translateY(-1px); box-shadow: 0 16px 28px rgba(236, 44, 122, 0.34); }
     .auth-submit:active { transform: translateY(0); }
-    .auth-submit:focus-visible { outline: 3px solid rgba(255, 45, 117, 0.4); outline-offset: 2px; }
+    .auth-submit:focus-visible { outline: 3px solid rgba(236, 44, 122, 0.4); outline-offset: 2px; }
     .auth-submit[disabled] { opacity: 0.7; cursor: progress; transform: none; }
 
     .auth-foot {

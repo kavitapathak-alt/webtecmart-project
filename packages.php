@@ -38,9 +38,9 @@ $trustBadges = $packagesPage['trust_badges'];
     .pkg-page {
         position: relative;
         width: 100%;
-        background: #FFFFFF;
+        background: #FBF8F1;
         overflow: hidden;
-        color: #111111;
+        color: #1F1B2A;
     }
 
     .pkg-container {
@@ -63,7 +63,7 @@ $trustBadges = $packagesPage['trust_badges'];
         position: absolute;
         top: 0; right: 0;
         width: 50%; height: 50%;
-        background: linear-gradient(to bottom left, rgba(255, 45, 117, 0.05), transparent);
+        background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
@@ -71,14 +71,14 @@ $trustBadges = $packagesPage['trust_badges'];
         position: absolute;
         bottom: 0; left: 0;
         width: 33.333%; height: 50%;
-        background: linear-gradient(to top right, rgba(255, 45, 117, 0.05), transparent);
+        background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
     .pkg-bg-shape {
         position: absolute;
         fill: none;
-        stroke: #FF2D75;
+        stroke: #C4007A;
         opacity: 0.1;
     }
     .pkg-bg-shape-1 { top: 80px; right: 40px; width: 128px; height: 128px; stroke-width: 2; }
@@ -96,15 +96,15 @@ $trustBadges = $packagesPage['trust_badges'];
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(255, 45, 117, 0.08);
-        border: 1px solid rgba(255, 45, 117, 0.15);
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.15);
         padding: 5px 14px;
         border-radius: 9999px;
         margin-bottom: 10px;
     }
-    .pkg-pill svg { width: 13px; height: 13px; color: #FF2D75; flex-shrink: 0; }
+    .pkg-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
     .pkg-pill span {
-        color: #FF2D75;
+        color: #C4007A;
         font-weight: 700;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
@@ -115,7 +115,7 @@ $trustBadges = $packagesPage['trust_badges'];
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
@@ -124,14 +124,14 @@ $trustBadges = $packagesPage['trust_badges'];
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111111;
+        color: #111827;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
     } }
 
     .pkg-h1 .accent {
-        color: #FF2D75;
+        color: #C4007A;
         position: relative;
         display: inline-block;
     }
@@ -144,7 +144,7 @@ $trustBadges = $packagesPage['trust_badges'];
     }
 
     .pkg-subtitle {
-        color: #666666;
+        color: #6B7280;
         font-size: 1rem;
         max-width: 768px;
         margin: 16px auto 0;
@@ -166,7 +166,7 @@ $trustBadges = $packagesPage['trust_badges'];
         font-weight: 600;
         transition: color 0.3s ease;
     }
-    .pkg-toggle-label.active { color: #FF2D75; }
+    .pkg-toggle-label.active { color: #C4007A; }
     .pkg-toggle-label.inactive { color: #9CA3AF; }
 
     .pkg-toggle {
@@ -174,7 +174,7 @@ $trustBadges = $packagesPage['trust_badges'];
         width: 64px;
         height: 36px;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.2);
+        background: rgba(196, 0, 122, 0.2);
         border: none;
         cursor: pointer;
         transition: background 0.3s ease;
@@ -187,7 +187,7 @@ $trustBadges = $packagesPage['trust_badges'];
         width: 28px;
         height: 28px;
         border-radius: 9999px;
-        background: #FF2D75;
+        background: #C4007A;
         transition: transform 0.3s ease;
     }
     .pkg-toggle.yearly .pkg-toggle-knob {
@@ -220,18 +220,18 @@ $trustBadges = $packagesPage['trust_badges'];
         background: #fff;
         border-radius: 16px;
         padding: 32px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.5s ease;
     }
     .pkg-card:hover {
         transform: translateY(-8px);
-        border-color: rgba(255, 45, 117, 0.3);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.1);
+        border-color: rgba(196, 0, 122, 0.3);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.1);
     }
     .pkg-card.popular {
-        border-color: #FF2D75;
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.2);
+        border-color: #C4007A;
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.2);
         transform: scale(1.02);
     }
     .pkg-card.popular:hover {
@@ -243,7 +243,7 @@ $trustBadges = $packagesPage['trust_badges'];
         top: -12px;
         left: 50%;
         transform: translateX(-50%);
-        background: #FF2D75;
+        background: #C4007A;
         color: #fff;
         font-size: 12px;
         font-weight: 700;
@@ -268,24 +268,24 @@ $trustBadges = $packagesPage['trust_badges'];
         margin: 0 auto 16px;
     }
     .pkg-card.popular .pkg-icon-wrap {
-        box-shadow: 0 0 0 2px #FF2D75;
+        box-shadow: 0 0 0 2px #C4007A;
     }
     .pkg-icon-wrap svg {
         width: 28px;
         height: 28px;
-        color: #FF2D75;
+        color: #C4007A;
     }
 
     .pkg-name {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0;
     }
 
     .pkg-desc {
         font-size: 0.875rem;
-        color: #666666;
+        color: #6B7280;
         margin: 8px 0 0;
     }
 
@@ -296,7 +296,7 @@ $trustBadges = $packagesPage['trust_badges'];
     .pkg-price {
         font-size: 2.25rem;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
     }
     .pkg-price-label {
         font-size: 0.875rem;
@@ -317,12 +317,12 @@ $trustBadges = $packagesPage['trust_badges'];
         align-items: flex-start;
         gap: 8px;
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
     }
     .pkg-feature svg {
         width: 16px;
         height: 16px;
-        color: #FF2D75;
+        color: #C4007A;
         flex-shrink: 0;
         margin-top: 2px;
     }
@@ -342,22 +342,22 @@ $trustBadges = $packagesPage['trust_badges'];
         font-family: inherit;
     }
     .pkg-cta.popular {
-        background: linear-gradient(90deg, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #C4007A, #E0398F);
         color: #fff;
-        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
     }
     .pkg-cta.popular:hover {
         transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.35);
+        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
         color: #fff;
     }
     .pkg-cta.regular {
-        border: 2px solid #FF2D75;
-        color: #FF2D75;
+        border: 2px solid #C4007A;
+        color: #C4007A;
         background: transparent;
     }
     .pkg-cta.regular:hover {
-        background: #FF2D75;
+        background: #C4007A;
         color: #fff;
     }
 
@@ -366,7 +366,7 @@ $trustBadges = $packagesPage['trust_badges'];
         background: linear-gradient(to bottom right, #FDF0F6, #fff);
         border-radius: 16px;
         padding: 32px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         margin-bottom: 64px;
     }
@@ -380,13 +380,13 @@ $trustBadges = $packagesPage['trust_badges'];
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0;
     }
     @media (min-width: 768px) { .pkg-addons-h2 { font-size: 1.875rem; } }
-    .pkg-addons-h2 .accent { color: #FF2D75; }
+    .pkg-addons-h2 .accent { color: #C4007A; }
     .pkg-addons-sub {
-        color: #666666;
+        color: #6B7280;
         font-size: 0.875rem;
         max-width: 672px;
         margin: 8px auto 0;
@@ -407,21 +407,21 @@ $trustBadges = $packagesPage['trust_badges'];
         background: #fff;
         border-radius: 12px;
         padding: 16px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         transition: all 0.3s ease;
     }
     .pkg-addon:hover {
-        border-color: rgba(255, 45, 117, 0.3);
-        box-shadow: 0 4px 6px -1px rgba(255, 45, 117, 0.1);
+        border-color: rgba(196, 0, 122, 0.3);
+        box-shadow: 0 4px 6px -1px rgba(196, 0, 122, 0.1);
     }
     .pkg-addon-name {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #374151;
     }
     .pkg-addon-price {
         font-size: 0.875rem;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
     }
 
     /* ===== Trust Badges ===== */
@@ -438,23 +438,23 @@ $trustBadges = $packagesPage['trust_badges'];
         border-radius: 12px;
         padding: 16px;
         text-align: center;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
     }
     .pkg-trust-card svg {
         width: 24px;
         height: 24px;
-        color: #FF2D75;
+        color: #C4007A;
         margin: 0 auto 8px;
         display: block;
     }
     .pkg-trust-title {
         font-size: 0.875rem;
         font-weight: 600;
-        color: #111111;
+        color: #111827;
     }
     .pkg-trust-sub {
         font-size: 0.75rem;
-        color: #666666;
+        color: #6B7280;
         margin-top: 2px;
     }
 
@@ -467,13 +467,13 @@ $trustBadges = $packagesPage['trust_badges'];
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0;
     }
     @media (min-width: 768px) { .pkg-faq-h2 { font-size: 1.875rem; } }
-    .pkg-faq-h2 .accent { color: #FF2D75; }
+    .pkg-faq-h2 .accent { color: #C4007A; }
     .pkg-faq-sub {
-        color: #666666;
+        color: #6B7280;
         font-size: 0.875rem;
         max-width: 672px;
         margin: 8px auto 0;
@@ -491,21 +491,21 @@ $trustBadges = $packagesPage['trust_badges'];
         background: #fff;
         border-radius: 12px;
         padding: 24px;
-        border: 1px solid rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(196, 0, 122, 0.1);
         transition: all 0.3s ease;
     }
     .pkg-faq-card:hover {
-        box-shadow: 0 4px 6px -1px rgba(255, 45, 117, 0.1);
+        box-shadow: 0 4px 6px -1px rgba(196, 0, 122, 0.1);
     }
     .pkg-faq-q {
         font-weight: 700;
-        color: #111111;
+        color: #111827;
         margin: 0 0 8px;
         font-size: 1rem;
     }
     .pkg-faq-a {
         font-size: 0.875rem;
-        color: #4A4A4A;
+        color: #4B5563;
         margin: 0;
         line-height: 1.625;
     }
@@ -513,7 +513,7 @@ $trustBadges = $packagesPage['trust_badges'];
     /* ===== CTA ===== */
     .pkg-cta-section {
         position: relative;
-        background: linear-gradient(90deg, #111111, #FF2D75, #F65A91);
+        background: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
         border-radius: 16px;
         padding: 32px;
         text-align: center;
@@ -567,7 +567,7 @@ $trustBadges = $packagesPage['trust_badges'];
         background: #fff;
         padding: 14px 32px;
         font-weight: 700;
-        color: #FF2D75;
+        color: #C4007A;
         text-decoration: none;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
@@ -575,7 +575,7 @@ $trustBadges = $packagesPage['trust_badges'];
     .pkg-cta-btn-1:hover {
         transform: scale(1.02);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-        color: #FF2D75;
+        color: #C4007A;
     }
     .pkg-cta-btn-1 svg { width: 16px; height: 16px; }
 
@@ -609,10 +609,10 @@ $trustBadges = $packagesPage['trust_badges'];
     .pkg-bottom-line {
         width: 48px;
         height: 1px;
-        background: linear-gradient(to right, transparent, rgba(255, 45, 117, 0.3));
+        background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
     }
     .pkg-bottom-line.right {
-        background: linear-gradient(to left, transparent, rgba(255, 45, 117, 0.3));
+        background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
     }
     .pkg-bottom-dots {
         display: flex;
@@ -624,11 +624,11 @@ $trustBadges = $packagesPage['trust_badges'];
         width: 6px;
         height: 6px;
         border-radius: 9999px;
-        background: rgba(255, 45, 117, 0.2);
+        background: rgba(196, 0, 122, 0.2);
     }
     .pkg-bottom-dots span.active {
         width: 24px;
-        background: #FF2D75;
+        background: #C4007A;
     }
 </style>
 
@@ -665,7 +665,7 @@ $trustBadges = $packagesPage['trust_badges'];
                 <span class="accent">
                     <?= e((string) $packagesPage['heading_highlight']) ?>
                     <svg viewBox="0 0 300 8" preserveAspectRatio="none">
-                        <path d="M2 4C60 1 240 1 298 4" stroke="#FF2D75" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                        <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                     </svg>
                 </span>
             </h1>

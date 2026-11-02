@@ -78,42 +78,41 @@ function renderFooterSection(): void
     ?>
     <style>
         /* ============================================================
-           FOOTER — Camps Deep Charcoal & Radiant Rose Edition
+           FOOTER — Webtecmart Next.js clone
         ============================================================ */
         .site-footer {
             position: relative;
             width: 100%;
-            background: linear-gradient(180deg, #14161A 0%, #181B20 100%);
+            background: #1a1a1a;
             overflow: hidden;
             color: #fff;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* Top radiant accent line */
+        /* Top pink accent line */
         .site-footer::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #FF3366, #FF6B5B, transparent);
+            height: 4px;
+            background: linear-gradient(90deg, transparent, #C4007A, transparent);
         }
 
         /* Decorative blobs */
         .ft-blob {
             position: absolute;
             border-radius: 9999px;
-            background: radial-gradient(circle, rgba(255, 51, 102, 0.1), transparent 70%);
-            filter: blur(50px);
+            background: rgba(196, 0, 122, 0.05);
+            filter: blur(64px);
             pointer-events: none;
         }
-        .ft-blob-1 { top: -60px; right: -40px; width: 420px; height: 420px; }
-        .ft-blob-2 { bottom: -60px; left: -40px; width: 320px; height: 320px; }
+        .ft-blob-1 { top: 0; right: 0; width: 384px; height: 384px; }
+        .ft-blob-2 { bottom: 0; left: 0; width: 256px; height: 256px; }
 
         /* Main padding */
         .ft-inner {
             position: relative;
             z-index: 10;
-            padding: 48px 0 28px;
+            padding: 36px 0 24px;
         }
 
         /* Grid */
@@ -144,85 +143,73 @@ function renderFooterSection(): void
             transition: transform 0.3s ease;
         }
         .ft-brand-link:hover img {
-            transform: scale(1.08);
+            transform: scale(1.1) rotate(2deg);
         }
         .ft-brand-text { margin-left: 0; }
         .ft-brand-name {
-            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-            font-size: 1.35rem;
+            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-size: 1.25rem;
             font-weight: 800;
             color: #fff;
             line-height: 1;
             letter-spacing: -0.02em;
             margin: 0;
         }
-        .ft-brand-name .accent { color: #FF3366; }
+        .ft-brand-name .accent { color: #C4007A; }
         .ft-brand-tagline {
-            font-size: 11px;
-            color: #FF825C;
-            letter-spacing: 0.22em;
+            font-size: 12px;
+            color: rgba(196, 0, 122, 0.7);
+            letter-spacing: 0.25em;
             text-transform: uppercase;
             font-weight: 600;
             margin: 4px 0 0;
         }
         .ft-brand-desc {
-            color: #A4B0C0;
-            font-size: 0.885rem;
-            line-height: 1.65;
-            margin: 0 0 18px;
+            color: #9CA3AF;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 0 0 16px;
             max-width: 360px;
         }
 
         /* Social Icons */
         .ft-social {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
         .ft-social-link {
-            width: 38px;
-            height: 38px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.06);
+            width: 36px;
+            height: 36px;
+            border-radius: 9999px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #A4B0C0;
+            color: #9CA3AF;
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
         .ft-social-link svg {
             width: 16px;
             height: 16px;
         }
         .ft-social-link:hover {
-            background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
-            border-color: #FF3366;
-            color: #FFFFFF;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(255, 51, 102, 0.35);
+            background: rgba(196, 0, 122, 0.15);
+            border-color: rgba(196, 0, 122, 0.4);
+            color: #C4007A;
+            transform: translateY(-3px);
         }
 
         /* Column Heading */
         .ft-heading {
-            color: #FFFFFF;
-            font-weight: 700;
-            font-size: 0.9rem;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.875rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             margin: 0 0 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .ft-heading::after {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 2px;
-            background: linear-gradient(90deg, #FF3366, #FF6B5B);
-            border-radius: 2px;
         }
 
         /* Links List */
@@ -238,25 +225,24 @@ function renderFooterSection(): void
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: #A4B0C0;
-            font-size: 0.885rem;
+            color: #9CA3AF;
+            font-size: 0.875rem;
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: color 0.3s ease;
         }
         .ft-link .dash {
             display: inline-block;
             width: 0;
             height: 2px;
-            background: #FF3366;
-            transition: width 0.25s ease;
+            background: #C4007A;
+            transition: width 0.3s ease;
             border-radius: 9999px;
         }
         .ft-link:hover {
-            color: #FFFFFF;
-            transform: translateX(4px);
+            color: #C4007A;
         }
         .ft-link:hover .dash {
-            width: 8px;
+            width: 6px;
         }
 
         /* Contact List */
@@ -272,25 +258,24 @@ function renderFooterSection(): void
             display: flex;
             align-items: flex-start;
             gap: 12px;
-            color: #A4B0C0;
-            font-size: 0.885rem;
+            color: #9CA3AF;
+            font-size: 0.875rem;
             text-decoration: none;
-            transition: color 0.25s ease;
+            transition: color 0.3s ease;
         }
         .ft-contact-item svg {
             width: 16px;
             height: 16px;
             flex-shrink: 0;
-            margin-top: 3px;
-            color: #FF3366;
-            transition: transform 0.25s ease;
+            margin-top: 2px;
+            color: #C4007A;
+            transition: transform 0.3s ease;
         }
         .ft-contact-item:hover {
-            color: #FFFFFF;
+            color: #C4007A;
         }
         .ft-contact-item:hover svg {
-            transform: scale(1.15);
-            color: #FF6B5B;
+            transform: scale(1.1);
         }
 
         /* Newsletter */
@@ -298,10 +283,10 @@ function renderFooterSection(): void
             margin-top: 16px;
         }
         .ft-newsletter-title {
-            color: #A4B0C0;
-            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.75rem;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.05em;
             margin: 0 0 8px;
         }
         .ft-newsletter-form {
@@ -311,42 +296,38 @@ function renderFooterSection(): void
         .ft-newsletter-input {
             flex: 1;
             min-width: 0;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.07);
-            border: 1px solid rgba(255, 255, 255, 0.14);
-            padding: 10px 14px;
-            font-size: 0.885rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 8px 12px;
+            font-size: 0.875rem;
             color: #fff;
             font-family: inherit;
             outline: none;
-            transition: all 0.25s ease;
+            transition: all 0.3s ease;
         }
         .ft-newsletter-input::placeholder {
-            color: #718096;
+            color: #6B7280;
         }
         .ft-newsletter-input:focus {
-            border-color: #FF3366;
-            box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.25);
-            background: rgba(255, 255, 255, 0.1);
+            border-color: #C4007A;
+            box-shadow: 0 0 0 1px #C4007A;
         }
         .ft-newsletter-btn {
-            border-radius: 10px;
-            background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
+            border-radius: 8px;
+            background: #C4007A;
             color: #fff;
-            padding: 10px 16px;
+            padding: 8px 12px;
             border: none;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 14px rgba(255, 51, 102, 0.35);
+            transition: background 0.3s ease;
         }
         .ft-newsletter-btn:hover {
-            background: linear-gradient(135deg, #FF2055 0%, #FF5745 100%);
-            transform: translateY(-1px);
-            box-shadow: 0 6px 18px rgba(255, 51, 102, 0.5);
+            background: #A3005F;
         }
         .ft-newsletter-btn svg {
             width: 16px;
@@ -368,28 +349,28 @@ function renderFooterSection(): void
             text-align: center;
         }
         .ft-copyright {
-            color: #8B95A5;
+            color: #6B7280;
             font-size: 0.75rem;
             margin: 0;
         }
-        .ft-copyright .accent { color: #FF3366; }
+        .ft-copyright .accent { color: #C4007A; }
 
         .ft-bottom-links {
             display: flex;
             align-items: center;
             gap: 24px;
             font-size: 0.75rem;
-            color: #8B95A5;
+            color: #6B7280;
             flex-wrap: wrap;
             justify-content: center;
         }
         .ft-bottom-links a {
-            color: #8B95A5;
+            color: #6B7280;
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .ft-bottom-links a:hover {
-            color: #FF3366;
+            color: #C4007A;
         }
         .ft-bottom-links .divider {
             width: 1px;
@@ -398,7 +379,7 @@ function renderFooterSection(): void
         }
 
         .ft-made-with {
-            color: #718096;
+            color: #4B5563;
             font-size: 0.75rem;
             display: flex;
             align-items: center;
@@ -408,7 +389,7 @@ function renderFooterSection(): void
         .ft-made-with svg {
             width: 12px;
             height: 12px;
-            color: #FF3366;
+            color: #C4007A;
             animation: ft-heartbeat 1.4s ease-in-out infinite;
         }
         @keyframes ft-heartbeat {
