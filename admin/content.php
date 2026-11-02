@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $postSizeBytes = (int) ((float) $postSizeMatch[1] * ($sizeUnits[$sizeUnit] ?? 1));
         $requestSize = (int) ($_SERVER['CONTENT_LENGTH'] ?? 0);
         if ($postSizeBytes > 0 && $requestSize > $postSizeBytes) {
-            $setFlash('error', 'This upload exceeds the server request limit. Choose a smaller image or ask your hosting provider to increase post_max_size.');
+            $setFlash('error', 'This upload exceeds the server request limit. Choose a smaller image (max 4 MB) or ask your hosting provider to increase post_max_size.');
             redirect('/admin/content.php?section=' . rawurlencode($selectedSection));
         }
     }
@@ -399,19 +399,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     break;
                 case 'blog':
                     $metadata['category'] = trim((string) ($_POST['category'] ?? ''));
+                    if ($metadata['category'] === '') $metadata['category'] = 'Insights';
                     $metadata['author'] = trim((string) ($_POST['author'] ?? ''));
+                    if ($metadata['author'] === '') $metadata['author'] = 'WebTecMart';
                     $metadata['date'] = trim((string) ($_POST['date'] ?? ''));
-                    $metadata['readTime'] = trim((string) ($_POST['read_time'] ?? ''));
-                    $likes = filter_var($_POST['likes'] ?? 0, FILTER_VALIDATE_INT);
-                    if ($likes === false || $likes < 0) throw new RuntimeException('Likes must be zero or a positive whole number.');
+                    if ($metadata['date'] === '') $metadata['date'] = date('F j, Y');
+                    $rawLikes = trim((string) ($_POST['likes'] ?? ''));
+                    $likes = $rawLikes === '' ? 0 : filter_var($rawLikes, FILTER_VALIDATE_INT);
+                    if ($likes === false || $likes < 0) $likes = 0;
                     $metadata['likes'] = $likes;
                     $metadata['image'] = trim((string) ($_POST['image_url'] ?? ''));
                     if ($metadata['image'] !== '' && !str_starts_with($metadata['image'], '/') && (!filter_var($metadata['image'], FILTER_VALIDATE_URL) || !in_array(parse_url($metadata['image'], PHP_URL_SCHEME), ['http', 'https'], true))) {
                         throw new RuntimeException('Enter a valid image URL beginning with http://, https://, or a site path.');
                     }
+                    if ($summary === '' && $body !== '') {
+                        $cleanBody = strip_tags($body);
+                        $cleanBody = preg_replace('/^#+\s*.+$/m', '', $cleanBody);
+                        $summary = mb_substr(trim(preg_replace('/\s+/', ' ', $cleanBody)), 0, 160);
+                        if ($summary !== '') $summary .= '...';
+                    }
                     if ($summary === '') throw new RuntimeException('A blog excerpt is required.');
                     if ($body === '') throw new RuntimeException('Add the blog article content before saving.');
+                    $readTime = trim((string) ($_POST['read_time'] ?? ''));
+                    if ($readTime === '') {
+                        $readTime = max(1, (int) ceil(str_word_count(strip_tags($body)) / 200)) . ' min read';
+                    }
+                    $metadata['readTime'] = $readTime;
                     $metadata['body'] = $body;
+                    $metadata['slug'] = slugify($title);
                     break;
                 case 'services_page':
                     $textFields = [
@@ -648,7 +663,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if ($sectionType === 'homepage_about') $metadata['image_src'] = $uploadedImage;
                 else $metadata['image'] = $uploadedImage;
             }
-            if ($sectionType === 'blog' && empty($metadata['image'])) $metadata['image'] = '/assets/images/placeholder.jpg';
+            if ($sectionType === 'blog' && empty($metadata['image'])) {
+                if ($action === 'update' && !empty($existing['metadata'])) {
+                    $prevMeta = json_decode($existing['metadata'], true);
+                    if (!empty($prevMeta['image'])) {
+                        $metadata['image'] = $prevMeta['image'];
+                    }
+                }
+                if (empty($metadata['image'])) {
+                    $metadata['image'] = '/assets/images/placeholder.jpg';
+                }
+            }
             if ($sectionType === 'partner' && empty($metadata['image'])) throw new RuntimeException('Choose a logo image before saving this partner.');
             if ($sectionType === 'portfolio_project' && empty($metadata['image'])) throw new RuntimeException('Upload a project image or enter an image URL before saving this project.');
             cmsSave($sectionType, $title, $summary, $body, $metadata, $action === 'update' ? $id : null);
@@ -656,7 +681,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else throw new RuntimeException('The requested action is not supported.');
     } catch (Throwable $exception) {
         error_log('CMS content action failed: ' . $exception->getMessage());
-        $setFlash('error', $exception instanceof RuntimeException ? $exception->getMessage() : 'Content could not be saved. Please try again.');
+        $msg = trim($exception->getMessage());
+        $setFlash('error', $msg !== '' ? $msg : 'Content could not be saved. Please try again.');
     }
     redirect('/admin/content.php?section=' . rawurlencode($selectedSection));
 }
@@ -1391,7 +1417,7 @@ require_once __DIR__ . '/templates/header.php';
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold" for="f-home-about-image">Upload section image <span class="text-body-secondary fw-normal small">· JPG, PNG, WEBP or GIF, max 5 MB</span></label>
+                                    <label class="form-label fw-semibold" for="f-home-about-image">Upload section image <span class="text-body-secondary fw-normal small">· JPG, PNG, WEBP or GIF, max 4 MB</span></label>
                                     <input type="file" class="form-control" id="f-home-about-image" name="image" accept="image/jpeg,image/png,image/webp,image/gif">
                                     <div class="form-text">Or change the image URL / site path above.</div>
                                 </div>
@@ -1786,7 +1812,12 @@ require_once __DIR__ . '/templates/header.php';
                                     'read_time' => 'Reading time',
                                     'likes' => 'Initial likes',
                                 ] as $field => $label): ?>
-                                    <?php $value = $field === 'read_time' ? ($formMeta['readTime'] ?? '') : ($formMeta[$field] ?? ''); ?>
+                                    <?php
+                                    $value = $field === 'read_time' ? ($formMeta['readTime'] ?? '') : ($formMeta[$field] ?? '');
+                                    if ($field === 'likes' && ($value === '' || $value === null)) $value = '0';
+                                    if ($field === 'date' && empty($value)) $value = date('F j, Y');
+                                    if ($field === 'author' && empty($value)) $value = 'WebTecMart';
+                                    ?>
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold" for="f-blog-<?= e($field) ?>"><?= e($label) ?></label>
                                         <input type="<?= $field === 'likes' ? 'number' : 'text' ?>" class="form-control" id="f-blog-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) $value) ?>" <?= $field === 'likes' ? 'min="0" step="1"' : '' ?>>
@@ -1854,7 +1885,7 @@ require_once __DIR__ . '/templates/header.php';
 
                             <?php if (in_array($sectionType, ['page', 'success_story', 'portfolio_project', 'testimonial', 'partner', 'blog'], true)): ?>
                                 <div class="col-12">
-                                    <label class="form-label fw-semibold" for="f-image"><?= $sectionType === 'testimonial' ? 'Client photo' : ($sectionType === 'partner' ? 'Partner logo' : ($sectionType === 'blog' ? 'Upload blog image' : ($sectionType === 'portfolio_project' ? 'Upload project image' : 'Image'))) ?> <span class="text-body-secondary fw-normal small">· JPG, PNG, WEBP or GIF, max 5 MB</span></label>
+                                    <label class="form-label fw-semibold" for="f-image"><?= $sectionType === 'testimonial' ? 'Client photo' : ($sectionType === 'partner' ? 'Partner logo' : ($sectionType === 'blog' ? 'Upload blog image' : ($sectionType === 'portfolio_project' ? 'Upload project image' : 'Image'))) ?> <span class="text-body-secondary fw-normal small">· JPG, PNG, WEBP or GIF, max 4 MB</span></label>
                                     <input type="file" class="form-control" id="f-image" name="image" accept="image/jpeg,image/png,image/webp,image/gif" <?= $sectionType === 'partner' && empty($formMeta['image']) ? 'required' : '' ?>>
                                     <?php if ($sectionType === 'portfolio_project'): ?><div class="form-text">Select an image from your device. For an existing project, its current image stays in place unless you choose a replacement.</div><?php endif; ?>
                                     <div class="d-flex align-items-center gap-3 mt-2" id="cmsImagePreviewWrap" <?= empty($formMeta['image']) ? 'hidden' : '' ?>>
@@ -1911,7 +1942,14 @@ require_once __DIR__ . '/templates/header.php';
     // Unsaved changes guard
     form.addEventListener('input', () => { dirty = true; });
     form.addEventListener('change', () => { dirty = true; });
-    form.addEventListener('submit', () => {
+    form.addEventListener('submit', (e) => {
+        const file = imageInput?.files?.[0];
+        const maxBytes = 4 * 1024 * 1024; // 4 MB
+        if (file && file.size > maxBytes) {
+            e.preventDefault();
+            alert('Selected image size exceeds 4 MB. Please choose an image up to 4 MB.');
+            return;
+        }
         dirty = false;
         const submitButton = form.querySelector('button[type="submit"]');
         if (submitButton) {
@@ -1930,18 +1968,27 @@ require_once __DIR__ . '/templates/header.php';
         history.replaceState(null, '', window.location.pathname + '?' + params.toString());
     });
 
-    // Image preview
+    // Image preview & 4 MB client validation
     const imageInput = form.querySelector('input[type="file"][name="image"]');
     const imagePreview = document.getElementById('cmsImagePreview');
     const imagePreviewWrap = document.getElementById('cmsImagePreviewWrap');
     imageInput?.addEventListener('change', () => {
         const file = imageInput.files?.[0];
-        if (!file || !imagePreview || !imagePreviewWrap) return;
-        if (imagePreview.dataset.objectUrl) URL.revokeObjectURL(imagePreview.dataset.objectUrl);
-        const url = URL.createObjectURL(file);
-        imagePreview.src = url;
-        imagePreview.dataset.objectUrl = url;
-        imagePreviewWrap.hidden = false;
+        if (!file) return;
+        const maxBytes = 4 * 1024 * 1024; // 4 MB
+        if (file.size > maxBytes) {
+            alert('Image size exceeds 4 MB (' + (file.size / (1024 * 1024)).toFixed(2) + ' MB). Please choose an image up to 4 MB.');
+            imageInput.value = '';
+            if (imagePreviewWrap) imagePreviewWrap.hidden = true;
+            return;
+        }
+        if (imagePreview && imagePreviewWrap) {
+            if (imagePreview.dataset.objectUrl) URL.revokeObjectURL(imagePreview.dataset.objectUrl);
+            const url = URL.createObjectURL(file);
+            imagePreview.src = url;
+            imagePreview.dataset.objectUrl = url;
+            imagePreviewWrap.hidden = false;
+        }
     });
 
     if (hasEditOrAdd) modal.show();

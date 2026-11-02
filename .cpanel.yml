@@ -3,3 +3,4 @@ deployment:
         - export DEPLOYPATH=/home/wwwwebtecmart/public_html/
         - /bin/cp -r * $DEPLOYPATH
         - /bin/cp .htaccess $DEPLOYPATH/.htaccess
+        - /bin/cp .user.ini $DEPLOYPATH/.user.ini 2>/dev/null || true

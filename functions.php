@@ -1325,23 +1325,54 @@ function uploadCmsImage(array $file): string
 
     if ($error !== UPLOAD_ERR_OK) {
         $uploadErrors = [
-            UPLOAD_ERR_INI_SIZE => 'The image is larger than this server allows. Choose a smaller image or ask your hosting provider to increase upload_max_filesize and post_max_size.',
-            UPLOAD_ERR_FORM_SIZE => 'The image exceeds the maximum size allowed by the form.',
+            UPLOAD_ERR_INI_SIZE => 'The image is larger than this server allows. Choose a smaller image (max 4 MB) or increase upload_max_filesize and post_max_size.',
+            UPLOAD_ERR_FORM_SIZE => 'The image exceeds the maximum size allowed by the form (max 4 MB).',
             UPLOAD_ERR_PARTIAL => 'The image upload was interrupted. Please try again.',
             UPLOAD_ERR_NO_TMP_DIR => 'The server is missing its temporary upload folder. Please contact your hosting provider.',
-            UPLOAD_ERR_CANT_WRITE => 'The server could not save the uploaded image. Please contact your hosting provider.',
-            UPLOAD_ERR_EXTENSION => 'A server extension stopped the image upload. Please contact your hosting provider.',
+            UPLOAD_ERR_CANT_WRITE => 'The server could not save the uploaded image. Please check disk permissions.',
+            UPLOAD_ERR_EXTENSION => 'A server extension stopped the image upload.',
         ];
         throw new RuntimeException($uploadErrors[$error] ?? 'The image upload failed. Please try again or use an image URL.');
     }
-    if (($file['size'] ?? 0) > 5 * 1024 * 1024) {
-        throw new RuntimeException('Images must be 5 MB or smaller.');
+
+    $maxBytes = 4 * 1024 * 1024; // 4 MB limit
+    if (($file['size'] ?? 0) > $maxBytes) {
+        throw new RuntimeException('Images must be 4 MB or smaller.');
     }
     if (empty($file['tmp_name']) || !is_uploaded_file($file['tmp_name'])) {
         throw new RuntimeException('The uploaded image could not be verified.');
     }
 
-    $mime = (new finfo(FILEINFO_MIME_TYPE))->file($file['tmp_name']);
+    $mime = '';
+    if (class_exists('finfo')) {
+        try {
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
+            $mime = (string) $finfo->file($file['tmp_name']);
+        } catch (Throwable $e) {
+            $mime = '';
+        }
+    }
+    if ($mime === '' && function_exists('mime_content_type')) {
+        $mime = (string) @mime_content_type($file['tmp_name']);
+    }
+    if ($mime === '' && function_exists('getimagesize')) {
+        $imgInfo = @getimagesize($file['tmp_name']);
+        if (!empty($imgInfo['mime'])) {
+            $mime = (string) $imgInfo['mime'];
+        }
+    }
+    if ($mime === '') {
+        $clientExt = strtolower(pathinfo((string) ($file['name'] ?? ''), PATHINFO_EXTENSION));
+        $extMap = [
+            'jpg' => 'image/jpeg',
+            'jpeg' => 'image/jpeg',
+            'png' => 'image/png',
+            'webp' => 'image/webp',
+            'gif' => 'image/gif',
+        ];
+        $mime = $extMap[$clientExt] ?? '';
+    }
+
     $extensions = [
         'image/jpeg' => 'jpg',
         'image/png' => 'png',
@@ -1352,17 +1383,30 @@ function uploadCmsImage(array $file): string
         throw new RuntimeException('Use a JPG, PNG, WEBP, or GIF image.');
     }
 
-    $directory = __DIR__ . '/public/assets/uploads/content';
-    if (!is_dir($directory)) {
-        if (!mkdir($directory, 0755, true) && !is_dir($directory)) {
-            throw new RuntimeException('The image upload directory is not available.');
+    $primaryDir = __DIR__ . '/public/assets/uploads/content';
+    $secondaryDir = __DIR__ . '/assets/uploads/content';
+
+    foreach ([$primaryDir, $secondaryDir] as $dir) {
+        if (!is_dir($dir)) {
+            @mkdir($dir, 0777, true);
         }
     }
 
     $filename = bin2hex(random_bytes(12)) . '.' . $extensions[$mime];
-    if (!move_uploaded_file($file['tmp_name'], $directory . '/' . $filename)) {
-        throw new RuntimeException('The uploaded image could not be saved.');
+    $primaryPath = $primaryDir . '/' . $filename;
+    $secondaryPath = $secondaryDir . '/' . $filename;
+
+    if (!move_uploaded_file($file['tmp_name'], $primaryPath)) {
+        if (!move_uploaded_file($file['tmp_name'], $secondaryPath)) {
+            throw new RuntimeException('The uploaded image could not be saved. Check server permissions.');
+        }
+        @copy($secondaryPath, $primaryPath);
+    } else {
+        @copy($primaryPath, $secondaryPath);
     }
+
+    @chmod($primaryPath, 0666);
+    @chmod($secondaryPath, 0666);
 
     return '/public/assets/uploads/content/' . $filename;
 }
