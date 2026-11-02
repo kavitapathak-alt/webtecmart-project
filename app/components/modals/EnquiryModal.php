@@ -15,7 +15,7 @@ function renderEnquiryModal(): void
             <!-- Left Column: Value Proposition -->
             <div class="wtm-modal-info">
                 <div class="wtm-modal-icon-badge">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="#FF3366" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"/><path d="m4.93 4.93 4.24 4.24"/><path d="m14.83 9.17 4.24-4.24"/><path d="m14.83 14.83 4.24 4.24"/><path d="m9.17 14.83-4.24 4.24"/>
                         <circle cx="12" cy="12" r="4"/><path d="m12 2v2"/><path d="m12 20v2"/><path d="m20 12h2"/><path d="m2 12h2"/>
                     </svg>
@@ -54,7 +54,7 @@ function renderEnquiryModal(): void
                 </div>
 
                 <div class="wtm-modal-contact-strip">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF3366" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                     <span>Direct Strategist Line: <strong>+91-9999674255</strong></span>
                 </div>
             </div>
@@ -183,7 +183,7 @@ function renderEnquiryModal(): void
         transition: all 0.2s ease;
     }
     .wtm-modal-close:hover {
-        background: #C4007A;
+        background: #FF3366;
         color: #FFFFFF;
         transform: rotate(90deg);
     }
@@ -200,9 +200,9 @@ function renderEnquiryModal(): void
 
     /* Left column */
     .wtm-modal-info {
-        background: linear-gradient(135deg, #FFF5FA 0%, #FDF2F8 100%);
+        background: linear-gradient(135deg, #FFF0F3 0%, #FFF5F7 100%);
         padding: 38px 28px;
-        border-right: 1px solid rgba(196, 0, 122, 0.1);
+        border-right: 1px solid #ECEFF4;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -212,26 +212,28 @@ function renderEnquiryModal(): void
         height: 60px;
         border-radius: 16px;
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        border: 1px solid rgba(255, 51, 102, 0.2);
         display: grid;
         place-items: center;
-        box-shadow: 0 8px 20px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 8px 20px rgba(255, 51, 102, 0.12);
         margin-bottom: 18px;
     }
     .wtm-modal-info-title {
         font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.55rem;
         font-weight: 800;
-        color: #111827;
+        color: #181B20;
         margin: 0 0 10px;
         line-height: 1.25;
     }
     .wtm-modal-info-title span {
-        color: #C4007A;
+        background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .wtm-modal-info-desc {
         font-size: 0.88rem;
-        color: #4B5563;
+        color: #5E6977;
         line-height: 1.6;
         margin: 0 0 20px;
     }
@@ -250,7 +252,7 @@ function renderEnquiryModal(): void
         width: 20px;
         height: 20px;
         border-radius: 50%;
-        background: #C4007A;
+        background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
         color: #FFFFFF;
         display: grid;
         place-items: center;
@@ -262,13 +264,13 @@ function renderEnquiryModal(): void
     .wtm-modal-point .pt-text strong {
         display: block;
         font-size: 0.84rem;
-        color: #111827;
+        color: #181B20;
         font-weight: 700;
         line-height: 1.25;
     }
     .wtm-modal-point .pt-text span {
         font-size: 0.76rem;
-        color: #6B7280;
+        color: #5E6977;
         line-height: 1.4;
     }
     .wtm-modal-contact-strip {
@@ -276,15 +278,15 @@ function renderEnquiryModal(): void
         align-items: center;
         gap: 8px;
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        border: 1px solid #ECEFF4;
         padding: 8px 14px;
         border-radius: 9999px;
         font-size: 0.78rem;
-        color: #374151;
+        color: #181B20;
         width: fit-content;
     }
     .wtm-modal-contact-strip strong {
-        color: #C4007A;
+        color: #FF3366;
     }
 
     /* Right column */
@@ -298,12 +300,12 @@ function renderEnquiryModal(): void
     .wtm-modal-form-head h4 {
         font-size: 1.35rem;
         font-weight: 800;
-        color: #111827;
+        color: #181B20;
         margin: 0 0 4px;
     }
     .wtm-modal-form-head p {
         font-size: 0.82rem;
-        color: #6B7280;
+        color: #5E6977;
         margin: 0;
     }
     .wtm-modal-group {
@@ -313,7 +315,7 @@ function renderEnquiryModal(): void
         display: block;
         font-size: 0.76rem;
         font-weight: 700;
-        color: #374151;
+        color: #181B20;
         margin-bottom: 4px;
         text-transform: uppercase;
         letter-spacing: 0.04em;
@@ -324,33 +326,33 @@ function renderEnquiryModal(): void
         width: 100%;
         padding: 9px 12px;
         border-radius: 10px;
-        border: 1.5px solid #E2E8F0;
+        border: 1.5px solid #ECEFF4;
         font-family: inherit;
         font-size: 0.88rem;
-        color: #111827;
+        color: #181B20;
         outline: none;
-        background: #F8FAFC;
+        background: #FAFAFC;
         transition: all 0.2s ease;
         box-sizing: border-box;
     }
     .wtm-modal-group input:focus,
     .wtm-modal-group select:focus,
     .wtm-modal-group textarea:focus {
-        border-color: #C4007A;
+        border-color: #FF3366;
         background: #FFFFFF;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.15);
     }
     .wtm-modal-robot-check {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
+        background: #FAFAFC;
+        border: 1px solid #ECEFF4;
         padding: 8px 12px;
         border-radius: 8px;
         margin: 10px 0 14px;
         font-size: 0.78rem;
-        color: #475569;
+        color: #5E6977;
     }
     .wtm-modal-robot-check label {
         display: inline-flex;
@@ -363,8 +365,8 @@ function renderEnquiryModal(): void
     .wtm-modal-robot-check .bot-badge {
         font-size: 0.68rem;
         font-weight: 700;
-        color: #059669;
-        background: #ECFDF5;
+        color: #00BFA5;
+        background: #E6FAF7;
         padding: 2px 6px;
         border-radius: 4px;
     }
@@ -374,7 +376,7 @@ function renderEnquiryModal(): void
         justify-content: center !important;
         gap: 8px !important;
         width: 100%;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF3366 0%, #FF6B5B 100%);
         color: #FFFFFF !important;
         font-weight: 700;
         font-size: 0.95rem;
@@ -382,12 +384,13 @@ function renderEnquiryModal(): void
         border-radius: 9999px;
         border: none;
         cursor: pointer;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.35);
+        box-shadow: 0 10px 24px rgba(255, 51, 102, 0.35);
         transition: all 0.25s ease;
     }
     .wtm-modal-submit-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(196, 0, 122, 0.45);
+        background: linear-gradient(135deg, #FF2055 0%, #FF5745 100%);
+        box-shadow: 0 14px 28px rgba(255, 51, 102, 0.45);
     }
     .wtm-modal-feedback {
         margin-top: 12px;

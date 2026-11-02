@@ -29,14 +29,15 @@ function renderAboutBrandSection(): void
     ?>
     <style>
         /* ============================================================
-           ABOUT SECTION — Webtecmart Next.js clone
+           ABOUT SECTION — Webtecmart Black & Hot Pink Theme
         ============================================================ */
         .about-section {
             position: relative;
             width: 100%;
-            padding: 16px 0;
-            background: #FBF8F1;
+            padding: 56px 0 44px;
+            background: #FFFFFF;
             overflow: hidden;
+            border-bottom: 1px solid #EAEAEA;
         }
 
         /* Decorative background */
@@ -50,30 +51,30 @@ function renderAboutBrandSection(): void
             position: absolute;
             top: 0;
             right: 0;
-            width: 50%;
-            height: 50%;
-            background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
+            width: 45%;
+            height: 45%;
+            background: radial-gradient(circle, rgba(255, 45, 117, 0.05), transparent 70%);
             border-radius: 9999px;
-            filter: blur(64px);
+            filter: blur(48px);
         }
 
         .about-bg-blob-2 {
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 33.333%;
-            height: 33.333%;
-            background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
+            width: 35%;
+            height: 35%;
+            background: radial-gradient(circle, rgba(246, 90, 145, 0.06), transparent 70%);
             border-radius: 9999px;
-            filter: blur(64px);
+            filter: blur(48px);
         }
 
         .about-bg-shape {
             position: absolute;
-            stroke: #C4007A;
-            stroke-width: 2;
+            stroke: #FF2D75;
+            stroke-width: 1.5;
             fill: none;
-            opacity: 0.1;
+            opacity: 0.12;
             display: none;
         }
 
@@ -82,30 +83,30 @@ function renderAboutBrandSection(): void
             position: relative;
             z-index: 10;
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 38px;
         }
 
         .about-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.08);
-            border: 1px solid rgba(196, 0, 122, 0.15);
-            padding: 5px 14px;
+            background: #FFF2F7;
+            border: 1px solid #EAEAEA;
+            padding: 6px 16px;
             border-radius: 9999px;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .about-pill svg {
-            width: 13px;
-            height: 13px;
-            color: #C4007A;
+            width: 14px;
+            height: 14px;
+            color: #FF2D75;
             flex-shrink: 0;
         }
 
         .about-pill span {
-            font-size: 0.72rem;
-            color: #C4007A;
+            font-size: 0.74rem;
+            color: #FF2D75;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -113,17 +114,17 @@ function renderAboutBrandSection(): void
 
         .about-heading {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-size: clamp(1.9rem, 3.4vw, 2.6rem);
             font-weight: 800;
-            color: #111827;
-            margin: 0 0 8px;
-            line-height: 1.18;
+            color: #111111;
+            margin: 0 0 12px;
+            line-height: 1.2;
             letter-spacing: -0.02em;
             padding: 0;
         }
 
         .about-heading .accent {
-            color: #C4007A;
+            color: #FF2D75;
             position: relative;
             display: inline-block;
         }
@@ -137,11 +138,11 @@ function renderAboutBrandSection(): void
         }
 
         .about-subtitle {
-            font-size: 0.95rem;
-            color: #4B5563;
+            font-size: 1rem;
+            color: #4A4A4A;
             max-width: 640px;
             margin: 0 auto;
-            line-height: 1.55;
+            line-height: 1.6;
             padding: 0;
         }
 
@@ -151,7 +152,7 @@ function renderAboutBrandSection(): void
             z-index: 10;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 32px;
             align-items: stretch;
         }
 
@@ -165,10 +166,11 @@ function renderAboutBrandSection(): void
         /* Image Card */
         .about-image-card {
             position: relative;
-            border-radius: 12px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 25px 50px -12px rgba(196, 0, 122, 0.1);
-            border: 1px solid rgba(196, 0, 122, 0.1);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.08);
+            border: 1px solid #EAEAEA;
+            background: #FFFFFF;
         }
 
         .about-image-inner {
@@ -187,98 +189,102 @@ function renderAboutBrandSection(): void
         .about-image-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to top, rgba(196, 0, 122, 0.5), rgba(196, 0, 122, 0.1) 50%, transparent);
+            background: linear-gradient(to top, rgba(17, 17, 17, 0.55), rgba(17, 17, 17, 0.1) 50%, transparent);
         }
 
         .about-brand-badge {
             position: absolute;
-            bottom: 8px;
-            left: 8px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(4px);
-            border-radius: 8px;
-            padding: 6px 10px;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            bottom: 16px;
+            left: 16px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 10px 16px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+            border: 1px solid #EAEAEA;
         }
 
         .about-brand-badge h3 {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: #C4007A;
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #111111;
             margin: 0;
-            line-height: 1.1;
+            line-height: 1.2;
         }
 
         .about-brand-badge p {
-            font-size: 8px;
-            color: #4B5563;
-            margin: 0;
+            font-size: 11px;
+            color: #FF2D75;
+            font-weight: 700;
+            margin: 2px 0 0;
         }
 
         /* Stats Grid */
         .about-stats {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 6px;
-            margin-top: 12px;
+            gap: 12px;
+            margin-top: 16px;
         }
 
         .about-stat {
-            background: #fff;
-            border-radius: 8px;
-            padding: 8px;
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 14px 12px;
             text-align: center;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             transition: all 0.3s ease;
         }
 
         .about-stat:hover {
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
-            transform: translateY(-4px);
+            box-shadow: 0 12px 28px rgba(255, 45, 117, 0.14);
+            transform: translateY(-3px);
+            border-color: #FF2D75;
         }
 
         .about-stat svg {
-            width: 14px;
-            height: 14px;
-            color: #C4007A;
-            margin: 0 auto 2px;
+            width: 18px;
+            height: 18px;
+            color: #FF2D75;
+            margin: 0 auto 6px;
             display: block;
         }
 
         .about-stat .value {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #C4007A;
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #111111;
             line-height: 1.2;
         }
 
         .about-stat .label {
-            font-size: 8px;
-            color: #4B5563;
-            line-height: 1.2;
-            margin-top: 2px;
+            font-size: 11px;
+            color: #4A4A4A;
+            line-height: 1.3;
+            margin-top: 4px;
+            font-weight: 600;
         }
 
         /* Why Choose Us Card */
         .about-why {
             flex: 1;
-            background: #fff;
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 12px;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            background: #FFFFFF;
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 16px;
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             display: flex;
             flex-direction: column;
         }
 
         .about-why h4 {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-weight: 700;
-            color: #111827;
-            font-size: 0.875rem;
-            margin: 0 0 8px;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 800;
+            color: #111111;
+            font-size: 1.08rem;
+            margin: 0 0 14px;
         }
 
         .about-why ul {
@@ -287,72 +293,73 @@ function renderAboutBrandSection(): void
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 10px;
         }
 
         .about-why li {
             display: flex;
             align-items: flex-start;
-            gap: 6px;
+            gap: 10px;
         }
 
         .about-why li svg {
-            width: 14px;
-            height: 14px;
-            color: #C4007A;
+            width: 16px;
+            height: 16px;
+            color: #FF2D75;
             flex-shrink: 0;
-            margin-top: 2px;
+            margin-top: 3px;
         }
 
         .about-why li span {
-            font-size: 10px;
-            color: #4B5563;
-            line-height: 1.6;
+            font-size: 0.88rem;
+            color: #4A4A4A;
+            line-height: 1.5;
         }
 
         .about-why-footer {
             margin-top: auto;
-            padding-top: 12px;
+            padding-top: 16px;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 8px;
-            border-top: 1px solid rgba(196, 0, 122, 0.1);
+            gap: 12px;
+            border-top: 1px solid #EAEAEA;
         }
 
         .about-avatars {
             display: flex;
-            margin-left: -8px;
+            margin-left: -6px;
         }
 
         .about-avatars > div {
-            width: 20px;
-            height: 20px;
+            width: 26px;
+            height: 26px;
             border-radius: 9999px;
-            background: rgba(196, 0, 122, 0.1);
-            border: 2px solid #fff;
+            background: #FFF2F7;
+            border: 2px solid #FFFFFF;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-left: -8px;
+            margin-left: -6px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
         }
 
         .about-avatars > div:first-child { margin-left: 0; }
 
         .about-avatars svg {
-            width: 10px;
-            height: 10px;
-            color: #C4007A;
+            width: 12px;
+            height: 12px;
+            color: #FF2D75;
         }
 
         .about-trust-text {
-            font-size: 8px;
-            color: #6B7280;
+            font-size: 12px;
+            color: #4A4A4A;
         }
 
         .about-trust-text .bold {
-            font-weight: 600;
-            color: #C4007A;
+            font-weight: 700;
+            color: #FF2D75;
         }
 
         /* ===== RIGHT COLUMN ===== */
@@ -360,101 +367,104 @@ function renderAboutBrandSection(): void
             display: flex;
             flex-direction: column;
             height: 100%;
-            gap: 12px;
+            gap: 18px;
         }
 
         .about-right h3 {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-            font-size: 1.125rem;
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 6px;
+            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-size: 1.38rem;
+            font-weight: 800;
+            color: #111111;
+            margin: 0 0 10px;
             line-height: 1.3;
         }
 
         .about-right h3 .accent {
-            color: #C4007A;
+            color: #FF2D75;
         }
 
         .about-right p {
-            font-size: 0.75rem;
-            color: #4B5563;
-            line-height: 1.625;
-            margin: 0 0 6px;
+            font-size: 0.94rem;
+            color: #4A4A4A;
+            line-height: 1.68;
+            margin: 0 0 12px;
         }
 
         .about-right p:last-child { margin-bottom: 0; }
 
         .about-right p .bold {
             font-weight: 700;
-            color: #C4007A;
+            color: #111111;
         }
 
         /* Features Grid */
         .about-features {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 8px;
+            gap: 12px;
         }
 
         .about-feature {
-            background: #fff;
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid rgba(196, 0, 122, 0.05);
+            background: #FFFFFF;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #EAEAEA;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
             transition: all 0.3s ease;
         }
 
         .about-feature:hover {
-            border-color: rgba(196, 0, 122, 0.2);
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
+            border-color: #FF2D75;
+            box-shadow: 0 12px 28px rgba(255, 45, 117, 0.12);
+            transform: translateY(-2px);
         }
 
         .about-feature svg {
-            width: 14px;
-            height: 14px;
-            color: #C4007A;
-            margin-bottom: 4px;
+            width: 20px;
+            height: 20px;
+            color: #FF2D75;
+            margin-bottom: 8px;
             transition: transform 0.3s ease;
         }
 
         .about-feature:hover svg {
-            transform: scale(1.1);
+            transform: scale(1.12);
         }
 
         .about-feature h4 {
-            font-weight: 600;
-            color: #111827;
-            font-size: 10px;
-            margin: 0 0 2px;
+            font-weight: 700;
+            color: #111111;
+            font-size: 0.98rem;
+            margin: 0 0 4px;
         }
 
         .about-feature p {
-            font-size: 8px;
-            color: #6B7280;
-            line-height: 1.625;
+            font-size: 0.86rem;
+            color: #4A4A4A;
+            line-height: 1.58;
             margin: 0;
         }
 
         /* USP Badge */
         .about-usp {
-            background: linear-gradient(to right, rgba(196, 0, 122, 0.05), #FDF0F6);
-            border-radius: 8px;
-            padding: 10px;
-            border: 1px solid rgba(196, 0, 122, 0.1);
+            background: #FFF2F7;
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid #EAEAEA;
         }
 
         .about-usp-inner {
             display: flex;
             align-items: flex-start;
-            gap: 8px;
+            gap: 12px;
         }
 
         .about-usp-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 9999px;
-            background: rgba(196, 0, 122, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: #FFFFFF;
+            border: 1px solid #EAEAEA;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -462,22 +472,22 @@ function renderAboutBrandSection(): void
         }
 
         .about-usp-icon svg {
-            width: 10px;
-            height: 10px;
-            color: #C4007A;
+            width: 16px;
+            height: 16px;
+            color: #FF2D75;
         }
 
         .about-usp h5 {
-            font-weight: 600;
-            color: #111827;
-            font-size: 10px;
-            margin: 0 0 2px;
+            font-weight: 700;
+            color: #111111;
+            font-size: 0.98rem;
+            margin: 0 0 4px;
         }
 
         .about-usp p {
-            font-size: 8px;
-            color: #4B5563;
-            line-height: 1.625;
+            font-size: 0.86rem;
+            color: #4A4A4A;
+            line-height: 1.58;
             margin: 0;
         }
 
@@ -486,50 +496,52 @@ function renderAboutBrandSection(): void
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            gap: 8px;
-            padding-top: 4px;
+            gap: 14px;
+            padding-top: 6px;
         }
 
         .about-cta-btn {
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             border-radius: 9999px;
-            background: linear-gradient(to right, #C4007A, #E0398F);
-            padding: 6px 14px;
-            font-weight: 600;
-            color: #fff;
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
+            background: #FF2D75;
+            padding: 13px 28px;
+            font-weight: 700;
+            color: #FFFFFF;
+            box-shadow: 0 10px 24px rgba(255, 45, 117, 0.35);
             transition: all 0.3s ease;
-            font-size: 10px;
+            font-size: 0.95rem;
             text-decoration: none;
             border: none;
             cursor: pointer;
         }
 
         .about-cta-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
-            color: #fff;
+            background: #F65A91;
+            transform: translateY(-2px);
+            box-shadow: 0 14px 28px rgba(255, 45, 117, 0.45);
+            color: #FFFFFF;
         }
 
         .about-cta-btn svg {
-            width: 10px;
-            height: 10px;
+            width: 14px;
+            height: 14px;
         }
 
         .about-cta-excellence {
             display: flex;
             align-items: center;
-            gap: 4px;
-            font-size: 10px;
-            color: #6B7280;
+            gap: 6px;
+            font-size: 13px;
+            color: #4A4A4A;
+            font-weight: 600;
         }
 
         .about-cta-excellence svg {
-            width: 12px;
-            height: 12px;
-            color: #C4007A;
+            width: 16px;
+            height: 16px;
+            color: #FF2D75;
         }
 
         /* ============================================================
@@ -744,7 +756,7 @@ function renderAboutBrandSection(): void
                         <span class="accent">
                             <?= e((string) $content['heading_highlight']) ?>
                             <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                                <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                                <path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.4"/>
                             </svg>
                         </span>
                     <?php endif; ?>

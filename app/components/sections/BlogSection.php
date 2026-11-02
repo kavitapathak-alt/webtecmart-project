@@ -5,40 +5,40 @@ function renderBlogSection(): void
     $posts = array_slice($allPosts, 0, 3);
     if (!$posts) return;
     ?>
-    <section class="home-blog-section" id="blog" style="padding: 36px 0 32px; background: #FBF8F1; position: relative;">
+    <section class="home-blog-section" id="blog" style="padding: 56px 0 44px; background: #FFFFFF; position: relative; border-bottom: 1px solid #EAEAEA;">
         <style>
             .home-blog-header {
                 text-align: center;
                 max-width: 720px;
-                margin: 0 auto 22px;
+                margin: 0 auto 36px;
             }
             .home-blog-pill {
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                background: rgba(196, 0, 122, 0.08);
-                border: 1px solid rgba(196, 0, 122, 0.15);
-                color: #C4007A;
-                font-size: 0.72rem;
+                background: #FFF2F7;
+                border: 1px solid #EAEAEA;
+                color: #FF2D75;
+                font-size: 0.74rem;
                 font-weight: 700;
                 letter-spacing: 0.08em;
                 text-transform: uppercase;
-                padding: 5px 14px;
+                padding: 6px 16px;
                 border-radius: 999px;
-                margin-bottom: 10px;
+                margin-bottom: 14px;
             }
-            .home-blog-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
+            .home-blog-pill svg { width: 14px; height: 14px; color: #FF2D75; flex-shrink: 0; }
             .home-blog-heading {
                 font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+                font-size: clamp(1.9rem, 3.4vw, 2.6rem);
                 font-weight: 800;
-                color: #111827;
-                line-height: 1.18;
-                margin: 0 0 8px;
+                color: #111111;
+                line-height: 1.2;
+                margin: 0 0 12px;
                 letter-spacing: -0.02em;
             }
             .home-blog-heading .accent {
-                color: #C4007A;
+                color: #FF2D75;
                 position: relative;
                 display: inline-block;
             }
@@ -51,18 +51,18 @@ function renderBlogSection(): void
                 pointer-events: none;
             }
             .home-blog-desc {
-                font-size: 0.95rem;
-                color: #4B5563;
-                line-height: 1.55;
+                font-size: 1rem;
+                color: #4A4A4A;
+                line-height: 1.6;
                 margin: 0 auto;
                 max-width: 640px;
             }
             .home-blog-card {
-                background: #ffffff;
+                background: #FFFFFF;
                 border-radius: 20px;
                 overflow: hidden;
-                border: 1.5px solid rgba(196, 0, 122, 0.1);
-                box-shadow: 0 10px 30px rgba(196, 0, 122, 0.06);
+                border: 1px solid #EAEAEA;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
                 transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
                 display: flex;
                 flex-direction: column;
@@ -70,15 +70,15 @@ function renderBlogSection(): void
             }
             .home-blog-card:hover {
                 transform: translateY(-6px);
-                border-color: #C4007A;
-                box-shadow: 0 20px 45px rgba(196, 0, 122, 0.18);
+                border-color: #FF2D75;
+                box-shadow: 0 18px 40px rgba(255, 45, 117, 0.12);
             }
             .home-blog-img-wrap {
                 position: relative;
                 width: 100%;
                 aspect-ratio: 16 / 10;
                 overflow: hidden;
-                background: #fce8f3;
+                background: #FFF2F7;
             }
             .home-blog-img {
                 width: 100%;
@@ -95,15 +95,15 @@ function renderBlogSection(): void
                 position: absolute;
                 top: 14px;
                 left: 14px;
-                background: linear-gradient(90deg, #C4007A, #E0398F);
-                color: #fff;
+                background: #FF2D75;
+                color: #FFFFFF;
                 font-size: 0.72rem;
                 font-weight: 800;
                 padding: 4px 12px;
                 border-radius: 50px;
                 text-transform: uppercase;
                 letter-spacing: 0.05em;
-                box-shadow: 0 4px 12px rgba(196,0,122,0.35);
+                box-shadow: 0 4px 12px rgba(255, 45, 117, 0.35);
             }
             .home-blog-body {
                 padding: 24px;
@@ -117,13 +117,13 @@ function renderBlogSection(): void
                 gap: 12px;
                 font-size: 0.8rem;
                 font-weight: 600;
-                color: #9CA3AF;
+                color: #666666;
                 margin-bottom: 10px;
             }
             .home-blog-title {
-                font-size: 1.2rem;
+                font-size: 1.22rem;
                 font-weight: 800;
-                color: #111827;
+                color: #111111;
                 line-height: 1.4;
                 margin: 0 0 10px;
             }
@@ -133,11 +133,11 @@ function renderBlogSection(): void
                 transition: color 0.2s ease;
             }
             .home-blog-card:hover .home-blog-title a {
-                color: #C4007A;
+                color: #FF2D75;
             }
             .home-blog-excerpt {
-                font-size: 0.92rem;
-                color: #4B5563;
+                font-size: 0.9rem;
+                color: #4A4A4A;
                 line-height: 1.6;
                 margin: 0 0 20px;
                 display: -webkit-box;
@@ -148,23 +148,23 @@ function renderBlogSection(): void
             .home-blog-foot {
                 margin-top: auto;
                 padding-top: 14px;
-                border-top: 1px solid rgba(196, 0, 122, 0.08);
+                border-top: 1px solid #EAEAEA;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
             }
             .home-blog-link {
-                color: #C4007A;
+                color: #FF2D75;
                 font-weight: 700;
-                font-size: 0.88rem;
+                font-size: 0.9rem;
                 text-decoration: none;
                 display: inline-flex;
                 align-items: center;
                 gap: 6px;
-                transition: transform 0.2s ease;
+                transition: transform 0.2s ease, color 0.2s ease;
             }
             .home-blog-link:hover {
-                color: #A3005F;
+                color: #111111;
                 transform: translateX(4px);
             }
             .home-blog-cta {
@@ -175,20 +175,21 @@ function renderBlogSection(): void
                 display: inline-flex;
                 align-items: center;
                 gap: 8px;
-                padding: 13px 32px;
+                padding: 14px 34px;
                 border-radius: 50px;
                 font-weight: 700;
                 font-size: 0.95rem;
                 text-decoration: none;
-                color: #fff;
-                background: linear-gradient(90deg, #C4007A, #E0398F);
-                box-shadow: 0 10px 24px rgba(196, 0, 122, 0.25);
-                transition: transform 0.25s ease, box-shadow 0.25s ease;
+                color: #FFFFFF;
+                background: #FF2D75;
+                box-shadow: 0 10px 24px rgba(255, 45, 117, 0.35);
+                transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
             }
             .home-blog-all-btn:hover {
-                color: #fff;
+                background: #F65A91;
+                color: #FFFFFF;
                 transform: translateY(-3px);
-                box-shadow: 0 14px 30px rgba(196, 0, 122, 0.4);
+                box-shadow: 0 14px 30px rgba(255, 45, 117, 0.45);
             }
         </style>
 
@@ -202,7 +203,7 @@ function renderBlogSection(): void
                     Latest
                     <span class="accent">
                         Articles &amp; Strategies
-                        <svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg>
+                        <svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.4"/></svg>
                     </span>
                 </h2>
                 <p class="home-blog-desc">Practical tips, search algorithms, and proven digital growth methodologies from WebTecMart's strategists.</p>

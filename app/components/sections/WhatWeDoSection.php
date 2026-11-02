@@ -95,18 +95,18 @@ function renderWhatWeDoSection(): void
     ?>
     <style>
         /* ============================================================
-           WHAT WE OFFER — OUR CORE SERVICES SECTION
-           Matches exact reference screenshot styling with compact spacing
+           WHAT WE OFFER — OUR CORE SERVICES SECTION (Black & Hot Pink)
            ============================================================ */
         .core-services-section {
             width: 100%;
-            background: #FBF8F1;
-            padding: 32px 0 24px;
+            background: #FFFFFF;
+            padding: 56px 0 44px;
             position: relative;
+            border-bottom: 1px solid #EAEAEA;
         }
         @media (min-width: 768px) {
             .core-services-section {
-                padding: 40px 0 28px;
+                padding: 68px 0 52px;
             }
         }
 
@@ -121,12 +121,12 @@ function renderWhatWeDoSection(): void
         /* ===== Header ===== */
         .core-services-header {
             text-align: center;
-            margin: 0 auto 22px;
+            margin: 0 auto 36px;
             max-width: 720px;
         }
         @media (min-width: 768px) {
             .core-services-header {
-                margin-bottom: 26px;
+                margin-bottom: 46px;
             }
         }
 
@@ -134,23 +134,23 @@ function renderWhatWeDoSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(196, 0, 122, 0.08);
-            border: 1px solid rgba(196, 0, 122, 0.15);
-            padding: 5px 14px;
+            background: #FFF2F7;
+            border: 1px solid #EAEAEA;
+            padding: 6px 16px;
             border-radius: 9999px;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .core-services-pill svg {
-            width: 13px;
-            height: 13px;
-            color: #C4007A;
+            width: 14px;
+            height: 14px;
+            color: #FF2D75;
             flex-shrink: 0;
         }
 
         .core-services-pill span {
-            font-size: 0.72rem;
-            color: #C4007A;
+            font-size: 0.74rem;
+            color: #FF2D75;
             font-weight: 700;
             letter-spacing: 0.08em;
             text-transform: uppercase;
@@ -158,16 +158,16 @@ function renderWhatWeDoSection(): void
 
         .core-services-title {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
+            font-size: clamp(1.9rem, 3.4vw, 2.6rem);
             font-weight: 800;
-            color: #111827;
-            letter-spacing: -0.02em;
+            color: #111111;
+            letter-spacing: -0.025em;
             line-height: 1.18;
-            margin: 0 0 8px;
+            margin: 0 0 12px;
         }
 
         .core-services-title .accent {
-            color: #C4007A;
+            color: #FF2D75;
             position: relative;
             display: inline-block;
         }
@@ -182,10 +182,10 @@ function renderWhatWeDoSection(): void
         }
 
         .core-services-subtitle {
-            font-size: 0.95rem;
-            color: #4B5563;
+            font-size: 1rem;
+            color: #4A4A4A;
             margin: 0 auto;
-            line-height: 1.55;
+            line-height: 1.6;
             max-width: 600px;
         }
 
@@ -198,27 +198,27 @@ function renderWhatWeDoSection(): void
         @media (min-width: 680px) {
             .core-services-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 22px;
+                gap: 24px;
             }
         }
         @media (min-width: 1024px) {
             .core-services-grid {
                 grid-template-columns: repeat(3, minmax(0, 1fr));
-                gap: 24px;
+                gap: 26px;
             }
         }
 
-        /* ===== Card (Exact design reference matching) ===== */
+        /* ===== Card ===== */
         .core-service-card {
             background: #FFFFFF;
-            border: 1.5px solid #F1E5EC;
+            border: 1px solid #EAEAEA;
             border-radius: 20px;
-            padding: 26px 22px 20px 22px;
+            padding: 30px 26px 24px 26px;
             display: flex;
             flex-direction: column;
             text-decoration: none;
             color: inherit;
-            box-shadow: 0 4px 18px -2px rgba(17, 24, 39, 0.03);
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.03);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                         box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
                         border-color 0.3s ease;
@@ -227,42 +227,45 @@ function renderWhatWeDoSection(): void
 
         .core-service-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(196, 0, 122, 0.32);
-            box-shadow: 0 16px 28px -8px rgba(196, 0, 122, 0.12), 0 0 0 1px rgba(196, 0, 122, 0.12);
+            border-color: #FF2D75;
+            box-shadow: 0 18px 38px rgba(255, 45, 117, 0.12);
         }
 
         /* Icon Container */
         .core-service-icon {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            background: #FFF0F7;
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            background: #FFF2F7;
+            border: 1px solid #EAEAEA;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 16px;
-            transition: transform 0.25s ease, background 0.25s ease;
+            margin-bottom: 20px;
+            transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease;
             flex-shrink: 0;
+            color: #FF2D75;
         }
 
         .core-service-card:hover .core-service-icon {
-            transform: scale(1.06);
-            background: #FCE4EC;
+            transform: scale(1.08);
+            background: #FF2D75;
+            color: #FFFFFF;
+            border-color: #FF2D75;
         }
 
         .core-service-icon svg {
-            width: 20px;
-            height: 20px;
-            color: #C4007A;
+            width: 22px;
+            height: 22px;
             stroke-width: 2;
         }
 
         /* Card Title */
         .core-service-heading {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: 1.18rem;
-            font-weight: 700;
-            color: #111827;
+            font-size: 1.22rem;
+            font-weight: 800;
+            color: #111111;
             margin: 0 0 10px;
             line-height: 1.32;
             letter-spacing: -0.015em;
@@ -270,15 +273,15 @@ function renderWhatWeDoSection(): void
         }
 
         .core-service-card:hover .core-service-heading {
-            color: #C4007A;
+            color: #FF2D75;
         }
 
         /* Description */
         .core-service-desc {
-            font-size: 0.85rem;
-            color: #4B5563;
-            line-height: 1.58;
-            margin: 0 0 18px;
+            font-size: 0.9rem;
+            color: #4A4A4A;
+            line-height: 1.62;
+            margin: 0 0 20px;
             flex-grow: 1;
         }
 
@@ -293,18 +296,21 @@ function renderWhatWeDoSection(): void
         .core-service-tag {
             display: inline-flex;
             align-items: center;
-            padding: 4px 10px;
-            background: #FFF0F7;
-            color: #C4007A;
+            padding: 4px 11px;
+            background: #F3F3F3;
+            color: #111111;
+            border: 1px solid #EAEAEA;
             border-radius: 9999px;
-            font-size: 0.72rem;
+            font-size: 0.74rem;
             font-weight: 600;
             letter-spacing: 0.01em;
-            transition: background 0.2s ease;
+            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
         }
 
         .core-service-card:hover .core-service-tag {
-            background: #FCE4EC;
+            background: #FFF2F7;
+            color: #FF2D75;
+            border-color: rgba(255, 45, 117, 0.3);
         }
 
         /* Learn More Link */
@@ -312,38 +318,38 @@ function renderWhatWeDoSection(): void
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            color: #C4007A;
-            font-weight: 600;
-            font-size: 0.88rem;
+            color: #FF2D75;
+            font-weight: 700;
+            font-size: 0.92rem;
             text-decoration: none;
             margin-top: auto;
             transition: gap 0.2s ease, color 0.2s ease;
         }
 
         .core-service-cta svg {
-            width: 14px;
-            height: 14px;
+            width: 15px;
+            height: 15px;
             stroke-width: 2.5;
             transition: transform 0.2s ease;
         }
 
         .core-service-card:hover .core-service-cta {
-            color: #A3005F;
+            color: #111111;
         }
 
         .core-service-card:hover .core-service-cta svg {
             transform: translateX(4px);
         }
 
-        /* ===== B2B & Exhibition SEO Spotlight Banner ===== */
+        /* ===== B2B & Exhibition SEO Spotlight Banner (Premium Black Card) ===== */
         .core-spotlight-banner {
-            margin-top: 36px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFF5FA 100%);
-            border: 1.5px solid rgba(196, 0, 122, 0.22);
+            margin-top: 48px;
+            background: #111111;
+            border: 1px solid #292929;
             border-radius: 24px;
-            padding: 38px 28px;
+            padding: 44px 32px;
             text-align: center;
-            box-shadow: 0 16px 36px -10px rgba(196, 0, 122, 0.08);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -354,7 +360,7 @@ function renderWhatWeDoSection(): void
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #C4007A, #E0398F);
+            background: linear-gradient(90deg, #FF2D75, #F65A91);
         }
         .core-spotlight-inner {
             max-width: 860px;
@@ -368,31 +374,31 @@ function renderWhatWeDoSection(): void
             gap: 6px;
             padding: 5px 14px;
             border-radius: 9999px;
-            background: rgba(196, 0, 122, 0.08);
-            border: 1px solid rgba(196, 0, 122, 0.18);
-            color: #C4007A;
+            background: rgba(255, 45, 117, 0.12);
+            border: 1px solid rgba(255, 45, 117, 0.25);
+            color: #FF2D75;
             font-size: 0.72rem;
             font-weight: 800;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
         }
         .core-spotlight-eyebrow svg {
             width: 13px;
             height: 13px;
-            color: #C4007A;
+            color: #FF2D75;
         }
         .core-spotlight-heading {
             font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
             font-size: clamp(1.85rem, 3.4vw, 2.5rem);
             font-weight: 800;
-            color: #111827;
-            margin: 0 0 12px;
+            color: #FFFFFF;
+            margin: 0 0 14px;
             line-height: 1.25;
             letter-spacing: -0.02em;
         }
         .core-spotlight-heading .accent {
-            color: #C4007A;
+            color: #FF2D75;
             position: relative;
             display: inline-block;
         }
@@ -407,26 +413,26 @@ function renderWhatWeDoSection(): void
         .core-spotlight-subheading {
             font-size: clamp(1.05rem, 1.8vw, 1.25rem);
             font-weight: 700;
-            color: #1F2937;
-            margin: 0 auto 12px;
+            color: #FFFFFF;
+            margin: 0 auto 14px;
             line-height: 1.4;
         }
         .core-spotlight-desc {
             font-size: 0.96rem;
-            color: #4B5563;
-            line-height: 1.65;
-            margin: 0 auto 10px;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.68;
+            margin: 0 auto 12px;
             max-width: 800px;
         }
         .core-spotlight-subdesc {
             font-size: 0.88rem;
-            color: #6B7280;
+            color: rgba(255, 255, 255, 0.75);
             line-height: 1.6;
-            margin: 0 auto 20px;
+            margin: 0 auto 24px;
             max-width: 780px;
         }
         .core-spotlight-subdesc strong {
-            color: #111827;
+            color: #FFFFFF;
             font-weight: 700;
         }
         .core-spotlight-pills {
@@ -434,20 +440,20 @@ function renderWhatWeDoSection(): void
             flex-wrap: wrap;
             justify-content: center;
             gap: 10px;
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .spotlight-pill {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            font-size: 0.78rem;
+            font-size: 0.8rem;
             font-weight: 700;
-            color: #C4007A;
-            background: #FFFFFF;
-            border: 1px solid rgba(196, 0, 122, 0.16);
-            padding: 5px 12px;
+            color: #FF2D75;
+            background: #1A1A1A;
+            border: 1px solid #292929;
+            padding: 6px 14px;
             border-radius: 9999px;
-            box-shadow: 0 2px 8px rgba(196, 0, 122, 0.04);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         }
         .core-spotlight-actions {
             display: flex;
@@ -456,28 +462,29 @@ function renderWhatWeDoSection(): void
             justify-content: center;
             align-items: center;
             gap: 14px;
-            margin-bottom: 16px;
+            margin-bottom: 18px;
         }
         .core-spotlight-btn-primary {
             display: inline-flex !important;
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+            background: #FF2D75;
             color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.95rem;
             line-height: 1;
-            padding: 13px 28px;
+            padding: 14px 30px;
             border-radius: 9999px;
             text-decoration: none;
             white-space: nowrap !important;
-            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32);
+            box-shadow: 0 10px 24px rgba(255, 45, 117, 0.35);
             transition: all 0.25s ease;
         }
         .core-spotlight-btn-primary:hover {
+            background: #F65A91;
             transform: translateY(-2px);
-            box-shadow: 0 14px 28px rgba(196, 0, 122, 0.42);
+            box-shadow: 0 14px 30px rgba(255, 45, 117, 0.45);
             color: #FFFFFF;
         }
         .core-spotlight-btn-primary svg {
@@ -494,26 +501,27 @@ function renderWhatWeDoSection(): void
             align-items: center !important;
             justify-content: center !important;
             gap: 8px !important;
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.25);
-            color: #C4007A !important;
+            background: transparent;
+            border: 1.5px solid #333333;
+            color: #FFFFFF !important;
             font-weight: 700;
             font-size: 0.95rem;
             line-height: 1;
-            padding: 13px 24px;
+            padding: 13px 26px;
             border-radius: 9999px;
             text-decoration: none;
             white-space: nowrap !important;
             transition: all 0.25s ease;
         }
         .core-spotlight-btn-secondary:hover {
-            background: rgba(196, 0, 122, 0.06);
-            border-color: #C4007A;
+            border-color: #FF2D75;
+            color: #FF2D75 !important;
+            background: rgba(255, 45, 117, 0.08);
             transform: translateY(-2px);
         }
         .core-spotlight-footnote {
             font-size: 0.78rem;
-            color: #6B7280;
+            color: rgba(255, 255, 255, 0.5);
             line-height: 1.55;
             margin: 0 auto;
             max-width: 740px;
@@ -548,7 +556,7 @@ function renderWhatWeDoSection(): void
                     <span class="accent">
                         Core Services
                         <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                            <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/>
+                            <path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.4"/>
                         </svg>
                     </span>
                 </h2>
@@ -589,8 +597,41 @@ function renderWhatWeDoSection(): void
                     </div>
 
                     <h3 class="core-spotlight-heading">
-                        Boost Your Event &amp; Exhibition <span class="accent">With SEO.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        Boost Your Event &amp; Exhibition <span class="accent">With SEO.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h3>
+
+                    <h4 class="core-spotlight-subheading">
+                        Want to attract more attendees, sponsors, exhibitors, and increase revenue?
+                    </h4>
+
+                    <p class="core-spotlight-desc">
+                        We'll help you uncover hidden opportunities and improve your exhibition website's performance with a customized Event SEO strategy that drives pre-registered trade buyers, sells out stalls, and delivers measurable results.
+                    </p>
+
+                    <p class="core-spotlight-subdesc">
+                        The organic search engine partner behind <strong>Bharat Tex Fair (Ministry of Textiles)</strong> and <strong>IHGF Delhi Autumn Fair (EPCH)</strong>. If you have any questions about how to kick-start your SEO strategy get in touch today.
+                    </p>
+
+                    <div class="core-spotlight-pills">
+                        <span class="spotlight-pill">✓ Attract Global Attendees</span>
+                        <span class="spotlight-pill">✓ Sell Out Exhibitor Stalls</span>
+                        <span class="spotlight-pill">✓ Multi-Date Google Event Schema</span>
+                        <span class="spotlight-pill">✓ 400%+ Organic Lift Proven</span>
+                    </div>
+
+                    <div class="core-spotlight-actions">
+                        <a href="/b2b-exhibition-seo.php" class="core-spotlight-btn-primary">
+                            <span>Let's Talk Optimization</span>
+                            <?= coreSvcIcon('arrow') ?>
+                        </a>
+                        <a href="tel:+919999674255" class="core-spotlight-btn-secondary">
+                            <span>Call: +91-9999674255</span>
+                        </a>
+                    </div>
+
+                    <p class="core-spotlight-footnote">
+                        * While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.
+                    </p>
 
                     <h4 class="core-spotlight-subheading">
                         Want to attract more attendees, sponsors, exhibitors, and increase revenue?

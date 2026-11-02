@@ -88,16 +88,16 @@ $dbService = getServiceBySlug('seo-audit');
 <style>
     /* ============================================================
        PURE PINK-ONLY PALETTE (Brand Request):
-       - Dark Pink / Deep Magenta: #C4007A, #9A0060, #850053
-       - Vibrant Hot Pink: #E0398F, #D81B60
-       - Soft / Light Pink: #FFF0F7, #FCE7F3, #FDF2F8
+       - Dark Pink / Deep Magenta: #FF2D75, #9A0060, #850053
+       - Vibrant Hot Pink: #F65A91, #D81B60
+       - Soft / Light Pink: #FFF2F7, #FCE7F3, #FFF2F7
        - Canvas: Pure White #FFFFFF and Softest Pink Tint #FFF9FB
-       - Readable Text: Dark Slate #111827 and Muted Gray #4B5563
+       - Readable Text: Dark Slate #111111 and Muted Gray #4A4A4A
        ============================================================ */
     .aud-wrap {
         width: 100%;
         background: #FFF9FB;
-        color: #111827;
+        color: #111111;
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         overflow-x: hidden;
     }
@@ -114,11 +114,11 @@ $dbService = getServiceBySlug('seo-audit');
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: #FFF0F7;
-        border: 1px solid rgba(196, 0, 122, 0.22);
+        background: #FFF2F7;
+        border: 1px solid rgba(255, 45, 117, 0.22);
         padding: 6px 15px;
         border-radius: 9999px;
-        color: #C4007A;
+        color: #FF2D75;
         font-size: 0.73rem;
         font-weight: 800;
         text-transform: uppercase;
@@ -128,7 +128,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-pill svg {
         width: 14px;
         height: 14px;
-        color: #C4007A;
+        color: #FF2D75;
     }
 
     /* Common Section Headings with Signature SVG Underline */
@@ -142,11 +142,11 @@ $dbService = getServiceBySlug('seo-audit');
         font-weight: 800;
         line-height: 1.25;
         letter-spacing: -0.025em;
-        color: #111827;
+        color: #111111;
         margin: 0 0 12px;
     }
     .aud-section-title .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -159,7 +159,7 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-section-sub {
         font-size: 1rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.65;
         margin: 0;
     }
@@ -170,7 +170,7 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #FFFFFF !important;
         font-weight: 700;
         font-size: 0.95rem;
@@ -179,14 +179,14 @@ $dbService = getServiceBySlug('seo-audit');
         border-radius: 9999px;
         text-decoration: none;
         white-space: nowrap !important;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32);
+        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.32);
         transition: all 0.25s ease;
         border: none;
         cursor: pointer;
     }
     .aud-btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.45);
+        box-shadow: 0 14px 30px rgba(255, 45, 117, 0.45);
         color: #FFFFFF;
     }
     .aud-btn-primary svg {
@@ -204,8 +204,8 @@ $dbService = getServiceBySlug('seo-audit');
         justify-content: center !important;
         gap: 8px !important;
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.3);
-        color: #C4007A !important;
+        border: 1.5px solid rgba(255, 45, 117, 0.3);
+        color: #FF2D75 !important;
         font-weight: 700;
         font-size: 0.95rem;
         line-height: 1;
@@ -214,11 +214,11 @@ $dbService = getServiceBySlug('seo-audit');
         text-decoration: none;
         white-space: nowrap !important;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 12px rgba(196, 0, 122, 0.04);
+        box-shadow: 0 4px 12px rgba(255, 45, 117, 0.04);
     }
     .aud-btn-secondary:hover {
-        background: #FFF0F7;
-        border-color: #C4007A;
+        background: #FFF2F7;
+        border-color: #FF2D75;
         transform: translateY(-2px);
     }
 
@@ -228,7 +228,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-hero {
         padding: 50px 0 38px;
         position: relative;
-        background: radial-gradient(circle at 85% 15%, rgba(196, 0, 122, 0.08) 0%, transparent 65%);
+        background: radial-gradient(circle at 85% 15%, rgba(255, 45, 117, 0.08) 0%, transparent 65%);
     }
     .aud-hero-grid {
         display: grid;
@@ -248,11 +248,11 @@ $dbService = getServiceBySlug('seo-audit');
         font-weight: 800;
         line-height: 1.15;
         letter-spacing: -0.025em;
-        color: #111827;
+        color: #111111;
         margin: 0 0 14px;
     }
     .aud-hero-title .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -267,7 +267,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-hero-desc {
         font-size: 1.02rem;
         line-height: 1.65;
-        color: #4B5563;
+        color: #4A4A4A;
         margin: 0 0 22px;
     }
 
@@ -293,7 +293,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-check-item svg {
         width: 18px;
         height: 18px;
-        color: #C4007A; /* Dark Pink checkmark */
+        color: #FF2D75; /* Dark Pink checkmark */
         flex-shrink: 0;
         margin-top: 1px;
     }
@@ -311,16 +311,16 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center;
         gap: 14px;
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        border: 1px solid rgba(255, 45, 117, 0.2);
         border-radius: 16px;
         padding: 10px 18px;
-        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.06);
+        box-shadow: 0 6px 18px rgba(255, 45, 117, 0.06);
     }
     .aud-author-avatar {
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #fff;
         display: flex;
         align-items: center;
@@ -334,19 +334,19 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-author-name {
         font-weight: 700;
-        color: #111827;
+        color: #111111;
     }
     .aud-author-meta {
-        color: #6B7280;
+        color: #666666;
     }
 
     /* Hero Form Card */
     .aud-form-card {
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.22);
+        border: 1.5px solid rgba(255, 45, 117, 0.22);
         border-radius: 24px;
         padding: 32px 28px;
-        box-shadow: 0 20px 45px -10px rgba(196, 0, 122, 0.12);
+        box-shadow: 0 20px 45px -10px rgba(255, 45, 117, 0.12);
         position: relative;
     }
     .aud-form-card::before {
@@ -354,19 +354,19 @@ $dbService = getServiceBySlug('seo-audit');
         position: absolute;
         top: 0; left: 0; right: 0;
         height: 5px;
-        background: linear-gradient(90deg, #99005F 0%, #C4007A 50%, #E0398F 100%);
+        background: linear-gradient(90deg, #99005F 0%, #FF2D75 50%, #F65A91 100%);
         border-radius: 24px 24px 0 0;
     }
     .aud-form-title {
         font-size: 1.35rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 6px;
         text-align: center;
     }
     .aud-form-sub {
         font-size: 0.84rem;
-        color: #6B7280;
+        color: #666666;
         text-align: center;
         margin: 0 0 20px;
     }
@@ -377,29 +377,29 @@ $dbService = getServiceBySlug('seo-audit');
         display: block;
         font-size: 0.78rem;
         font-weight: 700;
-        color: #374151;
+        color: #4A4A4A;
         margin-bottom: 4px;
     }
     .aud-form-input, .aud-form-select, .aud-form-textarea {
         width: 100%;
         background: #FFF9FB;
-        border: 1px solid rgba(196, 0, 122, 0.22);
+        border: 1px solid rgba(255, 45, 117, 0.22);
         border-radius: 10px;
         padding: 10px 14px;
         font-size: 0.9rem;
-        color: #111827;
+        color: #111111;
         outline: none;
         transition: all 0.2s ease;
         box-sizing: border-box;
     }
     .aud-form-input:focus, .aud-form-select:focus, .aud-form-textarea:focus {
-        border-color: #C4007A;
+        border-color: #FF2D75;
         background: #FFFFFF;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.15);
+        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.15);
     }
     .aud-form-submit {
         width: 100%;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #FFFFFF;
         font-weight: 700;
         font-size: 0.96rem;
@@ -407,7 +407,7 @@ $dbService = getServiceBySlug('seo-audit');
         border-radius: 9999px;
         border: none;
         cursor: pointer;
-        box-shadow: 0 8px 20px rgba(196, 0, 122, 0.35);
+        box-shadow: 0 8px 20px rgba(255, 45, 117, 0.35);
         transition: all 0.2s ease;
         display: flex;
         align-items: center;
@@ -416,7 +416,7 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-form-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 12px 26px rgba(196, 0, 122, 0.5);
+        box-shadow: 0 12px 26px rgba(255, 45, 117, 0.5);
     }
     .aud-form-privacy {
         font-size: 0.72rem;
@@ -430,10 +430,10 @@ $dbService = getServiceBySlug('seo-audit');
        ============================================================ */
     .aud-stats-section {
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.12);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.12);
+        border-top: 1px solid rgba(255, 45, 117, 0.12);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.12);
         padding: 26px 0;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 4px 16px rgba(255, 45, 117, 0.03);
     }
     .aud-stats-grid {
         display: grid;
@@ -455,12 +455,12 @@ $dbService = getServiceBySlug('seo-audit');
         line-height: 1.1;
         margin-bottom: 4px;
         letter-spacing: -0.02em;
-        color: #C4007A;
+        color: #FF2D75;
     }
     .aud-stat-lbl {
         font-size: 0.82rem;
         font-weight: 700;
-        color: #6B7280;
+        color: #666666;
         text-transform: uppercase;
         letter-spacing: 0.06em;
     }
@@ -476,10 +476,10 @@ $dbService = getServiceBySlug('seo-audit');
         max-width: 920px;
         margin: 0 auto;
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.18);
+        border: 1.5px solid rgba(255, 45, 117, 0.18);
         border-radius: 24px;
         padding: 42px 32px;
-        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.06);
+        box-shadow: 0 16px 36px rgba(255, 45, 117, 0.06);
     }
 
     /* ============================================================
@@ -505,17 +505,17 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-problem-card {
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.14);
+        border: 1px solid rgba(255, 45, 117, 0.14);
         border-radius: 18px;
         padding: 28px 24px;
         transition: all 0.25s ease;
         position: relative;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 4px 16px rgba(255, 45, 117, 0.03);
     }
     .aud-problem-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 16px 34px rgba(196, 0, 122, 0.12);
-        border-color: #C4007A;
+        box-shadow: 0 16px 34px rgba(255, 45, 117, 0.12);
+        border-color: #FF2D75;
     }
     .aud-problem-icon {
         width: 48px;
@@ -525,9 +525,9 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center;
         justify-content: center;
         margin-bottom: 18px;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.2);
     }
     .aud-problem-icon svg {
         width: 24px;
@@ -536,12 +536,12 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-problem-title {
         font-size: 1.15rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
     }
     .aud-problem-desc {
         font-size: 0.9rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.6;
         margin: 0;
     }
@@ -552,8 +552,8 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-types-section {
         padding: 56px 0 48px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.1);
+        border-top: 1px solid rgba(255, 45, 117, 0.1);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.1);
     }
     .aud-types-grid {
         display: grid;
@@ -572,7 +572,7 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-type-card {
         background: #FFF9FB;
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         border-radius: 18px;
         padding: 26px 22px;
         transition: all 0.25s ease;
@@ -582,8 +582,8 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-type-card:hover {
         background: #FFFFFF;
         transform: translateY(-4px);
-        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.12);
-        border-color: #C4007A;
+        box-shadow: 0 16px 36px rgba(255, 45, 117, 0.12);
+        border-color: #FF2D75;
     }
     .aud-type-badge {
         display: inline-block;
@@ -594,20 +594,20 @@ $dbService = getServiceBySlug('seo-audit');
         border-radius: 9999px;
         margin-bottom: 10px;
         align-self: flex-start;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.25);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.25);
     }
 
     .aud-type-title {
         font-size: 1.15rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
     }
     .aud-type-desc {
         font-size: 0.88rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.6;
         margin-bottom: 16px;
         flex-grow: 1;
@@ -618,7 +618,7 @@ $dbService = getServiceBySlug('seo-audit');
         gap: 6px;
         font-size: 0.84rem;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
         text-decoration: none;
         margin-top: auto;
     }
@@ -649,16 +649,16 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-why-card {
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         border-radius: 18px;
         padding: 28px 24px;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 4px 16px rgba(255, 45, 117, 0.03);
     }
     .aud-why-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 16px 32px rgba(196, 0, 122, 0.12);
-        border-color: #C4007A;
+        box-shadow: 0 16px 32px rgba(255, 45, 117, 0.12);
+        border-color: #FF2D75;
     }
     .aud-why-icon {
         width: 48px;
@@ -668,20 +668,20 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center;
         justify-content: center;
         margin-bottom: 16px;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.2);
         font-size: 1.25rem;
     }
     .aud-why-title {
         font-size: 1.15rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
     }
     .aud-why-desc {
         font-size: 0.9rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.6;
         margin: 0;
     }
@@ -692,8 +692,8 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-process-section {
         padding: 60px 0 52px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.1);
+        border-top: 1px solid rgba(255, 45, 117, 0.1);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.1);
         position: relative;
     }
     .aud-process-grid {
@@ -714,18 +714,18 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-proc-card {
         background: #FFF9FB;
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
+        border: 1.5px solid rgba(255, 45, 117, 0.16);
         border-radius: 18px;
         padding: 30px 24px;
         position: relative;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 18px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 4px 18px rgba(255, 45, 117, 0.03);
     }
     .aud-proc-card:hover {
         background: #FFFFFF;
-        border-color: #C4007A;
+        border-color: #FF2D75;
         transform: translateY(-4px);
-        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.14);
+        box-shadow: 0 16px 36px rgba(255, 45, 117, 0.14);
     }
     .aud-proc-num-wrap {
         display: inline-flex;
@@ -734,9 +734,9 @@ $dbService = getServiceBySlug('seo-audit');
         width: 44px;
         height: 44px;
         border-radius: 12px;
-        background: #FFF0F7;
-        border: 1.5px solid rgba(196, 0, 122, 0.3);
-        color: #C4007A;
+        background: #FFF2F7;
+        border: 1.5px solid rgba(255, 45, 117, 0.3);
+        color: #FF2D75;
         font-size: 1.15rem;
         font-weight: 900;
         margin-bottom: 16px;
@@ -744,12 +744,12 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-proc-title {
         font-size: 1.15rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
     }
     .aud-proc-desc {
         font-size: 0.88rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.6;
         margin: 0;
     }
@@ -777,19 +777,19 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-tool-card {
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.14);
+        border: 1px solid rgba(255, 45, 117, 0.14);
         border-radius: 18px;
         padding: 26px 22px;
         display: flex;
         align-items: flex-start;
         gap: 16px;
         transition: all 0.25s ease;
-        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 4px 14px rgba(255, 45, 117, 0.03);
     }
     .aud-tool-card:hover {
         transform: translateY(-3px);
-        box-shadow: 0 14px 28px rgba(196, 0, 122, 0.1);
-        border-color: #C4007A;
+        box-shadow: 0 14px 28px rgba(255, 45, 117, 0.1);
+        border-color: #FF2D75;
     }
     .aud-tool-icon {
         width: 44px;
@@ -799,20 +799,20 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.2);
         font-size: 1.25rem;
     }
     .aud-tool-title {
         font-size: 1.05rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 6px;
     }
     .aud-tool-desc {
         font-size: 0.86rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.55;
         margin: 0;
     }
@@ -823,8 +823,8 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-results-section {
         padding: 56px 0 48px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.1);
+        border-top: 1px solid rgba(255, 45, 117, 0.1);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.1);
     }
     .aud-results-grid {
         display: grid;
@@ -844,7 +844,7 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-res-card {
         background: #FFF9FB;
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         border-radius: 18px;
         padding: 28px 24px;
         transition: all 0.25s ease;
@@ -852,8 +852,8 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-res-card:hover {
         background: #FFFFFF;
         transform: translateY(-4px);
-        box-shadow: 0 16px 32px rgba(196, 0, 122, 0.12);
-        border-color: #C4007A;
+        box-shadow: 0 16px 32px rgba(255, 45, 117, 0.12);
+        border-color: #FF2D75;
     }
     .aud-res-header {
         display: flex;
@@ -869,19 +869,19 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center;
         justify-content: center;
         font-size: 1.2rem;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.2);
     }
     .aud-res-title {
         font-size: 1.12rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0;
     }
     .aud-res-desc {
         font-size: 0.88rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.6;
         margin: 0;
     }
@@ -907,12 +907,12 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-faq-left-title {
         font-size: clamp(2rem, 3.4vw, 2.7rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         line-height: 1.2;
         margin: 0 0 16px;
     }
     .aud-faq-left-title .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -925,7 +925,7 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-faq-left-text {
         font-size: 0.95rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.7;
         margin-bottom: 16px;
     }
@@ -933,16 +933,16 @@ $dbService = getServiceBySlug('seo-audit');
     /* FAQ Accordion Styles */
     .aud-faq-item {
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.16);
+        border: 1px solid rgba(255, 45, 117, 0.16);
         border-radius: 14px;
         margin-bottom: 12px;
         overflow: hidden;
         transition: all 0.2s ease;
-        box-shadow: 0 2px 8px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 2px 8px rgba(255, 45, 117, 0.03);
     }
     .aud-faq-item.active {
-        border-color: #C4007A;
-        box-shadow: 0 8px 24px rgba(196, 0, 122, 0.12);
+        border-color: #FF2D75;
+        box-shadow: 0 8px 24px rgba(255, 45, 117, 0.12);
     }
     .aud-faq-btn {
         width: 100%;
@@ -957,19 +957,19 @@ $dbService = getServiceBySlug('seo-audit');
         cursor: pointer;
         font-size: 0.96rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         transition: color 0.2s ease;
     }
     .aud-faq-btn:hover {
-        color: #C4007A;
+        color: #FF2D75;
     }
     .aud-faq-icon {
         width: 28px;
         height: 28px;
         border-radius: 50%;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.25);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.25);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -979,15 +979,15 @@ $dbService = getServiceBySlug('seo-audit');
         transition: transform 0.2s ease, background 0.2s ease;
     }
     .aud-faq-item.active .aud-faq-icon {
-        background: #C4007A;
+        background: #FF2D75;
         color: #FFFFFF;
-        border-color: #C4007A;
+        border-color: #FF2D75;
         transform: rotate(45deg);
     }
     .aud-faq-content {
         padding: 0 20px 18px;
         font-size: 0.88rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.65;
         display: none;
     }
@@ -1001,7 +1001,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-insights-section {
         padding: 56px 0 48px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
+        border-top: 1px solid rgba(255, 45, 117, 0.1);
     }
     .aud-insights-grid {
         display: grid;
@@ -1020,18 +1020,18 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-post-card {
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.14);
+        border: 1px solid rgba(255, 45, 117, 0.14);
         border-radius: 18px;
         overflow: hidden;
         transition: all 0.25s ease;
         display: flex;
         flex-direction: column;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.03);
+        box-shadow: 0 4px 16px rgba(255, 45, 117, 0.03);
     }
     .aud-post-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 16px 34px rgba(196, 0, 122, 0.12);
-        border-color: #C4007A;
+        box-shadow: 0 16px 34px rgba(255, 45, 117, 0.12);
+        border-color: #FF2D75;
     }
     .aud-post-thumb {
         height: 170px;
@@ -1040,8 +1040,8 @@ $dbService = getServiceBySlug('seo-audit');
         align-items: center;
         justify-content: center;
         font-size: 2.5rem;
-        background: linear-gradient(135deg, #FFF0F7 0%, #FCE7F3 100%);
-        color: #C4007A;
+        background: linear-gradient(135deg, #FFF2F7 0%, #FCE7F3 100%);
+        color: #FF2D75;
     }
 
     .aud-post-body {
@@ -1053,7 +1053,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-post-cat {
         font-size: 0.72rem;
         font-weight: 800;
-        color: #C4007A;
+        color: #FF2D75;
         text-transform: uppercase;
         letter-spacing: 0.06em;
         margin-bottom: 6px;
@@ -1061,13 +1061,13 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-post-title {
         font-size: 1.05rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 8px;
         line-height: 1.4;
     }
     .aud-post-excerpt {
         font-size: 0.86rem;
-        color: #6B7280;
+        color: #666666;
         line-height: 1.55;
         margin-bottom: 16px;
         flex-grow: 1;
@@ -1078,7 +1078,7 @@ $dbService = getServiceBySlug('seo-audit');
         justify-content: space-between;
         font-size: 0.76rem;
         color: #9CA3AF;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
+        border-top: 1px solid rgba(255, 45, 117, 0.1);
         padding-top: 12px;
         margin-bottom: 12px;
     }
@@ -1088,7 +1088,7 @@ $dbService = getServiceBySlug('seo-audit');
         gap: 6px;
         font-size: 0.84rem;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
         text-decoration: none;
     }
     .aud-post-btn:hover {
@@ -1101,7 +1101,7 @@ $dbService = getServiceBySlug('seo-audit');
        ============================================================ */
     .aud-cta-section {
         padding: 68px 0 60px;
-        background: linear-gradient(135deg, #850053 0%, #C4007A 50%, #E0398F 100%);
+        background: linear-gradient(135deg, #850053 0%, #FF2D75 50%, #F65A91 100%);
         color: #FFFFFF;
         text-align: center;
         position: relative;
@@ -1146,7 +1146,7 @@ $dbService = getServiceBySlug('seo-audit');
     }
     .aud-btn-cta-white {
         background: #FFFFFF !important;
-        color: #C4007A !important;
+        color: #FF2D75 !important;
         font-weight: 800;
         font-size: 0.98rem;
         padding: 14px 32px;
@@ -1162,7 +1162,7 @@ $dbService = getServiceBySlug('seo-audit');
     .aud-btn-cta-white:hover {
         transform: translateY(-2px);
         box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
-        background: #FFF0F7 !important;
+        background: #FFF2F7 !important;
     }
     .aud-btn-cta-outline {
         background: rgba(255, 255, 255, 0.12) !important;
@@ -1204,7 +1204,7 @@ $dbService = getServiceBySlug('seo-audit');
 
                     <h1 class="aud-hero-title">
                         Fix SEO Issues Before They Cost You Leads with an 
-                        <span class="accent">Expert SEO Audit<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        <span class="accent">Expert SEO Audit<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h1>
 
                     <p class="aud-hero-desc">
@@ -1349,14 +1349,14 @@ $dbService = getServiceBySlug('seo-audit');
 
                 <h2 class="aud-section-title">
                     Book Free SEO Audit Services Today for 
-                    <span class="accent">Faster and Smarter Growth<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">Faster and Smarter Growth<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
 
                 <p class="aud-section-sub" style="max-width: 780px; margin: 0 auto 24px;">
                     Are stagnant rankings and invisible traffic patterns keeping your digital presence in the shadows? WebTecMart brings you result-driven SEO audit services engineered to help businesses in Delhi NCR, Pan-India, and across the globe achieve sustainable growth in an intensely competitive digital landscape.
                 </p>
 
-                <p style="font-size: 0.95rem; color: #4B5563; line-height: 1.65; max-width: 800px; margin: 0 auto 28px;">
+                <p style="font-size: 0.95rem; color: #4A4A4A; line-height: 1.65; max-width: 800px; margin: 0 auto 28px;">
                     Our forensic diagnostic takes a deep look into each and every component of your website to identify the hidden flaws, crawl bottlenecks, and indexing gaps that hold your website’s search visibility back. Whether it is technical server health, Core Web Vitals, on-page taxonomy, or backlink profile security, our audits provide complete transparency, strategic clarity, and a clear path to market leadership.
                 </p>
 
@@ -1386,7 +1386,7 @@ $dbService = getServiceBySlug('seo-audit');
                 </div>
                 <h2 class="aud-section-title">
                     Why Your Business Needs a Leading SEO Audit Company 
-                    <span class="accent">Right Now<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">Right Now<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     Simply having a website is not enough. When your site is not found by search engines, you lose high-intent customers every day. Your website might be silently losing revenue right now due to these common bottlenecks:
@@ -1478,7 +1478,7 @@ $dbService = getServiceBySlug('seo-audit');
                 </div>
                 <h2 class="aud-section-title">
                     Fix Your Website Issues Instantly with 
-                    <span class="accent">Complete SEO Audit Services<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">Complete SEO Audit Services<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     Your rankings and conversion rates can be silently sabotaged by hidden technical bugs, unoptimized code, or outdated strategies. Explore our specialized audit diagnostics:
@@ -1567,7 +1567,7 @@ $dbService = getServiceBySlug('seo-audit');
                 </div>
                 <h2 class="aud-section-title">
                     Hire a Results-Driven SEO Audit Agency That 
-                    <span class="accent">Delivers Real Growth<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">Delivers Real Growth<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     Instead of guessing what is holding you back, our structured website audit reveals the exact technical and architectural bottlenecks throttling your organic revenue:
@@ -1660,7 +1660,7 @@ $dbService = getServiceBySlug('seo-audit');
                 </div>
                 <h2 class="aud-section-title">
                     Boost Rankings With a Website SEO Audit Company's 
-                    <span class="accent">Expert Audit Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">Expert Audit Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     Your website rankings require a clear, structured approach backed by in-depth analysis. We follow a proven systematic process designed to identify and solve every issue:
@@ -1741,7 +1741,7 @@ $dbService = getServiceBySlug('seo-audit');
                 </div>
                 <h2 class="aud-section-title">
                     Drive More Leads with a Results-Oriented 
-                    <span class="accent">SEO Audit Company in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">SEO Audit Company in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     In Delhi NCR and competitive Indian markets, websites do not fail from lack of effort, but from incomplete diagnostics. We combine advanced enterprise tools with human analytical expertise:
@@ -1827,7 +1827,7 @@ $dbService = getServiceBySlug('seo-audit');
                 </div>
                 <h2 class="aud-section-title">
                     Get Clear Insights &amp; Real Results with an 
-                    <span class="accent">SEO Performance Audit<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    <span class="accent">SEO Performance Audit<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     Guessing your SEO performance is not enough. With our audit services, we don't just identify issues but define outcomes that directly impact your website's growth. Here is what we deliver:
@@ -1904,7 +1904,7 @@ $dbService = getServiceBySlug('seo-audit');
 
             </div>
 
-            <p style="text-align: center; font-size: 0.94rem; color: #6B7280; margin-bottom: 24px;">
+            <p style="text-align: center; font-size: 0.94rem; color: #666666; margin-bottom: 24px;">
                 Through our comprehensive range of audit services, we ensure your SEO foundation is strong and ready for long-term organic dominance.
             </p>
 
@@ -1934,7 +1934,7 @@ $dbService = getServiceBySlug('seo-audit');
 
                     <h2 class="aud-faq-left-title">
                         End Your SEO Struggles with Top-Rated 
-                        <span class="accent">SEO Audit Services<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        <span class="accent">SEO Audit Services<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h2>
 
                     <p class="aud-faq-left-text">
@@ -1945,7 +1945,7 @@ $dbService = getServiceBySlug('seo-audit');
                         Based in Delhi NCR, India, and serving clients worldwide, we ensure your SEO foundation is strictly aligned with the latest Google algorithm guidelines. Our structured audit approach helps you move forward with confidence and an actionable roadmap that turns your website into a high-performing lead generation asset.
                     </p>
 
-                    <p class="aud-faq-left-text" style="font-weight: 700; color: #111827;">
+                    <p class="aud-faq-left-text" style="font-weight: 700; color: #111111;">
                         Ready to grow your website to the top of search results? Get a comprehensive SEO audit report today.
                     </p>
 
@@ -1961,8 +1961,8 @@ $dbService = getServiceBySlug('seo-audit');
 
                 <!-- Right Column: Accordion -->
                 <div>
-                    <h3 style="font-size: 1.6rem; font-weight: 800; color: #111827; margin: 0 0 20px;">
-                        Frequently Asked <span style="color: #C4007A;">Questions</span>
+                    <h3 style="font-size: 1.6rem; font-weight: 800; color: #111111; margin: 0 0 20px;">
+                        Frequently Asked <span style="color: #FF2D75;">Questions</span>
                     </h3>
 
                     <div class="aud-faq-item active">
@@ -2033,7 +2033,7 @@ $dbService = getServiceBySlug('seo-audit');
                     <span>EXPERT KNOWLEDGE</span>
                 </div>
                 <h2 class="aud-section-title">
-                    Latest <span class="accent">Insights &amp; SEO Guides<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Latest <span class="accent">Insights &amp; SEO Guides<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="aud-section-sub">
                     Stay ahead of algorithm updates and search best practices with actionable guides from our search engineering team:

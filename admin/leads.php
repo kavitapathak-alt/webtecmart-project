@@ -49,19 +49,19 @@ require_once __DIR__ . '/templates/header.php';
     .leads-header-row h1 {
         font-size: clamp(1.4rem, 2.5vw, 1.85rem) !important;
         font-weight: 800 !important;
-        color: #0F172A;
+        color: #111111;
         margin: 0 0 4px !important;
         letter-spacing: -0.02em;
     }
     .leads-header-row p {
         font-size: 0.95rem !important;
-        color: #64748B;
+        color: #4A4A4A;
         margin: 0 !important;
     }
 
     .leads-toolbar {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 14px;
         padding: 16px 20px;
         display: flex;
@@ -90,14 +90,14 @@ require_once __DIR__ . '/templates/header.php';
         width: 100%;
         padding: 10px 16px 10px 40px;
         border-radius: 10px;
-        border: 1.5px solid #E2E8F0;
+        border: 1.5px solid #EAEAEA;
         font-size: 0.9rem;
         outline: none;
         transition: all 0.2s ease;
     }
     .leads-search-input:focus {
-        border-color: #C4007A;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.12);
+        border-color: #FF2D75;
+        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.12);
     }
 
     .leads-export-btn {
@@ -116,14 +116,14 @@ require_once __DIR__ . '/templates/header.php';
     }
     .leads-export-btn:hover {
         background: #F8FAFC;
-        border-color: #0F172A;
-        color: #0F172A;
+        border-color: #111111;
+        color: #111111;
     }
 
     /* Table styles */
     .leads-card {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
@@ -139,8 +139,8 @@ require_once __DIR__ . '/templates/header.php';
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        color: #64748B;
-        border-bottom: 1px solid #E2E8F0;
+        color: #4A4A4A;
+        border-bottom: 1px solid #EAEAEA;
         white-space: nowrap;
     }
     .leads-table td {
@@ -148,7 +148,7 @@ require_once __DIR__ . '/templates/header.php';
         vertical-align: top;
         font-size: 0.88rem;
         border-bottom: 1px solid #F1F5F9;
-        color: #1E293B;
+        color: #111111;
     }
     .leads-table tr:hover td {
         background: #FCFAFB;
@@ -158,8 +158,8 @@ require_once __DIR__ . '/templates/header.php';
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        background: #FCE8F3;
-        color: #C4007A;
+        background: #FFF2F7;
+        color: #FF2D75;
         font-weight: 800;
         font-size: 0.95rem;
         display: grid;
@@ -170,8 +170,8 @@ require_once __DIR__ . '/templates/header.php';
         display: inline-flex;
         padding: 3px 10px;
         border-radius: 9999px;
-        background: #FFF0F7;
-        color: #C4007A;
+        background: #FFF2F7;
+        color: #FF2D75;
         font-size: 0.76rem;
         font-weight: 700;
     }
@@ -188,7 +188,7 @@ require_once __DIR__ . '/templates/header.php';
         transition: all 0.2s ease;
     }
     .lead-action-icon:hover {
-        background: #C4007A;
+        background: #FF2D75;
         color: #FFFFFF;
     }
 
@@ -223,18 +223,18 @@ require_once __DIR__ . '/templates/header.php';
         <input type="text" id="leadSearch" class="leads-search-input" placeholder="Search by name, email, phone, company..." aria-label="Search leads">
     </div>
     <div>
-        <span style="font-size: 0.825rem; font-weight: 700; color: #64748B;">Total Records: <strong><?= count($leads) ?></strong></span>
+        <span style="font-size: 0.825rem; font-weight: 700; color: #4A4A4A;">Total Records: <strong><?= count($leads) ?></strong></span>
     </div>
 </div>
 
 <div class="leads-card">
     <?php if (empty($leads)): ?>
         <div style="padding: 60px 24px; text-align: center;">
-            <div style="width: 64px; height: 64px; border-radius: 20px; background: #FFF0F7; color: #C4007A; display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 14px;">
+            <div style="width: 64px; height: 64px; border-radius: 20px; background: #FFF2F7; color: #FF2D75; display: inline-flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 14px;">
                 <i class="bi bi-inbox"></i>
             </div>
-            <h3 style="font-size: 1.1rem; font-weight: 800; color: #0F172A; margin: 0 0 6px;">No leads recorded yet</h3>
-            <p style="font-size: 0.9rem; color: #64748B; margin: 0;">Whenever visitors submit a proposal or consultation form, they will appear here instantly.</p>
+            <h3 style="font-size: 1.1rem; font-weight: 800; color: #111111; margin: 0 0 6px;">No leads recorded yet</h3>
+            <p style="font-size: 0.9rem; color: #4A4A4A; margin: 0;">Whenever visitors submit a proposal or consultation form, they will appear here instantly.</p>
         </div>
     <?php else: ?>
         <!-- Desktop Table -->
@@ -266,9 +266,9 @@ require_once __DIR__ . '/templates/header.php';
                                 <div style="display: flex; align-items: center; gap: 12px;">
                                     <div class="leads-avatar-circle"><?= e($initial((string) $l['name'])) ?></div>
                                     <div>
-                                        <div style="font-weight: 700; color: #0F172A;"><?= e($l['name']) ?></div>
+                                        <div style="font-weight: 700; color: #111111;"><?= e($l['name']) ?></div>
                                         <?php if (!empty($l['company'])): ?>
-                                            <div style="font-size: 0.78rem; color: #64748B;"><?= e($l['company']) ?></div>
+                                            <div style="font-size: 0.78rem; color: #4A4A4A;"><?= e($l['company']) ?></div>
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -281,7 +281,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                                 <?php if (!empty($l['phone'])): ?>
                                     <div style="margin-top: 4px;">
-                                        <a href="tel:<?= e($l['phone']) ?>" style="color: #64748B; text-decoration: none; font-size: 0.825rem;">
+                                        <a href="tel:<?= e($l['phone']) ?>" style="color: #4A4A4A; text-decoration: none; font-size: 0.825rem;">
                                             <i class="bi bi-telephone me-1"></i><?= e($l['phone']) ?>
                                         </a>
                                     </div>
@@ -304,7 +304,7 @@ require_once __DIR__ . '/templates/header.php';
                                     <?= !empty($l['message']) ? e($l['message']) : '<span style="color:#94A3B8">—</span>' ?>
                                 </div>
                             </td>
-                            <td style="white-space: nowrap; color: #64748B; font-size: 0.825rem;">
+                            <td style="white-space: nowrap; color: #4A4A4A; font-size: 0.825rem;">
                                 <?= date('d M Y, h:i A', strtotime($l['created_at'])) ?>
                             </td>
                             <td>
@@ -342,8 +342,8 @@ require_once __DIR__ . '/templates/header.php';
                         <div style="display: flex; gap: 10px; align-items: center;">
                             <div class="leads-avatar-circle"><?= e($initial((string) $l['name'])) ?></div>
                             <div>
-                                <div style="font-weight: 800; color: #0F172A;"><?= e($l['name']) ?></div>
-                                <div style="font-size: 0.78rem; color: #64748B;"><?= date('d M Y, h:i A', strtotime($l['created_at'])) ?></div>
+                                <div style="font-weight: 800; color: #111111;"><?= e($l['name']) ?></div>
+                                <div style="font-size: 0.78rem; color: #4A4A4A;"><?= date('d M Y, h:i A', strtotime($l['created_at'])) ?></div>
                             </div>
                         </div>
                         <?php if (!empty($l['service'])): ?>
@@ -352,7 +352,7 @@ require_once __DIR__ . '/templates/header.php';
                     </div>
 
                     <div style="font-size: 0.875rem; margin-bottom: 8px;">
-                        <a href="mailto:<?= e($l['email']) ?>" style="color: #C4007A; text-decoration: none; font-weight: 600;">
+                        <a href="mailto:<?= e($l['email']) ?>" style="color: #FF2D75; text-decoration: none; font-weight: 600;">
                             <i class="bi bi-envelope me-1"></i><?= e($l['email']) ?>
                         </a>
                     </div>

@@ -20,8 +20,8 @@ $bodyCopy  = $dbService['body'] ?? '';
        ============================================================ */
     .ev-page {
         width: 100%;
-        background: #FBF8F1;
-        color: #1F1B2A;
+        background: #FFFFFF;
+        color: #111111;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         overflow: hidden;
     }
@@ -37,7 +37,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-hero {
         padding: 48px 0 36px;
         position: relative;
-        background: radial-gradient(circle at 80% 20%, rgba(196, 0, 122, 0.05) 0%, transparent 60%);
+        background: radial-gradient(circle at 80% 20%, rgba(255, 45, 117, 0.05) 0%, transparent 60%);
     }
     .ev-hero-grid {
         display: grid;
@@ -56,9 +56,9 @@ $bodyCopy  = $dbService['body'] ?? '';
         display: inline-flex;
         align-items: center;
         gap: 7px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        color: #C4007A;
+        background: rgba(255, 45, 117, 0.08);
+        border: 1px solid rgba(255, 45, 117, 0.2);
+        color: #FF2D75;
         font-size: 0.74rem;
         font-weight: 800;
         letter-spacing: 0.08em;
@@ -70,7 +70,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-eyebrow svg {
         width: 13px;
         height: 13px;
-        color: #C4007A;
+        color: #FF2D75;
     }
 
     .ev-hero-title {
@@ -78,11 +78,11 @@ $bodyCopy  = $dbService['body'] ?? '';
         font-weight: 800;
         line-height: 1.15;
         letter-spacing: -0.025em;
-        color: #111827;
+        color: #111111;
         margin: 0 0 14px;
     }
     .ev-hero-title .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -105,7 +105,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-hero-desc {
         font-size: 0.98rem;
         line-height: 1.68;
-        color: #4B5563;
+        color: #4A4A4A;
         margin: 0 0 24px;
         max-width: 640px;
     }
@@ -122,7 +122,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #FFFFFF !important;
         font-weight: 700;
         font-size: 0.95rem;
@@ -131,12 +131,12 @@ $bodyCopy  = $dbService['body'] ?? '';
         border-radius: 9999px;
         text-decoration: none;
         white-space: nowrap !important;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32);
+        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.32);
         transition: all 0.25s ease;
     }
     .ev-btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.45);
+        box-shadow: 0 14px 30px rgba(255, 45, 117, 0.45);
         color: #FFFFFF;
     }
     .ev-btn-primary svg {
@@ -154,8 +154,8 @@ $bodyCopy  = $dbService['body'] ?? '';
         justify-content: center !important;
         gap: 8px !important;
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.25);
-        color: #C4007A !important;
+        border: 1.5px solid rgba(255, 45, 117, 0.25);
+        color: #FF2D75 !important;
         font-weight: 700;
         font-size: 0.95rem;
         line-height: 1;
@@ -166,8 +166,8 @@ $bodyCopy  = $dbService['body'] ?? '';
         transition: all 0.25s ease;
     }
     .ev-btn-secondary:hover {
-        background: rgba(196, 0, 122, 0.06);
-        border-color: #C4007A;
+        background: rgba(255, 45, 117, 0.06);
+        border-color: #FF2D75;
         transform: translateY(-2px);
     }
     .ev-btn-secondary svg {
@@ -179,20 +179,20 @@ $bodyCopy  = $dbService['body'] ?? '';
     /* Trust Footnote in Hero */
     .ev-hero-footnote {
         font-size: 0.82rem;
-        color: #6B7280;
+        color: #666666;
         line-height: 1.5;
         margin-top: 14px;
-        border-top: 1px dashed rgba(196, 0, 122, 0.15);
+        border-top: 1px dashed rgba(255, 45, 117, 0.15);
         padding-top: 12px;
     }
 
     /* SERP Mockup Card on Right */
     .ev-serp-mockup {
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.15);
+        border: 1.5px solid rgba(255, 45, 117, 0.15);
         border-radius: 24px;
         padding: 26px;
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.08);
+        box-shadow: 0 16px 40px rgba(255, 45, 117, 0.08);
         position: relative;
     }
     .ev-serp-mockup::before {
@@ -202,7 +202,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
+        background: linear-gradient(90deg, #FF2D75, #F65A91);
         border-radius: 24px 24px 0 0;
     }
     .ev-mockup-top {
@@ -227,7 +227,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-serp-url {
         font-size: 0.76rem;
-        color: #4B5563;
+        color: #4A4A4A;
         margin-bottom: 4px;
         display: flex;
         align-items: center;
@@ -270,7 +270,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         margin-bottom: 0;
     }
     .ev-rich-row strong {
-        color: #0F172A;
+        color: #181818;
     }
     .ev-metrics-row {
         display: grid;
@@ -278,11 +278,11 @@ $bodyCopy  = $dbService['body'] ?? '';
         gap: 10px;
         margin-top: 16px;
         padding-top: 14px;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
+        border-top: 1px solid rgba(255, 45, 117, 0.1);
     }
     .ev-metric-chip {
         background: #FFF5FA;
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         border-radius: 10px;
         padding: 8px 10px;
         text-align: center;
@@ -290,13 +290,13 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-metric-chip .v {
         font-size: 1.1rem;
         font-weight: 800;
-        color: #C4007A;
+        color: #FF2D75;
         line-height: 1.1;
     }
     .ev-metric-chip .l {
         font-size: 0.68rem;
         font-weight: 600;
-        color: #6B7280;
+        color: #666666;
         margin-top: 2px;
     }
 
@@ -310,12 +310,12 @@ $bodyCopy  = $dbService['body'] ?? '';
         font-size: clamp(1.75rem, 3.2vw, 2.5rem);
         font-weight: 800;
         line-height: 1.25;
-        color: #111827;
+        color: #111111;
         margin: 0 0 12px;
         letter-spacing: -0.02em;
     }
     .ev-section-title .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -328,7 +328,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-section-sub {
         font-size: 0.96rem;
-        color: #6B7280;
+        color: #666666;
         line-height: 1.6;
         margin: 0;
     }
@@ -337,8 +337,8 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-pillars-section {
         padding: 44px 0 36px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
+        border-top: 1px solid rgba(255, 45, 117, 0.08);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
     }
     .ev-pillars-grid {
         display: grid;
@@ -353,7 +353,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-pillar-card {
         background: #FFF9FB;
-        border: 1.5px solid rgba(196, 0, 122, 0.12);
+        border: 1.5px solid rgba(255, 45, 117, 0.12);
         border-radius: 18px;
         padding: 24px;
         transition: all 0.3s ease;
@@ -362,15 +362,15 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-pillar-card:hover {
         transform: translateY(-4px);
-        border-color: #C4007A;
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.1);
+        border-color: #FF2D75;
+        box-shadow: 0 14px 30px rgba(255, 45, 117, 0.1);
         background: #FFFFFF;
     }
     .ev-pillar-num {
         font-size: 0.78rem;
         font-weight: 800;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.1);
+        color: #FF2D75;
+        background: rgba(255, 45, 117, 0.1);
         width: 32px;
         height: 32px;
         border-radius: 10px;
@@ -381,13 +381,13 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-pillar-card h4 {
         font-size: 1.1rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
         line-height: 1.3;
     }
     .ev-pillar-card p {
         font-size: 0.88rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.6;
         margin: 0;
         flex-grow: 1;
@@ -396,7 +396,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     /* ===== EVENT LIFECYCLE TIMELINE ===== */
     .ev-lifecycle-section {
         padding: 44px 0 36px;
-        background: #FBF8F1;
+        background: #FFFFFF;
     }
     .ev-lifecycle-grid {
         display: grid;
@@ -408,7 +408,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-life-card {
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.12);
+        border: 1.5px solid rgba(255, 45, 117, 0.12);
         border-radius: 20px;
         padding: 26px;
         position: relative;
@@ -416,8 +416,8 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-life-tag {
         font-size: 0.72rem;
         font-weight: 800;
-        color: #C4007A;
-        background: #FFF0F7;
+        color: #FF2D75;
+        background: #FFF2F7;
         padding: 4px 10px;
         border-radius: 6px;
         display: inline-block;
@@ -426,7 +426,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-life-card h4 {
         font-size: 1.15rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
     }
     .ev-life-card ul {
@@ -436,7 +436,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-life-card li {
         font-size: 0.86rem;
-        color: #4B5563;
+        color: #4A4A4A;
         padding-left: 20px;
         position: relative;
         margin-bottom: 8px;
@@ -446,7 +446,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         content: '✓';
         position: absolute;
         left: 0;
-        color: #C4007A;
+        color: #FF2D75;
         font-weight: 800;
     }
 
@@ -454,12 +454,12 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-cases-section {
         padding: 44px 0 36px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
+        border-top: 1px solid rgba(255, 45, 117, 0.08);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
     }
     .ev-case-card {
         background: linear-gradient(135deg, #FFF9FB 0%, #FFFFFF 100%);
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
+        border: 1.5px solid rgba(255, 45, 117, 0.16);
         border-radius: 24px;
         padding: 32px;
         margin-bottom: 24px;
@@ -479,8 +479,8 @@ $bodyCopy  = $dbService['body'] ?? '';
         gap: 6px;
         font-size: 0.72rem;
         font-weight: 800;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.08);
+        color: #FF2D75;
+        background: rgba(255, 45, 117, 0.08);
         padding: 4px 12px;
         border-radius: 9999px;
         margin-bottom: 10px;
@@ -488,13 +488,13 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-case-card h3 {
         font-size: 1.45rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 10px;
         line-height: 1.25;
     }
     .ev-case-card p {
         font-size: 0.92rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.65;
         margin: 0 0 16px;
     }
@@ -505,7 +505,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-stat-box {
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.15);
+        border: 1.5px solid rgba(255, 45, 117, 0.15);
         border-radius: 14px;
         padding: 14px;
         text-align: center;
@@ -513,29 +513,29 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-stat-box .val {
         font-size: 1.5rem;
         font-weight: 800;
-        color: #C4007A;
+        color: #FF2D75;
         line-height: 1.1;
     }
     .ev-stat-box .lbl {
         font-size: 0.74rem;
         font-weight: 600;
-        color: #6B7280;
+        color: #666666;
         margin-top: 4px;
     }
 
     /* ===== AUDIT & ENQUIRY FORM ===== */
     .ev-form-section {
         padding: 44px 0 48px;
-        background: #FBF8F1;
+        background: #FFFFFF;
     }
     .ev-form-box {
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.2);
+        border: 1.5px solid rgba(255, 45, 117, 0.2);
         border-radius: 26px;
         padding: 38px 30px;
         max-width: 860px;
         margin: 0 auto;
-        box-shadow: 0 18px 44px rgba(196, 0, 122, 0.08);
+        box-shadow: 0 18px 44px rgba(255, 45, 117, 0.08);
         position: relative;
         overflow: hidden;
     }
@@ -544,7 +544,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         position: absolute;
         top: 0; left: 0; right: 0;
         height: 4px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
+        background: linear-gradient(90deg, #FF2D75, #F65A91);
     }
     .ev-form-head {
         text-align: center;
@@ -553,12 +553,12 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-form-head h3 {
         font-size: clamp(1.5rem, 2.6vw, 2rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 8px;
     }
     .ev-form-head p {
         font-size: 0.92rem;
-        color: #6B7280;
+        color: #666666;
         margin: 0;
     }
     .ev-grid-fields {
@@ -578,7 +578,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-field-group label {
         font-size: 0.82rem;
         font-weight: 700;
-        color: #374151;
+        color: #4A4A4A;
     }
     .ev-field-group input,
     .ev-field-group select,
@@ -589,17 +589,17 @@ $bodyCopy  = $dbService['body'] ?? '';
         border: 1.5px solid #E5E7EB;
         font-family: inherit;
         font-size: 0.9rem;
-        color: #111827;
+        color: #111111;
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
         background: #FAFAFA;
     }
     .ev-field-group input:focus,
     .ev-field-group select:focus,
     .ev-field-group textarea:focus {
-        border-color: #C4007A;
+        border-color: #FF2D75;
         outline: none;
         background: #FFFFFF;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.12);
+        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.12);
     }
     .ev-form-submit {
         display: inline-flex !important;
@@ -607,7 +607,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         justify-content: center !important;
         gap: 8px !important;
         width: 100%;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #FFFFFF !important;
         font-weight: 700;
         font-size: 1rem;
@@ -615,13 +615,13 @@ $bodyCopy  = $dbService['body'] ?? '';
         border-radius: 9999px;
         border: none;
         cursor: pointer;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.35);
+        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.35);
         transition: all 0.25s ease;
         margin-top: 10px;
     }
     .ev-form-submit:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(196, 0, 122, 0.45);
+        box-shadow: 0 14px 28px rgba(255, 45, 117, 0.45);
     }
     .ev-form-feedback {
         margin-top: 14px;
@@ -643,11 +643,11 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-faq-section {
         padding: 44px 0 40px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
+        border-top: 1px solid rgba(255, 45, 117, 0.08);
     }
     .ev-faq-item {
         background: #FFF9FB;
-        border: 1px solid rgba(196, 0, 122, 0.12);
+        border: 1px solid rgba(255, 45, 117, 0.12);
         border-radius: 14px;
         margin-bottom: 12px;
         overflow: hidden;
@@ -663,7 +663,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         align-items: center;
         font-weight: 700;
         font-size: 0.98rem;
-        color: #111827;
+        color: #111111;
         cursor: pointer;
     }
     .ev-faq-btn span.icon {
@@ -671,8 +671,8 @@ $bodyCopy  = $dbService['body'] ?? '';
         height: 24px;
         border-radius: 50%;
         background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        color: #C4007A;
+        border: 1px solid rgba(255, 45, 117, 0.2);
+        color: #FF2D75;
         display: grid;
         place-items: center;
         font-size: 1.1rem;
@@ -682,7 +682,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     .ev-faq-answer {
         padding: 0 20px 16px;
         font-size: 0.92rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.65;
         display: none;
     }
@@ -691,17 +691,17 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .ev-faq-item.active .ev-faq-btn span.icon {
         transform: rotate(45deg);
-        background: #C4007A;
+        background: #FF2D75;
         color: #FFFFFF;
     }
 
     /* ===== CONVERSION CTA BANNER ===== */
     .ev-cta-section {
         padding: 36px 0 48px;
-        background: #FBF8F1;
+        background: #FFFFFF;
     }
     .ev-cta-card {
-        background: linear-gradient(135deg, #2D051E 0%, #0F172A 100%);
+        background: linear-gradient(135deg, #111111 0%, #181818 100%);
         border-radius: 26px;
         padding: 44px 32px;
         text-align: center;
@@ -717,7 +717,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         color: #FFFFFF;
     }
     .ev-cta-card h2 span {
-        color: #F4C4DE;
+        color: #F65A91;
     }
     .ev-cta-card p {
         font-size: 0.98rem;
@@ -739,7 +739,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #FFFFFF !important;
         font-size: 0.95rem;
         font-weight: 700;
@@ -747,12 +747,12 @@ $bodyCopy  = $dbService['body'] ?? '';
         border-radius: 9999px;
         text-decoration: none;
         white-space: nowrap !important;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.4);
+        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.4);
         transition: all 0.25s ease;
     }
     .ev-cta-btn-main:hover {
         transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.5);
+        box-shadow: 0 14px 30px rgba(255, 45, 117, 0.5);
         color: #FFFFFF;
     }
     .ev-cta-btn-phone {
@@ -786,8 +786,8 @@ $bodyCopy  = $dbService['body'] ?? '';
     .del-rankings-section {
         padding: 52px 0 44px;
         background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
+        border-top: 1px solid rgba(255, 45, 117, 0.08);
+        border-bottom: 1px solid rgba(255, 45, 117, 0.08);
     }
     .del-rankings-header {
         text-align: center;
@@ -804,10 +804,10 @@ $bodyCopy  = $dbService['body'] ?? '';
     }
     .del-rank-card {
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.22);
+        border: 1.5px solid rgba(255, 45, 117, 0.22);
         border-radius: 18px;
         padding: 22px;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.06);
+        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.06);
         position: relative;
     }
     .del-rank-card-header {
@@ -821,14 +821,14 @@ $bodyCopy  = $dbService['body'] ?? '';
     .del-rank-domain {
         font-size: 0.96rem;
         font-weight: 800;
-        color: #111827;
+        color: #111111;
     }
     .del-rank-badge {
         font-size: 0.72rem;
         font-weight: 700;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.2);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1px solid rgba(255, 45, 117, 0.2);
         padding: 2px 8px;
         border-radius: 9999px;
     }
@@ -847,32 +847,32 @@ $bodyCopy  = $dbService['body'] ?? '';
     .del-rank-metric .val {
         font-size: 1.08rem;
         font-weight: 800;
-        color: #C4007A;
+        color: #FF2D75;
     }
     .del-rank-metric .lbl {
         font-size: 0.68rem;
-        color: #6B7280;
+        color: #666666;
         font-weight: 600;
         text-transform: uppercase;
     }
     .del-rank-top-pos {
         background: #FFF5FA;
-        border: 1px dashed rgba(196, 0, 122, 0.3);
+        border: 1px dashed rgba(255, 45, 117, 0.3);
         border-radius: 10px;
         padding: 9px 12px;
         font-size: 0.8rem;
-        color: #111827;
+        color: #111111;
         font-weight: 600;
     }
     .del-rank-top-pos span {
-        color: #C4007A;
+        color: #FF2D75;
         font-weight: 800;
     }
     .del-keywords-table-wrap {
-        border: 1.5px solid rgba(196, 0, 122, 0.2);
+        border: 1.5px solid rgba(255, 45, 117, 0.2);
         border-radius: 18px;
         overflow-x: auto;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.05);
+        box-shadow: 0 10px 24px rgba(255, 45, 117, 0.05);
         margin-bottom: 28px;
     }
     .del-kw-table {
@@ -882,13 +882,13 @@ $bodyCopy  = $dbService['body'] ?? '';
         background: #FFFFFF;
     }
     .del-kw-table th {
-        background: #FFF0F7;
+        background: #FFF2F7;
         color: #850053;
         font-weight: 800;
         font-size: 0.82rem;
         text-transform: uppercase;
         padding: 12px 16px;
-        border-bottom: 1.5px solid rgba(196, 0, 122, 0.2);
+        border-bottom: 1.5px solid rgba(255, 45, 117, 0.2);
     }
     .del-kw-table td {
         padding: 12px 16px;
@@ -903,7 +903,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         width: 32px;
         height: 28px;
         border-radius: 8px;
-        background: #C4007A;
+        background: #FF2D75;
         color: #FFFFFF;
         font-weight: 800;
         font-size: 0.88rem;
@@ -932,7 +932,7 @@ $bodyCopy  = $dbService['body'] ?? '';
                     </div>
 
                     <h1 class="ev-hero-title">
-                        Boost Your Event &amp; Exhibition <span class="accent">With SEO.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        Boost Your Event &amp; Exhibition <span class="accent">With SEO.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h1>
 
                     <h3 class="ev-hero-sub">
@@ -967,7 +967,7 @@ $bodyCopy  = $dbService['body'] ?? '';
                                 <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#059669;"></span>
                                 #1 Google Search Result
                             </div>
-                            <span style="font-size:0.72rem; color:#6B7280; font-weight:700;">Google Event Schema</span>
+                            <span style="font-size:0.72rem; color:#666666; font-weight:700;">Google Event Schema</span>
                         </div>
 
                         <div class="ev-serp-url">
@@ -986,11 +986,11 @@ $bodyCopy  = $dbService['body'] ?? '';
                         <!-- Rich Event Snippet Card -->
                         <div class="ev-serp-rich">
                             <div class="ev-rich-row">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF2D75" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
                                 <strong>Dates:</strong> Feb 14 &ndash; Feb 17, 2026
                             </div>
                             <div class="ev-rich-row">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF2D75" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
                                 <strong>Venue:</strong> Bharat Mandapam &amp; Yashobhoomi, New Delhi
                             </div>
                             <div class="ev-rich-row">
@@ -1029,7 +1029,7 @@ $bodyCopy  = $dbService['body'] ?? '';
             <div class="ev-section-head" data-wtm-reveal="fade-up">
                 <div class="ev-eyebrow">STRATEGIC EVENT ADVANTAGE</div>
                 <h2 class="ev-section-title">
-                    Engineered to <span class="accent">Pack Exhibition Halls<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Engineered to <span class="accent">Pack Exhibition Halls<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="ev-section-sub">
                     Generic agencies rely on expensive paid ads that stop working when budget runs out. We build organic market dominance across the entire event lifecycle.
@@ -1069,7 +1069,7 @@ $bodyCopy  = $dbService['body'] ?? '';
             <div class="ev-section-head" data-wtm-reveal="fade-up">
                 <div class="ev-eyebrow">FULL LIFECYCLE BLUEPRINT</div>
                 <h2 class="ev-section-title">
-                    The 3-Phase <span class="accent">Exhibition Roadmap<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    The 3-Phase <span class="accent">Exhibition Roadmap<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="ev-section-sub">
                     How WebTecMart plans and executes event search campaigns for maximum registration ROI.
@@ -1119,7 +1119,7 @@ $bodyCopy  = $dbService['body'] ?? '';
             <div class="ev-section-head" data-wtm-reveal="fade-up">
                 <div class="ev-eyebrow">VERIFIED PROOF OF PERFORMANCE</div>
                 <h2 class="ev-section-title">
-                    The Organic Engine Behind <span class="accent">India's Mega Fairs<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    The Organic Engine Behind <span class="accent">India's Mega Fairs<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="ev-section-sub">
                     Authentic results delivered for government-backed exhibitions and export promotion councils.
@@ -1202,10 +1202,10 @@ $bodyCopy  = $dbService['body'] ?? '';
         <div class="ev-container">
             <div class="del-rankings-header" data-wtm-reveal="fade-up">
                 <div class="ev-eyebrow">LIVE GOOGLE RANKINGS PROOF</div>
-                <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; color: #111827; margin: 0 0 10px;">
+                <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; color: #111111; margin: 0 0 10px;">
                     Organic Rankings That Drive Real Inbound Revenue
                 </h3>
-                <p style="font-size: 0.96rem; color: #6B7280; max-width: 720px; margin: 0 auto;">
+                <p style="font-size: 0.96rem; color: #666666; max-width: 720px; margin: 0 auto;">
                     Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and B2B exporters:
                 </p>
             </div>
@@ -1304,51 +1304,51 @@ $bodyCopy  = $dbService['body'] ?? '';
                     <tbody>
                         <tr>
                             <td><strong>Bharat Tex 2026 Fair</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">bharat-tex.com</td>
+                            <td style="color: #666666; font-size: 0.82rem;">bharat-tex.com</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +17 Positions</span></td>
                             <td>49,500/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Commercial</span></td>
+                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Commercial</span></td>
                         </tr>
                         <tr>
                             <td><strong>Best SEO Company in Delhi NCR</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/seo-services-delhi.php</td>
+                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/seo-services-delhi.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +13 Positions</span></td>
                             <td>14,800/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
+                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
                         </tr>
                         <tr>
                             <td><strong>IHGF Autumn Fair Dates 2026</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">ihgfdelhifair.in</td>
+                            <td style="color: #666666; font-size: 0.82rem;">ihgfdelhifair.in</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +25 Positions</span></td>
                             <td>22,200/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Buyer Intent</span></td>
+                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Buyer Intent</span></td>
                         </tr>
                         <tr>
                             <td><strong>B2B Exhibition SEO Services</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/b2b-exhibition-seo.php</td>
+                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/b2b-exhibition-seo.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +30 Positions</span></td>
                             <td>8,100/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">B2B Commercial</span></td>
+                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">B2B Commercial</span></td>
                         </tr>
                         <tr>
                             <td><strong>Local SEO Services in Delhi</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/local-seo.php</td>
+                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/local-seo.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +23 Positions</span></td>
                             <td>12,100/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Local Intent</span></td>
+                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Local Intent</span></td>
                         </tr>
                         <tr>
                             <td><strong>Technical SEO Services Delhi</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/technical-seo.php</td>
+                            <td style="color: #666666; font-size: 0.82rem;">webtecmart.com/technical-seo.php</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +19 Positions</span></td>
                             <td>6,400/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Technical</span></td>
+                            <td><span style="background: #FFF2F7; color: #FF2D75; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Technical</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -1440,7 +1440,7 @@ $bodyCopy  = $dbService['body'] ?? '';
             <div class="ev-section-head" data-wtm-reveal="fade-up">
                 <div class="ev-eyebrow">COMMON QUERIES</div>
                 <h2 class="ev-section-title">
-                    Frequently Asked <span class="accent">Questions<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Frequently Asked <span class="accent">Questions<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#FF2D75" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="ev-section-sub">
                     Answers to key questions asked by trade show organizers and international B2B exhibitors.

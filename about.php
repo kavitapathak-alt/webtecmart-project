@@ -37,9 +37,9 @@ function apIcon(string $name): string {
     .ap-section {
         position: relative;
         width: 100%;
-        background: #FBF8F1;
+        background: #FFFFFF;
         overflow: hidden;
-        color: #1F1B2A;
+        color: #111111;
     }
 
     /* Decorative Background */
@@ -52,7 +52,7 @@ function apIcon(string $name): string {
         position: absolute;
         top: 0; right: 0;
         width: 50%; height: 50%;
-        background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
+        background: linear-gradient(to bottom left, rgba(255, 45, 117, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
@@ -60,14 +60,14 @@ function apIcon(string $name): string {
         position: absolute;
         bottom: 0; left: 0;
         width: 33.333%; height: 50%;
-        background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
+        background: linear-gradient(to top right, rgba(255, 45, 117, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
     .ap-bg-shape {
         position: absolute;
         fill: none;
-        stroke: #C4007A;
+        stroke: #FF2D75;
         opacity: 0.1;
         display: none;
     }
@@ -108,8 +108,8 @@ function apIcon(string $name): string {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        background: rgba(255, 45, 117, 0.08);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         padding: 5px 14px;
         border-radius: 9999px;
         margin-bottom: 10px;
@@ -117,11 +117,11 @@ function apIcon(string $name): string {
     .ap-pill svg {
         width: 13px;
         height: 13px;
-        color: #C4007A;
+        color: #FF2D75;
         flex-shrink: 0;
     }
     .ap-pill span {
-        color: #C4007A;
+        color: #FF2D75;
         font-weight: 700;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
@@ -132,8 +132,8 @@ function apIcon(string $name): string {
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        background: rgba(255, 45, 117, 0.08);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         padding: 5px 14px;
         border-radius: 9999px;
         margin-bottom: 10px;
@@ -141,11 +141,11 @@ function apIcon(string $name): string {
     .ap-pill svg {
         width: 13px;
         height: 13px;
-        color: #C4007A;
+        color: #FF2D75;
         flex-shrink: 0;
     }
     .ap-pill span {
-        color: #C4007A;
+        color: #FF2D75;
         font-weight: 700;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
@@ -157,7 +157,7 @@ function apIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
@@ -167,7 +167,7 @@ function apIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
@@ -177,7 +177,7 @@ function apIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
@@ -187,7 +187,7 @@ function apIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
@@ -195,7 +195,7 @@ function apIcon(string $name): string {
     } }
 
     .ap-h1 .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -211,7 +211,7 @@ function apIcon(string $name): string {
     }
 
     .ap-subtitle {
-        color: #6B7280;
+        color: #666666;
         font-size: 0.875rem;
         max-width: 768px;
         margin: 12px auto 0;
@@ -244,12 +244,12 @@ function apIcon(string $name): string {
         border-radius: 12px;
         padding: 16px;
         text-align: center;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
     }
     .ap-stat:hover {
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.1);
         transform: translateY(-4px);
     }
     @media (min-width: 640px) { .ap-stat { border-radius: 16px; padding: 20px; } }
@@ -258,7 +258,7 @@ function apIcon(string $name): string {
     .ap-stat svg {
         width: 20px;
         height: 20px;
-        color: #C4007A;
+        color: #FF2D75;
         margin: 0 auto 6px;
         display: block;
     }
@@ -267,7 +267,7 @@ function apIcon(string $name): string {
     .ap-stat-value {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 640px) { .ap-stat-value { font-size: 1.5rem; } }
     @media (min-width: 768px) { .ap-stat-value { font-size: 1.875rem; } }
@@ -275,13 +275,13 @@ function apIcon(string $name): string {
     .ap-stat-label {
         font-size: 0.75rem;
         font-weight: 600;
-        color: #111827;
+        color: #111111;
     }
     @media (min-width: 640px) { .ap-stat-label { font-size: 0.875rem; } }
 
     .ap-stat-desc {
         font-size: 10px;
-        color: #6B7280;
+        color: #666666;
         margin-top: 4px;
         line-height: 1.2;
     }
@@ -315,16 +315,16 @@ function apIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
         font-size: 1.25rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 0 0 12px;
     }
     @media (min-width: 640px) { .ap-story-text h2 { font-size: 1.5rem; margin-bottom: 16px; } }
     @media (min-width: 768px) { .ap-story-text h2 { font-size: 1.875rem; } }
 
-    .ap-story-text h2 .accent { color: #C4007A; }
+    .ap-story-text h2 .accent { color: #FF2D75; }
 
     .ap-story-text p {
-        color: #4B5563;
+        color: #4A4A4A;
         font-size: 0.875rem;
         line-height: 1.625;
         margin: 0 0 12px;
@@ -333,7 +333,7 @@ function apIcon(string $name): string {
 
     .ap-story-text p .bold {
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
     }
 
     /* Story Visual */
@@ -349,8 +349,8 @@ function apIcon(string $name): string {
         position: relative;
         border-radius: 12px;
         overflow: hidden;
-        box-shadow: 0 25px 50px -12px rgba(196, 0, 122, 0.1);
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        box-shadow: 0 25px 50px -12px rgba(255, 45, 117, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
     }
     @media (min-width: 640px) {
         .ap-story-visual-inner { border-radius: 16px; }
@@ -358,7 +358,7 @@ function apIcon(string $name): string {
 
     .ap-story-visual-content {
         aspect-ratio: 4 / 3;
-        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.1), #FDF0F6);
+        background: linear-gradient(to bottom right, rgba(255, 45, 117, 0.1), #FDF0F6);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -375,7 +375,7 @@ function apIcon(string $name): string {
         height: 64px;
         margin: 0 auto 12px;
         border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.1);
+        background: rgba(255, 45, 117, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -386,7 +386,7 @@ function apIcon(string $name): string {
     .ap-story-quote-wrap svg {
         width: 32px;
         height: 32px;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 640px) {
         .ap-story-quote-wrap svg { width: 48px; height: 48px; }
@@ -395,12 +395,12 @@ function apIcon(string $name): string {
     .ap-story-brand {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 640px) { .ap-story-brand { font-size: 1.5rem; } }
 
     .ap-story-tagline {
-        color: #4B5563;
+        color: #4A4A4A;
         font-size: 0.875rem;
     }
     @media (min-width: 640px) { .ap-story-tagline { font-size: 1rem; } }
@@ -417,7 +417,7 @@ function apIcon(string $name): string {
         width: 6px;
         height: 6px;
         border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.3);
+        background: rgba(255, 45, 117, 0.3);
     }
     @media (min-width: 640px) { .ap-story-dots span { width: 8px; height: 8px; } }
 
@@ -440,14 +440,14 @@ function apIcon(string $name): string {
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         margin: 0 0 8px;
         line-height: 1.18;
         letter-spacing: -0.02em;
     }
     .ap-section-header h2 .accent,
     .ap-story-text h2 .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -462,7 +462,7 @@ function apIcon(string $name): string {
     }
 
     .ap-section-header p {
-        color: #6B7280;
+        color: #666666;
         font-size: 0.75rem;
         max-width: 640px;
         margin: 8px auto 0;
@@ -486,7 +486,7 @@ function apIcon(string $name): string {
         background: #fff;
         border-radius: 12px;
         padding: 20px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
     }
@@ -494,9 +494,9 @@ function apIcon(string $name): string {
         .ap-value-card { border-radius: 16px; padding: 24px; }
     }
     .ap-value-card:hover {
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.1);
         transform: translateY(-8px);
-        border-color: rgba(196, 0, 122, 0.3);
+        border-color: rgba(255, 45, 117, 0.3);
     }
 
     .ap-value-icon {
@@ -520,7 +520,7 @@ function apIcon(string $name): string {
     .ap-value-icon svg {
         width: 20px;
         height: 20px;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 640px) {
         .ap-value-icon svg { width: 24px; height: 24px; }
@@ -529,7 +529,7 @@ function apIcon(string $name): string {
     .ap-value-title {
         font-size: 1rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 0 0 6px;
         transition: color 0.3s ease;
     }
@@ -537,12 +537,12 @@ function apIcon(string $name): string {
         .ap-value-title { font-size: 1.125rem; margin-bottom: 8px; }
     }
     .ap-value-card:hover .ap-value-title {
-        color: #C4007A;
+        color: #FF2D75;
     }
 
     .ap-value-desc {
         font-size: 0.75rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.625;
         margin: 0;
     }
@@ -569,7 +569,7 @@ function apIcon(string $name): string {
         transform: translateX(-50%);
         top: 0; bottom: 0;
         width: 2px;
-        background: rgba(196, 0, 122, 0.2);
+        background: rgba(255, 45, 117, 0.2);
     }
     @media (min-width: 768px) {
         .ap-journey-line-desktop { display: block; }
@@ -581,7 +581,7 @@ function apIcon(string $name): string {
         left: 16px;
         top: 0; bottom: 0;
         width: 2px;
-        background: rgba(196, 0, 122, 0.2);
+        background: rgba(255, 45, 117, 0.2);
     }
     @media (min-width: 768px) {
         .ap-journey-line-mobile { display: none; }
@@ -617,7 +617,7 @@ function apIcon(string $name): string {
         width: 12px;
         height: 12px;
         border-radius: 9999px;
-        background: #C4007A;
+        background: #FF2D75;
         border: 2px solid #fff;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         z-index: 10;
@@ -630,7 +630,7 @@ function apIcon(string $name): string {
         background: #fff;
         border-radius: 12px;
         padding: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
         margin-left: 40px;
@@ -644,7 +644,7 @@ function apIcon(string $name): string {
         .ap-journey-item.odd  .ap-journey-card { margin-left: 24px; }
     }
     .ap-journey-card:hover {
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.1);
         transform: translateY(-4px);
     }
 
@@ -665,7 +665,7 @@ function apIcon(string $name): string {
     .ap-journey-year {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 640px) { .ap-journey-year { font-size: 1.5rem; } }
 
@@ -674,7 +674,7 @@ function apIcon(string $name): string {
         width: 12px;
         height: 12px;
         border-radius: 9999px;
-        background: #C4007A;
+        background: #FF2D75;
     }
     @media (min-width: 768px) {
         .ap-journey-pip { display: block; }
@@ -683,14 +683,14 @@ function apIcon(string $name): string {
     .ap-journey-title {
         font-size: 1rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 6px 0 0;
     }
     @media (min-width: 640px) { .ap-journey-title { font-size: 1.125rem; margin-top: 8px; } }
 
     .ap-journey-desc {
         font-size: 0.75rem;
-        color: #4B5563;
+        color: #4A4A4A;
         margin: 4px 0 0;
         line-height: 1.5;
     }
@@ -702,7 +702,7 @@ function apIcon(string $name): string {
         background: linear-gradient(to bottom right, #FDF0F6, #fff);
         border-radius: 12px;
         padding: 24px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         margin-left: 8px;
         margin-right: 8px;
@@ -740,7 +740,7 @@ function apIcon(string $name): string {
         width: 48px;
         height: 48px;
         border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.1);
+        background: rgba(255, 45, 117, 0.1);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -755,7 +755,7 @@ function apIcon(string $name): string {
     .ap-usp-icon svg {
         width: 24px;
         height: 24px;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 640px) {
         .ap-usp-icon svg { width: 28px; height: 28px; }
@@ -764,13 +764,13 @@ function apIcon(string $name): string {
     .ap-usp-title {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 0 0 6px;
     }
     @media (min-width: 640px) { .ap-usp-title { font-size: 1.25rem; margin-bottom: 8px; } }
 
     .ap-usp-desc {
-        color: #4B5563;
+        color: #4A4A4A;
         font-size: 0.75rem;
         line-height: 1.625;
         margin: 0;
@@ -780,7 +780,7 @@ function apIcon(string $name): string {
     /* ===== CTA ===== */
     .ap-cta {
         position: relative;
-        background: linear-gradient(to right, #A3005F, #C4007A, #E0398F);
+        background: linear-gradient(to right, #111111, #FF2D75, #F65A91);
         border-radius: 12px;
         padding: 24px;
         text-align: center;
@@ -857,7 +857,7 @@ function apIcon(string $name): string {
 
     .ap-cta-btn.primary {
         background: #fff;
-        color: #C4007A;
+        color: #FF2D75;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
     }
     .ap-cta-btn.primary:hover {
@@ -896,12 +896,12 @@ function apIcon(string $name): string {
     .ap-bottom-line {
         width: 32px;
         height: 1px;
-        background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
+        background: linear-gradient(to right, transparent, rgba(255, 45, 117, 0.3));
     }
     @media (min-width: 640px) { .ap-bottom-line { width: 48px; } }
 
     .ap-bottom-line.right {
-        background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
+        background: linear-gradient(to left, transparent, rgba(255, 45, 117, 0.3));
     }
 
     .ap-bottom-dots {
@@ -914,14 +914,14 @@ function apIcon(string $name): string {
         width: 4px;
         height: 4px;
         border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
+        background: rgba(255, 45, 117, 0.2);
     }
     @media (min-width: 640px) {
         .ap-bottom-dots span { width: 6px; height: 6px; }
     }
     .ap-bottom-dots span.active {
         width: 16px;
-        background: #C4007A;
+        background: #FF2D75;
     }
     @media (min-width: 640px) { .ap-bottom-dots span.active { width: 24px; } }
 </style>
@@ -955,7 +955,7 @@ function apIcon(string $name): string {
                     <span class="accent">
                         <?= e((string) $aboutContent['hero_highlight']) ?>
                         <svg viewBox="0 0 300 8" preserveAspectRatio="none">
-                            <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                            <path d="M2 4C60 1 240 1 298 4" stroke="#FF2D75" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                         </svg>
                     </span>
                 <?php endif; ?>

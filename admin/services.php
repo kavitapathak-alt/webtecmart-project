@@ -256,13 +256,13 @@ require_once __DIR__ . '/templates/header.php';
     .scms-title-wrap h1 {
         font-size: clamp(1.4rem, 2.5vw, 1.85rem) !important;
         font-weight: 800 !important;
-        color: #0F172A;
+        color: #111111;
         margin: 0 0 4px !important;
         letter-spacing: -0.02em;
     }
     .scms-title-wrap p {
         font-size: 0.92rem !important;
-        color: #64748B;
+        color: #4A4A4A;
         margin: 0 !important;
     }
 
@@ -281,7 +281,7 @@ require_once __DIR__ . '/templates/header.php';
     }
     .scms-stat-card {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 16px;
         padding: 20px 22px;
         display: flex;
@@ -303,27 +303,27 @@ require_once __DIR__ . '/templates/header.php';
         font-size: 1.35rem;
         flex-shrink: 0;
     }
-    .scms-stat-icon.pink { background: #FFF0F7; color: #C4007A; }
+    .scms-stat-icon.pink { background: #FFF2F7; color: #FF2D75; }
     .scms-stat-icon.green { background: #ECFDF5; color: #059669; }
     .scms-stat-icon.amber { background: #FFFBEB; color: #D97706; }
     .scms-stat-icon.blue { background: #EFF6FF; color: #2563EB; }
     .scms-stat-num {
         font-size: 1.6rem;
         font-weight: 800;
-        color: #0F172A;
+        color: #111111;
         line-height: 1.1;
     }
     .scms-stat-lbl {
         font-size: 0.8rem;
         font-weight: 600;
-        color: #64748B;
+        color: #4A4A4A;
         margin-top: 2px;
     }
 
     /* Actions Bar */
     .scms-bar {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 16px;
         padding: 16px 20px;
         margin-bottom: 20px;
@@ -350,7 +350,7 @@ require_once __DIR__ . '/templates/header.php';
     .scms-search-input {
         width: 100%;
         padding: 9px 14px 9px 38px;
-        border: 1.5px solid #E2E8F0;
+        border: 1.5px solid #EAEAEA;
         border-radius: 10px;
         font-size: 0.88rem;
         font-family: inherit;
@@ -358,7 +358,7 @@ require_once __DIR__ . '/templates/header.php';
         transition: border-color 0.2s ease;
     }
     .scms-search-input:focus {
-        border-color: #C4007A;
+        border-color: #FF2D75;
     }
 
     .scms-cat-pills {
@@ -368,7 +368,7 @@ require_once __DIR__ . '/templates/header.php';
     }
     .scms-cat-pill {
         background: #F1F5F9;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         color: #475569;
         font-size: 0.78rem;
         font-weight: 700;
@@ -380,15 +380,15 @@ require_once __DIR__ . '/templates/header.php';
     }
     .scms-cat-pill:hover,
     .scms-cat-pill.active {
-        background: #FFF0F7;
-        color: #C4007A;
-        border-color: rgba(196, 0, 122, 0.3);
+        background: #FFF2F7;
+        color: #FF2D75;
+        border-color: rgba(255, 45, 117, 0.3);
     }
 
     /* Table */
     .scms-table-card {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 16px;
         overflow: hidden;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
@@ -403,15 +403,15 @@ require_once __DIR__ . '/templates/header.php';
         padding: 14px 18px;
         font-size: 0.75rem;
         font-weight: 800;
-        color: #64748B;
+        color: #4A4A4A;
         text-transform: uppercase;
         letter-spacing: 0.06em;
-        border-bottom: 1px solid #E2E8F0;
+        border-bottom: 1px solid #EAEAEA;
     }
     .scms-table td {
         padding: 16px 18px;
         font-size: 0.88rem;
-        color: #1E293B;
+        color: #111111;
         border-bottom: 1px solid #F1F5F9;
         vertical-align: middle;
     }
@@ -431,8 +431,8 @@ require_once __DIR__ . '/templates/header.php';
         width: 42px;
         height: 42px;
         border-radius: 10px;
-        background: #FFF0F7;
-        color: #C4007A;
+        background: #FFF2F7;
+        color: #FF2D75;
         display: grid;
         place-items: center;
         font-size: 1.15rem;
@@ -440,13 +440,13 @@ require_once __DIR__ . '/templates/header.php';
     }
     .scms-svc-name {
         font-weight: 800;
-        color: #0F172A;
+        color: #111111;
         font-size: 0.94rem;
         margin-bottom: 2px;
     }
     .scms-svc-tagline {
         font-size: 0.78rem;
-        color: #64748B;
+        color: #4A4A4A;
     }
     .scms-svc-slug {
         font-size: 0.72rem;
@@ -511,7 +511,7 @@ require_once __DIR__ . '/templates/header.php';
         display: grid;
         place-items: center;
         font-size: 0.85rem;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         background: #FFFFFF;
         color: #475569;
         text-decoration: none;
@@ -520,13 +520,13 @@ require_once __DIR__ . '/templates/header.php';
     }
     .scms-btn-action:hover {
         background: #F8FAFC;
-        color: #0F172A;
+        color: #111111;
         border-color: #CBD5E1;
     }
     .scms-btn-action.edit:hover {
-        background: #FFF0F7;
-        color: #C4007A;
-        border-color: #C4007A;
+        background: #FFF2F7;
+        color: #FF2D75;
+        border-color: #FF2D75;
     }
     .scms-btn-action.del:hover {
         background: #FEF2F2;
@@ -537,7 +537,7 @@ require_once __DIR__ . '/templates/header.php';
     /* ===== EDITOR STYLES ===== */
     .scms-editor-card {
         background: #FFFFFF;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 20px;
         padding: 28px;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
@@ -548,13 +548,13 @@ require_once __DIR__ . '/templates/header.php';
         align-items: center;
         justify-content: space-between;
         padding-bottom: 20px;
-        border-bottom: 1px solid #E2E8F0;
+        border-bottom: 1px solid #EAEAEA;
         margin-bottom: 24px;
     }
     .scms-editor-title {
         font-size: 1.35rem;
         font-weight: 800;
-        color: #0F172A;
+        color: #111111;
         margin: 0;
     }
 
@@ -573,7 +573,7 @@ require_once __DIR__ . '/templates/header.php';
     .scms-form-control {
         width: 100%;
         padding: 10px 14px;
-        border: 1.5px solid #E2E8F0;
+        border: 1.5px solid #EAEAEA;
         border-radius: 10px;
         font-size: 0.92rem;
         font-family: inherit;
@@ -581,8 +581,8 @@ require_once __DIR__ . '/templates/header.php';
         transition: border-color 0.2s ease;
     }
     .scms-form-control:focus {
-        border-color: #C4007A;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.08);
+        border-color: #FF2D75;
+        box-shadow: 0 0 0 3px rgba(255, 45, 117, 0.08);
     }
     textarea.scms-form-control {
         min-height: 90px;
@@ -592,7 +592,7 @@ require_once __DIR__ . '/templates/header.php';
     .scms-tabs {
         display: flex;
         gap: 8px;
-        border-bottom: 2px solid #E2E8F0;
+        border-bottom: 2px solid #EAEAEA;
         margin-bottom: 24px;
         overflow-x: auto;
     }
@@ -603,17 +603,17 @@ require_once __DIR__ . '/templates/header.php';
         font-family: inherit;
         font-size: 0.88rem;
         font-weight: 700;
-        color: #64748B;
+        color: #4A4A4A;
         cursor: pointer;
         position: relative;
         white-space: nowrap;
         transition: color 0.2s ease;
     }
     .scms-tab-btn:hover {
-        color: #C4007A;
+        color: #FF2D75;
     }
     .scms-tab-btn.active {
-        color: #C4007A;
+        color: #FF2D75;
     }
     .scms-tab-btn.active::after {
         content: '';
@@ -622,12 +622,12 @@ require_once __DIR__ . '/templates/header.php';
         left: 0;
         right: 0;
         height: 2px;
-        background: #C4007A;
+        background: #FF2D75;
     }
 
     .scms-repeater-box {
         background: #F8FAFC;
-        border: 1px solid #E2E8F0;
+        border: 1px solid #EAEAEA;
         border-radius: 14px;
         padding: 16px;
         margin-bottom: 12px;
@@ -649,9 +649,9 @@ require_once __DIR__ . '/templates/header.php';
         place-items: center;
     }
     .scms-btn-add {
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1.5px dashed #C4007A;
+        background: #FFF2F7;
+        color: #FF2D75;
+        border: 1.5px dashed #FF2D75;
         font-weight: 700;
         font-size: 0.84rem;
         padding: 9px 18px;
@@ -663,12 +663,12 @@ require_once __DIR__ . '/templates/header.php';
         transition: all 0.2s ease;
     }
     .scms-btn-add:hover {
-        background: #C4007A;
+        background: #FF2D75;
         color: #FFFFFF;
     }
 
     .scms-primary-btn {
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
+        background: linear-gradient(135deg, #FF2D75 0%, #F65A91 100%);
         color: #FFFFFF;
         border: none;
         padding: 12px 28px;
@@ -679,12 +679,12 @@ require_once __DIR__ . '/templates/header.php';
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.25);
+        box-shadow: 0 4px 14px rgba(255, 45, 117, 0.25);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
     .scms-primary-btn:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(196, 0, 122, 0.35);
+        box-shadow: 0 8px 20px rgba(255, 45, 117, 0.35);
         color: #FFFFFF;
     }
 </style>
@@ -1034,7 +1034,7 @@ require_once __DIR__ . '/templates/header.php';
                                             <div class="scms-svc-name">
                                                 <?= htmlspecialchars($svc['title'] ?? '') ?>
                                                 <?php if (($svc['slug'] ?? '') === 'b2b-exhibition-seo'): ?>
-                                                    <span class="badge" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem; margin-left: 6px; vertical-align: middle;">★ FLAGSHIP</span>
+                                                    <span class="badge" style="background: linear-gradient(135deg, #FF2D75, #F65A91); font-size: 0.65rem; margin-left: 6px; vertical-align: middle;">★ FLAGSHIP</span>
                                                 <?php endif; ?>
                                             </div>
                                             <div class="scms-svc-tagline"><?= htmlspecialchars($svc['tagline'] ?? '') ?></div>

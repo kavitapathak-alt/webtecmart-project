@@ -2,12 +2,12 @@
         </main> <!-- /.adm-body -->
 
         <!-- Admin Footer -->
-        <footer style="padding: 16px 28px; background: #FFFFFF; border-top: 1px solid #E2E8F0; font-size: 0.8rem; color: #64748B; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+        <footer style="padding: 16px 28px; background: #FFFFFF; border-top: 1px solid #EAEAEA; font-size: 0.8rem; color: #666666; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
             <div>
-                &copy; <?= date('Y') ?> <strong style="color: #C4007A;">WebTecMart</strong> Content Management System. All rights reserved.
+                &copy; <?= date('Y') ?> <strong style="color: #FF2D75;">WebTecMart</strong> Content Management System. All rights reserved.
             </div>
             <div>
-                <a href="/" target="_blank" style="color: #64748B; text-decoration: none; font-weight: 600;">Visit Live Site &rarr;</a>
+                <a href="/" target="_blank" style="color: #111111; text-decoration: none; font-weight: 700;">Visit Live Site &rarr;</a>
             </div>
         </footer>
 

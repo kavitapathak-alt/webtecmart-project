@@ -775,9 +775,9 @@ require_once __DIR__ . '/templates/header.php';
     a { text-decoration: none; }
 
     .cms-shell {
-        --brand: #C4007A;
-        --brand-deep: #A3005F;
-        --brand-soft: #FCE8F3;
+        --brand: #FF2D75;
+        --brand-deep: #111111;
+        --brand-soft: #FFF2F7;
         --brand-faint: #FFF4FA;
 
         --bs-primary: var(--brand);
@@ -812,11 +812,11 @@ require_once __DIR__ . '/templates/header.php';
     /* Form focus ring in brand color */
     .cms-shell .form-control:focus,
     .cms-shell .form-select:focus {
-        border-color: #e0398f;
-        box-shadow: 0 0 0 .22rem rgba(196, 0, 122, .14);
+        border-color: #F65A91;
+        box-shadow: 0 0 0 .22rem rgba(255, 45, 117, .14);
     }
     .cms-shell .form-check-input:checked { background-color: var(--brand); border-color: var(--brand); }
-    .cms-shell .form-check-input:focus { border-color: #e0398f; box-shadow: 0 0 0 .22rem rgba(196, 0, 122, .14); }
+    .cms-shell .form-check-input:focus { border-color: #F65A91; box-shadow: 0 0 0 .22rem rgba(255, 45, 117, .14); }
 
     /* Page title (header ka global h1 size override) */
     .cms-shell .cms-title { font-size: 1.35rem !important; line-height: 1.3 !important; font-weight: 700 !important; letter-spacing: -.01em !important; margin: 0 0 .25rem !important; }

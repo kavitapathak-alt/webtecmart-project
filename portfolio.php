@@ -182,9 +182,9 @@ $categories = array_merge(
     .port-page {
         position: relative;
         width: 100%;
-        background: #FBF8F1;
+        background: #FFFFFF;
         overflow: hidden;
-        color: #1F1B2A;
+        color: #111111;
     }
 
     .port-container {
@@ -207,7 +207,7 @@ $categories = array_merge(
         position: absolute;
         top: 0; right: 0;
         width: 50%; height: 50%;
-        background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
+        background: linear-gradient(to bottom left, rgba(255, 45, 117, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
@@ -215,14 +215,14 @@ $categories = array_merge(
         position: absolute;
         bottom: 0; left: 0;
         width: 33.333%; height: 50%;
-        background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
+        background: linear-gradient(to top right, rgba(255, 45, 117, 0.05), transparent);
         border-radius: 9999px;
         filter: blur(64px);
     }
     .port-bg-shape {
         position: absolute;
         fill: none;
-        stroke: #C4007A;
+        stroke: #FF2D75;
         opacity: 0.1;
     }
     .port-bg-shape-1 { top: 80px; right: 40px; width: 128px; height: 128px; stroke-width: 2; }
@@ -238,15 +238,15 @@ $categories = array_merge(
         display: inline-flex;
         align-items: center;
         gap: 6px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.15);
+        background: rgba(255, 45, 117, 0.08);
+        border: 1px solid rgba(255, 45, 117, 0.15);
         padding: 5px 14px;
         border-radius: 9999px;
         margin-bottom: 10px;
     }
-    .port-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
+    .port-pill svg { width: 13px; height: 13px; color: #FF2D75; flex-shrink: 0; }
     .port-pill span {
-        color: #C4007A;
+        color: #FF2D75;
         font-weight: 700;
         font-size: 0.72rem;
         letter-spacing: 0.08em;
@@ -257,13 +257,13 @@ $categories = array_merge(
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         font-size: clamp(1.85rem, 3.2vw, 2.5rem);
         font-weight: 800;
-        color: #111827;
+        color: #111111;
         line-height: 1.18;
         letter-spacing: -0.02em;
         margin: 0 0 8px;
     }
     .port-h1 .accent {
-        color: #C4007A;
+        color: #FF2D75;
         position: relative;
         display: inline-block;
     }
@@ -276,7 +276,7 @@ $categories = array_merge(
     }
 
     .port-subtitle {
-        color: #6B7280;
+        color: #666666;
         font-size: 1rem;
         max-width: 768px;
         margin: 16px auto 0;
@@ -300,31 +300,31 @@ $categories = array_merge(
         border-radius: 16px;
         padding: 24px;
         text-align: center;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.3s ease;
     }
     .port-stat:hover {
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.1);
         transform: translateY(-4px);
     }
     .port-stat svg {
         width: 24px;
         height: 24px;
-        color: #C4007A;
+        color: #FF2D75;
         margin: 0 auto 8px;
         display: block;
     }
     .port-stat-value {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
     }
     @media (min-width: 768px) { .port-stat-value { font-size: 1.875rem; } }
     .port-stat-label {
         font-size: 0.875rem;
         font-weight: 600;
-        color: #111827;
+        color: #111111;
     }
 
     /* ===== Filter Buttons ===== */
@@ -342,22 +342,22 @@ $categories = array_merge(
         border-radius: 9999px;
         font-size: 0.875rem;
         font-weight: 600;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         background: #fff;
-        color: #4B5563;
+        color: #4A4A4A;
         cursor: pointer;
         font-family: inherit;
         transition: all 0.3s ease;
     }
     .port-filter:hover {
         background: #FDF0F6;
-        color: #C4007A;
+        color: #FF2D75;
     }
     .port-filter.active {
-        background: #C4007A;
+        background: #FF2D75;
         color: #fff;
-        border-color: #C4007A;
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.3);
+        border-color: #FF2D75;
+        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.3);
     }
 
     /* ===== Projects Grid ===== */
@@ -378,12 +378,12 @@ $categories = array_merge(
         background: #fff;
         border-radius: 16px;
         overflow: hidden;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
         transition: all 0.5s ease;
     }
     .port-card:hover {
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.1);
+        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.1);
         transform: translateY(-8px);
     }
 
@@ -391,7 +391,7 @@ $categories = array_merge(
     .port-img {
         position: relative;
         height: 208px;
-        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.1), #FDF0F6);
+        background: linear-gradient(to bottom right, rgba(255, 45, 117, 0.1), #FDF0F6);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -416,14 +416,14 @@ $categories = array_merge(
     .port-img-icon svg {
         width: 64px;
         height: 64px;
-        color: rgba(196, 0, 122, 0.2);
+        color: rgba(255, 45, 117, 0.2);
     }
 
     .port-cat-badge {
         position: absolute;
         top: 12px;
         left: 12px;
-        background: #C4007A;
+        background: #FF2D75;
         color: #fff;
         font-size: 12px;
         font-weight: 700;
@@ -437,7 +437,7 @@ $categories = array_merge(
         right: 12px;
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(4px);
-        color: #C4007A;
+        color: #FF2D75;
         font-size: 12px;
         font-weight: 700;
         padding: 4px 12px;
@@ -462,7 +462,7 @@ $categories = array_merge(
     .port-card:hover .port-hover-overlay { opacity: 1; }
     .port-hover-overlay span {
         background: #fff;
-        color: #C4007A;
+        color: #FF2D75;
         padding: 8px 16px;
         border-radius: 9999px;
         font-size: 0.875rem;
@@ -484,12 +484,12 @@ $categories = array_merge(
     .port-title {
         font-size: 1.125rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 0;
         transition: color 0.3s ease;
     }
     @media (min-width: 768px) { .port-title { font-size: 1.25rem; } }
-    .port-card:hover .port-title { color: #C4007A; }
+    .port-card:hover .port-title { color: #FF2D75; }
 
     .port-client {
         font-size: 12px;
@@ -499,7 +499,7 @@ $categories = array_merge(
 
     .port-desc {
         font-size: 0.875rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.625;
         margin: 0 0 16px;
         overflow-wrap: break-word;
@@ -514,7 +514,7 @@ $categories = array_merge(
     .port-result-tag {
         font-size: 12px;
         background: #FDF0F6;
-        color: #C4007A;
+        color: #FF2D75;
         padding: 4px 8px;
         border-radius: 9999px;
     }
@@ -525,7 +525,7 @@ $categories = array_merge(
         gap: 4px;
         font-size: 0.875rem;
         font-weight: 600;
-        color: #C4007A;
+        color: #FF2D75;
         text-decoration: none;
         transition: gap 0.3s ease;
     }
@@ -545,7 +545,7 @@ $categories = array_merge(
         display: block;
     }
     .port-empty p {
-        color: #6B7280;
+        color: #666666;
         font-size: 0.875rem;
         margin: 0;
     }
@@ -553,7 +553,7 @@ $categories = array_merge(
     /* ===== CTA ===== */
     .port-cta {
         position: relative;
-        background: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
+        background: linear-gradient(90deg, #111111, #FF2D75, #F65A91);
         border-radius: 16px;
         padding: 32px;
         text-align: center;
@@ -613,7 +613,7 @@ $categories = array_merge(
         background: #fff;
         padding: 14px 32px;
         font-weight: 700;
-        color: #C4007A;
+        color: #FF2D75;
         text-decoration: none;
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         transition: all 0.3s ease;
@@ -621,7 +621,7 @@ $categories = array_merge(
     .port-cta-btn-1:hover {
         transform: scale(1.02);
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-        color: #C4007A;
+        color: #FF2D75;
     }
     .port-cta-btn-1 svg { width: 16px; height: 16px; }
 
@@ -654,10 +654,10 @@ $categories = array_merge(
     .port-bottom-line {
         width: 48px;
         height: 1px;
-        background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
+        background: linear-gradient(to right, transparent, rgba(255, 45, 117, 0.3));
     }
     .port-bottom-line.right {
-        background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
+        background: linear-gradient(to left, transparent, rgba(255, 45, 117, 0.3));
     }
     .port-bottom-dots {
         display: flex;
@@ -669,11 +669,11 @@ $categories = array_merge(
         width: 6px;
         height: 6px;
         border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
+        background: rgba(255, 45, 117, 0.2);
     }
     .port-bottom-dots span.active {
         width: 24px;
-        background: #C4007A;
+        background: #FF2D75;
     }
 
     /* ===== Project Modal ===== */
@@ -705,7 +705,7 @@ $categories = array_merge(
         max-height: 90vh;
         overflow-y: auto;
         border-radius: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
+        border: 1px solid rgba(255, 45, 117, 0.1);
         background: #fff;
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         transform: translateY(20px) scale(0.97);
@@ -722,8 +722,8 @@ $categories = array_merge(
         width: 36px;
         height: 36px;
         border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.1);
-        color: #C4007A;
+        background: rgba(255, 45, 117, 0.1);
+        color: #FF2D75;
         border: none;
         cursor: pointer;
         display: flex;
@@ -731,12 +731,12 @@ $categories = array_merge(
         justify-content: center;
         transition: background 0.2s ease;
     }
-    .port-modal-close:hover { background: rgba(196, 0, 122, 0.2); }
+    .port-modal-close:hover { background: rgba(255, 45, 117, 0.2); }
     .port-modal-close svg { width: 16px; height: 16px; }
 
     .port-modal-hero {
         height: 160px;
-        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.15), #FDF0F6);
+        background: linear-gradient(to bottom right, rgba(255, 45, 117, 0.15), #FDF0F6);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -745,7 +745,7 @@ $categories = array_merge(
     .port-modal-hero svg {
         width: 64px;
         height: 64px;
-        color: rgba(196, 0, 122, 0.4);
+        color: rgba(255, 45, 117, 0.4);
     }
 
     .port-modal-body {
@@ -757,8 +757,8 @@ $categories = array_merge(
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.1);
+        color: #FF2D75;
+        background: rgba(255, 45, 117, 0.1);
         padding: 4px 12px;
         border-radius: 9999px;
         margin-bottom: 12px;
@@ -766,24 +766,24 @@ $categories = array_merge(
     .port-modal-title {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 0 0 4px;
     }
     .port-modal-meta {
         font-size: 0.875rem;
-        color: #6B7280;
+        color: #666666;
         margin: 0 0 16px;
     }
     .port-modal-desc {
         font-size: 0.9375rem;
-        color: #4B5563;
+        color: #4A4A4A;
         line-height: 1.625;
         margin: 0 0 20px;
     }
     .port-modal-results-title {
         font-size: 0.875rem;
         font-weight: 700;
-        color: #111827;
+        color: #111111;
         margin: 0 0 8px;
         text-transform: uppercase;
         letter-spacing: 0.05em;
@@ -799,12 +799,12 @@ $categories = array_merge(
         align-items: center;
         gap: 8px;
         font-size: 0.875rem;
-        color: #4B5563;
+        color: #4A4A4A;
     }
     .port-modal-result svg {
         width: 16px;
         height: 16px;
-        color: #C4007A;
+        color: #FF2D75;
         flex-shrink: 0;
     }
     .port-modal-cta {
@@ -812,12 +812,12 @@ $categories = array_merge(
         align-items: center;
         gap: 8px;
         border-radius: 9999px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
+        background: linear-gradient(90deg, #FF2D75, #F65A91);
         padding: 12px 24px;
         font-weight: 700;
         color: #fff;
         text-decoration: none;
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
+        box-shadow: 0 10px 15px -3px rgba(255, 45, 117, 0.25);
         transition: all 0.3s ease;
         font-size: 0.875rem;
         border: none;
@@ -825,7 +825,7 @@ $categories = array_merge(
     }
     .port-modal-cta:hover {
         transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
+        box-shadow: 0 20px 25px -5px rgba(255, 45, 117, 0.35);
         color: #fff;
     }
     .port-modal-cta svg { width: 14px; height: 14px; }
@@ -859,7 +859,7 @@ $categories = array_merge(
                 <span class="accent">
                     <?= e((string) $portfolioPage['heading_highlight']) ?>
                     <svg viewBox="0 0 300 8" preserveAspectRatio="none">
-                        <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                        <path d="M2 4C60 1 240 1 298 4" stroke="#FF2D75" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
                     </svg>
                 </span>
             </h1>
