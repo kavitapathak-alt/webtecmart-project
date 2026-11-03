@@ -116,7 +116,7 @@ $contactInfo = [
        ============================================================ */
     .cp-main {
         min-height: 100vh;
-        background: #FBF8F1;
+        background: #FFF8FC;
         padding: 32px 0;
     }
     @media (min-width: 1024px) { .cp-main { padding: 48px 0; } }
@@ -619,7 +619,7 @@ $contactInfo = [
         width: 100%;
         border-radius: 8px;
         border: 1px solid #E5E7EB;
-        background: #FBF8F1;
+        background: #FFF8FC;
         padding: 8px 10px 8px 28px;
         font-size: 0.75rem;
         color: #111827;

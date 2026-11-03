@@ -205,7 +205,7 @@ function renderSeoSuccessStoriesSection(): void
             position: relative;
             width: 100%;
             padding: 8px 0;
-            background: #FBF8F1;
+            background: #FFF8FC;
             overflow: hidden;
         }
 
@@ -348,7 +348,7 @@ function renderSeoSuccessStoriesSection(): void
             gap: 4px;
             padding: 8px 12px;
             border-bottom: 1px solid rgba(196, 0, 122, 0.1);
-            background: #FBF8F1;
+            background: #FFF8FC;
         }
         .spo-browser-dot {
             width: 8px;

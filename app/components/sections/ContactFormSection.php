@@ -60,7 +60,7 @@ function renderContactFormSection(): void
             position: relative;
             width: 100%;
             padding: 24px 0;
-            background: #FBF8F1;
+            background: #FFF8FC;
             overflow: hidden;
         }
 
@@ -477,7 +477,7 @@ function renderContactFormSection(): void
             width: 100%;
             border-radius: 8px;
             border: 1px solid #E5E7EB;
-            background: #FBF8F1;
+            background: #FFF8FC;
             padding: 8px 10px 8px 28px;
             font-size: 0.75rem;
             color: #111827;

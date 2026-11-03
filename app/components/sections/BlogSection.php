@@ -5,7 +5,7 @@ function renderBlogSection(): void
     $posts = array_slice($allPosts, 0, 3);
     if (!$posts) return;
     ?>
-    <section class="home-blog-section" id="blog" style="padding: 36px 0 32px; background: #FBF8F1; position: relative;">
+    <section class="home-blog-section" id="blog" style="padding: 36px 0 32px; background: #FFF8FC; position: relative;">
         <style>
             .home-blog-header {
                 text-align: center;

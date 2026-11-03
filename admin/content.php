@@ -703,6 +703,12 @@ $items = array_values(array_filter($allItems, static function (array $item) use 
     return !$isRegistry || $sectionType === 'homepage';
 }));
 
+if ($sectionType === 'blog') {
+    usort($items, static function (array $a, array $b): int {
+        return ((int) ($b['id'] ?? 0)) <=> ((int) ($a['id'] ?? 0));
+    });
+}
+
 $search = trim($_GET['q'] ?? '');
 if ($search !== '') {
     $needle = function_exists('mb_strtolower') ? mb_strtolower($search) : strtolower($search);
@@ -788,7 +794,7 @@ require_once __DIR__ . '/templates/header.php';
 
         font-family: var(--bs-body-font-family);
         letter-spacing: normal;
-        background: #FBF8F1;
+        background: #FFF8FC;
         color: #1f1b24;
         min-height: calc(100vh - 72px);
         padding: 1.5rem 0 3rem;

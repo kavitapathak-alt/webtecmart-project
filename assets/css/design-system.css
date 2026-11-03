@@ -16,8 +16,8 @@
     --wtm-primary-rgb: 196, 0, 122;
 
     /* Neutrals & Surfaces */
-    --wtm-bg: #FBF8F1;
-    --wtm-bg-alt: #F6EFE9;
+    --wtm-bg: #FFF8FC;
+    --wtm-bg-alt: #FFF0F7;
     --wtm-surface: #FFFFFF;
     --wtm-surface-muted: #F8FAFC;
     --wtm-surface-elevated: #FFFFFF;
@@ -98,12 +98,12 @@ body {
     height: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: #FBF8F1;
+    background: #FFF8FC;
 }
 ::-webkit-scrollbar-thumb {
     background: #E5C3D7;
     border-radius: 999px;
-    border: 2px solid #FBF8F1;
+    border: 2px solid #FFF8FC;
 }
 ::-webkit-scrollbar-thumb:hover {
     background: #C4007A;

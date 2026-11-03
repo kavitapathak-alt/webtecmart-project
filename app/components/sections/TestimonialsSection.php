@@ -79,7 +79,7 @@ function renderTestimonialsSection(): void
             position: relative;
             width: 100%;
             padding: 32px 0 28px;
-            background: #FBF8F1;
+            background: #FFF8FC;
             overflow: hidden;
         }
         @media (min-width: 768px) {

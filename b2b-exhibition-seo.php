@@ -20,7 +20,7 @@ $bodyCopy  = $dbService['body'] ?? '';
        ============================================================ */
     .ev-page {
         width: 100%;
-        background: #FBF8F1;
+        background: #FFF8FC;
         color: #1F1B2A;
         font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         overflow: hidden;
@@ -396,7 +396,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     /* ===== EVENT LIFECYCLE TIMELINE ===== */
     .ev-lifecycle-section {
         padding: 44px 0 36px;
-        background: #FBF8F1;
+        background: #FFF8FC;
     }
     .ev-lifecycle-grid {
         display: grid;
@@ -526,7 +526,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     /* ===== AUDIT & ENQUIRY FORM ===== */
     .ev-form-section {
         padding: 44px 0 48px;
-        background: #FBF8F1;
+        background: #FFF8FC;
     }
     .ev-form-box {
         background: #FFFFFF;
@@ -698,7 +698,7 @@ $bodyCopy  = $dbService['body'] ?? '';
     /* ===== CONVERSION CTA BANNER ===== */
     .ev-cta-section {
         padding: 36px 0 48px;
-        background: #FBF8F1;
+        background: #FFF8FC;
     }
     .ev-cta-card {
         background: linear-gradient(135deg, #2D051E 0%, #0F172A 100%);

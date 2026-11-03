@@ -90,7 +90,7 @@ export default function WhatWeDoSection() {
               <Link
                 key={service.id}
                 href={service.href}
-                className="group rounded-2xl border border-gray-100 bg-[#FBF8F1] p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5"
+                className="group rounded-2xl border border-gray-100 bg-[#FFF8FC] p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-black/5"
               >
                 <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-black transition-colors duration-300 group-hover:bg-[#C4007A]">
                   <Icon className="h-5 w-5 text-[#F9A8D4]" />

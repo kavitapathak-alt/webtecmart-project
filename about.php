@@ -37,7 +37,7 @@ function apIcon(string $name): string {
     .ap-section {
         position: relative;
         width: 100%;
-        background: #FBF8F1;
+        background: #FFF8FC;
         overflow: hidden;
         color: #1F1B2A;
     }

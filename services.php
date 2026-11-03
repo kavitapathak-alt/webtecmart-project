@@ -48,7 +48,7 @@ function spIcon(string $name): string {
     .sp-page {
         position: relative;
         width: 100%;
-        background: #FBF8F1;
+        background: #FFF8FC;
         overflow: hidden;
         color: #1F1B2A;
     }
@@ -266,7 +266,7 @@ function spIcon(string $name): string {
         width: 100%;
         border-radius: 12px;
         border: 1px solid rgba(196, 0, 122, 0.15);
-        background: rgba(251, 248, 241, 0.6);
+        background: rgba(255, 255, 255, 0.6);
         padding: 12px 16px;
         font-size: 0.875rem;
         color: #111827;
@@ -290,7 +290,7 @@ function spIcon(string $name): string {
         gap: 10px;
         border-radius: 12px;
         border: 1px dashed rgba(196, 0, 122, 0.2);
-        background: rgba(251, 248, 241, 0.6);
+        background: rgba(255, 255, 255, 0.6);
         padding: 12px 16px;
         cursor: pointer;
         user-select: none;
@@ -404,7 +404,7 @@ function spIcon(string $name): string {
     .sp-website-cta {
         position: relative;
         width: 100%;
-        background: #FBF8F1;
+        background: #FFF8FC;
         padding: 40px 0;
         overflow: hidden;
     }
@@ -483,7 +483,7 @@ function spIcon(string $name): string {
     .sp-stats-section {
         position: relative;
         width: 100%;
-        background: #FBF8F1;
+        background: #FFF8FC;
         overflow: hidden;
     }
 

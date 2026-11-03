@@ -595,6 +595,12 @@ function blogPosts(): array
         }
     }
     unset($post);
+
+    // User requested: Newly added blogs should always appear at the top (newest ID first)
+    usort($posts, static function (array $a, array $b): int {
+        return ((int) ($b['id'] ?? 0)) <=> ((int) ($a['id'] ?? 0));
+    });
+
     return $posts;
 }
 

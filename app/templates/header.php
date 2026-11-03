@@ -61,7 +61,7 @@ $navItems = [
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         :root {
-            --bg: #FBF8F1;
+            --bg: #FFF8FC;
             --primary: #C4007A;
             --primary-dark: #A3005F;
             --primary-light: #E0398F;
@@ -169,7 +169,7 @@ $navItems = [
 
         /* ===== HEADER ===== */
         .site-header {
-            background: rgba(251, 248, 241, 0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid var(--border-soft);
@@ -186,7 +186,7 @@ $navItems = [
         }
 
         .site-header.scrolled {
-            background: rgba(251, 248, 241, 0.98);
+            background: rgba(255, 255, 255, 0.98);
             box-shadow: 0 4px 30px rgba(196, 0, 122, 0.15);
         }
 
@@ -373,7 +373,7 @@ $navItems = [
             overflow: hidden;
             border: 1px solid rgba(196, 0, 122, 0.14);
             border-radius: 24px;
-            background: #FBF8F1;
+            background: #FFF8FC;
             box-shadow: 0 24px 80px rgba(31, 27, 42, 0.22);
         }
 
@@ -597,7 +597,7 @@ $navItems = [
         /* ===== MOBILE MENU PANEL ===== */
         .mobile-menu {
             display: none;
-            background: #FBF8F1;
+            background: #FFF8FC;
             border-top: 1px solid var(--border-soft);
             padding: 16px 0 24px;
             box-shadow: 0 25px 50px -12px rgba(31, 27, 42, 0.18);

@@ -32,7 +32,7 @@ function renderHeroSection(): void
             width: 100%;
             padding: 24px 0 20px;
             overflow: hidden;
-            background: #FBF8F1;
+            background: #FFF8FC;
         }
 
         /* Decorative Background Elements */

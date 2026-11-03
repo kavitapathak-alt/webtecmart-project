@@ -19,7 +19,7 @@ function renderTrustedPartnersSection(): void
             position: relative;
             width: 100%;
             padding: 24px 0;
-            background: #FBF8F1;
+            background: #FFF8FC;
             overflow: hidden;
             border-top: 1px solid rgba(196, 0, 122, 0.05);
             border-bottom: 1px solid rgba(196, 0, 122, 0.05);
@@ -37,12 +37,12 @@ function renderTrustedPartnersSection(): void
 
         .tp-edge-left {
             left: 0;
-            background: linear-gradient(to right, #FBF8F1, transparent);
+            background: linear-gradient(to right, #FFF8FC, transparent);
         }
 
         .tp-edge-right {
             right: 0;
-            background: linear-gradient(to left, #FBF8F1, transparent);
+            background: linear-gradient(to left, #FFF8FC, transparent);
         }
 
         /* ===== Header ===== */
@@ -127,12 +127,12 @@ function renderTrustedPartnersSection(): void
 
         .tp-marquee-fade-left {
             left: 0;
-            background: linear-gradient(to right, #FBF8F1, transparent);
+            background: linear-gradient(to right, #FFF8FC, transparent);
         }
 
         .tp-marquee-fade-right {
             right: 0;
-            background: linear-gradient(to left, #FBF8F1, transparent);
+            background: linear-gradient(to left, #FFF8FC, transparent);
         }
 
         /* Marquee viewport */

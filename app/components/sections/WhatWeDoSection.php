@@ -100,7 +100,7 @@ function renderWhatWeDoSection(): void
            ============================================================ */
         .core-services-section {
             width: 100%;
-            background: #FBF8F1;
+            background: #FFF8FC;
             padding: 32px 0 24px;
             position: relative;
         }

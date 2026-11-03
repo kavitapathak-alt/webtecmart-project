@@ -151,7 +151,7 @@ function renderServicePageLayout(array $config): void
            ============================================================ */
         .svc-page {
             width: 100%;
-            background: #FBF8F1;
+            background: #FFF8FC;
             color: #1F1B2A;
             overflow: hidden;
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
@@ -227,7 +227,7 @@ function renderServicePageLayout(array $config): void
         .svc-hero {
             position: relative;
             padding: 36px 0 32px;
-            background: linear-gradient(180deg, rgba(252, 232, 243, 0.4) 0%, rgba(251, 248, 241, 0) 100%);
+            background: linear-gradient(180deg, rgba(252, 232, 243, 0.4) 0%, rgba(255, 255, 255, 0) 100%);
             border-bottom: 1px solid rgba(196, 0, 122, 0.06);
         }
         .svc-hero-grid {
@@ -586,7 +586,7 @@ function renderServicePageLayout(array $config): void
         /* ===== APPROACH & METHODOLOGY ===== */
         .svc-approach-section {
             padding: 36px 0 28px;
-            background: #FBF8F1;
+            background: #FFF8FC;
         }
         .svc-overview-banner {
             background: #FFFFFF;
@@ -736,7 +736,7 @@ function renderServicePageLayout(array $config): void
         /* ===== PROCESS ROADMAP ===== */
         .svc-process-section {
             padding: 36px 0 30px;
-            background: #FBF8F1;
+            background: #FFF8FC;
         }
         .svc-process-grid {
             display: grid;
@@ -873,7 +873,7 @@ function renderServicePageLayout(array $config): void
         /* ===== WHY CHOOSE WEBTECMART ===== */
         .svc-why-section {
             padding: 36px 0 30px;
-            background: #FBF8F1;
+            background: #FFF8FC;
         }
         .svc-why-grid {
             display: grid;
@@ -1014,7 +1014,7 @@ function renderServicePageLayout(array $config): void
         /* ===== CONVERSION CTA BANNER ===== */
         .svc-cta-section {
             padding: 32px 0 44px;
-            background: #FBF8F1;
+            background: #FFF8FC;
         }
         .svc-cta-box {
             background: linear-gradient(135deg, #2D051E 0%, #0F172A 100%);

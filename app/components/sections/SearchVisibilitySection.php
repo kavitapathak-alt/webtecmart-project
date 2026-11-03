@@ -16,7 +16,7 @@ function renderSearchVisibilitySection(): void
             position: relative;
             width: 100%;
             padding: 24px 0 28px;
-            background: #FBF8F1;
+            background: #FFF8FC;
             overflow: hidden;
         }
 

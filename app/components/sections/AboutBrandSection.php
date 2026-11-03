@@ -35,7 +35,7 @@ function renderAboutBrandSection(): void
             position: relative;
             width: 100%;
             padding: 16px 0;
-            background: #FBF8F1;
+            background: #FFF8FC;
             overflow: hidden;
         }
 
