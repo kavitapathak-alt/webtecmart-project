@@ -12,8 +12,11 @@ $dbService = getServiceBySlug('seo-services-delhi');
 
 $heroTitle = $dbService['hero_title'] ?? 'Build Search Visibility That Drives Real Business Growth';
 $heroDesc = $dbService['hero_description'] ?? ($dbService['summary'] ?? 'Get discovered through traditional search and emerging AI experiences with data-led SEO built around relevant content, strong technical foundations, entity signals, and sustainable authority.');
-$founderName = $dbService['founder_name'] ?? 'Mr. Manoj Sharma';
-$founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strategist';
+$founderName = $dbService['founder_name'] ?? 'Jitin Madaan';
+$founderRole = $dbService['founder_role'] ?? 'Performance Marketing Strategist';
+$founderImage = $dbService['founder_image'] ?? '/assets/images/jitin-madaan.png';
+$founderAvatar = $dbService['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png';
+$founderInitial = 'JM';
 ?>
 
 <!-- Schema.org JSON-LD Structured Data for Local SEO & FAQPage -->
@@ -280,8 +283,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         box-shadow: 0 6px 18px rgba(196, 0, 122, 0.05);
     }
     .del-author-avatar {
-        width: 44px;
-        height: 44px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         background: linear-gradient(135deg, #C4007A, #E0398F);
         color: #FFFFFF;
@@ -289,8 +292,18 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         align-items: center;
         justify-content: center;
         font-weight: 800;
-        font-size: 1.1rem;
+        font-size: 1.05rem;
         flex-shrink: 0;
+        overflow: hidden;
+        border: 2px solid #FFF0F7;
+        box-shadow: 0 4px 10px rgba(196, 0, 122, 0.15);
+    }
+    .del-author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        display: block;
     }
     .del-author-meta .name {
         font-weight: 700;
@@ -480,8 +493,21 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
         border-radius: 20px;
         border: 1.5px solid rgba(196, 0, 122, 0.22);
         box-shadow: 0 18px 40px rgba(196, 0, 122, 0.09);
-        padding: 22px;
+        padding: 16px;
         overflow: hidden;
+    }
+    .del-serp-preview-img-wrap {
+        border-radius: 14px;
+        overflow: hidden;
+        background: #FFFFFF;
+        border: 1px solid rgba(196, 0, 122, 0.12);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+    .del-serp-preview-img-wrap img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 12px;
     }
     .del-serp-browser-bar {
         display: flex;
@@ -744,15 +770,87 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
     .del-founder-photo-box {
         position: relative;
         width: 100%;
-        max-width: 320px;
-        border-radius: 20px;
+        max-width: 330px;
+        border-radius: 24px;
         overflow: hidden;
-        border: 3px solid #FFF0F7;
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.15);
-        background: linear-gradient(135deg, #111827, #1F2937);
+        border: 2px solid #FFF0F7;
+        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.16);
+        background: linear-gradient(145deg, #18181B, #27272A);
         text-align: center;
-        padding: 30px 20px;
+        padding: 24px 20px;
         color: #FFFFFF;
+    }
+    .del-founder-img-wrapper {
+        position: relative;
+        width: 180px;
+        height: 210px;
+        margin: 0 auto 16px;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 2px solid rgba(224, 57, 143, 0.45);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+        background: #0F172A;
+    }
+    .del-founder-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center top;
+        display: block;
+    }
+    .del-founder-avatar-fallback {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #C4007A, #E0398F);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        font-weight: 800;
+    }
+    .del-founder-badge-pill {
+        position: absolute;
+        bottom: 8px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(17, 24, 39, 0.88);
+        backdrop-filter: blur(6px);
+        color: #FCE7F3;
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 3px 10px;
+        border-radius: 20px;
+        border: 1px solid rgba(224, 57, 143, 0.5);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        white-space: nowrap;
+    }
+    .del-founder-badge-pill .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #10B981;
+    }
+    .del-founder-name-tag {
+        color: #FFFFFF;
+        font-size: 1.25rem;
+        font-weight: 800;
+        margin: 0 0 4px;
+        letter-spacing: -0.01em;
+    }
+    .del-founder-role-tag {
+        color: #FCE7F3;
+        font-size: 0.84rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+    .del-founder-bio {
+        font-size: 0.82rem;
+        color: #D1D5DB;
+        margin: 0;
+        line-height: 1.5;
     }
 
     /* What We Offer 6 Cards */
@@ -1178,10 +1276,16 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
 
                     <!-- Strategist / Author Stamp (Image 1 Style) -->
                     <div class="del-author-card">
-                        <div class="del-author-avatar">MS</div>
+                        <div class="del-author-avatar">
+                            <?php if (!empty($founderAvatar) && file_exists(__DIR__ . $founderAvatar)): ?>
+                                <img src="<?= htmlspecialchars($founderAvatar) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-author-img">
+                            <?php else: ?>
+                                <?= htmlspecialchars($founderInitial) ?>
+                            <?php endif; ?>
+                        </div>
                         <div class="del-author-meta">
                             <div class="name"><?= htmlspecialchars($founderName) ?></div>
-                            <div class="sub"><?= htmlspecialchars($founderRole) ?> &bull; Published: Nov 04, 2025 &bull; Updated: Oct 31, 2026</div>
+                            <div class="sub"><?= htmlspecialchars($founderRole) ?> &bull; Published: Nov 04, 2025 &bull; Updated: Nov 03, 2026</div>
                         </div>
                     </div>
                 </div>
@@ -1319,45 +1423,8 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                 <!-- Right Column: Visual Google SERP AI Overview (Matching Image 2) -->
                 <div class="del-takeaways-right" data-wtm-reveal="fade-up">
                     <div class="del-serp-mockup">
-                        <div class="del-serp-browser-bar">
-                            <span class="search-icon">🔍</span>
-                            <span>seo services delhi</span>
-                        </div>
-
-                        <div class="del-serp-tabs">
-                            <span class="active">All</span>
-                            <span>Images</span>
-                            <span>Videos</span>
-                            <span>Forums</span>
-                            <span>News</span>
-                            <span>Tools</span>
-                        </div>
-
-                        <!-- AI Overview Mockup -->
-                        <div class="del-ai-overview-card">
-                            <div class="del-ai-tag">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
-                                <span>AI Overview</span>
-                            </div>
-                            <p class="del-ai-desc">
-                                <strong>SEO services</strong> help your website rank higher on search engines like Google to get more organic visitors. Key offerings include technical site architecture, keyword research, and on-page optimization. Top-ranked agencies in the Delhi NCR region include <strong>WebTecMart</strong>, recognized for commercial lead generation and verified top positions.
-                            </p>
-                        </div>
-
-                        <!-- #1 Ranked Result Highlighted -->
-                        <div class="del-serp-winner-card">
-                            <span class="del-winner-badge">🏆 #1 RANKED RESULT</span>
-                            <div class="del-winner-url">https://webtecmart.com &gt; seo-services-delhi</div>
-                            <div class="del-winner-title">WebTecMart &mdash; Top SEO Company in Delhi NCR | Guaranteed Organic Growth</div>
-                            <p class="del-winner-snippet">
-                                Drive qualified organic revenue with WebTecMart. 13+ years experience, 1,000+ happy clients. Custom technical SEO, local 3-pack rankings, and high-intent keyword strategies.
-                            </p>
-                            <div class="del-winner-sitelinks">
-                                <span>&bull; Core SEO Services</span>
-                                <span>&bull; Verified Case Studies</span>
-                                <span>&bull; Local SEO Delhi</span>
-                                <span>&bull; Request Quote</span>
-                            </div>
+                        <div class="del-serp-preview-img-wrap">
+                            <img src="/assets/images/seo-takeaways-preview.png" alt="Google Search SEO Rankings Delhi WebTecMart" class="del-serp-img" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -1492,12 +1559,19 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
 
                 <div class="del-founder-right">
                     <div class="del-founder-photo-box">
-                        <div style="width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #C4007A, #E0398F); margin: 0 auto 16px; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; font-weight: 800; color: #fff;">
-                            MS
+                        <div class="del-founder-img-wrapper">
+                            <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
+                                <img src="<?= htmlspecialchars($founderImage) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-founder-photo">
+                            <?php else: ?>
+                                <div class="del-founder-avatar-fallback"><?= htmlspecialchars($founderInitial) ?></div>
+                            <?php endif; ?>
+                            <div class="del-founder-badge-pill">
+                                <span class="badge-dot"></span> Verified Strategist
+                            </div>
                         </div>
-                        <h4 style="color: #FFFFFF; font-size: 1.15rem; margin: 0 0 4px;"><?= htmlspecialchars($founderName) ?></h4>
-                        <div style="color: #FCE7F3; font-size: 0.8rem; margin-bottom: 12px;"><?= htmlspecialchars($founderRole) ?></div>
-                        <p style="font-size: 0.82rem; color: #D1D5DB; margin: 0; line-height: 1.5;">
+                        <h4 class="del-founder-name-tag"><?= htmlspecialchars($founderName) ?></h4>
+                        <div class="del-founder-role-tag"><?= htmlspecialchars($founderRole) ?></div>
+                        <p class="del-founder-bio">
                             Architect of search campaigns powering 5,000+ top Google rankings across Delhi NCR and global B2B exhibitions.
                         </p>
                     </div>
@@ -1761,7 +1835,7 @@ $founderRole = $dbService['founder_role'] ?? 'Co-Founder & Digital Growth Strate
                             <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
                         </tr>
                         <tr>
-                            <td><strong>IHGF Autumn Fair Dates 2026</strong></td>
+                            <td><strong>IHGF Autumn Fair Dates 2027</strong></td>
                             <td style="color: #6B7280; font-size: 0.82rem;">ihgfdelhifair.in</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +25 Positions</span></td>

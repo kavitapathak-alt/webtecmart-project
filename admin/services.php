@@ -141,8 +141,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // Preserve existing metadata (e.g. custom rankings, case_results, etc.)
+        $existingMeta = [];
+        if ($id !== null) {
+            $prev = db()->prepare('SELECT metadata FROM content_items WHERE id = :id');
+            $prev->execute([':id' => $id]);
+            $prevRow = $prev->fetch();
+            if ($prevRow && !empty($prevRow['metadata'])) {
+                $existingMeta = json_decode($prevRow['metadata'], true) ?: [];
+            }
+        }
+
         // Build Metadata payload
-        $metadata = [
+        $metadata = array_merge($existingMeta, [
             'title'            => $title,
             'summary'          => $summary,
             'body'             => $body,
@@ -155,9 +166,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'process'          => $process,
             'faqs'             => $faqs,
             'benefits'         => $benefits,
+            'founder_name'     => trim($_POST['founder_name'] ?? ($existingMeta['founder_name'] ?? 'Jitin Madaan')),
+            'founder_role'     => trim($_POST['founder_role'] ?? ($existingMeta['founder_role'] ?? 'Performance Marketing Strategist')),
+            'founder_image'    => trim($_POST['founder_image'] ?? ($existingMeta['founder_image'] ?? '/assets/images/jitin-madaan.png')),
+            'founder_avatar'   => trim($_POST['founder_avatar'] ?? ($existingMeta['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png')),
             'page_meta_title'  => trim($_POST['page_meta_title'] ?? ($title . ' | WebTecMart')),
             'page_meta_desc'   => trim($_POST['page_meta_desc'] ?? $summary),
-        ];
+        ]);
 
         $payloadJson = json_encode($metadata, JSON_UNESCAPED_UNICODE);
 
@@ -855,6 +870,28 @@ require_once __DIR__ . '/templates/header.php';
                     <div class="scms-form-group">
                         <label>Short Excerpt / Card Summary</label>
                         <textarea name="summary" class="scms-form-control" placeholder="Brief summary used in cards and search engine snippets..."><?= htmlspecialchars($item['summary'] ?? '') ?></textarea>
+                    </div>
+
+                    <div class="scms-form-group" style="background: #FFF5FA; border: 1.5px solid rgba(196, 0, 122, 0.2); border-radius: 12px; padding: 18px; margin-top: 18px;">
+                        <label class="fw-bold text-dark mb-2" style="color: #C4007A !important; font-size: 0.95rem;">Lead Strategist / Executive Spotlight</label>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="small text-muted mb-1">Strategist Name</label>
+                                <input type="text" name="founder_name" class="scms-form-control" value="<?= htmlspecialchars($item['founder_name'] ?? 'Jitin Madaan') ?>" placeholder="e.g. Jitin Madaan">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small text-muted mb-1">Strategist Role / Title</label>
+                                <input type="text" name="founder_role" class="scms-form-control" value="<?= htmlspecialchars($item['founder_role'] ?? 'Performance Marketing Strategist') ?>" placeholder="e.g. Performance Marketing Strategist">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small text-muted mb-1">Strategist Photo URL</label>
+                                <input type="text" name="founder_image" class="scms-form-control" value="<?= htmlspecialchars($item['founder_image'] ?? '/assets/images/jitin-madaan.png') ?>" placeholder="/assets/images/jitin-madaan.png">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small text-muted mb-1">Strategist Avatar URL</label>
+                                <input type="text" name="founder_avatar" class="scms-form-control" value="<?= htmlspecialchars($item['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png') ?>" placeholder="/assets/images/jitin-madaan-avatar.png">
+                            </div>
+                        </div>
                     </div>
                 </div>
 

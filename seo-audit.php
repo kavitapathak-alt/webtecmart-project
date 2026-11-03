@@ -1241,9 +1241,11 @@ $dbService = getServiceBySlug('seo-audit');
                     </div>
 
                     <div class="aud-hero-author-card">
-                        <div class="aud-author-avatar">MS</div>
+                        <div class="aud-author-avatar">
+                            <img src="/assets/images/jitin-madaan-avatar.png" alt="Jitin Madaan" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                        </div>
                         <div class="aud-author-info">
-                            <div class="aud-author-name">Manoj Sharma • Senior Search Strategist</div>
+                            <div class="aud-author-name">Jitin Madaan • Performance Marketing Strategist</div>
                             <div class="aud-author-meta">Published: Apr 13, 2026 • Verified White-Hat Google Standards</div>
                         </div>
                     </div>
@@ -2051,7 +2053,7 @@ $dbService = getServiceBySlug('seo-audit');
                         <h3 class="aud-post-title">What Causes Google Search Ranking Fluctuations &amp; How to Fix Them</h3>
                         <p class="aud-post-excerpt">Algorithm updates, competitor content shifts, technical crawl traps, and Core Web Vitals latency can disrupt SERP positions. Here is our step-by-step recovery playbook.</p>
                         <div class="aud-post-meta">
-                            <span>By Manoj Sharma</span>
+                            <span>By Jitin Madaan</span>
                             <span>Oct 15, 2026</span>
                         </div>
                         <a href="/blog.php" class="aud-post-btn">
@@ -2070,7 +2072,7 @@ $dbService = getServiceBySlug('seo-audit');
                         <h3 class="aud-post-title">6 Ways to Check How Strong Your Website Is for SEO</h3>
                         <p class="aud-post-excerpt">Learn how to run essential checks on your website's indexation, site speed, internal linking architecture, and schema markup to identify hidden revenue leaks.</p>
                         <div class="aud-post-meta">
-                            <span>By Manoj Sharma</span>
+                            <span>By Jitin Madaan</span>
                             <span>Sep 25, 2026</span>
                         </div>
                         <a href="/blog.php" class="aud-post-btn">

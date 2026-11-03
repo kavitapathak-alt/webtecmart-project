@@ -1319,7 +1319,7 @@ $bodyCopy  = $dbService['body'] ?? '';
                             <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
                         </tr>
                         <tr>
-                            <td><strong>IHGF Autumn Fair Dates 2026</strong></td>
+                            <td><strong>IHGF Autumn Fair Dates 2027</strong></td>
                             <td style="color: #6B7280; font-size: 0.82rem;">ihgfdelhifair.in</td>
                             <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
                             <td><span class="del-kw-gain">↑ +25 Positions</span></td>
