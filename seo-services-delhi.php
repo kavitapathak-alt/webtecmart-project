@@ -18,6 +18,9 @@ $founderImage = $dbService['founder_image'] ?? '/assets/images/jitin-madaan.png'
 $founderAvatar = $dbService['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png';
 $founderInitial = 'JM';
 
+// Key Takeaways Google SERP Image (dynamic & uploadable in admin)
+$serpImage = $dbService['serp_image'] ?? '/assets/images/seo-takeaways-preview.png';
+
 // 1. Dynamic Brand Logos (Image 1 Reference)
 $brandLogos = $dbService['brand_logos'] ?? [
     ['name' => 'Informa Global', 'logo' => '/assets/images/logo-1.png', 'category' => 'Trade Events'],
@@ -132,6 +135,7 @@ $masterclass = $dbService['masterclass'] ?? [
         ]
     ]
 ];
+$mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?? '/assets/images/case-study-1.jpg';
 ?>
 
 <!-- Swiper 11 CSS for Touch Sliders -->
@@ -568,17 +572,21 @@ $masterclass = $dbService['masterclass'] ?? [
        NEW SECTION 1: TOP BRAND LOGOS MARQUEE (Image 1 Reference)
        ======================================================== */
     .del-brands-section {
-        padding: 56px 0 64px;
-        background: #FFFFFF;
+        padding: 60px 0 68px;
+        background: linear-gradient(180deg, #FFFFFF 0%, #FFF8FB 100%);
         position: relative;
         overflow: hidden;
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.1);
     }
     .del-marquee-wrap {
         position: relative;
         width: 100%;
         overflow: hidden;
-        padding: 10px 0;
+        padding: 22px 0;
+        border-radius: 24px;
+        background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(255, 240, 247, 0.75) 100%);
+        border: 1.5px solid rgba(196, 0, 122, 0.18);
+        box-shadow: inset 0 2px 14px rgba(196, 0, 122, 0.04);
     }
     .del-marquee-wrap::before,
     .del-marquee-wrap::after {
@@ -586,23 +594,28 @@ $masterclass = $dbService['masterclass'] ?? [
         position: absolute;
         top: 0;
         bottom: 0;
-        width: 120px;
+        width: 90px;
         z-index: 3;
         pointer-events: none;
     }
     .del-marquee-wrap::before {
         left: 0;
-        background: linear-gradient(90deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(90deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
+        border-top-left-radius: 22px;
+        border-bottom-left-radius: 22px;
     }
     .del-marquee-wrap::after {
         right: 0;
-        background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(270deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
+        border-top-right-radius: 22px;
+        border-bottom-right-radius: 22px;
     }
     .del-marquee-track {
         display: flex;
         gap: 20px;
         width: max-content;
         animation: delMarqueeLeft 38s linear infinite;
+        padding: 4px 10px;
     }
     .del-marquee-track.reverse {
         animation: delMarqueeRight 42s linear infinite;
@@ -624,10 +637,10 @@ $masterclass = $dbService['masterclass'] ?? [
         align-items: center;
         gap: 14px;
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
+        border: 1.5px solid rgba(196, 0, 122, 0.16);
         border-radius: 16px;
         padding: 12px 22px;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
+        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.05);
         transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         white-space: nowrap;
         cursor: default;
@@ -635,15 +648,16 @@ $masterclass = $dbService['masterclass'] ?? [
     .del-brand-card:hover {
         transform: translateY(-4px);
         border-color: #C4007A;
-        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.14);
+        background: #FFF5FA;
+        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.18);
     }
     .del-brand-logo-img {
-        height: 36px;
+        height: 38px;
         width: auto;
-        max-width: 90px;
+        max-width: 95px;
         object-fit: contain;
         filter: grayscale(100%);
-        opacity: 0.82;
+        opacity: 0.85;
         transition: all 0.3s ease;
     }
     .del-brand-card:hover .del-brand-logo-img {
@@ -658,10 +672,11 @@ $masterclass = $dbService['masterclass'] ?? [
     }
     .del-brand-info .b-cat {
         font-size: 0.72rem;
-        font-weight: 600;
+        font-weight: 700;
         color: #C4007A;
         text-transform: uppercase;
         letter-spacing: 0.04em;
+        margin-top: 2px;
     }
 
     /* ========================================================
@@ -1879,13 +1894,13 @@ $masterclass = $dbService['masterclass'] ?? [
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
     }
     .del-cta-box {
-        background: linear-gradient(135deg, #111827 0%, #1F2937 100%);
-        border: 2px solid rgba(196, 0, 122, 0.35);
+        background: linear-gradient(135deg, #C4007A 0%, #E0398F 50%, #9B0060 100%);
+        border: 2px solid rgba(255, 255, 255, 0.35);
         border-radius: 28px;
         padding: 56px 36px;
         text-align: center;
         color: #FFFFFF;
-        box-shadow: 0 24px 60px rgba(196, 0, 122, 0.15);
+        box-shadow: 0 24px 60px rgba(196, 0, 122, 0.35);
         position: relative;
         overflow: hidden;
     }
@@ -1896,7 +1911,7 @@ $masterclass = $dbService['masterclass'] ?? [
         left: -50%;
         width: 200%;
         height: 200%;
-        background: radial-gradient(circle, rgba(196, 0, 122, 0.18) 0%, transparent 60%);
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.22) 0%, transparent 60%);
         pointer-events: none;
     }
     .del-cta-box h2 {
@@ -1904,15 +1919,21 @@ $masterclass = $dbService['masterclass'] ?? [
         font-weight: 800;
         margin: 0 0 16px;
         position: relative;
+        color: #FFFFFF;
+        text-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
     }
     .del-cta-box h2 span {
-        color: #E0398F;
+        color: #FFE5F1;
+        text-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
     }
     .del-cta-box p {
         font-size: 1.05rem;
-        color: #E5E7EB;
+        color: rgba(255, 255, 255, 0.95);
         max-width: 680px;
         margin: 0 auto 32px;
+        line-height: 1.65;
+        position: relative;
+    }
         line-height: 1.65;
         position: relative;
     }
@@ -2103,49 +2124,53 @@ $masterclass = $dbService['masterclass'] ?? [
                     Here are just a few of the organisers, global trade expos, and high-growth brands we've helped with strategic search optimisation campaigns.
                 </p>
             </div>
-        </div>
 
-        <div class="del-marquee-wrap">
-            <!-- Row 1: Leftward Ticker -->
-            <div class="del-marquee-track">
-                <?php 
-                $doubleLogos = array_merge($brandLogos, $brandLogos);
-                foreach ($doubleLogos as $b): ?>
-                    <div class="del-brand-card">
-                        <?php if (!empty($b['logo']) && file_exists(__DIR__ . $b['logo'])): ?>
-                            <img src="<?= htmlspecialchars($b['logo']) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
-                        <?php else: ?>
-                            <div style="width: 36px; height: 36px; border-radius: 8px; background: #FFF0F7; color: #C4007A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">
-                                <?= htmlspecialchars(substr($b['name'], 0, 2)) ?>
+            <div class="del-marquee-wrap">
+                <!-- Row 1: Leftward Ticker -->
+                <div class="del-marquee-track">
+                    <?php 
+                    $doubleLogos = array_merge($brandLogos, $brandLogos);
+                    foreach ($doubleLogos as $b): 
+                        $imgPath = $b['logo'] ?? '';
+                    ?>
+                        <div class="del-brand-card">
+                            <?php if (!empty($imgPath)): ?>
+                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
+                            <?php else: ?>
+                                <div style="width: 36px; height: 36px; border-radius: 8px; background: #FFF0F7; color: #C4007A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">
+                                    <?= htmlspecialchars(substr($b['name'], 0, 2)) ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="del-brand-info">
+                                <div class="b-name"><?= htmlspecialchars($b['name']) ?></div>
+                                <div class="b-cat"><?= htmlspecialchars($b['category'] ?? 'Enterprise Brand') ?></div>
                             </div>
-                        <?php endif; ?>
-                        <div class="del-brand-info">
-                            <div class="b-name"><?= htmlspecialchars($b['name']) ?></div>
-                            <div class="b-cat"><?= htmlspecialchars($b['category'] ?? 'Enterprise Brand') ?></div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
+                    <?php endforeach; ?>
+                </div>
 
-            <!-- Row 2: Rightward Ticker -->
-            <div class="del-marquee-track reverse">
-                <?php 
-                $reversedLogos = array_reverse($doubleLogos);
-                foreach ($reversedLogos as $b): ?>
-                    <div class="del-brand-card">
-                        <?php if (!empty($b['logo']) && file_exists(__DIR__ . $b['logo'])): ?>
-                            <img src="<?= htmlspecialchars($b['logo']) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
-                        <?php else: ?>
-                            <div style="width: 36px; height: 36px; border-radius: 8px; background: #FFF0F7; color: #C4007A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">
-                                <?= htmlspecialchars(substr($b['name'], 0, 2)) ?>
+                <!-- Row 2: Rightward Ticker -->
+                <div class="del-marquee-track reverse">
+                    <?php 
+                    $reversedLogos = array_reverse($doubleLogos);
+                    foreach ($reversedLogos as $b): 
+                        $imgPath = $b['logo'] ?? '';
+                    ?>
+                        <div class="del-brand-card">
+                            <?php if (!empty($imgPath)): ?>
+                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
+                            <?php else: ?>
+                                <div style="width: 36px; height: 36px; border-radius: 8px; background: #FFF0F7; color: #C4007A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">
+                                    <?= htmlspecialchars(substr($b['name'], 0, 2)) ?>
+                                </div>
+                            <?php endif; ?>
+                            <div class="del-brand-info">
+                                <div class="b-name"><?= htmlspecialchars($b['name']) ?></div>
+                                <div class="b-cat"><?= htmlspecialchars($b['category'] ?? 'Verified Partner') ?></div>
                             </div>
-                        <?php endif; ?>
-                        <div class="del-brand-info">
-                            <div class="b-name"><?= htmlspecialchars($b['name']) ?></div>
-                            <div class="b-cat"><?= htmlspecialchars($b['category'] ?? 'Verified Partner') ?></div>
                         </div>
-                    </div>
-                <?php endforeach; ?>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </section>
@@ -2310,7 +2335,7 @@ $masterclass = $dbService['masterclass'] ?? [
                 <div class="del-takeaways-right" data-framer-reveal="slide-right">
                     <div class="del-serp-mockup">
                         <div class="del-serp-preview-img-wrap">
-                            <img src="/assets/images/seo-takeaways-preview.png" alt="Google Search SEO Rankings Delhi WebTecMart" class="del-serp-img" loading="lazy">
+                            <img src="<?= htmlspecialchars($serpImage) ?>" alt="Google Search SEO Rankings Delhi WebTecMart" class="del-serp-img" loading="lazy">
                         </div>
                     </div>
                 </div>
@@ -2628,7 +2653,7 @@ $masterclass = $dbService['masterclass'] ?? [
                 <!-- Right: Interactive Video Player Card -->
                 <div class="del-mc-right" data-framer-reveal="slide-right">
                     <div class="del-mc-video-card" onclick="openMasterclassModal()">
-                        <div class="del-mc-video-thumb">
+                        <div class="del-mc-video-thumb" style="background-image: url('<?= htmlspecialchars($mcVideoImage) ?>');">
                             <div class="del-mc-video-overlay"></div>
                             <div class="del-mc-play-btn">▶</div>
                         </div>
@@ -2967,16 +2992,16 @@ $masterclass = $dbService['masterclass'] ?? [
                 </p>
 
                 <div class="del-cta-btns">
-                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; box-shadow: 0 10px 25px rgba(0,0,0,0.15);">
+                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.18);">
                         <span>Get Free Consultation</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
-                    <a href="tel:+919999674255" class="del-btn-secondary" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.4); color: #FFFFFF !important;">
+                    <a href="tel:+919999674255" class="del-btn-secondary" style="background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.85); color: #FFFFFF !important; font-weight: 700;">
                         <span>Call: +91-9999674255</span>
                     </a>
                 </div>
 
-                <div style="margin-top: 22px; font-size: 0.8rem; color: rgba(255, 255, 255, 0.75);">
+                <div style="margin-top: 22px; font-size: 0.85rem; color: rgba(255, 255, 255, 0.95); position: relative; font-weight: 500;">
                     Free Strategy Consultation &bull; Zero Obligation &bull; Tailored Delhi NCR Action Plan
                 </div>
             </div>

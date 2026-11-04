@@ -152,6 +152,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // Handle image file uploads
+        $founderImage = trim($_POST['founder_image'] ?? ($existingMeta['founder_image'] ?? '/assets/images/jitin-madaan.png'));
+        if (!empty($_FILES['founder_image_file']['tmp_name']) && is_uploaded_file($_FILES['founder_image_file']['tmp_name'])) {
+            try {
+                $up = uploadCmsImage($_FILES['founder_image_file']);
+                if ($up) $founderImage = $up;
+            } catch (Throwable $e) {}
+        }
+
+        $founderAvatar = trim($_POST['founder_avatar'] ?? ($existingMeta['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png'));
+        if (!empty($_FILES['founder_avatar_file']['tmp_name']) && is_uploaded_file($_FILES['founder_avatar_file']['tmp_name'])) {
+            try {
+                $up = uploadCmsImage($_FILES['founder_avatar_file']);
+                if ($up) $founderAvatar = $up;
+            } catch (Throwable $e) {}
+        }
+
+        $serpImage = trim($_POST['serp_image'] ?? ($existingMeta['serp_image'] ?? '/assets/images/seo-takeaways-preview.png'));
+        if (!empty($_FILES['serp_image_file']['tmp_name']) && is_uploaded_file($_FILES['serp_image_file']['tmp_name'])) {
+            try {
+                $up = uploadCmsImage($_FILES['serp_image_file']);
+                if ($up) $serpImage = $up;
+            } catch (Throwable $e) {}
+        }
+
         // Build Metadata payload
         $metadata = array_merge($existingMeta, [
             'title'            => $title,
@@ -168,8 +193,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'benefits'         => $benefits,
             'founder_name'     => trim($_POST['founder_name'] ?? ($existingMeta['founder_name'] ?? 'Jitin Madaan')),
             'founder_role'     => trim($_POST['founder_role'] ?? ($existingMeta['founder_role'] ?? 'Performance Marketing Strategist')),
-            'founder_image'    => trim($_POST['founder_image'] ?? ($existingMeta['founder_image'] ?? '/assets/images/jitin-madaan.png')),
-            'founder_avatar'   => trim($_POST['founder_avatar'] ?? ($existingMeta['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png')),
+            'founder_image'    => $founderImage,
+            'founder_avatar'   => $founderAvatar,
+            'serp_image'       => $serpImage,
             'page_meta_title'  => trim($_POST['page_meta_title'] ?? ($title . ' | WebTecMart')),
             'page_meta_desc'   => trim($_POST['page_meta_desc'] ?? $summary),
         ]);
@@ -203,6 +229,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (isset($_POST['mc_title'])) {
             $skillsRaw = trim($_POST['mc_skills'] ?? '');
             $skillsArr = array_filter(array_map('trim', explode("\n", $skillsRaw)));
+            $mcVideoImg = trim($_POST['mc_video_image'] ?? ($existingMeta['masterclass']['video_image'] ?? '/assets/images/case-study-1.jpg'));
+            if (!empty($_FILES['mc_image_file']['tmp_name']) && is_uploaded_file($_FILES['mc_image_file']['tmp_name'])) {
+                try {
+                    $up = uploadCmsImage($_FILES['mc_image_file']);
+                    if ($up) $mcVideoImg = $up;
+                } catch (Throwable $e) {}
+            }
             $metadata['masterclass'] = [
                 'title'          => trim($_POST['mc_title'] ?? 'SEO Masterclass & In-House Blueprint.'),
                 'subtitle'       => trim($_POST['mc_subtitle'] ?? ''),
@@ -211,8 +244,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'skills'         => !empty($skillsArr) ? array_values($skillsArr) : ($existingMeta['masterclass']['skills'] ?? []),
                 'video_duration' => trim($_POST['mc_video_duration'] ?? '15 min executive training'),
                 'instructor'     => trim($_POST['mc_instructor'] ?? 'Jitin Madaan • Performance Marketing Strategist'),
+                'video_image'    => $mcVideoImg,
                 'reviews'        => $existingMeta['masterclass']['reviews'] ?? []
             ];
+        }
+
+        // Process Brand Logos Showcase if submitted
+        if (!empty($_POST['brand_names']) && is_array($_POST['brand_names'])) {
+            $bLogos = [];
+            foreach ($_POST['brand_names'] as $bIdx => $bName) {
+                $bName = trim($bName);
+                if ($bName === '') continue;
+                $bLogoUrl = trim($_POST['brand_urls'][$bIdx] ?? '');
+                $fileKey = 'brand_logo_file_' . $bIdx;
+                if (!empty($_FILES[$fileKey]['tmp_name']) && is_uploaded_file($_FILES[$fileKey]['tmp_name'])) {
+                    try {
+                        $up = uploadCmsImage($_FILES[$fileKey]);
+                        if ($up) $bLogoUrl = $up;
+                    } catch (Throwable $e) {}
+                }
+                $bLogos[] = [
+                    'name'     => $bName,
+                    'logo'     => $bLogoUrl,
+                    'category' => trim($_POST['brand_cats'][$bIdx] ?? 'Enterprise Brand'),
+                ];
+            }
+            if (!empty($bLogos)) {
+                $metadata['brand_logos'] = $bLogos;
+            }
         }
 
         if (!empty($_POST['cf_quotes']) && is_array($_POST['cf_quotes'])) {
@@ -859,7 +918,7 @@ require_once __DIR__ . '/templates/header.php';
                 </div>
             </div>
 
-            <form method="POST" action="/admin/services.php" id="scmsServiceForm">
+            <form method="POST" action="/admin/services.php" id="scmsServiceForm" enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['cms_csrf_token']) ?>">
                 <input type="hidden" name="action" value="save">
                 <?php if (!empty($item['id'])): ?>
@@ -948,12 +1007,30 @@ require_once __DIR__ . '/templates/header.php';
                                 <input type="text" name="founder_role" class="scms-form-control" value="<?= htmlspecialchars($item['founder_role'] ?? 'Performance Marketing Strategist') ?>" placeholder="e.g. Performance Marketing Strategist">
                             </div>
                             <div class="col-md-6">
-                                <label class="small text-muted mb-1">Strategist Photo URL</label>
-                                <input type="text" name="founder_image" class="scms-form-control" value="<?= htmlspecialchars($item['founder_image'] ?? '/assets/images/jitin-madaan.png') ?>" placeholder="/assets/images/jitin-madaan.png">
+                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-image text-primary me-1"></i> Strategist Photo (High-Res Portrait)</label>
+                                <?php if (!empty($item['founder_image'])): ?>
+                                    <div class="d-flex align-items-center gap-2 mb-2 p-2 bg-white rounded border">
+                                        <img src="<?= htmlspecialchars($item['founder_image']) ?>" alt="Current Photo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px; border: 1.5px solid #C4007A;">
+                                        <div class="small text-truncate" style="max-width: 250px; color: #4B5563;">Current: <code><?= htmlspecialchars($item['founder_image']) ?></code></div>
+                                    </div>
+                                <?php endif; ?>
+                                <label class="small text-muted mb-1">Upload New Photo File (JPG, PNG, WEBP):</label>
+                                <input type="file" name="founder_image_file" accept="image/*" class="form-control form-control-sm mb-2">
+                                <label class="small text-muted mb-1">Or Direct Photo URL / Path:</label>
+                                <input type="text" name="founder_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($item['founder_image'] ?? '/assets/images/jitin-madaan.png') ?>" placeholder="/assets/images/jitin-madaan.png">
                             </div>
                             <div class="col-md-6">
-                                <label class="small text-muted mb-1">Strategist Avatar URL</label>
-                                <input type="text" name="founder_avatar" class="scms-form-control" value="<?= htmlspecialchars($item['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png') ?>" placeholder="/assets/images/jitin-madaan-avatar.png">
+                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-person-badge text-primary me-1"></i> Strategist Avatar (Hero Circular Avatar)</label>
+                                <?php if (!empty($item['founder_avatar'])): ?>
+                                    <div class="d-flex align-items-center gap-2 mb-2 p-2 bg-white rounded border">
+                                        <img src="<?= htmlspecialchars($item['founder_avatar']) ?>" alt="Current Avatar" style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 2px solid #C4007A;">
+                                        <div class="small text-truncate" style="max-width: 250px; color: #4B5563;">Current: <code><?= htmlspecialchars($item['founder_avatar']) ?></code></div>
+                                    </div>
+                                <?php endif; ?>
+                                <label class="small text-muted mb-1">Upload New Avatar File (JPG, PNG, WEBP):</label>
+                                <input type="file" name="founder_avatar_file" accept="image/*" class="form-control form-control-sm mb-2">
+                                <label class="small text-muted mb-1">Or Direct Avatar URL / Path:</label>
+                                <input type="text" name="founder_avatar" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($item['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png') ?>" placeholder="/assets/images/jitin-madaan-avatar.png">
                             </div>
                         </div>
                     </div>
@@ -1193,6 +1270,24 @@ require_once __DIR__ . '/templates/header.php';
                                     'and much more...'
                                 ])) ?></textarea>
                             </div>
+                            <div class="col-md-12 mt-2">
+                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-camera-video-fill text-primary me-1"></i> Masterclass Video Cover / Thumbnail Image</label>
+                                <?php $mcImg = $masterclass['video_image'] ?? $item['masterclass_image'] ?? '/assets/images/case-study-1.jpg'; ?>
+                                <div class="d-flex align-items-center gap-3 p-2 bg-light rounded border mb-2">
+                                    <img src="<?= htmlspecialchars($mcImg) ?>" alt="Cover" style="width: 80px; height: 50px; object-fit: cover; border-radius: 6px; border: 1.5px solid #C4007A;">
+                                    <div class="small text-truncate" style="max-width: 320px; color: #4B5563;">Current: <code><?= htmlspecialchars($mcImg) ?></code></div>
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label class="small text-muted mb-1">Upload New Video Cover File (JPG, PNG, WEBP):</label>
+                                        <input type="file" name="mc_image_file" accept="image/*" class="form-control form-control-sm">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small text-muted mb-1">Or Direct Cover URL / Path:</label>
+                                        <input type="text" name="mc_video_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($mcImg) ?>" placeholder="/assets/images/case-study-1.jpg">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -1241,6 +1336,80 @@ require_once __DIR__ . '/templates/header.php';
                                         <div class="col-12 mt-2">
                                             <label class="small text-muted">Testimonial Quote</label>
                                             <textarea name="cf_quotes[]" class="scms-form-control" rows="2" placeholder="Detailed client testimonial..."><?= htmlspecialchars($cf['quote'] ?? '') ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <!-- 4. GOOGLE SERP & AI OVERVIEW IMAGE (Image 2 Takeaways) -->
+                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-google text-primary me-2"></i> 4. Google SERP AI Overview Mockup Image (Key Takeaways Section)</h5>
+                        <p class="small text-muted mb-3">Upload or replace the high-resolution Google SERP / AI search overview graphic shown on the right side of the Key Takeaways section.</p>
+
+                        <?php $serpImgVal = $item['serp_image'] ?? '/assets/images/seo-takeaways-preview.png'; ?>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-3">
+                                <div class="p-2 border rounded bg-light text-center">
+                                    <img src="<?= htmlspecialchars($serpImgVal) ?>" alt="SERP Preview" style="max-width: 100%; max-height: 120px; object-fit: contain; border-radius: 6px;">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-upload text-primary me-1"></i> Upload New SERP Image File (PNG, JPG, WEBP)</label>
+                                <input type="file" name="serp_image_file" accept="image/*" class="form-control form-control-sm mb-2">
+                                <label class="small text-muted mb-1">Or Direct Image URL / Path:</label>
+                                <input type="text" name="serp_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($serpImgVal) ?>" placeholder="/assets/images/seo-takeaways-preview.png">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. TOP EVENT BRAND LOGOS SHOWCASE (Image 1 Marquee) -->
+                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                        <div class="d-flex align-items-center justify-content-between mb-2">
+                            <h5 class="fw-bold text-dark mb-0"><i class="bi bi-collection-fill text-primary me-2"></i> 5. Top Event Brand Logos Showcase (Image 1 Marquee)</h5>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="scmsAddBrandLogoRow()"><i class="bi bi-plus-lg me-1"></i> Add Brand Logo</button>
+                        </div>
+                        <p class="small text-muted mb-3">Upload logos and edit brand names and category tags for all event organisers featured in the marquee.</p>
+
+                        <div id="scmsBrandLogosContainer">
+                            <?php 
+                            $bList = !empty($brandLogos) ? $brandLogos : [
+                                ['name' => 'Informa Global', 'logo' => '/assets/images/logo-1.png', 'category' => 'Trade Events'],
+                                ['name' => 'Bharat Tex Fair', 'logo' => '/assets/images/logos-10.jpeg', 'category' => 'Ministry of Textiles'],
+                                ['name' => 'IHGF Delhi Autumn Fair 2027', 'logo' => '/assets/images/logos-11.jpeg', 'category' => 'Global Sourcing Fair'],
+                                ['name' => 'Clarion Events', 'logo' => '/assets/images/logos-2.png', 'category' => 'Exhibition Leader'],
+                                ['name' => 'London Tech Week', 'logo' => '/assets/images/logos-3.jpeg', 'category' => 'Tech Expo'],
+                                ['name' => 'Media 10', 'logo' => '/assets/images/logos-4.jpeg', 'category' => 'Design & Media'],
+                                ['name' => 'The AI Summit', 'logo' => '/assets/images/logos-5.jpeg', 'category' => 'Enterprise AI'],
+                                ['name' => 'Northstar Travel Group', 'logo' => '/assets/images/logos-6.jpeg', 'category' => 'Travel Group'],
+                                ['name' => 'BMJ Future Health', 'logo' => '/assets/images/logos-7.jpeg', 'category' => 'Healthcare Publishing'],
+                                ['name' => 'Stonex Jewellers', 'logo' => '/assets/images/stonex-jewellers-logo.png', 'category' => 'Luxury Retail'],
+                                ['name' => 'Innovation Zero', 'logo' => '/assets/images/logos-8.jpeg', 'category' => 'CleanTech Congress'],
+                                ['name' => 'Premier Logistics', 'logo' => '/assets/images/logos-9.jpeg', 'category' => 'Industrial Logistics']
+                            ];
+                            foreach ($bList as $bIdx => $b): ?>
+                                <div class="scms-repeater-box mb-3 p-3 bg-light rounded border">
+                                    <div class="row g-2 align-items-center">
+                                        <div class="col-md-2 text-center">
+                                            <?php if (!empty($b['logo'])): ?>
+                                                <img src="<?= htmlspecialchars($b['logo']) ?>" alt="Logo" style="max-height: 44px; max-width: 90px; object-fit: contain; background: #fff; padding: 4px; border-radius: 6px; border: 1px solid #E5E7EB;">
+                                            <?php else: ?>
+                                                <div class="badge bg-secondary p-2">No Logo</div>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="small text-muted mb-0">Brand Name</label>
+                                            <input type="text" name="brand_names[<?= $bIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($b['name']) ?>" placeholder="e.g. Informa Global">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label class="small text-muted mb-0">Category / Subtitle</label>
+                                            <input type="text" name="brand_cats[<?= $bIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($b['category'] ?? 'Enterprise Brand') ?>" placeholder="e.g. Trade Events">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small text-muted mb-0"><i class="bi bi-upload text-primary me-1"></i> Upload Logo File</label>
+                                            <input type="file" name="brand_logo_file_<?= $bIdx ?>" accept="image/*" class="form-control form-control-sm mb-1">
+                                            <input type="text" name="brand_urls[<?= $bIdx ?>]" class="scms-form-control form-control-sm small" value="<?= htmlspecialchars($b['logo']) ?>" placeholder="/assets/images/logo-1.png">
                                         </div>
                                     </div>
                                 </div>
@@ -1493,6 +1662,37 @@ require_once __DIR__ . '/templates/header.php';
                 </div>
                 <div class="col-12">
                     <textarea name="faq_answers[]" class="scms-form-control" rows="3" placeholder="Authoritative answer..."></textarea>
+                </div>
+            </div>
+        `;
+        container.appendChild(div);
+    }
+
+    // Add Dynamic Brand Logo Row
+    function scmsAddBrandLogoRow() {
+        const container = document.getElementById('scmsBrandLogosContainer');
+        if (!container) return;
+        const count = container.querySelectorAll('.scms-repeater-box').length;
+        const div = document.createElement('div');
+        div.className = 'scms-repeater-box mb-3 p-3 bg-light rounded border';
+        div.innerHTML = `
+            <button type="button" class="del-btn" onclick="this.closest('.scms-repeater-box').remove()"><i class="bi bi-x"></i></button>
+            <div class="row g-2 align-items-center">
+                <div class="col-md-2 text-center">
+                    <div class="badge bg-secondary p-2">New Brand</div>
+                </div>
+                <div class="col-md-3">
+                    <label class="small text-muted mb-0">Brand Name</label>
+                    <input type="text" name="brand_names[${count}]" class="scms-form-control form-control-sm fw-bold" placeholder="Brand Name">
+                </div>
+                <div class="col-md-3">
+                    <label class="small text-muted mb-0">Category / Subtitle</label>
+                    <input type="text" name="brand_cats[${count}]" class="scms-form-control form-control-sm" placeholder="e.g. Trade Expo" value="Enterprise Brand">
+                </div>
+                <div class="col-md-4">
+                    <label class="small text-muted mb-0"><i class="bi bi-upload text-primary me-1"></i> Upload Logo File</label>
+                    <input type="file" name="brand_logo_file_${count}" accept="image/*" class="form-control form-control-sm mb-1">
+                    <input type="text" name="brand_urls[${count}]" class="scms-form-control form-control-sm small" placeholder="/assets/images/logo-1.png">
                 </div>
             </div>
         `;
