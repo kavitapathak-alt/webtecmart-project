@@ -174,6 +174,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'page_meta_desc'   => trim($_POST['page_meta_desc'] ?? $summary),
         ]);
 
+        // Process Advance UI & Growth Sections if submitted
+        if (isset($_POST['gq_m1'])) {
+            $metadata['growth_quadrants'] = [
+                'center_label' => trim($_POST['gq_center_label'] ?? 'Clicks from Search'),
+                'center_sub'   => trim($_POST['gq_center_sub'] ?? 'Increases measured over 90-day active sprint vs prior period'),
+                'quadrants' => [
+                    ['label' => trim($_POST['gq_l1'] ?? 'B2B Trade Show & Global Expo'), 'metric' => trim($_POST['gq_m1'] ?? '400%'), 'sub' => trim($_POST['gq_s1'] ?? 'Bharat Tex / Global Textile Expo')],
+                    ['label' => trim($_POST['gq_l2'] ?? 'International Sourcing Fair'), 'metric' => trim($_POST['gq_m2'] ?? '300%'), 'sub' => trim($_POST['gq_s2'] ?? 'IHGF Delhi Autumn Fair 2027')],
+                    ['label' => trim($_POST['gq_l3'] ?? 'B2B Industrial & Manufacturing'), 'metric' => trim($_POST['gq_m3'] ?? '85%'), 'sub' => trim($_POST['gq_s3'] ?? 'Commercial Inbound Lead Volume')],
+                    ['label' => trim($_POST['gq_l4'] ?? 'Delhi NCR Commercial SEO'), 'metric' => trim($_POST['gq_m4'] ?? '1,393%'), 'sub' => trim($_POST['gq_s4'] ?? 'Organic Inbound Search Leap')],
+                ],
+                'cards' => [
+                    [
+                        'icon' => '🎯',
+                        'title' => trim($_POST['gq_c1_title'] ?? 'Attract High-Intent Commercial Buyers'),
+                        'desc'  => trim($_POST['gq_c1_desc'] ?? 'Targeting specific transactional & commercial search queries with engineered landing pages that capture buyers ready to transact.')
+                    ],
+                    [
+                        'icon' => '📢',
+                        'title' => trim($_POST['gq_c2_title'] ?? 'Enhance Brand Entity Authority & Legacy'),
+                        'desc'  => trim($_POST['gq_c2_desc'] ?? 'Ensuring your executive thought leadership, brand knowledge graph, and service catalogue are indexable, permanent, and recommended by AI engines.')
+                    ]
+                ]
+            ];
+        }
+
+        if (isset($_POST['mc_title'])) {
+            $skillsRaw = trim($_POST['mc_skills'] ?? '');
+            $skillsArr = array_filter(array_map('trim', explode("\n", $skillsRaw)));
+            $metadata['masterclass'] = [
+                'title'          => trim($_POST['mc_title'] ?? 'SEO Masterclass & In-House Blueprint.'),
+                'subtitle'       => trim($_POST['mc_subtitle'] ?? ''),
+                'headline'       => trim($_POST['mc_headline'] ?? 'Designed for Enterprise Teams, Marketers & Founders'),
+                'description'    => trim($_POST['mc_description'] ?? ''),
+                'skills'         => !empty($skillsArr) ? array_values($skillsArr) : ($existingMeta['masterclass']['skills'] ?? []),
+                'video_duration' => trim($_POST['mc_video_duration'] ?? '15 min executive training'),
+                'instructor'     => trim($_POST['mc_instructor'] ?? 'Jitin Madaan • Performance Marketing Strategist'),
+                'reviews'        => $existingMeta['masterclass']['reviews'] ?? []
+            ];
+        }
+
+        if (!empty($_POST['cf_quotes']) && is_array($_POST['cf_quotes'])) {
+            $cFeed = [];
+            foreach ($_POST['cf_quotes'] as $i => $qText) {
+                $qText = trim($qText);
+                if ($qText === '') continue;
+                $cFeed[] = [
+                    'quote'   => $qText,
+                    'author'  => trim($_POST['cf_authors'][$i] ?? 'Client'),
+                    'role'    => trim($_POST['cf_roles'][$i] ?? 'Director'),
+                    'company' => trim($_POST['cf_companies'][$i] ?? 'Enterprise'),
+                    'rating'  => 5
+                ];
+            }
+            if (!empty($cFeed)) {
+                $metadata['client_feedback'] = $cFeed;
+            }
+        }
+
         $payloadJson = json_encode($metadata, JSON_UNESCAPED_UNICODE);
 
         if ($id !== null) {
@@ -780,6 +839,10 @@ require_once __DIR__ . '/templates/header.php';
         $process  = $item['process'] ?? [];
         $faqs     = $item['faqs'] ?? [];
         $benefits = $item['benefits'] ?? [];
+        $growthQuadrants = $item['growth_quadrants'] ?? [];
+        $masterclass     = $item['masterclass'] ?? [];
+        $clientFeedback  = $item['client_feedback'] ?? [];
+        $brandLogos      = $item['brand_logos'] ?? [];
     ?>
 
         <div class="scms-editor-card">
@@ -810,7 +873,8 @@ require_once __DIR__ . '/templates/header.php';
                     <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-features', this)">3. Features &amp; Deliverables (<?= count($features) ?>)</button>
                     <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-process', this)">4. Working Process (<?= count($process) ?>)</button>
                     <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-faqs', this)">5. FAQs (<?= count($faqs) ?>)</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-seo', this)">6. SEO &amp; Meta</button>
+                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-advance-ui', this)" style="background: #FFF0F7; color: #C4007A; border-color: rgba(196, 0, 122, 0.4); font-weight: 700;"><i class="bi bi-stars me-1"></i> 6. Advance UI &amp; Growth</button>
+                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-seo', this)">7. SEO &amp; Meta</button>
                 </div>
 
                 <!-- TAB 1: BASIC & HERO -->
@@ -1001,7 +1065,191 @@ require_once __DIR__ . '/templates/header.php';
                     </button>
                 </div>
 
-                <!-- TAB 6: SEO & META -->
+                <!-- TAB 6: ADVANCE UI & GROWTH SECTIONS -->
+                <div id="tab-advance-ui" class="scms-tab-pane d-none">
+                    <div class="alert alert-light border d-flex align-items-center mb-4" style="background: #FFF5FA; border-color: rgba(196, 0, 122, 0.25) !important;">
+                        <i class="bi bi-stars fs-3 text-primary me-3"></i>
+                        <div>
+                            <strong style="color: #C4007A;">Advance UI, Framer Animations &amp; Growth Sections</strong>
+                            <div class="small text-muted">Manage the interactive 4-Quadrant Growth Wheel, SEO Masterclass, Client Feedback Slider, and Brand Logos showcase.</div>
+                        </div>
+                    </div>
+
+                    <!-- 1. 4-QUADRANT GROWTH WHEEL (Image 2) -->
+                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill text-primary me-2"></i> 1. 4-Quadrant Growth Wheel &amp; Organic Impact (Image 2)</h5>
+                        <p class="small text-muted mb-3">Controls the interactive 4-quadrant diagram with central circular badge and high-impact metrics.</p>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Center Badge Main Label</label>
+                                <input type="text" name="gq_center_label" class="scms-form-control" value="<?= htmlspecialchars($growthQuadrants['center_label'] ?? 'Clicks from Search') ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Center Badge Subtitle</label>
+                                <input type="text" name="gq_center_sub" class="scms-form-control" value="<?= htmlspecialchars($growthQuadrants['center_sub'] ?? 'Increases measured over 90-day active sprint vs prior period') ?>">
+                            </div>
+                        </div>
+
+                        <div class="row g-3">
+                            <?php 
+                            $qList = $growthQuadrants['quadrants'] ?? [
+                                ['label' => 'B2B Trade Show & Global Expo', 'metric' => '400%', 'sub' => 'Bharat Tex / Global Textile Expo'],
+                                ['label' => 'International Sourcing Fair', 'metric' => '300%', 'sub' => 'IHGF Delhi Autumn Fair 2027'],
+                                ['label' => 'B2B Industrial & Manufacturing', 'metric' => '85%', 'sub' => 'Commercial Inbound Lead Volume'],
+                                ['label' => 'Delhi NCR Commercial SEO', 'metric' => '1,393%', 'sub' => 'Organic Inbound Search Leap'],
+                            ];
+                            ?>
+                            <div class="col-md-6 p-2">
+                                <div class="p-3 rounded bg-light border">
+                                    <div class="fw-bold text-primary small mb-2">Quadrant 1 (Top-Left)</div>
+                                    <input type="text" name="gq_m1" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[0]['metric'] ?? '400%') ?>" placeholder="Metric e.g. 400%">
+                                    <input type="text" name="gq_l1" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[0]['label'] ?? 'B2B Trade Show & Global Expo') ?>" placeholder="Label">
+                                    <input type="text" name="gq_s1" class="scms-form-control" value="<?= htmlspecialchars($qList[0]['sub'] ?? 'Bharat Tex / Global Textile Expo') ?>" placeholder="Subtitle">
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-2">
+                                <div class="p-3 rounded bg-light border">
+                                    <div class="fw-bold text-primary small mb-2">Quadrant 2 (Top-Right)</div>
+                                    <input type="text" name="gq_m2" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[1]['metric'] ?? '300%') ?>" placeholder="Metric e.g. 300%">
+                                    <input type="text" name="gq_l2" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[1]['label'] ?? 'International Sourcing Fair') ?>" placeholder="Label">
+                                    <input type="text" name="gq_s2" class="scms-form-control" value="<?= htmlspecialchars($qList[1]['sub'] ?? 'IHGF Delhi Autumn Fair 2027') ?>" placeholder="Subtitle">
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-2">
+                                <div class="p-3 rounded bg-light border">
+                                    <div class="fw-bold text-primary small mb-2">Quadrant 3 (Bottom-Left)</div>
+                                    <input type="text" name="gq_m3" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[2]['metric'] ?? '85%') ?>" placeholder="Metric e.g. 85%">
+                                    <input type="text" name="gq_l3" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[2]['label'] ?? 'B2B Industrial & Manufacturing') ?>" placeholder="Label">
+                                    <input type="text" name="gq_s3" class="scms-form-control" value="<?= htmlspecialchars($qList[2]['sub'] ?? 'Commercial Inbound Lead Volume') ?>" placeholder="Subtitle">
+                                </div>
+                            </div>
+                            <div class="col-md-6 p-2">
+                                <div class="p-3 rounded bg-light border">
+                                    <div class="fw-bold text-primary small mb-2">Quadrant 4 (Bottom-Right)</div>
+                                    <input type="text" name="gq_m4" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[3]['metric'] ?? '1,393%') ?>" placeholder="Metric e.g. 1,393%">
+                                    <input type="text" name="gq_l4" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[3]['label'] ?? 'Delhi NCR Commercial SEO') ?>" placeholder="Label">
+                                    <input type="text" name="gq_s4" class="scms-form-control" value="<?= htmlspecialchars($qList[3]['sub'] ?? 'Organic Inbound Search Leap') ?>" placeholder="Subtitle">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2 Sub Feature Cards -->
+                        <div class="row g-3 mt-2">
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Bottom Card 1 Title</label>
+                                <input type="text" name="gq_c1_title" class="scms-form-control mb-1" value="<?= htmlspecialchars($growthQuadrants['cards'][0]['title'] ?? 'Attract High-Intent Commercial Buyers') ?>">
+                                <label class="small text-muted">Card 1 Description</label>
+                                <textarea name="gq_c1_desc" class="scms-form-control" rows="2"><?= htmlspecialchars($growthQuadrants['cards'][0]['desc'] ?? 'Targeting specific transactional & commercial search queries with engineered landing pages that capture buyers ready to transact.') ?></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Bottom Card 2 Title</label>
+                                <input type="text" name="gq_c2_title" class="scms-form-control mb-1" value="<?= htmlspecialchars($growthQuadrants['cards'][1]['title'] ?? 'Enhance Brand Entity Authority & Legacy') ?>">
+                                <label class="small text-muted">Card 2 Description</label>
+                                <textarea name="gq_c2_desc" class="scms-form-control" rows="2"><?= htmlspecialchars($growthQuadrants['cards'][1]['desc'] ?? 'Ensuring your executive thought leadership, brand knowledge graph, and service catalogue are indexable, permanent, and recommended by AI engines.') ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. SEO MASTERCLASS (Image 5) -->
+                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-mortarboard-fill text-primary me-2"></i> 2. SEO Masterclass &amp; Strategy Blueprint (Image 5)</h5>
+                        <p class="small text-muted mb-3">Customise the in-house team training curriculum, instructor credentials, and video masterclass preview.</p>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Masterclass Main Title</label>
+                                <input type="text" name="mc_title" class="scms-form-control" value="<?= htmlspecialchars($masterclass['title'] ?? 'SEO Masterclass & In-House Blueprint.') ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Lead Instructor</label>
+                                <input type="text" name="mc_instructor" class="scms-form-control" value="<?= htmlspecialchars($masterclass['instructor'] ?? 'Jitin Madaan • Performance Marketing Strategist') ?>">
+                            </div>
+                            <div class="col-md-12">
+                                <label class="small fw-bold">Masterclass Subtitle</label>
+                                <input type="text" name="mc_subtitle" class="scms-form-control" value="<?= htmlspecialchars($masterclass['subtitle'] ?? 'Maximise your commercial marketing with our bespoke SEO Masterclass, designed to equip your team with the practical skills to implement modern SEO effectively in-house.') ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Curriculum Target Headline</label>
+                                <input type="text" name="mc_headline" class="scms-form-control" value="<?= htmlspecialchars($masterclass['headline'] ?? 'Designed for Enterprise Teams, Marketers & Founders') ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Video Duration Pill</label>
+                                <input type="text" name="mc_video_duration" class="scms-form-control" value="<?= htmlspecialchars($masterclass['video_duration'] ?? '15 min executive training') ?>">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Course Overview / Description</label>
+                                <textarea name="mc_description" class="scms-form-control" rows="4"><?= htmlspecialchars($masterclass['description'] ?? 'This four-week intensive blueprint demystifies search algorithms, AI search overviews (AEO/GEO), and ranking mechanics. Led by industry expert Jitin Madaan, you will be equipped with the exact frameworks powering 5,000+ top Google rankings.') ?></textarea>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="small fw-bold">Skills Learned (One Per Line)</label>
+                                <textarea name="mc_skills" class="scms-form-control" rows="4" placeholder="One skill per line..."><?= htmlspecialchars(implode("\n", $masterclass['skills'] ?? [
+                                    'Commercial Keyword Research & Search Intent Mapping',
+                                    'Reverse-Engineering Competitor Authority & Backlink Profiles',
+                                    'High-Impact Content Strategy & Semantic Topical Clusters',
+                                    'Technical SEO, Crawl Health & Core Web Vitals Optimization',
+                                    'Conversion Rate Optimization (CRO) & UX Engagement Signals',
+                                    'GA4 Analytics, Google Search Console & AI Search Tracking',
+                                    'and much more...'
+                                ])) ?></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. CLIENT FEEDBACK TESTIMONIALS SLIDER (Image 4) -->
+                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-chat-quote-fill text-primary me-2"></i> 3. Client Feedback Touch Slider (Image 4)</h5>
+                        <p class="small text-muted mb-3">Verified client testimonials displayed in the interactive touch carousel.</p>
+
+                        <div id="scmsClientFeedbackContainer">
+                            <?php 
+                            $cFeedList = !empty($clientFeedback) ? $clientFeedback : [
+                                [
+                                    'quote' => "Thank you so much WebTecMart. We've noticed a phenomenal improvement in commercial search visibility, keyword engagement, and subsequently a large proportion of our verified customer enquiries are coming directly through the website...",
+                                    'author' => 'Libby Powell',
+                                    'role' => 'Marketing Director',
+                                    'company' => 'Innovation Zero'
+                                ],
+                                [
+                                    'quote' => "WebTecMart has completely evolved our strategic thinking when it comes to enterprise websites. One of our greatest success stories was converting our legacy domain to an optimized search architecture which led to a 731% increase in website users and a 164% uplift in organic search conversions...",
+                                    'author' => 'Louise Smith',
+                                    'role' => 'Associate Director',
+                                    'company' => 'Society of Petroleum Engineers'
+                                ],
+                                [
+                                    'quote' => "Their support, keyword clustering, and best practice guidance helped ensure we now have a user friendly, SEO efficient, creative, and high performing landing site for our target audience across Delhi NCR and international markets...",
+                                    'author' => 'Ali McQueen',
+                                    'role' => 'Head of Marketing',
+                                    'company' => 'RoarB2B'
+                                ]
+                            ];
+                            foreach ($cFeedList as $cf): ?>
+                                <div class="scms-repeater-box mb-3 p-3 bg-light rounded border">
+                                    <div class="row g-2">
+                                        <div class="col-md-4">
+                                            <label class="small text-muted">Author Name</label>
+                                            <input type="text" name="cf_authors[]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($cf['author'] ?? '') ?>" placeholder="e.g. Libby Powell">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small text-muted">Role / Title</label>
+                                            <input type="text" name="cf_roles[]" class="scms-form-control" value="<?= htmlspecialchars($cf['role'] ?? '') ?>" placeholder="e.g. Marketing Director">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="small text-muted">Company</label>
+                                            <input type="text" name="cf_companies[]" class="scms-form-control" value="<?= htmlspecialchars($cf['company'] ?? '') ?>" placeholder="e.g. Innovation Zero">
+                                        </div>
+                                        <div class="col-12 mt-2">
+                                            <label class="small text-muted">Testimonial Quote</label>
+                                            <textarea name="cf_quotes[]" class="scms-form-control" rows="2" placeholder="Detailed client testimonial..."><?= htmlspecialchars($cf['quote'] ?? '') ?></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 7: SEO & META -->
                 <div id="tab-seo" class="scms-tab-pane d-none">
                     <div class="scms-form-group">
                         <label>Page Meta Title</label>
