@@ -301,6 +301,173 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // ====================================================
+        // DYNAMIC CONTENT ENGINE: SEO SERVICES IN DELHI
+        // ====================================================
+        if ($slug === 'seo-services-delhi' || (isset($id) && (int)$id === 69) || isset($_POST['is_delhi_seo'])) {
+            $metadata['is_delhi_seo'] = 1;
+            $metadata['hero_accent'] = trim($_POST['hero_accent'] ?? ($existingMeta['hero_accent'] ?? 'Result-Driven SEO to Grow Your Business'));
+            $metadata['hero_readiness_badge'] = trim($_POST['hero_readiness_badge'] ?? ($existingMeta['hero_readiness_badge'] ?? '⚡ Ready for Google to find you?'));
+            
+            if (!empty($_POST['hero_bullets_text'])) {
+                $bLines = array_filter(array_map('trim', explode("\n", $_POST['hero_bullets_text'])));
+                if (!empty($bLines)) {
+                    $metadata['hero_bullets'] = array_values($bLines);
+                }
+            }
+
+            // Strategic Narrative
+            if (isset($_POST['sn_title'])) {
+                $metadata['strategic_narrative'] = [
+                    'eyebrow' => trim($_POST['sn_eyebrow'] ?? 'BE FOUND BY THE CORRECT PEOPLE • GENERATE BETTER LEADS • GROW ORGANICALLY'),
+                    'title'   => trim($_POST['sn_title'] ?? 'SEO Services in Delhi That Turn Search Visibility Into Business Growth!'),
+                    'lead'    => trim($_POST['sn_lead'] ?? ''),
+                    'p1'      => trim($_POST['sn_p1'] ?? ''),
+                    'p2'      => trim($_POST['sn_p2'] ?? ''),
+                    'callout' => trim($_POST['sn_callout'] ?? '💡 Getting better rankings is just the start. It\'s really about improving the business results.')
+                ];
+            }
+
+            // Why Choose Us Cards
+            if (!empty($_POST['why_titles']) && is_array($_POST['why_titles'])) {
+                $wCards = [];
+                foreach ($_POST['why_titles'] as $wIdx => $wTitle) {
+                    $wTitle = trim($wTitle);
+                    if ($wTitle === '') continue;
+                    $wCards[] = [
+                        'icon'  => trim($_POST['why_icons'][$wIdx] ?? '🎯'),
+                        'title' => $wTitle,
+                        'desc'  => trim($_POST['why_descs'][$wIdx] ?? '')
+                    ];
+                }
+                if (!empty($wCards)) {
+                    $metadata['why_cards'] = $wCards;
+                }
+            }
+
+            // Key Takeaways & Approach
+            if (isset($_POST['takeaway_title'])) {
+                $tChecklist = [];
+                if (!empty($_POST['takeaway_checklist_text'])) {
+                    $tLines = array_filter(array_map('trim', explode("\n", $_POST['takeaway_checklist_text'])));
+                    if (!empty($tLines)) {
+                        $tChecklist = array_values($tLines);
+                    }
+                }
+                $metadata['takeaways'] = [
+                    'eyebrow'        => trim($_POST['takeaway_eyebrow'] ?? 'KEY TAKEAWAYS'),
+                    'title'          => trim($_POST['takeaway_title'] ?? 'SEO Services in Delhi at a Glance'),
+                    'lead'           => trim($_POST['takeaway_lead'] ?? ''),
+                    'checklist'      => !empty($tChecklist) ? $tChecklist : ($existingMeta['takeaways']['checklist'] ?? []),
+                    'approach_title' => trim($_POST['approach_title'] ?? 'Our SEO Approach: 7-Stage Strategic Growth Loop'),
+                    'approach_steps' => !empty($_POST['approach_steps']) ? array_filter(array_map('trim', explode(',', $_POST['approach_steps']))) : ($existingMeta['takeaways']['approach_steps'] ?? ['Research', 'Strategy', 'Optimisation', 'Content', 'Authority', 'Measurement', 'Growth']),
+                    'approach_desc'  => trim($_POST['approach_desc'] ?? '')
+                ];
+            }
+
+            // What We Offer (6 Core Offerings)
+            if (!empty($_POST['offer_titles']) && is_array($_POST['offer_titles'])) {
+                $oList = [];
+                foreach ($_POST['offer_titles'] as $oIdx => $oTitle) {
+                    $oTitle = trim($oTitle);
+                    if ($oTitle === '') continue;
+                    $oList[] = [
+                        'icon'      => trim($_POST['offer_icons'][$oIdx] ?? 'sparkles'),
+                        'title'     => $oTitle,
+                        'desc'      => trim($_POST['offer_descs'][$oIdx] ?? ''),
+                        'link'      => trim($_POST['offer_links'][$oIdx] ?? '/contact.php'),
+                        'link_text' => trim($_POST['offer_link_texts'][$oIdx] ?? 'Explore Service →')
+                    ];
+                }
+                if (!empty($oList)) {
+                    $metadata['offers'] = $oList;
+                }
+            }
+
+            // SEO Challenges
+            if (isset($_POST['chal_title'])) {
+                $cItems = [];
+                if (!empty($_POST['chal_item_titles']) && is_array($_POST['chal_item_titles'])) {
+                    foreach ($_POST['chal_item_titles'] as $cIdx => $cTitle) {
+                        $cTitle = trim($cTitle);
+                        if ($cTitle === '') continue;
+                        $cItems[] = [
+                            'icon'  => trim($_POST['chal_item_icons'][$cIdx] ?? '⚡'),
+                            'title' => $cTitle,
+                            'desc'  => trim($_POST['chal_item_descs'][$cIdx] ?? '')
+                        ];
+                    }
+                }
+                $metadata['challenges'] = [
+                    'eyebrow' => trim($_POST['chal_eyebrow'] ?? 'SEO CHALLENGES'),
+                    'title'   => trim($_POST['chal_title'] ?? 'What is Holding Your Site Back in Google Search?'),
+                    'lead'    => trim($_POST['chal_lead'] ?? ''),
+                    'items'   => !empty($cItems) ? $cItems : ($existingMeta['challenges']['items'] ?? [])
+                ];
+            }
+
+            // Meet the Experts (Jitin Madaan)
+            if (isset($_POST['founder_sec_title'])) {
+                $fStats = [];
+                if (!empty($_POST['fstat_vals']) && is_array($_POST['fstat_vals'])) {
+                    foreach ($_POST['fstat_vals'] as $sIdx => $sVal) {
+                        $sVal = trim($sVal);
+                        if ($sVal === '') continue;
+                        $fStats[] = [
+                            'val'   => $sVal,
+                            'label' => trim($_POST['fstat_labels'][$sIdx] ?? '')
+                        ];
+                    }
+                }
+                $fPillars = [];
+                if (!empty($_POST['pillar_titles']) && is_array($_POST['pillar_titles'])) {
+                    foreach ($_POST['pillar_titles'] as $pIdx => $pTitle) {
+                        $pTitle = trim($pTitle);
+                        if ($pTitle === '') continue;
+                        $fPillars[] = [
+                            'icon'  => trim($_POST['pillar_icons'][$pIdx] ?? '⚙️'),
+                            'title' => $pTitle,
+                            'desc'  => trim($_POST['pillar_descs'][$pIdx] ?? '')
+                        ];
+                    }
+                }
+                $metadata['founder_section'] = [
+                    'eyebrow' => trim($_POST['founder_sec_eyebrow'] ?? 'MEET THE EXPERTS'),
+                    'title'   => trim($_POST['founder_sec_title'] ?? 'The People Behind Your SEO Growth'),
+                    'lead'    => trim($_POST['founder_sec_lead'] ?? ''),
+                    'name'    => trim($_POST['founder_name'] ?? 'Jitin Madaan'),
+                    'role'    => trim($_POST['founder_role'] ?? 'Performance Marketing Strategist'),
+                    'stats'   => !empty($fStats) ? $fStats : ($existingMeta['founder_section']['stats'] ?? []),
+                    'pillars' => !empty($fPillars) ? $fPillars : ($existingMeta['founder_section']['pillars'] ?? [])
+                ];
+            }
+
+            // Wrapping Up & Micro-Markets
+            if (isset($_POST['wrap_title'])) {
+                $marketsArr = !empty($_POST['wrap_markets']) ? array_filter(array_map('trim', explode(',', $_POST['wrap_markets']))) : ($existingMeta['wrapping_up']['micro_markets'] ?? []);
+                $metadata['wrapping_up'] = [
+                    'eyebrow'       => trim($_POST['wrap_eyebrow'] ?? 'DELHI NCR LOCAL REACH'),
+                    'title'         => trim($_POST['wrap_title'] ?? 'Why SEO Services in Delhi Matter for Your Business'),
+                    'sub'           => trim($_POST['wrap_sub'] ?? 'Build Visibility. Earn Trust. Generate Sustainable Growth.'),
+                    'p1'            => trim($_POST['wrap_p1'] ?? ''),
+                    'p2'            => trim($_POST['wrap_p2'] ?? ''),
+                    'micro_markets' => array_values($marketsArr),
+                    'goal'          => trim($_POST['wrap_goal'] ?? 'Our goal is simple: Make your business discoverable, build trust, and convert search visibility into growth.')
+                ];
+            }
+
+            // CTA Box
+            if (isset($_POST['cta_headline'])) {
+                $metadata['cta_box'] = [
+                    'headline'  => trim($_POST['cta_headline'] ?? 'So You\'re Ready to Take the Plunge and Grow Your Business With SEO?'),
+                    'sub'       => trim($_POST['cta_sub'] ?? 'Let\'s Make Your Search Visibility Business Opportunities'),
+                    'text'      => trim($_POST['cta_text'] ?? ''),
+                    'btn_text'  => trim($_POST['cta_btn_text'] ?? 'Book Your Free SEO Consultation'),
+                    'call_text' => trim($_POST['cta_call_text'] ?? 'Call: +91-9999674255')
+                ];
+            }
+        }
+
         $payloadJson = json_encode($metadata, JSON_UNESCAPED_UNICODE);
 
         if ($id !== null) {
@@ -911,6 +1078,16 @@ require_once __DIR__ . '/templates/header.php';
         $masterclass     = $item['masterclass'] ?? [];
         $clientFeedback  = $item['client_feedback'] ?? [];
         $brandLogos      = $item['brand_logos'] ?? [];
+        $isDelhiSeo      = (!empty($item['slug']) && $item['slug'] === 'seo-services-delhi') || (!empty($item['id']) && (int)$item['id'] === 69);
+        $offers          = $item['offers'] ?? [];
+        $challenges      = $item['challenges'] ?? [];
+        $whyCards        = $item['why_cards'] ?? [];
+        $takeaways       = $item['takeaways'] ?? [];
+        $founderSection  = $item['founder_section'] ?? [];
+        $wrappingUp      = $item['wrapping_up'] ?? [];
+        $ctaBox          = $item['cta_box'] ?? [];
+        $strategicNarrative = $item['strategic_narrative'] ?? [];
+        $rankings        = $item['rankings'] ?? [];
     ?>
 
         <div class="scms-editor-card">
@@ -934,533 +1111,744 @@ require_once __DIR__ . '/templates/header.php';
                     <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
                 <?php endif; ?>
 
-                <!-- Tab Navigation -->
-                <div class="scms-tabs">
-                    <button type="button" class="scms-tab-btn active" onclick="scmsSwitchTab('tab-basic', this)">1. Basic &amp; Hero</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-overview', this)">2. Overview &amp; Benefits</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-features', this)">3. Features &amp; Deliverables (<?= count($features) ?>)</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-process', this)">4. Working Process (<?= count($process) ?>)</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-faqs', this)">5. FAQs (<?= count($faqs) ?>)</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-advance-ui', this)" style="background: #FFF0F7; color: #C4007A; border-color: rgba(196, 0, 122, 0.4); font-weight: 700;"><i class="bi bi-stars me-1"></i> 6. Advance UI &amp; Growth</button>
-                    <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-seo', this)">7. SEO &amp; Meta</button>
-                </div>
+                <?php
+// Template holding both the Delhi SEO 12-tab CMS and the standard CMS
+?>
+                <input type="hidden" name="is_delhi_seo" value="<?= $isDelhiSeo ? '1' : '0' ?>">
 
-                <!-- TAB 1: BASIC & HERO -->
-                <div id="tab-basic" class="scms-tab-pane">
-                    <div class="row">
-                        <div class="col-md-6 scms-form-group">
-                            <label>Service Title *</label>
-                            <input type="text" name="title" class="scms-form-control" value="<?= htmlspecialchars($item['title'] ?? '') ?>" required placeholder="e.g. Search Engine Optimization">
+                <?php if ($isDelhiSeo): ?>
+                    <!-- ========================================================
+                         DELHI SEO 12-TAB CMS NAVIGATION
+                         ======================================================== -->
+                    <div class="scms-tabs">
+                        <button type="button" class="scms-tab-btn active" onclick="scmsSwitchTab('tab-hero', this)">1. Hero &amp; Author</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-brands', this)">2. Event Brands Marquee</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-narrative', this)">3. Narrative &amp; Proof</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-takeaways', this)">4. Key Takeaways &amp; SERP</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-offers', this)" style="background: #FFF0F7; color: #C4007A; border-color: rgba(196, 0, 122, 0.4); font-weight: 700;"><i class="bi bi-grid-fill me-1"></i> 5. What We Offer (<?= count($offers) ?>)</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-challenges', this)">6. SEO Challenges</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-founder', this)">7. Meet the Experts</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-process', this)">8. Working Process</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-feedback', this)">9. Testimonials &amp; Rankings</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-wrap-cta', this)">10. Micro-Markets &amp; CTA</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-faqs', this)">11. FAQs (<?= count($faqs) ?>)</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-seo', this)">12. SEO Metadata</button>
+                    </div>
+
+                    <!-- TAB 1: HERO & AUTHOR -->
+                    <div id="tab-hero" class="scms-tab-pane">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-megaphone me-1"></i> Hero Section &amp; Strategist Author Badge</strong>
+                            <div class="small text-muted">Controls the top screen headline, value bullets, author stamp, and quote form settings.</div>
                         </div>
-                        <div class="col-md-6 scms-form-group">
-                            <label>URL Slug</label>
-                            <input type="text" name="slug" class="scms-form-control" value="<?= htmlspecialchars($item['slug'] ?? '') ?>" placeholder="e.g. search-engine-optimization">
-                            <small class="text-muted">Live URL: <code>/service.php?slug=<?= htmlspecialchars($item['slug'] ?? 'your-slug') ?></code></small>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-4 scms-form-group">
-                            <label>Category</label>
-                            <select name="category" class="scms-form-control">
-                                <?php
-                                $currentCat = $item['category'] ?? 'SEO';
-                                foreach (['SEO', 'Web Development', 'Paid Advertising', 'Social Media', 'Branding', 'Digital Strategy'] as $c): ?>
-                                    <option value="<?= $c ?>" <?= $currentCat === $c ? 'selected' : '' ?>><?= $c ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-md-4 scms-form-group">
-                            <label>Icon</label>
-                            <select name="icon" class="scms-form-control">
-                                <?php
-                                $currentIcon = $item['icon'] ?? 'sparkles';
-                                foreach (['sparkles', 'trending', 'layout', 'search', 'megaphone', 'share', 'target', 'globe', 'smartphone', 'award', 'shield'] as $ic): ?>
-                                    <option value="<?= $ic ?>" <?= $currentIcon === $ic ? 'selected' : '' ?>><?= ucfirst($ic) ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                        <div class="col-md-4 scms-form-group">
-                            <label>Publish Status</label>
-                            <div class="form-check form-switch mt-2">
-                                <input class="form-check-input" type="checkbox" name="is_active" id="scmsActiveCheck" value="1" <?= (!isset($item['is_active']) || (int) $item['is_active'] === 1) ? 'checked' : '' ?>>
-                                <label class="form-check-label text-dark fw-bold ms-2" for="scmsActiveCheck">Published &amp; Live on Site</label>
+                        <div class="row">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Main Page Title *</label>
+                                <input type="text" name="title" class="scms-form-control" value="<?= htmlspecialchars($item['title'] ?? 'SEO Services in Delhi') ?>" required>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="scms-form-group">
-                        <label>Tagline / Eyebrow Badge</label>
-                        <input type="text" name="tagline" class="scms-form-control" value="<?= htmlspecialchars($item['tagline'] ?? '') ?>" placeholder="e.g. Rank Higher. Convert Better. Scale Organically.">
-                    </div>
-
-                    <div class="scms-form-group">
-                        <label>Hero Description</label>
-                        <textarea name="hero_description" class="scms-form-control" placeholder="Short impactful summary appearing directly below the hero headline..."><?= htmlspecialchars($item['hero_description'] ?? '') ?></textarea>
-                    </div>
-
-                    <div class="scms-form-group">
-                        <label>Short Excerpt / Card Summary</label>
-                        <textarea name="summary" class="scms-form-control" placeholder="Brief summary used in cards and search engine snippets..."><?= htmlspecialchars($item['summary'] ?? '') ?></textarea>
-                    </div>
-
-                    <div class="scms-form-group" style="background: #FFF5FA; border: 1.5px solid rgba(196, 0, 122, 0.2); border-radius: 12px; padding: 18px; margin-top: 18px;">
-                        <label class="fw-bold text-dark mb-2" style="color: #C4007A !important; font-size: 0.95rem;">Lead Strategist / Executive Spotlight</label>
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="small text-muted mb-1">Strategist Name</label>
-                                <input type="text" name="founder_name" class="scms-form-control" value="<?= htmlspecialchars($item['founder_name'] ?? 'Jitin Madaan') ?>" placeholder="e.g. Jitin Madaan">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small text-muted mb-1">Strategist Role / Title</label>
-                                <input type="text" name="founder_role" class="scms-form-control" value="<?= htmlspecialchars($item['founder_role'] ?? 'Performance Marketing Strategist') ?>" placeholder="e.g. Performance Marketing Strategist">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-image text-primary me-1"></i> Strategist Photo (High-Res Portrait)</label>
-                                <?php if (!empty($item['founder_image'])): ?>
-                                    <div class="d-flex align-items-center gap-2 mb-2 p-2 bg-white rounded border">
-                                        <img src="<?= htmlspecialchars($item['founder_image']) ?>" alt="Current Photo" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px; border: 1.5px solid #C4007A;">
-                                        <div class="small text-truncate" style="max-width: 250px; color: #4B5563;">Current: <code><?= htmlspecialchars($item['founder_image']) ?></code></div>
-                                    </div>
-                                <?php endif; ?>
-                                <label class="small text-muted mb-1">Upload New Photo File (JPG, PNG, WEBP):</label>
-                                <input type="file" name="founder_image_file" accept="image/*" class="form-control form-control-sm mb-2">
-                                <label class="small text-muted mb-1">Or Direct Photo URL / Path:</label>
-                                <input type="text" name="founder_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($item['founder_image'] ?? '/assets/images/jitin-madaan.png') ?>" placeholder="/assets/images/jitin-madaan.png">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-person-badge text-primary me-1"></i> Strategist Avatar (Hero Circular Avatar)</label>
-                                <?php if (!empty($item['founder_avatar'])): ?>
-                                    <div class="d-flex align-items-center gap-2 mb-2 p-2 bg-white rounded border">
-                                        <img src="<?= htmlspecialchars($item['founder_avatar']) ?>" alt="Current Avatar" style="width: 44px; height: 44px; object-fit: cover; border-radius: 50%; border: 2px solid #C4007A;">
-                                        <div class="small text-truncate" style="max-width: 250px; color: #4B5563;">Current: <code><?= htmlspecialchars($item['founder_avatar']) ?></code></div>
-                                    </div>
-                                <?php endif; ?>
-                                <label class="small text-muted mb-1">Upload New Avatar File (JPG, PNG, WEBP):</label>
-                                <input type="file" name="founder_avatar_file" accept="image/*" class="form-control form-control-sm mb-2">
-                                <label class="small text-muted mb-1">Or Direct Avatar URL / Path:</label>
-                                <input type="text" name="founder_avatar" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($item['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png') ?>" placeholder="/assets/images/jitin-madaan-avatar.png">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TAB 2: OVERVIEW & BENEFITS -->
-                <div id="tab-overview" class="scms-tab-pane d-none">
-                    <div class="scms-form-group">
-                        <label>Full Service Overview (Body Copy)</label>
-                        <textarea name="body" class="scms-form-control" style="min-height: 160px;" placeholder="Comprehensive explanation of what this service offers, why customers need it, and agency results..."><?= htmlspecialchars($item['body'] ?? '') ?></textarea>
-                    </div>
-
-                    <h5 class="fw-bold mt-4 mb-3 text-dark">Strategic Benefits (Why Businesses Need This)</h5>
-                    <div id="scmsBenefitsContainer">
-                        <?php
-                        $defaultBenefits = !empty($benefits) ? $benefits : [
-                            ['title' => 'High-Intent Customer Acquisition', 'desc' => 'Capture qualified prospects actively searching for solutions.', 'metric' => '3x Average Lead Lift', 'icon' => 'trending'],
-                            ['title' => 'Durable Market Authority', 'desc' => 'Build a resilient digital footprint that outranks competitors.', 'metric' => 'Top 3 Search Dominance', 'icon' => 'shield'],
-                            ['title' => 'Optimized ROI & Lower CAC', 'desc' => 'Maximize conversion rates while lowering customer acquisition cost.', 'metric' => '99.8% Satisfaction', 'icon' => 'target']
-                        ];
-                        foreach ($defaultBenefits as $bIdx => $ben):
-                        ?>
-                            <div class="scms-repeater-box">
-                                <div class="row">
-                                    <div class="col-md-6 mb-2">
-                                        <input type="text" name="benefit_titles[]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($ben['title'] ?? '') ?>" placeholder="Benefit Title">
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <input type="text" name="benefit_metrics[]" class="scms-form-control" value="<?= htmlspecialchars($ben['metric'] ?? '') ?>" placeholder="Metric chip (e.g. +340% Growth)">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="benefit_descs[]" class="scms-form-control" rows="2" placeholder="Benefit description..."><?= htmlspecialchars($ben['desc'] ?? '') ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-
-                <!-- TAB 3: FEATURES & DELIVERABLES -->
-                <div id="tab-features" class="scms-tab-pane d-none">
-                    <p class="text-muted small mb-3">Add or edit specific features, deliverables, and capabilities included in this service.</p>
-                    <div id="scmsFeaturesContainer">
-                        <?php foreach ($features as $fIdx => $feat): ?>
-                            <div class="scms-repeater-box">
-                                <button type="button" class="del-btn" onclick="this.closest('.scms-repeater-box').remove()"><i class="bi bi-x"></i></button>
-                                <div class="row">
-                                    <div class="col-12 mb-2 pe-5">
-                                        <input type="text" name="feature_titles[]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($feat['title'] ?? '') ?>" placeholder="Deliverable Title">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="feature_descs[]" class="scms-form-control" rows="2" placeholder="Description of what is included..."><?= htmlspecialchars($feat['description'] ?? '') ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <button type="button" class="scms-btn-add" onclick="scmsAddFeature()">
-                        <i class="bi bi-plus-circle"></i> Add Deliverable Item
-                    </button>
-                </div>
-
-                <!-- TAB 4: WORKING PROCESS -->
-                <div id="tab-process" class="scms-tab-pane d-none">
-                    <p class="text-muted small mb-3">Define the 3 to 5 step delivery roadmap shown to prospects.</p>
-                    <div id="scmsProcessContainer">
-                        <?php foreach ($process as $pIdx => $st): ?>
-                            <div class="scms-repeater-box">
-                                <button type="button" class="del-btn" onclick="this.closest('.scms-repeater-box').remove()"><i class="bi bi-x"></i></button>
-                                <div class="row">
-                                    <div class="col-md-2 mb-2">
-                                        <input type="text" name="process_steps[]" class="scms-form-control text-center fw-bold" value="<?= htmlspecialchars($st['step'] ?? sprintf('%02d', $pIdx + 1)) ?>" placeholder="01">
-                                    </div>
-                                    <div class="col-md-10 mb-2 pe-5">
-                                        <input type="text" name="process_titles[]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($st['title'] ?? '') ?>" placeholder="Step Title (e.g. Audit & Strategy)">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="process_descs[]" class="scms-form-control" rows="2" placeholder="Explanation of what happens in this stage..."><?= htmlspecialchars($st['description'] ?? '') ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <button type="button" class="scms-btn-add" onclick="scmsAddProcess()">
-                        <i class="bi bi-plus-circle"></i> Add Process Step
-                    </button>
-                </div>
-
-                <!-- TAB 5: FAQS -->
-                <div id="tab-faqs" class="scms-tab-pane d-none">
-                    <p class="text-muted small mb-3">Service-specific frequently asked questions with accordion answers.</p>
-                    <div id="scmsFaqsContainer">
-                        <?php foreach ($faqs as $fq): ?>
-                            <div class="scms-repeater-box">
-                                <button type="button" class="del-btn" onclick="this.closest('.scms-repeater-box').remove()"><i class="bi bi-x"></i></button>
-                                <div class="row">
-                                    <div class="col-12 mb-2 pe-5">
-                                        <input type="text" name="faq_questions[]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($fq['q'] ?? $fq['question'] ?? '') ?>" placeholder="Question (e.g. How long does SEO take to produce results?)">
-                                    </div>
-                                    <div class="col-12">
-                                        <textarea name="faq_answers[]" class="scms-form-control" rows="3" placeholder="Clear, authoritative answer..."><?= htmlspecialchars($fq['a'] ?? $fq['answer'] ?? '') ?></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                    <button type="button" class="scms-btn-add" onclick="scmsAddFaq()">
-                        <i class="bi bi-plus-circle"></i> Add Question &amp; Answer
-                    </button>
-                </div>
-
-                <!-- TAB 6: ADVANCE UI & GROWTH SECTIONS -->
-                <div id="tab-advance-ui" class="scms-tab-pane d-none">
-                    <div class="alert alert-light border d-flex align-items-center mb-4" style="background: #FFF5FA; border-color: rgba(196, 0, 122, 0.25) !important;">
-                        <i class="bi bi-stars fs-3 text-primary me-3"></i>
-                        <div>
-                            <strong style="color: #C4007A;">Advance UI, Framer Animations &amp; Growth Sections</strong>
-                            <div class="small text-muted">Manage the interactive 4-Quadrant Growth Wheel, SEO Masterclass, Client Feedback Slider, and Brand Logos showcase.</div>
-                        </div>
-                    </div>
-
-                    <!-- 1. 4-QUADRANT GROWTH WHEEL (Image 2) -->
-                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
-                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-pie-chart-fill text-primary me-2"></i> 1. 4-Quadrant Growth Wheel &amp; Organic Impact (Image 2)</h5>
-                        <p class="small text-muted mb-3">Controls the interactive 4-quadrant diagram with central circular badge and high-impact metrics.</p>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Center Badge Main Label</label>
-                                <input type="text" name="gq_center_label" class="scms-form-control" value="<?= htmlspecialchars($growthQuadrants['center_label'] ?? 'Clicks from Search') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Center Badge Subtitle</label>
-                                <input type="text" name="gq_center_sub" class="scms-form-control" value="<?= htmlspecialchars($growthQuadrants['center_sub'] ?? 'Increases measured over 90-day active sprint vs prior period') ?>">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Headline Highlight / Accent Text</label>
+                                <input type="text" name="hero_accent" class="scms-form-control" value="<?= htmlspecialchars($item['hero_accent'] ?? 'Result-Driven SEO to Grow Your Business') ?>">
                             </div>
                         </div>
 
-                        <div class="row g-3">
+                        <div class="scms-form-group">
+                            <label>Hero Description</label>
+                            <textarea name="hero_description" class="scms-form-control" rows="3"><?= htmlspecialchars($item['hero_description'] ?? 'Get found when your customers are searching. WebTecMart offers strategic SEO solutions in Delhi to boost Google rankings, qualified organic traffic and lead to more enquiries, leads and sales.') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Hero Checkmark Bullets (One per line)</label>
                             <?php 
-                            $qList = $growthQuadrants['quadrants'] ?? [
-                                ['label' => 'B2B Trade Show & Global Expo', 'metric' => '400%', 'sub' => 'Bharat Tex / Global Textile Expo'],
-                                ['label' => 'International Sourcing Fair', 'metric' => '300%', 'sub' => 'IHGF Delhi Autumn Fair 2027'],
-                                ['label' => 'B2B Industrial & Manufacturing', 'metric' => '85%', 'sub' => 'Commercial Inbound Lead Volume'],
-                                ['label' => 'Delhi NCR Commercial SEO', 'metric' => '1,393%', 'sub' => 'Organic Inbound Search Leap'],
-                            ];
+                            $bLines = !empty($item['hero_bullets']) && is_array($item['hero_bullets']) ? implode("\n", $item['hero_bullets']) : "Enhance Google Rankings for relevant, high-value keywords\nBring in Targeted Organic Traffic from ready-to-buy customers\nIncrease website leads and enquiries with search optimisation\nCreate Long-Term Visibility by following a sustainable organic strategy";
                             ?>
-                            <div class="col-md-6 p-2">
-                                <div class="p-3 rounded bg-light border">
-                                    <div class="fw-bold text-primary small mb-2">Quadrant 1 (Top-Left)</div>
-                                    <input type="text" name="gq_m1" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[0]['metric'] ?? '400%') ?>" placeholder="Metric e.g. 400%">
-                                    <input type="text" name="gq_l1" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[0]['label'] ?? 'B2B Trade Show & Global Expo') ?>" placeholder="Label">
-                                    <input type="text" name="gq_s1" class="scms-form-control" value="<?= htmlspecialchars($qList[0]['sub'] ?? 'Bharat Tex / Global Textile Expo') ?>" placeholder="Subtitle">
-                                </div>
+                            <textarea name="hero_bullets_text" class="scms-form-control" rows="4"><?= htmlspecialchars($bLines) ?></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Readiness Badge Pill</label>
+                                <input type="text" name="hero_readiness_badge" class="scms-form-control" value="<?= htmlspecialchars($item['hero_readiness_badge'] ?? '⚡ Ready for Google to find you?') ?>">
                             </div>
-                            <div class="col-md-6 p-2">
-                                <div class="p-3 rounded bg-light border">
-                                    <div class="fw-bold text-primary small mb-2">Quadrant 2 (Top-Right)</div>
-                                    <input type="text" name="gq_m2" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[1]['metric'] ?? '300%') ?>" placeholder="Metric e.g. 300%">
-                                    <input type="text" name="gq_l2" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[1]['label'] ?? 'International Sourcing Fair') ?>" placeholder="Label">
-                                    <input type="text" name="gq_s2" class="scms-form-control" value="<?= htmlspecialchars($qList[1]['sub'] ?? 'IHGF Delhi Autumn Fair 2027') ?>" placeholder="Subtitle">
-                                </div>
-                            </div>
-                            <div class="col-md-6 p-2">
-                                <div class="p-3 rounded bg-light border">
-                                    <div class="fw-bold text-primary small mb-2">Quadrant 3 (Bottom-Left)</div>
-                                    <input type="text" name="gq_m3" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[2]['metric'] ?? '85%') ?>" placeholder="Metric e.g. 85%">
-                                    <input type="text" name="gq_l3" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[2]['label'] ?? 'B2B Industrial & Manufacturing') ?>" placeholder="Label">
-                                    <input type="text" name="gq_s3" class="scms-form-control" value="<?= htmlspecialchars($qList[2]['sub'] ?? 'Commercial Inbound Lead Volume') ?>" placeholder="Subtitle">
-                                </div>
-                            </div>
-                            <div class="col-md-6 p-2">
-                                <div class="p-3 rounded bg-light border">
-                                    <div class="fw-bold text-primary small mb-2">Quadrant 4 (Bottom-Right)</div>
-                                    <input type="text" name="gq_m4" class="scms-form-control mb-2 fw-bold" value="<?= htmlspecialchars($qList[3]['metric'] ?? '1,393%') ?>" placeholder="Metric e.g. 1,393%">
-                                    <input type="text" name="gq_l4" class="scms-form-control mb-2" value="<?= htmlspecialchars($qList[3]['label'] ?? 'Delhi NCR Commercial SEO') ?>" placeholder="Label">
-                                    <input type="text" name="gq_s4" class="scms-form-control" value="<?= htmlspecialchars($qList[3]['sub'] ?? 'Organic Inbound Search Leap') ?>" placeholder="Subtitle">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Publish Status</label>
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" name="is_active" id="delActiveCheck" value="1" <?= (!isset($item['is_active']) || (int) $item['is_active'] === 1) ? 'checked' : '' ?>>
+                                    <label class="form-check-label text-dark fw-bold ms-2" for="delActiveCheck">Published &amp; Live on Site</label>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 2 Sub Feature Cards -->
-                        <div class="row g-3 mt-2">
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Bottom Card 1 Title</label>
-                                <input type="text" name="gq_c1_title" class="scms-form-control mb-1" value="<?= htmlspecialchars($growthQuadrants['cards'][0]['title'] ?? 'Attract High-Intent Commercial Buyers') ?>">
-                                <label class="small text-muted">Card 1 Description</label>
-                                <textarea name="gq_c1_desc" class="scms-form-control" rows="2"><?= htmlspecialchars($growthQuadrants['cards'][0]['desc'] ?? 'Targeting specific transactional & commercial search queries with engineered landing pages that capture buyers ready to transact.') ?></textarea>
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-person-badge text-primary me-2"></i> Strategist / Author Stamp</h5>
+                        <div class="row">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Author Name</label>
+                                <input type="text" name="founder_name" class="scms-form-control" value="<?= htmlspecialchars($item['founder_name'] ?? 'Jitin Madaan') ?>">
                             </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Bottom Card 2 Title</label>
-                                <input type="text" name="gq_c2_title" class="scms-form-control mb-1" value="<?= htmlspecialchars($growthQuadrants['cards'][1]['title'] ?? 'Enhance Brand Entity Authority & Legacy') ?>">
-                                <label class="small text-muted">Card 2 Description</label>
-                                <textarea name="gq_c2_desc" class="scms-form-control" rows="2"><?= htmlspecialchars($growthQuadrants['cards'][1]['desc'] ?? 'Ensuring your executive thought leadership, brand knowledge graph, and service catalogue are indexable, permanent, and recommended by AI engines.') ?></textarea>
+                            <div class="col-md-6 scms-form-group">
+                                <label>Author Role / Designation</label>
+                                <input type="text" name="founder_role" class="scms-form-control" value="<?= htmlspecialchars($item['founder_role'] ?? 'Performance Marketing Strategist') ?>">
                             </div>
                         </div>
-                    </div>
 
-                    <!-- 2. SEO MASTERCLASS (Image 5) -->
-                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
-                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-mortarboard-fill text-primary me-2"></i> 2. SEO Masterclass &amp; Strategy Blueprint (Image 5)</h5>
-                        <p class="small text-muted mb-3">Customise the in-house team training curriculum, instructor credentials, and video masterclass preview.</p>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Masterclass Main Title</label>
-                                <input type="text" name="mc_title" class="scms-form-control" value="<?= htmlspecialchars($masterclass['title'] ?? 'SEO Masterclass & In-House Blueprint.') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Lead Instructor</label>
-                                <input type="text" name="mc_instructor" class="scms-form-control" value="<?= htmlspecialchars($masterclass['instructor'] ?? 'Jitin Madaan • Performance Marketing Strategist') ?>">
-                            </div>
-                            <div class="col-md-12">
-                                <label class="small fw-bold">Masterclass Subtitle</label>
-                                <input type="text" name="mc_subtitle" class="scms-form-control" value="<?= htmlspecialchars($masterclass['subtitle'] ?? 'Maximise your commercial marketing with our bespoke SEO Masterclass, designed to equip your team with the practical skills to implement modern SEO effectively in-house.') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Curriculum Target Headline</label>
-                                <input type="text" name="mc_headline" class="scms-form-control" value="<?= htmlspecialchars($masterclass['headline'] ?? 'Designed for Enterprise Teams, Marketers & Founders') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Video Duration Pill</label>
-                                <input type="text" name="mc_video_duration" class="scms-form-control" value="<?= htmlspecialchars($masterclass['video_duration'] ?? '15 min executive training') ?>">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Course Overview / Description</label>
-                                <textarea name="mc_description" class="scms-form-control" rows="4"><?= htmlspecialchars($masterclass['description'] ?? 'This four-week intensive blueprint demystifies search algorithms, AI search overviews (AEO/GEO), and ranking mechanics. Led by industry expert Jitin Madaan, you will be equipped with the exact frameworks powering 5,000+ top Google rankings.') ?></textarea>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="small fw-bold">Skills Learned (One Per Line)</label>
-                                <textarea name="mc_skills" class="scms-form-control" rows="4" placeholder="One skill per line..."><?= htmlspecialchars(implode("\n", $masterclass['skills'] ?? [
-                                    'Commercial Keyword Research & Search Intent Mapping',
-                                    'Reverse-Engineering Competitor Authority & Backlink Profiles',
-                                    'High-Impact Content Strategy & Semantic Topical Clusters',
-                                    'Technical SEO, Crawl Health & Core Web Vitals Optimization',
-                                    'Conversion Rate Optimization (CRO) & UX Engagement Signals',
-                                    'GA4 Analytics, Google Search Console & AI Search Tracking',
-                                    'and much more...'
-                                ])) ?></textarea>
-                            </div>
-                            <div class="col-md-12 mt-2">
-                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-camera-video-fill text-primary me-1"></i> Masterclass Video Cover / Thumbnail Image</label>
-                                <?php $mcImg = $masterclass['video_image'] ?? $item['masterclass_image'] ?? '/assets/images/case-study-1.jpg'; ?>
-                                <div class="d-flex align-items-center gap-3 p-2 bg-light rounded border mb-2">
-                                    <img src="<?= htmlspecialchars($mcImg) ?>" alt="Cover" style="width: 80px; height: 50px; object-fit: cover; border-radius: 6px; border: 1.5px solid #C4007A;">
-                                    <div class="small text-truncate" style="max-width: 320px; color: #4B5563;">Current: <code><?= htmlspecialchars($mcImg) ?></code></div>
-                                </div>
-                                <div class="row g-2">
-                                    <div class="col-md-6">
-                                        <label class="small text-muted mb-1">Upload New Video Cover File (JPG, PNG, WEBP):</label>
-                                        <input type="file" name="mc_image_file" accept="image/*" class="form-control form-control-sm">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label class="small text-muted mb-1">Or Direct Cover URL / Path:</label>
-                                        <input type="text" name="mc_video_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($mcImg) ?>" placeholder="/assets/images/case-study-1.jpg">
-                                    </div>
+                        <div class="scms-form-group">
+                            <label>Author Avatar Image</label>
+                            <div class="d-flex align-items-center gap-3">
+                                <?php $avVal = $item['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png'; ?>
+                                <img src="<?= htmlspecialchars($avVal) ?>" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #C4007A;">
+                                <div class="flex-grow-1">
+                                    <input type="text" name="founder_avatar" class="scms-form-control mb-1" value="<?= htmlspecialchars($avVal) ?>">
+                                    <input type="file" name="founder_avatar_file" class="form-control form-control-sm" accept="image/*">
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- 3. CLIENT FEEDBACK TESTIMONIALS SLIDER (Image 4) -->
-                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
-                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-chat-quote-fill text-primary me-2"></i> 3. Client Feedback Touch Slider (Image 4)</h5>
-                        <p class="small text-muted mb-3">Verified client testimonials displayed in the interactive touch carousel.</p>
+                    <!-- TAB 2: BRAND LOGOS MARQUEE -->
+                    <div id="tab-brands" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-award me-1"></i> Top Event Brands Embracing SEO (Single-Row Marquee)</strong>
+                            <div class="small text-muted">Manage the infinite auto-scrolling brand logos displayed directly below the hero section.</div>
+                        </div>
 
-                        <div id="scmsClientFeedbackContainer">
+                        <?php foreach ($brandLogos as $bIdx => $b): ?>
+                            <div class="p-3 mb-3 rounded border bg-white shadow-sm">
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-md-3">
+                                        <label class="small text-muted mb-0">Brand Name</label>
+                                        <input type="text" name="brand_names[<?= $bIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($b['name']) ?>">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="small text-muted mb-0">Category / Subtitle</label>
+                                        <input type="text" name="brand_cats[<?= $bIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($b['category'] ?? 'Enterprise Brand') ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="small text-muted mb-0">Logo Image File or URL</label>
+                                        <input type="text" name="brand_urls[<?= $bIdx ?>]" class="scms-form-control form-control-sm mb-1" value="<?= htmlspecialchars($b['logo'] ?? '') ?>">
+                                        <input type="file" name="brand_logo_file_<?= $bIdx ?>" class="form-control form-control-sm" accept="image/*">
+                                    </div>
+                                    <div class="col-md-2 text-center">
+                                        <?php if (!empty($b['logo'])): ?>
+                                            <img src="<?= htmlspecialchars($b['logo']) ?>" alt="Preview" style="max-height: 34px; max-width: 80px; object-fit: contain;">
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 3: NARRATIVE & SPRING SOURCING FAIR PROOF -->
+                    <div id="tab-narrative" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-window me-1"></i> Strategic Narrative &amp; Google Proof Showcase</strong>
+                            <div class="small text-muted">Controls the 2-column narrative section and the Spring Sourcing Fair 2027 SERP browser mockup.</div>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Section Eyebrow</label>
+                            <input type="text" name="sn_eyebrow" class="scms-form-control" value="<?= htmlspecialchars($strategicNarrative['eyebrow'] ?? 'BE FOUND BY THE CORRECT PEOPLE • GENERATE BETTER LEADS • GROW ORGANICALLY') ?>">
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Section Title</label>
+                            <input type="text" name="sn_title" class="scms-form-control" value="<?= htmlspecialchars($strategicNarrative['title'] ?? 'SEO Services in Delhi That Turn Search Visibility Into Business Growth!') ?>">
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Lead Paragraph</label>
+                            <textarea name="sn_lead" class="scms-form-control" rows="2"><?= htmlspecialchars($strategicNarrative['lead'] ?? 'Your customers are looking for your products and services. The challenge is to make sure that they find your business, not your competitors.') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Paragraph 1</label>
+                            <textarea name="sn_p1" class="scms-form-control" rows="2"><?= htmlspecialchars($strategicNarrative['p1'] ?? '') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Paragraph 2</label>
+                            <textarea name="sn_p2" class="scms-form-control" rows="2"><?= htmlspecialchars($strategicNarrative['p2'] ?? '') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Callout Highlight</label>
+                            <input type="text" name="sn_callout" class="scms-form-control" value="<?= htmlspecialchars($strategicNarrative['callout'] ?? '💡 Getting better rankings is just the start. It\'s really about improving the business results.') ?>">
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-image text-primary me-2"></i> Spring Sourcing Fair 2027 SERP Proof Screenshot</h5>
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <label class="small text-muted">Image Path</label>
+                                <input type="text" name="spring_serp_image" class="scms-form-control mb-2" value="<?= htmlspecialchars($item['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png') ?>">
+                                <input type="file" name="spring_serp_image_file" class="form-control form-control-sm" accept="image/*">
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <?php $spImg = $item['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png'; ?>
+                                <img src="<?= htmlspecialchars($spImg) ?>" alt="Preview" style="max-height: 90px; border-radius: 8px; border: 1.5px solid #C4007A;">
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-check-circle text-primary me-2"></i> What Makes WebTecMart the Perfect SEO Choice (6 Cards)</h5>
+                        <?php foreach ($whyCards as $wIdx => $wc): ?>
+                            <div class="p-3 mb-2 rounded border bg-light">
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-md-2">
+                                        <label class="small text-muted mb-0">Icon</label>
+                                        <input type="text" name="why_icons[<?= $wIdx ?>]" class="scms-form-control form-control-sm text-center" value="<?= htmlspecialchars($wc['icon'] ?? '🎯') ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="small text-muted mb-0">Title</label>
+                                        <input type="text" name="why_titles[<?= $wIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($wc['title'] ?? '') ?>">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="small text-muted mb-0">Description</label>
+                                        <input type="text" name="why_descs[<?= $wIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($wc['desc'] ?? '') ?>">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 4: KEY TAKEAWAYS & SERP -->
+                    <div id="tab-takeaways" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-list-check me-1"></i> Key Takeaways &amp; SEO Services at a Glance</strong>
+                            <div class="small text-muted">Controls the 10-point deliverables checklist, the Google SERP preview snapshot, and the 7-stage growth loop.</div>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Eyebrow</label>
+                            <input type="text" name="takeaway_eyebrow" class="scms-form-control" value="<?= htmlspecialchars($takeaways['eyebrow'] ?? 'KEY TAKEAWAYS') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Title</label>
+                            <input type="text" name="takeaway_title" class="scms-form-control" value="<?= htmlspecialchars($takeaways['title'] ?? 'SEO Services in Delhi at a Glance') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Intro Description</label>
+                            <textarea name="takeaway_lead" class="scms-form-control" rows="2"><?= htmlspecialchars($takeaways['lead'] ?? 'A good SEO approach ought to do greater than just ranking better. It should draw the intended audience to your business, gain trust and create measurable opportunities.') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>10 Key Deliverables Checklist (One per line)</label>
                             <?php 
-                            $cFeedList = !empty($clientFeedback) ? $clientFeedback : [
-                                [
-                                    'quote' => "Thank you so much WebTecMart. We've noticed a phenomenal improvement in commercial search visibility, keyword engagement, and subsequently a large proportion of our verified customer enquiries are coming directly through the website...",
-                                    'author' => 'Libby Powell',
-                                    'role' => 'Marketing Director',
-                                    'company' => 'Innovation Zero'
-                                ],
-                                [
-                                    'quote' => "WebTecMart has completely evolved our strategic thinking when it comes to enterprise websites. One of our greatest success stories was converting our legacy domain to an optimized search architecture which led to a 731% increase in website users and a 164% uplift in organic search conversions...",
-                                    'author' => 'Louise Smith',
-                                    'role' => 'Associate Director',
-                                    'company' => 'Society of Petroleum Engineers'
-                                ],
-                                [
-                                    'quote' => "Their support, keyword clustering, and best practice guidance helped ensure we now have a user friendly, SEO efficient, creative, and high performing landing site for our target audience across Delhi NCR and international markets...",
-                                    'author' => 'Ali McQueen',
-                                    'role' => 'Head of Marketing',
-                                    'company' => 'RoarB2B'
-                                ]
-                            ];
-                            foreach ($cFeedList as $cf): ?>
-                                <div class="scms-repeater-box mb-3 p-3 bg-light rounded border">
-                                    <div class="row g-2">
-                                        <div class="col-md-4">
-                                            <label class="small text-muted">Author Name</label>
-                                            <input type="text" name="cf_authors[]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($cf['author'] ?? '') ?>" placeholder="e.g. Libby Powell">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="small text-muted">Role / Title</label>
-                                            <input type="text" name="cf_roles[]" class="scms-form-control" value="<?= htmlspecialchars($cf['role'] ?? '') ?>" placeholder="e.g. Marketing Director">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="small text-muted">Company</label>
-                                            <input type="text" name="cf_companies[]" class="scms-form-control" value="<?= htmlspecialchars($cf['company'] ?? '') ?>" placeholder="e.g. Innovation Zero">
-                                        </div>
-                                        <div class="col-12 mt-2">
-                                            <label class="small text-muted">Testimonial Quote</label>
-                                            <textarea name="cf_quotes[]" class="scms-form-control" rows="2" placeholder="Detailed client testimonial..."><?= htmlspecialchars($cf['quote'] ?? '') ?></textarea>
-                                        </div>
+                            $tListText = !empty($takeaways['checklist']) && is_array($takeaways['checklist']) ? implode("\n", $takeaways['checklist']) : '';
+                            ?>
+                            <textarea name="takeaway_checklist_text" class="scms-form-control" rows="8"><?= htmlspecialchars($tListText) ?></textarea>
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-arrow-repeat text-primary me-2"></i> Our SEO Approach: 7-Stage Strategic Growth Loop</h5>
+                        <div class="scms-form-group">
+                            <label>Approach Title</label>
+                            <input type="text" name="approach_title" class="scms-form-control" value="<?= htmlspecialchars($takeaways['approach_title'] ?? 'Our SEO Approach: 7-Stage Strategic Growth Loop') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>7 Steps (Comma-separated)</label>
+                            <?php 
+                            $appSteps = !empty($takeaways['approach_steps']) && is_array($takeaways['approach_steps']) ? implode(', ', $takeaways['approach_steps']) : 'Research, Strategy, Optimisation, Content, Authority, Measurement, Growth';
+                            ?>
+                            <input type="text" name="approach_steps" class="scms-form-control" value="<?= htmlspecialchars($appSteps) ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Approach Description</label>
+                            <textarea name="approach_desc" class="scms-form-control" rows="2"><?= htmlspecialchars($takeaways['approach_desc'] ?? 'SEO is an ongoing process. Performance is analysed on a regular basis and the strategy is continually improved and fine-tuned to ensure your website continues to go in the right direction.') ?></textarea>
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3"><i class="bi bi-image text-primary me-2"></i> Google SERP Preview Snapshot (Right Column)</h5>
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <label class="small text-muted">Image Path</label>
+                                <input type="text" name="serp_image" class="scms-form-control mb-2" value="<?= htmlspecialchars($item['serp_image'] ?? '/assets/images/seo-takeaways-preview.png') ?>">
+                                <input type="file" name="serp_image_file" class="form-control form-control-sm" accept="image/*">
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <?php $sImg = $item['serp_image'] ?? '/assets/images/seo-takeaways-preview.png'; ?>
+                                <img src="<?= htmlspecialchars($sImg) ?>" alt="Preview" style="max-height: 90px; border-radius: 8px; border: 1.5px solid #C4007A;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 5: WHAT WE OFFER (6 CORE OFFERINGS) -->
+                    <div id="tab-offers" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-grid-fill me-1"></i> What We Offer (6 Core SEO Offerings)</strong>
+                            <div class="small text-muted">Manage the 6 service cards displayed in the "What We Offer" section. You can customize icons, titles, descriptions, and destination links.</div>
+                        </div>
+
+                        <?php foreach ($offers as $oIdx => $off): ?>
+                            <div class="p-3 mb-3 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                                <div class="row g-2 align-items-center mb-2">
+                                    <div class="col-md-2">
+                                        <label class="small fw-bold">Icon Type</label>
+                                        <select name="offer_icons[<?= $oIdx ?>]" class="scms-form-control form-control-sm">
+                                            <?php foreach (['code' => 'Code / Tech', 'layout' => 'Layout / On-Page', 'search' => 'Search / Keyword', 'map-pin' => 'Map / Local', 'link' => 'Link / Authority', 'sparkles' => 'Sparkles / AI'] as $ik => $il): ?>
+                                                <option value="<?= $ik ?>" <?= ($off['icon'] ?? '') === $ik ? 'selected' : '' ?>><?= $il ?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <label class="small fw-bold">Offering Title</label>
+                                        <input type="text" name="offer_titles[<?= $oIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($off['title'] ?? '') ?>">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="small fw-bold">Destination URL</label>
+                                        <input type="text" name="offer_links[<?= $oIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($off['link'] ?? '/contact.php') ?>">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="small fw-bold">Link Text</label>
+                                        <input type="text" name="offer_link_texts[<?= $oIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($off['link_text'] ?? 'Explore Service →') ?>">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="small text-muted mb-1">Description</label>
+                                    <textarea name="offer_descs[<?= $oIdx ?>]" class="scms-form-control form-control-sm" rows="2"><?= htmlspecialchars($off['desc'] ?? '') ?></textarea>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 6: SEO CHALLENGES -->
+                    <div id="tab-challenges" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-exclamation-triangle me-1"></i> SEO Challenges (What is Holding Your Site Back)</strong>
+                            <div class="small text-muted">Controls the 6-card challenges grid highlighting common competitor pitfalls in Delhi.</div>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Eyebrow</label>
+                            <input type="text" name="chal_eyebrow" class="scms-form-control" value="<?= htmlspecialchars($challenges['eyebrow'] ?? 'SEO CHALLENGES') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Title</label>
+                            <input type="text" name="chal_title" class="scms-form-control" value="<?= htmlspecialchars($challenges['title'] ?? 'What is Holding Your Site Back in Google Search?') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Intro Description</label>
+                            <textarea name="chal_lead" class="scms-form-control" rows="3"><?= htmlspecialchars($challenges['lead'] ?? '') ?></textarea>
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3">Challenge Cards</h5>
+                        <?php foreach (($challenges['items'] ?? []) as $cIdx => $ch): ?>
+                            <div class="p-3 mb-2 rounded border bg-light">
+                                <div class="row g-2 align-items-center mb-1">
+                                    <div class="col-md-2">
+                                        <label class="small text-muted mb-0">Icon</label>
+                                        <input type="text" name="chal_item_icons[<?= $cIdx ?>]" class="scms-form-control form-control-sm text-center" value="<?= htmlspecialchars($ch['icon'] ?? '⚡') ?>">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="small text-muted mb-0">Title</label>
+                                        <input type="text" name="chal_item_titles[<?= $cIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($ch['title'] ?? '') ?>">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="small text-muted mb-0">Description</label>
+                                    <textarea name="chal_item_descs[<?= $cIdx ?>]" class="scms-form-control form-control-sm" rows="2"><?= htmlspecialchars($ch['desc'] ?? '') ?></textarea>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 7: MEET THE EXPERTS -->
+                    <div id="tab-founder" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-people me-1"></i> Meet the Experts (Jitin Madaan Spotlight &amp; Pillars)</strong>
+                            <div class="small text-muted">Controls the founder spotlight, stats counters, high-resolution photo, and 3 expert pillars.</div>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Eyebrow</label>
+                            <input type="text" name="founder_sec_eyebrow" class="scms-form-control" value="<?= htmlspecialchars($founderSection['eyebrow'] ?? 'MEET THE EXPERTS') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Title</label>
+                            <input type="text" name="founder_sec_title" class="scms-form-control" value="<?= htmlspecialchars($founderSection['title'] ?? 'The People Behind Your SEO Growth') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Lead Description</label>
+                            <textarea name="founder_sec_lead" class="scms-form-control" rows="2"><?= htmlspecialchars($founderSection['lead'] ?? '') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Strategist High-Resolution Photo</label>
+                            <div class="d-flex align-items-center gap-3">
+                                <?php $fImg = $item['founder_image'] ?? '/assets/images/jitin-madaan.png'; ?>
+                                <img src="<?= htmlspecialchars($fImg) ?>" alt="Photo" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 2px solid #C4007A;">
+                                <div class="flex-grow-1">
+                                    <input type="text" name="founder_image" class="scms-form-control mb-1" value="<?= htmlspecialchars($fImg) ?>">
+                                    <input type="file" name="founder_image_file" class="form-control form-control-sm" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3">Key Stats Counters</h5>
+                        <div class="row g-2">
+                            <?php foreach (($founderSection['stats'] ?? []) as $sIdx => $st): ?>
+                                <div class="col-md-4">
+                                    <div class="p-2 border rounded bg-white">
+                                        <label class="small text-muted">Metric / Number</label>
+                                        <input type="text" name="fstat_vals[<?= $sIdx ?>]" class="scms-form-control form-control-sm fw-bold text-primary" value="<?= htmlspecialchars($st['val']) ?>">
+                                        <label class="small text-muted mt-1">Label</label>
+                                        <input type="text" name="fstat_labels[<?= $sIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($st['label']) ?>">
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-3">3 Core Expert Pillars</h5>
+                        <?php foreach (($founderSection['pillars'] ?? []) as $pIdx => $plr): ?>
+                            <div class="p-3 mb-2 rounded border bg-light">
+                                <div class="row g-2 align-items-center mb-1">
+                                    <div class="col-md-2">
+                                        <label class="small text-muted mb-0">Icon</label>
+                                        <input type="text" name="pillar_icons[<?= $pIdx ?>]" class="scms-form-control form-control-sm text-center" value="<?= htmlspecialchars($plr['icon'] ?? '⚙️') ?>">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="small text-muted mb-0">Title</label>
+                                        <input type="text" name="pillar_titles[<?= $pIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($plr['title'] ?? '') ?>">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="small text-muted mb-0">Description</label>
+                                    <textarea name="pillar_descs[<?= $pIdx ?>]" class="scms-form-control form-control-sm" rows="2"><?= htmlspecialchars($plr['desc'] ?? '') ?></textarea>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 8: WORKING PROCESS -->
+                    <div id="tab-process" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-diagram-3 me-1"></i> Working Process (6-Step Grid)</strong>
+                            <div class="small text-muted">Manage the 6 chronological stages of your SEO workflow in Delhi.</div>
+                        </div>
+
+                        <?php $processList = !empty($item['process']) && is_array($item['process']) ? $item['process'] : $process; foreach ($processList as $idx => $p): ?>
+                            <div class="p-3 mb-3 rounded border bg-white shadow-sm">
+                                <div class="row g-2 align-items-center mb-2">
+                                    <div class="col-md-2">
+                                        <label class="small fw-bold">Step Number</label>
+                                        <input type="text" name="process_steps[<?= $idx ?>]" class="scms-form-control form-control-sm text-center fw-bold" value="<?= htmlspecialchars($p['step']) ?>">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="small fw-bold">Step Title</label>
+                                        <input type="text" name="process_titles[<?= $idx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($p['title']) ?>">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="small text-muted mb-1">Step Description</label>
+                                    <textarea name="process_descs[<?= $idx ?>]" class="scms-form-control form-control-sm" rows="2"><?= htmlspecialchars($p['description']) ?></textarea>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 9: TESTIMONIALS & RANKINGS -->
+                    <div id="tab-feedback" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-chat-quote me-1"></i> Client Reviews &amp; Live Search Telemetry</strong>
+                            <div class="small text-muted">Manage verified client reviews and verified Google search rank telemetry table.</div>
+                        </div>
+
+                        <h5 class="fw-bold text-dark mb-3">Client Reviews Slider</h5>
+                        <?php foreach ($clientFeedback as $i => $fb): ?>
+                            <div class="p-3 mb-3 rounded border bg-white shadow-sm">
+                                <div class="row g-2 mb-2">
+                                    <div class="col-md-4">
+                                        <label class="small text-muted">Author Name</label>
+                                        <input type="text" name="cf_authors[<?= $i ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($fb['author']) ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="small text-muted">Designation</label>
+                                        <input type="text" name="cf_roles[<?= $i ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($fb['role']) ?>">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="small text-muted">Company</label>
+                                        <input type="text" name="cf_companies[<?= $i ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($fb['company']) ?>">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="small text-muted">Review Quote</label>
+                                    <textarea name="cf_quotes[<?= $i ?>]" class="scms-form-control form-control-sm" rows="2"><?= htmlspecialchars($fb['quote']) ?></textarea>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <!-- TAB 10: MICRO-MARKETS & CTA -->
+                    <div id="tab-wrap-cta" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-geo me-1"></i> Wrapping Up (Delhi Micro-Markets) &amp; Final CTA Banner</strong>
+                            <div class="small text-muted">Controls the localized Delhi NCR coverage area and the closing conversion callout.</div>
+                        </div>
+
+                        <h5 class="fw-bold text-dark mb-2">Wrapping Up Narrative</h5>
+                        <div class="scms-form-group">
+                            <label>Eyebrow</label>
+                            <input type="text" name="wrap_eyebrow" class="scms-form-control" value="<?= htmlspecialchars($wrappingUp['eyebrow'] ?? 'DELHI NCR LOCAL REACH') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Title</label>
+                            <input type="text" name="wrap_title" class="scms-form-control" value="<?= htmlspecialchars($wrappingUp['title'] ?? 'Why SEO Services in Delhi Matter for Your Business') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Subtitle</label>
+                            <input type="text" name="wrap_sub" class="scms-form-control" value="<?= htmlspecialchars($wrappingUp['sub'] ?? 'Build Visibility. Earn Trust. Generate Sustainable Growth.') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Paragraph 1</label>
+                            <textarea name="wrap_p1" class="scms-form-control" rows="2"><?= htmlspecialchars($wrappingUp['p1'] ?? '') ?></textarea>
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Paragraph 2</label>
+                            <textarea name="wrap_p2" class="scms-form-control" rows="2"><?= htmlspecialchars($wrappingUp['p2'] ?? '') ?></textarea>
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Target Micro-Markets (Comma-separated)</label>
+                            <?php 
+                            $mks = !empty($wrappingUp['micro_markets']) && is_array($wrappingUp['micro_markets']) ? implode(', ', $wrappingUp['micro_markets']) : 'Pitampura, Rohini, Dwarka, Janakpuri, South Delhi, Connaught Place, Saket, Punjabi Bagh, Noida, Gurgaon, Faridabad, Ghaziabad';
+                            ?>
+                            <input type="text" name="wrap_markets" class="scms-form-control" value="<?= htmlspecialchars($mks) ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Goal Statement</label>
+                            <input type="text" name="wrap_goal" class="scms-form-control" value="<?= htmlspecialchars($wrappingUp['goal'] ?? 'Our goal is simple: Make your business discoverable, build trust, and convert search visibility into growth.') ?>">
+                        </div>
+
+                        <hr class="my-4">
+                        <h5 class="fw-bold text-dark mb-2">Final Conversion CTA Box</h5>
+                        <div class="scms-form-group">
+                            <label>Headline</label>
+                            <input type="text" name="cta_headline" class="scms-form-control" value="<?= htmlspecialchars($ctaBox['headline'] ?? 'So You\'re Ready to Take the Plunge and Grow Your Business With SEO?') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Subtitle</label>
+                            <input type="text" name="cta_sub" class="scms-form-control" value="<?= htmlspecialchars($ctaBox['sub'] ?? 'Let\'s Make Your Search Visibility Business Opportunities') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Description Body</label>
+                            <textarea name="cta_text" class="scms-form-control" rows="3"><?= htmlspecialchars($ctaBox['text'] ?? '') ?></textarea>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Primary Button Label</label>
+                                <input type="text" name="cta_btn_text" class="scms-form-control" value="<?= htmlspecialchars($ctaBox['btn_text'] ?? 'Book Your Free SEO Consultation') ?>">
+                            </div>
+                            <div class="col-md-6 scms-form-group">
+                                <label>Phone Call Label</label>
+                                <input type="text" name="cta_call_text" class="scms-form-control" value="<?= htmlspecialchars($ctaBox['call_text'] ?? 'Call: +91-9999674255') ?>">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB 11: FAQS (10 ACCORDIONS) -->
+                    <div id="tab-faqs" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-question-circle me-1"></i> Frequently Asked Questions (10 Items)</strong>
+                            <div class="small text-muted">Questions &amp; answers displayed in the accordion and synchronized with Schema.org JSON-LD structured data.</div>
+                        </div>
+
+                        <div id="scmsFaqList">
+                            <?php foreach ($faqs as $fIdx => $fq): ?>
+                                <div class="scms-item-card p-3 mb-3 border rounded bg-white shadow-sm" id="scmsFaqRow_<?= $fIdx ?>">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="fw-bold small text-primary"><i class="bi bi-patch-question me-1"></i> FAQ Question #<?= $fIdx + 1 ?></div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <label class="small text-muted">Question</label>
+                                        <input type="text" name="faq_questions[<?= $fIdx ?>]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($fq['q'] ?? ($fq['question'] ?? '')) ?>" required>
+                                    </div>
+                                    <div>
+                                        <label class="small text-muted">Answer</label>
+                                        <textarea name="faq_answers[<?= $fIdx ?>]" class="scms-form-control" rows="3" required><?= htmlspecialchars($fq['a'] ?? ($fq['answer'] ?? '')) ?></textarea>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
 
-                    <!-- SPRING SOURCING FAIR 2027 SERP SHOWCASE IMAGE -->
-                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
-                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-window text-primary me-2"></i> Spring Sourcing Fair 2027 SERP Proof Screenshot (Section 2)</h5>
-                        <p class="small text-muted mb-3">Upload or replace the authentic Google SERP screenshot showing the keyword "Spring sourcing fair 2027" and the IHGF Delhi Fair website highlighted in red.</p>
+                    <!-- TAB 12: SEO METADATA -->
+                    <div id="tab-seo" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4" style="background:#FFF5FA; border-color:rgba(196,0,122,0.2) !important;">
+                            <strong style="color:#C4007A;"><i class="bi bi-search me-1"></i> SEO Metadata &amp; OpenGraph Settings</strong>
+                            <div class="small text-muted">Fine-tune the search engine snippet and social preview tags.</div>
+                        </div>
 
-                        <?php $springImgVal = $item['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png'; ?>
-                        <div class="row g-3 align-items-center">
-                            <div class="col-md-3">
-                                <div class="p-2 border rounded bg-light text-center">
-                                    <img src="<?= htmlspecialchars($springImgVal) ?>" alt="Spring SERP Preview" style="max-width: 100%; max-height: 120px; object-fit: contain; border-radius: 6px;">
-                                </div>
-                            </div>
-                            <div class="col-md-9">
-                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-upload text-primary me-1"></i> Upload New Spring Fair SERP Image File (PNG, JPG, WEBP)</label>
-                                <input type="file" name="spring_serp_image_file" accept="image/*" class="form-control form-control-sm mb-2">
-                                <label class="small text-muted mb-1">Or Direct Image URL / Path:</label>
-                                <input type="text" name="spring_serp_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($springImgVal) ?>" placeholder="/assets/images/spring-sourcing-fair-serp-highlight.png">
-                            </div>
+                        <div class="scms-form-group">
+                            <label>Page Meta Title</label>
+                            <input type="text" name="page_meta_title" class="scms-form-control" value="<?= htmlspecialchars($item['page_meta_title'] ?? 'SEO Services in Delhi – Result-Driven SEO to Grow Your Business | WebTecMart') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Page Meta Description</label>
+                            <textarea name="page_meta_desc" class="scms-form-control" rows="3"><?= htmlspecialchars($item['page_meta_desc'] ?? 'Build search visibility that drives real business growth. WebTecMart is the top-rated SEO agency in Delhi NCR providing AI-ready SEO, Google #1 rankings, and qualified organic leads.') ?></textarea>
                         </div>
                     </div>
 
-                    <!-- 4. GOOGLE SERP & AI OVERVIEW IMAGE (Image 2 Takeaways) -->
-                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
-                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-google text-primary me-2"></i> 4. Google SERP AI Overview Mockup Image (Key Takeaways Section)</h5>
-                        <p class="small text-muted mb-3">Upload or replace the high-resolution Google SERP / AI search overview graphic shown on the right side of the Key Takeaways section.</p>
+                <?php else: ?>
+                    <!-- ========================================================
+                         STANDARD CMS NAVIGATION (For other services)
+                         ======================================================== -->
+                    <div class="scms-tabs">
+                        <button type="button" class="scms-tab-btn active" onclick="scmsSwitchTab('tab-basic', this)">1. Basic &amp; Hero</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-overview', this)">2. Overview &amp; Benefits</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-features', this)">3. Features &amp; Deliverables (<?= count($features) ?>)</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-process', this)">4. Working Process (<?= count($process) ?>)</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-faqs', this)">5. FAQs (<?= count($faqs) ?>)</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-advance-ui', this)" style="background: #FFF0F7; color: #C4007A; border-color: rgba(196, 0, 122, 0.4); font-weight: 700;"><i class="bi bi-stars me-1"></i> 6. Advance UI &amp; Growth</button>
+                        <button type="button" class="scms-tab-btn" onclick="scmsSwitchTab('tab-seo', this)">7. SEO &amp; Meta</button>
+                    </div>
 
-                        <?php $serpImgVal = $item['serp_image'] ?? '/assets/images/seo-takeaways-preview.png'; ?>
-                        <div class="row g-3 align-items-center">
-                            <div class="col-md-3">
-                                <div class="p-2 border rounded bg-light text-center">
-                                    <img src="<?= htmlspecialchars($serpImgVal) ?>" alt="SERP Preview" style="max-width: 100%; max-height: 120px; object-fit: contain; border-radius: 6px;">
+                    <!-- TAB 1: BASIC & HERO -->
+                    <div id="tab-basic" class="scms-tab-pane">
+                        <div class="row">
+                            <div class="col-md-6 scms-form-group">
+                                <label>Service Title *</label>
+                                <input type="text" name="title" class="scms-form-control" value="<?= htmlspecialchars($item['title'] ?? '') ?>" required placeholder="e.g. Search Engine Optimization">
+                            </div>
+                            <div class="col-md-6 scms-form-group">
+                                <label>URL Slug</label>
+                                <input type="text" name="slug" class="scms-form-control" value="<?= htmlspecialchars($item['slug'] ?? '') ?>" placeholder="e.g. search-engine-optimization">
+                                <small class="text-muted">Live URL: <code>/service.php?slug=<?= htmlspecialchars($item['slug'] ?? 'your-slug') ?></code></small>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 scms-form-group">
+                                <label>Category</label>
+                                <select name="category" class="scms-form-control">
+                                    <?php
+                                    $currentCat = $item['category'] ?? 'SEO';
+                                    foreach (['SEO', 'Web Development', 'Paid Advertising', 'Social Media', 'Branding', 'Digital Strategy'] as $c): ?>
+                                        <option value="<?= $c ?>" <?= $currentCat === $c ? 'selected' : '' ?>><?= $c ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4 scms-form-group">
+                                <label>Icon</label>
+                                <select name="icon" class="scms-form-control">
+                                    <?php
+                                    $currentIcon = $item['icon'] ?? 'sparkles';
+                                    foreach (['sparkles', 'trending', 'layout', 'search', 'megaphone', 'share', 'target', 'globe', 'smartphone', 'award', 'shield'] as $ic): ?>
+                                        <option value="<?= $ic ?>" <?= $currentIcon === $ic ? 'selected' : '' ?>><?= ucfirst($ic) ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-md-4 scms-form-group">
+                                <label>Publish Status</label>
+                                <div class="form-check form-switch mt-2">
+                                    <input class="form-check-input" type="checkbox" name="is_active" id="scmsActiveCheck" value="1" <?= (!isset($item['is_active']) || (int) $item['is_active'] === 1) ? 'checked' : '' ?>>
+                                    <label class="form-check-label text-dark fw-bold ms-2" for="scmsActiveCheck">Published &amp; Live on Site</label>
                                 </div>
                             </div>
-                            <div class="col-md-9">
-                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-upload text-primary me-1"></i> Upload New SERP Image File (PNG, JPG, WEBP)</label>
-                                <input type="file" name="serp_image_file" accept="image/*" class="form-control form-control-sm mb-2">
-                                <label class="small text-muted mb-1">Or Direct Image URL / Path:</label>
-                                <input type="text" name="serp_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($serpImgVal) ?>" placeholder="/assets/images/seo-takeaways-preview.png">
-                            </div>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Tagline / Eyebrow Badge</label>
+                            <input type="text" name="tagline" class="scms-form-control" value="<?= htmlspecialchars($item['tagline'] ?? '') ?>" placeholder="e.g. Rank Higher. Convert Better. Scale Organically.">
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Hero Description</label>
+                            <textarea name="hero_description" class="scms-form-control" placeholder="Short impactful summary appearing directly below the hero headline..."><?= htmlspecialchars($item['hero_description'] ?? '') ?></textarea>
+                        </div>
+
+                        <div class="scms-form-group">
+                            <label>Short Excerpt / Card Summary</label>
+                            <textarea name="summary" class="scms-form-control" rows="2" placeholder="Brief 1-2 sentence description shown in service grids across the website..."><?= htmlspecialchars($item['summary'] ?? '') ?></textarea>
                         </div>
                     </div>
 
-                    <!-- 5. TOP EVENT BRAND LOGOS SHOWCASE (Image 1 Marquee) -->
-                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <h5 class="fw-bold text-dark mb-0"><i class="bi bi-collection-fill text-primary me-2"></i> 5. Top Event Brand Logos Showcase (Image 1 Marquee)</h5>
-                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="scmsAddBrandLogoRow()"><i class="bi bi-plus-lg me-1"></i> Add Brand Logo</button>
+                    <!-- TAB 2: OVERVIEW & BENEFITS -->
+                    <div id="tab-overview" class="scms-tab-pane d-none">
+                        <div class="scms-form-group">
+                            <label>Detailed Overview &amp; Description</label>
+                            <textarea name="body" class="scms-form-control" rows="6" placeholder="Comprehensive explanation of what this service delivers, methodologies used, and expected outcomes..."><?= htmlspecialchars($item['body'] ?? '') ?></textarea>
                         </div>
-                        <p class="small text-muted mb-3">Upload logos and edit brand names and category tags for all event organisers featured in the marquee.</p>
+                    </div>
 
-                        <div id="scmsBrandLogosContainer">
-                            <?php 
-                            $bList = !empty($brandLogos) ? $brandLogos : [
-                                ['name' => 'Informa Global', 'logo' => '/assets/images/logo-1.png', 'category' => 'Trade Events'],
-                                ['name' => 'Bharat Tex Fair', 'logo' => '/assets/images/logos-10.jpeg', 'category' => 'Ministry of Textiles'],
-                                ['name' => 'IHGF Delhi Autumn Fair 2027', 'logo' => '/assets/images/logos-11.jpeg', 'category' => 'Global Sourcing Fair'],
-                                ['name' => 'Clarion Events', 'logo' => '/assets/images/logos-2.png', 'category' => 'Exhibition Leader'],
-                                ['name' => 'London Tech Week', 'logo' => '/assets/images/logos-3.jpeg', 'category' => 'Tech Expo'],
-                                ['name' => 'Media 10', 'logo' => '/assets/images/logos-4.jpeg', 'category' => 'Design & Media'],
-                                ['name' => 'The AI Summit', 'logo' => '/assets/images/logos-5.jpeg', 'category' => 'Enterprise AI'],
-                                ['name' => 'Northstar Travel Group', 'logo' => '/assets/images/logos-6.jpeg', 'category' => 'Travel Group'],
-                                ['name' => 'BMJ Future Health', 'logo' => '/assets/images/logos-7.jpeg', 'category' => 'Healthcare Publishing'],
-                                ['name' => 'Stonex Jewellers', 'logo' => '/assets/images/stonex-jewellers-logo.png', 'category' => 'Luxury Retail'],
-                                ['name' => 'Innovation Zero', 'logo' => '/assets/images/logos-8.jpeg', 'category' => 'CleanTech Congress'],
-                                ['name' => 'Premier Logistics', 'logo' => '/assets/images/logos-9.jpeg', 'category' => 'Industrial Logistics']
-                            ];
-                            foreach ($bList as $bIdx => $b): ?>
-                                <div class="scms-repeater-box mb-3 p-3 bg-light rounded border">
-                                    <div class="row g-2 align-items-center">
-                                        <div class="col-md-2 text-center">
-                                            <?php if (!empty($b['logo'])): ?>
-                                                <img src="<?= htmlspecialchars($b['logo']) ?>" alt="Logo" style="max-height: 44px; max-width: 90px; object-fit: contain; background: #fff; padding: 4px; border-radius: 6px; border: 1px solid #E5E7EB;">
-                                            <?php else: ?>
-                                                <div class="badge bg-secondary p-2">No Logo</div>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="small text-muted mb-0">Brand Name</label>
-                                            <input type="text" name="brand_names[<?= $bIdx ?>]" class="scms-form-control form-control-sm fw-bold" value="<?= htmlspecialchars($b['name']) ?>" placeholder="e.g. Informa Global">
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label class="small text-muted mb-0">Category / Subtitle</label>
-                                            <input type="text" name="brand_cats[<?= $bIdx ?>]" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($b['category'] ?? 'Enterprise Brand') ?>" placeholder="e.g. Trade Events">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="small text-muted mb-0"><i class="bi bi-upload text-primary me-1"></i> Upload Logo File</label>
-                                            <input type="file" name="brand_logo_file_<?= $bIdx ?>" accept="image/*" class="form-control form-control-sm mb-1">
-                                            <input type="text" name="brand_urls[<?= $bIdx ?>]" class="scms-form-control form-control-sm small" value="<?= htmlspecialchars($b['logo']) ?>" placeholder="/assets/images/logo-1.png">
-                                        </div>
+                    <!-- TAB 3: FEATURES -->
+                    <div id="tab-features" class="scms-tab-pane d-none">
+                        <div id="scmsFeatureList">
+                            <?php foreach ($features as $idx => $f): ?>
+                                <div class="scms-item-card" id="scmsFeatureRow_<?= $idx ?>">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="fw-bold small text-primary"><i class="bi bi-check-circle me-1"></i> Feature #<?= $idx + 1 ?></div>
+                                    </div>
+                                    <div class="mb-2">
+                                        <input type="text" name="feature_titles[<?= $idx ?>]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($f['title']) ?>" placeholder="Feature Title">
+                                    </div>
+                                    <div>
+                                        <textarea name="feature_descs[<?= $idx ?>]" class="scms-form-control" rows="2" placeholder="Description"><?= htmlspecialchars($f['description']) ?></textarea>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
                     </div>
-                </div>
 
-                <!-- TAB 7: SEO & META -->
-                <div id="tab-seo" class="scms-tab-pane d-none">
-                    <div class="scms-form-group">
-                        <label>Page Meta Title</label>
-                        <input type="text" name="page_meta_title" class="scms-form-control" value="<?= htmlspecialchars($item['page_meta_title'] ?? '') ?>" placeholder="e.g. Search Engine Optimization (SEO) Services | WebTecMart">
+                    <!-- TAB 4: PROCESS -->
+                    <div id="tab-process" class="scms-tab-pane d-none">
+                        <div id="scmsProcessList">
+                            <?php foreach ($process as $idx => $p): ?>
+                                <div class="scms-item-card" id="scmsProcessRow_<?= $idx ?>">
+                                    <div class="row g-2 mb-2">
+                                        <div class="col-md-2">
+                                            <input type="text" name="process_steps[<?= $idx ?>]" class="scms-form-control text-center fw-bold" value="<?= htmlspecialchars($p['step']) ?>" placeholder="01">
+                                        </div>
+                                        <div class="col-md-10">
+                                            <input type="text" name="process_titles[<?= $idx ?>]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($p['title']) ?>" placeholder="Step Title">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <textarea name="process_descs[<?= $idx ?>]" class="scms-form-control" rows="2" placeholder="Description"><?= htmlspecialchars($p['description']) ?></textarea>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
-                    <div class="scms-form-group">
-                        <label>Page Meta Description</label>
-                        <textarea name="page_meta_desc" class="scms-form-control" rows="3" placeholder="Target 150-160 characters for high SERP click-through rates..."><?= htmlspecialchars($item['page_meta_desc'] ?? '') ?></textarea>
-                    </div>
-                </div>
 
-                <!-- Submit Bar -->
+                    <!-- TAB 5: FAQS -->
+                    <div id="tab-faqs" class="scms-tab-pane d-none">
+                        <div id="scmsFaqList">
+                            <?php foreach ($faqs as $idx => $fq): ?>
+                                <div class="scms-item-card" id="scmsFaqRow_<?= $idx ?>">
+                                    <div class="mb-2">
+                                        <input type="text" name="faq_questions[<?= $idx ?>]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($fq['q'] ?? ($fq['question'] ?? '')) ?>" placeholder="Question">
+                                    </div>
+                                    <div>
+                                        <textarea name="faq_answers[<?= $idx ?>]" class="scms-form-control" rows="2" placeholder="Answer"><?= htmlspecialchars($fq['a'] ?? ($fq['answer'] ?? '')) ?></textarea>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <!-- TAB 6: ADVANCE UI -->
+                    <div id="tab-advance-ui" class="scms-tab-pane d-none">
+                        <div class="alert alert-light border mb-4">
+                            <strong>Advance UI &amp; Growth Sections</strong>
+                        </div>
+                    </div>
+
+                    <!-- TAB 7: SEO -->
+                    <div id="tab-seo" class="scms-tab-pane d-none">
+                        <div class="scms-form-group">
+                            <label>Page Meta Title</label>
+                            <input type="text" name="page_meta_title" class="scms-form-control" value="<?= htmlspecialchars($item['page_meta_title'] ?? '') ?>">
+                        </div>
+                        <div class="scms-form-group">
+                            <label>Page Meta Description</label>
+                            <textarea name="page_meta_desc" class="scms-form-control" rows="3"><?= htmlspecialchars($item['page_meta_desc'] ?? '') ?></textarea>
+                        </div>
+                    </div>
+                <?php endif; ?>
+<!-- Submit Bar -->
                 <div class="d-flex align-items-center justify-content-between pt-4 mt-4 border-top">
                     <a href="/admin/services.php" class="btn btn-outline-secondary">Cancel</a>
                     <button type="submit" class="scms-primary-btn">
