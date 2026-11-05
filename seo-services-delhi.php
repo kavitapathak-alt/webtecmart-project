@@ -20,6 +20,7 @@ $founderInitial = 'JM';
 
 // Key Takeaways Google SERP Image (dynamic & uploadable in admin)
 $serpImage = $dbService['serp_image'] ?? '/assets/images/seo-takeaways-preview.png';
+$springSerpImage = $dbService['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png';
 
 // 1. Dynamic Brand Logos (Image 1 Reference)
 $brandLogos = $dbService['brand_logos'] ?? [
@@ -185,15 +186,79 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
           "name": "What are SEO services and why does my business need them?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "SEO services optimize your website's technical health, content, and search authority so it ranks higher on Google when customers search for your products or services. In competitive markets like Delhi NCR, SEO is essential to capture ready-to-buy customers."
+            "text": "SEO Services increase your site's presence in search engines and make it easier for anyone who searches for your goods or services to find your site. Combating local, commercial and industry-specific searches and building a sustainable source of organic traffic for businesses in Delhi is where SEO comes into the picture."
           }
         },
         {
           "@type": "Question",
-          "name": "How long does it take to see measurable SEO results in Delhi?",
+          "name": "How long does SEO take to show results?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "While technical fixes and on-page optimization reflect in Google rankings within 4 to 8 weeks, significant organic traffic jumps and consistent lead flow typically take 3 to 6 months depending on competition."
+            "text": "SEO is a long-term approach, and there is no guarantee of results, depending on your site, the competition, the industry, the keywords you're targeting and how well your site is being found in the search engines. Technical and on page optimisation can bring about changes fairly quickly, whereas building authority and targeting competitive keywords may take a longer period of time, but need consistent optimisation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can Local SEO help my Delhi business?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Local SEO puts your business in front of mobile searches that are related to your area and services. It can help people find your business when they look for local products and/or services, and can help you be seen in queries that are relevant to your business."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does an SEO agency in Delhi actually do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An SEO agency will be able to work on keyword research, technical SEO, on page optimisation, content optimisation, local SEO, internal linking, authority building, competitor analysis and monitoring performance. The exact approach will vary, depending on the business and goals."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is it possible to create leads with SEO and not traffic?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. The goal of SEO isn't to bring as many visitors as possible, it's to bring the right ones. Through focusing on search intent and optimising content and calls to action, landing pages, SEO can help to drive inquiries, registrations, sales and other conversions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which is better, SEO or Google Ads?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEO isn't the same thing as Google Ads. While SEO is about long-term organic visibility, Google Ads can offer instant paid visibility. A lot of businesses leverage both of them as part of an extensive digital marketing campaign."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How to select the Ideal SEO firm in Delhi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Find an SEO firm that has a clear understanding of your business, is able to articulate their approach, has a business objective that is relevant to your business, has a clear reporting system and isn't promising to rank websites in the improbable. A successful SEO partner should be able to tell you not only what they'll be working on, but why it is important to your business."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which businesses can benefit from SEO services?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "SEO can help virtually any business that has customers find it online. SEO can be beneficial for local businesses, e-commerce retailers, professional services, real estate companies, healthcare providers, educational institutions, tech companies and B2B types of companies as well."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does WebTecMart provide Local, National and International SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. WebTecMart can develop SEO strategies for businesses targeting customers locally in Delhi and Delhi NCR, across India or in international markets. The method and web design is modified based on the target market."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the price of SEO services in Delhi?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The cost of SEO services varies based on website size, competition, location, keywords, content needs, and the technical complexity and business goals. WebTecMart also provides several SEO packages and will be able to design a personalised approach to suit your needs."
           }
         }
       ]
@@ -394,10 +459,16 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
         max-width: 620px;
     }
     .del-hero-bullets {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 28px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+    @media (min-width: 640px) {
+        .del-hero-bullets {
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 18px;
+        }
     }
     .del-bullet-item {
         display: flex;
@@ -572,21 +643,22 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
        NEW SECTION 1: TOP BRAND LOGOS MARQUEE (Image 1 Reference)
        ======================================================== */
     .del-brands-section {
-        padding: 60px 0 68px;
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF8FB 100%);
+        padding: 68px 0 76px;
+        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 50%, #FFFFFF 100%);
         position: relative;
         overflow: hidden;
-        border-bottom: 1px solid rgba(196, 0, 122, 0.1);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.12);
     }
     .del-marquee-wrap {
         position: relative;
-        width: 100%;
+        max-width: 1160px;
+        margin: 0 auto;
         overflow: hidden;
-        padding: 22px 0;
-        border-radius: 24px;
-        background: linear-gradient(135deg, rgba(255, 245, 250, 0.95) 0%, rgba(255, 240, 247, 0.75) 100%);
-        border: 1.5px solid rgba(196, 0, 122, 0.18);
-        box-shadow: inset 0 2px 14px rgba(196, 0, 122, 0.04);
+        padding: 26px 20px;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255, 245, 250, 0.98) 0%, rgba(255, 235, 245, 0.88) 100%);
+        border: 2px solid rgba(196, 0, 122, 0.22);
+        box-shadow: 0 12px 36px rgba(196, 0, 122, 0.08), inset 0 2px 14px rgba(196, 0, 122, 0.04);
     }
     .del-marquee-wrap::before,
     .del-marquee-wrap::after {
@@ -601,46 +673,39 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
     .del-marquee-wrap::before {
         left: 0;
         background: linear-gradient(90deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
-        border-top-left-radius: 22px;
-        border-bottom-left-radius: 22px;
+        border-top-left-radius: 26px;
+        border-bottom-left-radius: 26px;
     }
     .del-marquee-wrap::after {
         right: 0;
         background: linear-gradient(270deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
-        border-top-right-radius: 22px;
-        border-bottom-right-radius: 22px;
+        border-top-right-radius: 26px;
+        border-bottom-right-radius: 26px;
     }
     .del-marquee-track {
         display: flex;
-        gap: 20px;
+        gap: 18px;
         width: max-content;
-        animation: delMarqueeLeft 38s linear infinite;
+        animation: delMarqueeSingle 32s linear infinite;
         padding: 4px 10px;
-    }
-    .del-marquee-track.reverse {
-        animation: delMarqueeRight 42s linear infinite;
-        margin-top: 18px;
+        align-items: center;
     }
     .del-marquee-wrap:hover .del-marquee-track {
         animation-play-state: paused;
     }
-    @keyframes delMarqueeLeft {
+    @keyframes delMarqueeSingle {
         0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-50%, 0, 0); }
-    }
-    @keyframes delMarqueeRight {
-        0% { transform: translate3d(-50%, 0, 0); }
-        100% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-33.333%, 0, 0); }
     }
     .del-brand-card {
         display: flex;
         align-items: center;
         gap: 14px;
         background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
+        border: 1.5px solid rgba(196, 0, 122, 0.22);
         border-radius: 16px;
-        padding: 12px 22px;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.05);
+        padding: 12px 24px;
+        box-shadow: 0 4px 18px rgba(196, 0, 122, 0.07);
         transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         white-space: nowrap;
         cursor: default;
@@ -648,8 +713,8 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
     .del-brand-card:hover {
         transform: translateY(-4px);
         border-color: #C4007A;
-        background: #FFF5FA;
-        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.18);
+        background: #FFF0F7;
+        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.22);
     }
     .del-brand-logo-img {
         height: 38px;
@@ -732,86 +797,103 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
         gap: 8px;
         box-shadow: 0 4px 12px rgba(196, 0, 122, 0.06);
     }
-    .del-laptop-showcase {
+    /* Google SERP Browser Showcase (Replaced Laptop Mockup) */
+    .del-serp-browser-showcase {
         position: relative;
-        perspective: 1000px;
-    }
-    .del-laptop-card {
-        background: #111827;
-        border: 2px solid rgba(196, 0, 122, 0.35);
+        background: #FFFFFF;
         border-radius: 24px;
-        padding: 24px;
-        box-shadow: 0 24px 60px rgba(17, 24, 39, 0.25), 0 0 40px rgba(196, 0, 122, 0.15);
-        color: #FFFFFF;
-        position: relative;
-        transform: rotateY(-3deg) rotateX(2deg);
-        transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        border: 2px solid rgba(196, 0, 122, 0.22);
+        box-shadow: 0 24px 60px rgba(196, 0, 122, 0.12), 0 4px 16px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
     }
-    .del-laptop-card:hover {
-        transform: rotateY(0deg) rotateX(0deg) translateY(-6px);
+    .del-serp-browser-showcase:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 30px 70px rgba(196, 0, 122, 0.18), 0 8px 24px rgba(0, 0, 0, 0.06);
+        border-color: #C4007A;
     }
-    .del-laptop-hud-header {
+    .del-browser-chrome {
+        background: #F9FAFB;
+        padding: 12px 18px;
+        border-bottom: 1px solid rgba(196, 0, 122, 0.14);
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        padding-bottom: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        margin-bottom: 20px;
+        gap: 14px;
     }
-    .del-hud-badge {
-        background: rgba(196, 0, 122, 0.25);
-        border: 1px solid #C4007A;
-        color: #FCE7F3;
-        font-size: 0.72rem;
-        font-weight: 700;
-        padding: 3px 10px;
-        border-radius: 9999px;
-        display: inline-flex;
+    .del-browser-dots {
+        display: flex;
         align-items: center;
         gap: 6px;
     }
-    .del-hud-badge .pulse {
-        width: 6px;
-        height: 6px;
-        background: #10B981;
+    .del-browser-dots .dot {
+        width: 10px;
+        height: 10px;
         border-radius: 50%;
-        animation: delPulse 2s infinite;
+        display: inline-block;
     }
-    .del-hud-screen {
-        background: #1E293B;
-        border-radius: 16px;
-        padding: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-    .del-hud-search-bar {
-        background: #0F172A;
-        border: 1px solid rgba(196, 0, 122, 0.3);
+    .del-browser-dots .dot.red { background: #EF4444; }
+    .del-browser-dots .dot.yellow { background: #F59E0B; }
+    .del-browser-dots .dot.green { background: #10B981; }
+    .del-browser-search-bar {
+        flex: 1;
+        background: #FFFFFF;
+        border: 1px solid rgba(196, 0, 122, 0.2);
         border-radius: 9999px;
-        padding: 10px 16px;
+        padding: 6px 14px;
+        font-size: 0.82rem;
+        color: #4B5563;
         display: flex;
         align-items: center;
-        gap: 10px;
-        font-size: 0.86rem;
-        color: #FCE7F3;
-        margin-bottom: 16px;
+        gap: 8px;
+        font-family: monospace;
     }
-    .del-hud-metrics-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin-top: 14px;
+    .del-browser-search-bar .lock-icon {
+        margin-left: auto;
+        font-size: 0.72rem;
+        opacity: 0.7;
     }
-    .del-hud-stat {
-        background: rgba(15, 23, 42, 0.6);
+    .del-browser-viewport {
+        position: relative;
+        background: #FFFFFF;
+        overflow: hidden;
+    }
+    .del-browser-serp-img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+    .del-serp-float-badge {
+        position: absolute;
+        background: #FFFFFF;
+        color: #111827;
         border-radius: 12px;
-        padding: 10px 12px;
-        border: 1px solid rgba(255, 255, 255, 0.06);
-        text-align: center;
+        padding: 8px 14px;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.14);
+        border: 1.5px solid rgba(196, 0, 122, 0.25);
+        font-size: 0.78rem;
+        font-weight: 700;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 4;
+        animation: delFloat 4s ease-in-out infinite alternate;
     }
-    .del-hud-stat .val {
-        font-size: 1.15rem;
-        font-weight: 800;
-        color: #E0398F;
+    .del-serp-float-badge.badge-top {
+        top: 14px;
+        right: 14px;
+    }
+    .del-serp-float-badge.badge-bottom {
+        bottom: 14px;
+        left: 14px;
+        animation-delay: -2s;
+    }
+    .del-serp-float-badge .pulse-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #10B981;
+        display: inline-block;
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
     }
     .del-hud-stat .lbl {
         font-size: 0.68rem;
@@ -918,176 +1000,7 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
         border-radius: 12px;
     }
 
-    /* ========================================================
-       NEW SECTION 3: 4-QUADRANT GROWTH WHEEL (Image 2 Reference)
-       ======================================================== */
-    .del-growth-section {
-        padding: 84px 0;
-        background: #FFFFFF;
-        position: relative;
-        overflow: hidden;
-    }
-    .del-quad-wheel-box {
-        max-width: 820px;
-        margin: 0 auto 48px;
-        position: relative;
-    }
-    .del-quad-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px;
-        position: relative;
-    }
-    @media (max-width: 640px) {
-        .del-quad-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-    .del-quad-card {
-        background: linear-gradient(145deg, #FFF5FA 0%, #FFFFFF 100%);
-        border: 1.5px solid rgba(196, 0, 122, 0.18);
-        border-radius: 28px;
-        padding: 34px 28px;
-        text-align: center;
-        box-shadow: 0 10px 30px rgba(196, 0, 122, 0.05);
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        position: relative;
-        overflow: hidden;
-    }
-    .del-quad-card:hover {
-        transform: translateY(-5px);
-        border-color: #C4007A;
-        box-shadow: 0 18px 45px rgba(196, 0, 122, 0.14);
-    }
-    .del-quad-tag {
-        font-size: 0.8rem;
-        font-weight: 700;
-        color: #4B5563;
-        margin-bottom: 12px;
-        letter-spacing: -0.01em;
-    }
-    .del-quad-num {
-        font-size: clamp(2.4rem, 4vw, 3.4rem);
-        font-weight: 900;
-        color: #C4007A;
-        line-height: 1;
-        margin-bottom: 8px;
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-    }
-    .del-quad-arrow {
-        font-size: 0.65em;
-        color: #10B981;
-    }
-    .del-quad-sub {
-        font-size: 0.8rem;
-        color: #6B7280;
-        font-weight: 600;
-    }
-    .del-quad-center-circle {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 220px;
-        height: 220px;
-        border-radius: 50%;
-        background: #FFFFFF;
-        border: 3px solid #C4007A;
-        box-shadow: 0 0 0 8px rgba(196, 0, 122, 0.12), 0 18px 40px rgba(196, 0, 122, 0.2);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 18px;
-        z-index: 5;
-        transition: transform 0.3s ease;
-    }
-    @media (max-width: 640px) {
-        .del-quad-center-circle {
-            position: static;
-            transform: none;
-            width: 100%;
-            height: auto;
-            border-radius: 24px;
-            margin-bottom: 16px;
-        }
-    }
-    .del-quad-center-badge {
-        background: #FFF0F7;
-        color: #C4007A;
-        font-size: 0.72rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        padding: 2px 10px;
-        border-radius: 9999px;
-        margin-bottom: 6px;
-    }
-    .del-quad-center-title {
-        font-size: 1.05rem;
-        font-weight: 800;
-        color: #111827;
-        margin-bottom: 4px;
-        line-height: 1.2;
-    }
-    .del-quad-center-desc {
-        font-size: 0.72rem;
-        color: #6B7280;
-        line-height: 1.35;
-    }
-    .del-growth-cards-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-        max-width: 980px;
-        margin: 0 auto;
-    }
-    @media (min-width: 768px) {
-        .del-growth-cards-grid {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-    .del-growth-feature-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
-        border-radius: 20px;
-        padding: 26px 24px;
-        display: flex;
-        gap: 16px;
-        box-shadow: 0 8px 24px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-growth-feature-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 14px 34px rgba(196, 0, 122, 0.1);
-    }
-    .del-growth-ficon {
-        width: 44px;
-        height: 44px;
-        border-radius: 14px;
-        background: #FFF0F7;
-        color: #C4007A;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.3rem;
-        flex-shrink: 0;
-    }
-    .del-growth-fcontent h4 {
-        font-size: 1.02rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0 0 6px;
-    }
-    .del-growth-fcontent p {
-        font-size: 0.86rem;
-        color: #4B5563;
-        line-height: 1.55;
-        margin: 0;
-    }
+
 
     /* ========================================================
        4. WHY SEO EFFORTS FALL SHORT (Image 3 Reference 3x2)
@@ -1994,6 +1907,244 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
         padding: 30px;
         text-align: center;
     }
+
+    /* ========================================================
+       NEW COMPONENT STYLES FOR CLIENT'S EXPANDED CONTENT
+       ======================================================== */
+    /* Value Prop / Why WebTecMart Grid */
+    .del-why-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin-top: 24px;
+        margin-bottom: 24px;
+    }
+    .del-why-card {
+        background: #FFFFFF;
+        border: 1.5px solid rgba(196, 0, 122, 0.16);
+        border-radius: 16px;
+        padding: 16px 18px;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.04);
+        transition: all 0.3s ease;
+    }
+    .del-why-card:hover {
+        transform: translateY(-3px);
+        border-color: #C4007A;
+        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
+        background: #FFF8FB;
+    }
+    .del-why-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+        background: #FFF0F7;
+        color: #C4007A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.15rem;
+        flex-shrink: 0;
+    }
+    .del-why-text {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: #1F2937;
+        line-height: 1.45;
+    }
+
+    /* Approach Flow Banner */
+    .del-approach-banner {
+        background: linear-gradient(135deg, #FFF0F7 0%, #FFF8FB 100%);
+        border: 1.5px dashed rgba(196, 0, 122, 0.3);
+        border-radius: 20px;
+        padding: 24px;
+        margin-top: 30px;
+        text-align: center;
+    }
+    .del-approach-title {
+        font-size: 0.82rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #C4007A;
+        margin-bottom: 10px;
+    }
+    .del-approach-flow {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 6px 12px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #111827;
+        margin-bottom: 10px;
+    }
+    .del-approach-flow span.arrow {
+        color: #C4007A;
+        font-weight: 900;
+    }
+
+    /* 6-Step Process Grid */
+    .del-process-section {
+        padding: 84px 0;
+        background: #FFFFFF;
+        position: relative;
+    }
+    .del-process-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 24px;
+        margin-top: 40px;
+    }
+    .del-process-card {
+        background: #FFFFFF;
+        border: 1.5px solid rgba(196, 0, 122, 0.16);
+        border-radius: 20px;
+        padding: 28px;
+        position: relative;
+        box-shadow: 0 8px 24px rgba(196, 0, 122, 0.05);
+        transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .del-process-card:hover {
+        transform: translateY(-6px);
+        border-color: #C4007A;
+        box-shadow: 0 18px 40px rgba(196, 0, 122, 0.14);
+    }
+    .del-process-num {
+        font-size: 2.2rem;
+        font-weight: 900;
+        color: rgba(196, 0, 122, 0.28);
+        line-height: 1;
+        margin-bottom: 12px;
+        transition: color 0.3s ease;
+    }
+    .del-process-card:hover .del-process-num {
+        color: #C4007A;
+    }
+    .del-process-card h3 {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: #111827;
+        margin: 0 0 10px;
+    }
+    .del-process-card p {
+        font-size: 0.92rem;
+        color: #4B5563;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* 8 Industries Grid */
+    .del-industries-section {
+        padding: 84px 0;
+        background: linear-gradient(180deg, #FFF8FB 0%, #FFFFFF 100%);
+        position: relative;
+    }
+    .del-industries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+        margin-top: 40px;
+    }
+    .del-industry-card {
+        background: #FFFFFF;
+        border: 1.5px solid rgba(196, 0, 122, 0.14);
+        border-radius: 18px;
+        padding: 24px;
+        box-shadow: 0 6px 20px rgba(196, 0, 122, 0.04);
+        transition: all 0.35s ease;
+    }
+    .del-industry-card:hover {
+        transform: translateY(-5px);
+        border-color: #C4007A;
+        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.12);
+        background: #FFF5FA;
+    }
+    .del-ind-icon {
+        font-size: 2.2rem;
+        margin-bottom: 14px;
+        display: inline-block;
+    }
+    .del-industry-card h3 {
+        font-size: 1.05rem;
+        font-weight: 800;
+        color: #111827;
+        margin: 0 0 8px;
+    }
+    .del-industry-card p {
+        font-size: 0.88rem;
+        color: #4B5563;
+        line-height: 1.55;
+        margin: 0;
+    }
+
+    /* 3 Expert Pillars Grid */
+    .del-expert-pillars {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 22px;
+        margin-top: 36px;
+    }
+    .del-expert-pillar-card {
+        background: #FFFFFF;
+        border: 1.5px solid rgba(196, 0, 122, 0.14);
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 6px 20px rgba(196, 0, 122, 0.05);
+        transition: all 0.3s ease;
+    }
+    .del-expert-pillar-card:hover {
+        transform: translateY(-4px);
+        border-color: #C4007A;
+        box-shadow: 0 14px 32px rgba(196, 0, 122, 0.12);
+    }
+    .del-ep-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        background: #FFF0F7;
+        color: #C4007A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.45rem;
+        margin-bottom: 16px;
+    }
+    .del-expert-pillar-card h4 {
+        font-size: 1.1rem;
+        font-weight: 800;
+        color: #111827;
+        margin: 0 0 10px;
+    }
+    .del-expert-pillar-card p {
+        font-size: 0.9rem;
+        color: #4B5563;
+        line-height: 1.6;
+        margin: 0;
+    }
+
+    /* Wrapping Up Section Box */
+    .del-wrap-section {
+        padding: 84px 0;
+        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
+    }
+    .del-wrap-card {
+        background: #FFFFFF;
+        border: 2px solid rgba(196, 0, 122, 0.2);
+        border-radius: 28px;
+        padding: 48px 40px;
+        box-shadow: 0 20px 50px rgba(196, 0, 122, 0.08);
+        position: relative;
+    }
+    @media (max-width: 640px) {
+        .del-wrap-card {
+            padding: 30px 20px;
+        }
+    }
 </style>
 
 <main class="del-seo-page">
@@ -2012,59 +2163,69 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
                 <div class="del-hero-left" data-framer-reveal="slide-left">
                     <div class="del-eyebrow">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
-                        <span>TOP-RATED SEO AGENCY IN DELHI NCR</span>
+                        <span>RESULT-DRIVEN SEO TO GROW YOUR BUSINESS</span>
                     </div>
 
                     <h1 class="del-hero-title">
-                        Build Search Visibility That Drives <span class="accent" style="color: #C4007A;">Real Business Growth</span>
+                        SEO Services in Delhi &bull; <span class="accent" style="color: #C4007A;">Result-Driven SEO to Grow Your Business</span>
                     </h1>
 
                     <p class="del-hero-desc">
-                        <?= htmlspecialchars($heroDesc) ?>
+                        Get found when your customers are searching. WebTecMart offers strategic SEO solutions in Delhi to boost Google rankings, qualified organic traffic and lead to more enquiries, leads and sales.
+                    </p>
+
+                    <p style="font-size: 0.94rem; line-height: 1.62; color: #4B5563; margin-bottom: 20px;">
+                        Whether it's technical SEO, on-page optimisation, local SEO, content strategy, or building authority, we develop individual SEO strategies that align with your business, your audience, your competition, and your growth objectives. If you are a local business in Delhi or a business with a growing presence in the Delhi NCR area, an ecommerce company or any business that aims to boost sales across India, our SEO solutions will help you convert search visibility into tangible business growth.
                     </p>
 
                     <div class="del-hero-bullets">
                         <div class="del-bullet-item">
                             <span class="dot">✓</span>
-                            <span>High-impact content optimization</span>
+                            <span>Enhance Google Rankings for relevant, high-value keywords</span>
                         </div>
                         <div class="del-bullet-item">
                             <span class="dot">✓</span>
-                            <span>ROI-focused strategy</span>
+                            <span>Bring in Targeted Organic Traffic from customers who are searching for your services.</span>
                         </div>
                         <div class="del-bullet-item">
                             <span class="dot">✓</span>
-                            <span>Topical authority building</span>
+                            <span>Increase website leads and enquiries with search optimisation</span>
                         </div>
                         <div class="del-bullet-item">
                             <span class="dot">✓</span>
-                            <span>Conversion-focused optimization</span>
+                            <span>Create Long-Term Visibility by following a sustainable organic growth strategy.</span>
                         </div>
                     </div>
 
                     <div class="del-hero-actions">
                         <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
-                            <span>Contact Us</span>
+                            <span>Schedule a Free SEO Consultation</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
                         <a href="tel:+919999674255" class="del-btn-secondary">
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <span>Call Now: +91-9999674255</span>
+                            <span>Call: +91-9999674255</span>
                         </a>
                     </div>
 
-                    <!-- Strategist / Author Stamp (Jitin Madaan) -->
-                    <div class="del-author-card">
-                        <div class="del-author-avatar">
-                            <?php if (!empty($founderAvatar) && file_exists(__DIR__ . $founderAvatar)): ?>
-                                <img src="<?= htmlspecialchars($founderAvatar) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-author-img">
-                            <?php else: ?>
-                                <?= htmlspecialchars($founderInitial) ?>
-                            <?php endif; ?>
+                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px; margin-top: 20px;">
+                        <!-- Strategist / Author Stamp (Jitin Madaan) -->
+                        <div class="del-author-card">
+                            <div class="del-author-avatar">
+                                <?php if (!empty($founderAvatar) && file_exists(__DIR__ . $founderAvatar)): ?>
+                                    <img src="<?= htmlspecialchars($founderAvatar) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-author-img">
+                                <?php else: ?>
+                                    <?= htmlspecialchars($founderInitial) ?>
+                                <?php endif; ?>
+                            </div>
+                            <div class="del-author-meta">
+                                <div class="name"><?= htmlspecialchars($founderName) ?></div>
+                                <div class="sub"><?= htmlspecialchars($founderRole) ?> &bull; Published: Nov 04, 2025 &bull; Updated: Nov 04, 2026</div>
+                            </div>
                         </div>
-                        <div class="del-author-meta">
-                            <div class="name"><?= htmlspecialchars($founderName) ?></div>
-                            <div class="sub"><?= htmlspecialchars($founderRole) ?> &bull; Published: Nov 04, 2025 &bull; Updated: Nov 04, 2026</div>
+
+                        <div style="font-size: 0.86rem; font-weight: 700; color: #C4007A; background: #FFF0F7; padding: 6px 14px; border-radius: 9999px; border: 1px solid rgba(196, 0, 122, 0.2);">
+                            ⚡ Ready for Google to find you?
                         </div>
                     </div>
                 </div>
@@ -2126,11 +2287,11 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
             </div>
 
             <div class="del-marquee-wrap">
-                <!-- Row 1: Leftward Ticker -->
+                <!-- Single Row: Continuous Infinite Auto-Scroll -->
                 <div class="del-marquee-track">
                     <?php 
-                    $doubleLogos = array_merge($brandLogos, $brandLogos);
-                    foreach ($doubleLogos as $b): 
+                    $tripleLogos = array_merge($brandLogos, $brandLogos, $brandLogos);
+                    foreach ($tripleLogos as $b): 
                         $imgPath = $b['logo'] ?? '';
                     ?>
                         <div class="del-brand-card">
@@ -2148,29 +2309,6 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
                         </div>
                     <?php endforeach; ?>
                 </div>
-
-                <!-- Row 2: Rightward Ticker -->
-                <div class="del-marquee-track reverse">
-                    <?php 
-                    $reversedLogos = array_reverse($doubleLogos);
-                    foreach ($reversedLogos as $b): 
-                        $imgPath = $b['logo'] ?? '';
-                    ?>
-                        <div class="del-brand-card">
-                            <?php if (!empty($imgPath)): ?>
-                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
-                            <?php else: ?>
-                                <div style="width: 36px; height: 36px; border-radius: 8px; background: #FFF0F7; color: #C4007A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.8rem;">
-                                    <?= htmlspecialchars(substr($b['name'], 0, 2)) ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="del-brand-info">
-                                <div class="b-name"><?= htmlspecialchars($b['name']) ?></div>
-                                <div class="b-cat"><?= htmlspecialchars($b['category'] ?? 'Verified Partner') ?></div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
             </div>
         </div>
     </section>
@@ -2183,32 +2321,55 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
             <div class="del-narrative-grid">
 
                 <div class="del-narrative-left" data-framer-reveal="slide-left">
-                    <div class="del-eyebrow">SEARCH ENGINE OPTIMISATION INTRO</div>
+                    <div class="del-eyebrow">BE FOUND BY THE CORRECT PEOPLE &bull; GENERATE BETTER LEADS &bull; GROW ORGANICALLY</div>
                     <h2 class="del-section-title" style="text-align: left;">
-                        <?= htmlspecialchars($strategicNarrative['title'] ?? 'Search Engine Optimisation for Events & Growth Brands') ?>
+                        SEO Services in Delhi That Turn Search Visibility Into <span class="accent">Business Growth!<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h2>
                     <p class="del-narrative-lead">
-                        <?= htmlspecialchars($strategicNarrative['p1'] ?? 'Optimising your event website for search engines is a powerful way to attract new attendees, sponsors, and exhibitors while driving long-term revenue growth.') ?>
+                        Your customers are looking for your products and services. The challenge is to make sure that they find your business, not your competitors.
                     </p>
                     <p class="del-narrative-sub">
-                        <?= htmlspecialchars($strategicNarrative['p2'] ?? 'While results cannot be guaranteed overnight, in our experience we have found that high-value enterprises are uniquely positioned to perform well with effective search engine optimisation.') ?>
+                        We at WebTecMart offer SEO Services in Delhi that are optimized to deliver results and enhance your search performance, to ensure that you reach the right people in the right manner with your web pages and that they are transformed into enquiries and customers.
+                    </p>
+                    <p class="del-narrative-sub">
+                        Technical SEO, Keyword Optimisation, Content, Local SEO, and Authority Building are just some of the strategies we will develop in line with your business, your audience and your growth goals. From local businesses in Delhi to growing businesses in Delhi NCR, e-commerce firms to businesses looking to reach customers beyond our borders in India, we develop SEO strategies that promote sustainable growth.
                     </p>
 
-                    <div class="del-narrative-pills">
-                        <div class="del-npill">
-                            <span>🏆 13+ Years Experience</span>
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: #111827; margin: 24px 0 10px;">What makes WebTecMart the perfect SEO choice?</h3>
+                    <div class="del-why-grid">
+                        <div class="del-why-card">
+                            <div class="del-why-icon">📍</div>
+                            <div class="del-why-text">Delhi-focused SEO strategies tailored to your market, audience and competition</div>
                         </div>
-                        <div class="del-npill">
-                            <span>⚡ 5,000+ Keywords Ranked</span>
+                        <div class="del-why-card">
+                            <div class="del-why-icon">🔍</div>
+                            <div class="del-why-text">One-stop search optimization for the search engines.</div>
                         </div>
-                        <div class="del-npill">
-                            <span>💎 95% Client Retention</span>
+                        <div class="del-why-card">
+                            <div class="del-why-icon">🎯</div>
+                            <div class="del-why-text">Keyword- and search-intent-based approaches that draw in relevant traffic</div>
                         </div>
+                        <div class="del-why-card">
+                            <div class="del-why-icon">📝</div>
+                            <div class="del-why-text">Content optimization that helps with rankings and provides useful information for users.</div>
+                        </div>
+                        <div class="del-why-card">
+                            <div class="del-why-icon">📊</div>
+                            <div class="del-why-text">Clear reporting to know what is getting better and why</div>
+                        </div>
+                        <div class="del-why-card">
+                            <div class="del-why-icon">🏆</div>
+                            <div class="del-why-text">13+ years of digital experience across SEO, content, websites and digital marketing</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 24px; padding: 14px 18px; background: #FFF5FA; border-left: 3px solid #C4007A; border-radius: 8px; font-weight: 700; color: #C4007A; font-size: 0.94rem;">
+                        💡 Getting better rankings is just the start. It's really about improving the business results.
                     </div>
 
                     <div style="display: flex; gap: 14px; flex-wrap: wrap;">
                         <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
-                            <span>Explore Strategy Consultation</span>
+                            <span>Take Advantage of Complimentary Website Analysis</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
                         <a href="tel:+919999674255" class="del-btn-secondary">
@@ -2217,56 +2378,31 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
                     </div>
                 </div>
 
-                <!-- Right: Framer 3D Tilted Modern Laptop Visual -->
+                <!-- Right: Authentic Google SERP Live Ranking Showcase (Keyword: Spring sourcing fair 2027) -->
                 <div class="del-narrative-right" data-framer-reveal="slide-right">
-                    <div class="del-laptop-showcase">
-                        <div class="del-float-chip chip-1">
-                            <span style="color: #10B981; font-weight: 800;">#1 Google Rank</span> &bull; Delhi Commercial Queries
-                        </div>
-                        <div class="del-float-chip chip-2">
-                            <span>⚡ AI Overview Featured Entity</span>
-                        </div>
-
-                        <div class="del-laptop-card">
-                            <div class="del-laptop-hud-header">
-                                <div style="display: flex; gap: 6px;">
-                                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>
-                                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
-                                    <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
-                                </div>
-                                <div class="del-hud-badge">
-                                    <span class="pulse"></span> LIVE SEARCH TELEMETRY
-                                </div>
+                    <div class="del-serp-browser-showcase">
+                        <div class="del-browser-chrome">
+                            <div class="del-browser-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
                             </div>
+                            <div class="del-browser-search-bar">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <span>google.com/search?q=spring+sourcing+fair+2027</span>
+                                <span class="lock-icon">🔒</span>
+                            </div>
+                        </div>
 
-                            <div class="del-hud-screen">
-                                <div class="del-hud-search-bar">
-                                    <span style="color: #E0398F;">🔍</span>
-                                    <span>google.com/search?q=best+seo+company+delhi</span>
-                                </div>
-
-                                <div style="background: rgba(15, 23, 42, 0.85); border-radius: 12px; padding: 16px; border: 1px solid rgba(224, 57, 143, 0.25); margin-bottom: 14px;">
-                                    <div style="font-size: 0.72rem; color: #10B981; font-weight: 800; margin-bottom: 4px;">🏆 #1 RANKED IN DELHI NCR</div>
-                                    <div style="font-size: 0.96rem; font-weight: 800; color: #FFFFFF; margin-bottom: 4px;">WebTecMart — Top SEO Agency in Delhi NCR</div>
-                                    <p style="font-size: 0.78rem; color: #94A3B8; margin: 0; line-height: 1.45;">
-                                        Driving qualified organic buyer revenue with 13+ years experience, 1,000+ verified client campaigns, and high-intent keyword strategies.
-                                    </p>
-                                </div>
-
-                                <div class="del-hud-metrics-row">
-                                    <div class="del-hud-stat">
-                                        <div class="val">+400%</div>
-                                        <div class="lbl">Organic Growth</div>
-                                    </div>
-                                    <div class="del-hud-stat">
-                                        <div class="val">80+</div>
-                                        <div class="lbl">#1 Keywords</div>
-                                    </div>
-                                    <div class="del-hud-stat">
-                                        <div class="val">1,393%</div>
-                                        <div class="lbl">Search Clicks</div>
-                                    </div>
-                                </div>
+                        <div class="del-browser-viewport">
+                            <img src="<?= htmlspecialchars($springSerpImage) ?>" alt="Google Search Spring Sourcing Fair 2027 IHGF Delhi Fair #1 Ranking WebTecMart" class="del-browser-serp-img" loading="lazy">
+                            
+                            <div class="del-serp-float-badge badge-top">
+                                <span class="pulse-dot"></span>
+                                <span>#1 Organic Rank &bull; IHGF Delhi Fair</span>
+                            </div>
+                            <div class="del-serp-float-badge badge-bottom">
+                                <span>🏆 Verified Client Google Ranking</span>
                             </div>
                         </div>
                     </div>
@@ -2285,50 +2421,82 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
 
                 <!-- Left Column: Core Takeaways -->
                 <div class="del-takeaways-left" data-framer-reveal="slide-left">
+                    <div class="del-eyebrow">KEY TAKEAWAYS</div>
                     <h2 class="del-section-title" style="text-align: left;">
-                        Key <span class="accent">Takeaways<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        SEO Services in Delhi <span class="accent">at a Glance<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h2>
                     <p style="font-size: 0.98rem; line-height: 1.64; color: #4B5563; margin-bottom: 20px;">
-                        <strong style="color: #111827;">SEO Services</strong> are professional search optimization solutions that help businesses improve their visibility across search engines and AI-powered search platforms. Whether you're a startup, a local business, or an established enterprise, our SEO consultant in Delhi combines technical optimization, keyword strategy, content enhancement, authority building, and AI SEO to support measurable business growth.
+                        A good SEO approach ought to do greater than just ranking better. It should draw the intended audience to your business, gain trust and create measurable opportunities.
                     </p>
 
-                    <h3 style="font-size: 1rem; font-weight: 800; color: #111827; margin: 0 0 14px;">What's included in our SEO services:</h3>
+                    <h3 style="font-size: 1rem; font-weight: 800; color: #111827; margin: 0 0 14px;">Our SEO Services include the following:</h3>
 
                     <div class="del-takeaways-checklist">
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>Technical SEO &amp; Website Optimization</span>
+                            <span>Technical SEO to boost website performance, crawlability and search accessibility</span>
                         </div>
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>Keyword Research &amp; Search Intent Strategy</span>
+                            <span>On-page SEO focused on keywords, search intent, content, headings, metadata and internal linking</span>
                         </div>
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>On-Page SEO &amp; Content Optimization</span>
+                            <span>Local SEO to attract customers looking for services in Delhi and the surrounding areas</span>
                         </div>
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>Local SEO &amp; Google Business Profile Optimization</span>
+                            <span>Authorities building and off page SEO support to boost the credibility of your website.</span>
                         </div>
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>High-Quality Authority Link Building</span>
+                            <span>Optimizing content for attracting relevant organic traffic.</span>
                         </div>
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>AI SEO (AEO, GEO, LLMO &amp; HEO)</span>
+                            <span>Ecommerce SEO for better product and category visibility in search.</span>
                         </div>
                         <div class="del-takeaway-item">
                             <span class="chk">✓</span>
-                            <span>Monthly Performance Reports &amp; Strategic Recommendations</span>
+                            <span>Keyword Research based on search volume and competition, relevance and user intent</span>
+                        </div>
+                        <div class="del-takeaway-item">
+                            <span class="chk">✓</span>
+                            <span>Business SEO strategies for Delhi, Delhi NCR, India and international market.</span>
+                        </div>
+                        <div class="del-takeaway-item">
+                            <span class="chk">✓</span>
+                            <span>Continual performance monitoring and optimisation as search behaviour changes</span>
+                        </div>
+                        <div class="del-takeaway-item">
+                            <span class="chk">✓</span>
+                            <span>Adapting to the evolving search landscape and user behaviour with AI-ready strategies.</span>
                         </div>
                     </div>
 
-                    <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
-                        <span>Watch the Journey to Higher Rankings</span>
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </a>
+                    <!-- Our SEO Approach Flow -->
+                    <div class="del-approach-banner">
+                        <div class="del-approach-title">Our SEO Approach</div>
+                        <div class="del-approach-flow">
+                            <span>Research</span> <span class="arrow">&rarr;</span>
+                            <span>Strategy</span> <span class="arrow">&rarr;</span>
+                            <span>Optimisation</span> <span class="arrow">&rarr;</span>
+                            <span>Content</span> <span class="arrow">&rarr;</span>
+                            <span>Authority</span> <span class="arrow">&rarr;</span>
+                            <span>Measurement</span> <span class="arrow">&rarr;</span>
+                            <span>Growth</span>
+                        </div>
+                        <div style="font-size: 0.85rem; color: #4B5563; margin-top: 6px;">
+                            SEO is an ongoing process. Performance is analysed on a regular basis and the strategy is continually improved and fine-tuned to ensure your website continues to go in the right direction.
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px;">
+                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                            <span>Watch the Journey to Higher Rankings</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                    </div>
                 </div>
 
                 <!-- Right Column: Visual Google SERP AI Overview (Image 2 Right) -->
@@ -2345,75 +2513,80 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
     </section>
 
     <!-- ========================================================
-         NEW SECTION 3: 4-QUADRANT GROWTH WHEEL (Image 2 Reference)
+         WHAT WE OFFER (6 Core SEO Offerings)
          ======================================================== -->
-    <section class="del-growth-section">
+    <section class="del-offers-section">
         <div class="del-container">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">COMPOUNDING SEARCH TRAFFIC IMPACT</div>
+                <div class="del-eyebrow">WHAT WE OFFER</div>
                 <h2 class="del-section-title">
-                    Boosting Visibility &amp; Driving <span class="accent">Organic Traffic.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Comprehensive SEO Services That Turn <span class="accent">Search Visibility Into Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
-                    Recent increases in organic traffic and qualified buyer pipeline we've helped our clients achieve.
+                    From technical architecture to local rankings, content strategy, high-authority link acquisition, and AI-search visibility. Discover what's included in our SEO solutions:
                 </p>
             </div>
 
-            <!-- 4-Quadrant Centerpiece Box -->
-            <div class="del-quad-wheel-box" data-framer-reveal="scale-in">
-                <!-- Center Circular Badge -->
-                <div class="del-quad-center-circle">
-                    <span class="del-quad-center-badge">-SEO-</span>
-                    <div class="del-quad-center-title"><?= htmlspecialchars($growthQuadrants['center_label'] ?? 'Clicks from Search') ?></div>
-                    <div class="del-quad-center-desc"><?= htmlspecialchars($growthQuadrants['center_sub'] ?? 'Increases measured over 90-day sprint vs prior period') ?></div>
-                </div>
-
-                <!-- 4 Quadrants Grid -->
-                <div class="del-quad-grid">
-                    <?php 
-                    $quads = $growthQuadrants['quadrants'] ?? [
-                        ['label' => 'B2B Trade Show UK', 'metric' => '22%', 'sub' => 'UK B2B Expo'],
-                        ['label' => 'B2B Trade Show & Expo UK', 'metric' => '84%', 'sub' => 'Exhibition Portal'],
-                        ['label' => 'B2B Trade Show UK', 'metric' => '85%', 'sub' => 'Commercial Buyer Pipeline'],
-                        ['label' => 'Trade Show & Conference Africa', 'metric' => '1,393%', 'sub' => 'International Sourcing'],
-                    ];
-                    foreach ($quads as $idx => $q): ?>
-                        <div class="del-quad-card">
-                            <div class="del-quad-tag"><?= htmlspecialchars($q['label']) ?></div>
-                            <div class="del-quad-num">
-                                <span><?= htmlspecialchars($q['metric']) ?></span>
-                                <span class="del-quad-arrow">↑</span>
-                            </div>
-                            <div class="del-quad-sub"><?= htmlspecialchars($q['sub']) ?></div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-
-            <!-- Bottom 2 Feature Cards (Image 2 Bottom) -->
-            <div class="del-growth-cards-grid" data-framer-reveal="fade-up">
-                <?php 
-                $gCards = $growthQuadrants['cards'] ?? [
-                    [
-                        'icon' => '🎯',
-                        'title' => 'Attract future attendees by targeting their interests with optimised pages',
-                        'desc' => 'Targeting specific transactional & commercial search queries with engineered landing pages that capture buyers ready to transact.'
-                    ],
-                    [
-                        'icon' => '📢',
-                        'title' => 'Enhance speaker legacy and visibility by ensuring speakers\' content is easily discoverable',
-                        'desc' => 'Ensuring your executive thought leadership, brand knowledge graph, and service catalogue are indexable, permanent, and recommended by AI engines.'
-                    ]
-                ];
-                foreach ($gCards as $gc): ?>
-                    <div class="del-growth-feature-card">
-                        <div class="del-growth-ficon"><?= htmlspecialchars($gc['icon'] ?? '🎯') ?></div>
-                        <div class="del-growth-fcontent">
-                            <h4><?= htmlspecialchars($gc['title']) ?></h4>
-                            <p><?= htmlspecialchars($gc['desc']) ?></p>
-                        </div>
+            <div class="del-offers-grid">
+                <!-- 1. Technical SEO -->
+                <a href="/technical-seo.php" class="del-offer-card" data-framer-reveal="fade-up">
+                    <div class="del-offer-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
                     </div>
-                <?php endforeach; ?>
+                    <h3>Technical SEO</h3>
+                    <p>We enhance the performance of your site by addressing crawling, indexing, Core Web Vitals, server response times, and architecture to ensure search bots navigate effortlessly.</p>
+                    <span class="del-offer-link">Explore Technical SEO &rarr;</span>
+                </a>
+
+                <!-- 2. On-Page Optimization -->
+                <a href="/on-page-seo.php" class="del-offer-card" data-framer-reveal="fade-up">
+                    <div class="del-offer-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
+                    </div>
+                    <h3>On-Page Optimization</h3>
+                    <p>Content without optimization cannot perform. We optimize title tags, meta descriptions, header structures (H1-H6), internal linking, and semantic keyword relevance.</p>
+                    <span class="del-offer-link">Explore On-Page SEO &rarr;</span>
+                </a>
+
+                <!-- 3. Keyword Research & Strategy -->
+                <a href="/keyword-research.php" class="del-offer-card" data-framer-reveal="fade-up">
+                    <div class="del-offer-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </div>
+                    <h3>Keyword Research &amp; Strategy</h3>
+                    <p>Searching for the appropriate keywords will guide users straight to your site. We dissect intent, competition, and search volume to capture high-value buyer searches.</p>
+                    <span class="del-offer-link">Explore Keyword Research &rarr;</span>
+                </a>
+
+                <!-- 4. Local SEO & Google Maps -->
+                <a href="/local-seo.php" class="del-offer-card" data-framer-reveal="fade-up">
+                    <div class="del-offer-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <h3>Local SEO &amp; Google 3-Pack</h3>
+                    <p>Dominate Google Maps across Delhi, Noida, Gurgaon, and NCR. Optimize your Google Business Profile, citations, reviews, and proximity signals to drive nearby calls.</p>
+                    <span class="del-offer-link">Explore Local SEO &rarr;</span>
+                </a>
+
+                <!-- 5. Off-Page & Authority Link Building -->
+                <a href="/off-page-seo.php" class="del-offer-card" data-framer-reveal="fade-up">
+                    <div class="del-offer-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    </div>
+                    <h3>High-Authority Link Building</h3>
+                    <p>Earn high-authority editorial backlinks and digital PR citations from verified Indian media and industry portals that supercharge domain trust.</p>
+                    <span class="del-offer-link">Explore Off-Page SEO &rarr;</span>
+                </a>
+
+                <!-- 6. AI-Ready SEO Strategies -->
+                <a href="/ai-seo-strategy.php" class="del-offer-card" data-framer-reveal="fade-up">
+                    <div class="del-offer-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
+                    </div>
+                    <h3>AI-Ready SEO (AEO &amp; GEO)</h3>
+                    <p>Position your brand prominently within Google AI Overviews, Perplexity, Gemini, and ChatGPT search recommendations through structured entity data.</p>
+                    <span class="del-offer-link">Explore AI-Ready SEO &rarr;</span>
+                </a>
             </div>
 
         </div>
@@ -2425,57 +2598,57 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
     <section class="del-challenges-section">
         <div class="del-container">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">COMMON PITFALLS WE RESOLVE</div>
+                <div class="del-eyebrow">SEO CHALLENGES</div>
                 <h2 class="del-section-title">
-                    Why Are Your SEO Efforts Falling Short Without an <span class="accent">Experienced SEO Agency in Delhi?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    What is Holding Your Site Back in <span class="accent">Google Search?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
-                    Most SEO campaigns stall for three reasons: lack of high-commercial intent targeting, inconsistent technical crawling, and zero entity authority. We build sustainable growth assets that outperform competitors:
+                    There are several common SEO challenges that businesses in Delhi encounter. Delhi is among the most competitive business hub in India. Whether it's a local service provider or a start-up, or a reputable brand or an e-commerce company, businesses are vying for the same search audience. Having a website is not sufficient: Your website has to be optimised for the right keywords, have valuable content, a solid technical underpinning, a good user experience and also a website strategy that aligns with your customers' search intent.
                 </p>
             </div>
 
             <div class="del-challenges-grid">
                 <div class="del-challenge-card" data-framer-reveal="fade-up">
-                    <div class="del-challenge-icon">📉</div>
-                    <h3>No Traffic Growth</h3>
-                    <p>A website without steady organic traffic is like a store without visitors. Publishing content without technical indexing foundations leads to zero crawl priority.</p>
+                    <div class="del-challenge-icon">⚡</div>
+                    <h3>Intense Local Competition</h3>
+                    <p>Firms fight it out for exposure in Google Search and Google Maps in Delhi. A basic SEO campaign can't be sufficient to beat the competition from other companies that are aimed at the same audience as you are. We define your competitors, learn about their search footprint and create a strategy based on what's possible in your market.</p>
                 </div>
 
                 <div class="del-challenge-card" data-framer-reveal="fade-up">
-                    <div class="del-challenge-icon">📊</div>
-                    <h3>Poor Keyword Rankings</h3>
-                    <p>Ranking on page two or three yields almost zero clicks. We target semantic clusters and transactional buyer terms to secure sustainable page 1 and #1 rankings.</p>
+                    <div class="del-challenge-icon">📉</div>
+                    <h3>Low or Irrelevant Organic Traffic</h3>
+                    <p>Getting visitors does not equal getting prospective customers. When you get visitors to your site that don't want to buy your products or services, you can get more visitors and no more enquiries or sales. We pay special attention to relevant keywords and search intent to get visitors that are more likely to take action.</p>
                 </div>
 
                 <div class="del-challenge-card" data-framer-reveal="fade-up">
                     <div class="del-challenge-icon">🎯</div>
-                    <h3>Wrong Targeting</h3>
-                    <p>Traffic alone does not guarantee revenue. When you choose the wrong audience, your bounce rate spikes. We align landing pages directly with buyer intent.</p>
+                    <h3>Poor Keyword Targeting</h3>
+                    <p>Competing for high-ranking keywords that don't have the proper intent, meaning, or business value can be a waste of time and resources. By leveraging our keyword research, we discover opportunities throughout commercial, transactional, informational and local searches to build a more effective SEO strategy.</p>
+                </div>
+
+                <div class="del-challenge-card" data-framer-reveal="fade-up">
+                    <div class="del-challenge-icon">📍</div>
+                    <h3>Weak Local Search Visibility</h3>
+                    <p>Local visibility is important if your customers are looking for services in their vicinity. Optimising your website and local search visibility to ensure your business is found in relevant local searches in Delhi and Delhi NCR.</p>
+                </div>
+
+                <div class="del-challenge-card" data-framer-reveal="fade-up">
+                    <div class="del-challenge-icon">⚙️</div>
+                    <h3>Technical SEO Problems</h3>
+                    <p>Slow pages, broken links, poor website structure, indexing problems, duplicate content and weak internal linking can impact the understanding and crawling of your website by search engines. We will assess these areas in our technical SEO process and look at the ways we can improve them to make your website's search foundation stronger.</p>
                 </div>
 
                 <div class="del-challenge-card" data-framer-reveal="fade-up">
                     <div class="del-challenge-icon">💰</div>
-                    <h3>No ROI Tracking</h3>
-                    <p>SEO without clear conversion measurement is guesswork. We track organic revenue, qualified form fills, calls, and customer pipeline to prove ROI.</p>
-                </div>
-
-                <div class="del-challenge-card" data-framer-reveal="fade-up">
-                    <div class="del-challenge-icon">🧩</div>
-                    <h3>Poor Entity Optimization</h3>
-                    <p>Modern search engines consider brands as entities connected by significance and authority. We build knowledge graph signals and structured schema markup.</p>
-                </div>
-
-                <div class="del-challenge-card" data-framer-reveal="fade-up">
-                    <div class="del-challenge-icon">🌐</div>
-                    <h3>Weak Topical Authority</h3>
-                    <p>Google rewards depth over random keywords. We build comprehensive topic clusters and pillar content that establishes your domain as the leading authority.</p>
+                    <h3>Overdependence on Paid Advertising</h3>
+                    <p>When it comes to paid advertising, you can get instant exposure, but it's at a price. With SEO, you can create an organic traffic stream that can keep bringing visibility after your optimisation efforts. We support businesses to achieve a healthier balance of paid and organic acquisition.</p>
                 </div>
             </div>
 
             <div style="text-align: center; margin-top: 36px;" data-framer-reveal="fade-up">
-                <p style="font-size: 0.95rem; color: #4B5563; margin-bottom: 18px;">Book a 15-minute free strategy call with our expert SEO agency in Delhi now and overcome these challenges with the right approach.</p>
+                <p style="font-size: 1.05rem; font-weight: 700; color: #111827; margin-bottom: 16px;">Don't let your competitors take the searches that should belong to your business.</p>
                 <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
-                    <span>Talk to an SEO Expert</span>
+                    <span>Request a Free SEO Audit</span>
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
             </div>
@@ -2487,6 +2660,19 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
          ======================================================== -->
     <section class="del-founder-section">
         <div class="del-container">
+
+            <div class="del-section-head" data-framer-reveal="fade-up" style="margin-bottom: 36px;">
+                <div class="del-eyebrow">THE PEOPLE BEHIND YOUR SEO GROWTH</div>
+                <h2 class="del-section-title">
+                    Meet the Experts Behind <span class="accent">WebTecMart SEO<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                </h2>
+                <p style="font-size: 1.05rem; font-weight: 700; color: #C4007A; margin-top: 6px;">
+                    Strategy, SEO, Content and Technical Expertise — Working Together
+                </p>
+                <p class="del-section-sub">
+                    To win at SEO you need more than publishing keywords or link building. We deliver sustainable search growth by leveraging SEO strategy, technical optimisation, content expertise and digital experience. Its goal is to enhance your local presence in Delhi, expand your reach across India or even globally, and our strategy starts from understanding your business and concludes with tangible optimisation.
+                </p>
+            </div>
 
             <!-- Founder Showcase Card -->
             <div class="del-founder-card" data-framer-reveal="fade-up">
@@ -2501,26 +2687,30 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
 
                     <div class="del-founder-stats">
                         <div class="del-fstat-item">
-                            <div class="val">10+</div>
-                            <div class="lbl">Years of Experience</div>
+                            <div class="val">13+</div>
+                            <div class="lbl">Years Industry Experience</div>
                         </div>
                         <div class="del-fstat-item">
-                            <div class="val">5000+</div>
-                            <div class="lbl">Projects Delivered</div>
+                            <div class="val">1000+</div>
+                            <div class="lbl">Projects &amp; Businesses Served</div>
                         </div>
                         <div class="del-fstat-item">
                             <div class="val">95%</div>
                             <div class="lbl">Client Retention</div>
                         </div>
+                        <div class="del-fstat-item">
+                            <div class="val">100%</div>
+                            <div class="lbl">Dedicated Project Support</div>
+                        </div>
                     </div>
 
                     <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-                        <a href="https://linkedin.com" target="_blank" class="del-btn-secondary" style="border-color: #C4007A; color: #C4007A !important;">
-                            <span>View LinkedIn Profile</span>
-                        </a>
                         <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
-                            <span>Book Free Consultation</span>
+                            <span>Discuss It With an SEO Specialist</span>
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a href="tel:+919999674255" class="del-btn-secondary" style="border-color: #C4007A; color: #C4007A !important;">
+                            <span>Call: +91-9999674255</span>
                         </a>
                     </div>
                 </div>
@@ -2534,67 +2724,168 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
                                 <div class="del-founder-avatar-fallback"><?= htmlspecialchars($founderInitial) ?></div>
                             <?php endif; ?>
                             <div class="del-founder-badge-pill">
-                                <span class="badge-dot"></span> Verified Strategist
+                                <span class="badge-dot"></span> Performance Strategist
                             </div>
                         </div>
                         <h4 class="del-founder-name-tag"><?= htmlspecialchars($founderName) ?></h4>
                         <div class="del-founder-role-tag"><?= htmlspecialchars($founderRole) ?></div>
                         <p class="del-founder-bio">
-                            Architect of search campaigns powering 5,000+ top Google rankings across Delhi NCR and global B2B exhibitions.
+                            Strong SEO comes from combining the right people, processes and expertise. Focused on aligning technical search architecture with high-converting customer pipeline across Delhi NCR and international markets.
                         </p>
                     </div>
                 </div>
             </div>
 
-            <!-- What We Offer 6 Cards -->
+            <!-- 3 Core Expert Pillars -->
+            <div class="del-expert-pillars" data-framer-reveal="fade-up">
+                <div class="del-expert-pillar-card">
+                    <div class="del-ep-icon">⚙️</div>
+                    <h4>SEO Strategy &amp; Technical Expertise</h4>
+                    <p>Our SEO experts specialize in keyword strategy, technical audits, competitor analysis, website structure and performance optimization to build a solid foundation for organic growth.</p>
+                </div>
+
+                <div class="del-expert-pillar-card">
+                    <div class="del-ep-icon">📝</div>
+                    <h4>Content &amp; Search Optimisation</h4>
+                    <p>Our content team produces useful, search optimized content that's aligned to user intent, keyword opportunities and your brand's expertise — empowering your website to offer actual value and boost search visibility at the same time.</p>
+                </div>
+
+                <div class="del-expert-pillar-card">
+                    <div class="del-ep-icon">🚀</div>
+                    <h4>Digital Growth Support</h4>
+                    <p>SEO is best suited when it is integrated with the broader digital landscape. Our team has SEO, content, website development and digital marketing skills to build a more interconnected growth strategy.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ========================================================
+         6. OUR PROCESS (6-Step SEO Process in Delhi)
+         ======================================================== -->
+    <section class="del-process-section">
+        <div class="del-container">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">WHAT WE OFFER</div>
+                <div class="del-eyebrow">OUR PROCESS</div>
                 <h2 class="del-section-title">
-                    What Do Professional SEO Services in Delhi Include for <span class="accent">Long-Term Business Growth?<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    How Our SEO Services in Delhi Turn <span class="accent">Strategy Into Results<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="del-section-sub">
-                    SEO services include a mix of technical SEO, keyword research, on-page optimization, content strategy, link building, local SEO, and regular performance tracking. Discover what's included in our AI-ready SEO solutions:
+                    Businesses should consider using a centralized and data-driven process around a business. Each business has its own set of customers, competition and goals for growth. Which is why we don't adhere to a single size fits all SEO. We begin by finding out where you're at and create a plan that shows you how to get to where you want to be.
                 </p>
             </div>
 
-            <div class="del-offers-grid">
-                <div class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">⚙️</div>
-                    <h3>Technical SEO</h3>
-                    <p>We enhance the performance of your site by eliminating crawl errors, accelerating page speed, refining XML sitemaps, and perfecting schema architecture.</p>
+            <div class="del-process-grid">
+                <div class="del-process-card" data-framer-reveal="fade-up">
+                    <div class="del-process-num">01</div>
+                    <h3>Research &amp; Discovery</h3>
+                    <p>We start with knowing your business, your audience, your competition and your online presence. Our research includes keyword analysis, competitor research, search intent and an in-depth website review.</p>
                 </div>
 
-                <div class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">📝</div>
-                    <h3>On-Page Optimization</h3>
-                    <p>Content without optimization cannot perform. We refine headings, meta descriptions, image alt tags, internal link silos, and keyword density for top placement.</p>
+                <div class="del-process-card" data-framer-reveal="fade-up">
+                    <div class="del-process-num">02</div>
+                    <h3>SEO Audit &amp; Analysis</h3>
+                    <p>We find technical problems, content gaps, ranking opportunities, website structure issues and areas that could be hindering your organic visibility.</p>
                 </div>
 
-                <div class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">🔍</div>
-                    <h3>Keyword Research &amp; Strategy</h3>
-                    <p>Searching for appropriate keywords will connect your business to the right searchers. We target high-intent transactional search queries that drive actual sales.</p>
+                <div class="del-process-card" data-framer-reveal="fade-up">
+                    <div class="del-process-num">03</div>
+                    <h3>Strategy &amp; Roadmap</h3>
+                    <p>Based on our findings, we develop an individual SEO roadmap that covers technical SEO, on-page optimization, content, authority building and local SEO.</p>
                 </div>
 
-                <div class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">📍</div>
-                    <h3>Local SEO</h3>
-                    <p>Dominate the Google 3-Pack and Maps in Delhi NCR. We optimize your Google Business Profile, local citations, geo-targeted landing pages, and review signals.</p>
+                <div class="del-process-card" data-framer-reveal="fade-up">
+                    <div class="del-process-num">04</div>
+                    <h3>SEO Implementation</h3>
+                    <p>We put the strategy into action by improving website structure, metadata, content, internal links, technical elements and other priority areas.</p>
                 </div>
 
-                <div class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">🔗</div>
-                    <h3>High-Authority Link Building</h3>
-                    <p>Quality backlinks act as a vote of trust from search engines. We implement genuine digital PR, contextual placements, and high-DA link building.</p>
+                <div class="del-process-card" data-framer-reveal="fade-up">
+                    <div class="del-process-num">05</div>
+                    <h3>Content &amp; Authority Building</h3>
+                    <p>We develop and fine-tune material that is relevant to your niche and nurture ongoing efforts in authority building that will bolster your website's search ranking.</p>
                 </div>
 
-                <div class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">🤖</div>
-                    <h3>AI SEO (AEO, GEO, LLMO)</h3>
-                    <p>Position your business as the recommended authority in Google AI Overviews, Gemini, ChatGPT, and Perplexity with semantic entity optimization.</p>
+                <div class="del-process-card" data-framer-reveal="fade-up">
+                    <div class="del-process-num">06</div>
+                    <h3>Measure, Refine &amp; Grow</h3>
+                    <p>SEO is an ongoing process. We track performance metrics like rankings, organic traffic, visibility in search results, and more, to see what's performing well and where there's room for improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         7. INDUSTRY EXPERTISE (8 Industries Across Delhi NCR)
+         ======================================================== -->
+    <section class="del-industries-section">
+        <div class="del-container">
+            <div class="del-section-head" data-framer-reveal="fade-up">
+                <div class="del-eyebrow">OUR INDUSTRY EXPERTISE</div>
+                <h2 class="del-section-title">
+                    SEO Services for Businesses Across <span class="accent">Delhi &amp; Delhi NCR<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                </h2>
+                <p class="del-section-sub">
+                    Industry-specific SEO Strategies. All industries have a different type of customer, search behaviour, and competition. Our SEO strategies are adapted to the way your audience searches and the goals of your business.
+                </p>
+            </div>
+
+            <div class="del-industries-grid">
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">🛒</div>
+                    <h3>E-commerce &amp; Online Stores</h3>
+                    <p>Enhance product, category and commercial search visibility and draw in customers who are actively seeking to purchase.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">🏢</div>
+                    <h3>Real Estate &amp; Property</h3>
+                    <p>Connect with buyers, investors and tenants looking for properties, locations and real estate services online.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">✈️</div>
+                    <h3>Travel &amp; Tourism</h3>
+                    <p>Create awareness for destination, travel, hotel, experience and tourism-related searches.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">🚗</div>
+                    <h3>Automotive &amp; Auto Parts</h3>
+                    <p>Reach prospects who are looking for Cars, Services, Accessories, Parts and Automotive Solutions.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">🩺</div>
+                    <h3>Healthcare &amp; Medical Services</h3>
+                    <p>Establish a credible online profile and enhance the likelihood of appearing in relevant health and service-related searches.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">⚖️</div>
+                    <h3>Legal &amp; Law Firms</h3>
+                    <p>Connect with prospective clients seeking legal help, skills and answers in certain areas.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">💳</div>
+                    <h3>Finance &amp; Insurance</h3>
+                    <p>Create visibility for your financial services and insurance solutions as well as related queries.</p>
+                </div>
+
+                <div class="del-industry-card" data-framer-reveal="fade-up">
+                    <div class="del-ind-icon">🎓</div>
+                    <h3>Education &amp; Training</h3>
+                    <p>Get in touch with students, parents and professionals looking for courses, institutions, training and education services.</p>
                 </div>
             </div>
 
+            <div style="text-align: center; margin-top: 36px;" data-framer-reveal="fade-up">
+                <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                    <span>Schedule a Free SEO Strategy Call Here</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </a>
+            </div>
         </div>
     </section>
 
@@ -2912,68 +3203,48 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
     </section>
 
     <!-- ========================================================
-         8. FAQS ACCORDION
+         8. WRAPPING UP: WHY SEO SERVICES IN DELHI MATTER
          ======================================================== -->
-    <section class="del-faq-section">
+    <section class="del-wrap-section" data-framer-reveal="fade-up">
         <div class="del-container">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">FREQUENTLY ASKED QUESTIONS</div>
-                <h2 class="del-section-title">
-                    Questions About <span class="accent">SEO in Delhi NCR<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub">
-                    Clear, transparent answers to help you make an informed decision for your digital growth:
-                </p>
-            </div>
-
-            <div style="max-width: 860px; margin: 0 auto;">
-                <div class="del-faq-item active" data-framer-reveal="fade-up">
-                    <button class="del-faq-btn" onclick="toggleDelFaq(this)">
-                        <span>What are SEO services and why does my business need them?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="del-faq-answer">
-                        SEO services increase your website's organic visibility on search engines like Google. When prospective customers in Delhi search for the solutions, products, or services you offer, effective SEO ensures your business appears in top positions, capturing valuable commercial traffic before your competitors can.
-                    </div>
+            <div class="del-wrap-card">
+                <div class="del-section-head" style="margin-bottom: 24px;">
+                    <div class="del-eyebrow">WRAPPING UP</div>
+                    <h2 class="del-section-title">
+                        Why SEO Services in Delhi Matter for Your <span class="accent">Business<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    </h2>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; color: #C4007A; margin-top: -6px;">
+                        Build Visibility. Earn Trust. Generate Sustainable Growth.
+                    </h3>
                 </div>
 
-                <div class="del-faq-item" data-framer-reveal="fade-up">
-                    <button class="del-faq-btn" onclick="toggleDelFaq(this)">
-                        <span>How long does SEO take to produce measurable results?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="del-faq-answer">
-                        SEO is a compounding growth channel. Technical remediations, speed enhancements, and on-page fixes typically show positive movement within 4 to 8 weeks. Compounding keyword ranking leaps, significant traffic increases, and consistent lead generation generally materialize within 3 to 6 months depending on market competition and domain age.
+                <div style="max-width: 900px; margin: 0 auto; font-size: 1.02rem; line-height: 1.7; color: #374151;">
+                    <p style="margin-bottom: 18px;">
+                        The digital market is extremely competitive in Delhi. There are customers who are always looking in Google for businesses, products and services &mdash; and businesses that show up at the right time have a higher chance of capturing that customer.
+                    </p>
+                    <p style="margin-bottom: 18px;">
+                        WebTecMart offers SEO services in Delhi, which goes beyond rankings. We use technical SEO, keyword research, content optimisation, local SEO and authority building to create a search strategy that's in line with your business goals.
+                    </p>
+                    <div style="background: #FFF5FA; border: 1.5px solid rgba(196, 0, 122, 0.2); border-radius: 16px; padding: 20px 24px; margin-bottom: 24px;">
+                        <div style="font-weight: 800; color: #111827; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                            <span style="color: #C4007A; font-size: 1.2rem;">📍</span>
+                            <span>Target Micro-Markets Across Delhi NCR</span>
+                        </div>
+                        <p style="margin: 0; font-size: 0.94rem; color: #4B5563; line-height: 1.6;">
+                            From the target market of <strong>Pitampura, Rohini, Dwarka, Janakpuri, South Delhi, Connaught Place, Saket, Punjabi Bagh</strong> to all of <strong>Delhi NCR</strong>, we can develop an SEO strategy that fits your target market and target audience.
+                        </p>
                     </div>
-                </div>
-
-                <div class="del-faq-item" data-framer-reveal="fade-up">
-                    <button class="del-faq-btn" onclick="toggleDelFaq(this)">
-                        <span>How can Local SEO help my Delhi NCR business?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="del-faq-answer">
-                        Local SEO optimizes your Google Business Profile, geo-targeted landing pages, local citations, and customer reviews to rank your business in the Google Local 3-Pack and Google Maps. When customers search "near me" or specify areas like South Delhi, Rohini, Dwarka, or Noida, your business is prominently showcased.
-                    </div>
-                </div>
-
-                <div class="del-faq-item" data-framer-reveal="fade-up">
-                    <button class="del-faq-btn" onclick="toggleDelFaq(this)">
-                        <span>What makes WebTecMart different from other SEO companies in Delhi?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="del-faq-answer">
-                        With 13+ years of experience, 1,000+ satisfied clients, and a 95% retention rate, WebTecMart rejects generic cookie-cutter plans. We analyze your commercial search intent, reverse-engineer your top 5 competitors, apply strict white-hat methodologies, and track actual lead conversions rather than vanity rankings.
-                    </div>
-                </div>
-
-                <div class="del-faq-item" data-framer-reveal="fade-up">
-                    <button class="del-faq-btn" onclick="toggleDelFaq(this)">
-                        <span>Can SEO generate actual qualified leads instead of just traffic?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="del-faq-answer">
-                        Yes! High traffic without conversions is pointless. We focus on commercial and transactional search intent queries, optimizing landing page structure, user experience, and calls to action so incoming searchers convert into booked consultations, phone calls, and paying customers.
+                    <p style="margin-bottom: 18px; font-weight: 700; color: #111827; font-size: 1.05rem;">
+                        Our goal is simple: <span style="color: #C4007A;">Make your business discoverable, build trust, and convert search visibility into growth.</span>
+                    </p>
+                    <p style="margin-bottom: 24px; color: #4B5563;">
+                        Looking to boost your organic visibility? Book an SEO consultation at WebTecMart and find out about opportunities for your website.
+                    </p>
+                    <div style="text-align: center; margin-top: 28px;">
+                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                            <span>Book Your Free SEO Consultation</span>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -2981,19 +3252,98 @@ $mcVideoImage = $masterclass['video_image'] ?? $dbService['masterclass_image'] ?
     </section>
 
     <!-- ========================================================
-         9. FINAL CONVERSION CTA BANNER
+         9. FAQS ACCORDION (All 10 Questions from Document)
+         ======================================================== -->
+    <section class="del-faq-section">
+        <div class="del-container">
+            <div class="del-section-head" data-framer-reveal="fade-up">
+                <div class="del-eyebrow">FREQUENTLY ASKED QUESTIONS</div>
+                <h2 class="del-section-title">
+                    Frequently Asked Questions About <span class="accent">SEO Services in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                </h2>
+                <p class="del-section-sub">
+                    Clear, transparent answers to help you make an informed decision for your digital growth:
+                </p>
+            </div>
+
+            <div style="max-width: 860px; margin: 0 auto;">
+                <?php 
+                $faqList = !empty($faqs) ? $faqs : [
+                    [
+                        'q' => 'What are SEO services and why does my business need them?',
+                        'a' => "SEO Services increase your site's presence in search engines and make it easier for anyone who searches for your goods or services to find your site. Combating local, commercial and industry-specific searches and building a sustainable source of organic traffic for businesses in Delhi is where SEO comes into the picture."
+                    ],
+                    [
+                        'q' => 'How long does SEO take to show results?',
+                        'a' => "SEO is a long-term approach, and there is no guarantee of results, depending on your site, the competition, the industry, the keywords you're targeting and how well your site is being found in the search engines. Technical and on page optimisation can bring about changes fairly quickly, whereas building authority and targeting competitive keywords may take a longer period of time, but need consistent optimisation."
+                    ],
+                    [
+                        'q' => 'How can Local SEO help my Delhi business?',
+                        'a' => "Local SEO puts your business in front of mobile searches that are related to your area and services. It can help people find your business when they look for local products and/or services, and can help you be seen in queries that are relevant to your business."
+                    ],
+                    [
+                        'q' => 'What does an SEO agency in Delhi actually do?',
+                        'a' => "An SEO agency will be able to work on keyword research, technical SEO, on page optimisation, content optimisation, local SEO, internal linking, authority building, competitor analysis and monitoring performance. The exact approach will vary, depending on the business and goals."
+                    ],
+                    [
+                        'q' => 'Is it possible to create leads with SEO and not traffic?',
+                        'a' => "Yes. The goal of SEO isn't to bring as many visitors as possible, it's to bring the right ones. Through focusing on search intent and optimising content and calls to action, landing pages, SEO can help to drive inquiries, registrations, sales and other conversions."
+                    ],
+                    [
+                        'q' => 'Which is better, SEO or Google Ads?',
+                        'a' => "SEO isn't the same thing as Google Ads. While SEO is about long-term organic visibility, Google Ads can offer instant paid visibility. A lot of businesses leverage both of them as part of an extensive digital marketing campaign."
+                    ],
+                    [
+                        'q' => 'How to select the Ideal SEO firm in Delhi?',
+                        'a' => "Find an SEO firm that has a clear understanding of your business, is able to articulate their approach, has a business objective that is relevant to your business, has a clear reporting system and isn't promising to rank websites in the improbable. A successful SEO partner should be able to tell you not only what they'll be working on, but why it is important to your business."
+                    ],
+                    [
+                        'q' => 'Which businesses can benefit from SEO services?',
+                        'a' => "SEO can help virtually any business that has customers find it online. SEO can be beneficial for local businesses, e-commerce retailers, professional services, real estate companies, healthcare providers, educational institutions, tech companies and B2B types of companies as well."
+                    ],
+                    [
+                        'q' => 'Does WebTecMart provide Local, National and International SEO?',
+                        'a' => "Yes. WebTecMart can develop SEO strategies for businesses targeting customers locally in Delhi and Delhi NCR, across India or in international markets. The method and web design is modified based on the target market."
+                    ],
+                    [
+                        'q' => 'What is the price of SEO services in Delhi?',
+                        'a' => "The cost of SEO services varies based on website size, competition, location, keywords, content needs, and the technical complexity and business goals. WebTecMart also provides several SEO packages and will be able to design a personalised approach to suit your needs."
+                    ]
+                ];
+                foreach ($faqList as $idx => $fq): 
+                    $isActive = ($idx === 0) ? ' active' : '';
+                ?>
+                    <div class="del-faq-item<?= $isActive ?>" data-framer-reveal="fade-up">
+                        <button class="del-faq-btn" onclick="toggleDelFaq(this)">
+                            <span><?= htmlspecialchars($fq['q']) ?></span>
+                            <span class="icon"><?= ($idx === 0) ? '−' : '+' ?></span>
+                        </button>
+                        <div class="del-faq-answer">
+                            <?= nl2br(htmlspecialchars($fq['a'])) ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================================
+         10. FINAL CONVERSION CTA BANNER (User Closing Content)
          ======================================================== -->
     <section class="del-cta-section">
         <div class="del-container">
             <div class="del-cta-box" data-framer-reveal="fade-up">
-                <h2>Ready to Outrank Competitors &amp; <span>Grow Your Delhi Business?</span></h2>
+                <h2>So You're Ready to Take the Plunge and <span>Grow Your Business With SEO?</span></h2>
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #FCE7F3; margin: 8px 0 16px;">
+                    Let's Make Your Search Visibility Business Opportunities
+                </h3>
                 <p>
-                    Speak with our senior SEO strategists today for a complimentary website audit, competitive gap analysis, and tailored organic growth blueprint.
+                    From local SEO in Delhi to national SEO across India, e-commerce SEO to full-fledged organic growth, WebTecMart has you covered to create a stronger search presence. Give us a brief description of your business, website and growth objectives. We will know the opportunities and understand what we need to put our SEO strategy into.
                 </p>
 
                 <div class="del-cta-btns">
                     <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.18);">
-                        <span>Get Free Consultation</span>
+                        <span>Get a Free SEO Consultation</span>
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
                     <a href="tel:+919999674255" class="del-btn-secondary" style="background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.85); color: #FFFFFF !important; font-weight: 700;">

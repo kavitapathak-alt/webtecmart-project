@@ -177,6 +177,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             } catch (Throwable $e) {}
         }
 
+        $springSerpImage = trim($_POST['spring_serp_image'] ?? ($existingMeta['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png'));
+        if (!empty($_FILES['spring_serp_image_file']['tmp_name']) && is_uploaded_file($_FILES['spring_serp_image_file']['tmp_name'])) {
+            try {
+                $up = uploadCmsImage($_FILES['spring_serp_image_file']);
+                if ($up) $springSerpImage = $up;
+            } catch (Throwable $e) {}
+        }
+
         // Build Metadata payload
         $metadata = array_merge($existingMeta, [
             'title'            => $title,
@@ -196,6 +204,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'founder_image'    => $founderImage,
             'founder_avatar'   => $founderAvatar,
             'serp_image'       => $serpImage,
+            'spring_serp_image'=> $springSerpImage,
             'page_meta_title'  => trim($_POST['page_meta_title'] ?? ($title . ' | WebTecMart')),
             'page_meta_desc'   => trim($_POST['page_meta_desc'] ?? $summary),
         ]);
@@ -1340,6 +1349,27 @@ require_once __DIR__ . '/templates/header.php';
                                     </div>
                                 </div>
                             <?php endforeach; ?>
+                        </div>
+                    </div>
+
+                    <!-- SPRING SOURCING FAIR 2027 SERP SHOWCASE IMAGE -->
+                    <div class="p-3 mb-4 rounded border bg-white shadow-sm" style="border-left: 4px solid #C4007A !important;">
+                        <h5 class="fw-bold text-dark mb-1"><i class="bi bi-window text-primary me-2"></i> Spring Sourcing Fair 2027 SERP Proof Screenshot (Section 2)</h5>
+                        <p class="small text-muted mb-3">Upload or replace the authentic Google SERP screenshot showing the keyword "Spring sourcing fair 2027" and the IHGF Delhi Fair website highlighted in red.</p>
+
+                        <?php $springImgVal = $item['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png'; ?>
+                        <div class="row g-3 align-items-center">
+                            <div class="col-md-3">
+                                <div class="p-2 border rounded bg-light text-center">
+                                    <img src="<?= htmlspecialchars($springImgVal) ?>" alt="Spring SERP Preview" style="max-width: 100%; max-height: 120px; object-fit: contain; border-radius: 6px;">
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <label class="small fw-bold text-dark mb-1"><i class="bi bi-upload text-primary me-1"></i> Upload New Spring Fair SERP Image File (PNG, JPG, WEBP)</label>
+                                <input type="file" name="spring_serp_image_file" accept="image/*" class="form-control form-control-sm mb-2">
+                                <label class="small text-muted mb-1">Or Direct Image URL / Path:</label>
+                                <input type="text" name="spring_serp_image" class="scms-form-control form-control-sm" value="<?= htmlspecialchars($springImgVal) ?>" placeholder="/assets/images/spring-sourcing-fair-serp-highlight.png">
+                            </div>
                         </div>
                     </div>
 
