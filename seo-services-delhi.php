@@ -22,13 +22,11 @@ $heroBullets = $dbService['hero_bullets'] ?? [
     'Increase website leads and enquiries with search optimisation',
     'Create Long-Term Visibility by following a sustainable organic strategy'
 ];
-$heroVisibleBullets = array_slice(is_array($heroBullets) ? $heroBullets : [], 0, 2);
+$heroVisibleBullets = is_array($heroBullets) ? $heroBullets : [];
 $founderName = $dbService['founder_name'] ?? 'Jitin Madaan';
 $founderRole = $dbService['founder_role'] ?? 'Performance Marketing Strategist';
 $founderImage = $dbService['founder_image'] ?? '/assets/images/jitin-madaan.png';
-$founderAvatar = $dbService['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png';
 $founderInitial = 'JM';
-$heroReadinessBadge = $dbService['hero_readiness_badge'] ?? '⚡ Ready for Google to find you?';
 
 $rankingKeywords = $dbService['keyword_ranking_showcase'] ?? [
     ['keyword' => 'Bharat Tex 2026 Fair', 'url' => 'bharat-tex.com', 'rank' => '#1', 'trend' => '↑ 17 Positions', 'volume' => '49,500/mo', 'intent' => 'Commercial'],
@@ -480,35 +478,25 @@ $ctaBox = $dbService['cta_box'] ?? [
        (#C4007A, #E0398F, #FFF0F7, #FCE7F3, #850053, #111827)
        ============================================================ */
     .del-seo-page {
-        width: 100%;
         background: #FFFFFF;
         color: #1F1B2A;
-        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        overflow: hidden;
+        width: 100%;
+        max-width: 100%;
+        overflow-x: clip;
+    }
+    .del-seo-page :is(img, video, iframe) {
+        max-width: 100%;
     }
     .del-container {
         max-width: 1220px;
-        margin: 0 auto;
-        padding: 0 24px;
-        position: relative;
-        z-index: 2;
-        width: 100%;
     }
 
     /* Common Typography & Badges */
     .del-eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
         background: #FFF0F7;
         border: 1px solid rgba(196, 0, 122, 0.22);
         color: #C4007A;
-        padding: 5px 13px;
         border-radius: 9999px;
-        font-size: 0.74rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
         margin-bottom: 8px;
     }
     .del-eyebrow svg {
@@ -518,7 +506,6 @@ $ctaBox = $dbService['cta_box'] ?? [
     }
     .del-section-title {
         font-size: clamp(1.9rem, 3vw, 2.7rem);
-        font-weight: 850;
         color: #111827;
         line-height: 1.12;
         letter-spacing: -0.04em;
@@ -554,10 +541,7 @@ $ctaBox = $dbService['cta_box'] ?? [
     }
     .del-section-sub {
         font-size: 0.96rem;
-        line-height: 1.6;
         color: #4B5563;
-        max-width: 780px;
-        margin: 0 auto;
     }
     .del-section-head {
         text-align: center;
@@ -569,21 +553,12 @@ $ctaBox = $dbService['cta_box'] ?? [
 
     /* Primary & Secondary Buttons */
     .del-btn-primary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
         background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
         color: #FFFFFF !important;
-        font-weight: 700;
-        font-size: 0.92rem;
-        padding: 12px 24px;
         border-radius: 9999px;
-        text-decoration: none;
         border: none;
         box-shadow: 0 8px 20px rgba(196, 0, 122, 0.28);
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        cursor: pointer;
     }
     .del-btn-primary:hover {
         transform: translateY(-2px);
@@ -591,20 +566,11 @@ $ctaBox = $dbService['cta_box'] ?? [
         color: #FFFFFF !important;
     }
     .del-btn-secondary {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
         background: #FFFFFF;
         color: #111827 !important;
         border: 1.5px solid rgba(196, 0, 122, 0.28);
-        font-weight: 700;
-        font-size: 0.92rem;
-        padding: 11px 22px;
         border-radius: 9999px;
-        text-decoration: none;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        cursor: pointer;
     }
     .del-btn-secondary:hover {
         background: #FFF0F7;
@@ -638,13 +604,8 @@ $ctaBox = $dbService['cta_box'] ?? [
 
     /* Ambient Glow */
     .del-ambient-glow {
-        position: absolute;
-        width: 440px;
-        height: 440px;
         border-radius: 50%;
         background: radial-gradient(circle, rgba(196, 0, 122, 0.08) 0%, rgba(224, 57, 143, 0.02) 60%, transparent 70%);
-        pointer-events: none;
-        z-index: 1;
         filter: blur(40px);
     }
 
@@ -652,13 +613,10 @@ $ctaBox = $dbService['cta_box'] ?? [
        1. HERO SECTION
        ======================================================== */
     .del-hero {
-        position: relative;
-        padding: 34px 0 28px;
         background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
         border-bottom: 1px solid rgba(196, 0, 122, 0.08);
     }
     .del-hero-grid {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 36px;
         align-items: center;
@@ -686,16 +644,17 @@ $ctaBox = $dbService['cta_box'] ?? [
         }
     }
     .del-hero-title {
-        font-size: clamp(2rem, 3.2vw, 3rem);
-        font-weight: 850;
+        font-size: clamp(1.9rem, 2.8vw, 2.65rem);
         color: #111827;
-        line-height: 1.1;
-        letter-spacing: -0.04em;
         margin: 0 0 14px;
-        text-align: left;
     }
     .del-hero-title .accent {
         color: #C4007A;
+        text-decoration-line: underline;
+        text-decoration-color: rgba(196, 0, 122, 0.72);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 5px;
+        text-decoration-skip-ink: none;
     }
     .del-hero-title .hero-separator {
         color: #C4007A;
@@ -704,112 +663,11 @@ $ctaBox = $dbService['cta_box'] ?? [
         margin: 0 0.12em;
     }
     .del-hero-desc {
-        font-size: 1.05rem;
-        line-height: 1.6;
         color: #374151;
         margin-bottom: 12px;
-        font-weight: 500;
-    }
-    .del-hero-desc.is-collapsed {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 3;
-        line-clamp: 3;
-        overflow: hidden;
-        margin-bottom: 4px;
-    }
-    .del-hero-more {
-        align-self: flex-start;
-        margin: 0 0 8px;
-        padding: 3px 0;
-        border: 0;
-        background: transparent;
-        color: #C4007A;
-        font: inherit;
-        font-size: 0.85rem;
-        font-weight: 800;
-        cursor: pointer;
-    }
-    .del-hero-more:hover {
-        color: #850053;
-        text-decoration: underline;
-        text-underline-offset: 3px;
-    }
-    .del-hero-details-dialog {
-        position: fixed;
-        width: min(620px, calc(100% - 32px));
-        max-width: 620px;
-        max-height: min(80vh, 680px);
-        overflow-y: auto;
-        padding: 30px;
-        border: 1px solid rgba(196, 0, 122, 0.18);
-        border-radius: 22px;
-        color: #1F2937;
-        box-shadow: 0 24px 80px rgba(34, 15, 29, 0.24);
-    }
-    .del-hero-details-dialog::backdrop {
-        background: rgba(24, 15, 23, 0.58);
-        backdrop-filter: blur(4px);
-    }
-    .del-hero-details-dialog h2 {
-        margin: 0 40px 12px 0;
-        color: #111827;
-        font-size: 1.45rem;
-        line-height: 1.25;
-        letter-spacing: -0.03em;
-    }
-    .del-hero-details-dialog p {
-        margin: 0 0 16px;
-        color: #4B5563;
-        font-size: 0.96rem;
-        line-height: 1.7;
-    }
-    .del-hero-details-dialog ul {
-        display: grid;
-        gap: 12px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-    .del-hero-details-dialog li {
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
-        color: #374151;
-        line-height: 1.5;
-    }
-    .del-hero-details-dialog li::before {
-        content: "✓";
-        display: inline-flex;
-        flex: 0 0 22px;
-        width: 22px;
-        height: 22px;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        background: #FFF0F7;
-        color: #C4007A;
-        font-size: 0.78rem;
-        font-weight: 800;
-    }
-    .del-hero-details-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        width: 36px;
-        height: 36px;
-        border: 0;
-        border-radius: 50%;
-        background: #FFF0F7;
-        color: #C4007A;
-        font-size: 1.4rem;
-        cursor: pointer;
     }
     .del-hero-bullets {
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 10px 14px;
-        margin: 10px 0 18px;
     }
     @media (min-width: 600px) {
         .del-hero-bullets {
@@ -819,7 +677,6 @@ $ctaBox = $dbService['cta_box'] ?? [
     .del-bullet-item {
         display: flex;
         align-items: center;
-        gap: 10px;
         font-size: 0.88rem;
         font-weight: 600;
         color: #1F2937;
@@ -839,20 +696,45 @@ $ctaBox = $dbService['cta_box'] ?? [
         flex-shrink: 0;
     }
     .del-hero-actions {
-        display: flex;
         align-items: center;
-        gap: 12px;
-        flex-wrap: wrap;
-        margin-bottom: 18px;
+    }
+    .del-theme-toggle {
+        display: inline-flex;
+        min-height: 46px;
+        border: 1px solid rgba(196, 0, 122, 0.24);
+        border-radius: 999px;
+        background: #FFFFFF;
+        color: #5B2850;
+        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+    .del-theme-toggle:hover {
+        transform: translateY(-2px);
+        border-color: #C4007A;
+        color: #C4007A;
+    }
+    .del-theme-toggle svg {
+        width: 17px;
+        height: 17px;
+        flex: 0 0 auto;
+    }
+    .del-theme-toggle .del-theme-icon-sun,
+    .del-theme-dark .del-theme-toggle .del-theme-icon-moon {
+        display: none;
+    }
+    .del-theme-dark .del-theme-toggle .del-theme-icon-sun {
+        display: block;
+    }
+    .del-theme-toggle-floating {
+        left: max(18px, env(safe-area-inset-left));
+        bottom: max(18px, env(safe-area-inset-bottom));
+        min-height: 48px;
+        background: #FFFFFF;
+        box-shadow: 0 8px 24px rgba(48, 17, 39, 0.18);
     }
     .del-author-card {
-        display: inline-flex;
-        align-items: center;
-        gap: 12px;
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.18);
         border-radius: 9999px;
-        padding: 5px 16px 5px 6px;
         box-shadow: 0 4px 14px rgba(196, 0, 122, 0.08);
     }
     .del-author-avatar {
@@ -862,12 +744,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: linear-gradient(135deg, #C4007A, #E0398F);
         color: #FFFFFF;
         display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1rem;
-        overflow: hidden;
-        flex-shrink: 0;
     }
     .del-author-avatar img {
         width: 100%;
@@ -899,7 +775,8 @@ $ctaBox = $dbService['cta_box'] ?? [
         padding: 32px;
         box-shadow: 0 20px 52px rgba(93, 22, 68, 0.11);
         position: relative;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
     .del-hero-form-card::before {
         content: "";
@@ -912,11 +789,26 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: linear-gradient(90deg, #C4007A, #E0398F);
     }
     .del-hero-form-card h3 {
+        display: flex;
+        align-items: center;
+        gap: 10px;
         font-size: 1.35rem;
         font-weight: 800;
         color: #111827;
         margin: 0 0 8px;
         letter-spacing: -0.03em;
+    }
+    .del-hero-form-icon {
+        width: 38px;
+        height: 38px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 38px;
+        color: #C4007A;
+        background: rgba(196, 0, 122, 0.08);
+        border: 1px solid rgba(196, 0, 122, 0.12);
+        border-radius: 12px;
     }
     .del-hero-form-card p {
         font-size: 0.9rem;
@@ -924,9 +816,37 @@ $ctaBox = $dbService['cta_box'] ?? [
         line-height: 1.55;
         margin: 0 0 20px;
     }
-    .del-form-group {
-        margin-bottom: 13px;
+    .del-hero-form-card form {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
     }
+    .del-hero-form-note {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: auto;
+        padding: 14px 16px;
+        color: #6B3453;
+        background: linear-gradient(100deg, #FFF1F8 0%, #FFF8FB 100%);
+        border: 1px solid rgba(196, 0, 122, 0.12);
+        border-radius: 14px;
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+    .del-hero-form-note svg {
+        flex: 0 0 20px;
+        color: #C4007A;
+    }
+    .del-theme-dark .del-hero-form-note {
+        color: #FBCFE8;
+        background: rgba(190, 24, 93, 0.14);
+        border-color: rgba(244, 114, 182, 0.22);
+    }
+    .del-theme-dark .del-hero-form-note svg {
+        color: #F472B6;
+    }
+
     .del-form-group input,
     .del-form-group textarea,
     .del-form-group select {
@@ -954,37 +874,20 @@ $ctaBox = $dbService['cta_box'] ?? [
         resize: vertical;
     }
     .del-form-consent-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin: 2px 0 16px;
         color: #4B5563;
-        font-size: 0.84rem;
     }
-    .del-form-consent {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        cursor: pointer;
-    }
+
     .del-form-consent input {
         accent-color: #C4007A;
     }
     .del-form-protected {
         color: #8A8490;
-        font-size: 0.78rem;
     }
     .del-form-submit {
-        width: 100%;
         background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
         color: #FFFFFF;
-        font-weight: 700;
-        font-size: 0.98rem;
-        padding: 14px;
         border-radius: 12px;
         border: none;
-        cursor: pointer;
         box-shadow: 0 8px 18px rgba(196, 0, 122, 0.3);
         transition: all 0.25s ease;
     }
@@ -997,22 +900,29 @@ $ctaBox = $dbService['cta_box'] ?? [
        BRAND LOGOS MARQUEE (Continuous Single-Row Auto-Scroll)
        ======================================================== */
     .del-brands-section {
-        padding: 24px 0 28px;
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 50%, #FFFFFF 100%);
-        position: relative;
-        overflow: hidden;
         border-bottom: 1px solid rgba(196, 0, 122, 0.1);
     }
     .del-marquee-wrap {
         position: relative;
-        max-width: 1180px;
-        margin: 0 auto;
-        overflow: hidden;
-        padding: 16px 14px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        cursor: grab;
+        scrollbar-width: none;
         border-radius: 22px;
         background: linear-gradient(135deg, rgba(255, 245, 250, 0.98) 0%, rgba(255, 235, 245, 0.88) 100%);
         border: 1.5px solid rgba(196, 0, 122, 0.2);
         box-shadow: 0 8px 24px rgba(196, 0, 122, 0.06);
+    }
+    .del-marquee-wrap::-webkit-scrollbar {
+        display: none;
+    }
+    .del-marquee-wrap:active {
+        cursor: grabbing;
+    }
+    .del-marquee-wrap:focus-visible {
+        outline: 3px solid rgba(196, 0, 122, 0.45);
+        outline-offset: 3px;
     }
     .del-marquee-wrap::before,
     .del-marquee-wrap::after {
@@ -1033,13 +943,13 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: linear-gradient(270deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
     }
     .del-marquee-track {
-        display: flex;
-        gap: 14px;
-        width: max-content;
         animation: delMarqueeSingle 32s linear infinite;
-        align-items: center;
     }
     .del-marquee-wrap:hover .del-marquee-track {
+        animation-play-state: paused;
+    }
+    .del-marquee-wrap:focus-within .del-marquee-track,
+    .del-marquee-wrap:active .del-marquee-track {
         animation-play-state: paused;
     }
     @keyframes delMarqueeSingle {
@@ -1047,16 +957,10 @@ $ctaBox = $dbService['cta_box'] ?? [
         100% { transform: translate3d(-33.333%, 0, 0); }
     }
     .del-brand-card {
-        display: flex;
-        align-items: center;
-        gap: 10px;
         background: #FFFFFF;
         border: 1px solid rgba(196, 0, 122, 0.2);
         border-radius: 12px;
-        padding: 8px 16px;
         box-shadow: 0 3px 12px rgba(196, 0, 122, 0.05);
-        white-space: nowrap;
-        cursor: default;
     }
     .del-brand-card:hover {
         transform: translateY(-2px);
@@ -1091,16 +995,12 @@ $ctaBox = $dbService['cta_box'] ?? [
     }
 
     .del-ranking-showcase {
-        padding: 30px 0 24px;
         background: #fbeaf4;
     }
     .del-ranking-showcase .del-container {
         max-width: 1180px;
     }
-    .del-ranking-header {
-        text-align: center;
-        margin-bottom: 18px;
-    }
+
     .del-ranking-header h2 {
         max-width: 940px;
     }
@@ -1121,10 +1021,8 @@ $ctaBox = $dbService['cta_box'] ?? [
         border: 1.5px solid rgba(196, 0, 122, 0.15);
         border-radius: 18px;
         box-shadow: 0 14px 32px rgba(196, 0, 122, 0.08);
-        overflow: hidden;
     }
     .del-keyword-table {
-        width: 100%;
         border-collapse: collapse;
         background: #fff;
     }
@@ -1153,68 +1051,39 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #fff8fc;
     }
     .del-keyword-name {
-        font-weight: 800;
         color: #111827;
     }
     .del-keyword-url {
         color: #4B5563;
-        font-size: 0.9rem;
-        word-break: break-word;
     }
     .del-rank-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 42px;
-        height: 42px;
-        padding: 0 12px;
         border-radius: 999px;
         background: linear-gradient(135deg, #ff4ca8 0%, #d91d77 100%);
         color: #fff;
-        font-weight: 800;
-        font-size: 1.05rem;
         box-shadow: 0 8px 18px rgba(196, 0, 122, 0.18);
     }
     .del-trend-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 6px 10px;
         border-radius: 999px;
         background: rgba(16, 185, 129, 0.12);
         color: #0f9f6d;
-        font-size: 0.8rem;
-        font-weight: 800;
     }
     .del-volume-value, .del-intent-tag {
         font-weight: 700;
         color: #374151;
     }
     .del-intent-tag {
-        display: inline-block;
-        padding: 7px 10px;
         background: rgba(196, 0, 122, 0.08);
         border-radius: 8px;
         color: #C4007A;
-        font-size: 0.76rem;
-        text-transform: capitalize;
     }
-    .del-market-showcase {
-        padding-top: 28px;
-        text-align: center;
-    }
+
     .del-market-showcase h3 {
         margin: 0 0 18px;
         color: #111827;
         font-size: clamp(1.35rem, 2vw, 1.8rem);
         font-weight: 800;
     }
-    .del-market-pills {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 12px;
-    }
+
     .del-market-pill {
         display: inline-flex;
         align-items: center;
@@ -1236,9 +1105,15 @@ $ctaBox = $dbService['cta_box'] ?? [
     @media (max-width: 780px) {
         .del-keyword-table-wrap {
             overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         .del-keyword-table {
             min-width: 760px;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .del-marquee-track {
+            animation: none !important;
         }
     }
 
@@ -1246,15 +1121,11 @@ $ctaBox = $dbService['cta_box'] ?? [
        2. STRATEGIC NARRATIVE & SPRING SOURCING FAIR SERP PROOF
        ======================================================== */
     .del-narrative-section {
-        padding: 36px 0 40px;
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-        position: relative;
     }
     .del-narrative-split {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 32px;
-        align-items: stretch;
     }
     @media (min-width: 992px) {
         .del-narrative-split {
@@ -1293,17 +1164,10 @@ $ctaBox = $dbService['cta_box'] ?? [
         }
     }
     .del-narrative-lead {
-        font-size: 1.08rem;
-        line-height: 1.62;
         color: #111827;
-        font-weight: 600;
-        margin-bottom: 12px;
     }
     .del-narrative-sub {
-        font-size: 0.92rem;
-        line-height: 1.62;
         color: #4B5563;
-        margin-bottom: 14px;
     }
     .del-narrative-title {
         max-width: 720px;
@@ -1329,12 +1193,10 @@ $ctaBox = $dbService['cta_box'] ?? [
 
     /* Google SERP Browser Showcase */
     .del-serp-browser-showcase {
-        position: relative;
         background: #FFFFFF;
         border-radius: 20px;
         border: 2px solid rgba(196, 0, 122, 0.22);
         box-shadow: 0 16px 40px rgba(196, 0, 122, 0.10);
-        overflow: hidden;
         transition: transform 0.3s ease;
     }
     .del-serp-browser-showcase:hover {
@@ -1344,16 +1206,10 @@ $ctaBox = $dbService['cta_box'] ?? [
     }
     .del-browser-chrome {
         background: #F9FAFB;
-        padding: 10px 16px;
         border-bottom: 1px solid rgba(196, 0, 122, 0.12);
-        display: flex;
-        align-items: center;
-        gap: 12px;
     }
     .del-browser-dots {
         display: flex;
-        align-items: center;
-        gap: 6px;
     }
     .del-browser-dots .dot {
         width: 10px;
@@ -1365,22 +1221,13 @@ $ctaBox = $dbService['cta_box'] ?? [
     .del-browser-dots .dot.yellow { background: #F59E0B; }
     .del-browser-dots .dot.green { background: #10B981; }
     .del-browser-search-bar {
-        flex: 1;
         background: #FFFFFF;
         border: 1px solid rgba(196, 0, 122, 0.18);
         border-radius: 9999px;
-        padding: 5px 12px;
-        font-size: 0.78rem;
         color: #4B5563;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        font-family: monospace;
     }
     .del-browser-viewport {
-        position: relative;
         background: #FFFFFF;
-        overflow: hidden;
     }
     .del-browser-serp-img {
         width: 100%;
@@ -1388,19 +1235,12 @@ $ctaBox = $dbService['cta_box'] ?? [
         display: block;
     }
     .del-serp-float-badge {
-        position: absolute;
         background: #FFFFFF;
         color: #111827;
         border-radius: 10px;
-        padding: 6px 12px;
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
         border: 1.5px solid rgba(196, 0, 122, 0.25);
-        font-size: 0.74rem;
-        font-weight: 700;
         display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        z-index: 4;
     }
     .del-serp-float-badge.badge-top {
         top: 12px;
@@ -1417,8 +1257,6 @@ $ctaBox = $dbService['cta_box'] ?? [
 
     /* Component 2B: Why WebTecMart Choice (3-Col Grid) */
     .del-narrative-why-wrap {
-        margin-top: 38px;
-        padding-top: 32px;
         border-top: 1px solid rgba(196, 0, 122, 0.12);
     }
     .del-why-section-head {
@@ -1428,10 +1266,8 @@ $ctaBox = $dbService['cta_box'] ?? [
         font-size: clamp(1.65rem, 2.6vw, 2.2rem);
     }
     .del-why-grid-3col {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 16px;
-        margin-top: 16px;
     }
     @media (min-width: 640px) {
         .del-why-grid-3col {
@@ -1448,10 +1284,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.14);
         border-radius: 16px;
-        padding: 18px;
-        display: flex;
-        gap: 14px;
-        align-items: flex-start;
         box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
         transition: all 0.3s ease;
     }
@@ -1461,36 +1293,21 @@ $ctaBox = $dbService['cta_box'] ?? [
         box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
     }
     .del-why-icon {
-        font-size: 1.5rem;
-        flex-shrink: 0;
         background: #FFF0F7;
-        width: 42px;
-        height: 42px;
         border-radius: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
     .del-why-title {
-        font-size: 0.95rem;
-        font-weight: 800;
         color: #111827;
-        margin: 0 0 4px;
     }
     .del-why-text {
-        font-size: 0.85rem;
         color: #4B5563;
-        line-height: 1.5;
-        margin: 0;
     }
 
     /* ========================================================
        3. KEY TAKEAWAYS & GOOGLE SERP AI OVERVIEW
        ======================================================== */
     .del-takeaways-section {
-        padding: 36px 0 40px;
         background: #FFFFFF;
-        position: relative;
     }
     .del-takeaways-intro {
         max-width: 860px;
@@ -1521,18 +1338,11 @@ $ctaBox = $dbService['cta_box'] ?? [
         line-height: 1.6;
     }
     .del-takeaways-subtitle {
-        margin: 0 0 12px;
         color: #111827;
-        font-size: 0.98rem;
-        line-height: 1.4;
-        font-weight: 800;
-        letter-spacing: -0.015em;
     }
     .del-takeaways-grid {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 32px;
-        align-items: stretch;
     }
     @media (min-width: 992px) {
         .del-takeaways-grid {
@@ -1554,10 +1364,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         }
     }
     .del-takeaways-checklist-2col {
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 8px 12px;
-        margin: 16px 0 20px;
     }
     @media (min-width: 600px) {
         .del-takeaways-checklist-2col {
@@ -1565,11 +1372,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         }
     }
     .del-takeaway-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
         font-size: 0.85rem;
-        line-height: 1.5;
         color: #1F2937;
         font-weight: 600;
     }
@@ -1580,24 +1383,16 @@ $ctaBox = $dbService['cta_box'] ?? [
         flex-shrink: 0;
     }
     .del-takeaways-outcomes {
-        margin: 0 0 18px;
-        padding: 16px 18px;
         border: 1px solid rgba(196, 0, 122, 0.16);
         border-radius: 16px;
         background: linear-gradient(135deg, #FFF7FB 0%, #FFFFFF 100%);
     }
     .del-takeaways-outcomes-title {
-        margin: 0 0 12px;
         color: #111827;
-        font-size: 0.9rem;
-        font-weight: 800;
     }
     .del-takeaways-outcomes-list {
         display: grid;
         gap: 10px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
     }
     .del-takeaways-outcomes-list li {
         display: flex;
@@ -1613,29 +1408,15 @@ $ctaBox = $dbService['cta_box'] ?? [
         color: #C4007A;
         font-weight: 800;
     }
-    .del-takeaways-right {
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-    }
+
     .del-serp-mockup {
-        display: flex;
-        flex: 1 1 auto;
-        flex-direction: column;
-        min-height: 0;
         background: #FFFFFF;
         border-radius: 20px;
         border: 2px solid rgba(196, 0, 122, 0.2);
         box-shadow: 0 16px 40px rgba(196, 0, 122, 0.10);
-        overflow: hidden;
     }
     .del-serp-preview-img-wrap {
-        position: relative;
-        display: flex;
-        flex: 1 1 auto;
-        min-height: 320px;
         background: #FFFFFF;
-        overflow: hidden;
     }
     .del-serp-img {
         width: 100%;
@@ -1649,12 +1430,9 @@ $ctaBox = $dbService['cta_box'] ?? [
        4. WHAT WE OFFER (6 Core SEO Offerings)
        ======================================================== */
     .del-offers-section {
-        padding: 36px 0 40px;
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-        position: relative;
     }
     .del-offers-grid {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 18px;
     }
@@ -1687,16 +1465,9 @@ $ctaBox = $dbService['cta_box'] ?? [
         border-color: #C4007A;
     }
     .del-offer-icon {
-        width: 46px;
-        height: 46px;
         border-radius: 12px;
         background: #FFF0F7;
         color: #C4007A;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.35rem;
-        margin-bottom: 14px;
     }
     .del-offer-card h3 {
         font-size: 1.1rem;
@@ -1712,11 +1483,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         flex-grow: 1;
     }
     .del-offer-link {
-        font-size: 0.86rem;
-        font-weight: 700;
         color: #C4007A;
-        display: inline-flex;
-        align-items: center;
         gap: 6px;
         transition: gap 0.2s ease;
     }
@@ -1728,7 +1495,6 @@ $ctaBox = $dbService['cta_box'] ?? [
        5. SEO CHALLENGES (6-Card Grid)
        ======================================================== */
     .del-challenges-section {
-        padding: 36px 0 40px;
         background: #FFFFFF;
     }
     .del-challenges-section .del-section-head,
@@ -1738,7 +1504,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         margin-left: auto;
     }
     .del-challenges-grid {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 18px;
     }
@@ -1757,7 +1522,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.14);
         border-radius: 18px;
-        padding: 22px 20px;
         box-shadow: 0 6px 18px rgba(196, 0, 122, 0.04);
         transition: all 0.3s ease;
     }
@@ -1766,10 +1530,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         border-color: #C4007A;
         box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
     }
-    .del-challenge-icon {
-        font-size: 1.6rem;
-        margin-bottom: 12px;
-    }
+
     .del-challenge-card h3 {
         font-size: 1.05rem;
         font-weight: 800;
@@ -1787,21 +1548,40 @@ $ctaBox = $dbService['cta_box'] ?? [
        6. MEET THE EXPERTS (Jitin Madaan Spotlight)
        ======================================================== */
     .del-founder-section {
-        padding: 36px 0 40px;
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
     }
     .del-founder-card {
         background: #FFFFFF;
         border: 2px solid rgba(196, 0, 122, 0.18);
         border-radius: 24px;
-        padding: 36px 32px;
         box-shadow: 0 16px 40px rgba(196, 0, 122, 0.08);
     }
     .del-founder-grid {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 32px;
-        align-items: center;
+    }
+    .del-founder-left,
+    .del-founder-right,
+    .del-founder-stats {
+        min-width: 0;
+    }
+    .del-founder-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .del-founder-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 18px;
+    }
+    .del-founder-actions > a {
+        min-width: 0;
+        max-width: 100%;
+        text-align: center;
+    }
+    .del-fstat-box {
+        min-width: 0;
+        overflow-wrap: anywhere;
     }
     @media (min-width: 992px) {
         .del-founder-grid {
@@ -1809,18 +1589,11 @@ $ctaBox = $dbService['cta_box'] ?? [
             gap: 38px;
         }
     }
-    .del-founder-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 12px;
-        margin: 20px 0;
-    }
+
     .del-fstat-box {
         background: #FFF5FA;
         border: 1px solid rgba(196, 0, 122, 0.18);
         border-radius: 12px;
-        padding: 12px 10px;
-        text-align: center;
     }
     .del-fstat-box .val {
         font-size: 1.35rem;
@@ -1837,17 +1610,10 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: linear-gradient(135deg, #FFF5FA 0%, #FFFFFF 100%);
         border: 2px solid rgba(196, 0, 122, 0.22);
         border-radius: 20px;
-        padding: 20px;
-        text-align: center;
         box-shadow: 0 10px 30px rgba(196, 0, 122, 0.08);
     }
     .del-founder-img-wrapper {
-        position: relative;
-        width: 140px;
-        height: 140px;
-        margin: 0 auto 14px;
         border-radius: 50%;
-        overflow: hidden;
         border: 3px solid #C4007A;
         box-shadow: 0 8px 24px rgba(196, 0, 122, 0.2);
     }
@@ -1857,22 +1623,13 @@ $ctaBox = $dbService['cta_box'] ?? [
         object-fit: cover;
     }
     .del-founder-name-tag {
-        font-size: 1.2rem;
-        font-weight: 800;
         color: #111827;
-        margin: 0 0 2px;
     }
     .del-founder-role-tag {
-        font-size: 0.82rem;
-        font-weight: 700;
         color: #C4007A;
-        margin-bottom: 10px;
     }
     .del-expert-pillars {
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 16px;
-        margin-top: 28px;
     }
     @media (min-width: 768px) {
         .del-expert-pillars {
@@ -1883,7 +1640,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.14);
         border-radius: 16px;
-        padding: 20px;
         box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
         transition: all 0.3s ease;
     }
@@ -1892,10 +1648,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         border-color: #C4007A;
         box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
     }
-    .del-ep-icon {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
+
     .del-expert-pillar-card h4 {
         font-size: 1rem;
         font-weight: 800;
@@ -1913,11 +1666,9 @@ $ctaBox = $dbService['cta_box'] ?? [
        7. WORKING PROCESS (6-Step Grid)
        ======================================================== */
     .del-process-section {
-        padding: 36px 0 40px;
         background: #FFFFFF;
     }
     .del-process-grid {
-        display: grid;
         grid-template-columns: 1fr;
         gap: 16px;
     }
@@ -1936,8 +1687,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.14);
         border-radius: 18px;
-        padding: 22px 20px;
-        position: relative;
         box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
         transition: all 0.3s ease;
     }
@@ -1947,11 +1696,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
     }
     .del-process-num {
-        font-size: 1.8rem;
-        font-weight: 800;
         color: rgba(196, 0, 122, 0.25);
-        line-height: 1;
-        margin-bottom: 8px;
     }
     .del-process-card h3 {
         font-size: 1.05rem;
@@ -1970,13 +1715,10 @@ $ctaBox = $dbService['cta_box'] ?? [
        8. INDUSTRIES WE WORK WITH (8 Cards)
        ======================================================== */
     .del-industries-section {
-        padding: 34px 0 38px;
         background: linear-gradient(180deg, #FFF8FB 0%, #FFFFFF 100%);
     }
     .del-industries-grid {
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 16px;
     }
     @media (min-width: 640px) {
         .del-industries-grid {
@@ -1992,7 +1734,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFFFFF;
         border: 1px solid rgba(196, 0, 122, 0.14);
         border-radius: 16px;
-        padding: 18px;
         box-shadow: 0 4px 14px rgba(196, 0, 122, 0.04);
         transition: all 0.3s ease;
     }
@@ -2001,9 +1742,21 @@ $ctaBox = $dbService['cta_box'] ?? [
         border-color: #C4007A;
         box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
     }
+
+    .del-offer-icon,
+    .del-why-icon,
+    .del-challenge-icon,
+    .del-ep-icon,
     .del-ind-icon {
-        font-size: 1.6rem;
-        margin-bottom: 8px;
+        transition: transform 0.25s ease;
+    }
+    .del-offer-card:hover .del-offer-icon,
+    .del-offer-card:focus-visible .del-offer-icon,
+    .del-why-card:hover .del-why-icon,
+    .del-challenge-card:hover .del-challenge-icon,
+    .del-expert-pillar-card:hover .del-ep-icon,
+    .del-industry-card:hover .del-ind-icon {
+        transform: translateY(-2px) rotate(-6deg) scale(1.08);
     }
     .del-industry-card h4 {
         font-size: 0.98rem;
@@ -2022,44 +1775,25 @@ $ctaBox = $dbService['cta_box'] ?? [
        9. CLIENT FEEDBACK & CASE STUDIES
        ======================================================== */
     .del-feedback-section {
-        padding: 36px 0 40px;
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
     }
     .del-feedback-card {
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.16);
         border-radius: 20px;
-        padding: 28px 24px;
         box-shadow: 0 10px 30px rgba(196, 0, 122, 0.06);
     }
     .del-stars {
         color: #F59E0B;
-        font-size: 1.1rem;
-        margin-bottom: 12px;
     }
     .del-quote-text {
-        font-size: 0.95rem;
-        line-height: 1.65;
         color: #374151;
-        font-style: italic;
-        margin-bottom: 18px;
     }
-    .del-client-author {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
+
     .del-client-avatar {
-        width: 44px;
-        height: 44px;
         border-radius: 50%;
         background: linear-gradient(135deg, #C4007A, #E0398F);
         color: #FFFFFF;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 1rem;
     }
     .del-client-info h5 {
         font-size: 0.95rem;
@@ -2075,13 +1809,10 @@ $ctaBox = $dbService['cta_box'] ?? [
 
     /* Case Studies */
     .del-case-section {
-        padding: 36px 0 40px;
         background: #FFFFFF;
     }
     .del-cases-grid {
-        display: grid;
         grid-template-columns: 1fr;
-        gap: 18px;
     }
     @media (min-width: 768px) {
         .del-cases-grid {
@@ -2092,7 +1823,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.14);
         border-radius: 18px;
-        padding: 22px 20px;
         box-shadow: 0 6px 18px rgba(196, 0, 122, 0.04);
         transition: all 0.3s ease;
     }
@@ -2102,15 +1832,9 @@ $ctaBox = $dbService['cta_box'] ?? [
         box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
     }
     .del-case-badge {
-        display: inline-block;
         background: #FFF0F7;
         color: #C4007A;
-        font-size: 0.72rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        padding: 4px 10px;
         border-radius: 9999px;
-        margin-bottom: 12px;
     }
     .del-case-card h3 {
         font-size: 1.05rem;
@@ -2121,17 +1845,11 @@ $ctaBox = $dbService['cta_box'] ?? [
     .del-case-stat-box {
         background: #FFF5FA;
         border-radius: 10px;
-        padding: 10px;
-        margin-bottom: 12px;
     }
     .del-case-stat-num {
-        font-size: 1.4rem;
-        font-weight: 800;
         color: #C4007A;
     }
     .del-case-stat-lbl {
-        font-size: 0.75rem;
-        font-weight: 600;
         color: #4B5563;
     }
     .del-case-card p {
@@ -2143,18 +1861,15 @@ $ctaBox = $dbService['cta_box'] ?? [
 
     /* Live Google Rankings Table */
     .del-rankings-section {
-        padding: 36px 0 40px;
         background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
     }
     .del-rankings-table-wrap {
         background: #FFFFFF;
         border: 1.5px solid rgba(196, 0, 122, 0.16);
         border-radius: 20px;
-        overflow: hidden;
         box-shadow: 0 10px 30px rgba(196, 0, 122, 0.06);
     }
     .del-table {
-        width: 100%;
         border-collapse: collapse;
         font-size: 0.88rem;
     }
@@ -2178,20 +1893,15 @@ $ctaBox = $dbService['cta_box'] ?? [
         background: #FFF8FC;
     }
     .del-pos-pill {
-        display: inline-block;
         background: #ECFDF5;
         color: #059669;
-        font-weight: 800;
-        padding: 3px 10px;
         border-radius: 9999px;
-        font-size: 0.82rem;
     }
 
     /* ========================================================
        10. WRAPPING UP (Why SEO in Delhi Matters + Micro-Markets)
        ======================================================== */
     .del-wrap-section {
-        padding: 36px 0 40px;
         background: #FFFFFF;
     }
     .del-wrap-card {
@@ -2201,12 +1911,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         padding: 36px 32px;
         box-shadow: 0 16px 40px rgba(196, 0, 122, 0.07);
     }
-    .del-markets-badge-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin: 14px 0 20px;
-    }
+
     .del-market-pill {
         background: #FFFFFF;
         border: 1px solid rgba(196, 0, 122, 0.22);
@@ -2221,7 +1926,6 @@ $ctaBox = $dbService['cta_box'] ?? [
        11. FAQS ACCORDION
        ======================================================== */
     .del-faq-section {
-        padding: 36px 0 40px;
         background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
     }
     .del-faq-item {
@@ -2238,19 +1942,14 @@ $ctaBox = $dbService['cta_box'] ?? [
     }
     .del-faq-btn {
         width: 100%;
-        text-align: left;
         background: transparent;
         border: none;
-        padding: 16px 20px;
         font-size: 0.98rem;
         font-weight: 700;
         color: #111827;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        gap: 14px;
-        cursor: pointer;
-        font-family: inherit;
     }
     .del-faq-btn:hover {
         color: #C4007A;
@@ -2269,9 +1968,6 @@ $ctaBox = $dbService['cta_box'] ?? [
         flex-shrink: 0;
     }
     .del-faq-answer {
-        padding: 0 20px 16px;
-        font-size: 0.9rem;
-        line-height: 1.62;
         color: #4B5563;
         display: none;
     }
@@ -2283,7 +1979,6 @@ $ctaBox = $dbService['cta_box'] ?? [
        12. FINAL CONVERSION CTA BANNER
        ======================================================== */
     .del-cta-section {
-        padding: 34px 0 42px;
         background: #FFFFFF;
     }
     .del-cta-box {
@@ -2291,11 +1986,8 @@ $ctaBox = $dbService['cta_box'] ?? [
         border: 2px solid rgba(196, 0, 122, 0.35);
         border-radius: 24px;
         padding: 40px 32px;
-        text-align: center;
         color: #FFFFFF;
         box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-        position: relative;
-        overflow: hidden;
     }
     .del-cta-box h2 {
         font-size: clamp(1.6rem, 2.8vw, 2.2rem);
@@ -2319,13 +2011,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         max-width: 780px;
         margin: 0 auto 24px;
     }
-    .del-cta-btns {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 14px;
-        flex-wrap: wrap;
-    }
+
 
     .del-seo-page > section:not(.del-hero) {
         padding-top: 40px;
@@ -2354,9 +2040,17 @@ $ctaBox = $dbService['cta_box'] ?? [
             padding-right: 18px;
             padding-left: 18px;
         }
+        .del-seo-page .del-container {
+            padding-right: 18px !important;
+            padding-left: 18px !important;
+        }
         .del-seo-page > section:not(.del-hero) {
             padding-top: 32px;
             padding-bottom: 32px;
+        }
+        .del-section-head {
+            padding-right: 2px;
+            padding-left: 2px;
         }
         .del-section-title {
             font-size: clamp(1.65rem, 7vw, 2.1rem);
@@ -2372,7 +2066,7 @@ $ctaBox = $dbService['cta_box'] ?? [
             font-size: 0.92rem;
         }
         .del-hero-title {
-            font-size: clamp(1.9rem, 8vw, 2.5rem);
+            font-size: clamp(1.75rem, 7vw, 2.2rem);
         }
         .del-hero-form-card {
             padding: 26px 22px;
@@ -2385,112 +2079,280 @@ $ctaBox = $dbService['cta_box'] ?? [
             padding: 28px 20px;
         }
     }
+    @media (max-width: 575px) {
+        .del-hero {
+            padding-top: 28px;
+        }
+        .del-hero-grid {
+            gap: 24px;
+        }
+        .del-hero-actions {
+            align-items: stretch;
+        }
+        .del-hero-actions > a,
+        .del-theme-toggle {
+            min-height: 48px;
+        }
+        .del-hero-actions > a:first-child {
+            width: 100%;
+        }
+        .del-hero-form-card {
+            padding: 24px 18px;
+            border-radius: 20px;
+        }
+        .del-founder-card {
+            padding: 24px 20px !important;
+            border-radius: 20px;
+        }
+        .del-founder-stats {
+            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+            gap: 10px !important;
+            margin: 16px 0 !important;
+        }
+        .del-fstat-box {
+            padding: 12px 8px !important;
+        }
+        .del-fstat-box .val {
+            font-size: 1.2rem;
+        }
+        .del-fstat-box .lbl {
+            line-height: 1.35;
+            overflow-wrap: anywhere;
+        }
+        .del-founder-actions {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
+        }
+        .del-founder-actions > a {
+            width: 100%;
+            padding-right: 14px !important;
+            padding-left: 14px !important;
+        }
+        .del-founder-photo-box {
+            padding: 18px 14px !important;
+        }
+        .del-theme-toggle-floating {
+            left: max(12px, env(safe-area-inset-left));
+            bottom: max(12px, env(safe-area-inset-bottom));
+            min-height: 46px;
+            padding-right: 12px;
+            padding-left: 12px;
+            font-size: 0.78rem;
+        }
+        .del-form-group input,
+        .del-form-group textarea,
+        .del-form-group select {
+            min-height: 48px;
+            font-size: 16px;
+        }
+        .del-form-group textarea {
+            min-height: 112px;
+        }
+        .del-section-head {
+            margin-bottom: 20px;
+        }
+        .del-marquee-wrap {
+            padding: 12px 10px !important;
+            border-radius: 16px;
+            scroll-snap-type: x proximity;
+        }
+        .del-brand-card {
+            scroll-snap-align: start;
+        }
+        .del-keyword-table-wrap,
+        .del-rankings-table-wrap > div {
+            -webkit-overflow-scrolling: touch;
+        }
+    }
+    @media (max-width: 380px) {
+        .del-section-title,
+        .del-narrative-title {
+            font-size: 1.65rem;
+        }
+        .del-hero-title {
+            font-size: 1.7rem;
+        }
+        .del-hero-actions > a,
+        .del-cta-btns > a,
+        .del-cta-btns > button {
+            width: 100%;
+        }
+        .del-market-pill {
+            max-width: 100%;
+            overflow-wrap: anywhere;
+        }
+    }
+    .del-seo-page :is(a, button, input, textarea, select):focus-visible {
+        outline: 3px solid rgba(196, 0, 122, 0.55);
+        outline-offset: 3px;
+    }
+    .del-theme-dark {
+        color-scheme: dark;
+        background: #0B1020;
+    }
+    .del-theme-dark .site-header,
+    .del-theme-dark .site-header.scrolled {
+        background: rgba(15, 23, 42, 0.97);
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+    }
+    .del-theme-dark .site-header .brand,
+    .del-theme-dark .site-header .brand-name,
+    .del-theme-dark .site-header .nav-link {
+        color: #F8FAFC;
+    }
+    .del-theme-dark .site-header .nav-link:hover,
+    .del-theme-dark .site-header .nav-link.active {
+        color: #F472B6;
+    }
+    .del-theme-dark .mobile-menu {
+        background: #111827;
+        border-color: rgba(255, 255, 255, 0.12);
+    }
+    .del-theme-dark .del-seo-page {
+        background: #0B1020;
+        color: #E5E7EB;
+    }
+    .del-theme-dark .del-seo-page > section {
+        background-color: #0F172A !important;
+        background-image: none !important;
+        color: #E5E7EB;
+    }
+    .del-theme-dark .del-seo-page :is(h1, h2, h3, h4, .del-section-sub, .del-hero-desc, .del-bullet-item, .del-takeaway-item, .del-approach-flow, .del-author-meta .name) {
+        color: #F8FAFC;
+    }
+    .del-theme-dark .del-seo-page :is(p, .del-author-meta .sub, .del-approach-flow, .del-approach-banner > div:last-child) {
+        color: #CBD5E1;
+    }
+    .del-theme-dark .del-seo-page :is([class*="-card"], [class*="-box"], [class*="-mockup"], [class*="-banner"], .del-author-card, .del-market-pill, .del-theme-toggle) {
+        background-color: #172033 !important;
+        background-image: none !important;
+        border-color: rgba(255, 255, 255, 0.14);
+        color: #E5E7EB;
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+    }
+    .del-theme-dark .del-seo-page .del-cta-box {
+        background: linear-gradient(135deg, #850053 0%, #C4007A 100%) !important;
+        color: #FFFFFF;
+    }
+    .del-theme-dark .del-seo-page .del-cta-box :is(h2, h3, p) {
+        color: #FFFFFF !important;
+    }
+    .del-theme-dark .del-seo-page .del-theme-toggle {
+        color: #F8FAFC;
+    }
+    .del-theme-dark .del-theme-toggle-floating {
+        background: #172033;
+        border-color: rgba(255, 255, 255, 0.18);
+        color: #F8FAFC;
+    }
+    .del-theme-dark .del-seo-page :is(input, textarea, select) {
+        background: #0F172A;
+        border-color: rgba(255, 255, 255, 0.18);
+        color: #F8FAFC;
+    }
+    .del-theme-dark .del-seo-page :is(input, textarea, select)::placeholder {
+        color: #94A3B8;
+    }
+    .del-theme-dark .del-seo-page :is(.del-section-title .accent, .del-hero-title .accent, .del-eyebrow, .del-offer-link, .del-approach-title) {
+        color: #F472B6;
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .del-seo-page *,
+        .del-seo-page *::before,
+        .del-seo-page *::after {
+            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+        }
+    }
 </style>
 
-<main class="del-seo-page">
+<main class="del-seo-page" style="width: 100%; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;">
 
     <!-- ========================================================
          1. HERO SECTION (2-COL WITH FLOATING QUOTE FORM)
          ======================================================== -->
-    <section class="del-hero">
-        <div class="del-ambient-glow" style="top: -80px; left: -80px;"></div>
-        <div class="del-ambient-glow" style="bottom: 0; right: -80px;"></div>
+    <section class="del-hero" style="position: relative; padding: 34px 0 28px;">
+        <div class="del-ambient-glow" style="top: -80px; left: -80px; position: absolute; width: 440px; height: 440px; pointer-events: none; z-index: 1;"></div>
+        <div class="del-ambient-glow" style="bottom: 0; right: -80px; position: absolute; width: 440px; height: 440px; pointer-events: none; z-index: 1;"></div>
 
-        <div class="del-container">
-            <div class="del-hero-grid">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
+            <div class="del-hero-grid" style="display: grid;">
 
                 <!-- Left Column: Copy, Bullets & Author -->
                 <div class="del-hero-left" data-framer-reveal="slide-left">
-                    <div class="del-eyebrow">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
-                        <span>SEO SERVICES IN DELHI NCR</span>
-                    </div>
-
-                    <h1 class="del-hero-title">
+                    <h1 class="del-hero-title" style="font-weight: 850; line-height: 1.1; letter-spacing: -0.04em; text-align: left;">
                         <?= htmlspecialchars($heroTitle) ?><span class="hero-separator">&bull;</span><br>
                         <span class="accent"><?= htmlspecialchars($heroAccent) ?></span>
                     </h1>
 
-                    <p class="del-hero-desc is-collapsed">
+                    <p class="del-hero-desc" style="font-size: 1.05rem; line-height: 1.6; font-weight: 500;">
                         <?= htmlspecialchars($heroDesc) ?>
                     </p>
-                    <button type="button" class="del-hero-more" onclick="document.getElementById('delHeroDetailsDialog').showModal()" aria-haspopup="dialog">
-                        Read more about our SEO approach
-                    </button>
 
-                    <div class="del-hero-bullets">
+                    <div class="del-hero-bullets" style="display: grid; gap: 10px 14px; margin: 10px 0 18px;">
                         <?php foreach ($heroVisibleBullets as $bullet): ?>
-                            <div class="del-bullet-item">
+                            <div class="del-bullet-item" style="gap: 10px;">
                                 <span class="dot">✓</span>
                                 <span><?= htmlspecialchars($bullet) ?></span>
                             </div>
                         <?php endforeach; ?>
                     </div>
 
-                    <div class="del-hero-actions">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                    <div class="del-hero-actions" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;">
+                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                             <span>Schedule a Free SEO Consultation</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
-                        <a href="tel:+919999674255" class="del-btn-secondary">
+                        <a href="tel:+919999674255" class="del-btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <span>Call: +91-9999674255</span>
                         </a>
-                    </div>
-
-                    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
-                        <!-- Strategist / Author Stamp (Jitin Madaan) -->
-                        <div class="del-author-card">
-                            <div class="del-author-avatar">
-                                <?php if (!empty($founderAvatar) && file_exists(__DIR__ . $founderAvatar)): ?>
-                                    <img src="<?= htmlspecialchars($founderAvatar) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-author-img">
-                                <?php else: ?>
-                                    <?= htmlspecialchars($founderInitial) ?>
-                                <?php endif; ?>
-                            </div>
-                            <div class="del-author-meta">
-                                <div class="name"><?= htmlspecialchars($founderName) ?></div>
-                                <div class="sub"><?= htmlspecialchars($founderRole) ?></div>
-                            </div>
-                        </div>
-
-                        <div style="font-size: 0.82rem; font-weight: 700; color: #C4007A; background: #FFF0F7; padding: 5px 12px; border-radius: 9999px; border: 1px solid rgba(196, 0, 122, 0.2);">
-                            <?= htmlspecialchars($heroReadinessBadge) ?>
-                        </div>
                     </div>
                 </div>
 
                 <!-- Right Column: Request A Quote Floating Form -->
                 <div class="del-hero-right" data-framer-reveal="slide-right">
-                    <div class="del-hero-form-card">
-                        <h3>Request A Quote</h3>
+                    <div class="del-hero-form-card" style="overflow: hidden;">
+                        <h3>
+                            <span class="del-hero-form-icon" aria-hidden="true">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15M8 7h8M8 11h7"/></svg>
+                            </span>
+                            <span>Request A Quote</span>
+                        </h3>
                         <p>Fill out the form below to receive a custom SEO strategy and projection for your Delhi business.</p>
 
                         <form id="delHeroQuoteForm" onsubmit="handleHeroQuoteSubmit(event)">
-                            <div class="del-form-group">
+                            <div class="del-form-group" style="margin-bottom: 13px;">
                                 <input type="text" name="name" placeholder="Name *" required>
                             </div>
-                            <div class="del-form-group">
+                            <div class="del-form-group" style="margin-bottom: 13px;">
                                 <input type="tel" name="phone" placeholder="Phone No *" required>
                             </div>
-                            <div class="del-form-group">
+                            <div class="del-form-group" style="margin-bottom: 13px;">
                                 <input type="email" name="email" placeholder="Email *" required>
                             </div>
-                            <div class="del-form-group">
+                            <div class="del-form-group" style="margin-bottom: 13px;">
                                 <textarea name="message" placeholder="Type Your Message *" required></textarea>
                             </div>
-                            <div class="del-form-consent-row">
-                                <label class="del-form-consent">
+                            <div class="del-form-consent-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 2px 0 16px; font-size: 0.84rem;">
+                                <label class="del-form-consent" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
                                     <input type="checkbox" checked required>
                                     <span>I'm not a robot</span>
                                 </label>
-                                <span class="del-form-protected">🔒 Protected</span>
+                                <span class="del-form-protected" style="font-size: 0.78rem;">🔒 Protected</span>
                             </div>
-                            <button type="submit" class="del-form-submit" id="delHeroSubmitBtn">
+                            <button type="submit" class="del-form-submit" id="delHeroSubmitBtn" style="width: 100%; font-weight: 700; font-size: 0.98rem; padding: 14px; cursor: pointer;">
                                 <span>Submit &rarr;</span>
                             </button>
                             <div id="delHeroFeedback" style="display:none; margin-top: 10px; padding: 8px; border-radius: 8px; font-size: 0.84rem; text-align: center; font-weight: 700;"></div>
                         </form>
+                        <div class="del-hero-form-note">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                            <span>Share your goals and we’ll tailor the SEO discussion to your business.</span>
+                        </div>
                     </div>
                 </div>
 
@@ -2498,31 +2360,18 @@ $ctaBox = $dbService['cta_box'] ?? [
         </div>
     </section>
 
-    <dialog class="del-hero-details-dialog" id="delHeroDetailsDialog" aria-labelledby="delHeroDetailsTitle" onclick="if (event.target === this) this.close()">
-        <button type="button" class="del-hero-details-close" onclick="this.closest('dialog').close()" aria-label="Close details">&times;</button>
-        <h2 id="delHeroDetailsTitle">A smarter SEO strategy for sustainable growth</h2>
-        <p><?= htmlspecialchars($heroDesc) ?></p>
-        <?php if (!empty($heroBullets) && is_array($heroBullets)): ?>
-            <ul>
-                <?php foreach ($heroBullets as $bullet): ?>
-                    <li><?= htmlspecialchars($bullet) ?></li>
-                <?php endforeach; ?>
-            </ul>
-        <?php endif; ?>
-    </dialog>
-
     <!-- ========================================================
          TOP EVENT BRANDS EMBRACING SEO (Marquee Showcase)
          ======================================================== -->
-    <section class="del-ranking-showcase">
-        <div class="del-container">
-            <div class="del-ranking-header">
-                <h2 class="del-section-title">Organic Rankings That Drive <span class="accent">Real Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span></h2>
+    <section class="del-ranking-showcase" style="padding: 30px 0 24px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
+            <div class="del-ranking-header" style="text-align: center; margin-bottom: 18px;">
+                <h2 class="del-section-title" style="font-weight: 850;">Organic Rankings That Drive <span class="accent">Real Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span></h2>
                 <p>Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and Delhi NCR businesses:</p>
             </div>
 
             <div class="del-keyword-table-wrap">
-                <table class="del-keyword-table">
+                <table class="del-keyword-table" style="width: 100%;">
                     <thead>
                         <tr>
                             <th>Target Search Keyword</th>
@@ -2542,21 +2391,21 @@ $ctaBox = $dbService['cta_box'] ?? [
                             <?php $volume = (string) ($row['volume'] ?? '0/mo'); ?>
                             <?php $intent = (string) ($row['intent'] ?? 'Commercial'); ?>
                             <tr>
-                                <td class="del-keyword-name"><?= htmlspecialchars($keyword) ?></td>
-                                <td class="del-keyword-url"><?= htmlspecialchars($url) ?></td>
-                                <td><span class="del-rank-badge"><?= htmlspecialchars($rank) ?></span></td>
-                                <td><span class="del-trend-badge"><?= htmlspecialchars($trend) ?></span></td>
+                                <td class="del-keyword-name" style="font-weight: 800;"><?= htmlspecialchars($keyword) ?></td>
+                                <td class="del-keyword-url" style="font-size: 0.9rem; word-break: break-word;"><?= htmlspecialchars($url) ?></td>
+                                <td><span class="del-rank-badge" style="display: inline-flex; align-items: center; justify-content: center; min-width: 42px; height: 42px; padding: 0 12px; font-weight: 800; font-size: 1.05rem;"><?= htmlspecialchars($rank) ?></span></td>
+                                <td><span class="del-trend-badge" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 0.8rem; font-weight: 800;"><?= htmlspecialchars($trend) ?></span></td>
                                 <td class="del-volume-value"><?= htmlspecialchars($volume) ?></td>
-                                <td><span class="del-intent-tag"><?= htmlspecialchars($intent) ?></span></td>
+                                <td><span class="del-intent-tag" style="display: inline-block; padding: 7px 10px; font-size: 0.76rem; text-transform: capitalize;"><?= htmlspecialchars($intent) ?></span></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
 
-            <div class="del-market-showcase">
+            <div class="del-market-showcase" style="padding-top: 28px; text-align: center;">
                 <h3>Serving Businesses Across All Delhi NCR Micro-Markets</h3>
-                <div class="del-market-pills">
+                <div class="del-market-pills" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
                     <?php foreach ($microMarketPills as $market): ?>
                         <span class="del-market-pill"><?= htmlspecialchars($market) ?></span>
                     <?php endforeach; ?>
@@ -2565,26 +2414,26 @@ $ctaBox = $dbService['cta_box'] ?? [
         </div>
     </section>
 
-    <section class="del-brands-section" data-framer-reveal="fade-up">
-        <div class="del-container">
+    <section class="del-brands-section" data-framer-reveal="fade-up" style="padding: 24px 0 28px; position: relative; overflow: hidden;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head">
-                <div class="del-eyebrow">GLOBAL INDUSTRY CREDIBILITY</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">GLOBAL INDUSTRY CREDIBILITY</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Top Event Brands Embracing <span class="accent">SEO<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Here are just a few of the organisers, global trade expos, and high-growth brands we've helped with strategic search optimisation campaigns.
                 </p>
             </div>
 
-            <div class="del-marquee-wrap">
-                <div class="del-marquee-track">
+            <div class="del-marquee-wrap" tabindex="0" role="region" aria-label="Client brands, horizontally scrollable" style="max-width: 1180px; margin: 0 auto; padding: 16px 14px;">
+                <div class="del-marquee-track" style="display: flex; gap: 14px; width: max-content; align-items: center;">
                     <?php 
                     $tripleLogos = array_merge($brandLogos, $brandLogos, $brandLogos);
                     foreach ($tripleLogos as $b): 
                         $imgPath = $b['logo'] ?? '';
                     ?>
-                        <div class="del-brand-card">
+                        <div class="del-brand-card" style="display: flex; align-items: center; gap: 10px; padding: 8px 16px; white-space: nowrap; cursor: default;">
                             <?php if (!empty($imgPath)): ?>
                                 <img src="<?= htmlspecialchars($imgPath) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
                             <?php else: ?>
@@ -2606,25 +2455,25 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          2. STRATEGIC NARRATIVE & SPRING SOURCING FAIR PROOF
          ======================================================== -->
-    <section class="del-narrative-section">
-        <div class="del-container">
+    <section class="del-narrative-section" style="padding: 36px 0 40px; position: relative;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <!-- 2A: Balanced Split Grid -->
-            <div class="del-narrative-split">
+            <div class="del-narrative-split" style="display: grid; align-items: stretch;">
                 <div class="del-narrative-left" data-framer-reveal="slide-left">
-                    <div class="del-eyebrow"><?= htmlspecialchars($strategicNarrative['eyebrow'] ?? 'BE FOUND BY THE CORRECT PEOPLE • GENERATE BETTER LEADS • GROW ORGANICALLY') ?></div>
-                    <h2 class="del-section-title del-narrative-title">
+                    <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($strategicNarrative['eyebrow'] ?? 'BE FOUND BY THE CORRECT PEOPLE • GENERATE BETTER LEADS • GROW ORGANICALLY') ?></div>
+                    <h2 class="del-section-title del-narrative-title" style="font-weight: 850;">
                         <?= htmlspecialchars($narrativeTitle) ?>
                         <?php if ($narrativeAccent !== ''): ?>
                             <span class="accent"><?= htmlspecialchars($narrativeAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                         <?php endif; ?>
                     </h2>
-                    <p class="del-narrative-lead">
+                    <p class="del-narrative-lead" style="font-size: 1.08rem; line-height: 1.62; font-weight: 600; margin-bottom: 12px;">
                         <?= htmlspecialchars($strategicNarrative['lead'] ?? 'Your customers are looking for your products and services. The challenge is to make sure that they find your business, not your competitors.') ?>
                     </p>
-                    <p class="del-narrative-sub">
+                    <p class="del-narrative-sub" style="font-size: 0.92rem; line-height: 1.62; margin-bottom: 14px;">
                         <?= htmlspecialchars($strategicNarrative['p1'] ?? '') ?>
                     </p>
-                    <p class="del-narrative-sub">
+                    <p class="del-narrative-sub" style="font-size: 0.92rem; line-height: 1.62; margin-bottom: 14px;">
                         <?= htmlspecialchars($strategicNarrative['p2'] ?? '') ?>
                     </p>
 
@@ -2633,11 +2482,11 @@ $ctaBox = $dbService['cta_box'] ?? [
                     </div>
 
                     <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                             <span>Complimentary Website Analysis</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
-                        <a href="tel:+919999674255" class="del-btn-secondary">
+                        <a href="tel:+919999674255" class="del-btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
                             <span>Call +91-9999674255</span>
                         </a>
                     </div>
@@ -2645,23 +2494,23 @@ $ctaBox = $dbService['cta_box'] ?? [
 
                 <!-- Right: Authentic Google SERP Live Ranking Showcase (Spring Sourcing Fair 2027) -->
                 <div class="del-narrative-right" data-framer-reveal="slide-right">
-                    <div class="del-serp-browser-showcase">
-                        <div class="del-browser-chrome">
-                            <div class="del-browser-dots">
+                    <div class="del-serp-browser-showcase" style="position: relative; overflow: hidden;">
+                        <div class="del-browser-chrome" style="padding: 10px 16px; display: flex; align-items: center; gap: 12px;">
+                            <div class="del-browser-dots" style="align-items: center; gap: 6px;">
                                 <span class="dot red"></span>
                                 <span class="dot yellow"></span>
                                 <span class="dot green"></span>
                             </div>
-                            <div class="del-browser-search-bar">
+                            <div class="del-browser-search-bar" style="flex: 1; padding: 5px 12px; font-size: 0.78rem; display: flex; align-items: center; gap: 6px; font-family: monospace;">
                                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                                 <span>google.com/search?q=spring+sourcing+fair+2027</span>
                                 <span class="lock-icon">🔒</span>
                             </div>
                         </div>
 
-                        <div class="del-browser-viewport">
+                        <div class="del-browser-viewport" style="position: relative; overflow: hidden;">
                             <img src="<?= htmlspecialchars($springSerpImage) ?>" alt="Google Search Spring Sourcing Fair 2027 IHGF Delhi Fair #1 Ranking WebTecMart" class="del-browser-serp-img" loading="lazy">
-                            <div class="del-serp-float-badge badge-top">
+                            <div class="del-serp-float-badge badge-top" style="position: absolute; padding: 6px 12px; font-size: 0.74rem; font-weight: 700; align-items: center; gap: 6px; z-index: 4;">
                                 <span class="pulse-dot"></span>
                                 <span>#1 Organic Rank &bull; IHGF Delhi Fair</span>
                             </div>
@@ -2671,21 +2520,21 @@ $ctaBox = $dbService['cta_box'] ?? [
             </div>
 
             <!-- 2B: What makes WebTecMart the perfect SEO choice? (6 Cards in 3-col grid) -->
-            <div class="del-narrative-why-wrap" data-framer-reveal="fade-up">
+            <div class="del-narrative-why-wrap" data-framer-reveal="fade-up" style="margin-top: 38px; padding-top: 32px;">
                 <div class="del-section-head del-why-section-head">
-                    <div class="del-eyebrow">WHY CHOOSE WEBTECMART</div>
-                    <h2 class="del-section-title">
+                    <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">WHY CHOOSE WEBTECMART</div>
+                    <h2 class="del-section-title" style="font-weight: 850;">
                         What Makes WebTecMart the Perfect <span class="accent">SEO Choice<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>?
                     </h2>
-                    <p class="del-section-sub">Battle-tested capabilities built around performance, transparency, and sustainable business revenue.</p>
+                    <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">Battle-tested capabilities built around performance, transparency, and sustainable business revenue.</p>
                 </div>
-                <div class="del-why-grid-3col">
+                <div class="del-why-grid-3col" style="display: grid; margin-top: 16px;">
                     <?php foreach ($whyCards as $wc): ?>
-                        <div class="del-why-card">
-                            <div class="del-why-icon"><?= htmlspecialchars($wc['icon'] ?? '🎯') ?></div>
+                        <div class="del-why-card" style="padding: 18px; display: flex; gap: 14px; align-items: flex-start;">
+                            <div class="del-why-icon" style="font-size: 1.5rem; flex-shrink: 0; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;"><?= htmlspecialchars($wc['icon'] ?? '🎯') ?></div>
                             <div>
-                                <div class="del-why-title"><?= htmlspecialchars($wc['title'] ?? '') ?></div>
-                                <div class="del-why-text"><?= htmlspecialchars($wc['desc'] ?? '') ?></div>
+                                <div class="del-why-title" style="font-size: 0.95rem; font-weight: 800; margin: 0 0 4px;"><?= htmlspecialchars($wc['title'] ?? '') ?></div>
+                                <div class="del-why-text" style="font-size: 0.85rem; line-height: 1.5; margin: 0;"><?= htmlspecialchars($wc['desc'] ?? '') ?></div>
                             </div>
                         </div>
                     <?php endforeach; ?>
@@ -2697,42 +2546,42 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          3. KEY TAKEAWAYS & GOOGLE SERP AI OVERVIEW
          ======================================================== -->
-    <section class="del-takeaways-section">
-        <div class="del-container">
+    <section class="del-takeaways-section" style="padding: 36px 0 40px; position: relative;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head del-takeaways-intro" data-framer-reveal="fade-up">
-                <div class="del-eyebrow"><?= htmlspecialchars($takeaways['eyebrow'] ?? 'KEY TAKEAWAYS') ?></div>
-                <h2 class="del-section-title del-takeaways-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($takeaways['eyebrow'] ?? 'KEY TAKEAWAYS') ?></div>
+                <h2 class="del-section-title del-takeaways-title" style="font-weight: 850;">
                     <?= htmlspecialchars($takeawaysTitleBase) ?>
                     <?php if ($takeawaysTitleAccent !== ''): ?>
                         <span class="accent"><?= htmlspecialchars($takeawaysTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     <?php endif; ?>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     <?= htmlspecialchars($takeaways['lead'] ?? 'A good SEO approach ought to do greater than just ranking better. It should draw the intended audience to your business, gain trust and create measurable opportunities.') ?>
                 </p>
             </div>
 
-            <div class="del-takeaways-grid">
+            <div class="del-takeaways-grid" style="display: grid; align-items: stretch;">
 
                 <!-- Left Column: Core Takeaways & 10 Deliverables -->
                 <div class="del-takeaways-left" data-framer-reveal="slide-left">
-                    <h3 class="del-takeaways-subtitle">What's included in our SEO services:</h3>
+                    <h3 class="del-takeaways-subtitle" style="margin: 0 0 12px; font-size: 0.98rem; line-height: 1.4; font-weight: 800; letter-spacing: -0.015em;">What's included in our SEO services:</h3>
 
-                    <div class="del-takeaways-checklist-2col">
+                    <div class="del-takeaways-checklist-2col" style="display: grid; gap: 8px 12px; margin: 16px 0 20px;">
                         <?php 
                         $checkItems = $takeaways['checklist'] ?? [];
                         foreach ($checkItems as $chk): 
                         ?>
-                            <div class="del-takeaway-item">
+                            <div class="del-takeaway-item" style="display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;">
                                 <span class="chk">✓</span>
                                 <span><?= htmlspecialchars($chk) ?></span>
                             </div>
                         <?php endforeach; ?>
                     </div>
 
-                    <div class="del-takeaways-outcomes">
-                        <h4 class="del-takeaways-outcomes-title">What this means for your business</h4>
-                        <ul class="del-takeaways-outcomes-list">
+                    <div class="del-takeaways-outcomes" style="margin: 0 0 18px; padding: 16px 18px;">
+                        <h4 class="del-takeaways-outcomes-title" style="margin: 0 0 12px; font-size: 0.9rem; font-weight: 800;">What this means for your business</h4>
+                        <ul class="del-takeaways-outcomes-list" style="margin: 0; padding: 0; list-style: none;">
                             <li>Stronger visibility for the services and locations that matter to you.</li>
                             <li>More relevant visitors finding your business through search.</li>
                             <li>Clear progress tracking to guide ongoing SEO improvements.</li>
@@ -2740,7 +2589,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                     </div>
 
                     <div style="margin-top: 18px;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                             <span>Book Your Free SEO Consultation</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
@@ -2748,9 +2597,9 @@ $ctaBox = $dbService['cta_box'] ?? [
                 </div>
 
                 <!-- Right Column: Google SERP visual -->
-                <div class="del-takeaways-right" data-framer-reveal="slide-right">
-                    <div class="del-serp-mockup">
-                        <div class="del-serp-preview-img-wrap">
+                <div class="del-takeaways-right" data-framer-reveal="slide-right" style="display: flex; flex-direction: column; gap: 16px;">
+                    <div class="del-serp-mockup" style="display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; overflow: hidden;">
+                        <div class="del-serp-preview-img-wrap" style="position: relative; display: flex; flex: 1 1 auto; min-height: 320px; overflow: hidden;">
                             <img src="<?= htmlspecialchars($serpImage) ?>" alt="Google Search SEO Rankings Delhi WebTecMart" class="del-serp-img" loading="lazy">
                         </div>
                     </div>
@@ -2763,19 +2612,19 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          4. WHAT WE OFFER (6 Core SEO Offerings)
          ======================================================== -->
-    <section class="del-offers-section">
-        <div class="del-container">
+    <section class="del-offers-section" style="padding: 36px 0 40px; position: relative;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">WHAT WE OFFER</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">WHAT WE OFFER</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Comprehensive SEO Services That Turn <span class="accent">Search Visibility Into Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     From technical architecture to local rankings, content strategy, high-authority link acquisition, and AI-search visibility. Discover what's included in our SEO solutions:
                 </p>
             </div>
 
-            <div class="del-offers-grid">
+            <div class="del-offers-grid" style="display: grid;">
                 <?php foreach ($offers as $off): 
                     $offIcon = $off['icon'] ?? 'sparkles';
                     $offTitle = $off['title'] ?? 'SEO Service';
@@ -2784,7 +2633,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                     $offLinkText = $off['link_text'] ?? 'Explore Service →';
                 ?>
                 <a href="<?= htmlspecialchars($offLink) ?>" class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon">
+                    <div class="del-offer-icon" style="width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 14px;">
                         <?php if ($offIcon === 'code'): ?>
                             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
                         <?php elseif ($offIcon === 'layout'): ?>
@@ -2801,7 +2650,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                     </div>
                     <h3><?= htmlspecialchars($offTitle) ?></h3>
                     <p><?= htmlspecialchars($offDesc) ?></p>
-                    <span class="del-offer-link"><?= htmlspecialchars($offLinkText) ?></span>
+                    <span class="del-offer-link" style="font-size: 0.86rem; font-weight: 700; display: inline-flex; align-items: center;"><?= htmlspecialchars($offLinkText) ?></span>
                 </a>
                 <?php endforeach; ?>
             </div>
@@ -2811,25 +2660,25 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          5. SEO CHALLENGES (6-Card Grid)
          ======================================================== -->
-    <section class="del-challenges-section">
-        <div class="del-container">
+    <section class="del-challenges-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow"><?= htmlspecialchars($challenges['eyebrow'] ?? 'SEO CHALLENGES') ?></div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($challenges['eyebrow'] ?? 'SEO CHALLENGES') ?></div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     <?= htmlspecialchars($challengesTitleBase) ?>
                     <?php if ($challengesTitleAccent !== ''): ?>
                         <span class="accent"><?= htmlspecialchars($challengesTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     <?php endif; ?>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     <?= htmlspecialchars($challenges['lead'] ?? '') ?>
                 </p>
             </div>
 
-            <div class="del-challenges-grid">
+            <div class="del-challenges-grid" style="display: grid;">
                 <?php foreach (($challenges['items'] ?? []) as $ch): ?>
-                    <div class="del-challenge-card" data-framer-reveal="fade-up">
-                        <div class="del-challenge-icon"><?= htmlspecialchars($ch['icon'] ?? '⚡') ?></div>
+                    <div class="del-challenge-card" data-framer-reveal="fade-up" style="padding: 22px 20px;">
+                        <div class="del-challenge-icon" style="font-size: 1.6rem; margin-bottom: 12px;"><?= htmlspecialchars($ch['icon'] ?? '⚡') ?></div>
                         <h3><?= htmlspecialchars($ch['title'] ?? '') ?></h3>
                         <p><?= htmlspecialchars($ch['desc'] ?? '') ?></p>
                     </div>
@@ -2841,23 +2690,23 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          6. MEET THE EXPERTS (Jitin Madaan Spotlight)
          ======================================================== -->
-    <section class="del-founder-section">
-        <div class="del-container">
+    <section class="del-founder-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow"><?= htmlspecialchars($founderSection['eyebrow'] ?? 'MEET THE EXPERTS') ?></div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($founderSection['eyebrow'] ?? 'MEET THE EXPERTS') ?></div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     <?= htmlspecialchars($founderTitleBase) ?>
                     <?php if ($founderTitleAccent !== ''): ?>
                         <span class="accent"><?= htmlspecialchars($founderTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     <?php endif; ?>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     <?= htmlspecialchars($founderSection['lead'] ?? '') ?>
                 </p>
             </div>
 
-            <div class="del-founder-card" data-framer-reveal="scale-in">
-                <div class="del-founder-grid">
+            <div class="del-founder-card" data-framer-reveal="scale-in" style="padding: 36px 32px;">
+                <div class="del-founder-grid" style="display: grid; align-items: center;">
                     <div class="del-founder-left">
                         <h3 style="font-size: 1.2rem; font-weight: 800; color: #111827; margin: 0 0 10px;">
                             Built on 13+ Years of Proven Technical Execution
@@ -2866,29 +2715,29 @@ $ctaBox = $dbService['cta_box'] ?? [
                             Strong SEO comes from combining the right people, processes and expertise. Our team is focused on search strategy, technical optimisation, content depth, and analytics to ensure campaigns directly advance real business pipeline.
                         </p>
 
-                        <div class="del-founder-stats">
+                        <div class="del-founder-stats" style="display: grid; gap: 12px; margin: 20px 0;">
                             <?php foreach (($founderSection['stats'] ?? []) as $fst): ?>
-                                <div class="del-fstat-box">
+                                <div class="del-fstat-box" style="padding: 12px 10px; text-align: center;">
                                     <div class="val"><?= htmlspecialchars($fst['val']) ?></div>
                                     <div class="lbl"><?= htmlspecialchars($fst['label']) ?></div>
                                 </div>
                             <?php endforeach; ?>
                         </div>
 
-                        <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px;">
-                            <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                        <div class="del-founder-actions">
+                            <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                                 <span>Discuss With an SEO Specialist</span>
                                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             </a>
-                            <a href="tel:+919999674255" class="del-btn-secondary">
+                            <a href="tel:+919999674255" class="del-btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
                                 <span>Call: +91-9999674255</span>
                             </a>
                         </div>
                     </div>
 
                     <div class="del-founder-right">
-                        <div class="del-founder-photo-box">
-                            <div class="del-founder-img-wrapper">
+                        <div class="del-founder-photo-box" style="padding: 20px; text-align: center;">
+                            <div class="del-founder-img-wrapper" style="position: relative; width: 140px; height: 140px; margin: 0 auto 14px; overflow: hidden;">
                                 <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
                                     <img src="<?= htmlspecialchars($founderImage) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-founder-photo">
                                 <?php else: ?>
@@ -2897,8 +2746,8 @@ $ctaBox = $dbService['cta_box'] ?? [
                                     </div>
                                 <?php endif; ?>
                             </div>
-                            <h4 class="del-founder-name-tag"><?= htmlspecialchars($founderName) ?></h4>
-                            <div class="del-founder-role-tag"><?= htmlspecialchars($founderRole) ?></div>
+                            <h4 class="del-founder-name-tag" style="font-size: 1.2rem; font-weight: 800; margin: 0 0 2px;"><?= htmlspecialchars($founderName) ?></h4>
+                            <div class="del-founder-role-tag" style="font-size: 0.82rem; font-weight: 700; margin-bottom: 10px;"><?= htmlspecialchars($founderRole) ?></div>
                             <p style="font-size: 0.82rem; color: #6B7280; line-height: 1.5; margin: 0;">
                                 Directing technical search architecture and high-converting commercial SEO for leading brands across Delhi NCR and international markets.
                             </p>
@@ -2907,10 +2756,10 @@ $ctaBox = $dbService['cta_box'] ?? [
                 </div>
 
                 <!-- 3 Core Expert Pillars -->
-                <div class="del-expert-pillars">
+                <div class="del-expert-pillars" style="display: grid; gap: 16px; margin-top: 28px;">
                     <?php foreach (($founderSection['pillars'] ?? []) as $plr): ?>
-                        <div class="del-expert-pillar-card">
-                            <div class="del-ep-icon"><?= htmlspecialchars($plr['icon'] ?? '⚙️') ?></div>
+                        <div class="del-expert-pillar-card" style="padding: 20px;">
+                            <div class="del-ep-icon" style="font-size: 1.5rem; margin-bottom: 10px;"><?= htmlspecialchars($plr['icon'] ?? '⚙️') ?></div>
                             <h4><?= htmlspecialchars($plr['title'] ?? '') ?></h4>
                             <p><?= htmlspecialchars($plr['desc'] ?? '') ?></p>
                         </div>
@@ -2923,22 +2772,22 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          7. OUR PROCESS (6-Step Grid)
          ======================================================== -->
-    <section class="del-process-section">
-        <div class="del-container">
+    <section class="del-process-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">OUR PROCESS</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">OUR PROCESS</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     How Our SEO Services in Delhi Turn <span class="accent">Strategy Into Results<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Each business has its own set of customers, competition and goals for growth. We begin by understanding where you stand today and create a roadmap that gets you where you want to be.
                 </p>
             </div>
 
-            <div class="del-process-grid">
+            <div class="del-process-grid" style="display: grid;">
                 <?php foreach ($processSteps as $p): ?>
-                    <div class="del-process-card" data-framer-reveal="fade-up">
-                        <div class="del-process-num"><?= htmlspecialchars($p['step']) ?></div>
+                    <div class="del-process-card" data-framer-reveal="fade-up" style="padding: 22px 20px; position: relative;">
+                        <div class="del-process-num" style="font-size: 1.8rem; font-weight: 800; line-height: 1; margin-bottom: 8px;"><?= htmlspecialchars($p['step']) ?></div>
                         <h3><?= htmlspecialchars($p['title']) ?></h3>
                         <p><?= htmlspecialchars($p['description']) ?></p>
                     </div>
@@ -2950,22 +2799,22 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          8. INDUSTRIES WE WORK WITH (8 Cards)
          ======================================================== -->
-    <section class="del-industries-section">
-        <div class="del-container">
+    <section class="del-industries-section" style="padding: 34px 0 38px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">INDUSTRY EXPERTISE</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">INDUSTRY EXPERTISE</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Industries We Work With Across <span class="accent">Delhi NCR &amp; Beyond<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Proven SEO strategies tailored to vertical-specific buyer intent, conversion funnels, and search landscapes.
                 </p>
             </div>
 
-            <div class="del-industries-grid">
+            <div class="del-industries-grid" style="display: grid; gap: 16px;">
                 <?php foreach ($industries as $ind): ?>
-                    <div class="del-industry-card" data-framer-reveal="fade-up">
-                        <div class="del-ind-icon"><?= htmlspecialchars($ind['icon']) ?></div>
+                    <div class="del-industry-card" data-framer-reveal="fade-up" style="padding: 18px;">
+                        <div class="del-ind-icon" style="font-size: 1.6rem; margin-bottom: 8px;"><?= htmlspecialchars($ind['icon']) ?></div>
                         <h4><?= htmlspecialchars($ind['title']) ?></h4>
                         <p><?= htmlspecialchars($ind['desc']) ?></p>
                     </div>
@@ -2977,14 +2826,14 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          9. CLIENT FEEDBACK & CASE STUDIES
          ======================================================== -->
-    <section class="del-feedback-section">
-        <div class="del-container">
+    <section class="del-feedback-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">CLIENT TESTIMONIALS</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">CLIENT TESTIMONIALS</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Trusted by Organisers, Founders &amp; <span class="accent">Marketing Directors<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Real feedback from partners who transformed their search visibility and qualified commercial inquiries with WebTecMart.
                 </p>
             </div>
@@ -2994,11 +2843,11 @@ $ctaBox = $dbService['cta_box'] ?? [
                 <div class="swiper-wrapper">
                     <?php foreach ($clientFeedback as $fb): ?>
                         <div class="swiper-slide">
-                            <div class="del-feedback-card">
-                                <div class="del-stars">★★★★★</div>
-                                <div class="del-quote-text">"<?= htmlspecialchars($fb['quote']) ?>"</div>
-                                <div class="del-client-author">
-                                    <div class="del-client-avatar"><?= htmlspecialchars(substr($fb['author'], 0, 1)) ?></div>
+                            <div class="del-feedback-card" style="padding: 28px 24px;">
+                                <div class="del-stars" style="font-size: 1.1rem; margin-bottom: 12px;">★★★★★</div>
+                                <div class="del-quote-text" style="font-size: 0.95rem; line-height: 1.65; font-style: italic; margin-bottom: 18px;">"<?= htmlspecialchars($fb['quote']) ?>"</div>
+                                <div class="del-client-author" style="display: flex; align-items: center; gap: 12px;">
+                                    <div class="del-client-avatar" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem;"><?= htmlspecialchars(substr($fb['author'], 0, 1)) ?></div>
                                     <div class="del-client-info">
                                         <h5><?= htmlspecialchars($fb['author']) ?></h5>
                                         <p><?= htmlspecialchars($fb['role']) ?> &bull; <?= htmlspecialchars($fb['company']) ?></p>
@@ -3014,31 +2863,31 @@ $ctaBox = $dbService['cta_box'] ?? [
     </section>
 
     <!-- Case Studies -->
-    <section class="del-case-section">
-        <div class="del-container">
+    <section class="del-case-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">VERIFIED CASE STUDIES</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">VERIFIED CASE STUDIES</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Real Rankings. Real Traffic. <span class="accent">Real Business Growth.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Explore documented outcomes from our targeted search campaigns across high-competition industries.
                 </p>
             </div>
 
-            <div class="del-cases-grid">
+            <div class="del-cases-grid" style="display: grid; gap: 18px;">
                 <?php foreach ($cases as $c): ?>
                     <?php $caseBadge = (string) ($c['badge'] ?? 'SEO Growth Result'); ?>
                     <?php $caseTitle = (string) ($c['title'] ?? 'SEO Success Story'); ?>
                     <?php $caseStat = (string) ($c['stat'] ?? 'Results'); ?>
                     <?php $caseStatDesc = (string) ($c['stat_desc'] ?? 'Business growth through search visibility'); ?>
                     <?php $caseDesc = (string) ($c['desc'] ?? ''); ?>
-                    <div class="del-case-card" data-framer-reveal="fade-up">
-                        <span class="del-case-badge"><?= htmlspecialchars($caseBadge) ?></span>
+                    <div class="del-case-card" data-framer-reveal="fade-up" style="padding: 22px 20px;">
+                        <span class="del-case-badge" style="display: inline-block; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; margin-bottom: 12px;"><?= htmlspecialchars($caseBadge) ?></span>
                         <h3><?= htmlspecialchars($caseTitle) ?></h3>
-                        <div class="del-case-stat-box">
-                            <div class="del-case-stat-num"><?= htmlspecialchars($caseStat) ?></div>
-                            <div class="del-case-stat-lbl"><?= htmlspecialchars($caseStatDesc) ?></div>
+                        <div class="del-case-stat-box" style="padding: 10px; margin-bottom: 12px;">
+                            <div class="del-case-stat-num" style="font-size: 1.4rem; font-weight: 800;"><?= htmlspecialchars($caseStat) ?></div>
+                            <div class="del-case-stat-lbl" style="font-size: 0.75rem; font-weight: 600;"><?= htmlspecialchars($caseStatDesc) ?></div>
                         </div>
                         <p><?= htmlspecialchars($caseDesc) ?></p>
                     </div>
@@ -3048,21 +2897,21 @@ $ctaBox = $dbService['cta_box'] ?? [
     </section>
 
     <!-- Live Google Rankings Telemetry Table -->
-    <section class="del-rankings-section">
-        <div class="del-container">
+    <section class="del-rankings-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">LIVE SEARCH TELEMETRY</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">LIVE SEARCH TELEMETRY</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Verified Google Rankings for Our <span class="accent">Client Campaigns<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Live keyword snapshot across competitive commercial and event search queries in Delhi NCR and global Google indices.
                 </p>
             </div>
 
-            <div class="del-rankings-table-wrap" data-framer-reveal="fade-up">
+            <div class="del-rankings-table-wrap" data-framer-reveal="fade-up" style="overflow: hidden;">
                 <div style="overflow-x: auto;">
-                    <table class="del-table">
+                    <table class="del-table" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Target Search Phrase</th>
@@ -3084,7 +2933,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                                         <span style="color: #C4007A; margin-right: 6px;">🔍</span>
                                         <?= htmlspecialchars($rankKw) ?>
                                     </td>
-                                    <td><span class="del-pos-pill"><?= htmlspecialchars($rankPos) ?></span></td>
+                                    <td><span class="del-pos-pill" style="display: inline-block; font-weight: 800; padding: 3px 10px; font-size: 0.82rem;"><?= htmlspecialchars($rankPos) ?></span></td>
                                     <td><?= htmlspecialchars($rankVol) ?></td>
                                     <td><span style="font-weight: 600; color: #4B5563;"><?= htmlspecialchars($rankDiff) ?></span></td>
                                     <td><span style="color: #059669; font-weight: 700; font-size: 0.82rem;">✓ <?= htmlspecialchars($rankStatus) ?></span></td>
@@ -3100,12 +2949,12 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          10. WRAPPING UP: WHY SEO SERVICES IN DELHI MATTER
          ======================================================== -->
-    <section class="del-wrap-section" data-framer-reveal="fade-up">
-        <div class="del-container">
+    <section class="del-wrap-section" data-framer-reveal="fade-up" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-wrap-card">
                 <div class="del-section-head" style="margin-bottom: 18px;">
-                    <div class="del-eyebrow"><?= htmlspecialchars($wrappingUp['eyebrow'] ?? 'DELHI NCR LOCAL REACH') ?></div>
-                    <h2 class="del-section-title">
+                    <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($wrappingUp['eyebrow'] ?? 'DELHI NCR LOCAL REACH') ?></div>
+                    <h2 class="del-section-title" style="font-weight: 850;">
                         <?= htmlspecialchars($wrappingUp['title'] ?? 'Why SEO Services in Delhi Matter for Your Business') ?> <span class="accent"><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                     </h2>
                     <h3 style="font-size: 1.05rem; font-weight: 700; color: #C4007A; margin: 6px 0 0;">
@@ -3126,7 +2975,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                             <span style="color: #C4007A; font-size: 1.1rem;">📍</span>
                             <span>Target Micro-Markets Across Delhi NCR</span>
                         </div>
-                        <div class="del-markets-badge-grid">
+                        <div class="del-markets-badge-grid" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 20px;">
                             <?php foreach (($wrappingUp['micro_markets'] ?? []) as $mm): ?>
                                 <span class="del-market-pill"><?= htmlspecialchars($mm) ?></span>
                             <?php endforeach; ?>
@@ -3138,7 +2987,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                     </p>
 
                     <div style="text-align: center; margin-top: 20px;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi">
+                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                             <span>Book Your Free SEO Consultation</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                         </a>
@@ -3151,14 +3000,14 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          11. FAQS ACCORDION (10 Questions from Document)
          ======================================================== -->
-    <section class="del-faq-section">
-        <div class="del-container">
+    <section class="del-faq-section" style="padding: 36px 0 40px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow">FREQUENTLY ASKED QUESTIONS</div>
-                <h2 class="del-section-title">
+                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">FREQUENTLY ASKED QUESTIONS</div>
+                <h2 class="del-section-title" style="font-weight: 850;">
                     Frequently Asked Questions About <span class="accent">SEO Services in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="del-section-sub">
+                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
                     Clear, transparent answers to help you make an informed decision for your digital growth:
                 </p>
             </div>
@@ -3170,11 +3019,11 @@ $ctaBox = $dbService['cta_box'] ?? [
                     $faqAnswer = is_array($fq) ? ($fq['a'] ?? $fq['answer'] ?? '') : '';
                 ?>
                     <div class="del-faq-item<?= $isActive ?>" data-framer-reveal="fade-up">
-                        <button class="del-faq-btn" onclick="toggleDelFaq(this)">
+                        <button class="del-faq-btn" onclick="toggleDelFaq(this)" style="text-align: left; padding: 16px 20px; gap: 14px; cursor: pointer; font-family: inherit;">
                             <span><?= htmlspecialchars($faqQuestion) ?></span>
                             <span class="icon"><?= ($idx === 0) ? '−' : '+' ?></span>
                         </button>
-                        <div class="del-faq-answer">
+                        <div class="del-faq-answer" style="padding: 0 20px 16px; font-size: 0.9rem; line-height: 1.62;">
                             <?= nl2br(htmlspecialchars($faqAnswer)) ?>
                         </div>
                     </div>
@@ -3186,19 +3035,19 @@ $ctaBox = $dbService['cta_box'] ?? [
     <!-- ========================================================
          12. FINAL CONVERSION CTA BANNER
          ======================================================== -->
-    <section class="del-cta-section">
-        <div class="del-container">
-            <div class="del-cta-box" data-framer-reveal="fade-up">
+    <section class="del-cta-section" style="padding: 34px 0 42px;">
+        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
+            <div class="del-cta-box" data-framer-reveal="fade-up" style="text-align: center; position: relative; overflow: hidden;">
                 <h2><?= htmlspecialchars($ctaBox['headline'] ?? "So You're Ready to Take the Plunge and") ?> <span>Grow Your Business With SEO?</span></h2>
                 <h3><?= htmlspecialchars($ctaBox['sub'] ?? "Let's Make Your Search Visibility Business Opportunities") ?></h3>
                 <p><?= htmlspecialchars($ctaBox['text'] ?? '') ?></p>
 
-                <div class="del-cta-btns">
-                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+                <div class="del-cta-btns" style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;">
+                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                         <span><?= htmlspecialchars($ctaBox['btn_text'] ?? 'Book Your Free SEO Consultation') ?></span>
                         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </button>
-                    <a href="tel:+919999674255" class="del-btn-secondary" style="background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.85); color: #FFFFFF !important; font-weight: 700;">
+                    <a href="tel:+919999674255" class="del-btn-secondary" style="background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.85); color: #FFFFFF !important; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
                         <span><?= htmlspecialchars($ctaBox['call_text'] ?? 'Call: +91-9999674255') ?></span>
                     </a>
                 </div>
@@ -3212,6 +3061,12 @@ $ctaBox = $dbService['cta_box'] ?? [
 
 </main>
 
+<button type="button" class="del-theme-toggle del-theme-toggle-floating" id="delThemeToggleFloating" aria-label="Switch to dark mode" aria-pressed="false" style="align-items: center; justify-content: center; gap: 8px; padding: 0 15px; font: inherit; font-size: 0.84rem; font-weight: 700; cursor: pointer; position: fixed; z-index: 1050;">
+    <svg class="del-theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
+    <svg class="del-theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+    <span class="del-theme-toggle-label">Dark mode</span>
+</button>
+
 <!-- Swiper 11 JS for Touch Sliders -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -3219,6 +3074,33 @@ $ctaBox = $dbService['cta_box'] ?? [
     // 1. Reveal Observer (Safe Initialization)
     document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.classList.add('js-reveal');
+
+        const themeToggles = document.querySelectorAll('.del-theme-toggle');
+        const applyTheme = (isDark) => {
+            document.body.classList.toggle('del-theme-dark', isDark);
+            themeToggles.forEach(toggle => {
+                toggle.setAttribute('aria-pressed', String(isDark));
+                toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
+                toggle.querySelector('.del-theme-toggle-label').textContent = isDark ? 'Light mode' : 'Dark mode';
+            });
+        };
+        try {
+            applyTheme(window.localStorage.getItem('del-seo-theme') === 'dark');
+        } catch (error) {
+            console.error('Unable to load the saved display theme.', error);
+            applyTheme(false);
+        }
+        themeToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const isDark = !document.body.classList.contains('del-theme-dark');
+                applyTheme(isDark);
+                try {
+                    window.localStorage.setItem('del-seo-theme', isDark ? 'dark' : 'light');
+                } catch (error) {
+                    console.error('Unable to save the selected display theme.', error);
+                }
+            });
+        });
 
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach(entry => {
