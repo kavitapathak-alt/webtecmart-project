@@ -1,4 +1,8 @@
 <?php
+$pageMeta = [
+    'title' => 'Mobile App Development Services | iOS & Android Apps - WebTecMart',
+    'description' => 'Build scalable, secure, and user-centric iOS and Android apps with WebTecMart. Flutter, React Native, Native Swift, Kotlin, and enterprise backend engineering.',
+];
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/templates/service-page-layout.php';
 
@@ -6,72 +10,74 @@ require_once __DIR__ . '/functions.php';
 $dbService = getServiceBySlug('mobile-app-development');
 
 $serviceData = [
-    'icon' => 'trending',
-    'title' => 'Performance Marketing',
-    'tagline' => 'Every Rupee, Measurably Working',
-    'heroDescription' => 'Data-driven campaigns across Google, Meta, and beyond — engineered for measurable ROI, lower acquisition costs, and scalable growth that your business can actually track.',
-    'overview' => "Performance marketing isn't about impressions or vanity metrics — it's about results you can see in your bank account. At WebTechMart, we combine deep audience research, sharp creative, and relentless optimization to turn ad spend into predictable revenue. Over the last 13 years, we've managed crores in ad budgets across 500+ brands, consistently delivering lower CPAs and higher ROAS. Whether you're launching your first campaign or scaling a proven funnel, we build performance systems that grow with your ambition.",
+    'icon' => 'smartphone',
+    'title' => 'Mobile App Development',
+    'tagline' => 'High-Performance iOS & Android Apps Built for Scale',
+    'heroDescription' => 'Turn your business vision into an engaging, intuitive mobile application. We build native iOS, Android, and cross-platform Flutter/React Native apps designed for speed, security, and maximum user retention.',
+    'overview' => "Mobile devices now account for over 65% of all digital interactions. A poorly architected mobile app costs your business valuable customer trust and revenue. At WebTecMart, we design and engineer scalable mobile applications that users love to open every single day.
+
+From early-stage MVP prototypes to enterprise-grade mobile platforms, our in-house engineering team leverages clean architecture, secure cloud backends, and intuitive UI/UX design. With 13+ years of technical excellence, we help startups, D2C brands, and established enterprises launch high-rating apps across the Apple App Store and Google Play Store.",
 
     'features' => [
         [
-            'title' => 'Google Ads (PPC)',
-            'description' => 'Search, Display, Shopping, and YouTube campaigns engineered for high-intent buyers and maximum return on ad spend.',
+            'title' => 'iOS App Development',
+            'description' => 'Native iOS applications built with Swift and SwiftUI, fully optimized for iPhones, iPads, and Apple ecosystem standards.',
         ],
         [
-            'title' => 'Meta Ads (Facebook & Instagram)',
-            'description' => 'Full-funnel campaigns — from cold audience awareness to retargeting — built for scale, precision, and creative testing.',
+            'title' => 'Android App Development',
+            'description' => 'High-performance native Android apps built with Kotlin, engineered to run smoothly across diverse screen sizes and hardware specifications.',
         ],
         [
-            'title' => 'Landing Page & CRO',
-            'description' => 'High-converting landing pages and continuous conversion rate optimization to squeeze more value from every click.',
+            'title' => 'Cross-Platform Apps (Flutter & React Native)',
+            'description' => 'Single-codebase mobile applications that deliver native performance on both iOS and Android, cutting development timelines and cost.',
         ],
         [
-            'title' => 'Analytics & Tracking',
-            'description' => 'GA4, Meta Pixel, and server-side tracking setup so every rupee spent is measurable and every decision is data-backed.',
+            'title' => 'UI/UX Mobile Design',
+            'description' => 'Intuitive user journeys, touch-friendly interfaces, and modern micro-interactions designed to reduce churn and maximize session time.',
         ],
         [
-            'title' => 'Retargeting & Funnels',
-            'description' => 'Smart retargeting sequences that re-engage warm audiences and turn abandoned interest into repeat customers.',
+            'title' => 'Backend APIs & Cloud Integration',
+            'description' => 'Scalable REST/GraphQL APIs, real-time database synchronization, push notification systems, and secure cloud infrastructure on AWS/Firebase.',
         ],
         [
-            'title' => 'A/B Testing & Scaling',
-            'description' => 'Continuous creative and copy testing to find winners, kill losers, and scale what actually drives revenue.',
+            'title' => 'App Store Optimization (ASO) & Launch',
+            'description' => 'End-to-end management of Apple App Store and Google Play Store approvals, guidelines compliance, and initial organic store rankings.',
         ],
     ],
 
     'process' => [
-        ['step' => '01', 'title' => 'Research', 'description' => 'We study your audience, competitors, and current funnel to identify exactly where the biggest growth opportunities lie.'],
-        ['step' => '02', 'title' => 'Strategy', 'description' => 'We map out channels, budgets, messaging, and KPIs — building a clear roadmap tied to your revenue goals.'],
-        ['step' => '03', 'title' => 'Setup',    'description' => 'We build campaigns, creatives, landing pages, and tracking infrastructure so nothing is left to guesswork.'],
-        ['step' => '04', 'title' => 'Launch',   'description' => 'Campaigns go live with tight monitoring — we track every click, conversion, and cost-per-acquisition in real time.'],
-        ['step' => '05', 'title' => 'Optimize', 'description' => 'We continuously test creatives, audiences, and bids — cutting waste and doubling down on what performs best.'],
-        ['step' => '06', 'title' => 'Scale',    'description' => 'Once we find winning combinations, we scale spend profitably while keeping ROAS and CPA firmly in control.'],
+        ['step' => '01', 'title' => 'Product Discovery', 'description' => 'We define user personas, feature scopes, technical feasibility, and business monetization goals before writing a single line of code.'],
+        ['step' => '02', 'title' => 'UI/UX Prototyping', 'description' => 'We design clickable interactive Figma prototypes so you can experience user flows and validate interactions before development.'],
+        ['step' => '03', 'title' => 'Agile Development', 'description' => 'Our developers code in 2-week sprints with milestone demos, maintaining clean modular architecture, unit tests, and secure API links.'],
+        ['step' => '04', 'title' => 'Rigorous QA & Testing', 'description' => 'Automated and manual testing across 30+ real iOS and Android devices, ensuring zero crashes, fast load speeds, and battery efficiency.'],
+        ['step' => '05', 'title' => 'Store Deployment', 'description' => 'We handle Apple App Store and Google Play Store submission, compliance checks, privacy disclosures, and smooth public releases.'],
+        ['step' => '06', 'title' => 'Maintenance & Growth', 'description' => 'Ongoing OS update compatibility, bug fixes, feature iterations, analytics tracking, and continuous app performance enhancements.'],
     ],
 
     'faqs' => [
         [
-            'q' => 'What is performance marketing?',
-            'a' => 'Performance marketing is a results-driven approach where every campaign is measured against clear KPIs — clicks, leads, sales, or ROAS. Unlike brand awareness campaigns, you pay for measurable outcomes, not just impressions.',
+            'q' => 'How much does it cost to build a mobile app?',
+            'a' => 'Mobile app development cost depends on scope, complexity, and platforms. Basic applications typically start around ₹45,000–₹85,000, while complex custom platforms with custom APIs and payment gateways range higher based on feature specifications.',
         ],
         [
-            'q' => 'What platforms do you run ads on?',
-            'a' => 'Primarily Google Ads (Search, Display, Shopping, YouTube), Meta Ads (Facebook & Instagram), and LinkedIn. We also handle programmatic, native ads, and marketplace ads depending on your goals.',
+            'q' => 'Should I build a native app or cross-platform (Flutter/React Native)?',
+            'a' => 'Cross-platform development with Flutter or React Native is ideal for 85% of businesses because it allows simultaneous launch on iOS and Android with a single codebase, saving 40% time and cost. We recommend Native (Swift/Kotlin) for apps requiring hardware-level computing, complex AR, or heavy background processing.',
         ],
         [
-            'q' => 'What is the minimum ad budget required?',
-            'a' => 'It depends on your industry and goals. For most small businesses, we recommend starting with at least ₹30,000–₹50,000/month in ad spend, plus our management fee, to gather meaningful data fast.',
+            'q' => 'How long does mobile app development take?',
+            'a' => 'A standard mobile app typically takes 6–10 weeks from discovery to App Store release. Complex enterprise apps or multi-sided marketplaces generally require 12–18 weeks with staged agile sprint releases.',
         ],
         [
-            'q' => 'How soon can I see results?',
-            'a' => 'Initial data comes within the first 7–14 days. Meaningful optimization and stable ROAS typically take 4–8 weeks as we gather enough data to refine targeting and creatives.',
+            'q' => 'Will you help publish our app on the App Store and Google Play?',
+            'a' => 'Yes. We manage the entire deployment process, including Apple Developer Account and Google Play Console setup, app signing, store screenshots, privacy policies, and approval guidelines compliance.',
         ],
         [
-            'q' => 'How do you report performance?',
-            'a' => 'You get a transparent dashboard plus weekly/monthly reports showing spend, clicks, conversions, CPA, ROAS, and clear next-step recommendations — no vanity metrics, no fluff.',
+            'q' => 'Do I own the source code of the developed app?',
+            'a' => 'Yes, absolutely. Once final delivery is complete, 100% of the source code, design assets, and intellectual property belong entirely to you with zero hidden licensing fees.',
         ],
         [
-            'q' => 'Do you charge a fixed fee or a percentage of ad spend?',
-            'a' => "We offer both models — a fixed monthly retainer or a percentage of ad spend (typically 10–20%). We'll recommend whichever suits your scale and goals best.",
+            'q' => 'Do you provide post-launch support and maintenance?',
+            'a' => 'Yes. All our development packages include free post-launch support, followed by flexible ongoing maintenance retainers for OS upgrades, server monitoring, and feature additions.',
         ],
     ],
 ];

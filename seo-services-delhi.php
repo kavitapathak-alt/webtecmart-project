@@ -15,7 +15,7 @@ $dbService = getServiceBySlug('seo-services-delhi') ?: [];
 // Hero Section
 $heroTitle = $dbService['hero_title'] ?? 'SEO Services in Delhi';
 $heroAccent = $dbService['hero_accent'] ?? 'Result-Driven SEO to Grow Your Business';
-$heroDesc = $dbService['hero_description'] ?? 'Get found when your customers are searching. WebTecMart offers strategic SEO solutions in Delhi to boost Google rankings, qualified organic traffic and lead to more enquiries, leads and sales.';
+$heroDesc = $dbService['hero_description'] ?? 'Boost your website’s search visibility, improve Google rankings, and attract relevant visitors with our Organic SEO services. Our SEO strategies focus on increasing organic traffic, improving keyword rankings, and strengthening your online presence for sustainable growth.';
 $heroBullets = $dbService['hero_bullets'] ?? [
     'Enhance Google Rankings for relevant, high-value keywords',
     'Bring in Targeted Organic Traffic from ready-to-buy customers',
@@ -2301,7 +2301,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                         <?php endforeach; ?>
                     </div>
 
-                    <div class="del-hero-actions" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 18px;">
+                    <div class="del-hero-actions" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
                         <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
                             <span>Schedule a Free SEO Consultation</span>
                             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
@@ -2310,6 +2310,26 @@ $ctaBox = $dbService['cta_box'] ?? [
                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <span>Call: +91-9999674255</span>
                         </a>
+                    </div>
+
+                    <!-- Author Badge: Jitin Madaan (Attachment 1 Match) -->
+                    <div class="del-author-card" style="display: inline-flex; align-items: center; gap: 12px; padding: 6px 16px 6px 8px; border-radius: 9999px; background: #FFFFFF; border: 1.5px solid rgba(196, 0, 122, 0.22); box-shadow: 0 4px 16px rgba(196, 0, 122, 0.08); margin-top: 4px;">
+                        <div class="del-author-avatar" style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(196, 0, 122, 0.25);">
+                            <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
+                                <img src="<?= htmlspecialchars($founderImage) ?>" alt="<?= htmlspecialchars($founderName) ?>" style="width: 100%; height: 100%; object-fit: cover;">
+                            <?php else: ?>
+                                <span>JM</span>
+                            <?php endif; ?>
+                        </div>
+                        <div class="del-author-meta" style="line-height: 1.35;">
+                            <div class="name" style="font-size: 0.92rem; font-weight: 800; color: #111827; display: flex; align-items: center; gap: 6px;">
+                                <span><?= htmlspecialchars($founderName) ?></span>
+                                <span style="display: inline-flex; width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);"></span>
+                            </div>
+                            <div class="sub" style="font-size: 0.76rem; font-weight: 600; color: #6B7280;">
+                                <span style="color: #C4007A; font-weight: 700;"><?= htmlspecialchars($founderRole) ?></span> &bull; Published: Nov 04, 2025 &bull; Updated: Oct 31, 2026
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2351,7 +2371,7 @@ $ctaBox = $dbService['cta_box'] ?? [
                         </form>
                         <div class="del-hero-form-note">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                            <span>Share your goals and we’ll tailor the SEO discussion to your business.</span>
+                            <span>Share your website URL, business niche, target location, and budget, and we’ll recommend a customised SEO strategy at competitive prices. Get in touch today to grow your business organically!</span>
                         </div>
                     </div>
                 </div>
@@ -2361,59 +2381,8 @@ $ctaBox = $dbService['cta_box'] ?? [
     </section>
 
     <!-- ========================================================
-         TOP EVENT BRANDS EMBRACING SEO (Marquee Showcase)
+         2. TOP EVENT BRANDS EMBRACING SEO (Marquee Showcase)
          ======================================================== -->
-    <section class="del-ranking-showcase" style="padding: 30px 0 24px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-ranking-header" style="text-align: center; margin-bottom: 18px;">
-                <h2 class="del-section-title" style="font-weight: 850;">Organic Rankings That Drive <span class="accent">Real Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span></h2>
-                <p>Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and Delhi NCR businesses:</p>
-            </div>
-
-            <div class="del-keyword-table-wrap">
-                <table class="del-keyword-table" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th>Target Search Keyword</th>
-                            <th>Ranking URL</th>
-                            <th>Google Rank</th>
-                            <th>Rank Movement</th>
-                            <th>Monthly Searches</th>
-                            <th>Search Intent</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($rankingKeywords as $row): ?>
-                            <?php $keyword = (string) ($row['keyword'] ?? 'Keyword'); ?>
-                            <?php $url = (string) ($row['url'] ?? ''); ?>
-                            <?php $rank = (string) ($row['rank'] ?? '#1'); ?>
-                            <?php $trend = (string) ($row['trend'] ?? '↑ 0 Positions'); ?>
-                            <?php $volume = (string) ($row['volume'] ?? '0/mo'); ?>
-                            <?php $intent = (string) ($row['intent'] ?? 'Commercial'); ?>
-                            <tr>
-                                <td class="del-keyword-name" style="font-weight: 800;"><?= htmlspecialchars($keyword) ?></td>
-                                <td class="del-keyword-url" style="font-size: 0.9rem; word-break: break-word;"><?= htmlspecialchars($url) ?></td>
-                                <td><span class="del-rank-badge" style="display: inline-flex; align-items: center; justify-content: center; min-width: 42px; height: 42px; padding: 0 12px; font-weight: 800; font-size: 1.05rem;"><?= htmlspecialchars($rank) ?></span></td>
-                                <td><span class="del-trend-badge" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; font-size: 0.8rem; font-weight: 800;"><?= htmlspecialchars($trend) ?></span></td>
-                                <td class="del-volume-value"><?= htmlspecialchars($volume) ?></td>
-                                <td><span class="del-intent-tag" style="display: inline-block; padding: 7px 10px; font-size: 0.76rem; text-transform: capitalize;"><?= htmlspecialchars($intent) ?></span></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="del-market-showcase" style="padding-top: 28px; text-align: center;">
-                <h3>Serving Businesses Across All Delhi NCR Micro-Markets</h3>
-                <div class="del-market-pills" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 12px;">
-                    <?php foreach ($microMarketPills as $market): ?>
-                        <span class="del-market-pill"><?= htmlspecialchars($market) ?></span>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <section class="del-brands-section" data-framer-reveal="fade-up" style="padding: 24px 0 28px; position: relative; overflow: hidden;">
         <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
             <div class="del-section-head">
@@ -2596,11 +2565,70 @@ $ctaBox = $dbService['cta_box'] ?? [
                     </div>
                 </div>
 
-                <!-- Right Column: Google SERP visual -->
+                <!-- Right Column: Google Search Live Telemetry (Attachment 7 Match) -->
                 <div class="del-takeaways-right" data-framer-reveal="slide-right" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div class="del-serp-mockup" style="display: flex; flex: 1 1 auto; flex-direction: column; min-height: 0; overflow: hidden;">
-                        <div class="del-serp-preview-img-wrap" style="position: relative; display: flex; flex: 1 1 auto; min-height: 320px; overflow: hidden;">
-                            <img src="<?= htmlspecialchars($serpImage) ?>" alt="Google Search SEO Rankings Delhi WebTecMart" class="del-serp-img" loading="lazy">
+                    <div class="del-telemetry-browser" style="background: #0B1020; border-radius: 20px; border: 1.5px solid rgba(196, 0, 122, 0.35); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(196, 0, 122, 0.12); overflow: hidden; display: flex; flex-direction: column;">
+                        <!-- Chrome Bar -->
+                        <div style="background: #111827; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); flex-wrap: wrap;">
+                            <div style="display: flex; align-items: center; gap: 6px;">
+                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>
+                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
+                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
+                            </div>
+                            <div style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 999px; font-size: 0.72rem; font-weight: 700; color: #10B981;">
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);"></span>
+                                <span>#1 Google Rank &bull; Delhi Commercial Queries</span>
+                            </div>
+                            <div style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.7rem; font-weight: 800; color: #FF2D75; text-transform: uppercase; letter-spacing: 0.05em;">
+                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #FF2D75; box-shadow: 0 0 6px #FF2D75;"></span>
+                                <span>Live Search Telemetry</span>
+                            </div>
+                        </div>
+
+                        <!-- Search Input -->
+                        <div style="padding: 10px 14px; background: #0E1526; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
+                            <div style="background: #172033; border: 1px solid rgba(196, 0, 122, 0.28); border-radius: 9999px; padding: 6px 14px; font-size: 0.78rem; color: #94A3B8; display: flex; align-items: center; gap: 8px; font-family: monospace;">
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF2D75" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                                <span style="color: #E2E8F0;">google.com/search?q=best+seo+company+delhi</span>
+                            </div>
+                        </div>
+
+                        <!-- Dark Card Body (Attachment 7 Match) -->
+                        <div style="padding: 18px 16px; background: #0B1020; display: flex; flex-direction: column; gap: 14px;">
+                            <div style="background: #111A2E; border: 1.5px solid rgba(196, 0, 122, 0.25); border-radius: 14px; padding: 16px 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);">
+                                <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 6px; color: #34D399; font-size: 0.74rem; font-weight: 800; margin-bottom: 8px;">
+                                    <span>🏆 #1 RANKED IN DELHI NCR</span>
+                                </div>
+                                <h4 style="font-size: 1.15rem; font-weight: 850; color: #FFFFFF; margin: 0 0 6px; line-height: 1.3;">
+                                    WebTecMart &mdash; Top SEO Agency in Delhi NCR
+                                </h4>
+                                <p style="font-size: 0.84rem; line-height: 1.5; color: #94A3B8; margin: 0 0 14px;">
+                                    Driving qualified organic buyer revenue with 13+ years experience, 1,000+ verified client campaigns, and high-intent keyword strategies.
+                                </p>
+
+                                <!-- 3 Stat KPI Boxes -->
+                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+                                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(196, 0, 122, 0.25); border-radius: 10px; padding: 10px 6px; text-align: center;">
+                                        <div style="font-size: 1.4rem; font-weight: 900; color: #FF2D75; line-height: 1; margin-bottom: 4px;">+400%</div>
+                                        <div style="font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">Organic Growth</div>
+                                    </div>
+                                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(196, 0, 122, 0.25); border-radius: 10px; padding: 10px 6px; text-align: center;">
+                                        <div style="font-size: 1.4rem; font-weight: 900; color: #FFFFFF; line-height: 1; margin-bottom: 4px;">80+</div>
+                                        <div style="font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">#1 Keywords</div>
+                                    </div>
+                                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(196, 0, 122, 0.25); border-radius: 10px; padding: 10px 6px; text-align: center;">
+                                        <div style="font-size: 1.4rem; font-weight: 900; color: #FF2D75; line-height: 1; margin-bottom: 4px;">1,393%</div>
+                                        <div style="font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">Search Clicks</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 0 4px;">
+                                <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 999px; color: #FBBF24; font-size: 0.74rem; font-weight: 700;">
+                                    <span>⚡ AI Overview Featured Entity</span>
+                                </div>
+                                <span style="font-size: 0.72rem; color: #64748B;">Verified GA4 &bull; Search Console 2026</span>
+                            </div>
                         </div>
                     </div>
                 </div>
