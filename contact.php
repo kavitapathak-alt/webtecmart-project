@@ -3,9 +3,9 @@ require_once __DIR__ . '/functions.php';
 
 $formStatus = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $field = static fn(string $name): string => is_string($_POST[$name] ?? null)
-        ? trim($_POST[$name])
-        : '';
+    $field = static function (string $name): string {
+        return is_string($_POST[$name] ?? null) ? trim($_POST[$name]) : '';
+    };
     $lead = [
         'name' => $field('name'),
         'email' => $field('email'),
@@ -61,8 +61,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    $redirectTo = !empty($_POST['redirect_to']) ? $_POST['redirect_to'] : '/contact.php';
-    if (!str_starts_with($redirectTo, '/')) {
+    $redirectTo = is_string($_POST['redirect_to'] ?? null) ? $_POST['redirect_to'] : '/contact.php';
+    if (strpos($redirectTo, '/') !== 0) {
         $redirectTo = '/contact.php';
     }
     if (strpos($redirectTo, '#') === false) {
