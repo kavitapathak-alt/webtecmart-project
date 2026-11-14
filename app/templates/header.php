@@ -280,7 +280,7 @@ $navItems = [
         }
 
         .brand-name {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.5rem;
             font-weight: 800;
             color: var(--deep);
@@ -804,8 +804,8 @@ $navItems = [
             .brand-tagline { font-size: 10px; }
         }
     </style>
-    <link rel="stylesheet" href="/assets/css/typography.css">
     <link rel="stylesheet" href="/assets/css/design-system.css">
+    <link rel="stylesheet" href="/assets/css/typography.css">
     <script defer src="/assets/js/webtecmart-motion.js"></script>
 </head>
 <body>

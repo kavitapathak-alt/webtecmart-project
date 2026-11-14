@@ -1,3 +1,5 @@
+@import url("typography.css");
+
 :root {
   --bg: #f8f1eb;
   --panel: #fff8fb;
@@ -15,7 +17,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-family-base);
   background: var(--bg);
   color: var(--deep);
   line-height: 1.6;

@@ -335,7 +335,7 @@ $contactInfo = [
     @media (min-width: 640px) { .cp-connect .dot { width: 6px; height: 6px; } }
 
     .cp-info-title {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.125rem;
         font-weight: 700;
         color: #fff;
@@ -776,7 +776,7 @@ $contactInfo = [
     @media (min-width: 768px) { .cp-map-card { padding: 24px; } }
 
     .cp-map-title {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.125rem;
         font-weight: 700;
         color: #111827;

@@ -149,7 +149,7 @@ function spIcon(string $name): string {
     }
 
     .sp-hero-h1 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.875rem;
         font-weight: 700;
         color: #111827;
@@ -370,7 +370,7 @@ function spIcon(string $name): string {
     @media (min-width: 640px) { .sp-intro-eyebrow { font-size: 0.875rem; margin-bottom: 12px; } }
 
     .sp-intro-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;
@@ -430,7 +430,7 @@ function spIcon(string $name): string {
     @media (min-width: 640px) { .sp-website-pre { font-size: 1.25rem; } }
 
     .sp-website-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;
@@ -552,7 +552,7 @@ function spIcon(string $name): string {
     }
     @media (min-width: 640px) { .sp-block-eyebrow { font-size: 0.875rem; } }
     .sp-block-title {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: #111827;
@@ -771,7 +771,7 @@ function spIcon(string $name): string {
     @media (min-width: 768px) { .sp-results-section { padding: 48px; } }
 
     .sp-results-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;
@@ -967,7 +967,7 @@ function spIcon(string $name): string {
         display: block;
     }
     .sp-cta-rocket h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: #fff;
@@ -1072,7 +1072,7 @@ function spIcon(string $name): string {
     @media (min-width: 640px) { .sp-proposal-pre { font-size: 1rem; } }
 
     .sp-proposal-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 800;
         font-style: italic;

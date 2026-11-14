@@ -580,7 +580,7 @@ $categories = array_merge(
         display: block;
     }
     .port-cta-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: #fff;

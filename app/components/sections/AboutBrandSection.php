@@ -274,7 +274,7 @@ function renderAboutBrandSection(): void
         }
 
         .about-why h4 {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 700;
             color: #111827;
             font-size: 0.875rem;
@@ -364,7 +364,7 @@ function renderAboutBrandSection(): void
         }
 
         .about-right h3 {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.125rem;
             font-weight: 700;
             color: #111827;

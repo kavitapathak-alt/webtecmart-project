@@ -377,7 +377,7 @@ $trustBadges = $packagesPage['trust_badges'];
         margin-bottom: 32px;
     }
     .pkg-addons-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: #111827;
@@ -464,7 +464,7 @@ $trustBadges = $packagesPage['trust_badges'];
         margin-bottom: 40px;
     }
     .pkg-faq-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: #111827;
@@ -534,7 +534,7 @@ $trustBadges = $packagesPage['trust_badges'];
         z-index: 10;
     }
     .pkg-cta-h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 700;
         color: #fff;

@@ -1,3 +1,5 @@
+@import url("typography.css");
+
 :root {
   --bg: #f5f7ff;
   --panel: #ffffff;
@@ -15,7 +17,7 @@
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-family-base);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
@@ -102,16 +104,13 @@ img { max-width: 100%; }
 
 h1, h2, h3, h4 {
   margin-top: 0;
-  line-height: 1.15;
 }
 
 h1 {
-  font-size: clamp(2.5rem, 4vw, 4.2rem);
   margin-bottom: 16px;
 }
 
 h2 {
-  font-size: clamp(2rem, 2.5vw, 2.8rem);
   margin-bottom: 18px;
 }
 

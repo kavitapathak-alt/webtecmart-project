@@ -149,7 +149,7 @@ function renderHeroSection(): void
 
         /* Main Heading */
         .hero-heading {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
             color: #111111;
             line-height: 1.18;
@@ -364,7 +364,7 @@ function renderHeroSection(): void
         }
 
         .hero-form-header h2 {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
             color: #111111;
             font-size: clamp(1.2rem, 1.8vw, 1.45rem);

@@ -312,7 +312,7 @@ function apIcon(string $name): string {
     }
 
     .ap-story-text h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.25rem;
         font-weight: 700;
         color: #111827;
@@ -806,7 +806,7 @@ function apIcon(string $name): string {
     }
 
     .ap-cta h2 {
-        font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+        font-family: 'Plus Jakarta Sans', sans-serif;
         font-size: 1.25rem;
         font-weight: 700;
         color: #fff;

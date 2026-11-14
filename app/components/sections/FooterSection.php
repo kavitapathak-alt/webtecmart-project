@@ -147,7 +147,7 @@ function renderFooterSection(): void
         }
         .ft-brand-text { margin-left: 0; }
         .ft-brand-name {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 1.25rem;
             font-weight: 800;
             color: #fff;
