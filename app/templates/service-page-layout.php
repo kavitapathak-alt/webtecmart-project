@@ -22,16 +22,25 @@ function renderServicePageLayout(array $config): void
 {
     $icon            = $config['icon'] ?? 'sparkles';
     $title           = $config['title'] ?? 'Website Design & Development';
+    $heroTitle       = $config['heroTitle'] ?? $title;
+    $heroTitleLead   = $config['heroTitleLead'] ?? '';
+    $heroTitleAccent = $config['heroTitleAccent'] ?? '';
+    $heroTitleTail   = $config['heroTitleTail'] ?? '';
+    $heroPanel       = $config['heroPanel'] ?? false;
     $tagline         = $config['tagline'] ?? 'SMART. SCALABLE. SECURE.';
     $heroDescription = $config['heroDescription'] ?? ($config['hero_description'] ?? '');
     $heroHeadline    = $config['heroHeadline'] ?? '';
     $heroBulletHeading = $config['heroBulletHeading'] ?? '';
     $heroBulletItems  = $config['heroBulletItems'] ?? [];
+    $showHeroBullets = $config['showHeroBullets'] ?? true;
+    $showHeroActions = $config['showHeroActions'] ?? true;
     $featuresTitleLead = $config['featuresTitleLead'] ?? '';
     $featuresTitleAccent = $config['featuresTitleAccent'] ?? '';
     $featuresTitleTail = $config['featuresTitleTail'] ?? '';
     $featuresEyebrow = $config['featuresEyebrow'] ?? 'SPECIALIZED SOLUTIONS';
     $featuresSubtitle = $config['featuresSubtitle'] ?? '';
+    $featureTagOne = $config['featureTagOne'] ?? 'Bespoke custom architecture';
+    $featureTagTwo = $config['featureTagTwo'] ?? 'Full mobile & SEO alignment';
     $benefitsTitleLead = $config['benefitsTitleLead'] ?? '';
     $benefitsTitleAccent = $config['benefitsTitleAccent'] ?? '';
     $benefitsTitleTail = $config['benefitsTitleTail'] ?? '';
@@ -42,6 +51,9 @@ function renderServicePageLayout(array $config): void
     $processTitleTail = $config['processTitleTail'] ?? '';
     $processSubtitle = $config['processSubtitle'] ?? '';
     $showCaseStudy = $config['showCaseStudy'] ?? true;
+    $caseStudyTitle = $config['caseStudyTitle'] ?? '';
+    $caseStudyBadge = $config['caseStudyBadge'] ?? 'Verified Case Study Spotlight';
+    $caseStudyScreenshots = $config['caseStudyScreenshots'] ?? [];
     $showPackages = $config['showPackages'] ?? true;
     $showTechnologies = $config['showTechnologies'] ?? true;
     $overview        = $config['overview'] ?? ($config['body'] ?? '');
@@ -387,21 +399,96 @@ function renderServicePageLayout(array $config): void
             display: grid;
             grid-template-columns: 1fr;
             gap: 36px;
-            align-items: center;
+            align-items: start;
+        }
+        .mb-hero-grid-equal {
+            --font-size-h1: clamp(2rem, 3vw, 2.5rem);
+            --font-size-h2: clamp(1.1rem, 1.8vw, 1.3rem);
+            --font-size-h3: 1.08rem;
+            --font-size-body: 0.9rem;
+            --line-height-heading: 1.12;
+            --line-height-body: 1.55;
+            padding: 20px;
+            background: #FFFFFF;
+            border: 1.5px solid rgba(196, 0, 122, 0.16);
+            border-radius: 24px;
+            box-shadow: 0 18px 48px rgba(196, 0, 122, 0.08);
         }
         @media (min-width: 992px) {
             .mb-hero-grid {
                 grid-template-columns: 1.12fr 0.88fr;
                 gap: 44px;
             }
+            .mb-hero-grid-equal {
+                grid-template-columns: 1.2fr 0.8fr;
+                gap: 32px;
+                align-items: stretch;
+                padding: 28px;
+            }
+            .mb-hero-grid-equal .mb-hero-panel {
+                padding: 14px 18px;
+            }
+            .mb-hero-grid-equal .mb-hero-right {
+                display: flex;
+                padding: 20px;
+                background: #FFF7FB;
+                border: 1px solid rgba(196, 0, 122, 0.12);
+                border-radius: 18px;
+            }
+            .mb-hero-grid-equal .mb-quote-card {
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                padding: 0;
+                background: transparent;
+                border: 0;
+                border-radius: 0;
+                box-shadow: none;
+            }
+            .mb-hero-grid-equal .mb-quote-card::before {
+                display: none;
+            }
+            .mb-hero-grid-equal #mbServiceQuoteForm {
+                flex: 1;
+            }
+            .mb-hero-grid-equal .mb-form-group {
+                margin-bottom: 12px;
+            }
+            .mb-hero-grid-equal .mb-form-trust {
+                margin-top: auto;
+                padding-top: 14px;
+                border-top: 1px solid rgba(196, 0, 122, 0.12);
+            }
+            .mb-hero-grid-equal .mb-hero-title {
+                margin-bottom: 10px;
+            }
+            .mb-hero-grid-equal .mb-hero-message {
+                margin-bottom: 10px;
+            }
+            .mb-hero-grid-equal .mb-hero-desc {
+                margin-bottom: 0;
+            }
         }
         .mb-hero-title {
-            font-size: clamp(2rem, 3.4vw, 2.9rem);
+            font-size: clamp(2rem, 3.2vw, 2.7rem);
             font-weight: 850;
             color: #111827;
             line-height: 1.14;
             letter-spacing: -0.03em;
             margin: 0 0 14px;
+        }
+        .mb-hero-title .accent {
+            color: #C4007A;
+            position: relative;
+            display: inline-block;
+        }
+        .mb-hero-title .accent svg {
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            width: 100%;
+            height: 6px;
+            pointer-events: none;
         }
         .mb-hero-desc {
             font-size: 1.05rem;
@@ -1136,6 +1223,43 @@ function renderServicePageLayout(array $config): void
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
         }
+        .mb-cs-gallery {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            margin-top: 24px;
+        }
+        @media (min-width: 768px) {
+            .mb-cs-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 22px;
+            }
+        }
+        .mb-cs-shot {
+            min-width: 0;
+            margin: 0;
+            padding: 10px;
+            background: #FFFFFF;
+            border: 1px solid rgba(196, 0, 122, 0.16);
+            border-radius: 16px;
+            box-shadow: 0 8px 24px rgba(17, 24, 39, 0.08);
+        }
+        .mb-cs-shot img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 520px;
+            object-fit: contain;
+            border-radius: 10px;
+            background: #F3F4F6;
+        }
+        .mb-cs-shot figcaption {
+            padding: 10px 4px 2px;
+            color: #1F2937;
+            font-size: 0.84rem;
+            font-weight: 700;
+            line-height: 1.45;
+        }
 
         /* ========================================================
            10. MICRO-MARKETS & GLOBAL REACH (Matebiz Hallmark)
@@ -1318,24 +1442,31 @@ function renderServicePageLayout(array $config): void
         ======================================================== -->
         <section class="mb-hero">
             <div class="mb-container">
-                <div class="mb-hero-grid">
+                <div class="mb-hero-grid <?= $heroPanel ? 'mb-hero-grid-equal' : '' ?>">
 
                     <!-- Left: Hero Headline, Description & CTAs -->
-                    <div class="mb-hero-left">
+                    <div class="mb-hero-left <?= $heroPanel ? 'mb-hero-panel' : '' ?>">
                         <div class="mb-eyebrow">
                             <?= svcIcon('sparkles') ?>
                             <span><?= htmlspecialchars($tagline !== '' ? $tagline : 'SMART. SCALABLE. SECURE.') ?></span>
                         </div>
 
                         <?php
-                        $rawTitle = trim((string) $title);
-                        $titleWords = preg_split('/\s+/', $rawTitle);
-                        if (count($titleWords) > 1) {
-                            $lastWord = array_pop($titleWords);
-                            $firstPart = implode(' ', $titleWords);
-                            $heroHeadingHtml = htmlspecialchars($firstPart) . ' <span class="accent">' . htmlspecialchars($lastWord) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>';
+                        if ($heroTitleAccent !== '') {
+                            $heroHeadingHtml = htmlspecialchars($heroTitleLead)
+                                . '<span class="accent">' . htmlspecialchars($heroTitleAccent)
+                                . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>'
+                                . htmlspecialchars($heroTitleTail);
                         } else {
-                            $heroHeadingHtml = '<span class="accent">' . htmlspecialchars($rawTitle) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>';
+                            $rawTitle = trim((string) $heroTitle);
+                            $titleWords = preg_split('/\s+/', $rawTitle);
+                            if (count($titleWords) > 1) {
+                                $lastWord = array_pop($titleWords);
+                                $firstPart = implode(' ', $titleWords);
+                                $heroHeadingHtml = htmlspecialchars($firstPart) . ' <span class="accent">' . htmlspecialchars($lastWord) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>';
+                            } else {
+                                $heroHeadingHtml = '<span class="accent">' . htmlspecialchars($rawTitle) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>';
+                            }
                         }
                         ?>
                         <h1 class="mb-hero-title">
@@ -1347,24 +1478,24 @@ function renderServicePageLayout(array $config): void
                         <?php endif; ?>
 
                         <p class="mb-hero-desc">
-                            <?= htmlspecialchars($heroDescription !== '' ? $heroDescription : $overview) ?>
+                            <?= nl2br(htmlspecialchars($heroDescription !== '' ? $heroDescription : $overview)) ?>
                         </p>
 
-                        <?php if (!empty($heroBulletItems)): ?>
-                        <h3 class="mb-hero-bullet-heading"><?= htmlspecialchars($heroBulletHeading !== '' ? $heroBulletHeading : 'Key Highlights') ?></h3>
-                        <div class="mb-hero-bullets">
-                            <?php foreach ($heroBulletItems as $bullet): ?>
-                                <div class="mb-bullet-item mb-bullet-item-detailed">
-                                    <span class="dot">✓</span>
-                                    <span class="mb-bullet-copy">
-                                        <strong><?= htmlspecialchars($bullet['title']) ?></strong>
-                                        <span><?= htmlspecialchars($bullet['description']) ?></span>
-                                    </span>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                        <?php else: ?>
-                            <!-- Key Highlights Checklist -->
+                        <?php if ($showHeroBullets): ?>
+                            <?php if (!empty($heroBulletItems)): ?>
+                            <h3 class="mb-hero-bullet-heading"><?= htmlspecialchars($heroBulletHeading !== '' ? $heroBulletHeading : 'Key Highlights') ?></h3>
+                            <div class="mb-hero-bullets">
+                                <?php foreach ($heroBulletItems as $bullet): ?>
+                                    <div class="mb-bullet-item mb-bullet-item-detailed">
+                                        <span class="dot">✓</span>
+                                        <span class="mb-bullet-copy">
+                                            <strong><?= htmlspecialchars($bullet['title']) ?></strong>
+                                            <span><?= htmlspecialchars($bullet['description']) ?></span>
+                                        </span>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                            <?php else: ?>
                             <div class="mb-hero-bullets">
                                 <div class="mb-bullet-item">
                                     <span class="dot">✓</span>
@@ -1383,8 +1514,10 @@ function renderServicePageLayout(array $config): void
                                     <span>Conversion-Focused Sales Funnel</span>
                                 </div>
                             </div>
+                            <?php endif; ?>
                         <?php endif; ?>
 
+                        <?php if ($showHeroActions): ?>
                         <div class="mb-hero-actions">
                             <a href="/contact.php" class="mb-btn-primary trigger-enquiry-modal" data-service="<?= htmlspecialchars($title) ?>">
                                 <span>Get Free Consultation</span>
@@ -1395,6 +1528,7 @@ function renderServicePageLayout(array $config): void
                                 <span>Call: +91-9999674255</span>
                             </a>
                         </div>
+                        <?php endif; ?>
                     </div>
 
                     <!-- Right: Matebiz-Style Interactive Quote Form -->
@@ -1537,11 +1671,11 @@ function renderServicePageLayout(array $config): void
                             <div class="mb-sol-tags">
                                 <div class="mb-sol-tag">
                                     <?= svcIcon('check', 14) ?>
-                                    <span>Bespoke custom architecture</span>
+                                    <span><?= htmlspecialchars($featureTagOne) ?></span>
                                 </div>
                                 <div class="mb-sol-tag">
                                     <?= svcIcon('check', 14) ?>
-                                    <span>Full mobile &amp; SEO alignment</span>
+                                    <span><?= htmlspecialchars($featureTagTwo) ?></span>
                                 </div>
                             </div>
                         </div>
@@ -1725,11 +1859,16 @@ function renderServicePageLayout(array $config): void
         <?php if ($showCaseStudy): ?>
         <section class="mb-casestudy-section">
             <div class="mb-container">
+                <?php if ($caseStudyTitle !== ''): ?>
+                <div class="mb-section-header">
+                    <h2 class="mb-section-title"><?= htmlspecialchars($caseStudyTitle) ?></h2>
+                </div>
+                <?php endif; ?>
                 <div class="mb-casestudy-card">
                     <div class="mb-cs-grid">
                         <div>
                             <div class="mb-cs-badge">
-                                🇮🇳 Verified Case Study Spotlight
+                                <?= htmlspecialchars($caseStudyBadge) ?>
                             </div>
                             <h3 class="mb-cs-title"><?= htmlspecialchars($caseStudy['client']) ?></h3>
                             <p class="mb-cs-desc"><?= htmlspecialchars($caseStudy['desc']) ?></p>
@@ -1750,6 +1889,21 @@ function renderServicePageLayout(array $config): void
                         </div>
                     </div>
                 </div>
+                <?php if (!empty($caseStudyScreenshots)): ?>
+                <div class="mb-cs-gallery">
+                    <?php foreach ($caseStudyScreenshots as $screenshot): ?>
+                    <figure class="mb-cs-shot">
+                        <img
+                            src="<?= htmlspecialchars($screenshot['src']) ?>"
+                            alt="<?= htmlspecialchars($screenshot['alt']) ?>"
+                            loading="lazy"
+                            decoding="async"
+                        >
+                        <figcaption><?= htmlspecialchars($screenshot['caption']) ?></figcaption>
+                    </figure>
+                    <?php endforeach; ?>
+                </div>
+                <?php endif; ?>
             </div>
         </section>
         <?php endif; ?>

@@ -11,10 +11,7 @@ $serviceNavItems = [
     ['label' => 'Website Design & Development', 'path' => '/website-design-development.php', 'description' => 'Fast, conversion-focused, mobile-first websites engineered to turn visitors into buyers.'],
     ['label' => 'Search Engine Marketing (Google Ads)', 'path' => '/search-engine-marketing.php', 'description' => 'High-ROI PPC and Google Search/Display ad campaigns managed by certified experts.'],
     ['label' => 'Social Media Optimization & Marketing', 'path' => '/social-media-optimization.php', 'description' => 'Build an engaged community and scale your presence across Instagram, LinkedIn, and Meta.'],
-    ['label' => 'Digital Business Branding', 'path' => '/digital-business-branding.php', 'description' => 'Create a memorable brand identity, distinctive logo, and scalable brand positioning.'],
     ['label' => 'Mobile App Development', 'path' => '/mobile-app-development.php', 'description' => 'Native and hybrid iOS & Android apps built for performance and user retention.'],
-    ['label' => 'E-commerce SEO', 'path' => '/ecommerce-seo.php', 'description' => 'Scale online store sales through product schema, category optimization, and technical search.'],
-    ['label' => 'Content Marketing', 'path' => '/content-marketing.php', 'description' => 'Authority-building articles, case studies, and content funnels that attract and educate buyers.'],
     ['label' => 'Performance Marketing', 'path' => '/performance-marketing.php', 'description' => 'Data-driven paid ads across Meta, Google, and YouTube with relentless ROAS focus.'],
     ['label' => 'Local SEO', 'path' => '/local-seo.php', 'description' => 'Dominate Google Maps & 3-pack local search results to drive calls and store visits.'],
 ];
