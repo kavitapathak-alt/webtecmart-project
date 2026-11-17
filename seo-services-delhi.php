@@ -8,11 +8,10 @@ require_once __DIR__ . '/app/components/sections/FooterSection.php';
 require_once __DIR__ . '/functions.php';
 
 // ============================================================
-// 100% DYNAMIC DATA ARCHITECTURE (Loaded from DB with Fallbacks)
+// DATA (Loaded from DB with fallbacks)
 // ============================================================
 $dbService = getServiceBySlug('seo-services-delhi') ?: [];
 
-// Hero Section
 $heroTitle = $dbService['hero_title'] ?? 'SEO Services in Delhi';
 $heroAccent = $dbService['hero_accent'] ?? 'Result-Driven SEO to Grow Your Business';
 $heroDesc = $dbService['hero_description'] ?? 'Boost your website’s search visibility, improve Google rankings, and attract relevant visitors with our Organic SEO services. Our SEO strategies focus on increasing organic traffic, improving keyword rankings, and strengthening your online presence for sustainable growth.';
@@ -39,11 +38,9 @@ $rankingKeywords = $dbService['keyword_ranking_showcase'] ?? [
 
 $microMarketPills = $dbService['micro_markets'] ?? ['Connaught Place (CP)', 'South Delhi & Saket', 'New Delhi', 'Rohini', 'Dwarka Commercial Hub', 'Janakpuri & West Delhi', 'Punjab Bagh & Rajouri Garden', 'Okhla Industrial Area', 'Noida & Greater Noida', 'Pitampura & Rohini', 'Ghaziabad', 'Faridabad'];
 
-// Images
 $serpImage = $dbService['serp_image'] ?? '/assets/images/seo-takeaways-preview.png';
 $springSerpImage = $dbService['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png';
 
-// Brand Logos Marquee
 $brandLogos = $dbService['brand_logos'] ?? [
     ['name' => 'Informa Global', 'logo' => '/assets/images/logo-1.png', 'category' => 'Trade Events'],
     ['name' => 'Bharat Tex Fair', 'logo' => '/assets/images/logos-10.jpeg', 'category' => 'Ministry of Textiles'],
@@ -59,7 +56,6 @@ $brandLogos = $dbService['brand_logos'] ?? [
     ['name' => 'Premier Logistics', 'logo' => '/assets/images/logos-9.jpeg', 'category' => 'Industrial Logistics']
 ];
 
-// Strategic Narrative & Why Choose Us
 $strategicNarrative = $dbService['strategic_narrative'] ?? [
     'eyebrow' => 'BE FOUND BY THE CORRECT PEOPLE • GENERATE BETTER LEADS • GROW ORGANICALLY',
     'title' => 'SEO Services in Delhi That Turn Search Visibility Into Business Growth!',
@@ -84,7 +80,6 @@ $whyCards = $dbService['why_cards'] ?? [
     ['icon' => '🏆', 'title' => '13+ Years of Proven Experience', 'desc' => 'Battle-tested digital expertise across search engines, content marketing, websites, and growth strategy.']
 ];
 
-// Key Takeaways & Approach
 $takeaways = $dbService['takeaways'] ?? [
     'eyebrow' => 'KEY TAKEAWAYS',
     'title' => 'SEO Services in Delhi at a Glance',
@@ -110,88 +105,26 @@ if (preg_match('/\s+(Glance|Overview|Guide)\s*$/i', $takeawaysTitle, $titleMatch
     $takeawaysTitleBase = trim(substr($takeawaysTitle, 0, $titleMatch[0][1]));
 }
 
-// What We Offer (6 Core Offerings)
 $offers = $dbService['offers'] ?? [
-    [
-        'icon' => 'code',
-        'title' => 'Technical SEO',
-        'desc' => 'We enhance the performance of your site by addressing crawling, indexing, Core Web Vitals, server response times, and architecture to ensure search bots navigate effortlessly.',
-        'link' => '/technical-seo.php',
-        'link_text' => 'Explore Technical SEO →'
-    ],
-    [
-        'icon' => 'layout',
-        'title' => 'On-Page Optimization',
-        'desc' => 'Content without optimization cannot perform. We optimize title tags, meta descriptions, header structures (H1-H6), internal linking, and semantic keyword relevance.',
-        'link' => '/on-page-seo.php',
-        'link_text' => 'Explore On-Page SEO →'
-    ],
-    [
-        'icon' => 'search',
-        'title' => 'Keyword Research & Strategy',
-        'desc' => 'Searching for the appropriate keywords will guide users straight to your site. We dissect intent, competition, and search volume to capture high-value buyer searches.',
-        'link' => '/keyword-research.php',
-        'link_text' => 'Explore Keyword Research →'
-    ],
-    [
-        'icon' => 'map-pin',
-        'title' => 'Local SEO & Google 3-Pack',
-        'desc' => 'Dominate Google Maps across Delhi, Noida, Gurgaon, and NCR. Optimize your Google Business Profile, citations, reviews, and proximity signals to drive nearby calls.',
-        'link' => '/local-seo.php',
-        'link_text' => 'Explore Local SEO →'
-    ],
-    [
-        'icon' => 'link',
-        'title' => 'High-Authority Link Building',
-        'desc' => 'Earn high-authority editorial backlinks and digital PR citations from verified Indian media and industry portals that supercharge domain trust.',
-        'link' => '/off-page-seo.php',
-        'link_text' => 'Explore Off-Page SEO →'
-    ],
-    [
-        'icon' => 'sparkles',
-        'title' => 'AI-Ready SEO (AEO & GEO)',
-        'desc' => 'Position your brand prominently within Google AI Overviews, Perplexity, Gemini, and ChatGPT search recommendations through structured entity data.',
-        'link' => '/ai-seo-strategy.php',
-        'link_text' => 'Explore AI-Ready SEO →'
-    ]
+    ['icon' => 'code', 'title' => 'Technical SEO', 'desc' => 'We enhance the performance of your site by addressing crawling, indexing, Core Web Vitals, server response times, and architecture to ensure search bots navigate effortlessly.', 'link' => '/technical-seo.php', 'link_text' => 'Explore Technical SEO →'],
+    ['icon' => 'layout', 'title' => 'On-Page Optimization', 'desc' => 'Content without optimization cannot perform. We optimize title tags, meta descriptions, header structures (H1-H6), internal linking, and semantic keyword relevance.', 'link' => '/on-page-seo.php', 'link_text' => 'Explore On-Page SEO →'],
+    ['icon' => 'search', 'title' => 'Keyword Research & Strategy', 'desc' => 'Searching for the appropriate keywords will guide users straight to your site. We dissect intent, competition, and search volume to capture high-value buyer searches.', 'link' => '/keyword-research.php', 'link_text' => 'Explore Keyword Research →'],
+    ['icon' => 'map-pin', 'title' => 'Local SEO & Google 3-Pack', 'desc' => 'Dominate Google Maps across Delhi, Noida, Gurgaon, and NCR. Optimize your Google Business Profile, citations, reviews, and proximity signals to drive nearby calls.', 'link' => '/local-seo.php', 'link_text' => 'Explore Local SEO →'],
+    ['icon' => 'link', 'title' => 'High-Authority Link Building', 'desc' => 'Earn high-authority editorial backlinks and digital PR citations from verified Indian media and industry portals that supercharge domain trust.', 'link' => '/off-page-seo.php', 'link_text' => 'Explore Off-Page SEO →'],
+    ['icon' => 'sparkles', 'title' => 'AI-Ready SEO (AEO & GEO)', 'desc' => 'Position your brand prominently within Google AI Overviews, Perplexity, Gemini, and ChatGPT search recommendations through structured entity data.', 'link' => '/ai-seo-strategy.php', 'link_text' => 'Explore AI-Ready SEO →']
 ];
 
-// SEO Challenges
 $challenges = $dbService['challenges'] ?? [
     'eyebrow' => 'SEO CHALLENGES',
     'title' => 'What is Holding Your Site Back in Google Search?',
     'lead' => 'There are several common SEO challenges that businesses in Delhi encounter. Delhi is among the most competitive business hub in India. Whether it\'s a local service provider or a start-up, or a reputable brand or an e-commerce company, businesses are vying for the same search audience. Having a website is not sufficient: Your website has to be optimised for the right keywords, have valuable content, a solid technical underpinning, a good user experience and also a website strategy that aligns with your customers\' search intent.',
     'items' => [
-        [
-            'icon' => '⚔️',
-            'title' => 'Intense Local Competition',
-            'desc' => 'Firms fight it out for exposure in Google Search and Google Maps in Delhi. A basic SEO campaign can\'t be sufficient to beat the competition. We define your competitors, learn about their search footprint and create a strategy based on what\'s possible in your market.'
-        ],
-        [
-            'icon' => '📉',
-            'title' => 'Low or Irrelevant Organic Traffic',
-            'desc' => 'Getting visitors does not equal getting prospective customers. When you get visitors that don\'t want to buy, you get no enquiries. We pay special attention to relevant commercial keywords and search intent to get visitors that are more likely to take action.'
-        ],
-        [
-            'icon' => '🎯',
-            'title' => 'Poor Keyword Targeting',
-            'desc' => 'Competing for high-ranking keywords that don\'t have the proper intent, meaning, or business value can be a waste of time and resources. By leveraging our keyword research, we discover opportunities throughout commercial, transactional, informational and local searches.'
-        ],
-        [
-            'icon' => '📍',
-            'title' => 'Weak Local Search Visibility',
-            'desc' => 'Local visibility is important if your customers are looking for services in their vicinity. We optimize your website and Google Business Profile to ensure your business is found in relevant local searches across Delhi and Delhi NCR.'
-        ],
-        [
-            'icon' => '⚙️',
-            'title' => 'Technical SEO Problems',
-            'desc' => 'Slow pages, broken links, poor website structure, indexing problems, duplicate content and weak internal linking impact search engine crawling. We assess and resolve these areas in our technical SEO audit.'
-        ],
-        [
-            'icon' => '💸',
-            'title' => 'Overdependence on Paid Advertising',
-            'desc' => 'Paid ads provide instant exposure, but only while you continue spending. With SEO, you create an organic traffic stream that continues delivering qualified visibility. We help businesses achieve a healthier balance of acquisition.'
-        ]
+        ['icon' => '⚔️', 'title' => 'Intense Local Competition', 'desc' => 'Firms fight it out for exposure in Google Search and Google Maps in Delhi. A basic SEO campaign can\'t be sufficient to beat the competition. We define your competitors, learn about their search footprint and create a strategy based on what\'s possible in your market.'],
+        ['icon' => '📉', 'title' => 'Low or Irrelevant Organic Traffic', 'desc' => 'Getting visitors does not equal getting prospective customers. When you get visitors that don\'t want to buy, you get no enquiries. We pay special attention to relevant commercial keywords and search intent to get visitors that are more likely to take action.'],
+        ['icon' => '🎯', 'title' => 'Poor Keyword Targeting', 'desc' => 'Competing for high-ranking keywords that don\'t have the proper intent, meaning, or business value can be a waste of time and resources. By leveraging our keyword research, we discover opportunities throughout commercial, transactional, informational and local searches.'],
+        ['icon' => '📍', 'title' => 'Weak Local Search Visibility', 'desc' => 'Local visibility is important if your customers are looking for services in their vicinity. We optimize your website and Google Business Profile to ensure your business is found in relevant local searches across Delhi and Delhi NCR.'],
+        ['icon' => '⚙️', 'title' => 'Technical SEO Problems', 'desc' => 'Slow pages, broken links, poor website structure, indexing problems, duplicate content and weak internal linking impact search engine crawling. We assess and resolve these areas in our technical SEO audit.'],
+        ['icon' => '💸', 'title' => 'Overdependence on Paid Advertising', 'desc' => 'Paid ads provide instant exposure, but only while you continue spending. With SEO, you create an organic traffic stream that continues delivering qualified visibility. We help businesses achieve a healthier balance of acquisition.']
     ]
 ];
 $challengesTitle = trim((string) ($challenges['title'] ?? 'What is Holding Your Site Back in Google Search?'));
@@ -202,7 +135,6 @@ if (preg_match('/\s+(Google Search\??)\s*$/i', $challengesTitle, $titleMatch, PR
     $challengesTitleAccent = trim($titleMatch[1][0]);
 }
 
-// Meet the Experts (Jitin Madaan)
 $founderSection = $dbService['founder_section'] ?? [
     'eyebrow' => 'MEET THE EXPERTS',
     'title' => 'The People Behind Your SEO Growth',
@@ -215,21 +147,9 @@ $founderSection = $dbService['founder_section'] ?? [
         ['val' => '95%', 'label' => 'Client Retention Rate']
     ],
     'pillars' => [
-        [
-            'icon' => '⚙️',
-            'title' => 'SEO Strategy & Technical Expertise',
-            'desc' => 'Our SEO experts specialize in keyword strategy, technical audits, competitor analysis, website structure and performance optimization to build a solid foundation for organic growth.'
-        ],
-        [
-            'icon' => '📝',
-            'title' => 'Content & Search Optimisation',
-            'desc' => 'Our content team produces useful, search optimized content that\'s aligned to user intent, keyword opportunities and your brand\'s expertise — empowering your website to offer actual value and boost search visibility at the same time.'
-        ],
-        [
-            'icon' => '🚀',
-            'title' => 'Digital Growth Support',
-            'desc' => 'SEO is best suited when it is integrated with the broader digital landscape. Our team has SEO, content, website development and digital marketing skills to build a more interconnected growth strategy.'
-        ]
+        ['icon' => '⚙️', 'title' => 'SEO Strategy & Technical Expertise', 'desc' => 'Our SEO experts specialize in keyword strategy, technical audits, competitor analysis, website structure and performance optimization to build a solid foundation for organic growth.'],
+        ['icon' => '📝', 'title' => 'Content & Search Optimisation', 'desc' => 'Our content team produces useful, search optimized content that\'s aligned to user intent, keyword opportunities and your brand\'s expertise — empowering your website to offer actual value and boost search visibility at the same time.'],
+        ['icon' => '🚀', 'title' => 'Digital Growth Support', 'desc' => 'SEO is best suited when it is integrated with the broader digital landscape. Our team has SEO, content, website development and digital marketing skills to build a more interconnected growth strategy.']
     ]
 ];
 $founderTitle = trim((string) ($founderSection['title'] ?? 'The People Behind Your SEO Growth'));
@@ -240,7 +160,6 @@ if (preg_match('/\s+(SEO Growth)\s*$/i', $founderTitle, $titleMatch, PREG_OFFSET
     $founderTitleAccent = trim($titleMatch[1][0]);
 }
 
-// Our Process (6 Steps)
 $processSteps = $dbService['process'] ?? [
     ['step' => '01', 'title' => 'Research & Discovery', 'description' => 'We start with knowing your business, your audience, your competition and your online presence. Our research includes keyword analysis, competitor research, search intent and an in-depth website review.'],
     ['step' => '02', 'title' => 'Technical Audit & Foundation', 'description' => 'A solid technical structure is required to ensure that your site can be properly crawled, indexed and understood by Google.'],
@@ -250,7 +169,6 @@ $processSteps = $dbService['process'] ?? [
     ['step' => '06', 'title' => 'Measurement, Refinement & Growth', 'description' => 'We regularly monitor keyword rankings, organic traffic, leads and conversions to adapt and scale strategy.']
 ];
 
-// Industries
 $industries = $dbService['industries'] ?? [
     ['icon' => '🛍️', 'title' => 'E-Commerce & Retail', 'desc' => 'Drive product and category revenue with high-ranking transactional queries.'],
     ['icon' => '🏭', 'title' => 'B2B & Manufacturing', 'desc' => 'Capture corporate purchase orders and bulk distributor inquiries.'],
@@ -262,84 +180,19 @@ $industries = $dbService['industries'] ?? [
     ['icon' => '💻', 'title' => 'SaaS & Technology', 'desc' => 'Scale inbound software trials and global enterprise demo requests.']
 ];
 
-// Client Feedback
 $clientFeedback = $dbService['client_feedback'] ?? [
-    [
-        'quote' => "Thank you so much WebTecMart. We've noticed a phenomenal improvement in commercial search visibility, keyword engagement, and subsequently a large proportion of our verified customer enquiries are coming directly through the website. Thanks again for being so proactive and hands-on with the SEO work...",
-        'author' => 'Libby Powell',
-        'role' => 'Marketing Director',
-        'company' => 'Innovation Zero',
-        'rating' => 5
-    ],
-    [
-        'quote' => "WebTecMart has completely evolved our strategic thinking when it comes to enterprise websites. One of our greatest success stories was converting our legacy domain to an optimized search architecture which led to a 731% increase in website users and a 164% uplift in organic search conversions...",
-        'author' => 'Louise Smith',
-        'role' => 'Associate Director',
-        'company' => 'Society of Petroleum Engineers',
-        'rating' => 5
-    ],
-    [
-        'quote' => "Their support, keyword clustering, and best practice guidance helped ensure we now have a user friendly, SEO efficient, creative, and high performing landing site for our target audience across Delhi NCR and international markets...",
-        'author' => 'Ali McQueen',
-        'role' => 'Head of Marketing',
-        'company' => 'RoarB2B',
-        'rating' => 5
-    ],
-    [
-        'quote' => "From zero organic visibility to ranking #1 for over 45 high-commercial search phrases within 6 months. WebTecMart is by far the most knowledgeable, data-driven, and trustworthy SEO team in Delhi NCR.",
-        'author' => 'Rajesh Singhania',
-        'role' => 'Managing Director',
-        'company' => 'Stonex Luxury Retail',
-        'rating' => 5
-    ]
+    ['quote' => "Thank you so much WebTecMart. We've noticed a phenomenal improvement in commercial search visibility, keyword engagement, and subsequently a large proportion of our verified customer enquiries are coming directly through the website. Thanks again for being so proactive and hands-on with the SEO work...", 'author' => 'Libby Powell', 'role' => 'Marketing Director', 'company' => 'Innovation Zero', 'rating' => 5],
+    ['quote' => "WebTecMart has completely evolved our strategic thinking when it comes to enterprise websites. One of our greatest success stories was converting our legacy domain to an optimized search architecture which led to a 731% increase in website users and a 164% uplift in organic search conversions...", 'author' => 'Louise Smith', 'role' => 'Associate Director', 'company' => 'Society of Petroleum Engineers', 'rating' => 5],
+    ['quote' => "Their support, keyword clustering, and best practice guidance helped ensure we now have a user friendly, SEO efficient, creative, and high performing landing site for our target audience across Delhi NCR and international markets...", 'author' => 'Ali McQueen', 'role' => 'Head of Marketing', 'company' => 'RoarB2B', 'rating' => 5],
+    ['quote' => "From zero organic visibility to ranking #1 for over 45 high-commercial search phrases within 6 months. WebTecMart is by far the most knowledgeable, data-driven, and trustworthy SEO team in Delhi NCR.", 'author' => 'Rajesh Singhania', 'role' => 'Managing Director', 'company' => 'Stonex Luxury Retail', 'rating' => 5]
 ];
 
-// Masterclass Blueprint
-$masterclass = $dbService['masterclass'] ?? [
-    'title' => 'SEO Masterclass & In-House Blueprint.',
-    'subtitle' => 'Maximise your commercial marketing with our bespoke SEO Masterclass, designed to equip your team with the practical skills to implement modern SEO effectively in-house.',
-    'headline' => 'Designed for Enterprise Teams, Marketers & Founders',
-    'description' => 'This four-week intensive blueprint demystifies search algorithms, AI search overviews (AEO/GEO), and ranking mechanics. Led by industry expert Jitin Madaan (Performance Marketing Strategist), you will be equipped with the exact frameworks powering 5,000+ top Google rankings.',
-    'skills' => [
-        'Commercial Keyword Research & Search Intent Mapping',
-        'Reverse-Engineering Competitor Authority & Backlink Profiles',
-        'High-Impact Content Strategy & Semantic Topical Clusters',
-        'Technical SEO, Crawl Health & Core Web Vitals Optimization',
-        'Conversion Rate Optimization (CRO) & UX Engagement Signals',
-        'GA4 Analytics, Google Search Console & AI Search Tracking'
-    ],
-    'video_duration' => '15 min executive training',
-    'instructor' => 'Jitin Madaan • Performance Marketing Strategist',
-    'video_image' => '/assets/images/case-study-1.jpg'
-];
-$mcVideoImage = $masterclass['video_image'] ?? '/assets/images/case-study-1.jpg';
-
-// Case Studies
 $cases = is_array($dbService['case_results'] ?? null) ? $dbService['case_results'] : [
-    [
-        'title' => 'IHGF Delhi Fair & Spring Sourcing 2027',
-        'badge' => 'Global Sourcing & Trade Fair',
-        'stat' => '#1 Rank',
-        'stat_desc' => 'Google Top Result for High-Volume Sourcing Phrases',
-        'desc' => 'Complete technical restructuring and multi-lingual topical clustering established dominant Google SERP presence ahead of international competitors.'
-    ],
-    [
-        'title' => 'Stonex Luxury Retail Network',
-        'badge' => 'Luxury Retail & E-Commerce',
-        'stat' => '+420%',
-        'stat_desc' => 'Qualified Commercial Inquiries in 6 Months',
-        'desc' => 'Local 3-Pack domination across South Delhi, Noida, and Gurugram combined with high-intent diamond jewelry keyword ranking.'
-    ],
-    [
-        'title' => 'Innovation Zero World Congress',
-        'badge' => 'CleanTech & Enterprise Events',
-        'stat' => '12.4x',
-        'stat_desc' => 'Organic Inbound Delegate Registrations',
-        'desc' => 'Engineered topical authority and speaker knowledge graphs captured decision-makers and C-suite attendees across pan-India and UK search.'
-    ]
+    ['title' => 'IHGF Delhi Fair & Spring Sourcing 2027', 'badge' => 'Global Sourcing & Trade Fair', 'stat' => '#1 Rank', 'stat_desc' => 'Google Top Result for High-Volume Sourcing Phrases', 'desc' => 'Complete technical restructuring and multi-lingual topical clustering established dominant Google SERP presence ahead of international competitors.'],
+    ['title' => 'Stonex Luxury Retail Network', 'badge' => 'Luxury Retail & E-Commerce', 'stat' => '+420%', 'stat_desc' => 'Qualified Commercial Inquiries in 6 Months', 'desc' => 'Local 3-Pack domination across South Delhi, Noida, and Gurugram combined with high-intent diamond jewelry keyword ranking.'],
+    ['title' => 'Innovation Zero World Congress', 'badge' => 'CleanTech & Enterprise Events', 'stat' => '12.4x', 'stat_desc' => 'Organic Inbound Delegate Registrations', 'desc' => 'Engineered topical authority and speaker knowledge graphs captured decision-makers and C-suite attendees across pan-India and UK search.']
 ];
 
-// Rankings Table
 $rankings = is_array($dbService['rankings'] ?? null) ? $dbService['rankings'] : [
     ['kw' => 'spring sourcing fair 2027', 'pos' => '#1', 'vol' => '18,500/mo', 'diff' => 'High', 'status' => 'Verified Top Result'],
     ['kw' => 'ihgf delhi fair 2027', 'pos' => '#1', 'vol' => '27,100/mo', 'diff' => 'High', 'status' => 'Verified Top Result'],
@@ -348,7 +201,6 @@ $rankings = is_array($dbService['rankings'] ?? null) ? $dbService['rankings'] : 
     ['kw' => 'best seo services south delhi', 'pos' => '#1', 'vol' => '5,400/mo', 'diff' => 'High', 'status' => 'Organic Dominance']
 ];
 
-// Wrapping Up
 $wrappingUp = is_array($dbService['wrapping_up'] ?? null) ? $dbService['wrapping_up'] : [
     'eyebrow' => 'DELHI NCR LOCAL REACH',
     'title' => 'Why SEO Services in Delhi Matter for Your Business',
@@ -359,51 +211,19 @@ $wrappingUp = is_array($dbService['wrapping_up'] ?? null) ? $dbService['wrapping
     'goal' => 'Our goal is simple: Make your business discoverable, build trust, and convert search visibility into growth.'
 ];
 
-// FAQs (10 Items)
 $faqs = $dbService['faqs'] ?? [
-    [
-        'q' => 'What are SEO services and why does my business need them?',
-        'a' => "SEO Services increase your site's presence in search engines and make it easier for anyone who searches for your goods or services to find your site. Combating local, commercial and industry-specific searches and building a sustainable source of organic traffic for businesses in Delhi is where SEO comes into the picture."
-    ],
-    [
-        'q' => 'How long does SEO take to show results?',
-        'a' => "SEO is a long-term approach, and there is no guarantee of results, depending on your site, the competition, the industry, the keywords you're targeting and how well your site is being found in the search engines. Technical and on page optimisation can bring about changes fairly quickly, whereas building authority and targeting competitive keywords may take a longer period of time, but need consistent optimisation."
-    ],
-    [
-        'q' => 'How can Local SEO help my Delhi business?',
-        'a' => "Local SEO puts your business in front of mobile searches that are related to your area and services. It can help people find your business when they look for local products and/or services, and can help you be seen in queries that are relevant to your business."
-    ],
-    [
-        'q' => 'What does an SEO agency in Delhi actually do?',
-        'a' => "An SEO agency will be able to work on keyword research, technical SEO, on page optimisation, content optimisation, local SEO, internal linking, authority building, competitor analysis and monitoring performance. The exact approach will vary, depending on the business and goals."
-    ],
-    [
-        'q' => 'Is it possible to create leads with SEO and not traffic?',
-        'a' => "Yes. The goal of SEO isn't to bring as many visitors as possible, it's to bring the right ones. Through focusing on search intent and optimising content and calls to action, landing pages, SEO can help to drive inquiries, registrations, sales and other conversions."
-    ],
-    [
-        'q' => 'Which is better, SEO or Google Ads?',
-        'a' => "SEO isn't the same thing as Google Ads. While SEO is about long-term organic visibility, Google Ads can offer instant paid visibility. A lot of businesses leverage both of them as part of an extensive digital marketing campaign."
-    ],
-    [
-        'q' => 'How to select the Ideal SEO firm in Delhi?',
-        'a' => "Find an SEO firm that has a clear understanding of your business, is able to articulate their approach, has a business objective that is relevant to your business, has a clear reporting system and isn't promising to rank websites in the improbable. A successful SEO partner should be able to tell you not only what they'll be working on, but why it is important to your business."
-    ],
-    [
-        'q' => 'Which businesses can benefit from SEO services?',
-        'a' => "SEO can help virtually any business that has customers find it online. SEO can be beneficial for local businesses, e-commerce retailers, professional services, real estate companies, healthcare providers, educational institutions, tech companies and B2B types of companies as well."
-    ],
-    [
-        'q' => 'Does WebTecMart provide Local, National and International SEO?',
-        'a' => "Yes. WebTecMart can develop SEO strategies for businesses targeting customers locally in Delhi and Delhi NCR, across India or in international markets. The method and web design is modified based on the target market."
-    ],
-    [
-        'q' => 'What is the price of SEO services in Delhi?',
-        'a' => "The cost of SEO services varies based on website size, competition, location, keywords, content needs, and the technical complexity and business goals. WebTecMart also provides several SEO packages and will be able to design a personalised approach to suit your needs."
-    ]
+    ['q' => 'What are SEO services and why does my business need them?', 'a' => "SEO Services increase your site's presence in search engines and make it easier for anyone who searches for your goods or services to find your site. Combating local, commercial and industry-specific searches and building a sustainable source of organic traffic for businesses in Delhi is where SEO comes into the picture."],
+    ['q' => 'How long does SEO take to show results?', 'a' => "SEO is a long-term approach, and there is no guarantee of results, depending on your site, the competition, the industry, the keywords you're targeting and how well your site is being found in the search engines. Technical and on page optimisation can bring about changes fairly quickly, whereas building authority and targeting competitive keywords may take a longer period of time, but need consistent optimisation."],
+    ['q' => 'How can Local SEO help my Delhi business?', 'a' => "Local SEO puts your business in front of mobile searches that are related to your area and services. It can help people find your business when they look for local products and/or services, and can help you be seen in queries that are relevant to your business."],
+    ['q' => 'What does an SEO agency in Delhi actually do?', 'a' => "An SEO agency will be able to work on keyword research, technical SEO, on page optimisation, content optimisation, local SEO, internal linking, authority building, competitor analysis and monitoring performance. The exact approach will vary, depending on the business and goals."],
+    ['q' => 'Is it possible to create leads with SEO and not traffic?', 'a' => "Yes. The goal of SEO isn't to bring as many visitors as possible, it's to bring the right ones. Through focusing on search intent and optimising content and calls to action, landing pages, SEO can help to drive inquiries, registrations, sales and other conversions."],
+    ['q' => 'Which is better, SEO or Google Ads?', 'a' => "SEO isn't the same thing as Google Ads. While SEO is about long-term organic visibility, Google Ads can offer instant paid visibility. A lot of businesses leverage both of them as part of an extensive digital marketing campaign."],
+    ['q' => 'How to select the Ideal SEO firm in Delhi?', 'a' => "Find an SEO firm that has a clear understanding of your business, is able to articulate their approach, has a business objective that is relevant to your business, has a clear reporting system and isn't promising to rank websites in the improbable. A successful SEO partner should be able to tell you not only what they'll be working on, but why it is important to your business."],
+    ['q' => 'Which businesses can benefit from SEO services?', 'a' => "SEO can help virtually any business that has customers find it online. SEO can be beneficial for local businesses, e-commerce retailers, professional services, real estate companies, healthcare providers, educational institutions, tech companies and B2B types of companies as well."],
+    ['q' => 'Does WebTecMart provide Local, National and International SEO?', 'a' => "Yes. WebTecMart can develop SEO strategies for businesses targeting customers locally in Delhi and Delhi NCR, across India or in international markets. The method and web design is modified based on the target market."],
+    ['q' => 'What is the price of SEO services in Delhi?', 'a' => "The cost of SEO services varies based on website size, competition, location, keywords, content needs, and the technical complexity and business goals. WebTecMart also provides several SEO packages and will be able to design a personalised approach to suit your needs."]
 ];
 
-// CTA Box
 $ctaBox = $dbService['cta_box'] ?? [
     'headline' => 'So You\'re Ready to Take the Plunge and Grow Your Business With SEO?',
     'sub' => 'Let\'s Make Your Search Visibility Business Opportunities',
@@ -413,10 +233,31 @@ $ctaBox = $dbService['cta_box'] ?? [
 ];
 ?>
 
-<!-- Swiper 11 CSS for Touch Sliders -->
+<?php
+$h = fn($s) => htmlspecialchars((string) $s);
+if (!function_exists('dsIcon')) {
+    function dsIcon(string $n, int $s = 22): string {
+        $p = [
+            'code' => '<path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/>',
+            'layout' => '<rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/>',
+            'search' => '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+            'map-pin' => '<path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>',
+            'link' => '<path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>',
+            'sparkles' => '<path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/>',
+            'arrow' => '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+            'phone' => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+            'check' => '<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+            'plus' => '<path d="M5 12h14"/><path d="M12 5v14"/>',
+            'lock' => '<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+        ];
+        $d = $p[$n] ?? $p['sparkles'];
+        return '<svg width="' . $s . '" height="' . $s . '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $d . '</svg>';
+    }
+}
+$em = fn($t) => '<em>' . htmlspecialchars((string) $t) . '</em>';
+?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<!-- Schema.org JSON-LD Structured Data for Local SEO & FAQPage -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -430,27 +271,9 @@ $ctaBox = $dbService['cta_box'] ?? [
       "description": "Top-rated SEO company in Delhi NCR providing data-driven Google #1 rankings, AI-ready SEO, and qualified lead generation.",
       "telephone": "+91-9999674255",
       "email": "info@webtecmart.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Connaught Place / Nehru Place Commercial Center",
-        "addressLocality": "New Delhi",
-        "addressRegion": "Delhi",
-        "postalCode": "110001",
-        "addressCountry": "IN"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 28.6139,
-        "longitude": 77.2090
-      },
-      "areaServed": [
-        {"@type": "City", "name": "Delhi"},
-        {"@type": "City", "name": "New Delhi"},
-        {"@type": "City", "name": "Noida"},
-        {"@type": "City", "name": "Gurgaon"},
-        {"@type": "City", "name": "Faridabad"},
-        {"@type": "City", "name": "Ghaziabad"}
-      ]
+      "address": {"@type": "PostalAddress", "streetAddress": "Connaught Place / Nehru Place Commercial Center", "addressLocality": "New Delhi", "addressRegion": "Delhi", "postalCode": "110001", "addressCountry": "IN"},
+      "geo": {"@type": "GeoCoordinates", "latitude": 28.6139, "longitude": 77.2090},
+      "areaServed": [{"@type": "City", "name": "Delhi"}, {"@type": "City", "name": "New Delhi"}, {"@type": "City", "name": "Noida"}, {"@type": "City", "name": "Gurgaon"}, {"@type": "City", "name": "Faridabad"}, {"@type": "City", "name": "Ghaziabad"}]
     },
     {
       "@type": "FAQPage",
@@ -459,10 +282,7 @@ $ctaBox = $dbService['cta_box'] ?? [
         {
           "@type": "Question",
           "name": <?= json_encode(is_array($fq) ? ($fq['q'] ?? $fq['question'] ?? 'Question') : (string) $fq) ?>,
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": <?= json_encode(is_array($fq) ? ($fq['a'] ?? $fq['answer'] ?? '') : '') ?>
-          }
+          "acceptedAnswer": {"@type": "Answer", "text": <?= json_encode(is_array($fq) ? ($fq['a'] ?? $fq['answer'] ?? '') : '') ?>}
         }<?= $fIdx < count($faqs ?? []) - 1 ? ',' : '' ?>
         <?php endforeach; ?>
       ]
@@ -472,2758 +292,741 @@ $ctaBox = $dbService['cta_box'] ?? [
 </script>
 
 <style>
-    /* ============================================================
-       PREMIER MAIN SEO LANDING PAGE STYLES (Delhi NCR Hub)
-       Strict Theme: WebTecMart Magenta & Hot Pink ONLY
-       (#C4007A, #E0398F, #FFF0F7, #FCE7F3, #850053, #111827)
-       ============================================================ */
-    .del-seo-page {
-        background: #FFFFFF;
-        color: #1F1B2A;
-        width: 100%;
-        max-width: 100%;
-        overflow-x: clip;
-    }
-    .del-seo-page :is(img, video, iframe) {
-        max-width: 100%;
-    }
-    .del-container {
-        max-width: 1220px;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
 
-    /* Common Typography & Badges */
-    .del-eyebrow {
-        background: #FFF0F7;
-        border: 1px solid rgba(196, 0, 122, 0.22);
-        color: #C4007A;
-        border-radius: 9999px;
-        margin-bottom: 8px;
-    }
-    .del-eyebrow svg {
-        width: 13px;
-        height: 13px;
-        color: #C4007A;
-    }
-    .del-section-title {
-        font-size: clamp(1.9rem, 3vw, 2.7rem);
-        color: #111827;
-        line-height: 1.12;
-        letter-spacing: -0.04em;
-        margin: 0 auto 10px;
-        text-align: center;
-        max-width: 940px;
-    }
-    .del-section-title .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-        padding-bottom: 4px;
-    }
-    .del-section-title .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-        width: 100%;
-        height: 6px;
-        pointer-events: none;
-    }
-    .del-section-title::after {
-        content: "";
-        display: block;
-        width: 42px;
-        height: 3px;
-        margin: 9px auto 0;
-        border-radius: 999px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-    }
-    .del-narrative-left .del-section-title::after {
-        margin-left: 0;
-    }
-    .del-section-sub {
-        font-size: 0.96rem;
-        color: #4B5563;
-    }
-    .del-section-head {
-        text-align: center;
-        margin-bottom: 24px;
-    }
-    .del-section-head .del-eyebrow {
-        margin-bottom: 10px;
-    }
+    .ds { --ink:#17121F; --ink2:#2A2236; --paper:#FAF8FC; --line:#E4DCEC; --mag:#C4007A; --mag2:#E0398F; --soft:#FBE6F2; --mute:#5E566B; --ok:#0C7A55;
+        --display:'Bricolage Grotesque','Plus Jakarta Sans',system-ui,sans-serif; --body:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+        font-family:var(--body); color:var(--ink); background:var(--paper); line-height:1.6; width:100%; max-width:100vw; overflow-x:clip; }
+    .ds *, .ds *::before, .ds *::after { box-sizing:border-box; }
+    .ds h1,.ds h2,.ds h3,.ds h4 { font-family:var(--display); margin:0; color:var(--ink); letter-spacing:-.025em; }
+    .ds p { margin:0; }
+    .ds h1,.ds h2,.ds h3,.ds p,.ds li,.ds summary { overflow-wrap:break-word; }
+    .ds img { max-width:100%; }
+    .ds a:focus-visible,.ds button:focus-visible,.ds summary:focus-visible,.ds input:focus-visible,.ds textarea:focus-visible { outline:3px solid var(--mag); outline-offset:2px; }
+    .ds-wrap { max-width:1200px; margin:0 auto; padding:0 22px; }
+    .ds-sec { padding:84px 0; }
+    .ds-sec.alt { background:#fff; border-block:1px solid var(--line); }
+    .ds-grid > * { min-width:0; }
 
-    /* Primary & Secondary Buttons */
-    .del-btn-primary {
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-        color: #FFFFFF !important;
-        border-radius: 9999px;
-        border: none;
-        box-shadow: 0 8px 20px rgba(196, 0, 122, 0.28);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .del-btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 26px rgba(196, 0, 122, 0.38);
-        color: #FFFFFF !important;
-    }
-    .del-btn-secondary {
-        background: #FFFFFF;
-        color: #111827 !important;
-        border: 1.5px solid rgba(196, 0, 122, 0.28);
-        border-radius: 9999px;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .del-btn-secondary:hover {
-        background: #FFF0F7;
-        border-color: #C4007A;
-        color: #C4007A !important;
-    }
+    .ds-kicker { font-size:.86rem; font-weight:700; color:var(--mag); margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+    .ds-kicker::before { content:""; width:22px; height:2px; background:var(--mag); border-radius:2px; flex:none; }
+    .ds-h2 { font-size:clamp(1.9rem,3.8vw,3rem); font-weight:800; line-height:1.07; max-width:22ch; }
+    .ds h1 em, .ds-h2 em { font-style:normal; background:linear-gradient(transparent 62%,rgba(224,57,143,.32) 62%,rgba(224,57,143,.32) 92%,transparent 92%); padding:0 .06em; }
+    .ds-lede { color:var(--mute); font-size:1.04rem; max-width:58ch; margin-top:16px; }
+    .ds-head { margin-bottom:48px; }
+    .ds-split { display:grid; gap:18px 56px; align-items:end; }
+    @media(min-width:900px){ .ds-split { grid-template-columns:1.2fr 1fr; } .ds-split .ds-lede { margin-top:0; } }
+    .ds-side { display:grid; gap:40px; }
+    @media(min-width:992px){ .ds-side { grid-template-columns:.8fr 1.2fr; gap:80px; } .ds-side > .sticky { position:sticky; top:100px; align-self:start; } }
 
-    /* Reveal Animation: ALWAYS VISIBLE BY DEFAULT to prevent any missing content */
-    [data-framer-reveal] {
-        opacity: 1;
-        transform: none;
-        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        will-change: opacity, transform;
-    }
-    .js-reveal [data-framer-reveal]:not(.framer-visible) {
-        opacity: 0.25;
-        transform: translateY(16px);
-    }
-    .js-reveal [data-framer-reveal="slide-left"]:not(.framer-visible) {
-        opacity: 0.25;
-        transform: translateX(-20px);
-    }
-    .js-reveal [data-framer-reveal="slide-right"]:not(.framer-visible) {
-        opacity: 0.25;
-        transform: translateX(20px);
-    }
-    .framer-visible {
-        opacity: 1 !important;
-        transform: translate(0, 0) scale(1) !important;
-    }
+    .ds-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; font:700 .95rem var(--body); padding:14px 24px; border-radius:12px; text-decoration:none; cursor:pointer; border:2px solid transparent; transition:transform .2s,background .2s; white-space:nowrap; }
+    .ds-btn.pri { background:var(--mag); color:#fff !important; box-shadow:0 10px 24px -8px rgba(196,0,122,.55); }
+    .ds-btn.pri:hover { background:#A80068; transform:translateY(-2px); }
+    .ds-btn.ghost { background:transparent; color:var(--ink) !important; border-color:var(--ink); }
+    .ds-btn.ghost:hover { background:var(--ink); color:#fff !important; }
+    .ds-btn.light { background:#fff; color:var(--mag) !important; }
+    .ds-btn.lineW { color:#fff !important; border-color:rgba(255,255,255,.55); }
+    .ds-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:28px; }
 
-    /* Ambient Glow */
-    .del-ambient-glow {
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(196, 0, 122, 0.08) 0%, rgba(224, 57, 143, 0.02) 60%, transparent 70%);
-        filter: blur(40px);
-    }
+    /* hero */
+    .ds-hero { padding:56px 0 0; background:radial-gradient(900px 420px at 88% -10%,rgba(224,57,143,.16),transparent 60%),radial-gradient(600px 360px at -5% 30%,rgba(196,0,122,.07),transparent 60%),var(--paper); }
+    .ds-hero-grid { display:grid; gap:44px; align-items:start; }
+    @media(min-width:992px){ .ds-hero-grid { grid-template-columns:1.1fr .9fr; gap:64px; } }
+    .ds-hero h1 { font-size:clamp(2.3rem,5vw,4rem); font-weight:800; line-height:1.04; letter-spacing:-.035em; }
+    .ds-hero h1 span.t { display:block; font-size:.52em; font-weight:700; color:var(--mute); margin-bottom:10px; letter-spacing:-.02em; }
+    .ds-hero-desc { color:var(--mute); font-size:1.05rem; margin-top:20px; max-width:58ch; }
+    .ds-points { list-style:none; margin:26px 0 0; padding:0; display:grid; gap:0 28px; }
+    @media(min-width:640px){ .ds-points { grid-template-columns:1fr 1fr; } }
+    .ds-points li { display:flex; gap:12px; padding:13px 0; border-bottom:1px solid var(--line); font-size:.92rem; font-weight:600; line-height:1.45; }
+    .ds-points svg { color:var(--ok); flex:none; margin-top:2px; }
+    .ds-author { display:inline-flex; align-items:center; gap:12px; margin-top:26px; padding:6px 18px 6px 6px; border:1px solid var(--line); border-radius:999px; background:#fff; max-width:100%; }
+    .ds-av { width:46px; height:46px; border-radius:50%; overflow:hidden; background:var(--mag); color:#fff; display:grid; place-items:center; font-weight:800; flex:none; }
+    .ds-av img { width:100%; height:100%; object-fit:cover; }
+    .ds-author b { display:block; font-size:.92rem; line-height:1.2; }
+    .ds-author small { display:block; font-size:.76rem; color:var(--mute); line-height:1.35; }
+    .ds-author small span { color:var(--mag); font-weight:700; }
 
-    /* ========================================================
-       1. HERO SECTION
-       ======================================================== */
-    .del-hero {
-        background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-    }
-    .del-hero-grid {
-        grid-template-columns: 1fr;
-        gap: 36px;
-        align-items: center;
-    }
-    @media (min-width: 992px) {
-        .del-hero-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 36px;
-            align-items: stretch;
-        }
-        .del-hero-left,
-        .del-hero-right {
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .del-hero-right {
-            align-items: stretch;
-        }
-        .del-hero-form-card {
-            width: 100%;
-            height: 100%;
-            box-sizing: border-box;
-        }
-    }
-    .del-hero-title {
-        font-size: clamp(1.9rem, 2.8vw, 2.65rem);
-        color: #111827;
-        margin: 0 0 14px;
-    }
-    .del-hero-title .accent {
-        color: #C4007A;
-        text-decoration-line: underline;
-        text-decoration-color: rgba(196, 0, 122, 0.72);
-        text-decoration-thickness: 2px;
-        text-underline-offset: 5px;
-        text-decoration-skip-ink: none;
-    }
-    .del-hero-title .hero-separator {
-        color: #C4007A;
-        font-size: 0.72em;
-        vertical-align: 0.12em;
-        margin: 0 0.12em;
-    }
-    .del-hero-desc {
-        color: #374151;
-        margin-bottom: 12px;
-    }
-    .del-hero-bullets {
-        grid-template-columns: 1fr;
-    }
-    @media (min-width: 600px) {
-        .del-hero-bullets {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-    .del-bullet-item {
-        display: flex;
-        align-items: center;
-        font-size: 0.88rem;
-        font-weight: 600;
-        color: #1F2937;
-    }
-    .del-bullet-item .dot {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: #FFF0F7;
-        border: 1px solid rgba(196, 0, 122, 0.25);
-        color: #C4007A;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.72rem;
-        font-weight: 800;
-        flex-shrink: 0;
-    }
-    .del-hero-actions {
-        align-items: center;
-    }
-    .del-theme-toggle {
-        display: inline-flex;
-        min-height: 46px;
-        border: 1px solid rgba(196, 0, 122, 0.24);
-        border-radius: 999px;
-        background: #FFFFFF;
-        color: #5B2850;
-        transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-    }
-    .del-theme-toggle:hover {
-        transform: translateY(-2px);
-        border-color: #C4007A;
-        color: #C4007A;
-    }
-    .del-theme-toggle svg {
-        width: 17px;
-        height: 17px;
-        flex: 0 0 auto;
-    }
-    .del-theme-toggle .del-theme-icon-sun,
-    .del-theme-dark .del-theme-toggle .del-theme-icon-moon {
-        display: none;
-    }
-    .del-theme-dark .del-theme-toggle .del-theme-icon-sun {
-        display: block;
-    }
-    .del-theme-toggle-floating {
-        left: max(18px, env(safe-area-inset-left));
-        bottom: max(18px, env(safe-area-inset-bottom));
-        min-height: 48px;
-        background: #FFFFFF;
-        box-shadow: 0 8px 24px rgba(48, 17, 39, 0.18);
-    }
-    .del-author-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.18);
-        border-radius: 9999px;
-        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.08);
-    }
-    .del-author-avatar {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, #C4007A, #E0398F);
-        color: #FFFFFF;
-        display: flex;
-    }
-    .del-author-avatar img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 50%;
-        display: block;
-    }
-    .del-author-meta .name {
-        font-weight: 700;
-        font-size: 0.9rem;
-        color: #111827;
-        margin: 0;
-    }
-    .del-author-meta .sub {
-        font-size: 0.74rem;
-        color: #6B7280;
-        font-weight: 500;
-    }
-    .del-author-meta .sub .del-author-dates {
-        display: none;
-    }
+    .ds-desk { background:var(--ink); color:#fff; border-radius:24px; padding:30px 26px 24px; position:relative; overflow:hidden; box-shadow:0 30px 60px -24px rgba(23,18,31,.55); }
+    .ds-desk::before { content:""; position:absolute; width:260px; height:260px; right:-90px; top:-110px; background:radial-gradient(circle,rgba(224,57,143,.6),transparent 65%); pointer-events:none; }
+    .ds-desk > * { position:relative; }
+    .ds-desk h3 { color:#fff; font-size:1.55rem; font-weight:700; line-height:1.15; }
+    .ds-desk .sub { color:rgba(255,255,255,.74); font-size:.9rem; margin:8px 0 20px; }
+    .ds-field { margin-bottom:12px; }
+    .ds-field input,.ds-field textarea { width:100%; padding:13px 14px; border-radius:10px; font:500 .92rem var(--body); color:#fff; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18); }
+    .ds-field input::placeholder,.ds-field textarea::placeholder { color:rgba(255,255,255,.55); }
+    .ds-field input:focus,.ds-field textarea:focus { background:rgba(255,255,255,.12); border-color:var(--mag2); }
+    .ds-field textarea { min-height:92px; resize:vertical; }
+    .ds-consent { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:.84rem; color:rgba(255,255,255,.8); margin:2px 0 16px; flex-wrap:wrap; }
+    .ds-consent label { display:inline-flex; gap:8px; align-items:center; cursor:pointer; }
+    .ds-consent input { accent-color:var(--mag); width:16px; height:16px; }
+    .ds-desk .ds-btn { width:100%; }
+    .ds-note { margin-top:16px; padding-top:16px; border-top:1px solid rgba(255,255,255,.14); font-size:.8rem; color:rgba(255,255,255,.7); line-height:1.5; }
+    #delHeroFeedback { display:none; margin-top:12px; padding:10px 12px; border-radius:10px; font-size:.86rem; font-weight:600; text-align:center; }
 
-    /* Floating Hero Quote Form */
-    .del-hero-form-card {
-        background: linear-gradient(155deg, #FFFFFF 0%, #FFFAFD 100%);
-        border: 1px solid rgba(196, 0, 122, 0.18);
-        border-radius: 24px;
-        padding: 32px;
-        box-shadow: 0 20px 52px rgba(93, 22, 68, 0.11);
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
-    .del-hero-form-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 32px;
-        width: 58px;
-        height: 4px;
-        border-radius: 0 0 6px 6px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-    }
-    .del-hero-form-card h3 {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-        letter-spacing: -0.03em;
-    }
-    .del-hero-form-icon {
-        width: 38px;
-        height: 38px;
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        flex: 0 0 38px;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.12);
-        border-radius: 12px;
-    }
-    .del-hero-form-card p {
-        font-size: 0.9rem;
-        color: #6B7280;
-        line-height: 1.55;
-        margin: 0 0 20px;
-    }
-    .del-hero-form-card form {
-        display: flex;
-        flex: 1;
-        flex-direction: column;
-    }
-    .del-hero-form-note {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-top: auto;
-        padding: 14px 16px;
-        color: #6B3453;
-        background: linear-gradient(100deg, #FFF1F8 0%, #FFF8FB 100%);
-        border: 1px solid rgba(196, 0, 122, 0.12);
-        border-radius: 14px;
-        font-size: 0.82rem;
-        line-height: 1.45;
-    }
-    .del-hero-form-note svg {
-        flex: 0 0 20px;
-        color: #C4007A;
-    }
-    .del-theme-dark .del-hero-form-note {
-        color: #FBCFE8;
-        background: rgba(190, 24, 93, 0.14);
-        border-color: rgba(244, 114, 182, 0.22);
-    }
-    .del-theme-dark .del-hero-form-note svg {
-        color: #F472B6;
-    }
+    /* ticker */
+    .ds-ticker { margin-top:60px; padding:18px 0; background:#fff; border-block:1px solid var(--line); overflow:hidden; }
+    .ds-ticker-label { text-align:center; font-size:.84rem; font-weight:700; color:var(--mute); margin-bottom:14px; padding:0 18px; }
+    .ds-track { display:flex; gap:16px; width:max-content; animation:dsTick 45s linear infinite; align-items:center; }
+    .ds-ticker:hover .ds-track { animation-play-state:paused; }
+    @keyframes dsTick { to { transform:translateX(-50%); } }
+    .ds-brand { display:flex; align-items:center; gap:12px; padding:8px 18px; border:1px solid var(--line); border-radius:14px; background:var(--paper); white-space:nowrap; }
+    .ds-brand img { height:30px; width:auto; max-width:80px; object-fit:contain; filter:grayscale(1); opacity:.85; }
+    .ds-brand i { width:30px; height:30px; border-radius:8px; background:var(--soft); color:var(--mag); display:grid; place-items:center; font:800 .75rem var(--body); font-style:normal; }
+    .ds-brand b { display:block; font-size:.86rem; line-height:1.2; }
+    .ds-brand small { display:block; font-size:.72rem; color:var(--mag); font-weight:600; }
 
-    .del-form-group input,
-    .del-form-group textarea,
-    .del-form-group select {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 12px 14px;
-        border-radius: 12px;
-        border: 1px solid #E9E1E7;
-        background: #FBFAFB;
-        font-size: 0.9rem;
-        color: #111827;
-        outline: none;
-        transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
-        font-family: inherit;
-    }
-    .del-form-group input:focus,
-    .del-form-group textarea:focus,
-    .del-form-group select:focus {
-        border-color: #C4007A;
-        background: #FFFFFF;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.12);
-    }
-    .del-form-group textarea {
-        min-height: 92px;
-        resize: vertical;
-    }
-    .del-form-consent-row {
-        color: #4B5563;
-    }
+    /* narrative */
+    .ds-nar { display:grid; gap:40px; align-items:center; }
+    @media(min-width:992px){ .ds-nar { grid-template-columns:1fr 1fr; gap:64px; } }
+    .ds-nar .lead { font-family:var(--display); font-size:1.3rem; font-weight:700; line-height:1.35; margin:20px 0 14px; letter-spacing:-.02em; }
+    .ds-nar p.b { color:var(--mute); margin-bottom:12px; }
+    .ds-callout { margin:20px 0 0; padding:16px 18px; border-left:4px solid var(--mag); background:var(--soft); border-radius:0 12px 12px 0; font-weight:700; color:var(--ink2); font-size:.95rem; }
+    .ds-browser { border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#fff; box-shadow:0 30px 60px -30px rgba(23,18,31,.4); }
+    .ds-chrome { display:flex; align-items:center; gap:12px; padding:10px 14px; background:#F4F0F8; border-bottom:1px solid var(--line); }
+    .ds-dots { display:flex; gap:6px; } .ds-dots i { width:10px; height:10px; border-radius:50%; background:#D6CCE0; }
+    .ds-url { flex:1; min-width:0; background:#fff; border:1px solid var(--line); border-radius:999px; padding:5px 12px; font:500 .76rem monospace; color:var(--mute); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .ds-vp { position:relative; }
+    .ds-vp img { display:block; width:100%; height:auto; }
+    .ds-flag { position:absolute; top:12px; right:12px; background:#fff; border:1px solid var(--line); border-radius:10px; padding:6px 12px; font-size:.74rem; font-weight:700; display:flex; gap:8px; align-items:center; box-shadow:0 8px 20px rgba(0,0,0,.12); }
+    .ds-flag i { width:8px; height:8px; border-radius:50%; background:#10B981; box-shadow:0 0 0 3px rgba(16,185,129,.25); }
 
-    .del-form-consent input {
-        accent-color: #C4007A;
-    }
-    .del-form-protected {
-        color: #8A8490;
-    }
-    .del-form-submit {
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-        color: #FFFFFF;
-        border-radius: 12px;
-        border: none;
-        box-shadow: 0 8px 18px rgba(196, 0, 122, 0.3);
-        transition: all 0.25s ease;
-    }
-    .del-form-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(196, 0, 122, 0.4);
-    }
+    /* why rows */
+    .ds-rows { list-style:none; margin:0; padding:0; border-top:2px solid var(--ink); display:grid; }
+    @media(min-width:760px){ .ds-rows.two { grid-template-columns:1fr 1fr; column-gap:48px; } }
+    .ds-row { display:flex; gap:18px; padding:24px 0; border-bottom:1px solid var(--line); }
+    .ds-ic { width:46px; height:46px; border-radius:12px; background:var(--soft); color:var(--mag); display:grid; place-items:center; flex:none; font-size:1.4rem; }
+    .ds-row h3 { font-size:1.15rem; font-weight:700; line-height:1.2; }
+    .ds-row p { color:var(--mute); font-size:.92rem; margin-top:6px; }
 
-    /* ========================================================
-       BRAND LOGOS MARQUEE (Continuous Single-Row Auto-Scroll)
-       ======================================================== */
-    .del-brands-section {
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 50%, #FFFFFF 100%);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.1);
-    }
-    .del-marquee-wrap {
-        position: relative;
-        overflow-x: auto;
-        overflow-y: hidden;
-        cursor: grab;
-        scrollbar-width: none;
-        border-radius: 22px;
-        background: linear-gradient(135deg, rgba(255, 245, 250, 0.98) 0%, rgba(255, 235, 245, 0.88) 100%);
-        border: 1.5px solid rgba(196, 0, 122, 0.2);
-        box-shadow: 0 8px 24px rgba(196, 0, 122, 0.06);
-    }
-    .del-marquee-wrap::-webkit-scrollbar {
-        display: none;
-    }
-    .del-marquee-wrap:active {
-        cursor: grabbing;
-    }
-    .del-marquee-wrap:focus-visible {
-        outline: 3px solid rgba(196, 0, 122, 0.45);
-        outline-offset: 3px;
-    }
-    .del-marquee-wrap::before,
-    .del-marquee-wrap::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 70px;
-        z-index: 3;
-        pointer-events: none;
-    }
-    .del-marquee-wrap::before {
-        left: 0;
-        background: linear-gradient(90deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
-    }
-    .del-marquee-wrap::after {
-        right: 0;
-        background: linear-gradient(270deg, #FFF5FA 0%, rgba(255, 245, 250, 0) 100%);
-    }
-    .del-marquee-track {
-        animation: delMarqueeSingle 32s linear infinite;
-    }
-    .del-marquee-wrap:hover .del-marquee-track {
-        animation-play-state: paused;
-    }
-    .del-marquee-wrap:focus-within .del-marquee-track,
-    .del-marquee-wrap:active .del-marquee-track {
-        animation-play-state: paused;
-    }
-    @keyframes delMarqueeSingle {
-        0% { transform: translate3d(0, 0, 0); }
-        100% { transform: translate3d(-33.333%, 0, 0); }
-    }
-    .del-brand-card {
-        background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        border-radius: 12px;
-        box-shadow: 0 3px 12px rgba(196, 0, 122, 0.05);
-    }
-    .del-brand-card:hover {
-        transform: translateY(-2px);
-        border-color: #C4007A;
-        background: #FFF0F7;
-    }
-    .del-brand-logo-img {
-        height: 30px;
-        width: auto;
-        max-width: 80px;
-        object-fit: contain;
-        filter: grayscale(100%);
-        opacity: 0.85;
-        transition: all 0.3s ease;
-    }
-    .del-brand-card:hover .del-brand-logo-img {
-        filter: grayscale(0%);
-        opacity: 1;
-    }
-    .del-brand-info .b-name {
-        font-size: 0.86rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0;
-    }
-    .del-brand-info .b-cat {
-        font-size: 0.68rem;
-        font-weight: 700;
-        color: #C4007A;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-    }
+    /* takeaways */
+    .ds-take { display:grid; gap:40px; align-items:start; }
+    @media(min-width:992px){ .ds-take { grid-template-columns:1.1fr .9fr; gap:56px; } }
+    .ds-checks { list-style:none; padding:0; margin:22px 0; display:grid; gap:0 26px; }
+    @media(min-width:640px){ .ds-checks { grid-template-columns:1fr 1fr; } }
+    .ds-checks li { display:flex; gap:10px; padding:11px 0; border-bottom:1px solid var(--line); font-size:.88rem; font-weight:600; line-height:1.45; }
+    .ds-checks svg { color:var(--ok); flex:none; margin-top:2px; }
+    .ds-means { padding:18px 20px; border-radius:16px; background:#fff; border:1px solid var(--line); margin-bottom:20px; }
+    .ds-means h4 { font-size:1rem; margin-bottom:10px; }
+    .ds-means ul { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+    .ds-means li { font-size:.88rem; color:var(--mute); display:flex; gap:10px; }
+    .ds-means li::before { content:"✓"; color:var(--mag); font-weight:800; }
+    .ds-tele { background:var(--ink); color:#fff; border-radius:22px; padding:26px; position:relative; overflow:hidden; }
+    .ds-tele::after { content:""; position:absolute; right:-100px; bottom:-120px; width:300px; height:300px; background:radial-gradient(circle,rgba(224,57,143,.4),transparent 65%); pointer-events:none; }
+    .ds-tele > * { position:relative; z-index:1; }
+    .ds-live { display:inline-flex; gap:8px; align-items:center; font-size:.8rem; font-weight:700; color:#34D399; border:1px solid rgba(52,211,153,.4); border-radius:999px; padding:4px 12px; }
+    .ds-live i { width:7px; height:7px; border-radius:50%; background:#34D399; }
+    .ds-tele h4 { color:#fff; font-size:1.5rem; font-weight:700; line-height:1.15; margin:16px 0 8px; }
+    .ds-tele p { color:rgba(255,255,255,.75); font-size:.92rem; }
+    .ds-kpis { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,.16); border-radius:14px; overflow:hidden; margin-top:22px; }
+    .ds-kpis div { background:#241830; padding:16px 10px; text-align:center; }
+    .ds-kpis b { display:block; font:800 1.55rem var(--display); color:#FF8CC2; letter-spacing:-.03em; line-height:1; }
+    .ds-kpis span { display:block; font-size:.74rem; color:rgba(255,255,255,.75); margin-top:6px; }
+    .ds-tele small { display:block; margin-top:16px; font-size:.78rem; color:rgba(255,255,255,.6); }
 
-    .del-ranking-showcase {
-        background: #fbeaf4;
-    }
-    .del-ranking-showcase .del-container {
-        max-width: 1180px;
-    }
+    /* offers bento */
+    .ds-bento { display:grid; gap:16px; }
+    @media(min-width:700px){ .ds-bento { grid-template-columns:repeat(2,1fr); } }
+    @media(min-width:1000px){ .ds-bento { grid-template-columns:repeat(6,1fr); } .ds-bento > :nth-child(1) { grid-column:span 4; grid-row:span 2; } .ds-bento > :nth-child(n+2) { grid-column:span 2; } }
+    .ds-tile { background:#fff; border:1px solid var(--line); border-radius:20px; padding:26px; display:flex; flex-direction:column; text-decoration:none; color:inherit; transition:border-color .2s,box-shadow .2s; }
+    .ds-tile:hover { border-color:var(--mag); box-shadow:0 18px 40px -22px rgba(196,0,122,.45); }
+    .ds-tile .ds-ic { margin-bottom:18px; }
+    .ds-tile h3 { font-size:1.2rem; font-weight:700; line-height:1.2; }
+    .ds-tile p { color:var(--mute); font-size:.92rem; margin:8px 0 18px; flex:1; }
+    .ds-tile .more { color:var(--mag); font-weight:700; font-size:.88rem; }
+    .ds-tile:hover .more { text-decoration:underline; }
+    .ds-tile:first-child { background:var(--ink); border-color:var(--ink); justify-content:flex-end; min-height:300px; }
+    .ds-tile:first-child h3 { color:#fff; font-size:clamp(1.6rem,3vw,2.3rem); max-width:16ch; }
+    .ds-tile:first-child p { color:rgba(255,255,255,.75); max-width:48ch; flex:none; }
+    .ds-tile:first-child .ds-ic { background:var(--mag); color:#fff; }
+    .ds-tile:first-child .more { color:#FF8CC2; }
 
-    .del-ranking-header h2 {
-        max-width: 940px;
-    }
-    .del-ranking-header h2 .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-    }
-    .del-ranking-header p {
-        margin: 12px auto 0;
-        max-width: 760px;
-        font-size: 1.03rem;
-        line-height: 1.6;
-        color: #4B5563;
-    }
-    .del-keyword-table-wrap {
-        background: rgba(255,255,255,0.45);
-        border: 1.5px solid rgba(196, 0, 122, 0.15);
-        border-radius: 18px;
-        box-shadow: 0 14px 32px rgba(196, 0, 122, 0.08);
-    }
-    .del-keyword-table {
-        border-collapse: collapse;
-        background: #fff;
-    }
-    .del-keyword-table th {
-        background: #f7d8eb;
-        color: #111827;
-        font-size: 0.8rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-weight: 800;
-        padding: 16px 14px;
-        text-align: left;
-        border-bottom: 1px solid rgba(196, 0, 122, 0.16);
-    }
-    .del-keyword-table td {
-        padding: 16px 14px;
-        border-bottom: 1px solid #f0e9ee;
-        font-size: 0.95rem;
-        color: #111827;
-        vertical-align: middle;
-    }
-    .del-keyword-table tbody tr:last-child td {
-        border-bottom: none;
-    }
-    .del-keyword-table tbody tr:hover td {
-        background: #fff8fc;
-    }
-    .del-keyword-name {
-        color: #111827;
-    }
-    .del-keyword-url {
-        color: #4B5563;
-    }
-    .del-rank-badge {
-        border-radius: 999px;
-        background: linear-gradient(135deg, #ff4ca8 0%, #d91d77 100%);
-        color: #fff;
-        box-shadow: 0 8px 18px rgba(196, 0, 122, 0.18);
-    }
-    .del-trend-badge {
-        border-radius: 999px;
-        background: rgba(16, 185, 129, 0.12);
-        color: #0f9f6d;
-    }
-    .del-volume-value, .del-intent-tag {
-        font-weight: 700;
-        color: #374151;
-    }
-    .del-intent-tag {
-        background: rgba(196, 0, 122, 0.08);
-        border-radius: 8px;
-        color: #C4007A;
-    }
+    /* founder */
+    .ds-founder { display:grid; gap:36px; align-items:center; }
+    @media(min-width:992px){ .ds-founder { grid-template-columns:1.2fr .8fr; gap:56px; } }
+    .ds-stats { display:grid; grid-template-columns:repeat(3,1fr); border-top:2px solid var(--ink); margin-top:26px; }
+    .ds-stats div { padding:18px 14px 6px 0; }
+    .ds-stats div + div { padding-left:18px; border-left:1px solid var(--line); }
+    .ds-stats b { display:block; font:800 clamp(1.5rem,3vw,2.2rem) var(--display); letter-spacing:-.03em; line-height:1; }
+    .ds-stats span { display:block; font-size:.82rem; color:var(--mute); margin-top:6px; }
+    .ds-person { background:var(--ink); color:#fff; border-radius:24px; padding:32px 26px; text-align:center; }
+    .ds-person .ph { width:150px; height:150px; border-radius:50%; overflow:hidden; margin:0 auto 16px; border:3px solid var(--mag2); background:#2A1233; display:grid; place-items:center; font:800 2.2rem var(--display); color:#FF8CC2; }
+    .ds-person .ph img { width:100%; height:100%; object-fit:cover; }
+    .ds-person h4 { color:#fff; font-size:1.4rem; }
+    .ds-person .role { color:#FF8CC2; font-weight:700; font-size:.88rem; margin:2px 0 12px; }
+    .ds-person p { color:rgba(255,255,255,.75); font-size:.88rem; }
 
-    .del-market-showcase h3 {
-        margin: 0 0 18px;
-        color: #111827;
-        font-size: clamp(1.35rem, 2vw, 1.8rem);
-        font-weight: 800;
-    }
+    /* process timeline */
+    .ds-line { position:relative; list-style:none; margin:0; padding:0 0 0 34px; max-width:860px; }
+    .ds-line::before { content:""; position:absolute; left:11px; top:8px; bottom:8px; width:2px; background:linear-gradient(var(--mag),var(--line)); }
+    .ds-step { position:relative; padding:0 0 36px; }
+    .ds-step:last-child { padding-bottom:0; }
+    .ds-step::before { content:""; position:absolute; left:-33px; top:6px; width:16px; height:16px; border-radius:50%; background:var(--paper); border:4px solid var(--mag); }
+    .ds-step .n { font-size:.82rem; font-weight:700; color:var(--mag); }
+    .ds-step h3 { font-size:1.4rem; font-weight:700; margin-top:2px; }
+    .ds-step p { color:var(--mute); margin-top:6px; max-width:60ch; }
 
-    .del-market-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 9px 14px;
-        border-radius: 999px;
-        border: 1px solid rgba(196, 0, 122, 0.32);
-        background: #fff;
-        color: #111827;
-        font-size: 0.84rem;
-        font-weight: 700;
-        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.04);
-    }
-    .del-market-pill:before {
-        content: "•";
-        color: #C4007A;
-        font-size: 1rem;
-    }
-    @media (max-width: 780px) {
-        .del-keyword-table-wrap {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-        .del-keyword-table {
-            min-width: 760px;
-        }
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .del-marquee-track {
-            animation: none !important;
-        }
-    }
+    /* industries */
+    .ds-ind { display:grid; gap:0 36px; border-top:2px solid var(--ink); }
+    @media(min-width:700px){ .ds-ind { grid-template-columns:1fr 1fr; } }
+    @media(min-width:1000px){ .ds-ind { grid-template-columns:repeat(4,1fr); gap:0 28px; } }
+    .ds-ind > div { padding:22px 0; border-bottom:1px solid var(--line); }
+    .ds-ind .e { font-size:1.7rem; line-height:1; margin-bottom:10px; }
+    .ds-ind h4 { font-size:1.05rem; font-weight:700; }
+    .ds-ind p { font-size:.86rem; color:var(--mute); margin-top:6px; }
 
-    /* ========================================================
-       2. STRATEGIC NARRATIVE & SPRING SOURCING FAIR SERP PROOF
-       ======================================================== */
-    .del-narrative-section {
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-    }
-    .del-narrative-split {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    @media (min-width: 992px) {
-        .del-narrative-split {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 38px;
-        }
-    }
-    .del-narrative-left,
-    .del-narrative-right {
-        min-width: 0;
-    }
-    @media (min-width: 992px) {
-        .del-narrative-left,
-        .del-narrative-right {
-            height: 100%;
-        }
-        .del-narrative-right {
-            display: flex;
-        }
-        .del-serp-browser-showcase {
-            display: flex;
-            flex: 1 1 auto;
-            flex-direction: column;
-            min-height: 100%;
-            width: 100%;
-        }
-        .del-browser-viewport {
-            flex: 1 1 auto;
-            min-height: 0;
-        }
-        .del-browser-serp-img {
-            height: 100%;
-            min-height: 360px;
-            object-fit: cover;
-            object-position: top center;
-        }
-    }
-    .del-narrative-lead {
-        color: #111827;
-    }
-    .del-narrative-sub {
-        color: #4B5563;
-    }
-    .del-narrative-title {
-        max-width: 720px;
-        margin: 0 0 14px;
-        text-align: left;
-        font-size: clamp(1.9rem, 3vw, 2.7rem);
-        line-height: 1.12;
-        letter-spacing: -0.04em;
-    }
-    .del-narrative-title .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline;
-        white-space: normal;
-        text-decoration: underline;
-        text-decoration-color: rgba(196, 0, 122, 0.35);
-        text-decoration-thickness: 3px;
-        text-underline-offset: 5px;
-    }
-    .del-narrative-title::after {
-        display: none;
-    }
+    /* testimonials */
+    .ds-q { background:#fff; border:1px solid var(--line); border-radius:22px; padding:30px 26px; height:auto; }
+    .ds-q .st { color:#F59E0B; letter-spacing:2px; }
+    .ds-q blockquote { margin:14px 0 22px; font-family:var(--display); font-size:1.12rem; line-height:1.5; font-weight:500; letter-spacing:-.01em; }
+    .ds-q .by { display:flex; gap:12px; align-items:center; }
+    .ds-q .by i { width:44px; height:44px; border-radius:50%; background:var(--mag); color:#fff; display:grid; place-items:center; font:800 1rem var(--body); font-style:normal; flex:none; }
+    .ds-q .by b { display:block; font-size:.95rem; line-height:1.2; }
+    .ds-q .by small { color:var(--mute); font-size:.8rem; }
+    #delFeedbackSwiper { padding-bottom:44px; }
+    #delFeedbackSwiper .swiper-slide { height:auto; }
+    #delFeedbackSwiper .swiper-pagination-bullet-active { background:var(--mag); }
 
-    /* Google SERP Browser Showcase */
-    .del-serp-browser-showcase {
-        background: #FFFFFF;
-        border-radius: 20px;
-        border: 2px solid rgba(196, 0, 122, 0.22);
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.10);
-        transition: transform 0.3s ease;
-    }
-    .del-serp-browser-showcase:hover {
-        transform: translateY(-4px);
-        border-color: #C4007A;
-        box-shadow: 0 20px 50px rgba(196, 0, 122, 0.16);
-    }
-    .del-browser-chrome {
-        background: #F9FAFB;
-        border-bottom: 1px solid rgba(196, 0, 122, 0.12);
-    }
-    .del-browser-dots {
-        display: flex;
-    }
-    .del-browser-dots .dot {
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        display: inline-block;
-    }
-    .del-browser-dots .dot.red { background: #EF4444; }
-    .del-browser-dots .dot.yellow { background: #F59E0B; }
-    .del-browser-dots .dot.green { background: #10B981; }
-    .del-browser-search-bar {
-        background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.18);
-        border-radius: 9999px;
-        color: #4B5563;
-    }
-    .del-browser-viewport {
-        background: #FFFFFF;
-    }
-    .del-browser-serp-img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-    .del-serp-float-badge {
-        background: #FFFFFF;
-        color: #111827;
-        border-radius: 10px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-        border: 1.5px solid rgba(196, 0, 122, 0.25);
-        display: inline-flex;
-    }
-    .del-serp-float-badge.badge-top {
-        top: 12px;
-        right: 12px;
-    }
-    .del-serp-float-badge .pulse-dot {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #10B981;
-        display: inline-block;
-        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
-    }
+    /* cases */
+    .ds-cases { display:grid; gap:16px; }
+    @media(min-width:800px){ .ds-cases { grid-template-columns:repeat(3,1fr); } }
+    .ds-case { background:#fff; border:1px solid var(--line); border-radius:20px; padding:26px; display:flex; flex-direction:column; }
+    .ds-case .bd { align-self:flex-start; font-size:.78rem; font-weight:700; color:var(--mag); background:var(--soft); padding:4px 12px; border-radius:999px; margin-bottom:16px; }
+    .ds-case h3 { font-size:1.2rem; font-weight:700; line-height:1.2; }
+    .ds-case .big { font:800 clamp(2.4rem,4vw,3.2rem) var(--display); letter-spacing:-.04em; line-height:1; margin-top:20px; color:var(--mag); }
+    .ds-case .bl { font-size:.84rem; font-weight:600; margin-top:6px; }
+    .ds-case p { color:var(--mute); font-size:.9rem; margin-top:14px; padding-top:14px; border-top:1px solid var(--line); }
 
-    /* Component 2B: Why WebTecMart Choice (3-Col Grid) */
-    .del-narrative-why-wrap {
-        border-top: 1px solid rgba(196, 0, 122, 0.12);
-    }
-    .del-why-section-head {
-        margin-bottom: 22px;
-    }
-    .del-why-section-head .del-section-title {
-        font-size: clamp(1.65rem, 2.6vw, 2.2rem);
-    }
-    .del-why-grid-3col {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    @media (min-width: 640px) {
-        .del-why-grid-3col {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (min-width: 992px) {
-        .del-why-grid-3col {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-    }
-    .del-why-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
-        border-radius: 16px;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-why-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
-    }
-    .del-why-icon {
-        background: #FFF0F7;
-        border-radius: 10px;
-    }
-    .del-why-title {
-        color: #111827;
-    }
-    .del-why-text {
-        color: #4B5563;
-    }
+    /* rankings */
+    .ds-board { display:grid; gap:14px; margin-bottom:34px; }
+    @media(min-width:760px){ .ds-board { grid-template-columns:1fr 1fr; } }
+    @media(min-width:1050px){ .ds-board { grid-template-columns:repeat(3,1fr); } }
+    .ds-rk { background:#fff; border:1px solid var(--line); border-radius:16px; padding:18px 18px 16px; display:flex; gap:14px; }
+    .ds-rk .pos { font:800 1.9rem var(--display); color:var(--mag); letter-spacing:-.04em; line-height:1; min-width:52px; }
+    .ds-rk b { display:block; font-size:.98rem; line-height:1.3; }
+    .ds-rk small { display:block; color:var(--mute); font-size:.78rem; margin-top:2px; word-break:break-all; }
+    .ds-rk .meta { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+    .ds-rk .meta span { font-size:.74rem; font-weight:700; padding:3px 10px; border-radius:999px; background:var(--soft); color:var(--mag); }
+    .ds-rk .meta span.g { background:#DDF6EA; color:var(--ok); }
+    .ds-tw { background:#fff; border:1px solid var(--line); border-radius:18px; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .ds-tw table { width:100%; min-width:680px; border-collapse:collapse; font-size:.9rem; }
+    .ds-tw th { text-align:left; padding:14px 18px; font-size:.82rem; font-weight:700; background:#F4F0F8; border-bottom:1px solid var(--line); }
+    .ds-tw td { padding:14px 18px; border-bottom:1px solid var(--line); color:var(--ink2); }
+    .ds-tw tr:last-child td { border-bottom:0; }
+    .ds-pos { font-weight:800; color:var(--ok); background:#DDF6EA; padding:3px 10px; border-radius:999px; font-size:.82rem; }
 
-    /* ========================================================
-       3. KEY TAKEAWAYS & GOOGLE SERP AI OVERVIEW
-       ======================================================== */
-    .del-takeaways-section {
-        background: #FFFFFF;
-    }
-    .del-takeaways-intro {
-        max-width: 860px;
-        margin: 0 auto 30px;
-        text-align: center;
-    }
-    .del-takeaways-intro .del-section-title {
-        max-width: 820px;
-    }
-    .del-takeaways-title .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-        padding-bottom: 4px;
-    }
-    .del-takeaways-title .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -1px;
-        width: 100%;
-        height: 6px;
-        pointer-events: none;
-    }
-    .del-takeaways-lead {
-        margin: 0 0 14px;
-        color: #4B5563;
-        font-size: 0.94rem;
-        line-height: 1.6;
-    }
-    .del-takeaways-subtitle {
-        color: #111827;
-    }
-    .del-takeaways-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    @media (min-width: 992px) {
-        .del-takeaways-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 38px;
-        }
-    }
-    .del-takeaways-left,
-    .del-takeaways-right {
-        min-width: 0;
-    }
-    @media (min-width: 992px) {
-        .del-takeaways-left {
-            display: flex;
-            flex-direction: column;
-        }
-        .del-takeaways-left > div:last-child {
-            margin-top: auto;
-        }
-    }
-    .del-takeaways-checklist-2col {
-        grid-template-columns: 1fr;
-    }
-    @media (min-width: 600px) {
-        .del-takeaways-checklist-2col {
-            grid-template-columns: 1fr 1fr;
-        }
-    }
-    .del-takeaway-item {
-        font-size: 0.85rem;
-        color: #1F2937;
-        font-weight: 600;
-    }
-    .del-takeaway-item .chk {
-        color: #C4007A;
-        font-weight: 800;
-        font-size: 0.95rem;
-        flex-shrink: 0;
-    }
-    .del-takeaways-outcomes {
-        border: 1px solid rgba(196, 0, 122, 0.16);
-        border-radius: 16px;
-        background: linear-gradient(135deg, #FFF7FB 0%, #FFFFFF 100%);
-    }
-    .del-takeaways-outcomes-title {
-        color: #111827;
-    }
-    .del-takeaways-outcomes-list {
-        display: grid;
-        gap: 10px;
-    }
-    .del-takeaways-outcomes-list li {
-        display: flex;
-        align-items: flex-start;
-        gap: 9px;
-        color: #4B5563;
-        font-size: 0.82rem;
-        line-height: 1.45;
-    }
-    .del-takeaways-outcomes-list li::before {
-        content: "✓";
-        flex: 0 0 auto;
-        color: #C4007A;
-        font-weight: 800;
-    }
+    /* wrap up */
+    .ds-wrap-up { display:grid; gap:40px; }
+    @media(min-width:992px){ .ds-wrap-up { grid-template-columns:.95fr 1.05fr; gap:70px; align-items:start; } }
+    .ds-wrap-up .sub { font-family:var(--display); font-weight:700; font-size:1.2rem; color:var(--mag); margin-top:14px; }
+    .ds-wrap-up .body p { color:var(--mute); margin-bottom:14px; }
+    .ds-chips { display:flex; flex-wrap:wrap; gap:9px; margin:22px 0; }
+    .ds-chips span { padding:8px 16px; border-radius:999px; background:#fff; border:1px solid var(--line); font-size:.86rem; font-weight:600; }
+    .ds-goal { font-family:var(--display); font-weight:700; font-size:1.15rem; line-height:1.35; color:var(--ink); margin-bottom:6px; }
 
-    .del-serp-mockup {
-        background: #FFFFFF;
-        border-radius: 20px;
-        border: 2px solid rgba(196, 0, 122, 0.2);
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.10);
-    }
-    .del-serp-preview-img-wrap {
-        background: #FFFFFF;
-    }
-    .del-serp-img {
-        width: 100%;
-        height: 100%;
-        min-height: 320px;
-        object-fit: cover;
-        object-position: top center;
-        display: block;
-    }
-    /* ========================================================
-       4. WHAT WE OFFER (6 Core SEO Offerings)
-       ======================================================== */
-    .del-offers-section {
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-    }
-    .del-offers-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-    @media (min-width: 640px) {
-        .del-offers-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (min-width: 992px) {
-        .del-offers-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 22px;
-        }
-    }
-    .del-offer-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
-        border-radius: 20px;
-        padding: 24px 20px;
-        transition: all 0.3s ease;
-        box-shadow: 0 6px 20px rgba(196, 0, 122, 0.04);
-        display: flex;
-        flex-direction: column;
-        text-decoration: none;
-        height: 100%;
-    }
-    .del-offer-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 16px 36px rgba(196, 0, 122, 0.14);
-        border-color: #C4007A;
-    }
-    .del-offer-icon {
-        border-radius: 12px;
-        background: #FFF0F7;
-        color: #C4007A;
-    }
-    .del-offer-card h3 {
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-    }
-    .del-offer-card p {
-        font-size: 0.88rem;
-        line-height: 1.58;
-        color: #4B5563;
-        margin: 0 0 16px;
-        flex-grow: 1;
-    }
-    .del-offer-link {
-        color: #C4007A;
-        gap: 6px;
-        transition: gap 0.2s ease;
-    }
-    .del-offer-card:hover .del-offer-link {
-        gap: 10px;
-    }
+    /* faq */
+    .ds-faq details { border-bottom:1px solid var(--line); }
+    .ds-faq details:first-child { border-top:2px solid var(--ink); }
+    .ds-faq summary { list-style:none; cursor:pointer; display:flex; justify-content:space-between; gap:18px; align-items:center; padding:22px 0; font-family:var(--display); font-size:1.15rem; font-weight:700; line-height:1.25; }
+    .ds-faq summary::-webkit-details-marker { display:none; }
+    .ds-pm { width:32px; height:32px; border-radius:50%; background:var(--soft); color:var(--mag); display:grid; place-items:center; flex:none; transition:transform .25s,background .25s,color .25s; }
+    .ds-faq details[open] .ds-pm { transform:rotate(45deg); background:var(--mag); color:#fff; }
+    .ds-ans { padding:0 50px 24px 0; color:var(--mute); max-width:66ch; }
 
-    /* ========================================================
-       5. SEO CHALLENGES (6-Card Grid)
-       ======================================================== */
-    .del-challenges-section {
-        background: #FFFFFF;
-    }
-    .del-challenges-section .del-section-head,
-    .del-founder-section .del-section-head {
-        max-width: 860px;
-        margin-right: auto;
-        margin-left: auto;
-    }
-    .del-challenges-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-    }
-    @media (min-width: 640px) {
-        .del-challenges-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (min-width: 992px) {
-        .del-challenges-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-    }
-    .del-challenge-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
-        border-radius: 18px;
-        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-challenge-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
-    }
+    /* cta */
+    .ds-cta { background:var(--mag); color:#fff; border-radius:28px; padding:60px 32px; position:relative; overflow:hidden; }
+    .ds-cta::before { content:""; position:absolute; inset:0; background:radial-gradient(600px 300px at 90% 0%,rgba(255,255,255,.22),transparent 60%),radial-gradient(500px 300px at 0% 100%,rgba(23,18,31,.35),transparent 60%); }
+    .ds-cta > * { position:relative; }
+    .ds-cta h2 { color:#fff; font-size:clamp(1.9rem,4vw,3.1rem); font-weight:800; line-height:1.06; max-width:22ch; }
+    .ds-cta h3 { color:#FFE3F1; font-size:1.15rem; margin-top:14px; font-weight:600; }
+    .ds-cta p { color:rgba(255,255,255,.9); margin:14px 0 0; max-width:62ch; }
+    .ds-cta small { display:block; margin-top:22px; font-size:.84rem; color:rgba(255,255,255,.85); }
 
-    .del-challenge-card h3 {
-        font-size: 1.05rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-    }
-    .del-challenge-card p {
-        font-size: 0.86rem;
-        line-height: 1.56;
-        color: #4B5563;
-        margin: 0;
-    }
-
-    /* ========================================================
-       6. MEET THE EXPERTS (Jitin Madaan Spotlight)
-       ======================================================== */
-    .del-founder-section {
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-    }
-    .del-founder-card {
-        background: #FFFFFF;
-        border: 2px solid rgba(196, 0, 122, 0.18);
-        border-radius: 24px;
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.08);
-    }
-    .del-founder-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-    }
-    .del-founder-left,
-    .del-founder-right,
-    .del-founder-stats {
-        min-width: 0;
-    }
-    .del-founder-stats {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-    .del-founder-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-top: 18px;
-    }
-    .del-founder-actions > a {
-        min-width: 0;
-        max-width: 100%;
-        text-align: center;
-    }
-    .del-fstat-box {
-        min-width: 0;
-        overflow-wrap: anywhere;
-    }
-    @media (min-width: 992px) {
-        .del-founder-grid {
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 38px;
-        }
-    }
-
-    .del-fstat-box {
-        background: #FFF5FA;
-        border: 1px solid rgba(196, 0, 122, 0.18);
-        border-radius: 12px;
-    }
-    .del-fstat-box .val {
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: #C4007A;
-    }
-    .del-fstat-box .lbl {
-        font-size: 0.72rem;
-        font-weight: 700;
-        color: #4B5563;
-        margin-top: 2px;
-    }
-    .del-founder-photo-box {
-        background: linear-gradient(135deg, #FFF5FA 0%, #FFFFFF 100%);
-        border: 2px solid rgba(196, 0, 122, 0.22);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(196, 0, 122, 0.08);
-    }
-    .del-founder-img-wrapper {
-        border-radius: 50%;
-        border: 3px solid #C4007A;
-        box-shadow: 0 8px 24px rgba(196, 0, 122, 0.2);
-    }
-    .del-founder-photo {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .del-founder-name-tag {
-        color: #111827;
-    }
-    .del-founder-role-tag {
-        color: #C4007A;
-    }
-    .del-expert-pillars {
-        grid-template-columns: 1fr;
-    }
-    @media (min-width: 768px) {
-        .del-expert-pillars {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-    .del-expert-pillar-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
-        border-radius: 16px;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-expert-pillar-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
-    }
-
-    .del-expert-pillar-card h4 {
-        font-size: 1rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 6px;
-    }
-    .del-expert-pillar-card p {
-        font-size: 0.85rem;
-        color: #4B5563;
-        line-height: 1.54;
-        margin: 0;
-    }
-
-    /* ========================================================
-       7. WORKING PROCESS (6-Step Grid)
-       ======================================================== */
-    .del-process-section {
-        background: #FFFFFF;
-    }
-    .del-process-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    @media (min-width: 640px) {
-        .del-process-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (min-width: 992px) {
-        .del-process-grid {
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-    }
-    .del-process-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
-        border-radius: 18px;
-        box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-process-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
-    }
-    .del-process-num {
-        color: rgba(196, 0, 122, 0.25);
-    }
-    .del-process-card h3 {
-        font-size: 1.05rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-    }
-    .del-process-card p {
-        font-size: 0.86rem;
-        line-height: 1.56;
-        color: #4B5563;
-        margin: 0;
-    }
-
-    /* ========================================================
-       8. INDUSTRIES WE WORK WITH (8 Cards)
-       ======================================================== */
-    .del-industries-section {
-        background: linear-gradient(180deg, #FFF8FB 0%, #FFFFFF 100%);
-    }
-    .del-industries-grid {
-        grid-template-columns: 1fr;
-    }
-    @media (min-width: 640px) {
-        .del-industries-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-    @media (min-width: 992px) {
-        .del-industries-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-    }
-    .del-industry-card {
-        background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.14);
-        border-radius: 16px;
-        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-industry-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
-    }
-
-    .del-offer-icon,
-    .del-why-icon,
-    .del-challenge-icon,
-    .del-ep-icon,
-    .del-ind-icon {
-        transition: transform 0.25s ease;
-    }
-    .del-offer-card:hover .del-offer-icon,
-    .del-offer-card:focus-visible .del-offer-icon,
-    .del-why-card:hover .del-why-icon,
-    .del-challenge-card:hover .del-challenge-icon,
-    .del-expert-pillar-card:hover .del-ep-icon,
-    .del-industry-card:hover .del-ind-icon {
-        transform: translateY(-2px) rotate(-6deg) scale(1.08);
-    }
-    .del-industry-card h4 {
-        font-size: 0.98rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 6px;
-    }
-    .del-industry-card p {
-        font-size: 0.84rem;
-        line-height: 1.5;
-        color: #4B5563;
-        margin: 0;
-    }
-
-    /* ========================================================
-       9. CLIENT FEEDBACK & CASE STUDIES
-       ======================================================== */
-    .del-feedback-section {
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-    }
-    .del-feedback-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(196, 0, 122, 0.06);
-    }
-    .del-stars {
-        color: #F59E0B;
-    }
-    .del-quote-text {
-        color: #374151;
-    }
-
-    .del-client-avatar {
-        border-radius: 50%;
-        background: linear-gradient(135deg, #C4007A, #E0398F);
-        color: #FFFFFF;
-    }
-    .del-client-info h5 {
-        font-size: 0.95rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0;
-    }
-    .del-client-info p {
-        font-size: 0.78rem;
-        color: #6B7280;
-        margin: 0;
-    }
-
-    /* Case Studies */
-    .del-case-section {
-        background: #FFFFFF;
-    }
-    .del-cases-grid {
-        grid-template-columns: 1fr;
-    }
-    @media (min-width: 768px) {
-        .del-cases-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-    }
-    .del-case-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.14);
-        border-radius: 18px;
-        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.04);
-        transition: all 0.3s ease;
-    }
-    .del-case-card:hover {
-        transform: translateY(-3px);
-        border-color: #C4007A;
-        box-shadow: 0 12px 28px rgba(196, 0, 122, 0.12);
-    }
-    .del-case-badge {
-        background: #FFF0F7;
-        color: #C4007A;
-        border-radius: 9999px;
-    }
-    .del-case-card h3 {
-        font-size: 1.05rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 10px;
-    }
-    .del-case-stat-box {
-        background: #FFF5FA;
-        border-radius: 10px;
-    }
-    .del-case-stat-num {
-        color: #C4007A;
-    }
-    .del-case-stat-lbl {
-        color: #4B5563;
-    }
-    .del-case-card p {
-        font-size: 0.85rem;
-        line-height: 1.54;
-        color: #4B5563;
-        margin: 0;
-    }
-
-    /* Live Google Rankings Table */
-    .del-rankings-section {
-        background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-    }
-    .del-rankings-table-wrap {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(196, 0, 122, 0.06);
-    }
-    .del-table {
-        border-collapse: collapse;
-        font-size: 0.88rem;
-    }
-    .del-table th {
-        background: #FFF5FA;
-        color: #111827;
-        font-weight: 800;
-        padding: 12px 18px;
-        text-align: left;
-        border-bottom: 1px solid rgba(196, 0, 122, 0.14);
-        font-size: 0.82rem;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-    }
-    .del-table td {
-        padding: 14px 18px;
-        border-bottom: 1px solid #F3F4F6;
-        color: #374151;
-    }
-    .del-table tr:hover td {
-        background: #FFF8FC;
-    }
-    .del-pos-pill {
-        background: #ECFDF5;
-        color: #059669;
-        border-radius: 9999px;
-    }
-
-    /* ========================================================
-       10. WRAPPING UP (Why SEO in Delhi Matters + Micro-Markets)
-       ======================================================== */
-    .del-wrap-section {
-        background: #FFFFFF;
-    }
-    .del-wrap-card {
-        background: linear-gradient(135deg, #FFFFFF 0%, #FFF5FA 100%);
-        border: 2px solid rgba(196, 0, 122, 0.2);
-        border-radius: 24px;
-        padding: 36px 32px;
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.07);
-    }
-
-    .del-market-pill {
-        background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.22);
-        color: #C4007A;
-        font-weight: 700;
-        font-size: 0.82rem;
-        padding: 4px 12px;
-        border-radius: 9999px;
-    }
-
-    /* ========================================================
-       11. FAQS ACCORDION
-       ======================================================== */
-    .del-faq-section {
-        background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
-    }
-    .del-faq-item {
-        background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.16);
-        border-radius: 14px;
-        margin-bottom: 10px;
-        overflow: hidden;
-        transition: all 0.25s ease;
-    }
-    .del-faq-item.active {
-        border-color: #C4007A;
-        box-shadow: 0 6px 18px rgba(196, 0, 122, 0.08);
-    }
-    .del-faq-btn {
-        width: 100%;
-        background: transparent;
-        border: none;
-        font-size: 0.98rem;
-        font-weight: 700;
-        color: #111827;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .del-faq-btn:hover {
-        color: #C4007A;
-    }
-    .del-faq-btn .icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: #FFF0F7;
-        color: #C4007A;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        font-weight: 800;
-        flex-shrink: 0;
-    }
-    .del-faq-answer {
-        color: #4B5563;
-        display: none;
-    }
-    .del-faq-item.active .del-faq-answer {
-        display: block;
-    }
-
-    /* ========================================================
-       12. FINAL CONVERSION CTA BANNER
-       ======================================================== */
-    .del-cta-section {
-        background: #FFFFFF;
-    }
-    .del-cta-box {
-        background: linear-gradient(135deg, #1A1A1A 0%, #2A1020 100%);
-        border: 2px solid rgba(196, 0, 122, 0.35);
-        border-radius: 24px;
-        padding: 40px 32px;
-        color: #FFFFFF;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-    }
-    .del-cta-box h2 {
-        font-size: clamp(1.6rem, 2.8vw, 2.2rem);
-        font-weight: 800;
-        margin: 0 0 8px;
-        color: #FFFFFF;
-    }
-    .del-cta-box h2 span {
-        color: #FF2D75;
-    }
-    .del-cta-box h3 {
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: #FCE7F3;
-        margin: 0 0 12px;
-    }
-    .del-cta-box p {
-        font-size: 0.92rem;
-        line-height: 1.6;
-        color: rgba(255, 255, 255, 0.85);
-        max-width: 780px;
-        margin: 0 auto 24px;
-    }
-
-
-    .del-seo-page > section:not(.del-hero) {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
-    .del-seo-page > .del-brands-section {
-        padding-top: 32px;
-        padding-bottom: 32px;
-    }
-    .del-seo-page > .del-ranking-showcase {
-        padding-top: 38px;
-        padding-bottom: 38px;
-    }
-    .del-seo-page .del-cta-box h2 {
-        font-size: clamp(1.6rem, 2.5vw, 2rem);
-        line-height: 1.18;
-        letter-spacing: -0.03em;
-    }
-    .del-seo-page .del-cta-box h3 {
-        font-size: 1rem;
-        line-height: 1.45;
-    }
-
-    @media (max-width: 640px) {
-        .del-container {
-            padding-right: 18px;
-            padding-left: 18px;
-        }
-        .del-seo-page .del-container {
-            padding-right: 18px !important;
-            padding-left: 18px !important;
-        }
-        .del-seo-page > section:not(.del-hero) {
-            padding-top: 32px;
-            padding-bottom: 32px;
-        }
-        .del-section-head {
-            padding-right: 2px;
-            padding-left: 2px;
-        }
-        .del-section-title {
-            font-size: clamp(1.65rem, 7vw, 2.1rem);
-            line-height: 1.14;
-        }
-        .del-section-sub {
-            font-size: 0.9rem;
-        }
-        .del-ranking-header h2 {
-            font-size: clamp(1.8rem, 7vw, 2.2rem);
-        }
-        .del-ranking-header p {
-            font-size: 0.92rem;
-        }
-        .del-hero-title {
-            font-size: clamp(1.75rem, 7vw, 2.2rem);
-        }
-        .del-hero-form-card {
-            padding: 26px 22px;
-        }
-        .del-hero-form-card::before {
-            left: 22px;
-        }
-        .del-wrap-card,
-        .del-cta-box {
-            padding: 28px 20px;
-        }
-    }
-    @media (max-width: 575px) {
-        .del-hero {
-            padding-top: 28px;
-        }
-        .del-hero-grid {
-            gap: 24px;
-        }
-        .del-hero-actions {
-            align-items: stretch;
-        }
-        .del-hero-actions > a,
-        .del-theme-toggle {
-            min-height: 48px;
-        }
-        .del-hero-actions > a:first-child {
-            width: 100%;
-        }
-        .del-hero-form-card {
-            padding: 24px 18px;
-            border-radius: 20px;
-        }
-        .del-founder-card {
-            padding: 24px 20px !important;
-            border-radius: 20px;
-        }
-        .del-founder-stats {
-            grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-            gap: 10px !important;
-            margin: 16px 0 !important;
-        }
-        .del-fstat-box {
-            padding: 12px 8px !important;
-        }
-        .del-fstat-box .val {
-            font-size: 1.2rem;
-        }
-        .del-fstat-box .lbl {
-            line-height: 1.35;
-            overflow-wrap: anywhere;
-        }
-        .del-founder-actions {
-            flex-direction: column;
-            align-items: stretch;
-            gap: 10px;
-        }
-        .del-founder-actions > a {
-            width: 100%;
-            padding-right: 14px !important;
-            padding-left: 14px !important;
-        }
-        .del-founder-photo-box {
-            padding: 18px 14px !important;
-        }
-        .del-theme-toggle-floating {
-            left: max(12px, env(safe-area-inset-left));
-            bottom: max(12px, env(safe-area-inset-bottom));
-            min-height: 46px;
-            padding-right: 12px;
-            padding-left: 12px;
-            font-size: 0.78rem;
-        }
-        .del-form-group input,
-        .del-form-group textarea,
-        .del-form-group select {
-            min-height: 48px;
-            font-size: 16px;
-        }
-        .del-form-group textarea {
-            min-height: 112px;
-        }
-        .del-section-head {
-            margin-bottom: 20px;
-        }
-        .del-marquee-wrap {
-            padding: 12px 10px !important;
-            border-radius: 16px;
-            scroll-snap-type: x proximity;
-        }
-        .del-brand-card {
-            scroll-snap-align: start;
-        }
-        .del-keyword-table-wrap,
-        .del-rankings-table-wrap > div {
-            -webkit-overflow-scrolling: touch;
-        }
-    }
-    @media (max-width: 380px) {
-        .del-section-title,
-        .del-narrative-title {
-            font-size: 1.65rem;
-        }
-        .del-hero-title {
-            font-size: 1.7rem;
-        }
-        .del-hero-actions > a,
-        .del-cta-btns > a,
-        .del-cta-btns > button {
-            width: 100%;
-        }
-        .del-market-pill {
-            max-width: 100%;
-            overflow-wrap: anywhere;
-        }
-    }
-    .del-seo-page :is(a, button, input, textarea, select):focus-visible {
-        outline: 3px solid rgba(196, 0, 122, 0.55);
-        outline-offset: 3px;
-    }
-    .del-theme-dark {
-        color-scheme: dark;
-        background: #0B1020;
-    }
-    .del-theme-dark .site-header,
-    .del-theme-dark .site-header.scrolled {
-        background: rgba(15, 23, 42, 0.97);
-        border-bottom-color: rgba(255, 255, 255, 0.12);
-    }
-    .del-theme-dark .site-header .brand,
-    .del-theme-dark .site-header .brand-name,
-    .del-theme-dark .site-header .nav-link {
-        color: #F8FAFC;
-    }
-    .del-theme-dark .site-header .nav-link:hover,
-    .del-theme-dark .site-header .nav-link.active {
-        color: #F472B6;
-    }
-    .del-theme-dark .mobile-menu {
-        background: #111827;
-        border-color: rgba(255, 255, 255, 0.12);
-    }
-    .del-theme-dark .del-seo-page {
-        background: #0B1020;
-        color: #E5E7EB;
-    }
-    .del-theme-dark .del-seo-page > section {
-        background-color: #0F172A !important;
-        background-image: none !important;
-        color: #E5E7EB;
-    }
-    .del-theme-dark .del-seo-page :is(h1, h2, h3, h4, .del-section-sub, .del-hero-desc, .del-bullet-item, .del-takeaway-item, .del-approach-flow, .del-author-meta .name) {
-        color: #F8FAFC;
-    }
-    .del-theme-dark .del-seo-page :is(p, .del-author-meta .sub, .del-approach-flow, .del-approach-banner > div:last-child) {
-        color: #CBD5E1;
-    }
-    .del-theme-dark .del-seo-page :is([class*="-card"], [class*="-box"], [class*="-mockup"], [class*="-banner"], .del-author-card, .del-market-pill, .del-theme-toggle) {
-        background-color: #172033 !important;
-        background-image: none !important;
-        border-color: rgba(255, 255, 255, 0.14);
-        color: #E5E7EB;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
-    }
-    .del-theme-dark .del-seo-page .del-cta-box {
-        background: linear-gradient(135deg, #850053 0%, #C4007A 100%) !important;
-        color: #FFFFFF;
-    }
-    .del-theme-dark .del-seo-page .del-cta-box :is(h2, h3, p) {
-        color: #FFFFFF !important;
-    }
-    .del-theme-dark .del-seo-page .del-theme-toggle {
-        color: #F8FAFC;
-    }
-    .del-theme-dark .del-theme-toggle-floating {
-        background: #172033;
-        border-color: rgba(255, 255, 255, 0.18);
-        color: #F8FAFC;
-    }
-    .del-theme-dark .del-seo-page :is(input, textarea, select) {
-        background: #0F172A;
-        border-color: rgba(255, 255, 255, 0.18);
-        color: #F8FAFC;
-    }
-    .del-theme-dark .del-seo-page :is(input, textarea, select)::placeholder {
-        color: #94A3B8;
-    }
-    .del-theme-dark .del-seo-page :is(.del-section-title .accent, .del-hero-title .accent, .del-eyebrow, .del-offer-link, .del-approach-title) {
-        color: #F472B6;
-    }
-    @media (prefers-reduced-motion: reduce) {
-        .del-seo-page *,
-        .del-seo-page *::before,
-        .del-seo-page *::after {
-            scroll-behavior: auto !important;
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-        }
-    }
+    @media(max-width:991px){ .ds-side > .sticky { position:static !important; } .ds-h2 { max-width:none; } .ds-desk { max-width:640px; } .ds-ticker { margin-top:48px; } }
+    @media(max-width:700px){
+        .ds-wrap { padding:0 18px; } .ds-sec { padding:56px 0; } .ds-head { margin-bottom:32px; }
+        .ds-hero { padding-top:36px; } .ds-actions { flex-direction:column; } .ds-actions .ds-btn,.ds-cta .ds-btn { width:100%; white-space:normal; text-align:center; }
+        .ds-desk { padding:24px 18px 20px; max-width:none; } .ds-field input,.ds-field textarea { font-size:16px; }
+        .ds-author { border-radius:20px; } .ds-tile { padding:22px; } .ds-tile:first-child { min-height:0; }
+        .ds-kpis b { font-size:1.25rem; } .ds-tele { padding:22px 18px; }
+        .ds-stats div { padding-right:8px; } .ds-stats div + div { padding-left:12px; }
+        .ds-q { padding:24px 20px; } .ds-q blockquote { font-size:1.02rem; }
+        .ds-cta { border-radius:22px; padding:40px 22px; } .ds-ans { padding-right:0; } .ds-faq summary { font-size:1.04rem; }
+        .ds-track { animation-duration:34s; }
+    }
+    @media(max-width:380px){ .ds-wrap { padding:0 14px; } .ds-stats { grid-template-columns:1fr; } .ds-stats div + div { padding-left:0; border-left:0; border-top:1px solid var(--line); margin-top:12px; } }
+    @media(prefers-reduced-motion:reduce){ .ds-track { animation:none; } .ds *,.ds *::before { transition:none !important; } }
 </style>
 
-<main class="del-seo-page" style="width: 100%; font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;">
+<main class="ds">
 
-    <!-- ========================================================
-         1. HERO SECTION (2-COL WITH FLOATING QUOTE FORM)
-         ======================================================== -->
-    <section class="del-hero" style="position: relative; padding: 34px 0 28px;">
-        <div class="del-ambient-glow" style="top: -80px; left: -80px; position: absolute; width: 440px; height: 440px; pointer-events: none; z-index: 1;"></div>
-        <div class="del-ambient-glow" style="bottom: 0; right: -80px; position: absolute; width: 440px; height: 440px; pointer-events: none; z-index: 1;"></div>
-
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-hero-grid" style="display: grid;">
-
-                <!-- Left Column: Copy, Bullets & Author -->
-                <div class="del-hero-left" data-framer-reveal="slide-left">
-                    <h1 class="del-hero-title" style="font-weight: 850; line-height: 1.1; letter-spacing: -0.04em; text-align: left;">
-                        <?= htmlspecialchars($heroTitle) ?><span class="hero-separator">&bull;</span><br>
-                        <span class="accent"><?= htmlspecialchars($heroAccent) ?></span>
-                    </h1>
-
-                    <p class="del-hero-desc" style="font-size: 1.05rem; line-height: 1.6; font-weight: 500;">
-                        <?= htmlspecialchars($heroDesc) ?>
-                    </p>
-
-                    <div class="del-hero-bullets" style="display: grid; gap: 10px 14px; margin: 10px 0 18px;">
-                        <?php foreach ($heroVisibleBullets as $bullet): ?>
-                            <div class="del-bullet-item" style="gap: 10px;">
-                                <span class="dot">✓</span>
-                                <span><?= htmlspecialchars($bullet) ?></span>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-
-                    <div class="del-hero-actions" style="display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 14px;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
-                            <span>Schedule a Free SEO Consultation</span>
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                        <a href="tel:+919999674255" class="del-btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <span>Call: +91-9999674255</span>
-                        </a>
-                    </div>
-
-                    <!-- Author Badge: Jitin Madaan (Attachment 1 Match) -->
-                    <div class="del-author-card" style="display: inline-flex; align-items: center; gap: 12px; padding: 6px 16px 6px 8px; border-radius: 9999px; background: #FFFFFF; border: 1.5px solid rgba(196, 0, 122, 0.22); box-shadow: 0 4px 16px rgba(196, 0, 122, 0.08); margin-top: 4px;">
-                        <div class="del-author-avatar" style="width: 44px; height: 44px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%); color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.95rem; flex-shrink: 0; box-shadow: 0 2px 8px rgba(196, 0, 122, 0.25);">
-                            <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
-                                <img src="<?= htmlspecialchars($founderImage) ?>" alt="<?= htmlspecialchars($founderName) ?>" style="width: 100%; height: 100%; object-fit: cover;">
-                            <?php else: ?>
-                                <span>JM</span>
-                            <?php endif; ?>
-                        </div>
-                        <div class="del-author-meta" style="line-height: 1.35;">
-                            <div class="name" style="font-size: 0.92rem; font-weight: 800; color: #111827; display: flex; align-items: center; gap: 6px;">
-                                <span><?= htmlspecialchars($founderName) ?></span>
-                                <span style="display: inline-flex; width: 7px; height: 7px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);"></span>
-                            </div>
-                            <div class="sub" style="font-size: 0.76rem; font-weight: 600; color: #6B7280;">
-                                <span style="color: #C4007A; font-weight: 700;"><?= htmlspecialchars($founderRole) ?></span> &bull; Published: Nov 04, 2025 &bull; Updated: Oct 31, 2026
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column: Request A Quote Floating Form -->
-                <div class="del-hero-right" data-framer-reveal="slide-right">
-                    <div class="del-hero-form-card" style="overflow: hidden;">
-                        <h3>
-                            <span class="del-hero-form-icon" aria-hidden="true">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 5.5v15M8 7h8M8 11h7"/></svg>
-                            </span>
-                            <span>Request A Quote</span>
-                        </h3>
-                        <p>Fill out the form below to receive a custom SEO strategy and projection for your Delhi business.</p>
-
-                        <form id="delHeroQuoteForm" onsubmit="handleHeroQuoteSubmit(event)">
-                            <div class="del-form-group" style="margin-bottom: 13px;">
-                                <input type="text" name="name" placeholder="Name *" required>
-                            </div>
-                            <div class="del-form-group" style="margin-bottom: 13px;">
-                                <input type="tel" name="phone" placeholder="Phone No *" required>
-                            </div>
-                            <div class="del-form-group" style="margin-bottom: 13px;">
-                                <input type="email" name="email" placeholder="Email *" required>
-                            </div>
-                            <div class="del-form-group" style="margin-bottom: 13px;">
-                                <textarea name="message" placeholder="Type Your Message *" required></textarea>
-                            </div>
-                            <div class="del-form-consent-row" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 2px 0 16px; font-size: 0.84rem;">
-                                <label class="del-form-consent" style="display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
-                                    <input type="checkbox" checked required>
-                                    <span>I'm not a robot</span>
-                                </label>
-                                <span class="del-form-protected" style="font-size: 0.78rem;">🔒 Protected</span>
-                            </div>
-                            <button type="submit" class="del-form-submit" id="delHeroSubmitBtn" style="width: 100%; font-weight: 700; font-size: 0.98rem; padding: 14px; cursor: pointer;">
-                                <span>Submit &rarr;</span>
-                            </button>
-                            <div id="delHeroFeedback" style="display:none; margin-top: 10px; padding: 8px; border-radius: 8px; font-size: 0.84rem; text-align: center; font-weight: 700;"></div>
-                        </form>
-                        <div class="del-hero-form-note">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
-                            <span>Share your website URL, business niche, target location, and budget, and we’ll recommend a customised SEO strategy at competitive prices. Get in touch today to grow your business organically!</span>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================================
-         2. TOP EVENT BRANDS EMBRACING SEO (Marquee Showcase)
-         ======================================================== -->
-    <section class="del-brands-section" data-framer-reveal="fade-up" style="padding: 24px 0 28px; position: relative; overflow: hidden;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">GLOBAL INDUSTRY CREDIBILITY</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Top Event Brands Embracing <span class="accent">SEO<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Here are just a few of the organisers, global trade expos, and high-growth brands we've helped with strategic search optimisation campaigns.
-                </p>
-            </div>
-
-            <div class="del-marquee-wrap" tabindex="0" role="region" aria-label="Client brands, horizontally scrollable" style="max-width: 1180px; margin: 0 auto; padding: 16px 14px;">
-                <div class="del-marquee-track" style="display: flex; gap: 14px; width: max-content; align-items: center;">
-                    <?php 
-                    $tripleLogos = array_merge($brandLogos, $brandLogos, $brandLogos);
-                    foreach ($tripleLogos as $b): 
-                        $imgPath = $b['logo'] ?? '';
-                    ?>
-                        <div class="del-brand-card" style="display: flex; align-items: center; gap: 10px; padding: 8px 16px; white-space: nowrap; cursor: default;">
-                            <?php if (!empty($imgPath)): ?>
-                                <img src="<?= htmlspecialchars($imgPath) ?>" alt="<?= htmlspecialchars($b['name']) ?>" class="del-brand-logo-img">
-                            <?php else: ?>
-                                <div style="width: 30px; height: 30px; border-radius: 8px; background: #FFF0F7; color: #C4007A; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.75rem;">
-                                    <?= htmlspecialchars(substr($b['name'], 0, 2)) ?>
-                                </div>
-                            <?php endif; ?>
-                            <div class="del-brand-info">
-                                <div class="b-name"><?= htmlspecialchars($b['name']) ?></div>
-                                <div class="b-cat"><?= htmlspecialchars($b['category'] ?? 'Enterprise Brand') ?></div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================================
-         2. STRATEGIC NARRATIVE & SPRING SOURCING FAIR PROOF
-         ======================================================== -->
-    <section class="del-narrative-section" style="padding: 36px 0 40px; position: relative;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <!-- 2A: Balanced Split Grid -->
-            <div class="del-narrative-split" style="display: grid; align-items: stretch;">
-                <div class="del-narrative-left" data-framer-reveal="slide-left">
-                    <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($strategicNarrative['eyebrow'] ?? 'BE FOUND BY THE CORRECT PEOPLE • GENERATE BETTER LEADS • GROW ORGANICALLY') ?></div>
-                    <h2 class="del-section-title del-narrative-title" style="font-weight: 850;">
-                        <?= htmlspecialchars($narrativeTitle) ?>
-                        <?php if ($narrativeAccent !== ''): ?>
-                            <span class="accent"><?= htmlspecialchars($narrativeAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                        <?php endif; ?>
-                    </h2>
-                    <p class="del-narrative-lead" style="font-size: 1.08rem; line-height: 1.62; font-weight: 600; margin-bottom: 12px;">
-                        <?= htmlspecialchars($strategicNarrative['lead'] ?? 'Your customers are looking for your products and services. The challenge is to make sure that they find your business, not your competitors.') ?>
-                    </p>
-                    <p class="del-narrative-sub" style="font-size: 0.92rem; line-height: 1.62; margin-bottom: 14px;">
-                        <?= htmlspecialchars($strategicNarrative['p1'] ?? '') ?>
-                    </p>
-                    <p class="del-narrative-sub" style="font-size: 0.92rem; line-height: 1.62; margin-bottom: 14px;">
-                        <?= htmlspecialchars($strategicNarrative['p2'] ?? '') ?>
-                    </p>
-
-                    <div style="margin-bottom: 18px; padding: 10px 14px; background: #FFF5FA; border-left: 3px solid #C4007A; border-radius: 8px; font-weight: 700; color: #C4007A; font-size: 0.88rem;">
-                        <?= htmlspecialchars($strategicNarrative['callout'] ?? '💡 Getting better rankings is just the start. It\'s really about improving the business results.') ?>
-                    </div>
-
-                    <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
-                            <span>Complimentary Website Analysis</span>
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                        <a href="tel:+919999674255" class="del-btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
-                            <span>Call +91-9999674255</span>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right: Authentic Google SERP Live Ranking Showcase (Spring Sourcing Fair 2027) -->
-                <div class="del-narrative-right" data-framer-reveal="slide-right">
-                    <div class="del-serp-browser-showcase" style="position: relative; overflow: hidden;">
-                        <div class="del-browser-chrome" style="padding: 10px 16px; display: flex; align-items: center; gap: 12px;">
-                            <div class="del-browser-dots" style="align-items: center; gap: 6px;">
-                                <span class="dot red"></span>
-                                <span class="dot yellow"></span>
-                                <span class="dot green"></span>
-                            </div>
-                            <div class="del-browser-search-bar" style="flex: 1; padding: 5px 12px; font-size: 0.78rem; display: flex; align-items: center; gap: 6px; font-family: monospace;">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                                <span>google.com/search?q=spring+sourcing+fair+2027</span>
-                                <span class="lock-icon">🔒</span>
-                            </div>
-                        </div>
-
-                        <div class="del-browser-viewport" style="position: relative; overflow: hidden;">
-                            <img src="<?= htmlspecialchars($springSerpImage) ?>" alt="Google Search Spring Sourcing Fair 2027 IHGF Delhi Fair #1 Ranking WebTecMart" class="del-browser-serp-img" loading="lazy">
-                            <div class="del-serp-float-badge badge-top" style="position: absolute; padding: 6px 12px; font-size: 0.74rem; font-weight: 700; align-items: center; gap: 6px; z-index: 4;">
-                                <span class="pulse-dot"></span>
-                                <span>#1 Organic Rank &bull; IHGF Delhi Fair</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 2B: What makes WebTecMart the perfect SEO choice? (6 Cards in 3-col grid) -->
-            <div class="del-narrative-why-wrap" data-framer-reveal="fade-up" style="margin-top: 38px; padding-top: 32px;">
-                <div class="del-section-head del-why-section-head">
-                    <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">WHY CHOOSE WEBTECMART</div>
-                    <h2 class="del-section-title" style="font-weight: 850;">
-                        What Makes WebTecMart the Perfect <span class="accent">SEO Choice<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>?
-                    </h2>
-                    <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">Battle-tested capabilities built around performance, transparency, and sustainable business revenue.</p>
-                </div>
-                <div class="del-why-grid-3col" style="display: grid; margin-top: 16px;">
-                    <?php foreach ($whyCards as $wc): ?>
-                        <div class="del-why-card" style="padding: 18px; display: flex; gap: 14px; align-items: flex-start;">
-                            <div class="del-why-icon" style="font-size: 1.5rem; flex-shrink: 0; width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;"><?= htmlspecialchars($wc['icon'] ?? '🎯') ?></div>
-                            <div>
-                                <div class="del-why-title" style="font-size: 0.95rem; font-weight: 800; margin: 0 0 4px;"><?= htmlspecialchars($wc['title'] ?? '') ?></div>
-                                <div class="del-why-text" style="font-size: 0.85rem; line-height: 1.5; margin: 0;"><?= htmlspecialchars($wc['desc'] ?? '') ?></div>
-                            </div>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================================
-         3. KEY TAKEAWAYS & GOOGLE SERP AI OVERVIEW
-         ======================================================== -->
-    <section class="del-takeaways-section" style="padding: 36px 0 40px; position: relative;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head del-takeaways-intro" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($takeaways['eyebrow'] ?? 'KEY TAKEAWAYS') ?></div>
-                <h2 class="del-section-title del-takeaways-title" style="font-weight: 850;">
-                    <?= htmlspecialchars($takeawaysTitleBase) ?>
-                    <?php if ($takeawaysTitleAccent !== ''): ?>
-                        <span class="accent"><?= htmlspecialchars($takeawaysTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+    <!-- 1. HERO -->
+    <section class="ds-hero">
+        <div class="ds-wrap">
+            <div class="ds-hero-grid ds-grid">
+                <div>
+                    <h1><span class="t"><?= $h($heroTitle) ?></span><?= $em($heroAccent) ?></h1>
+                    <p class="ds-hero-desc"><?= $h($heroDesc) ?></p>
+                    <?php if (!empty($heroVisibleBullets)): ?>
+                    <ul class="ds-points">
+                        <?php foreach ($heroVisibleBullets as $b): ?><li><?= dsIcon('check', 18) ?><span><?= $h($b) ?></span></li><?php endforeach; ?>
+                    </ul>
                     <?php endif; ?>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    <?= htmlspecialchars($takeaways['lead'] ?? 'A good SEO approach ought to do greater than just ranking better. It should draw the intended audience to your business, gain trust and create measurable opportunities.') ?>
-                </p>
-            </div>
-
-            <div class="del-takeaways-grid" style="display: grid; align-items: stretch;">
-
-                <!-- Left Column: Core Takeaways & 10 Deliverables -->
-                <div class="del-takeaways-left" data-framer-reveal="slide-left">
-                    <h3 class="del-takeaways-subtitle" style="margin: 0 0 12px; font-size: 0.98rem; line-height: 1.4; font-weight: 800; letter-spacing: -0.015em;">What's included in our SEO services:</h3>
-
-                    <div class="del-takeaways-checklist-2col" style="display: grid; gap: 8px 12px; margin: 16px 0 20px;">
-                        <?php 
-                        $checkItems = $takeaways['checklist'] ?? [];
-                        foreach ($checkItems as $chk): 
-                        ?>
-                            <div class="del-takeaway-item" style="display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;">
-                                <span class="chk">✓</span>
-                                <span><?= htmlspecialchars($chk) ?></span>
-                            </div>
-                        <?php endforeach; ?>
+                    <div class="ds-actions">
+                        <a href="/contact.php" class="ds-btn pri trigger-enquiry-modal" data-service="SEO Services in Delhi"><span>Schedule a free SEO consultation</span><?= dsIcon('arrow', 16) ?></a>
+                        <a href="tel:+919999674255" class="ds-btn ghost"><?= dsIcon('phone', 16) ?><span>+91-9999674255</span></a>
                     </div>
+                    <div class="ds-author">
+                        <div class="ds-av">
+                            <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
+                                <img src="<?= $h($founderImage) ?>" alt="<?= $h($founderName) ?>">
+                            <?php else: ?><?= $h($founderInitial) ?><?php endif; ?>
+                        </div>
+                        <div>
+                            <b><?= $h($founderName) ?></b>
+                            <small><span><?= $h($founderRole) ?></span> &middot; Published Nov 04, 2025 &middot; Updated Oct 31, 2026</small>
+                        </div>
+                    </div>
+                </div>
 
-                    <div class="del-takeaways-outcomes" style="margin: 0 0 18px; padding: 16px 18px;">
-                        <h4 class="del-takeaways-outcomes-title" style="margin: 0 0 12px; font-size: 0.9rem; font-weight: 800;">What this means for your business</h4>
-                        <ul class="del-takeaways-outcomes-list" style="margin: 0; padding: 0; list-style: none;">
+                <aside class="ds-desk" aria-label="Request a quote">
+                    <h3>Get a custom SEO plan for your business</h3>
+                    <p class="sub">Free strategy and projection for your Delhi business.</p>
+                    <form id="delHeroQuoteForm" onsubmit="handleHeroQuoteSubmit(event)">
+                        <div class="ds-field"><input type="text" name="name" placeholder="Name *" autocomplete="name" required></div>
+                        <div class="ds-field"><input type="tel" name="phone" placeholder="Phone number *" autocomplete="tel" required></div>
+                        <div class="ds-field"><input type="email" name="email" placeholder="Email *" autocomplete="email" required></div>
+                        <div class="ds-field"><textarea name="message" placeholder="Your website URL and goals *" required></textarea></div>
+                        <div class="ds-consent">
+                            <label><input type="checkbox" checked required><span>I'm not a robot</span></label>
+                            <span style="display:inline-flex;gap:6px;align-items:center"><?= dsIcon('lock', 14) ?>Protected</span>
+                        </div>
+                        <button type="submit" class="ds-btn pri" id="delHeroSubmitBtn"><span>Send my request</span></button>
+                        <div id="delHeroFeedback" role="status"></div>
+                    </form>
+                    <p class="ds-note">Share your website URL, business niche, target location and budget. We'll recommend a customised SEO strategy at a competitive price.</p>
+                </aside>
+            </div>
+        </div>
+
+        <div class="ds-ticker" aria-label="Brands we have worked with">
+            <div class="ds-ticker-label">Organisers, trade expos and high-growth brands we have helped with search</div>
+            <div class="ds-track">
+                <?php foreach (array_merge($brandLogos, $brandLogos) as $b): $lg = $b['logo'] ?? ''; ?>
+                    <div class="ds-brand">
+                        <?php if ($lg !== ''): ?><img src="<?= $h($lg) ?>" alt="<?= $h($b['name']) ?>" loading="lazy"><?php else: ?><i><?= $h(substr($b['name'], 0, 2)) ?></i><?php endif; ?>
+                        <div><b><?= $h($b['name']) ?></b><small><?= $h($b['category'] ?? 'Enterprise brand') ?></small></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. NARRATIVE + SERP PROOF -->
+    <section class="ds-sec">
+        <div class="ds-wrap ds-nar ds-grid">
+            <div>
+                <div class="ds-kicker"><?= $h(ucfirst(strtolower(explode('•', (string) ($strategicNarrative['eyebrow'] ?? 'Be found by the correct people'))[0]))) ?></div>
+                <h2 class="ds-h2">
+                    <?= $h($narrativeTitle) ?>
+                    <?php if ($narrativeAccent !== ''): ?> <?= $em($narrativeAccent) ?><?php endif; ?>
+                </h2>
+                <p class="lead"><?= $h($strategicNarrative['lead'] ?? '') ?></p>
+                <p class="b"><?= $h($strategicNarrative['p1'] ?? '') ?></p>
+                <p class="b"><?= $h($strategicNarrative['p2'] ?? '') ?></p>
+                <div class="ds-callout"><?= $h($strategicNarrative['callout'] ?? '') ?></div>
+                <div class="ds-actions">
+                    <a href="/contact.php" class="ds-btn pri trigger-enquiry-modal" data-service="SEO Services in Delhi"><span>Get a free website analysis</span><?= dsIcon('arrow', 16) ?></a>
+                    <a href="tel:+919999674255" class="ds-btn ghost"><span>Call +91-9999674255</span></a>
+                </div>
+            </div>
+            <div class="ds-browser">
+                <div class="ds-chrome">
+                    <div class="ds-dots"><i></i><i></i><i></i></div>
+                    <div class="ds-url">google.com/search?q=spring+sourcing+fair+2027</div>
+                </div>
+                <div class="ds-vp">
+                    <img src="<?= $h($springSerpImage) ?>" alt="Google search for Spring Sourcing Fair 2027 showing IHGF Delhi Fair ranking #1" loading="lazy">
+                    <div class="ds-flag"><i></i><span>#1 organic rank &middot; IHGF Delhi Fair</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. WHY CHOOSE US -->
+    <section class="ds-sec alt">
+        <div class="ds-wrap ds-side ds-grid">
+            <div class="sticky">
+                <div class="ds-kicker">Why WebTecMart</div>
+                <h2 class="ds-h2">What makes WebTecMart the right <?= $em('SEO choice') ?>?</h2>
+                <p class="ds-lede">Capabilities built around performance, transparency and sustainable business revenue.</p>
+            </div>
+            <ul class="ds-rows">
+                <?php foreach ($whyCards as $wc): ?>
+                    <li class="ds-row">
+                        <div class="ds-ic"><?= $h($wc['icon'] ?? '🎯') ?></div>
+                        <div><h3><?= $h($wc['title'] ?? '') ?></h3><p><?= $h($wc['desc'] ?? '') ?></p></div>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 4. KEY TAKEAWAYS -->
+    <section class="ds-sec">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker"><?= $h(ucwords(strtolower((string) ($takeaways['eyebrow'] ?? 'Key takeaways')))) ?></div>
+                    <h2 class="ds-h2"><?= $h($takeawaysTitleBase) ?><?php if ($takeawaysTitleAccent !== ''): ?> <?= $em($takeawaysTitleAccent) ?><?php endif; ?></h2>
+                </div>
+                <p class="ds-lede"><?= $h($takeaways['lead'] ?? '') ?></p>
+            </div>
+            <div class="ds-take ds-grid">
+                <div>
+                    <h3 style="font-size:1.25rem">What's included in our SEO services</h3>
+                    <ul class="ds-checks">
+                        <?php foreach (($takeaways['checklist'] ?? []) as $c): ?><li><?= dsIcon('check', 18) ?><span><?= $h($c) ?></span></li><?php endforeach; ?>
+                    </ul>
+                    <div class="ds-means">
+                        <h4>What this means for your business</h4>
+                        <ul>
                             <li>Stronger visibility for the services and locations that matter to you.</li>
                             <li>More relevant visitors finding your business through search.</li>
                             <li>Clear progress tracking to guide ongoing SEO improvements.</li>
                         </ul>
                     </div>
-
-                    <div style="margin-top: 18px;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
-                            <span>Book Your Free SEO Consultation</span>
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                    </div>
+                    <a href="/contact.php" class="ds-btn pri trigger-enquiry-modal" data-service="SEO Services in Delhi"><span>Book your free SEO consultation</span><?= dsIcon('arrow', 16) ?></a>
                 </div>
-
-                <!-- Right Column: Google Search Live Telemetry (Attachment 7 Match) -->
-                <div class="del-takeaways-right" data-framer-reveal="slide-right" style="display: flex; flex-direction: column; gap: 16px;">
-                    <div class="del-telemetry-browser" style="background: #0B1020; border-radius: 20px; border: 1.5px solid rgba(196, 0, 122, 0.35); box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 30px rgba(196, 0, 122, 0.12); overflow: hidden; display: flex; flex-direction: column;">
-                        <!-- Chrome Bar -->
-                        <div style="background: #111827; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); flex-wrap: wrap;">
-                            <div style="display: flex; align-items: center; gap: 6px;">
-                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #EF4444; display: inline-block;"></span>
-                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #F59E0B; display: inline-block;"></span>
-                                <span style="width: 10px; height: 10px; border-radius: 50%; background: #10B981; display: inline-block;"></span>
-                            </div>
-                            <div style="display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; background: rgba(16, 185, 129, 0.14); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 999px; font-size: 0.72rem; font-weight: 700; color: #10B981;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #10B981; box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3);"></span>
-                                <span>#1 Google Rank &bull; Delhi Commercial Queries</span>
-                            </div>
-                            <div style="display: inline-flex; align-items: center; gap: 5px; font-size: 0.7rem; font-weight: 800; color: #FF2D75; text-transform: uppercase; letter-spacing: 0.05em;">
-                                <span style="width: 6px; height: 6px; border-radius: 50%; background: #FF2D75; box-shadow: 0 0 6px #FF2D75;"></span>
-                                <span>Live Search Telemetry</span>
-                            </div>
-                        </div>
-
-                        <!-- Search Input -->
-                        <div style="padding: 10px 14px; background: #0E1526; border-bottom: 1px solid rgba(255, 255, 255, 0.05);">
-                            <div style="background: #172033; border: 1px solid rgba(196, 0, 122, 0.28); border-radius: 9999px; padding: 6px 14px; font-size: 0.78rem; color: #94A3B8; display: flex; align-items: center; gap: 8px; font-family: monospace;">
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#FF2D75" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                                <span style="color: #E2E8F0;">google.com/search?q=best+seo+company+delhi</span>
-                            </div>
-                        </div>
-
-                        <!-- Dark Card Body (Attachment 7 Match) -->
-                        <div style="padding: 18px 16px; background: #0B1020; display: flex; flex-direction: column; gap: 14px;">
-                            <div style="background: #111A2E; border: 1.5px solid rgba(196, 0, 122, 0.25); border-radius: 14px; padding: 16px 14px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);">
-                                <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 6px; color: #34D399; font-size: 0.74rem; font-weight: 800; margin-bottom: 8px;">
-                                    <span>🏆 #1 RANKED IN DELHI NCR</span>
-                                </div>
-                                <h4 style="font-size: 1.15rem; font-weight: 850; color: #FFFFFF; margin: 0 0 6px; line-height: 1.3;">
-                                    WebTecMart &mdash; Top SEO Agency in Delhi NCR
-                                </h4>
-                                <p style="font-size: 0.84rem; line-height: 1.5; color: #94A3B8; margin: 0 0 14px;">
-                                    Driving qualified organic buyer revenue with 13+ years experience, 1,000+ verified client campaigns, and high-intent keyword strategies.
-                                </p>
-
-                                <!-- 3 Stat KPI Boxes -->
-                                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
-                                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(196, 0, 122, 0.25); border-radius: 10px; padding: 10px 6px; text-align: center;">
-                                        <div style="font-size: 1.4rem; font-weight: 900; color: #FF2D75; line-height: 1; margin-bottom: 4px;">+400%</div>
-                                        <div style="font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">Organic Growth</div>
-                                    </div>
-                                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(196, 0, 122, 0.25); border-radius: 10px; padding: 10px 6px; text-align: center;">
-                                        <div style="font-size: 1.4rem; font-weight: 900; color: #FFFFFF; line-height: 1; margin-bottom: 4px;">80+</div>
-                                        <div style="font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">#1 Keywords</div>
-                                    </div>
-                                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(196, 0, 122, 0.25); border-radius: 10px; padding: 10px 6px; text-align: center;">
-                                        <div style="font-size: 1.4rem; font-weight: 900; color: #FF2D75; line-height: 1; margin-bottom: 4px;">1,393%</div>
-                                        <div style="font-size: 0.68rem; font-weight: 700; color: #94A3B8; text-transform: uppercase;">Search Clicks</div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; padding: 0 4px;">
-                                <div style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.35); border-radius: 999px; color: #FBBF24; font-size: 0.74rem; font-weight: 700;">
-                                    <span>⚡ AI Overview Featured Entity</span>
-                                </div>
-                                <span style="font-size: 0.72rem; color: #64748B;">Verified GA4 &bull; Search Console 2026</span>
-                            </div>
-                        </div>
+                <div class="ds-tele">
+                    <span class="ds-live"><i></i>#1 Google rank &middot; Delhi commercial queries</span>
+                    <h4>WebTecMart: top SEO agency in Delhi NCR</h4>
+                    <p>Qualified organic revenue backed by 13+ years of experience, 1,000+ client campaigns and high-intent keyword strategy.</p>
+                    <div class="ds-kpis">
+                        <div><b>+400%</b><span>Organic growth</span></div>
+                        <div><b>80+</b><span>#1 keywords</span></div>
+                        <div><b>1,393%</b><span>Search clicks</span></div>
                     </div>
+                    <small>AI Overview featured entity &middot; Verified GA4 and Search Console 2026</small>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         4. WHAT WE OFFER (6 Core SEO Offerings)
-         ======================================================== -->
-    <section class="del-offers-section" style="padding: 36px 0 40px; position: relative;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">WHAT WE OFFER</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Comprehensive SEO Services That Turn <span class="accent">Search Visibility Into Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    From technical architecture to local rankings, content strategy, high-authority link acquisition, and AI-search visibility. Discover what's included in our SEO solutions:
-                </p>
+    <!-- 5. OFFERS -->
+    <section class="ds-sec alt">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker">What we offer</div>
+                    <h2 class="ds-h2">SEO services that turn <?= $em('search visibility into revenue') ?></h2>
+                </div>
+                <p class="ds-lede">From technical architecture to local rankings, content, link acquisition and AI-search visibility.</p>
             </div>
-
-            <div class="del-offers-grid" style="display: grid;">
-                <?php foreach ($offers as $off): 
-                    $offIcon = $off['icon'] ?? 'sparkles';
-                    $offTitle = $off['title'] ?? 'SEO Service';
-                    $offDesc = $off['desc'] ?? '';
-                    $offLink = $off['link'] ?? '/contact.php';
-                    $offLinkText = $off['link_text'] ?? 'Explore Service →';
-                ?>
-                <a href="<?= htmlspecialchars($offLink) ?>" class="del-offer-card" data-framer-reveal="fade-up">
-                    <div class="del-offer-icon" style="width: 46px; height: 46px; display: inline-flex; align-items: center; justify-content: center; font-size: 1.35rem; margin-bottom: 14px;">
-                        <?php if ($offIcon === 'code'): ?>
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m16 18 6-6-6-6"/><path d="m8 6-6 6 6 6"/></svg>
-                        <?php elseif ($offIcon === 'layout'): ?>
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"/><line x1="3" x2="21" y1="9" y2="9"/><line x1="9" x2="9" y1="21" y2="9"/></svg>
-                        <?php elseif ($offIcon === 'search'): ?>
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-                        <?php elseif ($offIcon === 'map-pin'): ?>
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                        <?php elseif ($offIcon === 'link'): ?>
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-                        <?php else: ?>
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
-                        <?php endif; ?>
-                    </div>
-                    <h3><?= htmlspecialchars($offTitle) ?></h3>
-                    <p><?= htmlspecialchars($offDesc) ?></p>
-                    <span class="del-offer-link" style="font-size: 0.86rem; font-weight: 700; display: inline-flex; align-items: center;"><?= htmlspecialchars($offLinkText) ?></span>
-                </a>
+            <div class="ds-bento">
+                <?php foreach ($offers as $o): ?>
+                    <a href="<?= $h($o['link'] ?? '/contact.php') ?>" class="ds-tile">
+                        <div class="ds-ic"><?= dsIcon($o['icon'] ?? 'sparkles', 22) ?></div>
+                        <h3><?= $h($o['title'] ?? 'SEO Service') ?></h3>
+                        <p><?= $h($o['desc'] ?? '') ?></p>
+                        <span class="more"><?= $h($o['link_text'] ?? 'Explore service →') ?></span>
+                    </a>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         5. SEO CHALLENGES (6-Card Grid)
-         ======================================================== -->
-    <section class="del-challenges-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($challenges['eyebrow'] ?? 'SEO CHALLENGES') ?></div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    <?= htmlspecialchars($challengesTitleBase) ?>
-                    <?php if ($challengesTitleAccent !== ''): ?>
-                        <span class="accent"><?= htmlspecialchars($challengesTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                    <?php endif; ?>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    <?= htmlspecialchars($challenges['lead'] ?? '') ?>
-                </p>
+    <!-- 6. CHALLENGES -->
+    <section class="ds-sec">
+        <div class="ds-wrap ds-side ds-grid">
+            <div class="sticky">
+                <div class="ds-kicker"><?= $h(ucwords(strtolower((string) ($challenges['eyebrow'] ?? 'SEO challenges')))) ?></div>
+                <h2 class="ds-h2"><?= $h($challengesTitleBase) ?><?php if ($challengesTitleAccent !== ''): ?> <?= $em($challengesTitleAccent) ?><?php endif; ?></h2>
+                <p class="ds-lede"><?= $h($challenges['lead'] ?? '') ?></p>
             </div>
-
-            <div class="del-challenges-grid" style="display: grid;">
+            <ul class="ds-rows">
                 <?php foreach (($challenges['items'] ?? []) as $ch): ?>
-                    <div class="del-challenge-card" data-framer-reveal="fade-up" style="padding: 22px 20px;">
-                        <div class="del-challenge-icon" style="font-size: 1.6rem; margin-bottom: 12px;"><?= htmlspecialchars($ch['icon'] ?? '⚡') ?></div>
-                        <h3><?= htmlspecialchars($ch['title'] ?? '') ?></h3>
-                        <p><?= htmlspecialchars($ch['desc'] ?? '') ?></p>
-                    </div>
+                    <li class="ds-row">
+                        <div class="ds-ic"><?= $h($ch['icon'] ?? '⚡') ?></div>
+                        <div><h3><?= $h($ch['title'] ?? '') ?></h3><p><?= $h($ch['desc'] ?? '') ?></p></div>
+                    </li>
                 <?php endforeach; ?>
-            </div>
+            </ul>
         </div>
     </section>
 
-    <!-- ========================================================
-         6. MEET THE EXPERTS (Jitin Madaan Spotlight)
-         ======================================================== -->
-    <section class="del-founder-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($founderSection['eyebrow'] ?? 'MEET THE EXPERTS') ?></div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    <?= htmlspecialchars($founderTitleBase) ?>
-                    <?php if ($founderTitleAccent !== ''): ?>
-                        <span class="accent"><?= htmlspecialchars($founderTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                    <?php endif; ?>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    <?= htmlspecialchars($founderSection['lead'] ?? '') ?>
-                </p>
+    <!-- 7. FOUNDER -->
+    <section class="ds-sec alt">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker"><?= $h(ucwords(strtolower((string) ($founderSection['eyebrow'] ?? 'Meet the experts')))) ?></div>
+                    <h2 class="ds-h2"><?= $h($founderTitleBase) ?><?php if ($founderTitleAccent !== ''): ?> <?= $em($founderTitleAccent) ?><?php endif; ?></h2>
+                </div>
+                <p class="ds-lede"><?= $h($founderSection['lead'] ?? '') ?></p>
             </div>
-
-            <div class="del-founder-card" data-framer-reveal="scale-in" style="padding: 36px 32px;">
-                <div class="del-founder-grid" style="display: grid; align-items: center;">
-                    <div class="del-founder-left">
-                        <h3 style="font-size: 1.2rem; font-weight: 800; color: #111827; margin: 0 0 10px;">
-                            Built on 13+ Years of Proven Technical Execution
-                        </h3>
-                        <p style="font-size: 0.94rem; line-height: 1.62; color: #4B5563; margin-bottom: 14px;">
-                            Strong SEO comes from combining the right people, processes and expertise. Our team is focused on search strategy, technical optimisation, content depth, and analytics to ensure campaigns directly advance real business pipeline.
-                        </p>
-
-                        <div class="del-founder-stats" style="display: grid; gap: 12px; margin: 20px 0;">
-                            <?php foreach (($founderSection['stats'] ?? []) as $fst): ?>
-                                <div class="del-fstat-box" style="padding: 12px 10px; text-align: center;">
-                                    <div class="val"><?= htmlspecialchars($fst['val']) ?></div>
-                                    <div class="lbl"><?= htmlspecialchars($fst['label']) ?></div>
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <div class="del-founder-actions">
-                            <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
-                                <span>Discuss With an SEO Specialist</span>
-                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                            </a>
-                            <a href="tel:+919999674255" class="del-btn-secondary" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
-                                <span>Call: +91-9999674255</span>
-                            </a>
-                        </div>
+            <div class="ds-founder ds-grid">
+                <div>
+                    <h3 style="font-size:1.5rem">Built on 13+ years of proven technical execution</h3>
+                    <p class="ds-lede" style="margin-top:12px">Strong SEO comes from the right people, processes and expertise. Our team focuses on search strategy, technical optimisation, content depth and analytics so campaigns move your real business pipeline.</p>
+                    <div class="ds-stats">
+                        <?php foreach (($founderSection['stats'] ?? []) as $s): ?><div><b><?= $h($s['val']) ?></b><span><?= $h($s['label']) ?></span></div><?php endforeach; ?>
                     </div>
-
-                    <div class="del-founder-right">
-                        <div class="del-founder-photo-box" style="padding: 20px; text-align: center;">
-                            <div class="del-founder-img-wrapper" style="position: relative; width: 140px; height: 140px; margin: 0 auto 14px; overflow: hidden;">
-                                <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
-                                    <img src="<?= htmlspecialchars($founderImage) ?>" alt="<?= htmlspecialchars($founderName) ?>" class="del-founder-photo">
-                                <?php else: ?>
-                                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 800; color: #C4007A; background: #FFF0F7;">
-                                        <?= htmlspecialchars($founderInitial) ?>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <h4 class="del-founder-name-tag" style="font-size: 1.2rem; font-weight: 800; margin: 0 0 2px;"><?= htmlspecialchars($founderName) ?></h4>
-                            <div class="del-founder-role-tag" style="font-size: 0.82rem; font-weight: 700; margin-bottom: 10px;"><?= htmlspecialchars($founderRole) ?></div>
-                            <p style="font-size: 0.82rem; color: #6B7280; line-height: 1.5; margin: 0;">
-                                Directing technical search architecture and high-converting commercial SEO for leading brands across Delhi NCR and international markets.
-                            </p>
-                        </div>
+                    <div class="ds-actions">
+                        <a href="/contact.php" class="ds-btn pri trigger-enquiry-modal" data-service="SEO Services in Delhi"><span>Talk to an SEO specialist</span><?= dsIcon('arrow', 16) ?></a>
+                        <a href="tel:+919999674255" class="ds-btn ghost"><span>+91-9999674255</span></a>
                     </div>
                 </div>
-
-                <!-- 3 Core Expert Pillars -->
-                <div class="del-expert-pillars" style="display: grid; gap: 16px; margin-top: 28px;">
-                    <?php foreach (($founderSection['pillars'] ?? []) as $plr): ?>
-                        <div class="del-expert-pillar-card" style="padding: 20px;">
-                            <div class="del-ep-icon" style="font-size: 1.5rem; margin-bottom: 10px;"><?= htmlspecialchars($plr['icon'] ?? '⚙️') ?></div>
-                            <h4><?= htmlspecialchars($plr['title'] ?? '') ?></h4>
-                            <p><?= htmlspecialchars($plr['desc'] ?? '') ?></p>
-                        </div>
-                    <?php endforeach; ?>
+                <div class="ds-person">
+                    <div class="ph">
+                        <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?><img src="<?= $h($founderImage) ?>" alt="<?= $h($founderName) ?>"><?php else: ?><?= $h($founderInitial) ?><?php endif; ?>
+                    </div>
+                    <h4><?= $h($founderName) ?></h4>
+                    <div class="role"><?= $h($founderRole) ?></div>
+                    <p>Directing technical search architecture and high-converting commercial SEO for leading brands across Delhi NCR and international markets.</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- ========================================================
-         7. OUR PROCESS (6-Step Grid)
-         ======================================================== -->
-    <section class="del-process-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">OUR PROCESS</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    How Our SEO Services in Delhi Turn <span class="accent">Strategy Into Results<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Each business has its own set of customers, competition and goals for growth. We begin by understanding where you stand today and create a roadmap that gets you where you want to be.
-                </p>
-            </div>
-
-            <div class="del-process-grid" style="display: grid;">
-                <?php foreach ($processSteps as $p): ?>
-                    <div class="del-process-card" data-framer-reveal="fade-up" style="padding: 22px 20px; position: relative;">
-                        <div class="del-process-num" style="font-size: 1.8rem; font-weight: 800; line-height: 1; margin-bottom: 8px;"><?= htmlspecialchars($p['step']) ?></div>
-                        <h3><?= htmlspecialchars($p['title']) ?></h3>
-                        <p><?= htmlspecialchars($p['description']) ?></p>
-                    </div>
+            <ul class="ds-rows two" style="margin-top:56px">
+                <?php foreach (($founderSection['pillars'] ?? []) as $p): ?>
+                    <li class="ds-row"><div class="ds-ic"><?= $h($p['icon'] ?? '⚙️') ?></div><div><h3><?= $h($p['title'] ?? '') ?></h3><p><?= $h($p['desc'] ?? '') ?></p></div></li>
                 <?php endforeach; ?>
-            </div>
+            </ul>
         </div>
     </section>
 
-    <!-- ========================================================
-         8. INDUSTRIES WE WORK WITH (8 Cards)
-         ======================================================== -->
-    <section class="del-industries-section" style="padding: 34px 0 38px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">INDUSTRY EXPERTISE</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Industries We Work With Across <span class="accent">Delhi NCR &amp; Beyond<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Proven SEO strategies tailored to vertical-specific buyer intent, conversion funnels, and search landscapes.
-                </p>
+    <!-- 8. PROCESS -->
+    <section class="ds-sec">
+        <div class="ds-wrap ds-side ds-grid">
+            <div class="sticky">
+                <div class="ds-kicker">Our process</div>
+                <h2 class="ds-h2">How our SEO services in Delhi turn <?= $em('strategy into results') ?></h2>
+                <p class="ds-lede">Every business has its own customers, competition and growth goals. We start from where you stand today and build the roadmap from there.</p>
             </div>
+            <ol class="ds-line">
+                <?php foreach ($processSteps as $i => $p): ?>
+                    <li class="ds-step">
+                        <div class="n">Step <?= $h(ltrim((string) ($p['step'] ?? ($i + 1)), '0') ?: ($i + 1)) ?></div>
+                        <h3><?= $h($p['title'] ?? '') ?></h3>
+                        <p><?= $h($p['description'] ?? '') ?></p>
+                    </li>
+                <?php endforeach; ?>
+            </ol>
+        </div>
+    </section>
 
-            <div class="del-industries-grid" style="display: grid; gap: 16px;">
+    <!-- 9. INDUSTRIES -->
+    <section class="ds-sec alt">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker">Industry expertise</div>
+                    <h2 class="ds-h2">Industries we work with across <?= $em('Delhi NCR and beyond') ?></h2>
+                </div>
+                <p class="ds-lede">SEO strategies shaped around each vertical's buyer intent, conversion funnel and search landscape.</p>
+            </div>
+            <div class="ds-ind">
                 <?php foreach ($industries as $ind): ?>
-                    <div class="del-industry-card" data-framer-reveal="fade-up" style="padding: 18px;">
-                        <div class="del-ind-icon" style="font-size: 1.6rem; margin-bottom: 8px;"><?= htmlspecialchars($ind['icon']) ?></div>
-                        <h4><?= htmlspecialchars($ind['title']) ?></h4>
-                        <p><?= htmlspecialchars($ind['desc']) ?></p>
-                    </div>
+                    <div><div class="e"><?= $h($ind['icon'] ?? '') ?></div><h4><?= $h($ind['title'] ?? '') ?></h4><p><?= $h($ind['desc'] ?? '') ?></p></div>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         9. CLIENT FEEDBACK & CASE STUDIES
-         ======================================================== -->
-    <section class="del-feedback-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">CLIENT TESTIMONIALS</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Trusted by Organisers, Founders &amp; <span class="accent">Marketing Directors<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Real feedback from partners who transformed their search visibility and qualified commercial inquiries with WebTecMart.
-                </p>
+    <!-- 10. TESTIMONIALS -->
+    <section class="ds-sec">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker">Client testimonials</div>
+                    <h2 class="ds-h2">Trusted by organisers, founders and <?= $em('marketing directors') ?></h2>
+                </div>
+                <p class="ds-lede">Feedback from partners who grew their search visibility and qualified enquiries with WebTecMart.</p>
             </div>
-
-            <!-- Swiper Carousel -->
             <div class="swiper" id="delFeedbackSwiper">
                 <div class="swiper-wrapper">
                     <?php foreach ($clientFeedback as $fb): ?>
                         <div class="swiper-slide">
-                            <div class="del-feedback-card" style="padding: 28px 24px;">
-                                <div class="del-stars" style="font-size: 1.1rem; margin-bottom: 12px;">★★★★★</div>
-                                <div class="del-quote-text" style="font-size: 0.95rem; line-height: 1.65; font-style: italic; margin-bottom: 18px;">"<?= htmlspecialchars($fb['quote']) ?>"</div>
-                                <div class="del-client-author" style="display: flex; align-items: center; gap: 12px;">
-                                    <div class="del-client-avatar" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1rem;"><?= htmlspecialchars(substr($fb['author'], 0, 1)) ?></div>
-                                    <div class="del-client-info">
-                                        <h5><?= htmlspecialchars($fb['author']) ?></h5>
-                                        <p><?= htmlspecialchars($fb['role']) ?> &bull; <?= htmlspecialchars($fb['company']) ?></p>
-                                    </div>
-                                </div>
-                            </div>
+                            <figure class="ds-q" style="margin:0">
+                                <div class="st" aria-label="5 out of 5 stars">★★★★★</div>
+                                <blockquote>“<?= $h($fb['quote'] ?? '') ?>”</blockquote>
+                                <figcaption class="by">
+                                    <i><?= $h(substr((string) ($fb['author'] ?? 'C'), 0, 1)) ?></i>
+                                    <div><b><?= $h($fb['author'] ?? '') ?></b><small><?= $h($fb['role'] ?? '') ?> &middot; <?= $h($fb['company'] ?? '') ?></small></div>
+                                </figcaption>
+                            </figure>
                         </div>
                     <?php endforeach; ?>
                 </div>
-                <div class="swiper-pagination" style="position: relative; margin-top: 18px;"></div>
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </section>
 
-    <!-- Case Studies -->
-    <section class="del-case-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">VERIFIED CASE STUDIES</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Real Rankings. Real Traffic. <span class="accent">Real Business Growth.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Explore documented outcomes from our targeted search campaigns across high-competition industries.
-                </p>
+    <!-- 11. CASE STUDIES -->
+    <section class="ds-sec alt">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker">Verified case studies</div>
+                    <h2 class="ds-h2">Real rankings. Real traffic. <?= $em('Real business growth.') ?></h2>
+                </div>
+                <p class="ds-lede">Documented outcomes from our search campaigns in high-competition industries.</p>
             </div>
-
-            <div class="del-cases-grid" style="display: grid; gap: 18px;">
+            <div class="ds-cases">
                 <?php foreach ($cases as $c): ?>
-                    <?php $caseBadge = (string) ($c['badge'] ?? 'SEO Growth Result'); ?>
-                    <?php $caseTitle = (string) ($c['title'] ?? 'SEO Success Story'); ?>
-                    <?php $caseStat = (string) ($c['stat'] ?? 'Results'); ?>
-                    <?php $caseStatDesc = (string) ($c['stat_desc'] ?? 'Business growth through search visibility'); ?>
-                    <?php $caseDesc = (string) ($c['desc'] ?? ''); ?>
-                    <div class="del-case-card" data-framer-reveal="fade-up" style="padding: 22px 20px;">
-                        <span class="del-case-badge" style="display: inline-block; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; padding: 4px 10px; margin-bottom: 12px;"><?= htmlspecialchars($caseBadge) ?></span>
-                        <h3><?= htmlspecialchars($caseTitle) ?></h3>
-                        <div class="del-case-stat-box" style="padding: 10px; margin-bottom: 12px;">
-                            <div class="del-case-stat-num" style="font-size: 1.4rem; font-weight: 800;"><?= htmlspecialchars($caseStat) ?></div>
-                            <div class="del-case-stat-lbl" style="font-size: 0.75rem; font-weight: 600;"><?= htmlspecialchars($caseStatDesc) ?></div>
-                        </div>
-                        <p><?= htmlspecialchars($caseDesc) ?></p>
-                    </div>
+                    <article class="ds-case">
+                        <span class="bd"><?= $h($c['badge'] ?? 'SEO growth result') ?></span>
+                        <h3><?= $h($c['title'] ?? 'SEO success story') ?></h3>
+                        <div class="big"><?= $h($c['stat'] ?? 'Results') ?></div>
+                        <div class="bl"><?= $h($c['stat_desc'] ?? '') ?></div>
+                        <p><?= $h($c['desc'] ?? '') ?></p>
+                    </article>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- Live Google Rankings Telemetry Table -->
-    <section class="del-rankings-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">LIVE SEARCH TELEMETRY</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Verified Google Rankings for Our <span class="accent">Client Campaigns<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Live keyword snapshot across competitive commercial and event search queries in Delhi NCR and global Google indices.
-                </p>
+    <!-- 12. RANKINGS -->
+    <section class="ds-sec">
+        <div class="ds-wrap">
+            <div class="ds-head ds-split">
+                <div>
+                    <div class="ds-kicker">Live search telemetry</div>
+                    <h2 class="ds-h2">Verified Google rankings for our <?= $em('client campaigns') ?></h2>
+                </div>
+                <p class="ds-lede">A keyword snapshot across competitive commercial and event queries in Delhi NCR and global Google indices.</p>
             </div>
-
-            <div class="del-rankings-table-wrap" data-framer-reveal="fade-up" style="overflow: hidden;">
-                <div style="overflow-x: auto;">
-                    <table class="del-table" style="width: 100%;">
-                        <thead>
+            <?php if (!empty($rankingKeywords)): ?>
+            <div class="ds-board">
+                <?php foreach ($rankingKeywords as $k): ?>
+                    <div class="ds-rk">
+                        <div class="pos"><?= $h($k['rank'] ?? '#1') ?></div>
+                        <div>
+                            <b><?= $h($k['keyword'] ?? '') ?></b>
+                            <small><?= $h($k['url'] ?? '') ?></small>
+                            <div class="meta">
+                                <span class="g"><?= $h($k['trend'] ?? '') ?></span>
+                                <span><?= $h($k['volume'] ?? '') ?></span>
+                                <span><?= $h($k['intent'] ?? '') ?></span>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            <?php endif; ?>
+            <div class="ds-tw">
+                <table>
+                    <thead><tr><th>Target search phrase</th><th>Google position</th><th>Est. search volume</th><th>Difficulty</th><th>SERP status</th></tr></thead>
+                    <tbody>
+                        <?php foreach ($rankings as $rk): ?>
                             <tr>
-                                <th>Target Search Phrase</th>
-                                <th>Google Position</th>
-                                <th>Est. Search Volume</th>
-                                <th>Difficulty</th>
-                                <th>SERP Status</th>
+                                <td style="font-weight:700"><?= $h($rk['kw'] ?? '') ?></td>
+                                <td><span class="ds-pos"><?= $h($rk['pos'] ?? '#1') ?></span></td>
+                                <td><?= $h($rk['vol'] ?? 'N/A') ?></td>
+                                <td><?= $h($rk['diff'] ?? 'Medium') ?></td>
+                                <td style="color:var(--ok);font-weight:700">✓ <?= $h($rk['status'] ?? 'Verified') ?></td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <?php foreach ($rankings as $rk): ?>
-                                <?php $rankKw = (string) ($rk['kw'] ?? 'Search keyword'); ?>
-                                <?php $rankPos = (string) ($rk['pos'] ?? '#1'); ?>
-                                <?php $rankVol = (string) ($rk['vol'] ?? 'N/A'); ?>
-                                <?php $rankDiff = (string) ($rk['diff'] ?? 'Medium'); ?>
-                                <?php $rankStatus = (string) ($rk['status'] ?? 'Verified'); ?>
-                                <tr>
-                                    <td style="font-weight: 700; color: #111827;">
-                                        <span style="color: #C4007A; margin-right: 6px;">🔍</span>
-                                        <?= htmlspecialchars($rankKw) ?>
-                                    </td>
-                                    <td><span class="del-pos-pill" style="display: inline-block; font-weight: 800; padding: 3px 10px; font-size: 0.82rem;"><?= htmlspecialchars($rankPos) ?></span></td>
-                                    <td><?= htmlspecialchars($rankVol) ?></td>
-                                    <td><span style="font-weight: 600; color: #4B5563;"><?= htmlspecialchars($rankDiff) ?></span></td>
-                                    <td><span style="color: #059669; font-weight: 700; font-size: 0.82rem;">✓ <?= htmlspecialchars($rankStatus) ?></span></td>
-                                </tr>
-                            <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         10. WRAPPING UP: WHY SEO SERVICES IN DELHI MATTER
-         ======================================================== -->
-    <section class="del-wrap-section" data-framer-reveal="fade-up" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-wrap-card">
-                <div class="del-section-head" style="margin-bottom: 18px;">
-                    <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;"><?= htmlspecialchars($wrappingUp['eyebrow'] ?? 'DELHI NCR LOCAL REACH') ?></div>
-                    <h2 class="del-section-title" style="font-weight: 850;">
-                        <?= htmlspecialchars($wrappingUp['title'] ?? 'Why SEO Services in Delhi Matter for Your Business') ?> <span class="accent"><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                    </h2>
-                    <h3 style="font-size: 1.05rem; font-weight: 700; color: #C4007A; margin: 6px 0 0;">
-                        <?= htmlspecialchars($wrappingUp['sub'] ?? 'Build Visibility. Earn Trust. Generate Sustainable Growth.') ?>
-                    </h3>
-                </div>
-
-                <div style="max-width: 880px; margin: 0 auto; font-size: 0.95rem; line-height: 1.65; color: #374151;">
-                    <p style="margin-bottom: 14px;">
-                        <?= htmlspecialchars($wrappingUp['p1'] ?? '') ?>
-                    </p>
-                    <p style="margin-bottom: 14px;">
-                        <?= htmlspecialchars($wrappingUp['p2'] ?? '') ?>
-                    </p>
-
-                    <div style="background: #FFF5FA; border: 1.5px solid rgba(196, 0, 122, 0.2); border-radius: 16px; padding: 18px 20px; margin-bottom: 18px;">
-                        <div style="font-weight: 800; color: #111827; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; font-size: 0.94rem;">
-                            <span style="color: #C4007A; font-size: 1.1rem;">📍</span>
-                            <span>Target Micro-Markets Across Delhi NCR</span>
-                        </div>
-                        <div class="del-markets-badge-grid" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 20px;">
-                            <?php foreach (($wrappingUp['micro_markets'] ?? []) as $mm): ?>
-                                <span class="del-market-pill"><?= htmlspecialchars($mm) ?></span>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-
-                    <p style="margin-bottom: 18px; font-weight: 700; color: #111827; font-size: 0.98rem; text-align: center;">
-                        <?= htmlspecialchars($wrappingUp['goal'] ?? 'Our goal is simple: Make your business discoverable, build trust, and convert search visibility into growth.') ?>
-                    </p>
-
-                    <div style="text-align: center; margin-top: 20px;">
-                        <a href="/contact.php" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-weight: 700; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
-                            <span>Book Your Free SEO Consultation</span>
-                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                    </div>
-                </div>
+    <!-- 13. WHY SEO IN DELHI -->
+    <section class="ds-sec alt">
+        <div class="ds-wrap ds-wrap-up ds-grid">
+            <div>
+                <div class="ds-kicker"><?= $h(ucwords(strtolower((string) ($wrappingUp['eyebrow'] ?? 'Delhi NCR local reach')))) ?></div>
+                <h2 class="ds-h2"><?= $h($wrappingUp['title'] ?? 'Why SEO Services in Delhi Matter for Your Business') ?></h2>
+                <div class="sub"><?= $h($wrappingUp['sub'] ?? '') ?></div>
+            </div>
+            <div class="body">
+                <p><?= $h($wrappingUp['p1'] ?? '') ?></p>
+                <p><?= $h($wrappingUp['p2'] ?? '') ?></p>
+                <div class="ds-chips"><?php foreach (($wrappingUp['micro_markets'] ?? []) as $m): ?><span><?= $h($m) ?></span><?php endforeach; ?></div>
+                <p class="ds-goal"><?= $h($wrappingUp['goal'] ?? '') ?></p>
+                <div class="ds-actions"><a href="/contact.php" class="ds-btn pri trigger-enquiry-modal" data-service="SEO Services in Delhi"><span>Book your free SEO consultation</span><?= dsIcon('arrow', 16) ?></a></div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         11. FAQS ACCORDION (10 Questions from Document)
-         ======================================================== -->
-    <section class="del-faq-section" style="padding: 36px 0 40px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-section-head" data-framer-reveal="fade-up">
-                <div class="del-eyebrow" style="display: inline-flex; align-items: center; gap: 8px; padding: 5px 13px; font-size: 0.74rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;">FREQUENTLY ASKED QUESTIONS</div>
-                <h2 class="del-section-title" style="font-weight: 850;">
-                    Frequently Asked Questions About <span class="accent">SEO Services in Delhi<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="del-section-sub" style="line-height: 1.6; max-width: 780px; margin: 0 auto;">
-                    Clear, transparent answers to help you make an informed decision for your digital growth:
-                </p>
+    <!-- 14. FAQ -->
+    <section class="ds-sec">
+        <div class="ds-wrap ds-side ds-grid">
+            <div class="sticky">
+                <div class="ds-kicker">FAQ</div>
+                <h2 class="ds-h2">Questions about <?= $em('SEO services in Delhi') ?></h2>
+                <p class="ds-lede">Clear, transparent answers to help you decide.</p>
             </div>
-
-            <div style="max-width: 860px; margin: 0 auto;">
-                <?php foreach (($faqs ?? []) as $idx => $fq):
-                    $isActive = ($idx === 0) ? ' active' : '';
-                    $faqQuestion = is_array($fq) ? ($fq['q'] ?? $fq['question'] ?? 'Question') : (string) $fq;
-                    $faqAnswer = is_array($fq) ? ($fq['a'] ?? $fq['answer'] ?? '') : '';
-                ?>
-                    <div class="del-faq-item<?= $isActive ?>" data-framer-reveal="fade-up">
-                        <button class="del-faq-btn" onclick="toggleDelFaq(this)" style="text-align: left; padding: 16px 20px; gap: 14px; cursor: pointer; font-family: inherit;">
-                            <span><?= htmlspecialchars($faqQuestion) ?></span>
-                            <span class="icon"><?= ($idx === 0) ? '−' : '+' ?></span>
-                        </button>
-                        <div class="del-faq-answer" style="padding: 0 20px 16px; font-size: 0.9rem; line-height: 1.62;">
-                            <?= nl2br(htmlspecialchars($faqAnswer)) ?>
-                        </div>
-                    </div>
+            <div class="ds-faq">
+                <?php foreach (($faqs ?? []) as $i => $fq):
+                    $q = is_array($fq) ? ($fq['q'] ?? $fq['question'] ?? 'Question') : (string) $fq;
+                    $a = is_array($fq) ? ($fq['a'] ?? $fq['answer'] ?? '') : ''; ?>
+                    <details name="ds-faq" <?= $i === 0 ? 'open' : '' ?>>
+                        <summary><span><?= $h($q) ?></span><span class="ds-pm"><?= dsIcon('plus', 16) ?></span></summary>
+                        <div class="ds-ans"><?= nl2br($h($a)) ?></div>
+                    </details>
                 <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         12. FINAL CONVERSION CTA BANNER
-         ======================================================== -->
-    <section class="del-cta-section" style="padding: 34px 0 42px;">
-        <div class="del-container" style="margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; width: 100%;">
-            <div class="del-cta-box" data-framer-reveal="fade-up" style="text-align: center; position: relative; overflow: hidden;">
-                <h2><?= htmlspecialchars($ctaBox['headline'] ?? "So You're Ready to Take the Plunge and") ?> <span>Grow Your Business With SEO?</span></h2>
-                <h3><?= htmlspecialchars($ctaBox['sub'] ?? "Let's Make Your Search Visibility Business Opportunities") ?></h3>
-                <p><?= htmlspecialchars($ctaBox['text'] ?? '') ?></p>
-
-                <div class="del-cta-btns" style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap;">
-                    <button type="button" class="del-btn-primary trigger-enquiry-modal" data-service="SEO Services in Delhi" style="background: #FFFFFF !important; color: #C4007A !important; font-weight: 800; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.2); display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.92rem; padding: 12px 24px; text-decoration: none; cursor: pointer;">
-                        <span><?= htmlspecialchars($ctaBox['btn_text'] ?? 'Book Your Free SEO Consultation') ?></span>
-                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </button>
-                    <a href="tel:+919999674255" class="del-btn-secondary" style="background: rgba(255,255,255,0.18); border: 2px solid rgba(255,255,255,0.85); color: #FFFFFF !important; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 0.92rem; padding: 11px 22px; text-decoration: none; cursor: pointer;">
-                        <span><?= htmlspecialchars($ctaBox['call_text'] ?? 'Call: +91-9999674255') ?></span>
-                    </a>
+    <!-- 15. CTA -->
+    <section class="ds-sec" style="padding-top:0">
+        <div class="ds-wrap">
+            <div class="ds-cta">
+                <h2><?= $h($ctaBox['headline'] ?? '') ?></h2>
+                <h3><?= $h($ctaBox['sub'] ?? '') ?></h3>
+                <p><?= $h($ctaBox['text'] ?? '') ?></p>
+                <div class="ds-actions">
+                    <a href="/contact.php" class="ds-btn light trigger-enquiry-modal" data-service="SEO Services in Delhi"><span><?= $h($ctaBox['btn_text'] ?? 'Book your free SEO consultation') ?></span><?= dsIcon('arrow', 16) ?></a>
+                    <a href="tel:+919999674255" class="ds-btn lineW"><?= dsIcon('phone', 16) ?><span><?= $h($ctaBox['call_text'] ?? 'Call: +91-9999674255') ?></span></a>
                 </div>
-
-                <div style="margin-top: 18px; font-size: 0.82rem; color: rgba(255, 255, 255, 0.9); font-weight: 500;">
-                    Free Strategy Consultation &bull; Zero Obligation &bull; Tailored Delhi NCR Action Plan
-                </div>
+                <small>Free strategy consultation &middot; Zero obligation &middot; Tailored Delhi NCR action plan</small>
             </div>
         </div>
     </section>
-
 </main>
 
-<button type="button" class="del-theme-toggle del-theme-toggle-floating" id="delThemeToggleFloating" aria-label="Switch to dark mode" aria-pressed="false" style="align-items: center; justify-content: center; gap: 8px; padding: 0 15px; font: inherit; font-size: 0.84rem; font-weight: 700; cursor: pointer; position: fixed; z-index: 1050;">
-    <svg class="del-theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/></svg>
-    <svg class="del-theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
-    <span class="del-theme-toggle-label">Dark mode</span>
-</button>
-
-<!-- Swiper 11 JS for Touch Sliders -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
 <script>
-    // 1. Reveal Observer (Safe Initialization)
-    document.addEventListener('DOMContentLoaded', () => {
-        document.documentElement.classList.add('js-reveal');
-
-        const themeToggles = document.querySelectorAll('.del-theme-toggle');
-        const applyTheme = (isDark) => {
-            document.body.classList.toggle('del-theme-dark', isDark);
-            themeToggles.forEach(toggle => {
-                toggle.setAttribute('aria-pressed', String(isDark));
-                toggle.setAttribute('aria-label', isDark ? 'Switch to light mode' : 'Switch to dark mode');
-                toggle.querySelector('.del-theme-toggle-label').textContent = isDark ? 'Light mode' : 'Dark mode';
-            });
-        };
-        try {
-            applyTheme(window.localStorage.getItem('del-seo-theme') === 'dark');
-        } catch (error) {
-            console.error('Unable to load the saved display theme.', error);
-            applyTheme(false);
-        }
-        themeToggles.forEach(toggle => {
-            toggle.addEventListener('click', () => {
-                const isDark = !document.body.classList.contains('del-theme-dark');
-                applyTheme(isDark);
-                try {
-                    window.localStorage.setItem('del-seo-theme', isDark ? 'dark' : 'light');
-                } catch (error) {
-                    console.error('Unable to save the selected display theme.', error);
-                }
-            });
-        });
-
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('framer-visible');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.05, rootMargin: '0px 0px 80px 0px' });
-
-        document.querySelectorAll('[data-framer-reveal]').forEach(el => observer.observe(el));
-
-        // 2. Swiper 11 for Client Feedback Slider
+    document.addEventListener('DOMContentLoaded', function () {
         if (typeof Swiper !== 'undefined') {
             new Swiper('#delFeedbackSwiper', {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                loop: true,
-                grabCursor: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false,
-                    pauseOnMouseEnter: true,
-                },
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true,
-                },
-                breakpoints: {
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 22,
-                    }
-                }
+                slidesPerView: 1, spaceBetween: 20, loop: true, grabCursor: true,
+                autoplay: { delay: 6000, disableOnInteraction: false, pauseOnMouseEnter: true },
+                pagination: { el: '#delFeedbackSwiper .swiper-pagination', clickable: true },
+                breakpoints: { 768: { slidesPerView: 2, spaceBetween: 22 } }
             });
         }
     });
 
-    // 3. FAQ Accordion Toggle
-    function toggleDelFaq(btn) {
-        const item = btn.closest('.del-faq-item');
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.del-faq-item').forEach(el => {
-            el.classList.remove('active');
-            const icon = el.querySelector('.icon');
-            if (icon) icon.innerText = '+';
-        });
-        if (!isActive) {
-            item.classList.add('active');
-            const icon = item.querySelector('.icon');
-            if (icon) icon.innerText = '−';
-        }
-    }
-
-    // 4. Hero Quote Form AJAX Submission
     function handleHeroQuoteSubmit(e) {
         e.preventDefault();
-        const form = document.getElementById('delHeroQuoteForm');
-        const btn  = document.getElementById('delHeroSubmitBtn');
-        const fb   = document.getElementById('delHeroFeedback');
-
-        const formData = new FormData(form);
-        formData.set('service', 'SEO Services in Delhi');
-        formData.set('ajax', '1');
-
+        var form = document.getElementById('delHeroQuoteForm');
+        var btn = document.getElementById('delHeroSubmitBtn');
+        var fb = document.getElementById('delHeroFeedback');
+        var label = btn.querySelector('span');
+        var original = label.textContent;
+        var fd = new FormData(form);
+        fd.set('service', 'SEO Services in Delhi');
+        fd.set('ajax', '1');
         btn.disabled = true;
-        btn.querySelector('span').innerText = 'Submitting...';
-
-        fetch('/contact.php', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Accept': 'application/json'
-            }
-        })
-        .then(res => res.json())
-        .then(data => {
+        label.textContent = 'Sending...';
+        var show = function (ok, msg) {
             fb.style.display = 'block';
-            fb.style.background = '#ECFDF5';
-            fb.style.color = '#065F46';
-            fb.innerText = "Thank you! Your quote request has been received. Our team will contact you shortly.";
-            form.reset();
-            btn.disabled = false;
-            btn.querySelector('span').innerText = 'Submit →';
-        })
-        .catch(() => {
-            fb.style.display = 'block';
-            fb.style.background = '#ECFDF5';
-            fb.style.color = '#065F46';
-            fb.innerText = "Thank you! Your quote request has been received. Our team will contact you shortly.";
-            form.reset();
-            btn.disabled = false;
-            btn.querySelector('span').innerText = 'Submit →';
-        });
+            fb.style.background = ok ? '#DDF6EA' : '#FDE2E2';
+            fb.style.color = ok ? '#065F46' : '#991B1B';
+            fb.textContent = msg;
+        };
+        fetch('/contact.php', { method: 'POST', body: fd, headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' } })
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                if (d && d.success === false) { show(false, d.message || 'Something went wrong. Please call +91-9999674255.'); }
+                else { show(true, 'Thank you! Your quote request has been received. Our team will contact you shortly.'); form.reset(); }
+            })
+            .catch(function () { show(false, 'We could not send your request. Please call +91-9999674255.'); })
+            .finally(function () { btn.disabled = false; label.textContent = original; });
     }
 </script>
 

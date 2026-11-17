@@ -12,1208 +12,501 @@ $dbService = getServiceBySlug('b2b-exhibition-seo');
 $pageTitle = $dbService['title'] ?? 'B2B & Exhibition SEO Services';
 $heroDesc  = $dbService['hero_description'] ?? ($dbService['summary'] ?? 'We uncover hidden search opportunities and build a customized, deadline-driven Event SEO strategy that drives pre-registered trade buyers, sells out exhibitor stalls, and delivers measurable results.');
 $bodyCopy  = $dbService['body'] ?? '';
+
+$arrow = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>';
+$phone = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>';
+
+$challenges = [
+    ['Attracting qualified international buyers', 'Reaching the right audience matters more than raw traffic. Organisers need relevant buyers, importers, wholesalers and sourcing professionals arriving through organic search.'],
+    ['Generating quality exhibitor enquiries', 'Exhibitors need more than event promotion. Your website must show business opportunity, industry relevance and commercial value.'],
+    ['Competing for organic search visibility', 'B2B fairs compete across event, industry, product and location searches. Without a focused SEO strategy, valuable search demand goes to someone else.'],
+    ['Driving registrations in short timelines', 'Exhibition marketing runs on fixed dates. Building visibility, reaching the right people and converting them takes consistent SEO planning and execution.'],
+];
+
+$ranks = [
+    ['bharat-tex.com 🇮🇳', 'Govt / Mega Fair', '771', '137K+', '₹18.4L', 'Top 3 positions: ', '80+ commercial keywords #1'],
+    ['ihgfdelhifair.in 🇮🇳', 'B2B Trade Show', '883', '42.5K+', '₹8.2L', 'Top 3 positions: ', '22 key locations #1 ranked'],
+    ['premier-logistics.in 🏢', 'B2B Industrial', '1.3K+', '68.2K+', '$12.5K', 'Top 10 positions: ', '140+ high-intent keywords'],
+];
+
+$keywords = [
+    ['Bharat Tex 2026 Fair', 'bharat-tex.com', '+17', '49,500/mo', 'Commercial'],
+    ['Best SEO Company in Delhi NCR', 'webtecmart.com/seo-services-delhi.php', '+13', '14,800/mo', 'High Intent'],
+    ['IHGF Autumn Fair Dates 2027', 'ihgfdelhifair.in', '+25', '22,200/mo', 'Buyer Intent'],
+    ['B2B Exhibition SEO Services', 'webtecmart.com/b2b-exhibition-seo.php', '+30', '8,100/mo', 'B2B Commercial'],
+    ['Local SEO Services in Delhi', 'webtecmart.com/local-seo.php', '+23', '12,100/mo', 'Local Intent'],
+    ['Technical SEO Services Delhi', 'webtecmart.com/technical-seo.php', '+19', '6,400/mo', 'Technical'],
+];
+
+$faqs = [
+    ['When should an exhibition organizer start SEO before the event dates?', 'Ideally 6 to 9 months prior to the event dates. This timeline gives Google sufficient opportunity to crawl exhibitor categories, rank competitive sourcing queries, and build momentum before visitor badge pre-registrations peak in the final 90 days.'],
+    ['Can individual B2B exhibitors also benefit from exhibition SEO?', 'Absolutely. Individual exhibitors investing in stalls at fairs like Bharat Tex, IHGF, or Auto Expo can launch dedicated exhibition landing pages to rank for product searches during the fair, pre-booking high-value meetings with visiting international delegations before the fair doors even open.'],
+    ['How did WebTecMart achieve 400% organic growth for Bharat Tex Fair?', 'We implemented a multi-tiered technical taxonomy, optimized over 200+ global textile keywords, built Event and Organization schema hierarchies, and executed digital PR that earned coverage from global trade portals, securing #1 Google rankings for high-intent search queries worldwide.'],
+    ['How do you prevent trade show websites from losing rank once the fair ends?', 'We build evergreen URL structures alongside annual archive slugs. Instead of deleting pages, we transition past editions into authoritative post-show review hubs while redirecting core search equity into next year\'s upcoming event campaign.'],
+];
 ?>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
 <style>
-    /* ============================================================
-       B2B & EXHIBITION SEO DEDICATED FLAGSHIP PAGE STYLING
-       ============================================================ */
-    .ev-page {
-        width: 100%;
-        background: #FFF8FC;
-        color: #1F1B2A;
-        font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-        overflow: hidden;
-    }
-    .ev-container {
-        max-width: 1240px;
-        margin: 0 auto;
-        padding: 0 20px;
-        position: relative;
-        z-index: 2;
-    }
+/* ============================================================
+   B2B & EXHIBITION SEO — "Expo Floor" design
+   Idea: the page behaves like a trade-fair venue. Dark hall at the
+   top, a visitor badge as hero, stall-signage section blocks.
+   ============================================================ */
+.xp {
+    --ink: #1A0613;
+    --ink2: #2B0B20;
+    --pink: #C4007A;
+    --pink2: #E0398F;
+    --blush: #FBEAF3;
+    --paper: #FFFFFF;
+    --mist: #F7F4F8;
+    --gold: #FFB547;
+    --mint: #0E9F6E;
+    --text: #2A2430;
+    --mute: #6C6474;
+    --line: rgba(26, 6, 19, .12);
+    --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    background: var(--paper);
+    overflow-x: clip;
+}
+.xp *, .xp *::before, .xp *::after { box-sizing: border-box; }
+.xp h1, .xp h2, .xp h3, .xp h4 { font-family: var(--disp); margin: 0; letter-spacing: -.02em; }
+.xp p { margin: 0; }
+.xp a:focus-visible, .xp button:focus-visible, .xp input:focus-visible, .xp select:focus-visible, .xp textarea:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 2px;
+}
+.xp-wrap { max-width: 1200px; margin: 0 auto; padding: 0 22px; }
+/* Grid blowout fix: every grid track can shrink below its content (inputs, long text) */
+.xp-hero-grid, .xp-board, .xp-web-grid, .xp-case, .xp-rank-cards, .xp-form-card, .xp-fields, .xp-faq-grid, .xp-stats, .xp-chips, .xp-screen-body { grid-template-columns: minmax(0, 1fr); }
+.xp-hero-grid > *, .xp-board > *, .xp-web-grid > *, .xp-case > *, .xp-rank-cards > *, .xp-form-card > *, .xp-fields > *, .xp-faq-grid > *, .xp-stats > * { min-width: 0; }
+.xp img, .xp svg, .xp input, .xp select, .xp textarea, .xp table { max-width: 100%; }
+.xp-field input, .xp-field select, .xp-field textarea { min-width: 0; }
+.xp h1, .xp h2, .xp h3, .xp p, .xp li { overflow-wrap: anywhere; }
 
-    /* ===== HERO SECTION ===== */
-    .ev-hero {
-        padding: 48px 0 36px;
-        position: relative;
-        background: radial-gradient(circle at 80% 20%, rgba(196, 0, 122, 0.05) 0%, transparent 60%);
-    }
-    .ev-hero-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 36px;
-        align-items: center;
-    }
-    @media (min-width: 992px) {
-        .ev-hero-grid {
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 48px;
-        }
-    }
+/* Buttons */
+.xp-btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 14px 26px; border-radius: 12px; font-weight: 700; font-size: .95rem; line-height: 1;
+    text-decoration: none; white-space: nowrap; border: 2px solid transparent; cursor: pointer;
+    transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+}
+.xp-btn svg { flex-shrink: 0; }
+.xp-btn--pink { background: var(--pink); color: #fff !important; box-shadow: 0 6px 0 #7E004E; }
+.xp-btn--pink:hover { translate: 0 2px; box-shadow: 0 4px 0 #7E004E; }
+.xp-btn--pink:active { translate: 0 6px; box-shadow: 0 0 0 #7E004E; }
+.xp-btn--ghost { background: transparent; color: #fff !important; border-color: rgba(255,255,255,.35); }
+.xp-btn--ghost:hover { background: rgba(255,255,255,.1); border-color: #fff; }
+.xp-btn--line { background: #fff; color: var(--pink) !important; border-color: var(--pink); }
+.xp-btn--line:hover { background: var(--blush); }
+.xp-btn--sm { padding: 11px 20px; font-size: .86rem; }
 
-    .ev-eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        color: #C4007A;
-        font-size: 0.74rem;
-        font-weight: 800;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        padding: 6px 14px;
-        border-radius: 9999px;
-        margin-bottom: 16px;
-    }
-    .ev-eyebrow svg {
-        width: 13px;
-        height: 13px;
-        color: #C4007A;
-    }
+/* ===== HERO (the hall) ===== */
+.xp-hero {
+    position: relative; color: #fff; padding: 64px 0 0;
+    background:
+        radial-gradient(60% 70% at 85% 10%, rgba(196,0,122,.55), transparent 65%),
+        radial-gradient(40% 50% at 0% 100%, rgba(255,181,71,.16), transparent 70%),
+        var(--ink);
+}
+.xp-hero::before { /* floor-plan dot grid */
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1.2px);
+    background-size: 26px 26px;
+    -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
+            mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
+    pointer-events: none;
+}
+.xp-hero-grid { position: relative; display: grid; gap: 48px; align-items: center; padding-bottom: 64px; }
+@media (min-width: 992px) { .xp-hero-grid { grid-template-columns: 1.1fr .9fr; gap: 56px; } }
+.xp-tag {
+    display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px 7px 10px; margin-bottom: 22px;
+    border-radius: 999px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.2);
+    font-size: .8rem; font-weight: 600; color: #FFE3F1;
+}
+.xp-tag i { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(255,181,71,.25); }
+.xp-hero h1 { font-size: clamp(2.5rem, 5.4vw, 4.4rem); font-weight: 800; line-height: 1.03; margin-bottom: 20px; }
+.xp-hero-sub { font-family: var(--disp); font-size: clamp(1.15rem, 2vw, 1.45rem); font-weight: 600; line-height: 1.35; color: #FFD7EB; margin-bottom: 16px; max-width: 560px; }
+.xp-hero-desc { color: rgba(255,255,255,.78); line-height: 1.7; max-width: 560px; margin-bottom: 28px; }
+.xp-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+.xp-note { margin-top: 26px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,.25); font-size: .8rem; color: rgba(255,255,255,.6); line-height: 1.55; max-width: 560px; }
 
-    .ev-hero-title {
-        font-size: clamp(2.2rem, 4.4vw, 3.4rem);
-        font-weight: 800;
-        line-height: 1.15;
-        letter-spacing: -0.025em;
-        color: #111827;
-        margin: 0 0 14px;
-    }
-    .ev-hero-title .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-    }
-    .ev-hero-title .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -6px;
-        width: 100%;
-        height: 7px;
-    }
+/* Visitor badge (SERP + event pass) */
+.xp-badge-wrap { position: relative; display: flex; justify-content: center; padding-top: 70px; perspective: 1100px; }
+.xp-lanyard { position: absolute; top: 0; left: 50%; width: 14px; height: 90px; margin-left: -7px; background: linear-gradient(var(--gold), #E58B00); border-radius: 0 0 4px 4px; }
+.xp-lanyard::after { content: ''; position: absolute; left: 50%; bottom: -4px; width: 46px; height: 12px; margin-left: -23px; background: #8C94A3; border-radius: 4px; }
+.xp-badge {
+    position: relative; width: 100%; max-width: 430px; background: #fff; color: var(--text); border-radius: 22px;
+    padding: 34px 26px 24px; transform: rotate(2.2deg); transform-origin: top center;
+    box-shadow: 0 30px 60px rgba(0,0,0,.45);
+}
+@keyframes xp-sway { from { transform: rotate(2.2deg); } to { transform: rotate(-1.4deg); } }
+.xp-badge::before { /* lanyard hole */
+    content: ''; position: absolute; top: 12px; left: 50%; width: 52px; height: 9px; margin-left: -26px; border-radius: 99px; background: var(--ink);
+}
+.xp-badge-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; gap: 10px; }
+.xp-live { display: inline-flex; align-items: center; gap: 7px; background: #E6F8F0; color: #0A7A54; font-size: .75rem; font-weight: 700; padding: 5px 11px; border-radius: 99px; }
+.xp-live i { width: 7px; height: 7px; border-radius: 50%; background: var(--mint); }
+.xp-badge-top small { font-size: .72rem; color: var(--mute); font-weight: 700; }
+.xp-serp-url { font-size: .76rem; color: var(--mute); margin-bottom: 4px; }
+.xp-serp-url b { color: #1A0DAB; font-weight: 700; }
+.xp-serp-title { font-family: var(--disp); font-size: 1.12rem; font-weight: 700; color: #1A0DAB; text-decoration: underline; line-height: 1.3; margin-bottom: 8px; }
+.xp-serp-desc { font-size: .84rem; line-height: 1.55; color: #4D5156; margin-bottom: 14px; }
+.xp-pass { margin: 0 -26px; padding: 16px 26px; background: var(--blush); border-top: 2px dashed rgba(196,0,122,.35); border-bottom: 2px dashed rgba(196,0,122,.35); position: relative; }
+.xp-pass::before, .xp-pass::after { content: ''; position: absolute; top: 50%; width: 18px; height: 18px; margin-top: -9px; border-radius: 50%; background: #2B0B20; }
+.xp-pass::before { left: -9px; } .xp-pass::after { right: -9px; }
+.xp-pass div { font-size: .8rem; line-height: 1.5; margin-bottom: 6px; color: #3A2733; }
+.xp-pass div:last-child { margin-bottom: 0; }
+.xp-pass strong { color: var(--ink); }
+.xp-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+.xp-chip { text-align: center; padding: 10px 4px; border-radius: 10px; background: var(--ink); color: #fff; }
+.xp-chip b { display: block; font-family: var(--disp); font-size: 1.25rem; color: var(--gold); line-height: 1.1; }
+.xp-chip span { font-size: .66rem; font-weight: 600; opacity: .8; }
 
-    .ev-hero-sub {
-        font-size: clamp(1.1rem, 2vw, 1.35rem);
-        font-weight: 700;
-        color: #1F2937;
-        line-height: 1.4;
-        margin: 0 0 16px;
-    }
+/* Stat ribbon (hall signage) */
+.xp-ribbon { position: relative; background: var(--gold); color: var(--ink); overflow: hidden; border-top: 3px solid var(--ink); }
+.xp-ribbon-track { display: flex; width: max-content; animation: xp-run 38s linear infinite; }
+.xp-ribbon span { font-family: var(--disp); font-weight: 800; font-size: 1.05rem; padding: 14px 30px; white-space: nowrap; }
+.xp-ribbon span::after { content: '✦'; margin-left: 60px; opacity: .55; }
+@keyframes xp-run { to { transform: translateX(-50%); } }
 
-    .ev-hero-desc {
-        font-size: 0.98rem;
-        line-height: 1.68;
-        color: #4B5563;
-        margin: 0 0 14px;
-        max-width: 640px;
-    }
-    .ev-hero-desc:last-of-type {
-        margin-bottom: 24px;
-    }
+/* ===== Section shells ===== */
+.xp-sec { padding: 84px 0; }
+.xp-head { max-width: 720px; margin-bottom: 44px; }
+.xp-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.9rem); font-weight: 800; line-height: 1.1; color: var(--ink); margin-bottom: 14px; }
+.xp-head p { color: var(--mute); line-height: 1.65; font-size: 1.02rem; }
+.xp-head--dark h2 { color: #fff; }
+.xp-head--dark p { color: rgba(255,255,255,.7); }
+.xp-kicker { display: inline-block; font-size: .82rem; font-weight: 700; color: var(--pink); margin-bottom: 12px; padding-left: 14px; border-left: 4px solid var(--pink); }
 
-    .ev-hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 14px;
-        margin-bottom: 28px;
-    }
-    .ev-btn-primary {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-        color: #FFFFFF !important;
-        font-weight: 700;
-        font-size: 0.95rem;
-        line-height: 1;
-        padding: 13px 28px;
-        border-radius: 9999px;
-        text-decoration: none;
-        white-space: nowrap !important;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.32);
-        transition: all 0.25s ease;
-    }
-    .ev-btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.45);
-        color: #FFFFFF;
-    }
-    .ev-btn-primary svg {
-        width: 16px !important;
-        height: 16px !important;
-        flex-shrink: 0;
-        transition: transform 0.2s ease;
-    }
-    .ev-btn-primary:hover svg {
-        transform: translateX(3px);
-    }
-    .ev-btn-secondary {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.25);
-        color: #C4007A !important;
-        font-weight: 700;
-        font-size: 0.95rem;
-        line-height: 1;
-        padding: 13px 24px;
-        border-radius: 9999px;
-        text-decoration: none;
-        white-space: nowrap !important;
-        transition: all 0.25s ease;
-    }
-    .ev-btn-secondary:hover {
-        background: rgba(196, 0, 122, 0.06);
-        border-color: #C4007A;
-        transform: translateY(-2px);
-    }
-    .ev-btn-secondary svg {
-        width: 15px !important;
-        height: 15px !important;
-        flex-shrink: 0;
-    }
+/* ===== Challenges: stall signboards ===== */
+.xp-challenges { background: var(--mist); }
+.xp-board { display: grid; gap: 18px; }
+@media (min-width: 768px) { .xp-board { grid-template-columns: repeat(2, 1fr); } }
+.xp-stall {
+    position: relative; background: #fff; border: 2px solid var(--ink); border-radius: 18px; padding: 54px 26px 26px;
+    box-shadow: 6px 6px 0 var(--ink);
+}
+.xp-stall::before { /* awning */
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 28px; border-radius: 15px 15px 0 0;
+    background: repeating-linear-gradient(90deg, var(--pink) 0 22px, #fff 22px 44px);
+    border-bottom: 2px solid var(--ink);
+}
+.xp-stall:nth-child(even)::before { background: repeating-linear-gradient(90deg, var(--ink) 0 22px, var(--gold) 22px 44px); }
+.xp-stall { transition: translate .25s ease, box-shadow .25s ease; }
+.xp-stall:hover { translate: -4px -4px; box-shadow: 10px 10px 0 var(--pink); }
+.xp-rc, .xp-stat { transition: translate .25s ease, box-shadow .25s ease; }
+.xp-rc:hover { translate: -3px -3px; box-shadow: 6px 6px 0 var(--pink); }
+.xp-stat:hover { translate: 0 -4px; }
+.xp-stall h3 { font-size: 1.3rem; font-weight: 700; line-height: 1.25; color: var(--ink); margin-bottom: 10px; }
+.xp-stall p { font-size: .94rem; line-height: 1.65; color: var(--mute); }
 
-    /* Trust Footnote in Hero */
-    .ev-hero-footnote {
-        font-size: 0.82rem;
-        color: #6B7280;
-        line-height: 1.5;
-        margin-top: 14px;
-        border-top: 1px dashed rgba(196, 0, 122, 0.15);
-        padding-top: 12px;
-    }
+/* ===== Event websites ===== */
+.xp-web-grid { display: grid; gap: 44px; align-items: center; }
+@media (min-width: 992px) { .xp-web-grid { grid-template-columns: .95fr 1.05fr; gap: 64px; } }
+.xp-web-copy h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 800; line-height: 1.1; color: var(--ink); margin-bottom: 12px; }
+.xp-web-copy h3 { font-size: 1.2rem; font-weight: 600; color: var(--pink); line-height: 1.35; margin-bottom: 22px; }
+.xp-web-copy p { line-height: 1.7; color: var(--mute); margin-bottom: 16px; }
+.xp-web-copy .xp-actions { margin-top: 28px; }
+.xp-browser { background: var(--ink); border-radius: 18px; padding: 12px; box-shadow: 14px 14px 0 var(--blush), 0 0 0 2px var(--ink); }
+.xp-browser-bar { display: flex; align-items: center; gap: 14px; padding: 4px 6px 12px; }
+.xp-dots { display: flex; gap: 6px; }
+.xp-dots span { width: 11px; height: 11px; border-radius: 50%; background: var(--pink); }
+.xp-dots span:nth-child(2) { background: var(--gold); } .xp-dots span:nth-child(3) { background: #fff; }
+.xp-url { flex: 1; min-width: 0; background: rgba(255,255,255,.1); color: rgba(255,255,255,.7); font-size: .72rem; padding: 6px 12px; border-radius: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.xp-screen { background: #fff; border-radius: 10px; overflow: hidden; min-height: 320px; }
+.xp-screen-nav { display: flex; justify-content: space-between; align-items: center; padding: 14px 18px; border-bottom: 1px solid #F0E6EC; gap: 10px; }
+.xp-screen-nav b { font-family: var(--disp); font-size: 1.2rem; color: var(--pink); }
+.xp-screen-nav em { font-style: normal; font-size: .65rem; color: var(--mute); }
+.xp-screen-nav span { background: var(--pink); color: #fff; font-size: .65rem; font-weight: 800; padding: 8px 12px; border-radius: 8px; white-space: nowrap; }
+.xp-screen-body { display: grid; grid-template-columns: 1fr .85fr; gap: 16px; align-items: center; padding: 28px 22px; }
+.xp-screen-body small { color: var(--pink); font-size: .64rem; font-weight: 700; }
+.xp-screen-body h4 { margin: 10px 0 10px; font-size: clamp(1.5rem, 3vw, 2.3rem); font-weight: 800; line-height: 1.02; color: var(--ink); }
+.xp-screen-body p { font-size: .72rem; line-height: 1.5; color: var(--mute); margin-bottom: 14px; }
+.xp-screen-body i { display: inline-block; font-style: normal; background: var(--ink); color: #fff; font-size: .65rem; font-weight: 800; padding: 9px 12px; border-radius: 8px; }
+.xp-art { min-height: 190px; border-radius: 10px; background: radial-gradient(ellipse at 70% 30%, rgba(255,255,255,.7) 0 8%, transparent 9%), radial-gradient(ellipse at 58% 50%, rgba(244,196,222,.9) 0 17%, transparent 18%), linear-gradient(145deg, #2D051E 0%, #C4007A 52%, #E98EBE 100%); }
+@media (max-width: 575px) { .xp-screen-nav em { display: none; } .xp-screen-body { padding: 20px 14px; gap: 10px; } .xp-art { min-height: 140px; } }
 
-    /* SERP Mockup Card on Right */
-    .ev-serp-mockup {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.15);
-        border-radius: 24px;
-        padding: 26px;
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.08);
-        position: relative;
-    }
-    .ev-serp-mockup::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-        border-radius: 24px 24px 0 0;
-    }
-    .ev-mockup-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 16px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-    .ev-mockup-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: #ECFDF5;
-        color: #059669;
-        font-size: 0.72rem;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        border: 1px solid rgba(5, 150, 105, 0.2);
-    }
-    .ev-serp-url {
-        font-size: 0.76rem;
-        color: #4B5563;
-        margin-bottom: 4px;
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-    .ev-serp-url span {
-        color: #1A0DAB;
-        font-weight: 700;
-    }
-    .ev-serp-title {
-        font-size: 1.15rem;
-        font-weight: 700;
-        color: #1A0DAB;
-        text-decoration: underline;
-        margin-bottom: 8px;
-        line-height: 1.3;
-    }
-    .ev-serp-desc {
-        font-size: 0.86rem;
-        color: #4D5156;
-        line-height: 1.55;
-        margin-bottom: 14px;
-    }
-    .ev-serp-rich {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 12px;
-        padding: 12px 14px;
-        margin-bottom: 16px;
-    }
-    .ev-rich-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.78rem;
-        color: #334155;
-        margin-bottom: 6px;
-    }
-    .ev-rich-row:last-child {
-        margin-bottom: 0;
-    }
-    .ev-rich-row strong {
-        color: #0F172A;
-    }
-    .ev-metrics-row {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
-        margin-top: 16px;
-        padding-top: 14px;
-        border-top: 1px solid rgba(196, 0, 122, 0.1);
-    }
-    .ev-metric-chip {
-        background: #FFF5FA;
-        border: 1px solid rgba(196, 0, 122, 0.15);
-        border-radius: 10px;
-        padding: 8px 10px;
-        text-align: center;
-    }
-    .ev-metric-chip .v {
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: #C4007A;
-        line-height: 1.1;
-    }
-    .ev-metric-chip .l {
-        font-size: 0.68rem;
-        font-weight: 600;
-        color: #6B7280;
-        margin-top: 2px;
-    }
+/* ===== Case studies ===== */
+.xp-cases { background: var(--ink); color: #fff; }
+.xp-case { display: grid; gap: 28px; padding: 34px; margin-bottom: 22px; border-radius: 22px; background: var(--ink2); border: 1px solid rgba(255,255,255,.12); align-items: center; }
+@media (min-width: 900px) { .xp-case { grid-template-columns: 1.1fr .9fr; padding: 42px; gap: 44px; } .xp-case:nth-of-type(even) { grid-template-columns: .9fr 1.1fr; } .xp-case:nth-of-type(even) .xp-case-text { order: 2; } }
+.xp-case-org { display: inline-block; font-size: .78rem; font-weight: 700; color: var(--ink); background: var(--gold); padding: 6px 12px; border-radius: 8px; margin-bottom: 14px; }
+.xp-case h3 { font-size: clamp(1.45rem, 2.6vw, 2rem); font-weight: 800; line-height: 1.15; margin-bottom: 14px; }
+.xp-case p { color: rgba(255,255,255,.75); line-height: 1.7; margin-bottom: 22px; font-size: .96rem; }
+.xp-stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.xp-stat { padding: 18px 14px; border-radius: 14px; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14); }
+.xp-stat b { display: block; font-family: var(--disp); font-size: 2rem; font-weight: 800; color: var(--gold); line-height: 1.05; }
+.xp-stat span { font-size: .78rem; color: rgba(255,255,255,.7); font-weight: 600; }
 
-    /* ===== SECTION TITLES ===== */
-    .ev-section-head {
-        text-align: center;
-        max-width: 780px;
-        margin: 0 auto 36px;
-    }
-    .ev-section-title {
-        font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        line-height: 1.25;
-        color: #111827;
-        margin: 0 0 12px;
-        letter-spacing: -0.02em;
-    }
-    .ev-section-title .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-    }
-    .ev-section-title .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        width: 100%;
-        height: 6px;
-    }
-    .ev-section-sub {
-        font-size: 0.96rem;
-        color: #6B7280;
-        line-height: 1.6;
-        margin: 0;
-    }
+/* ===== Rankings leaderboard ===== */
+.xp-rank-cards { display: grid; gap: 18px; margin-bottom: 36px; }
+@media (min-width: 768px) { .xp-rank-cards { grid-template-columns: repeat(3, 1fr); } }
+.xp-rc { background: #fff; border: 2px solid var(--ink); border-radius: 18px; overflow: hidden; }
+.xp-rc-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 14px 18px; background: var(--ink); color: #fff; }
+.xp-rc-head b { font-family: var(--disp); font-size: 1rem; word-break: break-all; }
+.xp-rc-head span { font-size: .68rem; font-weight: 700; background: var(--pink); padding: 3px 9px; border-radius: 99px; white-space: nowrap; }
+.xp-rc-metrics { display: grid; grid-template-columns: repeat(3, 1fr); text-align: center; }
+.xp-rc-metrics div { padding: 16px 4px; border-right: 1px solid var(--line); }
+.xp-rc-metrics div:last-child { border-right: 0; }
+.xp-rc-metrics b { display: block; font-family: var(--disp); font-size: 1.35rem; color: var(--pink); }
+.xp-rc-metrics span { font-size: .68rem; font-weight: 600; color: var(--mute); }
+.xp-rc-foot { padding: 13px 18px; background: var(--blush); font-size: .82rem; font-weight: 600; color: var(--ink); border-top: 2px solid var(--ink); }
+.xp-rc-foot b { color: var(--pink); }
+.xp-table-wrap { overflow-x: auto; border: 2px solid var(--ink); border-radius: 18px; margin-bottom: 36px; background: #fff; }
+.xp-table { width: 100%; min-width: 760px; border-collapse: collapse; }
+.xp-table th { text-align: left; padding: 14px 18px; background: var(--blush); color: var(--ink); font-size: .8rem; font-weight: 800; border-bottom: 2px solid var(--ink); }
+.xp-table td { padding: 15px 18px; font-size: .9rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.xp-table tr:last-child td { border-bottom: 0; }
+.xp-table tbody tr:hover { background: #FFF9FC; }
+.xp-url-cell { color: var(--mute); font-size: .8rem; }
+.xp-medal { display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--gold); color: var(--ink); font-family: var(--disp); font-weight: 800; border: 2px solid var(--ink); }
+.xp-up { color: var(--mint); font-weight: 800; font-size: .84rem; }
+.xp-intent { display: inline-block; background: var(--blush); color: var(--pink); font-weight: 700; font-size: .74rem; padding: 4px 10px; border-radius: 99px; }
+.xp-center { text-align: center; }
 
-    /* ===== STRATEGIC PILLARS ===== */
-    .ev-pillars-section {
-        padding: 44px 0 36px;
-        background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-    }
-    .ev-pillars-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 22px;
-    }
-    @media (min-width: 640px) {
-        .ev-pillars-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1024px) {
-        .ev-pillars-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-    .ev-pillar-card {
-        background: #FFF9FB;
-        border: 1.5px solid rgba(196, 0, 122, 0.12);
-        border-radius: 18px;
-        padding: 24px;
-        transition: all 0.3s ease;
-        display: flex;
-        flex-direction: column;
-    }
-    .ev-pillar-card:hover {
-        transform: translateY(-4px);
-        border-color: #C4007A;
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.1);
-        background: #FFFFFF;
-    }
-    .ev-pillar-num {
-        font-size: 0.78rem;
-        font-weight: 800;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.1);
-        width: 32px;
-        height: 32px;
-        border-radius: 10px;
-        display: grid;
-        place-items: center;
-        margin-bottom: 14px;
-    }
-    .ev-pillar-card h3,
-    .ev-pillar-card h4 {
-        font-size: 1.1rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 10px;
-        line-height: 1.3;
-    }
-    .ev-pillar-card p {
-        font-size: 0.88rem;
-        color: #4B5563;
-        line-height: 1.6;
-        margin: 0;
-        flex-grow: 1;
-    }
+/* ===== Form ===== */
+.xp-form-sec { background: var(--blush); }
+.xp-form-card { display: grid; max-width: 1060px; margin: 0 auto; border: 2px solid var(--ink); border-radius: 24px; overflow: hidden; background: #fff; box-shadow: 10px 10px 0 var(--ink); }
+@media (min-width: 900px) { .xp-form-card { grid-template-columns: .8fr 1.2fr; } }
+.xp-form-side { background: var(--pink); color: #fff; padding: 38px 30px; display: flex; flex-direction: column; gap: 18px; }
+.xp-form-side h3 { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 800; line-height: 1.12; }
+.xp-form-side p { line-height: 1.65; color: rgba(255,255,255,.9); font-size: .95rem; }
+.xp-form-side ul { list-style: none; padding: 0; margin: 4px 0 0; display: grid; gap: 10px; }
+.xp-form-side li { display: flex; gap: 10px; font-size: .9rem; font-weight: 600; }
+.xp-form-side li::before { content: '✓'; display: grid; place-items: center; flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #fff; color: var(--pink); font-size: .75rem; font-weight: 800; }
+.xp-form-main { padding: 36px 30px; }
+.xp-fields { display: grid; gap: 16px; margin-bottom: 16px; }
+@media (min-width: 640px) { .xp-fields { grid-template-columns: repeat(2, 1fr); } }
+.xp-field { display: flex; flex-direction: column; gap: 6px; margin-bottom: 0; }
+.xp-field--full { margin-bottom: 16px; }
+.xp-field label { font-size: .82rem; font-weight: 700; color: var(--ink); }
+.xp-field input, .xp-field select, .xp-field textarea {
+    width: 100%; padding: 13px 14px; border-radius: 10px; border: 2px solid #E4DCE6; background: #FCFAFD;
+    font-family: inherit; font-size: .92rem; color: var(--ink); transition: border-color .2s, box-shadow .2s;
+}
+.xp-field input:focus, .xp-field select:focus, .xp-field textarea:focus { border-color: var(--pink); background: #fff; outline: none; box-shadow: 0 0 0 4px rgba(196,0,122,.14); }
+.xp-submit { width: 100%; margin-top: 6px; }
+.xp-submit:disabled { opacity: .7; cursor: wait; }
+.ev-form-feedback { display: none; margin-top: 16px; padding: 13px 14px; border-radius: 10px; font-size: .88rem; font-weight: 600; text-align: center; }
+.ev-form-feedback.success { display: block; background: #E6F8F0; color: #065F46; border: 1px solid #A7F3D0; }
 
-    /* ===== EVENT WEBSITE DESIGN SHOWCASE ===== */
-    .ev-websites-section {
-        padding: 44px 0 40px;
-        color: #1F1B2A;
-        background: #FFF8FC;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-    }
-    .ev-websites-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 28px;
-        align-items: center;
-    }
-    @media (min-width: 992px) {
-        .ev-websites-grid {
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-    }
-    .ev-websites-subtitle {
-        font-size: clamp(1.1rem, 2vw, 1.35rem);
-        font-weight: 700;
-        line-height: 1.4;
-        color: #1F2937;
-        margin: 0;
-    }
-    .ev-websites-copy p {
-        color: #4B5563;
-        font-size: 0.98rem;
-        line-height: 1.68;
-        margin: 0 0 16px;
-    }
-    .ev-websites-copy p:last-child {
-        margin-bottom: 0;
-    }
-    .ev-website-browser {
-        position: relative;
-        padding: 14px;
-        border: 1.5px solid rgba(196, 0, 122, 0.15);
-        border-radius: 20px;
-        background: #FFFFFF;
-        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.1);
-        color: #1F1B2A;
-    }
-    .ev-browser-chrome {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        padding: 4px 4px 14px;
-    }
-    .ev-browser-dots {
-        display: flex;
-        gap: 6px;
-        flex-shrink: 0;
-    }
-    .ev-browser-dots span {
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: #C4007A;
-    }
-    .ev-browser-dots span:nth-child(2) { background: #E0398F; }
-    .ev-browser-dots span:nth-child(3) { background: #F4C4DE; }
-    .ev-browser-url {
-        min-width: 0;
-        overflow: hidden;
-        color: #6B7280;
-        font-size: 0.72rem;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    .ev-browser-page {
-        min-height: 330px;
-        overflow: hidden;
-        border: 1px solid #F3E7EE;
-        background: #FFFFFF;
-    }
-    .ev-preview-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 16px 18px;
-        border-bottom: 1px solid #F3E7EE;
-    }
-    .ev-preview-brand {
-        font-size: 1.2rem;
-        font-weight: 800;
-        color: #C4007A;
-    }
-    .ev-preview-links {
-        color: #6B7280;
-        font-size: 0.65rem;
-        white-space: nowrap;
-    }
-    .ev-preview-register {
-        padding: 8px 11px;
-        border-radius: 999px;
-        background: #C4007A;
-        color: #FFFFFF;
-        font-size: 0.65rem;
-        font-weight: 800;
-        white-space: nowrap;
-    }
-    .ev-preview-content {
-        display: grid;
-        grid-template-columns: 1fr 0.85fr;
-        gap: 16px;
-        align-items: center;
-        padding: 28px 22px;
-    }
-    .ev-preview-copy small {
-        color: #C4007A;
-        font-size: 0.6rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-    }
-    .ev-preview-copy h3 {
-        margin: 12px 0 10px;
-        color: #111827;
-        font-family: inherit;
-        font-weight: 800;
-        font-size: clamp(1.4rem, 2.6vw, 2.3rem);
-        line-height: 1.05;
-    }
-    .ev-preview-copy p {
-        margin: 0 0 16px;
-        color: #6B7280;
-        font-size: 0.72rem;
-        line-height: 1.5;
-    }
-    .ev-preview-cta {
-        display: inline-block;
-        padding: 9px 12px;
-        border-radius: 999px;
-        background: #C4007A;
-        color: #FFFFFF;
-        font-size: 0.65rem;
-        font-weight: 800;
-    }
-    .ev-preview-art {
-        min-height: 190px;
-        border-radius: 10px;
-        background:
-            radial-gradient(ellipse at 70% 30%, rgba(255, 255, 255, 0.72) 0 8%, transparent 9%),
-            radial-gradient(ellipse at 58% 50%, rgba(244, 196, 222, 0.88) 0 17%, transparent 18%),
-            linear-gradient(145deg, #2D051E 0%, #C4007A 52%, #E98EBE 100%);
-    }
-    @media (max-width: 575px) {
-        .ev-website-browser { padding: 9px; }
-        .ev-browser-page { min-height: 250px; }
-        .ev-preview-nav { padding: 12px; }
-        .ev-preview-links { display: none; }
-        .ev-preview-content { gap: 10px; padding: 20px 14px; }
-        .ev-preview-art { min-height: 150px; }
-    }
+/* ===== FAQ ===== */
+.xp-faq-grid { display: grid; gap: 40px; }
+@media (min-width: 992px) { .xp-faq-grid { grid-template-columns: .8fr 1.2fr; gap: 64px; } .xp-faq-grid .xp-head { position: sticky; top: 100px; align-self: start; margin-bottom: 0; } }
+.ev-faq-item { border: 2px solid var(--ink); border-radius: 14px; margin-bottom: 12px; background: #fff; overflow: hidden; transition: box-shadow .2s; }
+.ev-faq-item.active { box-shadow: 5px 5px 0 var(--pink); }
+.ev-faq-btn { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 20px; background: transparent; border: 0; text-align: left; font-family: var(--disp); font-weight: 700; font-size: 1.04rem; line-height: 1.3; color: var(--ink); cursor: pointer; }
+.ev-faq-btn .icon { flex-shrink: 0; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--blush); color: var(--pink); font-size: 1.2rem; line-height: 1; transition: transform .25s, background .25s, color .25s; }
+.ev-faq-item.active .icon { transform: rotate(45deg); background: var(--pink); color: #fff; }
+.ev-faq-answer { display: none; padding: 0 20px 20px; line-height: 1.7; color: var(--mute); font-size: .94rem; }
+.ev-faq-item.active .ev-faq-answer { display: block; }
 
-    /* ===== CASE STUDIES SHOWCASE ===== */
-    .ev-cases-section {
-        padding: 44px 0 36px;
-        background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-    }
-    .ev-case-card {
-        background: linear-gradient(135deg, #FFF9FB 0%, #FFFFFF 100%);
-        border: 1.5px solid rgba(196, 0, 122, 0.16);
-        border-radius: 24px;
-        padding: 32px;
-        margin-bottom: 24px;
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 24px;
-        align-items: center;
-    }
-    @media (min-width: 860px) {
-        .ev-case-card {
-            grid-template-columns: 1.2fr 0.8fr;
-        }
-    }
-    .ev-case-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.08);
-        padding: 4px 12px;
-        border-radius: 9999px;
-        margin-bottom: 10px;
-    }
-    .ev-case-card h3 {
-        font-size: 1.45rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 10px;
-        line-height: 1.25;
-    }
-    .ev-case-card p {
-        font-size: 0.92rem;
-        color: #4B5563;
-        line-height: 1.65;
-        margin: 0 0 16px;
-    }
-    .ev-case-stats {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
-    }
-    .ev-stat-box {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.15);
-        border-radius: 14px;
-        padding: 14px;
-        text-align: center;
-    }
-    .ev-stat-box .val {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: #C4007A;
-        line-height: 1.1;
-    }
-    .ev-stat-box .lbl {
-        font-size: 0.74rem;
-        font-weight: 600;
-        color: #6B7280;
-        margin-top: 4px;
-    }
+/* ===== Final CTA ===== */
+.xp-cta { padding: 0 0 84px; }
+.xp-cta-card { position: relative; overflow: hidden; background: var(--ink); color: #fff; border-radius: 26px; padding: 60px 34px; text-align: center; }
+.xp-cta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(50% 80% at 50% 120%, rgba(196,0,122,.7), transparent 70%), radial-gradient(rgba(255,255,255,.1) 1px, transparent 1.2px) 0 0 / 26px 26px; }
+.xp-cta-card > * { position: relative; }
+.xp-cta-card h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; line-height: 1.1; max-width: 800px; margin: 0 auto 16px; }
+.xp-cta-card p { max-width: 620px; margin: 0 auto 30px; color: rgba(255,255,255,.8); line-height: 1.65; }
+.xp-cta-card .xp-actions { justify-content: center; }
+.xp-cta-foot { margin-top: 26px; font-size: .8rem; color: rgba(255,255,255,.6); }
 
-    /* ===== AUDIT & ENQUIRY FORM ===== */
-    .ev-form-section {
-        padding: 44px 0 48px;
-        background: #FFF8FC;
-    }
-    .ev-form-box {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.2);
-        border-radius: 26px;
-        padding: 38px 30px;
-        max-width: 860px;
-        margin: 0 auto;
-        box-shadow: 0 18px 44px rgba(196, 0, 122, 0.08);
-        position: relative;
-        overflow: hidden;
-    }
-    .ev-form-box::before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 4px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-    }
-    .ev-form-head {
-        text-align: center;
-        margin-bottom: 28px;
-    }
-    .ev-form-head h3 {
-        font-size: clamp(1.5rem, 2.6vw, 2rem);
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-    }
-    .ev-form-head p {
-        font-size: 0.92rem;
-        color: #6B7280;
-        margin: 0;
-    }
-    .ev-grid-fields {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-        margin-bottom: 16px;
-    }
-    @media (min-width: 640px) {
-        .ev-grid-fields { grid-template-columns: repeat(2, 1fr); }
-    }
-    .ev-field-group {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-    }
-    .ev-field-group label {
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: #374151;
-    }
-    .ev-field-group input,
-    .ev-field-group select,
-    .ev-field-group textarea {
-        width: 100%;
-        padding: 12px 14px;
-        border-radius: 10px;
-        border: 1.5px solid #E5E7EB;
-        font-family: inherit;
-        font-size: 0.9rem;
-        color: #111827;
-        transition: border-color 0.2s ease, box-shadow 0.2s ease;
-        background: #FAFAFA;
-    }
-    .ev-field-group input:focus,
-    .ev-field-group select:focus,
-    .ev-field-group textarea:focus {
-        border-color: #C4007A;
-        outline: none;
-        background: #FFFFFF;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.12);
-    }
-    .ev-form-submit {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        width: 100%;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-        color: #FFFFFF !important;
-        font-weight: 700;
-        font-size: 1rem;
-        padding: 14px 28px;
-        border-radius: 9999px;
-        border: none;
-        cursor: pointer;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.35);
-        transition: all 0.25s ease;
-        margin-top: 10px;
-    }
-    .ev-form-submit:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 28px rgba(196, 0, 122, 0.45);
-    }
-    .ev-form-feedback {
-        margin-top: 14px;
-        padding: 12px;
-        border-radius: 10px;
-        font-size: 0.88rem;
-        font-weight: 600;
-        display: none;
-        text-align: center;
-    }
-    .ev-form-feedback.success {
-        display: block;
-        background: #ECFDF5;
-        color: #065F46;
-        border: 1px solid #A7F3D0;
-    }
+/* ===== Motion states (only active when Motion library loaded) ===== */
+.xp-progress { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 9999; background: linear-gradient(90deg, var(--gold), var(--pink)); transform-origin: 0 50%; transform: scaleX(0); }
+.xp-js .xp-progress { display: block; }
+.xp-orb { position: absolute; right: -6%; top: 6%; width: 440px; height: 440px; border-radius: 50%; pointer-events: none; background: radial-gradient(circle at 30% 30%, rgba(255,181,71,.38), rgba(196,0,122,0) 70%); filter: blur(8px); }
+.xp-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.xp-w > span { display: inline-block; }
+.xp-js .xp-tag, .xp-js .xp-hero-sub, .xp-js .xp-hero-desc, .xp-js .xp-hero .xp-actions, .xp-js .xp-note, .xp-js .xp-badge-wrap,
+.xp-js .xp-head, .xp-js .xp-stall, .xp-js .xp-web-copy > *, .xp-js .xp-browser, .xp-js .xp-case, .xp-js .xp-rc,
+.xp-js .xp-table-wrap, .xp-js .xp-form-card, .xp-js .xp-faq-grid .ev-faq-item, .xp-js .xp-cta-card { opacity: 0; }
+.xp-js .xp-table tbody tr, .xp-js .xp-medal { opacity: 0; }
 
-    /* ===== FAQ ACCORDION ===== */
-    .ev-faq-section {
-        padding: 44px 0 40px;
-        background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-    }
-    .ev-faq-item {
-        background: #FFF9FB;
-        border: 1px solid rgba(196, 0, 122, 0.12);
-        border-radius: 14px;
-        margin-bottom: 12px;
-        overflow: hidden;
-    }
-    .ev-faq-btn {
-        width: 100%;
-        padding: 16px 20px;
-        background: transparent;
-        border: none;
-        text-align: left;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        font-weight: 700;
-        font-size: 0.98rem;
-        color: #111827;
-        cursor: pointer;
-    }
-    .ev-faq-btn span.icon {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: #FFFFFF;
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        color: #C4007A;
-        display: grid;
-        place-items: center;
-        font-size: 1.1rem;
-        line-height: 1;
-        transition: transform 0.2s ease;
-    }
-    .ev-faq-answer {
-        padding: 0 20px 16px;
-        font-size: 0.92rem;
-        color: #4B5563;
-        line-height: 1.65;
-        display: none;
-    }
-    .ev-faq-item.active .ev-faq-answer {
-        display: block;
-    }
-    .ev-faq-item.active .ev-faq-btn span.icon {
-        transform: rotate(45deg);
-        background: #C4007A;
-        color: #FFFFFF;
-    }
+/* ===== Responsive ===== */
+@media (max-width: 991px) {
+    .xp-hero-grid { gap: 36px; }
+    .xp-hero h1, .xp-hero-sub, .xp-hero-desc, .xp-note { max-width: none; }
+    .xp-badge { max-width: 400px; }
+    .xp-orb { width: 300px; height: 300px; right: -20%; }
+    .xp-form-card { box-shadow: 6px 6px 0 var(--ink); }
+}
+@media (max-width: 760px) {
+    .xp-rank-cards { grid-template-columns: 1fr; }
+    .xp-table-wrap { border: 0; background: transparent; overflow: visible; border-radius: 0; }
+    .xp-table { min-width: 0; display: block; }
+    .xp-table thead { display: none; }
+    .xp-table tbody { display: grid; gap: 16px; }
+    .xp-table tr { display: block; background: #fff; border: 2px solid var(--ink); border-radius: 16px; padding: 4px 0; box-shadow: 5px 5px 0 var(--ink); }
+    .xp-table td { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 11px 16px; text-align: right; border-bottom: 1px dashed var(--line); word-break: break-word; }
+    .xp-table tr td:last-child { border-bottom: 0; }
+    .xp-table td::before { content: attr(data-label); flex-shrink: 0; text-align: left; font-size: .72rem; font-weight: 700; color: var(--mute); }
+    .xp-table td:first-child { background: var(--blush); border-radius: 12px 12px 0 0; }
+    .xp-center { text-align: right; }
+}
+@media (max-width: 575px) {
+    .xp-wrap { padding: 0 16px; }
+    .xp-sec { padding: 60px 0; }
+    .xp-head { margin-bottom: 32px; }
+    .xp-hero { padding-top: 40px; }
+    .xp-hero h1 { font-size: clamp(2.1rem, 9.5vw, 2.6rem); }
+    .xp-hero-grid { padding-bottom: 48px; }
+    .xp-badge-wrap { padding-top: 56px; }
+    .xp-lanyard { height: 76px; }
+    .xp-badge { padding: 32px 18px 20px; }
+    .xp-pass { margin: 0 -18px; padding: 14px 18px; }
+    .xp-ribbon span { font-size: .92rem; padding: 12px 22px; }
+    .xp-case { padding: 24px 18px; }
+    .xp-stat b { font-size: 1.6rem; }
+    .xp-actions .xp-btn { width: 100%; white-space: normal; text-align: center; }
+    .xp-stall { padding: 50px 20px 22px; box-shadow: 4px 4px 0 var(--ink); }
+    .xp-browser { box-shadow: 7px 7px 0 var(--blush), 0 0 0 2px var(--ink); }
+    .xp-form-main, .xp-form-side { padding: 28px 18px; }
+    .xp-cta-card { padding: 44px 20px; border-radius: 20px; }
+    .ev-faq-btn { padding: 16px; font-size: .98rem; }
+    .ev-faq-answer { padding: 0 16px 18px; }
+}
+@media (max-width: 380px) {
+    .xp-stats { grid-template-columns: 1fr; }
+    .xp-chips { gap: 6px; }
+    .xp-chip b { font-size: 1.05rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .xp-ribbon-track { animation: none; }
+    .xp-btn, .xp-stall, .xp-rc, .xp-stat { transition: none; }
+}
 
-    /* ===== CONVERSION CTA BANNER ===== */
-    .ev-cta-section {
-        padding: 36px 0 48px;
-        background: #FFF8FC;
-    }
-    .ev-cta-card {
-        background: linear-gradient(135deg, #2D051E 0%, #0F172A 100%);
-        border-radius: 26px;
-        padding: 44px 32px;
-        text-align: center;
-        color: #FFFFFF;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 20px 48px rgba(15, 23, 42, 0.2);
-    }
-    .ev-cta-card h2 {
-        font-size: clamp(1.8rem, 3.4vw, 2.6rem);
-        font-weight: 800;
-        margin: 0 0 12px;
-        color: #FFFFFF;
-    }
-    .ev-cta-card h2 span {
-        color: #F4C4DE;
-    }
-    .ev-cta-card p {
-        font-size: 0.98rem;
-        color: rgba(255, 255, 255, 0.85);
-        max-width: 640px;
-        margin: 0 auto 26px;
-        line-height: 1.6;
-    }
-    .ev-cta-btns {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-    }
-    .ev-cta-btn-main {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-        color: #FFFFFF !important;
-        font-size: 0.95rem;
-        font-weight: 700;
-        padding: 14px 28px;
-        border-radius: 9999px;
-        text-decoration: none;
-        white-space: nowrap !important;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.4);
-        transition: all 0.25s ease;
-    }
-    .ev-cta-btn-main:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 14px 30px rgba(196, 0, 122, 0.5);
-        color: #FFFFFF;
-    }
-    .ev-cta-btn-phone {
-        display: inline-flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        background: rgba(255, 255, 255, 0.1);
-        border: 1.5px solid rgba(255, 255, 255, 0.3);
-        color: #FFFFFF !important;
-        font-size: 0.95rem;
-        font-weight: 700;
-        padding: 14px 26px;
-        border-radius: 9999px;
-        text-decoration: none;
-        white-space: nowrap !important;
-        transition: all 0.25s ease;
-    }
-    .ev-cta-btn-phone:hover {
-        background: rgba(255, 255, 255, 0.2);
-        border-color: #FFFFFF;
-        transform: translateY(-2px);
-    }
-    .ev-cta-footnote {
-        margin-top: 22px;
-        font-size: 0.8rem;
-        color: rgba(255, 255, 255, 0.7);
-    }
-
-    /* ===== LIVE ORGANIC RANKINGS SHOWCASE (B2B & Exhibition Proof) ===== */
-    .del-rankings-section {
-        padding: 52px 0 44px;
-        background: #FFFFFF;
-        border-top: 1px solid rgba(196, 0, 122, 0.08);
-        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-    }
-    .del-rankings-header {
-        text-align: center;
-        margin-bottom: 32px;
-    }
-    .del-rankings-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 22px;
-        margin-bottom: 40px;
-    }
-    @media (min-width: 768px) {
-        .del-rankings-grid { grid-template-columns: repeat(3, 1fr); }
-    }
-    .del-rank-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.22);
-        border-radius: 18px;
-        padding: 22px;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.06);
-        position: relative;
-    }
-    .del-rank-card-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border-bottom: 1px solid #F3F4F6;
-        padding-bottom: 10px;
-        margin-bottom: 14px;
-    }
-    .del-rank-domain {
-        font-size: 0.96rem;
-        font-weight: 800;
-        color: #111827;
-    }
-    .del-rank-badge {
-        font-size: 0.72rem;
-        font-weight: 700;
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        padding: 2px 8px;
-        border-radius: 9999px;
-    }
-    .del-rank-metrics-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 8px;
-        margin-bottom: 14px;
-        text-align: center;
-    }
-    .del-rank-metric {
-        background: #F9FAFB;
-        border-radius: 10px;
-        padding: 8px 4px;
-    }
-    .del-rank-metric .val {
-        font-size: 1.08rem;
-        font-weight: 800;
-        color: #C4007A;
-    }
-    .del-rank-metric .lbl {
-        font-size: 0.68rem;
-        color: #6B7280;
-        font-weight: 600;
-        text-transform: uppercase;
-    }
-    .del-rank-top-pos {
-        background: #FFF5FA;
-        border: 1px dashed rgba(196, 0, 122, 0.3);
-        border-radius: 10px;
-        padding: 9px 12px;
-        font-size: 0.8rem;
-        color: #111827;
-        font-weight: 600;
-    }
-    .del-rank-top-pos span {
-        color: #C4007A;
-        font-weight: 800;
-    }
-    .del-keywords-table-wrap {
-        border: 1.5px solid rgba(196, 0, 122, 0.2);
-        border-radius: 18px;
-        overflow-x: auto;
-        box-shadow: 0 10px 24px rgba(196, 0, 122, 0.05);
-        margin-bottom: 28px;
-    }
-    .del-kw-table {
-        width: 100%;
-        border-collapse: collapse;
-        min-width: 640px;
-        background: #FFFFFF;
-    }
-    .del-kw-table th {
-        background: #FFF0F7;
-        color: #850053;
-        font-weight: 800;
-        font-size: 0.82rem;
-        text-transform: uppercase;
-        padding: 12px 16px;
-        border-bottom: 1.5px solid rgba(196, 0, 122, 0.2);
-    }
-    .del-kw-table td {
-        padding: 12px 16px;
-        font-size: 0.88rem;
-        color: #1F2937;
-        border-bottom: 1px solid #F3F4F6;
-    }
-    .del-kw-rank-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px;
-        height: 28px;
-        border-radius: 8px;
-        background: #C4007A;
-        color: #FFFFFF;
-        font-weight: 800;
-        font-size: 0.88rem;
-    }
-    .del-kw-gain {
-        color: #059669;
-        font-weight: 700;
-        font-size: 0.82rem;
-    }
+/* ===== Mobile hardening (v3) ===== */
+@media (max-width: 575px) {
+    .xp-btn { white-space: normal; text-align: center; line-height: 1.3; max-width: 100%; padding: 14px 18px; }
+    .xp-center .xp-btn, .xp-submit, .xp-cta-card .xp-btn { width: 100%; }
+    .xp-form-card { border-radius: 18px; }
+    .xp-form-card, .xp-case, .xp-rc, .xp-stall { max-width: 100%; }
+    .xp-field input, .xp-field select, .xp-field textarea { font-size: 16px; padding: 12px; }
+    .xp-screen-body { grid-template-columns: minmax(0, 1fr) minmax(0, .8fr); }
+    .xp-rc-head { flex-wrap: wrap; }
+    .xp-rc-metrics b { font-size: 1.15rem; }
+    .xp-table td { flex-wrap: wrap; }
+    .xp-url-cell { overflow-wrap: anywhere; }
+}
 </style>
 
-<main class="ev-page">
+<main class="xp">
+<script>document.currentScript.parentElement.classList.add('xp-js');</script>
+<div class="xp-progress" aria-hidden="true"></div>
 
-    <!-- ========================================================
-         1. HERO SECTION
-    ======================================================== -->
-    <section class="ev-hero">
-        <div class="ev-container">
-            <div class="ev-hero-grid">
-
-                <!-- Left Column: Copy -->
-                <div class="ev-hero-left" data-wtm-reveal="fade-up">
-                    <div class="ev-eyebrow">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l2.4 6.6L21 11l-6.6 2.4L12 20l-2.4-6.6L3 11l6.6-2.4L12 2z"/></svg>
-                        <span>INDIA'S #1 EVENT &amp; EXHIBITION SEO SPECIALISTS</span>
+    <!-- 1. HERO -->
+    <section class="xp-hero">
+        <div class="xp-orb" aria-hidden="true"></div>
+        <div class="xp-wrap">
+            <div class="xp-hero-grid">
+                <div>
+                    <div class="xp-tag"><i></i><span>India's #1 event &amp; exhibition SEO specialists</span></div>
+                    <h1>Boost Your Event &amp; Exhibition With SEO.</h1>
+                    <h3 class="xp-hero-sub">Want to attract more attendees, sponsors, exhibitors, and increase revenue?</h3>
+                    <p class="xp-hero-desc"><?= htmlspecialchars($heroDesc) ?></p>
+                    <div class="xp-actions">
+                        <a href="#event-audit-form" class="xp-btn xp-btn--pink"><span>Let's Talk Optimization</span><?= $arrow ?></a>
+                        <a href="tel:+919999674255" class="xp-btn xp-btn--ghost"><?= $phone ?><span>Call: +91-9999674255</span></a>
                     </div>
-
-                    <h1 class="ev-hero-title">
-                        Boost Your Event &amp; Exhibition <span class="accent">With SEO.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                    </h1>
-
-                    <h3 class="ev-hero-sub">
-                        Want to attract more attendees, sponsors, exhibitors, and increase revenue?
-                    </h3>
-
-                    <p class="ev-hero-desc">
-                        <?= htmlspecialchars($heroDesc) ?>
-                    </p>
-
-                    <div class="ev-hero-actions">
-                        <a href="#event-audit-form" class="ev-btn-primary">
-                            <span>Let's Talk Optimization</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                        <a href="tel:+919999674255" class="ev-btn-secondary">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                            <span>Call: +91-9999674255</span>
-                        </a>
-                    </div>
-
-                    <div class="ev-hero-footnote">
-                        * While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.
-                    </div>
+                    <p class="xp-note">* While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.</p>
                 </div>
 
-                <!-- Right Column: Interactive Google Event SERP Mockup -->
-                <div class="ev-hero-right" data-wtm-reveal="fade-up">
-                    <div class="ev-serp-mockup">
-                        <div class="ev-mockup-top">
-                            <div class="ev-mockup-badge">
-                                <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:#059669;"></span>
-                                #1 Google Search Result
-                            </div>
-                            <span style="font-size:0.72rem; color:#6B7280; font-weight:700;">Google Event Schema</span>
+                <div class="xp-badge-wrap" data-wtm-reveal="fade-up">
+                    <div class="xp-lanyard"></div>
+                    <div class="xp-badge">
+                        <div class="xp-badge-top">
+                            <div class="xp-live"><i></i>#1 Google Search Result</div>
+                            <small>Google Event Schema</small>
                         </div>
-
-                        <div class="ev-serp-url">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-                            <span>https://www.your-expo-domain.com</span> &rsaquo; register
+                        <div class="xp-serp-url"><b>https://www.your-expo-domain.com</b> &rsaquo; register</div>
+                        <div class="xp-serp-title">Bharat Tex Fair 2026 | Global Textile Mega Exhibition &amp; B2B Expo</div>
+                        <div class="xp-serp-desc">Pre-register as international trade buyer or book exhibitor stall. 3,500+ global exhibitors, 100+ buyer delegations from USA, UK, Europe, UAE.</div>
+                        <div class="xp-pass">
+                            <div><strong>Dates:</strong> Feb 14 &ndash; Feb 17, 2026</div>
+                            <div><strong>Venue:</strong> Bharat Mandapam &amp; Yashobhoomi, New Delhi</div>
+                            <div><strong>Registration:</strong> Visitor Badges Open &bull; Zero Booking Fee</div>
                         </div>
-
-                        <div class="ev-serp-title">
-                            Bharat Tex Fair 2026 | Global Textile Mega Exhibition &amp; B2B Expo
+                        <div class="xp-chips">
+                            <div class="xp-chip"><b>400%</b><span>Organic Growth</span></div>
+                            <div class="xp-chip"><b>200+</b><span>Top 3 Ranks</span></div>
+                            <div class="xp-chip"><b>10k+</b><span>Pre-Registrations</span></div>
                         </div>
-
-                        <div class="ev-serp-desc">
-                            Pre-register as international trade buyer or book exhibitor stall. 3,500+ global exhibitors, 100+ buyer delegations from USA, UK, Europe, UAE.
-                        </div>
-
-                        <!-- Rich Event Snippet Card -->
-                        <div class="ev-serp-rich">
-                            <div class="ev-rich-row">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
-                                <strong>Dates:</strong> Feb 14 &ndash; Feb 17, 2026
-                            </div>
-                            <div class="ev-rich-row">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C4007A" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
-                                <strong>Venue:</strong> Bharat Mandapam &amp; Yashobhoomi, New Delhi
-                            </div>
-                            <div class="ev-rich-row">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>
-                                <strong>Registration:</strong> Visitor Badges Open &bull; Zero Booking Fee
-                            </div>
-                        </div>
-
-                        <div class="ev-metrics-row">
-                            <div class="ev-metric-chip">
-                                <div class="v">400%</div>
-                                <div class="l">Organic Growth</div>
-                            </div>
-                            <div class="ev-metric-chip">
-                                <div class="v">200+</div>
-                                <div class="l">Top 3 Ranks</div>
-                            </div>
-                            <div class="ev-metric-chip">
-                                <div class="v">10k+</div>
-                                <div class="l">Pre-Registrations</div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
+            </div>
+        </div>
 
+        <div class="xp-ribbon" aria-hidden="true">
+            <div class="xp-ribbon-track">
+                <?php for ($i = 0; $i < 4; $i++): ?>
+                    <span>400% organic growth</span><span>200+ keywords ranked</span><span>80+ top 3 worldwide</span><span>10,000+ buyer registrations</span>
+                <?php endfor; ?>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         2. CHALLENGES FACED BY EXHIBITION ORGANISERS
-    ======================================================== -->
-    <section class="ev-pillars-section">
-        <div class="ev-container">
-            <div class="ev-section-head" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">EVENT ORGANISER CHALLENGES</div>
-                <h2 class="ev-section-title">
-                    Challenges Faced by B2B Exhibition <span class="accent">Organisers<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="ev-section-sub">
-                    Turning Event Websites into Powerful Organic Growth Platforms.
-                </p>
+    <!-- 2. CHALLENGES -->
+    <section class="xp-sec xp-challenges">
+        <div class="xp-wrap">
+            <div class="xp-head">
+                <span class="xp-kicker">Event organiser challenges</span>
+                <h2>Challenges Faced by B2B Exhibition Organisers</h2>
+                <p>Turning event websites into powerful organic growth platforms.</p>
             </div>
-
-            <div class="ev-pillars-grid">
-                <div class="ev-pillar-card" data-wtm-reveal="fade-up">
-                    <div class="ev-pillar-num">01</div>
-                    <h3>Attracting Qualified International Buyers</h3>
-                    <p>Reaching the right audience is more important than generating high website traffic. Organisers need to attract relevant buyers, importers, wholesalers and sourcing professionals through organic search.</p>
-                </div>
-                <div class="ev-pillar-card" data-wtm-reveal="fade-up">
-                    <div class="ev-pillar-num">02</div>
-                    <h3>Generating Quality Exhibitor Enquiries</h3>
-                    <p>Attracting exhibitors requires more than event promotion. Your website must communicate business opportunities, industry relevance and commercial value to potential exhibitors.</p>
-                </div>
-                <div class="ev-pillar-card" data-wtm-reveal="fade-up">
-                    <div class="ev-pillar-num">03</div>
-                    <h3>Competing for Organic Search Visibility</h3>
-                    <p>B2B fairs compete for rankings across event-related, industry-specific, product and location-based searches. Without a focused SEO strategy, valuable organic search opportunities can be missed.</p>
-                </div>
-                <div class="ev-pillar-card" data-wtm-reveal="fade-up">
-                    <div class="ev-pillar-num">04</div>
-                    <h3>Driving Registrations Within Short Event Timelines</h3>
-                    <p>Exhibition marketing operates within fixed schedules. Building search visibility, attracting relevant audiences and converting visitors into registrations requires consistent SEO planning and execution.</p>
-                </div>
+            <div class="xp-board">
+                <?php foreach ($challenges as $c): ?>
+                    <article class="xp-stall">
+                        <h3><?= htmlspecialchars($c[0]) ?></h3>
+                        <p><?= htmlspecialchars($c[1]) ?></p>
+                    </article>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         3. EVENT WEBSITE DESIGN & ORGANIC GROWTH
-    ======================================================== -->
-    <section class="ev-websites-section">
-        <div class="ev-container">
-            <div class="ev-section-head" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">EVENT WEBSITE DESIGN &amp; SEO</div>
-                <h2 class="ev-section-title">
-                    Event Websites <span class="accent">That Perform.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <h3 class="ev-websites-subtitle">Designing &amp; Developing Event Websites That Drive Organic Growth.</h3>
-            </div>
-
-            <div class="ev-websites-grid">
-                <div class="ev-websites-copy" data-wtm-reveal="fade-up">
+    <!-- 3. EVENT WEBSITE DESIGN -->
+    <section class="xp-sec">
+        <div class="xp-wrap">
+            <div class="xp-web-grid">
+                <div class="xp-web-copy">
+                    <span class="xp-kicker">Event website design &amp; SEO</span>
+                    <h2>Event Websites That Perform.</h2>
+                    <h3>Designing &amp; Developing Event Websites That Drive Organic Growth.</h3>
                     <p>Your event website should do more than look impressive. It should attract the right audience, rank on search engines and convert visitors into registrations.</p>
                     <p>At WEBTECMART, we specialise in designing and developing high-performance websites for B2B trade fairs, exhibitions and international business events, with a strong focus on organic SEO.</p>
                     <p>We combine event-specific website development with strategic SEO to help organisers improve Google visibility, attract international buyers, exhibitors and visitors, and generate quality registrations through organic search.</p>
-                    <div class="ev-hero-actions ev-websites-actions">
-                        <a href="/event-website-demo.php" class="ev-btn-primary">
-                            <span>Request a demo</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                        </a>
-                        <a href="/portfolio.php" class="ev-btn-secondary">
-                            <span>View Portfolio</span>
-                        </a>
+                    <div class="xp-actions">
+                        <a href="/event-website-demo.php" class="xp-btn xp-btn--pink"><span>Request a demo</span><?= $arrow ?></a>
+                        <a href="/portfolio.php" class="xp-btn xp-btn--line"><span>View Portfolio</span></a>
                     </div>
                 </div>
 
-                <div class="ev-website-browser" aria-hidden="true" data-wtm-reveal="fade-up">
-                    <div class="ev-browser-chrome">
-                        <div class="ev-browser-dots"><span></span><span></span><span></span></div>
-                        <div class="ev-browser-url">webtecmart.com/b2b-exhibition-seo.php</div>
+                <div class="xp-browser" aria-hidden="true">
+                    <div class="xp-browser-bar">
+                        <div class="xp-dots"><span></span><span></span><span></span></div>
+                        <div class="xp-url">webtecmart.com/b2b-exhibition-seo.php</div>
                     </div>
-                    <div class="ev-browser-page">
-                        <div class="ev-preview-nav">
-                            <span class="ev-preview-brand">Canvas</span>
-                            <span class="ev-preview-links">Home &nbsp; About &nbsp; Exhibit &nbsp; Visit</span>
-                            <span class="ev-preview-register">Book Tickets</span>
+                    <div class="xp-screen">
+                        <div class="xp-screen-nav">
+                            <b>Canvas</b>
+                            <em>Home &nbsp; About &nbsp; Exhibit &nbsp; Visit</em>
+                            <span>Book Tickets</span>
                         </div>
-                        <div class="ev-preview-content">
-                            <div class="ev-preview-copy">
+                        <div class="xp-screen-body">
+                            <div>
                                 <small>1 - 3 SEPTEMBER | LONDON</small>
-                                <h3>Artistry<br>Unveiled</h3>
+                                <h4>Artistry<br>Unveiled</h4>
                                 <p>Discover ideas, people and possibilities shaping the future.</p>
-                                <span class="ev-preview-cta">Explore the event</span>
+                                <i>Explore the event</i>
                             </div>
-                            <div class="ev-preview-art"></div>
+                            <div class="xp-art"></div>
                         </div>
                     </div>
                 </div>
@@ -1221,411 +514,210 @@ $bodyCopy  = $dbService['body'] ?? '';
         </div>
     </section>
 
-    <!-- ========================================================
-         4. VERIFIED CASE STUDIES SHOWCASE
-    ======================================================== -->
-    <section class="ev-cases-section">
-        <div class="ev-container">
-            <div class="ev-section-head" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">VERIFIED PROOF OF PERFORMANCE</div>
-                <h2 class="ev-section-title">
-                    The Organic Engine Behind <span class="accent">India's Mega Fairs<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="ev-section-sub">
-                    Authentic results delivered for government-backed exhibitions and export promotion councils.
-                </p>
+    <!-- 4. CASE STUDIES -->
+    <section class="xp-sec xp-cases">
+        <div class="xp-wrap">
+            <div class="xp-head xp-head--dark">
+                <span class="xp-kicker" style="color:var(--gold);border-color:var(--gold)">Verified proof of performance</span>
+                <h2>The Organic Engine Behind India's Mega Fairs</h2>
+                <p>Authentic results delivered for government-backed exhibitions and export promotion councils.</p>
             </div>
 
-            <!-- Case Study 1: Bharat Tex Fair -->
-            <div class="ev-case-card" data-wtm-reveal="fade-up">
-                <div>
-                    <div class="ev-case-badge">Ministry of Textiles, Government of India</div>
+            <div class="xp-case">
+                <div class="xp-case-text">
+                    <span class="xp-case-org">Ministry of Textiles, Government of India</span>
                     <h3>Bharat Tex Fair 2026 &mdash; 400% Organic Traffic Surge</h3>
-                    <p>
-                        Positioned India's flagship international textile mega-expo at the very top of Google searches across 100+ countries. Engineered product-silo architectures for yarns, apparel machinery, home textiles, and technical textiles, capturing verified overseas buyer delegations and institutional registrations.
-                    </p>
-                    <a href="#event-audit-form" class="ev-btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">
-                        <span>Request Similar Growth Plan</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </a>
+                    <p>Positioned India's flagship international textile mega-expo at the very top of Google searches across 100+ countries. Engineered product-silo architectures for yarns, apparel machinery, home textiles, and technical textiles, capturing verified overseas buyer delegations and institutional registrations.</p>
+                    <a href="#event-audit-form" class="xp-btn xp-btn--pink xp-btn--sm"><span>Request Similar Growth Plan</span><?= $arrow ?></a>
                 </div>
-                <div class="ev-case-stats">
-                    <div class="ev-stat-box">
-                        <div class="val">400%</div>
-                        <div class="lbl">Organic Growth Lift</div>
-                    </div>
-                    <div class="ev-stat-box">
-                        <div class="val">200+</div>
-                        <div class="lbl">Keywords Ranked</div>
-                    </div>
-                    <div class="ev-stat-box">
-                        <div class="val">80+</div>
-                        <div class="lbl">Top 3 Worldwide</div>
-                    </div>
-                    <div class="ev-stat-box">
-                        <div class="val">10,000+</div>
-                        <div class="lbl">Buyer Registrations</div>
-                    </div>
+                <div class="xp-stats">
+                    <div class="xp-stat"><b>400%</b><span>Organic Growth Lift</span></div>
+                    <div class="xp-stat"><b>200+</b><span>Keywords Ranked</span></div>
+                    <div class="xp-stat"><b>80+</b><span>Top 3 Worldwide</span></div>
+                    <div class="xp-stat"><b>10,000+</b><span>Buyer Registrations</span></div>
                 </div>
             </div>
 
-            <!-- Case Study 2: IHGF Delhi Fair -->
-            <div class="ev-case-card" data-wtm-reveal="fade-up">
-                <div>
-                    <div class="ev-case-badge">Export Promotion Council for Handicrafts (EPCH)</div>
+            <div class="xp-case">
+                <div class="xp-case-text">
+                    <span class="xp-case-org">Export Promotion Council for Handicrafts (EPCH)</span>
                     <h3>IHGF Delhi Autumn Fair &mdash; Global Sourcing Dominance</h3>
-                    <p>
-                        Targeted international procurement queries for handicraft exporters, home decor, lifestyle, and fashion accessories across the US, UK, Germany, France, and the Middle East. Secured top 3 global positions, driving high-volume pre-show registrations for visiting foreign buyer delegations.
-                    </p>
-                    <a href="#event-audit-form" class="ev-btn-primary" style="padding: 10px 22px; font-size: 0.88rem;">
-                        <span>Request Similar Growth Plan</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </a>
+                    <p>Targeted international procurement queries for handicraft exporters, home decor, lifestyle, and fashion accessories across the US, UK, Germany, France, and the Middle East. Secured top 3 global positions, driving high-volume pre-show registrations for visiting foreign buyer delegations.</p>
+                    <a href="#event-audit-form" class="xp-btn xp-btn--pink xp-btn--sm"><span>Request Similar Growth Plan</span><?= $arrow ?></a>
                 </div>
-                <div class="ev-case-stats">
-                    <div class="ev-stat-box">
-                        <div class="val">Top 3</div>
-                        <div class="lbl">Global SERP Rank</div>
-                    </div>
-                    <div class="ev-stat-box">
-                        <div class="val">100+</div>
-                        <div class="lbl">Countries Targeted</div>
-                    </div>
-                    <div class="ev-stat-box">
-                        <div class="val">3x</div>
-                        <div class="lbl">Pre-Fair Sourcing Leads</div>
-                    </div>
-                    <div class="ev-stat-box">
-                        <div class="val">100%</div>
-                        <div class="lbl">White-Hat Strategy</div>
-                    </div>
+                <div class="xp-stats">
+                    <div class="xp-stat"><b>Top 3</b><span>Global SERP Rank</span></div>
+                    <div class="xp-stat"><b>100+</b><span>Countries Targeted</span></div>
+                    <div class="xp-stat"><b>3x</b><span>Pre-Fair Sourcing Leads</span></div>
+                    <div class="xp-stat"><b>100%</b><span>White-Hat Strategy</span></div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <!-- ========================================================
-         4B. LIVE ORGANIC RANKINGS PROOF (Exact Match to User Request)
-    ======================================================== -->
-    <section class="del-rankings-section">
-        <div class="ev-container">
-            <div class="ev-section-head del-rankings-header" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">LIVE GOOGLE RANKINGS PROOF</div>
-                <h2 class="ev-section-title">
-                    Organic Rankings That Drive Real Inbound <span class="accent">Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="ev-section-sub">
-                    Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and B2B exporters:
-                </p>
+    <!-- 4B. LIVE RANKINGS -->
+    <section class="xp-sec">
+        <div class="xp-wrap">
+            <div class="xp-head">
+                <span class="xp-kicker">Live Google rankings proof</span>
+                <h2>Organic Rankings That Drive Real Inbound Revenue</h2>
+                <p>Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and B2B exporters.</p>
             </div>
 
-            <!-- 3 Organic Rankings Tracker Cards -->
-            <div class="del-rankings-grid">
-                <!-- Card 1: Bharat Tex -->
-                <div class="del-rank-card" data-wtm-reveal="fade-up">
-                    <div class="del-rank-card-header">
-                        <span class="del-rank-domain">bharat-tex.com 🇮🇳</span>
-                        <span class="del-rank-badge">Govt / Mega Fair</span>
-                    </div>
-                    <div class="del-rank-metrics-row">
-                        <div class="del-rank-metric">
-                            <div class="val">771</div>
-                            <div class="lbl">Keywords</div>
+            <div class="xp-rank-cards">
+                <?php foreach ($ranks as $r): ?>
+                    <div class="xp-rc">
+                        <div class="xp-rc-head"><b><?= $r[0] ?></b><span><?= $r[1] ?></span></div>
+                        <div class="xp-rc-metrics">
+                            <div><b><?= $r[2] ?></b><span>Keywords</span></div>
+                            <div><b><?= $r[3] ?></b><span>Traffic/Mo</span></div>
+                            <div><b><?= $r[4] ?></b><span>Traffic Cost</span></div>
                         </div>
-                        <div class="del-rank-metric">
-                            <div class="val">137K+</div>
-                            <div class="lbl">Traffic/Mo</div>
-                        </div>
-                        <div class="del-rank-metric">
-                            <div class="val">₹18.4L</div>
-                            <div class="lbl">Traffic Cost</div>
-                        </div>
+                        <div class="xp-rc-foot"><?= $r[5] ?><b><?= $r[6] ?></b></div>
                     </div>
-                    <div class="del-rank-top-pos">
-                        Top 3 Positions: <span>80+ Commercial Keywords #1</span>
-                    </div>
-                </div>
-
-                <!-- Card 2: IHGF Fair -->
-                <div class="del-rank-card" data-wtm-reveal="fade-up">
-                    <div class="del-rank-card-header">
-                        <span class="del-rank-domain">ihgfdelhifair.in 🇮🇳</span>
-                        <span class="del-rank-badge">B2B Trade Show</span>
-                    </div>
-                    <div class="del-rank-metrics-row">
-                        <div class="del-rank-metric">
-                            <div class="val">883</div>
-                            <div class="lbl">Keywords</div>
-                        </div>
-                        <div class="del-rank-metric">
-                            <div class="val">42.5K+</div>
-                            <div class="lbl">Traffic/Mo</div>
-                        </div>
-                        <div class="del-rank-metric">
-                            <div class="val">₹8.2L</div>
-                            <div class="lbl">Traffic Cost</div>
-                        </div>
-                    </div>
-                    <div class="del-rank-top-pos">
-                        Top 3 Positions: <span>22 Key Locations #1 Ranked</span>
-                    </div>
-                </div>
-
-                <!-- Card 3: Premier Logistics -->
-                <div class="del-rank-card" data-wtm-reveal="fade-up">
-                    <div class="del-rank-card-header">
-                        <span class="del-rank-domain">premier-logistics.in 🏢</span>
-                        <span class="del-rank-badge">B2B Industrial</span>
-                    </div>
-                    <div class="del-rank-metrics-row">
-                        <div class="del-rank-metric">
-                            <div class="val">1.3K+</div>
-                            <div class="lbl">Keywords</div>
-                        </div>
-                        <div class="del-rank-metric">
-                            <div class="val">68.2K+</div>
-                            <div class="lbl">Traffic/Mo</div>
-                        </div>
-                        <div class="del-rank-metric">
-                            <div class="val">$12.5K</div>
-                            <div class="lbl">Traffic Cost</div>
-                        </div>
-                    </div>
-                    <div class="del-rank-top-pos">
-                        Top 10 Positions: <span>140+ High-Intent Keywords</span>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
 
-            <!-- Live Keyword Proof Table -->
-            <div class="del-keywords-table-wrap" data-wtm-reveal="fade-up">
-                <table class="del-kw-table">
+            <div class="xp-table-wrap">
+                <table class="xp-table">
                     <thead>
                         <tr>
                             <th>Target Search Keyword</th>
                             <th>Ranking URL</th>
-                            <th style="text-align: center;">Google Rank</th>
+                            <th class="xp-center">Google Rank</th>
                             <th>Rank Movement</th>
                             <th>Monthly Searches</th>
                             <th>Search Intent</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>Bharat Tex 2026 Fair</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">bharat-tex.com</td>
-                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
-                            <td><span class="del-kw-gain">↑ +17 Positions</span></td>
-                            <td>49,500/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Commercial</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Best SEO Company in Delhi NCR</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/seo-services-delhi.php</td>
-                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
-                            <td><span class="del-kw-gain">↑ +13 Positions</span></td>
-                            <td>14,800/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">High Intent</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>IHGF Autumn Fair Dates 2027</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">ihgfdelhifair.in</td>
-                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
-                            <td><span class="del-kw-gain">↑ +25 Positions</span></td>
-                            <td>22,200/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Buyer Intent</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>B2B Exhibition SEO Services</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/b2b-exhibition-seo.php</td>
-                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
-                            <td><span class="del-kw-gain">↑ +30 Positions</span></td>
-                            <td>8,100/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">B2B Commercial</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Local SEO Services in Delhi</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/local-seo.php</td>
-                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
-                            <td><span class="del-kw-gain">↑ +23 Positions</span></td>
-                            <td>12,100/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Local Intent</span></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Technical SEO Services Delhi</strong></td>
-                            <td style="color: #6B7280; font-size: 0.82rem;">webtecmart.com/technical-seo.php</td>
-                            <td style="text-align: center;"><span class="del-kw-rank-badge">#1</span></td>
-                            <td><span class="del-kw-gain">↑ +19 Positions</span></td>
-                            <td>6,400/mo</td>
-                            <td><span style="background: #FFF0F7; color: #C4007A; font-weight: 700; font-size: 0.74rem; padding: 3px 8px; border-radius: 9999px;">Technical</span></td>
-                        </tr>
+                        <?php foreach ($keywords as $k): ?>
+                            <tr>
+                                <td data-label="Keyword"><strong><?= $k[0] ?></strong></td>
+                                <td class="xp-url-cell" data-label="Ranking URL"><?= $k[1] ?></td>
+                                <td class="xp-center" data-label="Google Rank"><span class="xp-medal">#1</span></td>
+                                <td data-label="Movement"><span class="xp-up">↑ <?= $k[2] ?> Positions</span></td>
+                                <td data-label="Searches"><?= $k[3] ?></td>
+                                <td data-label="Intent"><span class="xp-intent"><?= $k[4] ?></span></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
 
-            <!-- Call Specialists Button -->
-            <div style="text-align: center;">
-                <a href="tel:+919999674255" class="ev-btn-primary" style="padding: 14px 34px; font-size: 1rem;">
-                    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    <span>Call Our SEO Specialists (+91-9999674255)</span>
-                </a>
+            <div class="xp-center">
+                <a href="tel:+919999674255" class="xp-btn xp-btn--pink"><?= $phone ?><span>Call Our SEO Specialists (+91-9999674255)</span></a>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         5. INTERACTIVE EVENT SEO CONSULTATION & AUDIT FORM
-    ======================================================== -->
-    <section class="ev-form-section" id="event-audit-form">
-        <div class="ev-container">
-            <div class="ev-form-box" data-wtm-reveal="fade-up">
-                <div class="ev-form-head">
-                    <div class="ev-eyebrow">COMPLIMENTARY EVENT AUDIT</div>
+    <!-- 5. AUDIT FORM -->
+    <section class="xp-sec xp-form-sec" id="event-audit-form">
+        <div class="xp-wrap">
+            <div class="xp-form-card">
+                <div class="xp-form-side">
+                    <span class="xp-kicker" style="color:#fff;border-color:var(--gold)">Complimentary event audit</span>
                     <h3>Let's Talk Event &amp; Exhibition Optimization</h3>
                     <p>Share your upcoming trade fair or B2B event details for a tailored organic footfall roadmap.</p>
+                    <ul>
+                        <li>Custom organic footfall blueprint</li>
+                        <li>Reviewed by senior exhibition SEO strategists</li>
+                        <li>Reply within 24 hours</li>
+                    </ul>
                 </div>
 
-                <form id="evAuditForm" onsubmit="handleEvFormSubmit(event)">
-                    <div class="ev-grid-fields">
-                        <div class="ev-field-group">
-                            <label for="evEventName">Event / Fair Name *</label>
-                            <input type="text" id="evEventName" name="event_name" placeholder="e.g. India Auto Expo 2026" required>
+                <div class="xp-form-main">
+                    <form id="evAuditForm" onsubmit="handleEvFormSubmit(event)">
+                        <div class="xp-fields">
+                            <div class="xp-field">
+                                <label for="evEventName">Event / Fair Name *</label>
+                                <input type="text" id="evEventName" name="event_name" placeholder="e.g. India Auto Expo 2026" required>
+                            </div>
+                            <div class="xp-field">
+                                <label for="evWebsite">Event Website URL *</label>
+                                <input type="url" id="evWebsite" name="website" placeholder="https://www.yourexpo.com" required>
+                            </div>
+                            <div class="xp-field">
+                                <label for="evDates">Event Dates &amp; Venue *</label>
+                                <input type="text" id="evDates" name="dates_venue" placeholder="e.g. Oct 15-18 &bull; Pragati Maidan / Yashobhoomi" required>
+                            </div>
+                            <div class="xp-field">
+                                <label for="evGoal">Primary SEO Objective *</label>
+                                <select id="evGoal" name="goal" required>
+                                    <option value="Pre-Register Trade Visitors & Attendees">Pre-Register Trade Visitors &amp; Attendees</option>
+                                    <option value="Sell Out Exhibitor Stalls & Booths">Sell Out Exhibitor Stalls &amp; Booths</option>
+                                    <option value="Attract International Sourcing Delegations">Attract International Sourcing Delegations</option>
+                                    <option value="Full Event Lifecycle SEO (All of the Above)">Full Event Lifecycle SEO (All of the Above)</option>
+                                </select>
+                            </div>
+                            <div class="xp-field">
+                                <label for="evContactName">Contact Person Name *</label>
+                                <input type="text" id="evContactName" name="name" placeholder="Your Full Name" required>
+                            </div>
+                            <div class="xp-field">
+                                <label for="evContactPhone">Phone Number / WhatsApp *</label>
+                                <input type="tel" id="evContactPhone" name="phone" placeholder="+91 99996 74255" required>
+                            </div>
                         </div>
-                        <div class="ev-field-group">
-                            <label for="evWebsite">Event Website URL *</label>
-                            <input type="url" id="evWebsite" name="website" placeholder="https://www.yourexpo.com" required>
+
+                        <div class="xp-field xp-field--full">
+                            <label for="evContactEmail">Official Email Address *</label>
+                            <input type="email" id="evContactEmail" name="email" placeholder="organizer@yourexpo.com" required>
                         </div>
-                        <div class="ev-field-group">
-                            <label for="evDates">Event Dates &amp; Venue *</label>
-                            <input type="text" id="evDates" name="dates_venue" placeholder="e.g. Oct 15-18 &bull; Pragati Maidan / Yashobhoomi" required>
+
+                        <div class="xp-field xp-field--full">
+                            <label for="evMessage">Tell Us About Your Event &amp; Target Audience</label>
+                            <textarea id="evMessage" name="message" rows="3" placeholder="Target countries, expected exhibitor count, current challenges with visitor registrations..."></textarea>
                         </div>
-                        <div class="ev-field-group">
-                            <label for="evGoal">Primary SEO Objective *</label>
-                            <select id="evGoal" name="goal" required>
-                                <option value="Pre-Register Trade Visitors & Attendees">Pre-Register Trade Visitors &amp; Attendees</option>
-                                <option value="Sell Out Exhibitor Stalls & Booths">Sell Out Exhibitor Stalls &amp; Booths</option>
-                                <option value="Attract International Sourcing Delegations">Attract International Sourcing Delegations</option>
-                                <option value="Full Event Lifecycle SEO (All of the Above)">Full Event Lifecycle SEO (All of the Above)</option>
-                            </select>
+
+                        <button type="submit" class="xp-btn xp-btn--pink xp-submit" id="evSubmitBtn">
+                            <span>Claim Your Free Event SEO Growth Blueprint</span><?= $arrow ?>
+                        </button>
+
+                        <div class="ev-form-feedback" id="evFeedback">
+                            Thank you! Your event details have been submitted. Our Senior Exhibition SEO Strategists will review your site and contact you within 24 hours with a custom blueprint.
                         </div>
-                        <div class="ev-field-group">
-                            <label for="evContactName">Contact Person Name *</label>
-                            <input type="text" id="evContactName" name="name" placeholder="Your Full Name" required>
-                        </div>
-                        <div class="ev-field-group">
-                            <label for="evContactPhone">Phone Number / WhatsApp *</label>
-                            <input type="tel" id="evContactPhone" name="phone" placeholder="+91 99996 74255" required>
-                        </div>
-                    </div>
-
-                    <div class="ev-field-group" style="margin-bottom: 16px;">
-                        <label for="evContactEmail">Official Email Address *</label>
-                        <input type="email" id="evContactEmail" name="email" placeholder="organizer@yourexpo.com" required>
-                    </div>
-
-                    <div class="ev-field-group" style="margin-bottom: 20px;">
-                        <label for="evMessage">Tell Us About Your Event &amp; Target Audience</label>
-                        <textarea id="evMessage" name="message" rows="3" placeholder="Target countries, expected exhibitor count, current challenges with visitor registrations..."></textarea>
-                    </div>
-
-                    <button type="submit" class="ev-form-submit" id="evSubmitBtn">
-                        <span>Claim Your Free Event SEO Growth Blueprint</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </button>
-
-                    <div class="ev-form-feedback success" id="evFeedback">
-                        Thank you! Your event details have been submitted. Our Senior Exhibition SEO Strategists will review your site and contact you within 24 hours with a custom blueprint.
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================================
-         6. FREQUENTLY ASKED QUESTIONS
-    ======================================================== -->
-    <section class="ev-faq-section">
-        <div class="ev-container">
-            <div class="ev-section-head" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">COMMON QUERIES</div>
-                <h2 class="ev-section-title">
-                    Frequently Asked <span class="accent">Questions<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                </h2>
-                <p class="ev-section-sub">
-                    Answers to key questions asked by trade show organizers and international B2B exhibitors.
-                </p>
-            </div>
-
-            <div style="max-width: 860px; margin: 0 auto;">
-                <div class="ev-faq-item active">
-                    <button class="ev-faq-btn" onclick="toggleEvFaq(this)">
-                        <span>When should an exhibition organizer start SEO before the event dates?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="ev-faq-answer">
-                        Ideally 6 to 9 months prior to the event dates. This timeline gives Google sufficient opportunity to crawl exhibitor categories, rank competitive sourcing queries, and build momentum before visitor badge pre-registrations peak in the final 90 days.
-                    </div>
-                </div>
-
-                <div class="ev-faq-item">
-                    <button class="ev-faq-btn" onclick="toggleEvFaq(this)">
-                        <span>Can individual B2B exhibitors also benefit from exhibition SEO?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="ev-faq-answer">
-                        Absolutely. Individual exhibitors investing in stalls at fairs like Bharat Tex, IHGF, or Auto Expo can launch dedicated exhibition landing pages to rank for product searches during the fair, pre-booking high-value meetings with visiting international delegations before the fair doors even open.
-                    </div>
-                </div>
-
-                <div class="ev-faq-item">
-                    <button class="ev-faq-btn" onclick="toggleEvFaq(this)">
-                        <span>How did WebTecMart achieve 400% organic growth for Bharat Tex Fair?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="ev-faq-answer">
-                        We implemented a multi-tiered technical taxonomy, optimized over 200+ global textile keywords, built Event and Organization schema hierarchies, and executed digital PR that earned coverage from global trade portals, securing #1 Google rankings for high-intent search queries worldwide.
-                    </div>
-                </div>
-
-                <div class="ev-faq-item">
-                    <button class="ev-faq-btn" onclick="toggleEvFaq(this)">
-                        <span>How do you prevent trade show websites from losing rank once the fair ends?</span>
-                        <span class="icon">+</span>
-                    </button>
-                    <div class="ev-faq-answer">
-                        We build evergreen URL structures alongside annual archive slugs. Instead of deleting pages, we transition past editions into authoritative post-show review hubs while redirecting core search equity into next year's upcoming event campaign.
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ========================================================
-         7. CONVERSION CTA BANNER
-    ======================================================== -->
-    <section class="ev-cta-section">
-        <div class="ev-container">
-            <div class="ev-cta-card" data-wtm-reveal="fade-up">
-                <h2>Ready to Pack Your Exhibition Halls with <span>High-Intent Trade Buyers?</span></h2>
-                <p>
-                    Speak with our senior event SEO specialists today for a complimentary audit and custom organic footfall blueprint for your upcoming fair.
-                </p>
-
-                <div class="ev-cta-btns">
-                    <a href="#event-audit-form" class="ev-cta-btn-main">
-                        <span>Let's Talk Optimization</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </a>
-                    <a href="tel:+919999674255" class="ev-cta-btn-phone">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                        <span>Call: +91-9999674255</span>
-                    </a>
+    <!-- 6. FAQ -->
+    <section class="xp-sec">
+        <div class="xp-wrap">
+            <div class="xp-faq-grid">
+                <div class="xp-head">
+                    <span class="xp-kicker">Common queries</span>
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Answers to key questions asked by trade show organizers and international B2B exhibitors.</p>
                 </div>
-
-                <div class="ev-cta-footnote">
-                    Free Event Strategy Consultation &bull; Zero Obligation &bull; Tailored For Organizers &amp; Exhibitors
+                <div>
+                    <?php foreach ($faqs as $i => $f): ?>
+                        <div class="ev-faq-item<?= $i === 0 ? ' active' : '' ?>">
+                            <button class="ev-faq-btn" onclick="toggleEvFaq(this)">
+                                <span><?= htmlspecialchars($f[0]) ?></span>
+                                <span class="icon">+</span>
+                            </button>
+                            <div class="ev-faq-answer"><?= htmlspecialchars($f[1]) ?></div>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CTA -->
+    <section class="xp-cta">
+        <div class="xp-wrap">
+            <div class="xp-cta-card">
+                <h2>Ready to Pack Your Exhibition Halls with High-Intent Trade Buyers?</h2>
+                <p>Speak with our senior event SEO specialists today for a complimentary audit and custom organic footfall blueprint for your upcoming fair.</p>
+                <div class="xp-actions">
+                    <a href="#event-audit-form" class="xp-btn xp-btn--pink"><span>Let's Talk Optimization</span><?= $arrow ?></a>
+                    <a href="tel:+919999674255" class="xp-btn xp-btn--ghost"><?= $phone ?><span>Call: +91-9999674255</span></a>
+                </div>
+                <div class="xp-cta-foot">Free Event Strategy Consultation &bull; Zero Obligation &bull; Tailored For Organizers &amp; Exhibitors</div>
             </div>
         </div>
     </section>
@@ -1640,6 +732,9 @@ $bodyCopy  = $dbService['body'] ?? '';
         document.querySelectorAll('.ev-faq-item').forEach(el => el.classList.remove('active'));
         if (!isActive) {
             item.classList.add('active');
+            if (window.Motion) {
+                Motion.animate(item.querySelector('.ev-faq-answer'), { opacity: [0, 1], y: [-10, 0] }, { duration: 0.35, ease: 'easeOut' });
+            }
         }
     }
 
@@ -1693,6 +788,101 @@ $bodyCopy  = $dbService['body'] ?? '';
             btn.querySelector('span').innerText = 'Claim Your Free Event SEO Growth Blueprint';
         });
     }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@11.18.2/dist/motion.js"></script>
+<script>
+(function () {
+    var root = document.querySelector('main.xp');
+    if (!root) return;
+    var M = window.Motion;
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!M || reduce) { root.classList.remove('xp-js'); return; }
+    var animate = M.animate, inView = M.inView, scroll = M.scroll, stagger = M.stagger;
+    var spring = { type: 'spring', stiffness: 110, damping: 16 };
+    var fine = window.matchMedia('(pointer: fine)').matches;
+
+    /* scroll progress bar */
+    var bar = root.querySelector('.xp-progress');
+    if (bar && scroll) scroll(animate(bar, { scaleX: [0, 1] }, { ease: 'linear' }));
+
+    /* hero headline: word-by-word mask reveal */
+    var h1 = root.querySelector('.xp-hero h1');
+    if (h1) {
+        var words = h1.textContent.trim().split(/\s+/);
+        h1.innerHTML = words.map(function (w) { return '<span class="xp-w"><span>' + w.replace(/&/g, '&amp;') + '</span></span>'; }).join(' ');
+        animate(h1.querySelectorAll('.xp-w > span'), { y: ['110%', '0%'] }, { duration: 0.85, delay: stagger(0.07, { startDelay: 0.1 }), ease: [0.22, 1, 0.36, 1] });
+    }
+    animate('.xp-tag, .xp-hero-sub, .xp-hero-desc, .xp-hero .xp-actions, .xp-note', { opacity: [0, 1], y: [26, 0] }, { duration: 0.7, delay: stagger(0.1, { startDelay: 0.45 }), ease: 'easeOut' });
+
+    /* hero badge: drops in on its lanyard, sways, tilts with the cursor */
+    var wrap = root.querySelector('.xp-badge-wrap'), badge = root.querySelector('.xp-badge');
+    if (wrap) animate(wrap, { opacity: [0, 1], y: [-140, 0] }, { type: 'spring', stiffness: 60, damping: 11, delay: 0.5 });
+    if (badge) {
+        animate(badge, { rotate: [2.4, -1.6] }, { duration: 2.8, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' });
+        if (fine) {
+            var hero = root.querySelector('.xp-hero');
+            hero.addEventListener('pointermove', function (e) {
+                var nx = e.clientX / window.innerWidth - 0.5, ny = e.clientY / window.innerHeight - 0.5;
+                animate(badge, { rotateY: nx * 16, rotateX: -ny * 12 }, { duration: 0.6, ease: 'easeOut' });
+            });
+            hero.addEventListener('pointerleave', function () { animate(badge, { rotateY: 0, rotateX: 0 }, spring); });
+        }
+    }
+    var orb = root.querySelector('.xp-orb');
+    if (orb) animate(orb, { y: [0, -30], x: [0, -16] }, { duration: 5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' });
+
+    /* scroll reveals with spring + sibling stagger */
+    var groups = ['.xp-head', '.xp-stall', '.xp-web-copy > *', '.xp-browser', '.xp-case', '.xp-rc', '.xp-form-card', '.xp-faq-grid .ev-faq-item', '.xp-cta-card'];
+    groups.forEach(function (sel) {
+        root.querySelectorAll(sel).forEach(function (el, i) {
+            var sib = Array.prototype.indexOf.call(el.parentElement.children, el);
+            var delay = Math.min(sib, 5) * 0.08;
+            inView(el, function () {
+                animate(el, { opacity: [0, 1], y: [48, 0], scale: [0.96, 1] }, Object.assign({ delay: delay }, spring));
+            }, { amount: 0.15 });
+        });
+    });
+
+    /* keyword table: rows slide in, medals pop */
+    var tw = root.querySelector('.xp-table-wrap');
+    if (tw) {
+        inView(tw, function () {
+            animate(tw, { opacity: [0, 1] }, { duration: 0.4 });
+            animate(tw.querySelectorAll('tbody tr'), { opacity: [0, 1], x: [-30, 0] }, { duration: 0.5, delay: stagger(0.08), ease: 'easeOut' });
+            animate(tw.querySelectorAll('.xp-medal'), { opacity: [0, 1], scale: [0, 1], rotate: [-120, 0] }, { type: 'spring', stiffness: 220, damping: 12, delay: stagger(0.08, { startDelay: 0.3 }) });
+        }, { amount: 0.15 });
+    }
+
+    /* count-up numbers */
+    root.querySelectorAll('.xp-chip b, .xp-stat b, .xp-rc-metrics b').forEach(function (el) {
+        var m = el.textContent.trim().match(/^([^\d]?)(\d[\d,]*\.?\d*)(.*)$/);
+        if (!m) return;
+        var raw = m[2], num = parseFloat(raw.replace(/,/g, '')), dec = (raw.split('.')[1] || '').length, comma = raw.indexOf(',') > -1;
+        el.textContent = m[1] + (0).toFixed(dec) + m[3];
+        inView(el, function () {
+            animate(0, num, {
+                duration: 1.7, ease: 'easeOut',
+                onUpdate: function (v) {
+                    var t = v.toFixed(dec);
+                    if (comma) { var parts = t.split('.'); parts[0] = Math.round(+parts[0]).toLocaleString('en-US'); t = parts.join('.'); }
+                    el.textContent = m[1] + t + m[3];
+                }
+            });
+        }, { amount: 0.6 });
+    });
+
+    /* magnetic primary buttons */
+    if (fine) {
+        root.querySelectorAll('.xp-btn--pink').forEach(function (b) {
+            b.addEventListener('pointermove', function (e) {
+                var r = b.getBoundingClientRect();
+                animate(b, { x: (e.clientX - r.left - r.width / 2) * 0.22, y: (e.clientY - r.top - r.height / 2) * 0.3 }, { duration: 0.25 });
+            });
+            b.addEventListener('pointerleave', function () { animate(b, { x: 0, y: 0 }, { type: 'spring', stiffness: 300, damping: 14 }); });
+        });
+    }
+})();
 </script>
 
 <?php

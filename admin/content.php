@@ -78,6 +78,7 @@ $homeSections = [
 ];
 
 $selectedSection = trim($_GET['section'] ?? $_POST['section'] ?? 'collection:service');
+$blogWordLimit = 3000;
 if ($selectedSection === 'registry:partners') $selectedSection = 'collection:partner';
 if ($selectedSection === 'registry:about') $selectedSection = 'collection:homepage_about';
 if ($selectedSection === 'registry:visibility') $selectedSection = 'collection:homepage_visibility';
@@ -420,9 +421,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     if ($summary === '') throw new RuntimeException('A blog excerpt is required.');
                     if ($body === '') throw new RuntimeException('Add the blog article content before saving.');
+                    $blogText = html_entity_decode(strip_tags($body), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $blogWordCount = preg_match_all('/[\p{L}\p{N}]+(?:[\'’][\p{L}\p{N}]+)*/u', $blogText);
+                    if ($blogWordCount === false) throw new RuntimeException('The blog article contains text that could not be counted.');
+                    if ($blogWordCount > $blogWordLimit) {
+                        throw new RuntimeException('Blog article content cannot exceed ' . number_format($blogWordLimit) . ' words.');
+                    }
                     $readTime = trim((string) ($_POST['read_time'] ?? ''));
                     if ($readTime === '') {
-                        $readTime = max(1, (int) ceil(str_word_count(strip_tags($body)) / 200)) . ' min read';
+                        $readTime = max(1, (int) ceil($blogWordCount / 200)) . ' min read';
                     }
                     $metadata['readTime'] = $readTime;
                     $metadata['body'] = $body;
@@ -1271,8 +1278,13 @@ require_once __DIR__ . '/templates/header.php';
                             <?php if (in_array($sectionType, ['blog', 'page', 'hero_content', 'service_detail'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-body"><?= $sectionType === 'blog' ? 'Article content' : ($sectionType === 'hero_content' ? 'Main hero description' : ($sectionType === 'service_detail' ? 'Service overview' : 'Additional details')) ?></label>
-                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
-                                    <?php if ($sectionType === 'blog'): ?><div class="form-text">Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items.</div><?php endif; ?>
+                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' data-word-limit="' . (int) $blogWordLimit . '" aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
+                                    <?php if ($sectionType === 'blog'): ?>
+                                        <div class="form-text" id="blog-body-help">
+                                            Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items. Maximum <?= number_format($blogWordLimit) ?> words.
+                                            <span id="blog-word-count" class="ms-1" aria-live="polite"></span>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             <?php endif; ?>
 
@@ -1921,6 +1933,22 @@ require_once __DIR__ . '/templates/header.php';
 (() => {
     const modalEl = document.getElementById('cmsModal');
     const form = document.getElementById('cmsForm');
+    const blogBody = document.getElementById('f-body');
+    const blogWordCount = document.getElementById('blog-word-count');
+    const blogWordLimit = Number(blogBody?.dataset.wordLimit || 0);
+
+    if (blogBody && blogWordCount && blogWordLimit > 0) {
+        const countWords = text => (text.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) || []).length;
+        const updateBlogWordCount = () => {
+            const count = countWords(blogBody.value);
+            const isOverLimit = count > blogWordLimit;
+            blogWordCount.textContent = `${count.toLocaleString()} / ${blogWordLimit.toLocaleString()} words`;
+            blogWordCount.classList.toggle('text-danger', isOverLimit);
+            blogBody.setCustomValidity(isOverLimit ? `Blog articles cannot exceed ${blogWordLimit.toLocaleString()} words.` : '');
+        };
+        blogBody.addEventListener('input', updateBlogWordCount);
+        updateBlogWordCount();
+    }
 
     // Delete confirm
     document.querySelectorAll('[data-delete-form]').forEach(f => {
