@@ -13,7 +13,6 @@ $serviceNavItems = [
     ['label' => 'Social Media Optimization & Marketing', 'path' => '/social-media-optimization.php', 'description' => 'Build an engaged community and scale your presence across Instagram, LinkedIn, and Meta.'],
     ['label' => 'Mobile App Development', 'path' => '/mobile-app-development.php', 'description' => 'Native and hybrid iOS & Android apps built for performance and user retention.'],
     ['label' => 'Performance Marketing', 'path' => '/performance-marketing.php', 'description' => 'Data-driven paid ads across Meta, Google, and YouTube with relentless ROAS focus.'],
-    ['label' => 'Local SEO', 'path' => '/local-seo.php', 'description' => 'Dominate Google Maps & 3-pack local search results to drive calls and store visits.'],
 ];
 
 // Dynamically enrich navigation items with live database records
