@@ -24,6 +24,26 @@ function renderServicePageLayout(array $config): void
     $title           = $config['title'] ?? 'Website Design & Development';
     $tagline         = $config['tagline'] ?? 'SMART. SCALABLE. SECURE.';
     $heroDescription = $config['heroDescription'] ?? ($config['hero_description'] ?? '');
+    $heroHeadline    = $config['heroHeadline'] ?? '';
+    $heroBulletHeading = $config['heroBulletHeading'] ?? '';
+    $heroBulletItems  = $config['heroBulletItems'] ?? [];
+    $featuresTitleLead = $config['featuresTitleLead'] ?? '';
+    $featuresTitleAccent = $config['featuresTitleAccent'] ?? '';
+    $featuresTitleTail = $config['featuresTitleTail'] ?? '';
+    $featuresEyebrow = $config['featuresEyebrow'] ?? 'SPECIALIZED SOLUTIONS';
+    $featuresSubtitle = $config['featuresSubtitle'] ?? '';
+    $benefitsTitleLead = $config['benefitsTitleLead'] ?? '';
+    $benefitsTitleAccent = $config['benefitsTitleAccent'] ?? '';
+    $benefitsTitleTail = $config['benefitsTitleTail'] ?? '';
+    $benefitsSubtitle = $config['benefitsSubtitle'] ?? '';
+    $processEyebrow = $config['processEyebrow'] ?? 'EXECUTION PIPELINE';
+    $processTitleLead = $config['processTitleLead'] ?? '';
+    $processTitleAccent = $config['processTitleAccent'] ?? '';
+    $processTitleTail = $config['processTitleTail'] ?? '';
+    $processSubtitle = $config['processSubtitle'] ?? '';
+    $showCaseStudy = $config['showCaseStudy'] ?? true;
+    $showPackages = $config['showPackages'] ?? true;
+    $showTechnologies = $config['showTechnologies'] ?? true;
     $overview        = $config['overview'] ?? ($config['body'] ?? '');
     $features        = $config['features'] ?? [];
     $process         = $config['process'] ?? [];
@@ -389,6 +409,19 @@ function renderServicePageLayout(array $config): void
             color: #374151;
             margin: 0 0 18px;
         }
+        .mb-hero-message {
+            margin: 0 0 12px;
+            color: #111827;
+            font-size: clamp(1.1rem, 2vw, 1.35rem);
+            font-weight: 800;
+            line-height: 1.35;
+        }
+        .mb-hero-bullet-heading {
+            margin: 0 0 10px;
+            color: #111827;
+            font-size: 0.96rem;
+            font-weight: 800;
+        }
         .mb-hero-bullets {
             display: grid;
             grid-template-columns: 1fr;
@@ -407,6 +440,27 @@ function renderServicePageLayout(array $config): void
             font-size: 0.88rem;
             font-weight: 600;
             color: #1F2937;
+        }
+        .mb-bullet-item-detailed {
+            align-items: flex-start;
+            padding: 10px;
+            border: 1px solid rgba(196, 0, 122, 0.12);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.88);
+        }
+        .mb-bullet-copy strong {
+            display: block;
+            margin-bottom: 4px;
+            color: #1F2937;
+            font-size: 0.82rem;
+            line-height: 1.35;
+        }
+        .mb-bullet-copy span {
+            display: block;
+            color: #6B7280;
+            font-size: 0.76rem;
+            font-weight: 400;
+            line-height: 1.45;
         }
         .mb-bullet-item .dot {
             width: 20px;
@@ -1288,29 +1342,48 @@ function renderServicePageLayout(array $config): void
                             <?= $heroHeadingHtml ?>
                         </h1>
 
+                        <?php if ($heroHeadline !== ''): ?>
+                            <h2 class="mb-hero-message"><?= htmlspecialchars($heroHeadline) ?></h2>
+                        <?php endif; ?>
+
                         <p class="mb-hero-desc">
                             <?= htmlspecialchars($heroDescription !== '' ? $heroDescription : $overview) ?>
                         </p>
 
-                        <!-- Key Highlights Checklist -->
+                        <?php if (!empty($heroBulletItems)): ?>
+                        <h3 class="mb-hero-bullet-heading"><?= htmlspecialchars($heroBulletHeading !== '' ? $heroBulletHeading : 'Key Highlights') ?></h3>
                         <div class="mb-hero-bullets">
-                            <div class="mb-bullet-item">
-                                <span class="dot">✓</span>
-                                <span>100% Mobile & Cross-Device Responsive</span>
-                            </div>
-                            <div class="mb-bullet-item">
-                                <span class="dot">✓</span>
-                                <span>SEO-Friendly Semantic Architecture</span>
-                            </div>
-                            <div class="mb-bullet-item">
-                                <span class="dot">✓</span>
-                                <span>Custom UI/UX Tailored to Your Brand</span>
-                            </div>
-                            <div class="mb-bullet-item">
-                                <span class="dot">✓</span>
-                                <span>Conversion-Focused Sales Funnel</span>
-                            </div>
+                            <?php foreach ($heroBulletItems as $bullet): ?>
+                                <div class="mb-bullet-item mb-bullet-item-detailed">
+                                    <span class="dot">✓</span>
+                                    <span class="mb-bullet-copy">
+                                        <strong><?= htmlspecialchars($bullet['title']) ?></strong>
+                                        <span><?= htmlspecialchars($bullet['description']) ?></span>
+                                    </span>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
+                        <?php else: ?>
+                            <!-- Key Highlights Checklist -->
+                            <div class="mb-hero-bullets">
+                                <div class="mb-bullet-item">
+                                    <span class="dot">✓</span>
+                                    <span>100% Mobile & Cross-Device Responsive</span>
+                                </div>
+                                <div class="mb-bullet-item">
+                                    <span class="dot">✓</span>
+                                    <span>SEO-Friendly Semantic Architecture</span>
+                                </div>
+                                <div class="mb-bullet-item">
+                                    <span class="dot">✓</span>
+                                    <span>Custom UI/UX Tailored to Your Brand</span>
+                                </div>
+                                <div class="mb-bullet-item">
+                                    <span class="dot">✓</span>
+                                    <span>Conversion-Focused Sales Funnel</span>
+                                </div>
+                            </div>
+                        <?php endif; ?>
 
                         <div class="mb-hero-actions">
                             <a href="/contact.php" class="mb-btn-primary trigger-enquiry-modal" data-service="<?= htmlspecialchars($title) ?>">
@@ -1435,13 +1508,17 @@ function renderServicePageLayout(array $config): void
                 <div class="mb-section-header">
                     <div class="mb-eyebrow">
                         <?= svcIcon('sparkles') ?>
-                        <span>SPECIALIZED SOLUTIONS</span>
+                        <span><?= htmlspecialchars($featuresEyebrow) ?></span>
                     </div>
                     <h2 class="mb-section-title">
-                        Expert <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> for Every Business Need
+                        <?php if ($featuresTitleAccent !== ''): ?>
+                            <?= htmlspecialchars($featuresTitleLead) ?><span class="accent"><?= htmlspecialchars($featuresTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span><?= htmlspecialchars($featuresTitleTail) ?>
+                        <?php else: ?>
+                            Expert <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> for Every Business Need
+                        <?php endif; ?>
                     </h2>
                     <p class="mb-section-sub">
-                        Explore our end-to-end capabilities engineered to enhance performance, establish brand credibility, and convert traffic into revenue.
+                        <?= htmlspecialchars($featuresSubtitle !== '' ? $featuresSubtitle : 'Explore our end-to-end capabilities engineered to enhance performance, establish brand credibility, and convert traffic into revenue.') ?>
                     </p>
                 </div>
 
@@ -1485,10 +1562,14 @@ function renderServicePageLayout(array $config): void
                         <span>THE WEBTECMART ADVANTAGE</span>
                     </div>
                     <h2 class="mb-section-title">
-                        Why Choose Our <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> Services?
+                        <?php if ($benefitsTitleAccent !== ''): ?>
+                            <?= htmlspecialchars($benefitsTitleLead) ?><span class="accent"><?= htmlspecialchars($benefitsTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span><?= htmlspecialchars($benefitsTitleTail) ?>
+                        <?php else: ?>
+                            Why Choose Our <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> Services?
+                        <?php endif; ?>
                     </h2>
                     <p class="mb-section-sub">
-                        We don't build generic websites or run cookie-cutter campaigns. Here is how our strategic approach delivers tangible business impact.
+                        <?= htmlspecialchars($benefitsSubtitle !== '' ? $benefitsSubtitle : "We don't build generic websites or run cookie-cutter campaigns. Here is how our strategic approach delivers tangible business impact.") ?>
                     </p>
                 </div>
 
@@ -1517,6 +1598,7 @@ function renderServicePageLayout(array $config): void
         <!-- ========================================================
              6. ALL-IN-ONE PACKAGES & PRICING (Matebiz Signature)
         ======================================================== -->
+        <?php if ($showPackages): ?>
         <section class="mb-packages-section">
             <div class="mb-container">
                 <div class="mb-section-header">
@@ -1567,10 +1649,12 @@ function renderServicePageLayout(array $config): void
                 </div>
             </div>
         </section>
+        <?php endif; ?>
 
         <!-- ========================================================
              7. MODERN TECHNOLOGIES STACK
         ======================================================== -->
+        <?php if ($showTechnologies): ?>
         <section class="mb-tech-section">
             <div class="mb-container">
                 <div class="mb-section-header">
@@ -1597,6 +1681,7 @@ function renderServicePageLayout(array $config): void
                 </div>
             </div>
         </section>
+        <?php endif; ?>
 
         <!-- ========================================================
              8. WORKING PROCESS ROADMAP (5-Step Pipeline)
@@ -1607,13 +1692,17 @@ function renderServicePageLayout(array $config): void
                 <div class="mb-section-header">
                     <div class="mb-eyebrow">
                         <?= svcIcon('sparkles') ?>
-                        <span>EXECUTION PIPELINE</span>
+                        <span><?= htmlspecialchars($processEyebrow) ?></span>
                     </div>
                     <h2 class="mb-section-title">
-                        Our Step-by-Step <span class="accent">Working Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        <?php if ($processTitleAccent !== ''): ?>
+                            <?= htmlspecialchars($processTitleLead) ?><span class="accent"><?= htmlspecialchars($processTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span><?= htmlspecialchars($processTitleTail) ?>
+                        <?php else: ?>
+                            Our Step-by-Step <span class="accent">Working Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                        <?php endif; ?>
                     </h2>
                     <p class="mb-section-sub">
-                        A structured delivery roadmap ensuring on-time delivery, pixel-perfect design, and reliable performance.
+                        <?= htmlspecialchars($processSubtitle !== '' ? $processSubtitle : 'A structured delivery roadmap ensuring on-time delivery, pixel-perfect design, and reliable performance.') ?>
                     </p>
                 </div>
 
@@ -1633,6 +1722,7 @@ function renderServicePageLayout(array $config): void
         <!-- ========================================================
              9. VERIFIED CASE STUDY SPOTLIGHT
         ======================================================== -->
+        <?php if ($showCaseStudy): ?>
         <section class="mb-casestudy-section">
             <div class="mb-container">
                 <div class="mb-casestudy-card">
@@ -1662,6 +1752,7 @@ function renderServicePageLayout(array $config): void
                 </div>
             </div>
         </section>
+        <?php endif; ?>
 
         <!-- ========================================================
              10. MICRO-MARKETS & GLOBAL REACH (Matebiz Hallmark)

@@ -6,6 +6,14 @@ const APP_NAME = 'WebTecMart Digital';
 const APP_URL = 'http://localhost:8000';
 const DB_PATH = __DIR__ . '/storage/site.db';
 
+function formatDatabaseDateTime(string $value, string $format = 'd M Y, h:i A'): string
+{
+    $storedDate = new DateTimeImmutable($value, new DateTimeZone('UTC'));
+    $appTimezone = new DateTimeZone(date_default_timezone_get());
+
+    return $storedDate->setTimezone($appTimezone)->format($format);
+}
+
 function loadEnvironmentConfig(): void
 {
     $path = __DIR__ . '/.env';

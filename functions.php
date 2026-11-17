@@ -1464,7 +1464,9 @@ function sendLeadNotification(array $lead, int $leadId): bool
     $clientMessage = nl2br(htmlspecialchars($lead['message'] ?? 'No message provided.', ENT_QUOTES, 'UTF-8'));
     $timestamp = date('d M Y, h:i A T');
 
-    $subject = '⚡ New Website Enquiry #' . $leadId . ' - ' . ($lead['name'] ?? 'Client');
+    $isEventWebsiteDemo = strpos((string) ($lead['service'] ?? ''), 'Event Website Demo Request') === 0;
+    $subject = ($isEventWebsiteDemo ? 'New Event Website Demo Request' : '⚡ New Website Enquiry')
+        . ' #' . $leadId . ' - ' . ($lead['name'] ?? 'Client');
 
     $plainBody = implode("\r\n", [
         "========================================",

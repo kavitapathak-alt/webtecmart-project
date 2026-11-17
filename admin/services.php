@@ -1931,7 +1931,7 @@ require_once __DIR__ . '/templates/header.php';
                                     </form>
                                 </td>
                                 <td>
-                                    <small class="text-muted"><?= htmlspecialchars(date('M d, Y', strtotime($svc['updated_at'] ?? $svc['created_at'] ?? 'now'))) ?></small>
+                                    <small class="text-muted"><?= htmlspecialchars(formatDatabaseDateTime((string) ($svc['updated_at'] ?? $svc['created_at'] ?? 'now'), 'M d, Y')) ?></small>
                                 </td>
                                 <td>
                                     <div class="scms-actions-cell justify-content-end">

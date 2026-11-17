@@ -358,7 +358,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <?php endif; ?>
                             </td>
                             <td style="color: #64748B; font-size: 0.825rem; white-space: nowrap;">
-                                <?= date('d M Y, h:i A', strtotime($lead['created_at'])) ?>
+                                <?= formatDatabaseDateTime((string) $lead['created_at']) ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

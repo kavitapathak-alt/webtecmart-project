@@ -1,7 +1,7 @@
 <?php
 $pageMeta = [
-    'title' => 'B2B & Exhibition SEO Services | Boost Your Event With SEO - WebTecMart',
-    'description' => 'Want to attract more attendees, sponsors, exhibitors, and increase revenue? WebTecMart is India’s premier exhibition SEO agency behind Bharat Tex Fair & IHGF Delhi Fair.',
+    'title' => 'Event Website Design & B2B Exhibition SEO | WebTecMart',
+    'description' => 'High-performance websites for B2B trade fairs and exhibitions, combining event website development with strategic SEO to drive organic growth and registrations.',
 ];
 require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/components/sections/FooterSection.php';
@@ -106,8 +106,11 @@ $bodyCopy  = $dbService['body'] ?? '';
         font-size: 0.98rem;
         line-height: 1.68;
         color: #4B5563;
-        margin: 0 0 24px;
+        margin: 0 0 14px;
         max-width: 640px;
+    }
+    .ev-hero-desc:last-of-type {
+        margin-bottom: 24px;
     }
 
     .ev-hero-actions {
@@ -378,6 +381,7 @@ $bodyCopy  = $dbService['body'] ?? '';
         place-items: center;
         margin-bottom: 14px;
     }
+    .ev-pillar-card h3,
     .ev-pillar-card h4 {
         font-size: 1.1rem;
         font-weight: 800;
@@ -393,61 +397,162 @@ $bodyCopy  = $dbService['body'] ?? '';
         flex-grow: 1;
     }
 
-    /* ===== EVENT LIFECYCLE TIMELINE ===== */
-    .ev-lifecycle-section {
-        padding: 44px 0 36px;
+    /* ===== EVENT WEBSITE DESIGN SHOWCASE ===== */
+    .ev-websites-section {
+        padding: 44px 0 40px;
+        color: #1F1B2A;
         background: #FFF8FC;
+        border-top: 1px solid rgba(196, 0, 122, 0.08);
+        border-bottom: 1px solid rgba(196, 0, 122, 0.08);
     }
-    .ev-lifecycle-grid {
+    .ev-websites-grid {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 28px;
+        align-items: center;
     }
-    @media (min-width: 768px) {
-        .ev-lifecycle-grid { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 992px) {
+        .ev-websites-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
     }
-    .ev-life-card {
-        background: #FFFFFF;
-        border: 1.5px solid rgba(196, 0, 122, 0.12);
-        border-radius: 20px;
-        padding: 26px;
-        position: relative;
-    }
-    .ev-life-tag {
-        font-size: 0.72rem;
-        font-weight: 800;
-        color: #C4007A;
-        background: #FFF0F7;
-        padding: 4px 10px;
-        border-radius: 6px;
-        display: inline-block;
-        margin-bottom: 12px;
-    }
-    .ev-life-card h4 {
-        font-size: 1.15rem;
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 10px;
-    }
-    .ev-life-card ul {
-        list-style: none;
-        padding: 0;
+    .ev-websites-subtitle {
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+        font-weight: 700;
+        line-height: 1.4;
+        color: #1F2937;
         margin: 0;
     }
-    .ev-life-card li {
-        font-size: 0.86rem;
+    .ev-websites-copy p {
         color: #4B5563;
-        padding-left: 20px;
+        font-size: 0.98rem;
+        line-height: 1.68;
+        margin: 0 0 16px;
+    }
+    .ev-websites-copy p:last-child {
+        margin-bottom: 0;
+    }
+    .ev-website-browser {
         position: relative;
-        margin-bottom: 8px;
+        padding: 14px;
+        border: 1.5px solid rgba(196, 0, 122, 0.15);
+        border-radius: 20px;
+        background: #FFFFFF;
+        box-shadow: 0 16px 40px rgba(196, 0, 122, 0.1);
+        color: #1F1B2A;
+    }
+    .ev-browser-chrome {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 4px 4px 14px;
+    }
+    .ev-browser-dots {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+    .ev-browser-dots span {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #C4007A;
+    }
+    .ev-browser-dots span:nth-child(2) { background: #E0398F; }
+    .ev-browser-dots span:nth-child(3) { background: #F4C4DE; }
+    .ev-browser-url {
+        min-width: 0;
+        overflow: hidden;
+        color: #6B7280;
+        font-size: 0.72rem;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .ev-browser-page {
+        min-height: 330px;
+        overflow: hidden;
+        border: 1px solid #F3E7EE;
+        background: #FFFFFF;
+    }
+    .ev-preview-nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px 18px;
+        border-bottom: 1px solid #F3E7EE;
+    }
+    .ev-preview-brand {
+        font-size: 1.2rem;
+        font-weight: 800;
+        color: #C4007A;
+    }
+    .ev-preview-links {
+        color: #6B7280;
+        font-size: 0.65rem;
+        white-space: nowrap;
+    }
+    .ev-preview-register {
+        padding: 8px 11px;
+        border-radius: 999px;
+        background: #C4007A;
+        color: #FFFFFF;
+        font-size: 0.65rem;
+        font-weight: 800;
+        white-space: nowrap;
+    }
+    .ev-preview-content {
+        display: grid;
+        grid-template-columns: 1fr 0.85fr;
+        gap: 16px;
+        align-items: center;
+        padding: 28px 22px;
+    }
+    .ev-preview-copy small {
+        color: #C4007A;
+        font-size: 0.6rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+    }
+    .ev-preview-copy h3 {
+        margin: 12px 0 10px;
+        color: #111827;
+        font-family: inherit;
+        font-weight: 800;
+        font-size: clamp(1.4rem, 2.6vw, 2.3rem);
+        line-height: 1.05;
+    }
+    .ev-preview-copy p {
+        margin: 0 0 16px;
+        color: #6B7280;
+        font-size: 0.72rem;
         line-height: 1.5;
     }
-    .ev-life-card li::before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: #C4007A;
+    .ev-preview-cta {
+        display: inline-block;
+        padding: 9px 12px;
+        border-radius: 999px;
+        background: #C4007A;
+        color: #FFFFFF;
+        font-size: 0.65rem;
         font-weight: 800;
+    }
+    .ev-preview-art {
+        min-height: 190px;
+        border-radius: 10px;
+        background:
+            radial-gradient(ellipse at 70% 30%, rgba(255, 255, 255, 0.72) 0 8%, transparent 9%),
+            radial-gradient(ellipse at 58% 50%, rgba(244, 196, 222, 0.88) 0 17%, transparent 18%),
+            linear-gradient(145deg, #2D051E 0%, #C4007A 52%, #E98EBE 100%);
+    }
+    @media (max-width: 575px) {
+        .ev-website-browser { padding: 9px; }
+        .ev-browser-page { min-height: 250px; }
+        .ev-preview-nav { padding: 12px; }
+        .ev-preview-links { display: none; }
+        .ev-preview-content { gap: 10px; padding: 20px 14px; }
+        .ev-preview-art { min-height: 150px; }
     }
 
     /* ===== CASE STUDIES SHOWCASE ===== */
@@ -918,7 +1023,7 @@ $bodyCopy  = $dbService['body'] ?? '';
 <main class="ev-page">
 
     <!-- ========================================================
-         1. HERO SECTION (Inspired by Reference Design)
+         1. HERO SECTION
     ======================================================== -->
     <section class="ev-hero">
         <div class="ev-container">
@@ -1022,90 +1127,95 @@ $bodyCopy  = $dbService['body'] ?? '';
     </section>
 
     <!-- ========================================================
-         2. STRATEGIC PILLARS: WHY EVENTS NEED SPECIALIZED SEO
+         2. CHALLENGES FACED BY EXHIBITION ORGANISERS
     ======================================================== -->
     <section class="ev-pillars-section">
         <div class="ev-container">
             <div class="ev-section-head" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">STRATEGIC EVENT ADVANTAGE</div>
+                <div class="ev-eyebrow">EVENT ORGANISER CHALLENGES</div>
                 <h2 class="ev-section-title">
-                    Engineered to <span class="accent">Pack Exhibition Halls<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Challenges Faced by B2B Exhibition <span class="accent">Organisers<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
                 <p class="ev-section-sub">
-                    Generic agencies rely on expensive paid ads that stop working when budget runs out. We build organic market dominance across the entire event lifecycle.
+                    Turning Event Websites into Powerful Organic Growth Platforms.
                 </p>
             </div>
 
             <div class="ev-pillars-grid">
                 <div class="ev-pillar-card" data-wtm-reveal="fade-up">
                     <div class="ev-pillar-num">01</div>
-                    <h4>Attract Trade Attendees &amp; Global Buyers</h4>
-                    <p>Target high-intent international sourcing queries across North America, Europe, UAE, and Asia to capture pre-registered retail buyers and procurement delegations.</p>
+                    <h3>Attracting Qualified International Buyers</h3>
+                    <p>Reaching the right audience is more important than generating high website traffic. Organisers need to attract relevant buyers, importers, wholesalers and sourcing professionals through organic search.</p>
                 </div>
                 <div class="ev-pillar-card" data-wtm-reveal="fade-up">
                     <div class="ev-pillar-num">02</div>
-                    <h4>Sell Out Exhibitor Stalls Early</h4>
-                    <p>Rank for high-commercial supplier searches ('exhibition stall booking Delhi', 'apparel machinery expo booth') to sell out booths 6&ndash;9 months prior to opening.</p>
+                    <h3>Generating Quality Exhibitor Enquiries</h3>
+                    <p>Attracting exhibitors requires more than event promotion. Your website must communicate business opportunities, industry relevance and commercial value to potential exhibitors.</p>
                 </div>
                 <div class="ev-pillar-card" data-wtm-reveal="fade-up">
                     <div class="ev-pillar-num">03</div>
-                    <h4>Multi-Date Google Event Schema</h4>
-                    <p>Deploy specialized Event, Place, and Organization structured data so Google displays dates, venue halls, and badge registration buttons directly in SERP cards.</p>
+                    <h3>Competing for Organic Search Visibility</h3>
+                    <p>B2B fairs compete for rankings across event-related, industry-specific, product and location-based searches. Without a focused SEO strategy, valuable organic search opportunities can be missed.</p>
                 </div>
                 <div class="ev-pillar-card" data-wtm-reveal="fade-up">
                     <div class="ev-pillar-num">04</div>
-                    <h4>Year-Round Authority (Zero Cliff)</h4>
-                    <p>Eliminate the post-fair traffic collapse. We transition past editions into authoritative buyer review hubs while passing search equity into next year's campaign.</p>
+                    <h3>Driving Registrations Within Short Event Timelines</h3>
+                    <p>Exhibition marketing operates within fixed schedules. Building search visibility, attracting relevant audiences and converting visitors into registrations requires consistent SEO planning and execution.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- ========================================================
-         3. 3-STAGE EVENT SEO LIFECYCLE ROADMAP
+         3. EVENT WEBSITE DESIGN & ORGANIC GROWTH
     ======================================================== -->
-    <section class="ev-lifecycle-section">
+    <section class="ev-websites-section">
         <div class="ev-container">
             <div class="ev-section-head" data-wtm-reveal="fade-up">
-                <div class="ev-eyebrow">FULL LIFECYCLE BLUEPRINT</div>
+                <div class="ev-eyebrow">EVENT WEBSITE DESIGN &amp; SEO</div>
                 <h2 class="ev-section-title">
-                    The 3-Phase <span class="accent">Exhibition Roadmap<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                    Event Websites <span class="accent">That Perform.<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
                 </h2>
-                <p class="ev-section-sub">
-                    How WebTecMart plans and executes event search campaigns for maximum registration ROI.
-                </p>
+                <h3 class="ev-websites-subtitle">Designing &amp; Developing Event Websites That Drive Organic Growth.</h3>
             </div>
 
-            <div class="ev-lifecycle-grid">
-                <div class="ev-life-card" data-wtm-reveal="fade-up">
-                    <span class="ev-life-tag">PHASE 1: 9 TO 6 MONTHS OUT</span>
-                    <h4>Stall Sales &amp; Early Launch</h4>
-                    <ul>
-                        <li>Exhibitor booking intent keyword clustering</li>
-                        <li>Sponsor package landing page optimization</li>
-                        <li>Venue &amp; dates Schema markup deployment</li>
-                        <li>High-authority trade directory submissions</li>
-                    </ul>
+            <div class="ev-websites-grid">
+                <div class="ev-websites-copy" data-wtm-reveal="fade-up">
+                    <p>Your event website should do more than look impressive. It should attract the right audience, rank on search engines and convert visitors into registrations.</p>
+                    <p>At WEBTECMART, we specialise in designing and developing high-performance websites for B2B trade fairs, exhibitions and international business events, with a strong focus on organic SEO.</p>
+                    <p>We combine event-specific website development with strategic SEO to help organisers improve Google visibility, attract international buyers, exhibitors and visitors, and generate quality registrations through organic search.</p>
+                    <div class="ev-hero-actions ev-websites-actions">
+                        <a href="/event-website-demo.php" class="ev-btn-primary">
+                            <span>Request a demo</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        </a>
+                        <a href="/portfolio.php" class="ev-btn-secondary">
+                            <span>View Portfolio</span>
+                        </a>
+                    </div>
                 </div>
-                <div class="ev-life-card" data-wtm-reveal="fade-up">
-                    <span class="ev-life-tag">PHASE 2: 6 TO 1 MONTH OUT</span>
-                    <h4>Peak Buyer Acquisition</h4>
-                    <ul>
-                        <li>International trade visitor badge registration sprint</li>
-                        <li>Product hall and directory silo ranking</li>
-                        <li>Digital PR coverage on export councils &amp; media</li>
-                        <li>Mobile registration speed and indexing optimization</li>
-                    </ul>
-                </div>
-                <div class="ev-life-card" data-wtm-reveal="fade-up">
-                    <span class="ev-life-tag">PHASE 3: DURING &amp; POST FAIR</span>
-                    <h4>Live Footfall &amp; Evergreen Equity</h4>
-                    <ul>
-                        <li>Live show schedules &amp; hall navigation searches</li>
-                        <li>Exhibitor catalog and product indexing</li>
-                        <li>Post-show reports and photo gallery hubs</li>
-                        <li>Redirect architecture to seed next year's edition</li>
-                    </ul>
+
+                <div class="ev-website-browser" aria-hidden="true" data-wtm-reveal="fade-up">
+                    <div class="ev-browser-chrome">
+                        <div class="ev-browser-dots"><span></span><span></span><span></span></div>
+                        <div class="ev-browser-url">webtecmart.com/b2b-exhibition-seo.php</div>
+                    </div>
+                    <div class="ev-browser-page">
+                        <div class="ev-preview-nav">
+                            <span class="ev-preview-brand">Canvas</span>
+                            <span class="ev-preview-links">Home &nbsp; About &nbsp; Exhibit &nbsp; Visit</span>
+                            <span class="ev-preview-register">Book Tickets</span>
+                        </div>
+                        <div class="ev-preview-content">
+                            <div class="ev-preview-copy">
+                                <small>1 - 3 SEPTEMBER | LONDON</small>
+                                <h3>Artistry<br>Unveiled</h3>
+                                <p>Discover ideas, people and possibilities shaping the future.</p>
+                                <span class="ev-preview-cta">Explore the event</span>
+                            </div>
+                            <div class="ev-preview-art"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1200,12 +1310,12 @@ $bodyCopy  = $dbService['body'] ?? '';
     ======================================================== -->
     <section class="del-rankings-section">
         <div class="ev-container">
-            <div class="del-rankings-header" data-wtm-reveal="fade-up">
+            <div class="ev-section-head del-rankings-header" data-wtm-reveal="fade-up">
                 <div class="ev-eyebrow">LIVE GOOGLE RANKINGS PROOF</div>
-                <h3 style="font-size: clamp(1.6rem, 2.8vw, 2.2rem); font-weight: 800; color: #111827; margin: 0 0 10px;">
-                    Organic Rankings That Drive Real Inbound Revenue
-                </h3>
-                <p style="font-size: 0.96rem; color: #6B7280; max-width: 720px; margin: 0 auto;">
+                <h2 class="ev-section-title">
+                    Organic Rankings That Drive Real Inbound <span class="accent">Revenue<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
+                </h2>
+                <p class="ev-section-sub">
                     Inspect our authentic live ranking metrics verified across enterprise brands, global trade fairs, and B2B exporters:
                 </p>
             </div>

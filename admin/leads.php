@@ -19,7 +19,7 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
             $l['service'] ?? '',
             $l['budget'] ?? '',
             $l['message'] ?? '',
-            $l['created_at'] ?? ''
+            formatDatabaseDateTime((string) ($l['created_at'] ?? 'now'))
         ]);
     }
     fclose($output);
@@ -305,7 +305,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                             </td>
                             <td style="white-space: nowrap; color: #64748B; font-size: 0.825rem;">
-                                <?= date('d M Y, h:i A', strtotime($l['created_at'])) ?>
+                                <?= formatDatabaseDateTime((string) $l['created_at']) ?>
                             </td>
                             <td>
                                 <div style="display: flex; gap: 6px;">
@@ -343,7 +343,7 @@ require_once __DIR__ . '/templates/header.php';
                             <div class="leads-avatar-circle"><?= e($initial((string) $l['name'])) ?></div>
                             <div>
                                 <div style="font-weight: 800; color: #0F172A;"><?= e($l['name']) ?></div>
-                                <div style="font-size: 0.78rem; color: #64748B;"><?= date('d M Y, h:i A', strtotime($l['created_at'])) ?></div>
+                                <div style="font-size: 0.78rem; color: #64748B;"><?= formatDatabaseDateTime((string) $l['created_at']) ?></div>
                             </div>
                         </div>
                         <?php if (!empty($l['service'])): ?>
