@@ -1,4 +1,8 @@
 <?php
+// TEMP DEBUG: asli error screen pe dikhane ke liye. Page chal jaye to ye 2 lines HATA DENA.
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
 $pageMeta = [
     'title' => 'Event Website Design & B2B Exhibition SEO | WebTecMart',
     'description' => 'High-performance websites for B2B trade fairs and exhibitions, combining event website development with strategic SEO to drive organic growth and registrations.',
@@ -7,12 +11,14 @@ require_once __DIR__ . '/app/templates/header.php';
 require_once __DIR__ . '/app/components/sections/FooterSection.php';
 require_once __DIR__ . '/functions.php';
 
-// Pull dynamic updates from DB if edited in Admin
-$dbService = null;
+// Pull dynamic updates from DB if edited in Admin (safe: DB fail hone par bhi page chalega)
+$dbService = [];
 try {
-    $dbService = getServiceBySlug('b2b-exhibition-seo');
-} catch (Throwable $exception) {
-    error_log('B2B Exhibition SEO CMS unavailable: ' . $exception->getMessage());
+    if (function_exists('getServiceBySlug')) {
+        $dbService = getServiceBySlug('b2b-exhibition-seo') ?: [];
+    }
+} catch (Throwable $e) {
+    $dbService = [];
 }
 $pageTitle = $dbService['title'] ?? 'B2B & Exhibition SEO Services';
 $heroDesc  = $dbService['hero_description'] ?? ($dbService['summary'] ?? 'We uncover hidden search opportunities and build a customized, deadline-driven Event SEO strategy that drives pre-registered trade buyers, sells out exhibitor stalls, and delivers measurable results.');
@@ -749,7 +755,7 @@ html.lenis, html.lenis body { height: auto; }
                 ];
                 foreach ($challenges as $ci => $c): ?>
                     <article class="xp-stall<?= ($ci === 0 || $ci === 3) ? ' xp-stall--wide' : '' ?>">
-                        <span class="xp-ico"><?= $cIcons[$ci] ?? '' ?></span>
+                        <span class="xp-ico"><?= isset($cIcons[$ci]) ? $cIcons[$ci] : '' ?></span>
                         <h3><?= htmlspecialchars($c[0]) ?></h3>
                         <p><?= htmlspecialchars($c[1]) ?></p>
                     </article>
@@ -913,7 +919,10 @@ html.lenis, html.lenis body { height: auto; }
 
             <?php
             $sorted = $keywords;
-            usort($sorted, static fn($a, $b) => (int) $b[2] <=> (int) $a[2]);
+            // PHP 7.3 and older compatible (static fn needs 7.4+)
+            usort($sorted, function ($a, $b) {
+                return (int) $b[2] - (int) $a[2];
+            });
             $maxGain = max(1, (int) $sorted[0][2]);
             ?>
             <div class="xp-race">
@@ -1560,4 +1569,6 @@ html.lenis, html.lenis body { height: auto; }
 </script>
 
 <?php
-renderFooterSection();
+if (function_exists('renderFooterSection')) {
+    renderFooterSection();
+}
