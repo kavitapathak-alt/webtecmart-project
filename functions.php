@@ -198,6 +198,7 @@ function serviceDetailPages(): array
         return $defaults;
     }
 
+    try {
     $seedMarker = db()->prepare('SELECT 1 FROM cms_content_type_state WHERE content_type = :type');
     $seedMarker->execute([':type' => 'service_detail_defaults_v1']);
     if (!$seedMarker->fetchColumn()) {
@@ -249,6 +250,10 @@ function serviceDetailPages(): array
     }
     unset($page);
     return $pages;
+    } catch (Throwable $exception) {
+        error_log('Service detail CMS unavailable: ' . $exception->getMessage());
+        return $defaults;
+    }
 }
 
 function getServiceBySlug(string $slug): ?array

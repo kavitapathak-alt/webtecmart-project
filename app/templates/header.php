@@ -17,8 +17,12 @@ $serviceNavItems = [
 
 // Dynamically enrich navigation items with live database records
 $dbPagesBySlugNav = [];
-foreach (serviceDetailPages() as $dp) {
-    if (!empty($dp['slug'])) $dbPagesBySlugNav[$dp['slug']] = $dp;
+try {
+    foreach (serviceDetailPages() as $dp) {
+        if (!empty($dp['slug'])) $dbPagesBySlugNav[$dp['slug']] = $dp;
+    }
+} catch (Throwable $exception) {
+    error_log('Header CMS navigation unavailable: ' . $exception->getMessage());
 }
 foreach ($serviceNavItems as &$sni) {
     $baseName = basename($sni['path'], '.php');
