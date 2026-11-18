@@ -87,7 +87,7 @@ function db(): PDO
 
 function databaseAvailable(): bool
 {
-    return in_array('sqlite', PDO::getAvailableDrivers(), true);
+    return class_exists('PDO') && in_array('sqlite', PDO::getAvailableDrivers(), true);
 }
 
 function initDatabase(): void
