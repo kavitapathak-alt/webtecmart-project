@@ -49,6 +49,7 @@ $faqs = [
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css">
 
 <style>
 /* ============================================================
@@ -325,7 +326,7 @@ $faqs = [
 .xp-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
 .xp-w > span { display: inline-block; }
 .xp-js .xp-tag, .xp-js .xp-hero-sub, .xp-js .xp-hero-desc, .xp-js .xp-hero .xp-actions, .xp-js .xp-note, .xp-js .xp-badge-wrap,
-.xp-js .xp-head, .xp-js .xp-stall, .xp-js .xp-web-copy > *, .xp-js .xp-browser, .xp-js .xp-case, .xp-js .xp-rc,
+.xp-js .xp-head, .xp-js .xp-stall, .xp-js .xp-web-copy > *, .xp-js .xp-browser, .xp-js .xp-slider, .xp-js .xp-race, .xp-js .xp-rc,
 .xp-js .xp-table-wrap, .xp-js .xp-form-card, .xp-js .xp-faq-grid .ev-faq-item, .xp-js .xp-cta-card { opacity: 0; }
 .xp-js .xp-table tbody tr, .xp-js .xp-medal { opacity: 0; }
 
@@ -338,7 +339,9 @@ $faqs = [
     .xp-form-card { box-shadow: 6px 6px 0 var(--ink); }
 }
 @media (max-width: 760px) {
-    .xp-rank-cards { grid-template-columns: 1fr; }
+    .xp-rank-cards { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -22px 28px; padding: 4px 22px 16px; scrollbar-width: none; }
+    .xp-rank-cards::-webkit-scrollbar { display: none; }
+    .xp-rank-cards .xp-rc { flex: 0 0 84%; scroll-snap-align: center; }
     .xp-table-wrap { border: 0; background: transparent; overflow: visible; border-radius: 0; }
     .xp-table { min-width: 0; display: block; }
     .xp-table thead { display: none; }
@@ -395,19 +398,277 @@ $faqs = [
     .xp-table td { flex-wrap: wrap; }
     .xp-url-cell { overflow-wrap: anywhere; }
 }
+
+/* ===== v4: slider, floating chips, spotlight, sticky bar ===== */
+.xp-slider .swiper { overflow: hidden; padding: 4px 14px 18px 4px; margin: -4px -14px -18px -4px; }
+.xp-slider .swiper-slide { height: auto; }
+.xp-slider .xp-case { height: 100%; margin-bottom: 0; border: 2px solid rgba(255,255,255,.18); box-shadow: 8px 8px 0 var(--gold); }
+.xp-slider { padding-right: 8px; }
+.xp-slider-nav { display: flex; align-items: center; justify-content: space-between; gap: 20px; margin-top: 30px; }
+.xp-pag { display: flex; gap: 8px; }
+.xp-pag .swiper-pagination-bullet { width: 44px; height: 6px; border-radius: 0; background: rgba(255,255,255,.28); opacity: 1; margin: 0 !important; cursor: pointer; transition: background .3s, width .3s; }
+.xp-pag .swiper-pagination-bullet-active { background: var(--gold); width: 72px; }
+.xp-arrows { display: flex; gap: 10px; }
+.xp-arrows button { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 12px; border: 2px solid var(--ink); background: var(--gold); color: var(--ink); cursor: pointer; box-shadow: 0 4px 0 #B77400; transition: translate .15s, box-shadow .15s, background .2s; }
+.xp-arrows button:hover { translate: 0 2px; box-shadow: 0 2px 0 #B77400; background: #fff; }
+.xp-arrows button.swiper-button-disabled { opacity: .45; }
+
+.xp-float { position: absolute; z-index: 3; display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 12px; background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); font-family: var(--disp); font-weight: 800; font-size: .8rem; white-space: nowrap; }
+.xp-float i { width: 8px; height: 8px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 0 3px rgba(14,159,110,.25); }
+.xp-float--a { left: 0; top: 46%; }
+.xp-float--b { right: 0; bottom: 5%; background: #fff; }
+@media (max-width: 575px) { .xp-float { display: none; } }
+
+.xp-stall::after, .xp-rc::after { content: ''; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .25s; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(196,0,122,.13), transparent 62%); }
+.xp-rc { position: relative; }
+.xp-stall:hover::after, .xp-rc:hover::after { opacity: 1; }
+
+.xp-bar { display: block; width: 84px; height: 7px; margin: 0 0 16px; background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px); transform-origin: 0 50%; }
+
+.xp-sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 999; display: none; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: var(--ink); border-top: 3px solid var(--gold); translate: 0 115%; transition: translate .35s cubic-bezier(.16, 1, .3, 1); }
+.xp-sticky.on { translate: 0 0; }
+.xp-sticky .xp-btn { padding: 13px 16px; font-size: .9rem; }
+.xp-sticky .xp-btn--ghost { flex: 0 0 auto; }
+.xp-sticky .xp-btn--pink { flex: 1; width: auto; box-shadow: 0 4px 0 #7E004E; }
+@media (max-width: 767px) { .xp-sticky { display: flex; } .xp-cta { padding-bottom: 96px; } }
+
+@media (max-width: 575px) {
+    .xp-rank-cards { margin: 0 -16px 28px; padding: 4px 16px 16px; }
+    .xp-slider .xp-case { box-shadow: 5px 5px 0 var(--gold); }
+    .xp-pag .swiper-pagination-bullet { width: 26px; }
+    .xp-pag .swiper-pagination-bullet-active { width: 44px; }
+}
+
+/* ===== v5: aurora, bento, big type, cursor, glow borders ===== */
+@property --xpa { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes xpSpin { to { rotate: 360deg; } }
+@keyframes xpAngle { to { --xpa: 360deg; } }
+@keyframes xpShine { to { background-position: 200% 0; } }
+@keyframes xpRunSlow { to { transform: translateX(-33.333%); } }
+
+.xp-aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.xp-aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; }
+.xp-aurora i:nth-child(1) { width: 440px; height: 440px; left: -8%; top: 8%; background: var(--pink); }
+.xp-aurora i:nth-child(2) { width: 360px; height: 360px; right: 16%; bottom: -10%; background: var(--gold); opacity: .26; }
+.xp-aurora i:nth-child(3) { width: 320px; height: 320px; left: 38%; top: -12%; background: var(--pink2); opacity: .3; }
+.xp-hero::after { content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .09; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+.xp-hero .xp-ribbon, .xp-hero-grid { z-index: 2; }
+.xp-hero h1 .xp-w:last-child > span { background: linear-gradient(90deg, var(--gold), #FF7BC0, var(--gold)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: xpShine 4s linear infinite; }
+.xp-tag { backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+.xp-rotor { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: -6px 0 22px; font-size: .95rem; color: rgba(255,255,255,.75); }
+.xp-rotor-win { display: inline-block; overflow: hidden; height: 1.55em; }
+.xp-rotor b { display: inline-block; font-family: var(--disp); font-size: 1.05rem; color: var(--gold); }
+
+.xp-badge-wrap::before { content: ''; position: absolute; left: 8%; right: 8%; top: 22%; bottom: 0; z-index: 0; border-radius: 50%; filter: blur(60px); opacity: .55; background: conic-gradient(from 0deg, var(--pink), var(--gold), var(--pink2), var(--pink)); animation: xpSpin 14s linear infinite; }
+.xp-badge { z-index: 1; }
+
+/* bento challenges */
+.xp-board { perspective: 1200px; }
+.xp-web-grid { perspective: 1400px; }
+.xp-ico { display: grid; place-items: center; width: 50px; height: 50px; margin-bottom: 16px; border-radius: 12px; background: var(--blush); color: var(--pink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--gold); transition: rotate .3s ease, scale .3s ease; }
+.xp-stall:hover .xp-ico { rotate: -8deg; scale: 1.08; }
+@media (min-width: 768px) { .xp-stall--wide { grid-column: span 2; } }
+@media (min-width: 992px) {
+    .xp-board { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .xp-stall { grid-column: span 2; }
+    .xp-stall--wide { grid-column: span 4; }
+    .xp-stall--wide h3 { font-size: 1.6rem; }
+}
+
+/* big scrolling type */
+.xp-bigtext { overflow: hidden; background: #fff; border-top: 3px solid var(--ink); border-bottom: 3px solid var(--ink); padding: 22px 0; }
+.xp-bigtext-track { display: flex; width: max-content; align-items: center; gap: 48px; animation: xpRunSlow 60s linear infinite; }
+.xp-js .xp-bigtext-track { animation: none; }
+.xp-bigtext span { font-family: var(--disp); font-weight: 800; font-size: clamp(3rem, 9vw, 7.5rem); line-height: 1; letter-spacing: -.03em; text-transform: uppercase; white-space: nowrap; color: transparent; -webkit-text-stroke: 2px var(--ink); }
+.xp-bigtext span:nth-child(3n+2) { color: var(--pink); -webkit-text-stroke: 0; }
+.xp-bigtext span:nth-child(3n) { -webkit-text-stroke-color: var(--pink); }
+.xp-bigtext span::after { content: '✦'; margin-left: 48px; font-size: .45em; vertical-align: middle; color: var(--gold); -webkit-text-fill-color: var(--gold); -webkit-text-stroke: 0; }
+
+/* conic glow border on final CTA */
+.xp-cta-card::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px; pointer-events: none; background: conic-gradient(from var(--xpa), var(--pink), var(--gold), var(--pink2), var(--pink)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: xpAngle 6s linear infinite; }
+
+/* form micro-interactions */
+.xp-field:focus-within label { color: var(--pink); }
+.xp-submit { position: relative; overflow: hidden; }
+.xp-submit::after { content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; transform: skewX(-20deg); background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: xpSweep 3.2s ease-in-out infinite; }
+@keyframes xpSweep { 0% { left: -60%; } 55%, 100% { left: 130%; } }
+
+/* cursor ring + confetti */
+.xp-cursor { position: fixed; left: -18px; top: -18px; width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--pink); background: rgba(255,181,71,.14); pointer-events: none; z-index: 99998; opacity: 0; transition: opacity .25s, scale .25s, background .25s; scale: 1; }
+.xp-cursor.on { opacity: 1; }
+.xp-cursor.big { scale: 1.9; background: rgba(196,0,122,.14); }
+.xp-conf { position: fixed; width: 9px; height: 14px; border-radius: 2px; z-index: 10000; pointer-events: none; }
+@media (pointer: coarse) { .xp-cursor { display: none; } }
+@media (prefers-reduced-motion: reduce) { .xp-aurora i, .xp-badge-wrap::before, .xp-cta-card::after, .xp-submit::after, .xp-bigtext-track, .xp-hero h1 .xp-w:last-child > span { animation: none; } }
+
+/* ===== v6: sliding sections, ghost chapters, section rail ===== */
+.xp-wrap { position: relative; z-index: 1; }
+.xp-sec { position: relative; }
+.xp-sec::before { content: attr(data-chap); position: absolute; top: 14px; right: 3%; z-index: 0; pointer-events: none; font: 800 clamp(6rem, 16vw, 14rem)/1 var(--disp); letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 2px rgba(26,6,19,.09); }
+.xp-cases::before { -webkit-text-stroke-color: rgba(255,255,255,.1); }
+.xp-js .xp-sec, .xp-js .xp-cta, .xp-js .xp-bigtext { clip-path: inset(0% 100% 0% 0%); }
+.xp-js .xp-sec > .xp-wrap, .xp-js .xp-cta > .xp-wrap { opacity: 0; }
+
+.xp-rail { position: fixed; right: 18px; top: 50%; translate: 0 -50%; z-index: 900; display: none; flex-direction: column; gap: 14px; }
+@media (min-width: 1280px) { .xp-rail { display: flex; } }
+.xp-rail a { position: relative; display: block; width: 13px; height: 13px; border-radius: 50%; background: #fff; border: 2px solid var(--ink); box-shadow: 0 0 0 2px #fff; transition: scale .25s, background .25s; }
+.xp-rail a.on { background: var(--pink); scale: 1.45; }
+.xp-rail a span { position: absolute; right: 26px; top: 50%; translate: 8px -50%; opacity: 0; pointer-events: none; white-space: nowrap; background: var(--ink); color: #fff; font: 700 .72rem var(--disp); padding: 5px 10px; border-radius: 8px; transition: opacity .2s, translate .2s; }
+.xp-rail a:hover span, .xp-rail a.on span { opacity: 1; translate: 0 -50%; }
+
+/* ===== v7: cursor spotlight, button glow, awning scallops, smooth scroll ===== */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.xp-spot { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: radial-gradient(420px circle at var(--hx, 70%) var(--hy, 30%), rgba(255,181,71,.17), transparent 60%); }
+.xp-spot::after { content: ''; position: absolute; inset: 0; background-image: radial-gradient(rgba(255,255,255,.6) 1px, transparent 1.3px); background-size: 26px 26px; -webkit-mask-image: radial-gradient(260px circle at var(--hx, 70%) var(--hy, 30%), #000, transparent 70%); mask-image: radial-gradient(260px circle at var(--hx, 70%) var(--hy, 30%), #000, transparent 70%); }
+.xp-btn--pink { background: radial-gradient(150px circle at var(--bx, 50%) var(--by, 50%), #E0398F 0, var(--pink) 72%); }
+.xp-challenges::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 18px; z-index: 0; pointer-events: none; background: radial-gradient(circle at 18px 0, var(--gold) 17px, transparent 18px) 0 0 / 36px 18px repeat-x; }
+.xp-form-side { background: radial-gradient(circle at 12% 0%, rgba(255,181,71,.42), transparent 55%), radial-gradient(circle at 100% 100%, rgba(26,6,19,.4), transparent 55%), var(--pink); }
+.xp-kicker { min-width: 1ch; }
+
+/* ===== v8: expo doors intro, typing search, bar race, ripple ===== */
+@keyframes xpBlink { 50% { opacity: 0; } }
+.xp-intro { position: fixed; inset: 0; z-index: 100000; display: none; }
+.xp-intro-on .xp-intro { display: block; }
+.xp-door { position: absolute; top: 0; bottom: 0; width: 50.5%; background: radial-gradient(rgba(255,255,255,.12) 1px, transparent 1.2px) 0 0 / 26px 26px, var(--ink); }
+.xp-door.l { left: 0; border-right: 4px solid var(--gold); }
+.xp-door.r { right: 0; border-left: 4px solid var(--gold); }
+.xp-intro-msg { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; color: #fff; padding: 20px; }
+.xp-intro-msg span { font-size: .85rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.xp-intro-msg b { font-family: var(--disp); font-weight: 800; font-size: clamp(2rem, 7vw, 4.5rem); line-height: 1.05; letter-spacing: -.03em; }
+
+.xp-search { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 8px 14px; border: 2px solid var(--ink); border-radius: 999px; background: #fff; color: var(--ink); font-size: .82rem; box-shadow: 3px 3px 0 var(--gold); }
+.xp-search svg { color: var(--pink); flex-shrink: 0; }
+.xp-typed { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; }
+.xp-caret { width: 2px; height: 1.1em; background: var(--pink); animation: xpBlink 1s steps(1) infinite; }
+.xp-rank { display: inline-block; font-family: var(--disp); }
+
+.xp-race { background: #fff; border: 2px solid var(--ink); border-radius: 20px; box-shadow: 6px 6px 0 var(--ink); padding: 24px; margin-bottom: 30px; }
+.xp-race-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 14px; margin-bottom: 14px; }
+.xp-race-head b { font-family: var(--disp); font-size: 1.2rem; color: var(--ink); }
+.xp-race-head span { font-size: .8rem; color: var(--mute); font-weight: 600; }
+.xp-race-row { display: grid; grid-template-columns: minmax(130px, 250px) minmax(0, 1fr) 52px; align-items: center; gap: 14px; margin: 12px 0; }
+.xp-race-name { font-size: .88rem; font-weight: 700; color: var(--ink); }
+.xp-race-track { height: 18px; border-radius: 99px; border: 2px solid var(--ink); background: var(--blush); overflow: hidden; }
+.xp-race-bar { display: block; height: 100%; border-radius: 99px; transform-origin: 0 50%; background: repeating-linear-gradient(45deg, var(--pink) 0 10px, var(--pink2) 10px 20px); }
+.xp-race-val { font-family: var(--disp); font-size: 1.05rem; color: var(--mint); text-align: right; }
+@media (max-width: 575px) {
+    .xp-race { padding: 18px 16px; box-shadow: 4px 4px 0 var(--ink); }
+    .xp-race-row { grid-template-columns: minmax(0, 1fr) 48px; gap: 6px 10px; margin: 16px 0; }
+    .xp-race-name { grid-column: 1 / -1; }
+}
+
+.xp-btn { position: relative; overflow: hidden; }
+.xp-ripple { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: currentColor; opacity: .3; pointer-events: none; animation: xpRipple .65s ease-out forwards; }
+@keyframes xpRipple { to { transform: scale(22); opacity: 0; } }
+
+/* ===== v9: stamp, scroll cue, richer backgrounds, responsive hardening ===== */
+.xp-stamp { position: absolute; top: 6px; right: 2%; z-index: 4; display: grid; place-items: center; width: 112px; height: 112px; border-radius: 50%; background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transition: scale .25s ease; }
+.xp-stamp:hover { scale: 1.08; }
+.xp-stamp svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.xp-stamp-ring { transform-origin: 60px 60px; animation: xpSpin2 14s linear infinite; }
+.xp-stamp:hover .xp-stamp-ring { animation-duration: 4s; }
+@keyframes xpSpin2 { to { transform: rotate(360deg); } }
+
+.xp-cue { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 0 20px; font-size: .7rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.6); }
+.xp-cue i { position: relative; width: 22px; height: 34px; border: 2px solid rgba(255,255,255,.5); border-radius: 12px; }
+.xp-cue i::after { content: ''; position: absolute; left: 50%; top: 6px; width: 4px; height: 8px; margin-left: -2px; border-radius: 2px; background: var(--gold); animation: xpWheel 1.6s ease-in-out infinite; }
+@keyframes xpWheel { 0% { translate: 0 0; opacity: 1; } 70% { translate: 0 12px; opacity: 0; } 100% { opacity: 0; } }
+
+.xp-challenges { background-image: radial-gradient(rgba(26,6,19,.07) 1px, transparent 1.2px); background-size: 24px 24px; }
+.xp-cases { background: radial-gradient(50% 60% at 92% 0%, rgba(196,0,122,.38), transparent 70%), radial-gradient(40% 50% at 0% 100%, rgba(255,181,71,.14), transparent 70%), var(--ink); }
+.xp-form-sec { background: radial-gradient(40% 50% at 100% 0%, rgba(255,181,71,.28), transparent 70%), var(--blush); }
+
+@media (min-width: 1440px) { .xp-wrap { max-width: 1320px; } }
+@media (min-width: 576px) and (max-width: 991px) {
+    .xp-hero h1 { font-size: clamp(2.6rem, 7vw, 3.5rem); }
+    .xp-stamp { width: 96px; height: 96px; }
+    .xp-board { gap: 16px; }
+}
+@media (max-width: 767px) {
+    .xp-cue { display: none; }
+    .xp-aurora i { filter: blur(48px); }
+    .xp-badge-wrap::before { animation: none; filter: blur(40px); }
+    .xp-hero::after { display: none; }
+    .xp-sec::before { top: 6px; right: 2%; font-size: clamp(5rem, 24vw, 8rem); }
+}
+@media (max-width: 575px) {
+    .xp-stamp { width: 78px; height: 78px; top: 0; right: 0; box-shadow: 3px 3px 0 var(--ink); }
+    .xp-btn { min-height: 48px; }
+    .xp-head h2 { overflow-wrap: break-word; }
+    .xp-bigtext { padding: 14px 0; }
+}
+@media (hover: none) {
+    .xp-stall:hover, .xp-rc:hover, .xp-btn--pink:hover, .xp-stat:hover, .xp-stamp:hover { translate: none; scale: 1; }
+    .xp-stall:hover { box-shadow: 6px 6px 0 var(--ink); }
+    .xp-rc:hover { box-shadow: none; }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+    .xp-sticky { display: none; }
+    .xp-hero { padding-top: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { .xp-stamp-ring, .xp-cue i::after { animation: none; } }
+
+/* ===== v10: ribbon + big-type divider rebuilt (no outline artifacts, fully responsive) ===== */
+.xp-ribbon span b { display: inline-block; margin-right: 8px; padding: 2px 11px; border-radius: 8px; background: var(--ink); color: var(--gold); font-size: 1em; }
+.xp-ribbon:hover .xp-ribbon-track { animation-play-state: paused; }
+.xp-ribbon::before, .xp-ribbon::after { content: ''; position: absolute; top: 0; bottom: 0; width: 70px; z-index: 2; pointer-events: none; }
+.xp-ribbon::before { left: 0; background: linear-gradient(90deg, var(--gold), transparent); }
+.xp-ribbon::after { right: 0; background: linear-gradient(270deg, var(--gold), transparent); }
+
+.xp-bigtext { display: grid; gap: 14px; padding: 28px 0 24px; }
+.xp-bigtext span { -webkit-text-stroke: 0; color: var(--ink); }
+.xp-bigtext span:nth-child(3n+2) { background: linear-gradient(90deg, var(--pink), #FF7BC0 55%, var(--gold)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.xp-bigtext span:nth-child(3n) { background: repeating-linear-gradient(135deg, var(--pink) 0 6px, var(--ink) 6px 12px); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; color: transparent; }
+.xp-bigtext span::after { -webkit-text-fill-color: var(--gold); color: var(--gold); }
+
+.xp-bigtext-track--b { gap: 16px; }
+.xp-bigtext-track--b span { font-size: clamp(1.15rem, 2.6vw, 2rem); letter-spacing: 0; padding: 10px 24px; border: 2px solid var(--ink); border-radius: 999px; background: var(--gold); -webkit-background-clip: border-box; background-clip: border-box; color: var(--ink); -webkit-text-fill-color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+.xp-bigtext-track--b span:nth-child(even) { background: var(--pink); color: #fff; -webkit-text-fill-color: #fff; }
+.xp-bigtext-track--b span:nth-child(3n) { background: #fff; color: var(--ink); -webkit-text-fill-color: var(--ink); }
+.xp-bigtext-track--b span::after { display: none; }
+
+@media (max-width: 767px) {
+    .xp-ribbon span { font-size: .9rem; padding: 12px 20px; }
+    .xp-ribbon span::after { margin-left: 36px; }
+    .xp-ribbon::before, .xp-ribbon::after { width: 36px; }
+    .xp-challenges::after { height: 14px; background: radial-gradient(circle at 14px 0, var(--gold) 13px, transparent 14px) 0 0 / 28px 14px repeat-x; }
+    .xp-bigtext { gap: 10px; padding: 18px 0 16px; }
+    .xp-bigtext-track { gap: 28px; }
+    .xp-bigtext span { font-size: clamp(2.4rem, 13vw, 3.6rem); }
+    .xp-bigtext span::after { margin-left: 28px; }
+    .xp-bigtext-track--b { gap: 10px; }
+    .xp-bigtext-track--b span { font-size: .95rem; padding: 8px 16px; box-shadow: 2px 2px 0 var(--ink); }
+}
 </style>
 
 <main class="xp">
-<script>document.currentScript.parentElement.classList.add('xp-js');</script>
+<script>(function (s) {
+    s.parentElement.classList.add('xp-js');
+    try {
+        var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!calm && !sessionStorage.getItem('xpSeen')) {
+            document.documentElement.classList.add('xp-intro-on');
+            setTimeout(function () { document.documentElement.classList.remove('xp-intro-on'); }, 4500); /* failsafe */
+        }
+    } catch (e) {}
+})(document.currentScript);</script>
+<div class="xp-intro" id="xpIntro" aria-hidden="true">
+    <div class="xp-door l"></div><div class="xp-door r"></div>
+    <div class="xp-intro-msg"><span>WebTecMart presents</span><b>B2B Exhibition SEO</b></div>
+</div>
 <div class="xp-progress" aria-hidden="true"></div>
 
     <!-- 1. HERO -->
     <section class="xp-hero">
         <div class="xp-orb" aria-hidden="true"></div>
+        <div class="xp-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="xp-wrap">
             <div class="xp-hero-grid">
                 <div>
                     <div class="xp-tag"><i></i><span>India's #1 event &amp; exhibition SEO specialists</span></div>
+                    <div class="xp-rotor"><span>We help you rank for</span><span class="xp-rotor-win"><b>trade buyers</b></span></div>
                     <h1>Boost Your Event &amp; Exhibition With SEO.</h1>
                     <h3 class="xp-hero-sub">Want to attract more attendees, sponsors, exhibitors, and increase revenue?</h3>
                     <p class="xp-hero-desc"><?= htmlspecialchars($heroDesc) ?></p>
@@ -420,9 +681,20 @@ $faqs = [
 
                 <div class="xp-badge-wrap" data-wtm-reveal="fade-up">
                     <div class="xp-lanyard"></div>
+                    <div class="xp-float xp-float--a"><i></i>Event schema live</div>
+                    <div class="xp-float xp-float--b">80+ top 3 worldwide</div>
+                    <a class="xp-stamp" href="#event-audit-form" aria-label="Get a free event SEO audit">
+                        <svg viewBox="0 0 120 120" aria-hidden="true">
+                            <defs><path id="xpCirc" d="M60,60 m-44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+                            <g class="xp-stamp-ring"><text font-size="9.5" font-weight="800" fill="currentColor" letter-spacing=".4"><textPath href="#xpCirc" textLength="268" lengthAdjust="spacing">FREE EVENT SEO AUDIT • FREE EVENT SEO AUDIT • </textPath></text></g>
+                            <circle cx="60" cy="60" r="22" fill="#1A0613"/>
+                            <path d="M52 68 68 52M54 52h14v14" fill="none" stroke="#FFB547" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </a>
                     <div class="xp-badge">
+                        <div class="xp-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg><span class="xp-typed">bharat tex fair 2026</span><i class="xp-caret"></i></div>
                         <div class="xp-badge-top">
-                            <div class="xp-live"><i></i>#1 Google Search Result</div>
+                            <div class="xp-live"><i></i><b class="xp-rank">#1</b>&nbsp;Google Search Result</div>
                             <small>Google Event Schema</small>
                         </div>
                         <div class="xp-serp-url"><b>https://www.your-expo-domain.com</b> &rsaquo; register</div>
@@ -443,10 +715,12 @@ $faqs = [
             </div>
         </div>
 
+        <div class="xp-cue" aria-hidden="true"><span>Scroll</span><i></i></div>
+
         <div class="xp-ribbon" aria-hidden="true">
             <div class="xp-ribbon-track">
                 <?php for ($i = 0; $i < 4; $i++): ?>
-                    <span>400% organic growth</span><span>200+ keywords ranked</span><span>80+ top 3 worldwide</span><span>10,000+ buyer registrations</span>
+                    <span><b>400%</b> organic growth</span><span><b>200+</b> keywords ranked</span><span><b>80+</b> top 3 worldwide</span><span><b>10,000+</b> buyer registrations</span>
                 <?php endfor; ?>
             </div>
         </div>
@@ -461,8 +735,16 @@ $faqs = [
                 <p>Turning event websites into powerful organic growth platforms.</p>
             </div>
             <div class="xp-board">
-                <?php foreach ($challenges as $c): ?>
-                    <article class="xp-stall">
+                <?php
+                $cIcons = [
+                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>',
+                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>',
+                    '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>',
+                ];
+                foreach ($challenges as $ci => $c): ?>
+                    <article class="xp-stall<?= ($ci === 0 || $ci === 3) ? ' xp-stall--wide' : '' ?>">
+                        <span class="xp-ico"><?= $cIcons[$ci] ?? '' ?></span>
                         <h3><?= htmlspecialchars($c[0]) ?></h3>
                         <p><?= htmlspecialchars($c[1]) ?></p>
                     </article>
@@ -514,6 +796,20 @@ $faqs = [
         </div>
     </section>
 
+    <!-- DIVIDER: scroll-driven marquee (2 rows, opposite directions) -->
+    <div class="xp-bigtext" aria-hidden="true">
+        <div class="xp-bigtext-track">
+            <?php for ($i = 0; $i < 3; $i++): ?>
+                <span>Buyers</span><span>Exhibitors</span><span>Visitors</span><span>Sponsors</span><span>Registrations</span>
+            <?php endfor; ?>
+        </div>
+        <div class="xp-bigtext-track xp-bigtext-track--b">
+            <?php for ($i = 0; $i < 4; $i++): ?>
+                <span>Event websites</span><span>Exhibition SEO</span><span>Trade fairs</span><span>Global buyers</span>
+            <?php endfor; ?>
+        </div>
+    </div>
+
     <!-- 4. CASE STUDIES -->
     <section class="xp-sec xp-cases">
         <div class="xp-wrap">
@@ -523,7 +819,11 @@ $faqs = [
                 <p>Authentic results delivered for government-backed exhibitions and export promotion councils.</p>
             </div>
 
-            <div class="xp-case">
+            <div class="xp-slider">
+                <div class="swiper" id="xpCaseSwiper">
+                    <div class="swiper-wrapper">
+<div class="swiper-slide">
+<div class="xp-case">
                 <div class="xp-case-text">
                     <span class="xp-case-org">Ministry of Textiles, Government of India</span>
                     <h3>Bharat Tex Fair 2026 &mdash; 400% Organic Traffic Surge</h3>
@@ -537,8 +837,9 @@ $faqs = [
                     <div class="xp-stat"><b>10,000+</b><span>Buyer Registrations</span></div>
                 </div>
             </div>
-
-            <div class="xp-case">
+</div>
+<div class="swiper-slide">
+<div class="xp-case">
                 <div class="xp-case-text">
                     <span class="xp-case-org">Export Promotion Council for Handicrafts (EPCH)</span>
                     <h3>IHGF Delhi Autumn Fair &mdash; Global Sourcing Dominance</h3>
@@ -550,6 +851,33 @@ $faqs = [
                     <div class="xp-stat"><b>100+</b><span>Countries Targeted</span></div>
                     <div class="xp-stat"><b>3x</b><span>Pre-Fair Sourcing Leads</span></div>
                     <div class="xp-stat"><b>100%</b><span>White-Hat Strategy</span></div>
+                </div>
+            </div>
+</div>
+<div class="swiper-slide">
+<div class="xp-case">
+    <div class="xp-case-text">
+        <span class="xp-case-org">B2B Industrial</span>
+        <h3>Premier Logistics &mdash; High-Intent Industrial Keywords</h3>
+        <p>Organic search programme for an industrial B2B brand, focused on high-intent commercial queries. The domain now ranks for 1.3K+ keywords, with 140+ high-intent keywords holding top 10 positions.</p>
+        <a href="#event-audit-form" class="xp-btn xp-btn--pink xp-btn--sm"><span>Request Similar Growth Plan</span><?= $arrow ?></a>
+    </div>
+    <div class="xp-stats">
+        <div class="xp-stat"><b>1.3K+</b><span>Keywords Ranked</span></div>
+        <div class="xp-stat"><b>68.2K+</b><span>Monthly Traffic</span></div>
+        <div class="xp-stat"><b>140+</b><span>Top 10 Keywords</span></div>
+        <div class="xp-stat"><b>$12.5K</b><span>Traffic Value</span></div>
+    </div>
+</div>
+</div>
+                    </div>
+                </div>
+                <div class="xp-slider-nav">
+                    <div class="xp-pag"></div>
+                    <div class="xp-arrows">
+                        <button type="button" class="xp-prev" aria-label="Previous case study"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg></button>
+                        <button type="button" class="xp-next" aria-label="Next case study"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -574,6 +902,22 @@ $faqs = [
                             <div><b><?= $r[4] ?></b><span>Traffic Cost</span></div>
                         </div>
                         <div class="xp-rc-foot"><?= $r[5] ?><b><?= $r[6] ?></b></div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php
+            $sorted = $keywords;
+            usort($sorted, static fn($a, $b) => (int) $b[2] <=> (int) $a[2]);
+            $maxGain = max(1, (int) $sorted[0][2]);
+            ?>
+            <div class="xp-race">
+                <div class="xp-race-head"><b>Positions gained</b><span>Rank movement per keyword</span></div>
+                <?php foreach ($sorted as $k): $v = (int) $k[2]; ?>
+                    <div class="xp-race-row">
+                        <span class="xp-race-name"><?= $k[0] ?></span>
+                        <div class="xp-race-track"><i class="xp-race-bar" style="width: <?= round($v / $maxGain * 100) ?>%"></i></div>
+                        <b class="xp-race-val">+<?= $v ?></b>
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -722,6 +1066,11 @@ $faqs = [
         </div>
     </section>
 
+    <div class="xp-sticky" id="xpSticky">
+        <a href="tel:+919999674255" class="xp-btn xp-btn--ghost"><?= $phone ?><span>Call</span></a>
+        <a href="#event-audit-form" class="xp-btn xp-btn--pink"><span>Free SEO audit</span><?= $arrow ?></a>
+    </div>
+
 </main>
 
 <script>
@@ -775,6 +1124,7 @@ $faqs = [
             fb.innerText = "Thank you! Your event details have been submitted. Our Senior Exhibition SEO Strategists will review your site and contact you within 24 hours with a custom blueprint.";
             fb.style.display = 'block';
             form.reset();
+            if (window.xpConfetti) xpConfetti(btn);
             btn.disabled = false;
             btn.querySelector('span').innerText = 'Claim Your Free Event SEO Growth Blueprint';
         })
@@ -784,10 +1134,185 @@ $faqs = [
             fb.innerText = "Thank you! Your event details have been submitted. Our Senior Exhibition SEO Strategists will contact you shortly.";
             fb.style.display = 'block';
             form.reset();
+            if (window.xpConfetti) xpConfetti(btn);
             btn.disabled = false;
             btn.querySelector('span').innerText = 'Claim Your Free Event SEO Growth Blueprint';
         });
     }
+</script>
+
+<script>
+(function () {
+    /* confetti burst (Web Animations API, no library needed) */
+    window.xpConfetti = function (el) {
+        var r = el.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2, cols = ['#C4007A', '#FFB547', '#E0398F', '#1A0613', '#0E9F6E'];
+        for (var i = 0; i < 40; i++) {
+            var d = document.createElement('i');
+            d.className = 'xp-conf';
+            d.style.left = cx + 'px'; d.style.top = cy + 'px'; d.style.background = cols[i % cols.length];
+            document.body.appendChild(d);
+            var a = Math.random() * Math.PI * 2, v = 120 + Math.random() * 240;
+            var anim = d.animate([
+                { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+                { transform: 'translate(' + Math.cos(a) * v + 'px,' + (Math.sin(a) * v + 150) + 'px) rotate(' + Math.random() * 720 + 'deg)', opacity: 0 }
+            ], { duration: 1100 + Math.random() * 700, easing: 'cubic-bezier(.2,.7,.3,1)' });
+            anim.onfinish = (function (n) { return function () { n.remove(); }; })(d);
+        }
+    };
+
+    /* cursor ring (desktop pointers only) */
+    var fine = window.matchMedia('(pointer: fine)').matches, calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (fine && !calm) {
+        var ring = document.createElement('div');
+        ring.className = 'xp-cursor';
+        ring.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(ring);
+        var tx = -100, ty = -100, x = tx, y = ty;
+        window.addEventListener('pointermove', function (e) {
+            tx = e.clientX; ty = e.clientY;
+            var inside = e.target.closest && e.target.closest('main.xp');
+            ring.classList.toggle('on', !!inside);
+            ring.classList.toggle('big', !!(inside && e.target.closest('a,button,.xp-stall,.xp-rc,input,select,textarea,.swiper,.xp-browser')));
+        }, { passive: true });
+        (function loop() { x += (tx - x) * 0.18; y += (ty - y) * 0.18; ring.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; requestAnimationFrame(loop); })();
+    }
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js"></script>
+<script>
+(function () {
+    /* case-study slider */
+    if (window.Swiper && document.getElementById('xpCaseSwiper')) {
+        new Swiper('#xpCaseSwiper', {
+            slidesPerView: 1, spaceBetween: 0, speed: 800, rewind: true, grabCursor: true,
+            effect: 'creative', creativeEffect: { prev: { shadow: false, translate: ['-25%', 0, -1], opacity: 0 }, next: { translate: ['100%', 0, 0] } },
+            autoplay: { delay: 6500, disableOnInteraction: false, pauseOnMouseEnter: true },
+            keyboard: { enabled: true },
+            navigation: { nextEl: '.xp-next', prevEl: '.xp-prev' },
+            pagination: { el: '.xp-pag', clickable: true },
+            on: {
+                slideChangeTransitionStart: function (sw) {
+                    if (!window.Motion) return;
+                    var st = sw.slides[sw.activeIndex].querySelectorAll('.xp-stat');
+                    Motion.animate(st, { opacity: [0, 1], y: [22, 0], scale: [0.94, 1] }, { delay: Motion.stagger(0.07), type: 'spring', stiffness: 160, damping: 15 });
+                }
+            }
+        });
+    }
+
+    /* sticky mobile CTA: shows after hero, hides while the form is on screen */
+    var sticky = document.getElementById('xpSticky'), hero = document.querySelector('.xp-hero'), form = document.getElementById('event-audit-form');
+    if (sticky && hero && 'IntersectionObserver' in window) {
+        var heroOut = false, formIn = false, ctaIn = false;
+        var upd = function () { sticky.classList.toggle('on', heroOut && !formIn && !ctaIn); };
+        new IntersectionObserver(function (e) { heroOut = !e[0].isIntersecting; upd(); }).observe(hero);
+        if (form) new IntersectionObserver(function (e) { formIn = e[0].isIntersecting; upd(); }, { threshold: 0.15 }).observe(form);
+        var ctaEl = document.querySelector('.xp-cta');
+        if (ctaEl) new IntersectionObserver(function (e) { ctaIn = e[0].isIntersecting; upd(); }, { threshold: 0.2 }).observe(ctaEl);
+    }
+
+    /* cursor spotlight on cards */
+    document.querySelectorAll('.xp-stall, .xp-rc').forEach(function (c) {
+        c.addEventListener('pointermove', function (e) {
+            var r = c.getBoundingClientRect();
+            c.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+            c.style.setProperty('--my', (e.clientY - r.top) + 'px');
+        });
+    });
+})();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function () {
+    var root = document.querySelector('main.xp');
+    if (!root) return;
+    var fine = window.matchMedia('(pointer: fine)').matches, calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* hero spotlight: dot grid lights up around the cursor */
+    var hero = root.querySelector('.xp-hero');
+    if (hero && fine && !calm) {
+        var spot = document.createElement('div');
+        spot.className = 'xp-spot';
+        spot.setAttribute('aria-hidden', 'true');
+        var au = hero.querySelector('.xp-aurora');
+        (au || hero.firstElementChild).insertAdjacentElement('afterend', spot);
+        hero.addEventListener('pointermove', function (e) {
+            var r = hero.getBoundingClientRect();
+            spot.style.setProperty('--hx', (e.clientX - r.left) + 'px');
+            spot.style.setProperty('--hy', (e.clientY - r.top) + 'px');
+        });
+    }
+
+    /* pink buttons: light follows the pointer */
+    root.querySelectorAll('.xp-btn--pink').forEach(function (b) {
+        b.addEventListener('pointermove', function (e) {
+            var r = b.getBoundingClientRect();
+            b.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+            b.style.setProperty('--by', (e.clientY - r.top) + 'px');
+        });
+    });
+
+    /* tactile click ripple */
+    root.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.xp-btn');
+        if (!b) return;
+        var r = b.getBoundingClientRect(), d = document.createElement('i');
+        d.className = 'xp-ripple';
+        d.style.left = (e.clientX - r.left) + 'px';
+        d.style.top = (e.clientY - r.top) + 'px';
+        b.appendChild(d);
+        setTimeout(function () { d.remove(); }, 700);
+    });
+
+    /* inertia smooth scroll (desktop only) */
+    if (window.Lenis && fine && !calm) {
+        var lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+        window.xpLenis = lenis;
+        (function raf(t) { lenis.raf(t); requestAnimationFrame(raf); })(performance.now());
+        document.addEventListener('click', function (e) {
+            var a = e.target.closest && e.target.closest('a[href^="#"]');
+            if (!a || a.getAttribute('href') === '#') return;
+            var t = null;
+            try { t = document.querySelector(a.getAttribute('href')); } catch (err) { return; }
+            if (t) { e.preventDefault(); lenis.scrollTo(t, { offset: -10 }); }
+        });
+    }
+})();
+</script>
+
+<script>
+(function () {
+    var root = document.querySelector('main.xp');
+    if (!root) return;
+    root.querySelectorAll('section.xp-sec').forEach(function (sec, i) { sec.setAttribute('data-chap', String(i + 1).padStart(2, '0')); });
+    var map = [['.xp-hero', 'Start'], ['.xp-challenges', 'Challenges'], ['.xp-web-grid', 'Websites'], ['.xp-cases', 'Results'], ['.xp-rank-cards', 'Rankings'], ['#event-audit-form', 'Audit'], ['.xp-faq-grid', 'FAQ']];
+    var rail = document.createElement('nav');
+    rail.className = 'xp-rail';
+    rail.setAttribute('aria-label', 'Page sections');
+    var items = [];
+    map.forEach(function (m) {
+        var el = root.querySelector(m[0]);
+        var sec = el && (el.tagName === 'SECTION' ? el : el.closest('section'));
+        if (!sec) return;
+        var a = document.createElement('a');
+        a.href = '#'; a.setAttribute('aria-label', m[1]);
+        a.innerHTML = '<span>' + m[1] + '</span>';
+        a.addEventListener('click', function (e) { e.preventDefault(); if (window.xpLenis) window.xpLenis.scrollTo(sec); else sec.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+        rail.appendChild(a);
+        items.push({ a: a, sec: sec });
+    });
+    root.appendChild(rail);
+    if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (!en.isIntersecting) return;
+                items.forEach(function (it) { it.a.classList.toggle('on', it.sec === en.target); });
+            });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        items.forEach(function (it) { io.observe(it.sec); });
+    }
+})();
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/motion@11.18.2/dist/motion.js"></script>
@@ -797,10 +1322,27 @@ $faqs = [
     if (!root) return;
     var M = window.Motion;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!M || reduce) { root.classList.remove('xp-js'); return; }
+    if (!M || reduce) { root.classList.remove('xp-js'); document.documentElement.classList.remove('xp-intro-on'); return; }
     var animate = M.animate, inView = M.inView, scroll = M.scroll, stagger = M.stagger;
     var spring = { type: 'spring', stiffness: 110, damping: 16 };
     var fine = window.matchMedia('(pointer: fine)').matches;
+
+    /* expo doors intro (once per session) */
+    var introEl = document.getElementById('xpIntro');
+    var introOn = document.documentElement.classList.contains('xp-intro-on');
+    var introDelay = introOn ? 1.5 : 0;
+    if (introEl && introOn) {
+        var dl = introEl.querySelector('.xp-door.l'), dr = introEl.querySelector('.xp-door.r'), msg = introEl.querySelector('.xp-intro-msg');
+        animate(msg, { opacity: [0, 1], y: [20, 0], scale: [0.95, 1] }, { duration: 0.5 });
+        setTimeout(function () {
+            animate(msg, { opacity: 0, y: -20 }, { duration: 0.25 });
+            animate(dl, { x: ['0%', '-101%'] }, { duration: 0.9, ease: [0.76, 0, 0.24, 1] });
+            animate(dr, { x: ['0%', '101%'] }, { duration: 0.9, ease: [0.76, 0, 0.24, 1] }).finished.then(function () {
+                document.documentElement.classList.remove('xp-intro-on');
+            });
+        }, 900);
+        try { sessionStorage.setItem('xpSeen', '1'); } catch (e) {}
+    }
 
     /* scroll progress bar */
     var bar = root.querySelector('.xp-progress');
@@ -811,13 +1353,13 @@ $faqs = [
     if (h1) {
         var words = h1.textContent.trim().split(/\s+/);
         h1.innerHTML = words.map(function (w) { return '<span class="xp-w"><span>' + w.replace(/&/g, '&amp;') + '</span></span>'; }).join(' ');
-        animate(h1.querySelectorAll('.xp-w > span'), { y: ['110%', '0%'] }, { duration: 0.85, delay: stagger(0.07, { startDelay: 0.1 }), ease: [0.22, 1, 0.36, 1] });
+        animate(h1.querySelectorAll('.xp-w > span'), { y: ['110%', '0%'] }, { duration: 0.85, delay: stagger(0.07, { startDelay: 0.1 + introDelay }), ease: [0.22, 1, 0.36, 1] });
     }
-    animate('.xp-tag, .xp-hero-sub, .xp-hero-desc, .xp-hero .xp-actions, .xp-note', { opacity: [0, 1], y: [26, 0] }, { duration: 0.7, delay: stagger(0.1, { startDelay: 0.45 }), ease: 'easeOut' });
+    animate('.xp-tag, .xp-hero-sub, .xp-hero-desc, .xp-hero .xp-actions, .xp-note', { opacity: [0, 1], y: [26, 0] }, { duration: 0.7, delay: stagger(0.1, { startDelay: 0.45 + introDelay }), ease: 'easeOut' });
 
     /* hero badge: drops in on its lanyard, sways, tilts with the cursor */
     var wrap = root.querySelector('.xp-badge-wrap'), badge = root.querySelector('.xp-badge');
-    if (wrap) animate(wrap, { opacity: [0, 1], y: [-140, 0] }, { type: 'spring', stiffness: 60, damping: 11, delay: 0.5 });
+    if (wrap) animate(wrap, { opacity: [0, 1], y: [-140, 0] }, { type: 'spring', stiffness: 60, damping: 11, delay: 0.5 + introDelay });
     if (badge) {
         animate(badge, { rotate: [2.4, -1.6] }, { duration: 2.8, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' });
         if (fine) {
@@ -832,14 +1374,31 @@ $faqs = [
     var orb = root.querySelector('.xp-orb');
     if (orb) animate(orb, { y: [0, -30], x: [0, -16] }, { duration: 5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' });
 
+    /* every section wipes in from alternating sides while its content slides with it */
+    root.querySelectorAll('section.xp-sec, section.xp-cta, .xp-bigtext').forEach(function (sec, i) {
+        var dir = i % 2 ? 1 : -1;
+        var from = dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)';
+        var inner = sec.querySelector(':scope > .xp-wrap');
+        inView(sec, function () {
+            animate(sec, { clipPath: [from, 'inset(0% 0% 0% 0%)'] }, { duration: 1.05, ease: [0.22, 1, 0.36, 1] }).finished.then(function () { sec.style.clipPath = 'none'; });
+            if (inner) animate(inner, { opacity: [0, 1], x: [dir * 110, 0] }, { duration: 1.05, ease: [0.22, 1, 0.36, 1] });
+        }, { amount: 0.08 });
+    });
+
     /* scroll reveals with spring + sibling stagger */
-    var groups = ['.xp-head', '.xp-stall', '.xp-web-copy > *', '.xp-browser', '.xp-case', '.xp-rc', '.xp-form-card', '.xp-faq-grid .ev-faq-item', '.xp-cta-card'];
+    var groups = ['.xp-head', '.xp-stall', '.xp-web-copy > *', '.xp-browser', '.xp-slider', '.xp-race', '.xp-rc', '.xp-form-card', '.xp-faq-grid .ev-faq-item', '.xp-cta-card'];
     groups.forEach(function (sel) {
         root.querySelectorAll(sel).forEach(function (el, i) {
             var sib = Array.prototype.indexOf.call(el.parentElement.children, el);
             var delay = Math.min(sib, 5) * 0.08;
             inView(el, function () {
-                animate(el, { opacity: [0, 1], y: [48, 0], scale: [0.96, 1] }, Object.assign({ delay: delay }, spring));
+                var side = (sel === '.xp-stall' || sel === '.xp-rc' || sel === '.xp-faq-grid .ev-faq-item');
+                var kf;
+                if (side) kf = { opacity: [0, 1], x: [(sib % 2 ? 1 : -1) * 90, 0], scale: [0.96, 1] };
+                else if (sel === '.xp-browser') kf = { opacity: [0, 1], x: [120, 0] };
+                else if (sel === '.xp-head' || sel === '.xp-web-copy > *') kf = { opacity: [0, 1], x: [-70, 0] };
+                else kf = { opacity: [0, 1], y: [48, 0], scale: [0.96, 1] };
+                animate(el, kf, Object.assign({ delay: delay }, spring));
             }, { amount: 0.15 });
         });
     });
@@ -855,7 +1414,7 @@ $faqs = [
     }
 
     /* count-up numbers */
-    root.querySelectorAll('.xp-chip b, .xp-stat b, .xp-rc-metrics b').forEach(function (el) {
+    root.querySelectorAll('.xp-chip b, .xp-stat b, .xp-rc-metrics b, .xp-race-val').forEach(function (el) {
         var m = el.textContent.trim().match(/^([^\d]?)(\d[\d,]*\.?\d*)(.*)$/);
         if (!m) return;
         var raw = m[2], num = parseFloat(raw.replace(/,/g, '')), dec = (raw.split('.')[1] || '').length, comma = raw.indexOf(',') > -1;
@@ -871,6 +1430,116 @@ $faqs = [
             });
         }, { amount: 0.6 });
     });
+
+    /* floating chips bob */
+    root.querySelectorAll('.xp-float').forEach(function (f, i) {
+        animate(f, { y: [0, i ? 12 : -12] }, { duration: 2.6 + i * 0.7, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' });
+    });
+
+    /* animated stripe bar under every section heading */
+    root.querySelectorAll('.xp-head h2').forEach(function (h) {
+        var bar2 = document.createElement('i');
+        bar2.className = 'xp-bar';
+        bar2.style.transform = 'scaleX(0)';
+        h.insertAdjacentElement('afterend', bar2);
+        inView(bar2, function () { animate(bar2, { scaleX: [0, 1] }, { duration: 0.8, delay: 0.25, ease: [0.22, 1, 0.36, 1] }); }, { amount: 0.8 });
+    });
+
+    /* website mockup: parallax + floating art */
+    var br = root.querySelector('.xp-browser'), art = root.querySelector('.xp-art');
+    if (br && art && scroll) scroll(animate(art, { y: [28, -28] }, { ease: 'linear' }), { target: br, offset: ['start end', 'end start'] });
+
+    /* aurora blobs drift */
+    root.querySelectorAll('.xp-aurora i').forEach(function (b, i) {
+        animate(b, { x: [0, i % 2 ? -70 : 70, 0], y: [0, i === 1 ? 50 : -45, 0], scale: [1, 1.22, 1] }, { duration: 12 + i * 3, repeat: Infinity, ease: 'easeInOut' });
+    });
+
+    /* hero content drifts + fades as you scroll away */
+    var hg = root.querySelector('.xp-hero-grid'), hh = root.querySelector('.xp-hero');
+    if (hg && hh && scroll) scroll(animate(hg, { y: [0, -60], opacity: [1, 0.3] }, { ease: 'linear' }), { target: hh, offset: ['start start', 'end start'] });
+
+    /* rotating words in hero */
+    var rot = root.querySelector('.xp-rotor-win b');
+    if (rot) {
+        var ws = ['trade buyers', 'exhibitor stalls', 'visitor registrations', 'sponsors'], ri = 0;
+        setInterval(function () {
+            animate(rot, { y: [0, -18], opacity: [1, 0] }, { duration: 0.25 }).finished.then(function () {
+                ri = (ri + 1) % ws.length;
+                rot.textContent = ws[ri];
+                animate(rot, { y: [18, 0], opacity: [0, 1] }, { duration: 0.4, ease: 'easeOut' });
+            });
+        }, 2400);
+    }
+
+    /* section headlines: word-by-word mask reveal on scroll */
+    root.querySelectorAll('.xp-head h2, .xp-web-copy h2, .xp-cta-card h2').forEach(function (h) {
+        var wds = h.textContent.trim().split(/\s+/);
+        h.innerHTML = wds.map(function (w) { return '<span class="xp-w"><span>' + w.replace(/&/g, '&amp;') + '</span></span>'; }).join(' ');
+        var sp = h.querySelectorAll('.xp-w > span');
+        sp.forEach(function (n) { n.style.transform = 'translateY(110%)'; });
+        inView(h, function () { animate(sp, { y: ['110%', '0%'] }, { duration: 0.8, delay: stagger(0.05), ease: [0.22, 1, 0.36, 1] }); }, { amount: 0.6 });
+    });
+
+    /* 3D tilt on stalls + website mockup */
+    if (fine) {
+        root.querySelectorAll('.xp-stall, .xp-browser').forEach(function (c) {
+            c.addEventListener('pointermove', function (e) {
+                var r = c.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+                animate(c, { rotateY: nx * 8, rotateX: -ny * 8 }, { duration: 0.3 });
+            });
+            c.addEventListener('pointerleave', function () { animate(c, { rotateX: 0, rotateY: 0 }, { type: 'spring', stiffness: 200, damping: 15 }); });
+        });
+    }
+
+    /* big outline type scrolls with the page */
+    var bt = root.querySelector('.xp-bigtext'), bk = root.querySelector('.xp-bigtext-track');
+    if (bt && bk && scroll) scroll(animate(bk, { x: ['0%', '-40%'] }, { ease: 'linear' }), { target: bt, offset: ['start end', 'end start'] });
+    var bk2 = root.querySelector('.xp-bigtext-track--b');
+    if (bt && bk2 && scroll) scroll(animate(bk2, { x: ['-40%', '0%'] }, { ease: 'linear' }), { target: bt, offset: ['start end', 'end start'] });
+
+    /* section kickers decode into place */
+    root.querySelectorAll('.xp-kicker').forEach(function (k) {
+        var txt = k.textContent, chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ#%&*';
+        inView(k, function () {
+            var t0 = performance.now(), dur = 750;
+            (function tick(now) {
+                var p = Math.min(1, (now - t0) / dur), n = Math.floor(p * txt.length), out = '';
+                for (var i = 0; i < txt.length; i++) out += (i < n || txt[i] === ' ') ? txt[i] : chars[Math.floor(Math.random() * chars.length)];
+                k.textContent = p < 1 ? out : txt;
+                if (p < 1) requestAnimationFrame(tick);
+            })(t0);
+        }, { amount: 1 });
+    });
+
+    /* bar race: bars grow when the chart scrolls into view */
+    var race = root.querySelector('.xp-race');
+    if (race) {
+        var bars = race.querySelectorAll('.xp-race-bar');
+        bars.forEach(function (b) { b.style.transform = 'scaleX(0)'; });
+        inView(race, function () {
+            animate(bars, { scaleX: [0, 1] }, { type: 'spring', stiffness: 70, damping: 14, delay: stagger(0.12, { startDelay: 0.25 }) });
+        }, { amount: 0.4 });
+    }
+
+    /* hero search bar types itself, then the rank climbs to #1 (loops) */
+    var typed = root.querySelector('.xp-typed'), rankEl = root.querySelector('.xp-rank'), query = 'bharat tex fair 2026';
+    if (typed && rankEl) {
+        var cycle = function () {
+            typed.textContent = '';
+            rankEl.textContent = '#12';
+            var i = 0;
+            var tm = setInterval(function () {
+                typed.textContent = query.slice(0, ++i);
+                if (i >= query.length) { clearInterval(tm); setTimeout(climb, 350); }
+            }, 70);
+            function climb() {
+                animate(12, 1, { duration: 1.6, ease: 'easeInOut', onUpdate: function (v) { rankEl.textContent = '#' + Math.max(1, Math.round(v)); } });
+                animate(rankEl, { scale: [1, 1.45, 1] }, { delay: 1.5, duration: 0.45 });
+            }
+        };
+        setTimeout(cycle, 1400 + introDelay * 1000);
+        setInterval(cycle, 11000);
+    }
 
     /* magnetic primary buttons */
     if (fine) {
