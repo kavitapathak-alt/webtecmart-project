@@ -194,6 +194,10 @@ function serviceDetailPages(): array
         return array_merge($page, is_array($metadata) ? $metadata : []);
     }, $defaults);
 
+    if (!databaseAvailable()) {
+        return $defaults;
+    }
+
     $seedMarker = db()->prepare('SELECT 1 FROM cms_content_type_state WHERE content_type = :type');
     $seedMarker->execute([':type' => 'service_detail_defaults_v1']);
     if (!$seedMarker->fetchColumn()) {

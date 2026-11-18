@@ -69,11 +69,25 @@ function db(): PDO
     }
 
     ensureStorageDir();
-    $pdo = new PDO('sqlite:' . DB_PATH);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    if (!databaseAvailable()) {
+        throw new RuntimeException('The SQLite database extension is unavailable.');
+    }
+
+    try {
+        $pdo = new PDO('sqlite:' . DB_PATH);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    } catch (PDOException $exception) {
+        error_log('Database unavailable: ' . $exception->getMessage());
+        throw new RuntimeException('The application database is unavailable.', 0, $exception);
+    }
 
     return $pdo;
+}
+
+function databaseAvailable(): bool
+{
+    return in_array('sqlite', PDO::getAvailableDrivers(), true);
 }
 
 function initDatabase(): void
@@ -176,4 +190,8 @@ function ensureAdmin(): void
     }
 }
 
-initDatabase();
+try {
+    initDatabase();
+} catch (Throwable $exception) {
+    error_log('Database initialization skipped: ' . $exception->getMessage());
+}
