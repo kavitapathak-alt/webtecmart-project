@@ -656,10 +656,15 @@ html.lenis, html.lenis body { height: auto; }
 
 <main class="xp">
 <script>(function (s) {
-    s.parentElement.classList.add('xp-js');
+    var mobile = false, calm = false;
     try {
-        var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!calm && !sessionStorage.getItem('xpSeen')) {
+        mobile = matchMedia('(max-width: 991px)').matches || matchMedia('(pointer: coarse)').matches;
+        calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch (e) {}
+    /* Mobile/touch/reduced-motion: show everything normally (no hidden start states) */
+    if (!mobile && !calm) s.parentElement.classList.add('xp-js');
+    try {
+        if (!calm && !mobile && !sessionStorage.getItem('xpSeen')) {
             document.documentElement.classList.add('xp-intro-on');
             setTimeout(function () { document.documentElement.classList.remove('xp-intro-on'); }, 4500); /* failsafe */
         }
@@ -690,7 +695,7 @@ html.lenis, html.lenis body { height: auto; }
                     <p class="xp-note">* While results can't be guaranteed, events and trade exhibitions are uniquely positioned to perform exceptionally well with effective search engine optimization.</p>
                 </div>
 
-                <div class="xp-badge-wrap" data-wtm-reveal="fade-up">
+                <div class="xp-badge-wrap">
                     <div class="xp-lanyard"></div>
                     <div class="xp-float xp-float--a"><i></i>Event schema live</div>
                     <div class="xp-float xp-float--b">80+ top 3 worldwide</div>
@@ -1336,7 +1341,24 @@ html.lenis, html.lenis body { height: auto; }
     if (!root) return;
     var M = window.Motion;
     var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!M || reduce) { root.classList.remove('xp-js'); document.documentElement.classList.remove('xp-intro-on'); return; }
+    var mobile = window.matchMedia('(max-width: 991px)').matches || window.matchMedia('(pointer: coarse)').matches;
+
+    /* Safety net: if anything fails, make the whole page visible */
+    window.xpFallback = function () {
+        root.classList.remove('xp-js');
+        document.documentElement.classList.remove('xp-intro-on');
+        root.querySelectorAll('.xp-sec, .xp-cta, .xp-bigtext').forEach(function (n) { n.style.clipPath = 'none'; });
+        root.querySelectorAll('.xp-w > span').forEach(function (n) { n.style.transform = 'none'; });
+        root.querySelectorAll('.xp-bar, .xp-race-bar').forEach(function (n) { n.style.transform = 'none'; });
+        root.querySelectorAll('[data-final]').forEach(function (n) { n.textContent = n.getAttribute('data-final'); });
+    };
+
+    if (!M || reduce || mobile) { window.xpFallback(); return; }
+    try {
+    window.addEventListener('scroll', function w() {
+        window.removeEventListener('scroll', w);
+        setTimeout(function () { if (!window.xpSecOK) window.xpFallback(); }, 2500);
+    }, { passive: true });
     var animate = M.animate, inView = M.inView, scroll = M.scroll, stagger = M.stagger;
     var spring = { type: 'spring', stiffness: 110, damping: 16 };
     var fine = window.matchMedia('(pointer: fine)').matches;
@@ -1394,6 +1416,7 @@ html.lenis, html.lenis body { height: auto; }
         var from = dir > 0 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)';
         var inner = sec.querySelector(':scope > .xp-wrap');
         inView(sec, function () {
+            window.xpSecOK = true;
             animate(sec, { clipPath: [from, 'inset(0% 0% 0% 0%)'] }, { duration: 1.05, ease: [0.22, 1, 0.36, 1] }).finished.then(function () { sec.style.clipPath = 'none'; });
             if (inner) animate(inner, { opacity: [0, 1], x: [dir * 110, 0] }, { duration: 1.05, ease: [0.22, 1, 0.36, 1] });
         }, { amount: 0.08 });
@@ -1432,6 +1455,7 @@ html.lenis, html.lenis body { height: auto; }
         var m = el.textContent.trim().match(/^([^\d]?)(\d[\d,]*\.?\d*)(.*)$/);
         if (!m) return;
         var raw = m[2], num = parseFloat(raw.replace(/,/g, '')), dec = (raw.split('.')[1] || '').length, comma = raw.indexOf(',') > -1;
+        el.setAttribute('data-final', el.textContent.trim());
         el.textContent = m[1] + (0).toFixed(dec) + m[3];
         inView(el, function () {
             animate(0, num, {
@@ -1565,6 +1589,7 @@ html.lenis, html.lenis body { height: auto; }
             b.addEventListener('pointerleave', function () { animate(b, { x: 0, y: 0 }, { type: 'spring', stiffness: 300, damping: 14 }); });
         });
     }
+    } catch (err) { window.xpFallback(); }
 })();
 </script>
 
