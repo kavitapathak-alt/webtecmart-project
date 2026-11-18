@@ -8,7 +8,12 @@ require_once __DIR__ . '/app/components/sections/FooterSection.php';
 require_once __DIR__ . '/functions.php';
 
 // Pull dynamic updates from DB if edited in Admin
-$dbService = getServiceBySlug('b2b-exhibition-seo');
+$dbService = null;
+try {
+    $dbService = getServiceBySlug('b2b-exhibition-seo');
+} catch (Throwable $exception) {
+    error_log('B2B Exhibition SEO CMS unavailable: ' . $exception->getMessage());
+}
 $pageTitle = $dbService['title'] ?? 'B2B & Exhibition SEO Services';
 $heroDesc  = $dbService['hero_description'] ?? ($dbService['summary'] ?? 'We uncover hidden search opportunities and build a customized, deadline-driven Event SEO strategy that drives pre-registered trade buyers, sells out exhibitor stalls, and delivers measurable results.');
 $bodyCopy  = $dbService['body'] ?? '';

@@ -64,6 +64,10 @@ function db(): PDO
 {
     static $pdo;
 
+    if (!databaseAvailable()) {
+        throw new RuntimeException('The SQLite database extension is unavailable.');
+    }
+
     if ($pdo instanceof PDO) {
         return $pdo;
     }
