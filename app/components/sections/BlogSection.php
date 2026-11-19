@@ -5,248 +5,108 @@ function renderBlogSection(): void
     $posts = array_slice($allPosts, 0, 3);
     if (!$posts) return;
     ?>
-    <section class="home-blog-section" id="blog" style="padding: 36px 0 32px; background: #FFF8FC; position: relative;">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
+    <section class="xpb" id="blog">
         <style>
-            .home-blog-header {
-                text-align: center;
-                max-width: 720px;
-                margin: 0 auto 22px;
+            /* "Expo Floor" design — fully scoped to .xpb so it is safe on the homepage */
+            .xpb {
+                --ink:#1A0613; --pink:#C4007A; --blush:#FBEAF3; --gold:#FFB547; --text:#2A2430; --mute:#6C6474;
+                --disp:'Bricolage Grotesque','Plus Jakarta Sans',system-ui,sans-serif;
+                position:relative; padding:76px 0; overflow-x:clip; color:var(--text);
+                font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif;
+                background:#F7F4F8 radial-gradient(rgba(26,6,19,.07) 1px,transparent 1.2px) 0 0/24px 24px;
             }
-            .home-blog-pill {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                background: rgba(196, 0, 122, 0.08);
-                border: 1px solid rgba(196, 0, 122, 0.15);
-                color: #C4007A;
-                font-size: 0.72rem;
-                font-weight: 700;
-                letter-spacing: 0.08em;
-                text-transform: uppercase;
-                padding: 5px 14px;
-                border-radius: 999px;
-                margin-bottom: 10px;
+            .xpb *, .xpb *::before, .xpb *::after { box-sizing:border-box; }
+            .xpb::before { content:''; position:absolute; top:0; left:0; right:0; height:18px; pointer-events:none; background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x; }
+            .xpb a:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+            .xpb-wrap { position:relative; max-width:1200px; margin:0 auto; padding:0 22px; }
+            @media (min-width:1440px){ .xpb-wrap { max-width:1320px; } }
+
+            .xpb-head { max-width:760px; margin:0 auto 40px; text-align:center; }
+            .xpb-kicker { display:inline-block; margin-bottom:12px; padding-left:14px; border-left:4px solid var(--pink); font-size:.82rem; font-weight:700; color:var(--pink); text-align:left; }
+            .xpb-head h2 { margin:0 0 14px; font-family:var(--disp); font-size:clamp(1.85rem,3.5vw,2.8rem); font-weight:800; line-height:1.1; letter-spacing:-.02em; color:var(--ink); }
+            .xpb-head h2 span { color:var(--pink); }
+            .xpb-bar { display:block; width:84px; height:7px; margin:0 auto 16px; background:repeating-linear-gradient(90deg,var(--pink) 0 12px,var(--gold) 12px 24px); }
+            .xpb-head p { margin:0; color:var(--mute); line-height:1.65; font-size:1.02rem; }
+
+            .xpb-grid { display:grid; gap:24px; grid-template-columns:minmax(0,1fr); }
+            @media (min-width:640px){ .xpb-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+            @media (min-width:992px){ .xpb-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+
+            .xpb-card { display:flex; flex-direction:column; height:100%; min-width:0; background:#fff; border:2px solid var(--ink); border-radius:18px; overflow:hidden; box-shadow:6px 6px 0 var(--ink); transition:translate .25s, box-shadow .25s; }
+            .xpb-card:hover { translate:-4px -4px; box-shadow:10px 10px 0 var(--pink); }
+            .xpb-img { position:relative; aspect-ratio:16/10; overflow:hidden; background:var(--blush); border-bottom:2px solid var(--ink); }
+            .xpb-img img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; transition:transform .5s ease; }
+            .xpb-card:hover .xpb-img img { transform:scale(1.05); }
+            .xpb-cat { position:absolute; top:14px; left:14px; padding:5px 12px; background:var(--gold); color:var(--ink); border:2px solid var(--ink); border-radius:8px; box-shadow:3px 3px 0 var(--ink); font-size:.74rem; font-weight:800; }
+            .xpb-body { display:flex; flex-direction:column; flex:1; padding:22px 22px 20px; }
+            .xpb-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px 10px; margin-bottom:10px; font-size:.78rem; font-weight:700; color:var(--mute); }
+            .xpb-meta i { width:5px; height:5px; border-radius:50%; background:var(--pink); }
+            .xpb-title { margin:0 0 10px; font-family:var(--disp); font-size:1.2rem; font-weight:700; line-height:1.3; letter-spacing:-.01em; color:var(--ink); overflow-wrap:anywhere; }
+            .xpb-title a { color:inherit; text-decoration:none; transition:color .2s; }
+            .xpb-card:hover .xpb-title a { color:var(--pink); }
+            .xpb-excerpt { margin:0 0 18px; font-size:.92rem; line-height:1.65; color:var(--mute); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+            .xpb-foot { margin-top:auto; padding-top:14px; border-top:2px dashed rgba(26,6,19,.15); }
+            .xpb-link { display:inline-flex; align-items:center; gap:8px; font-weight:800; font-size:.9rem; color:var(--pink); text-decoration:none; transition:gap .2s; }
+            .xpb-card:hover .xpb-link { gap:12px; }
+
+            .xpb-cta { margin-top:48px; text-align:center; }
+            .xpb-btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:15px 28px; border-radius:12px; border:2px solid transparent; background:var(--pink); color:#fff; font-weight:700; font-size:.95rem; line-height:1.2; text-decoration:none; box-shadow:0 6px 0 #7E004E; transition:translate .2s, box-shadow .2s; }
+            .xpb-btn:hover { color:#fff; translate:0 2px; box-shadow:0 4px 0 #7E004E; }
+            .xpb-btn:active { translate:0 6px; box-shadow:0 0 0 #7E004E; }
+            .xpb-btn svg { flex-shrink:0; }
+
+            @media (max-width:575px){
+                .xpb { padding:56px 0; } .xpb-wrap { padding:0 16px; }
+                .xpb-card { box-shadow:4px 4px 0 var(--ink); }
+                .xpb-btn { width:100%; white-space:normal; text-align:center; min-height:48px; }
             }
-            .home-blog-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
-            .home-blog-heading {
-                font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-                font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-                font-weight: 800;
-                color: #111827;
-                line-height: 1.18;
-                margin: 0 0 8px;
-                letter-spacing: -0.02em;
-            }
-            .home-blog-heading .accent {
-                color: #C4007A;
-                position: relative;
-                display: inline-block;
-            }
-            .home-blog-heading .accent svg {
-                position: absolute;
-                left: 0;
-                bottom: -4px;
-                width: 100%;
-                height: 6px;
-                pointer-events: none;
-            }
-            .home-blog-desc {
-                font-size: 0.95rem;
-                color: #4B5563;
-                line-height: 1.55;
-                margin: 0 auto;
-                max-width: 640px;
-            }
-            .home-blog-card {
-                background: #ffffff;
-                border-radius: 20px;
-                overflow: hidden;
-                border: 1.5px solid rgba(196, 0, 122, 0.1);
-                box-shadow: 0 10px 30px rgba(196, 0, 122, 0.06);
-                transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-                display: flex;
-                flex-direction: column;
-                height: 100%;
-            }
-            .home-blog-card:hover {
-                transform: translateY(-6px);
-                border-color: #C4007A;
-                box-shadow: 0 20px 45px rgba(196, 0, 122, 0.18);
-            }
-            .home-blog-img-wrap {
-                position: relative;
-                width: 100%;
-                aspect-ratio: 16 / 10;
-                overflow: hidden;
-                background: #fce8f3;
-            }
-            .home-blog-img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                object-position: center;
-                display: block;
-                transition: transform 0.5s ease;
-            }
-            .home-blog-card:hover .home-blog-img {
-                transform: scale(1.05);
-            }
-            .home-blog-cat {
-                position: absolute;
-                top: 14px;
-                left: 14px;
-                background: linear-gradient(90deg, #C4007A, #E0398F);
-                color: #fff;
-                font-size: 0.72rem;
-                font-weight: 800;
-                padding: 4px 12px;
-                border-radius: 50px;
-                text-transform: uppercase;
-                letter-spacing: 0.05em;
-                box-shadow: 0 4px 12px rgba(196,0,122,0.35);
-            }
-            .home-blog-body {
-                padding: 24px;
-                display: flex;
-                flex-direction: column;
-                flex: 1;
-            }
-            .home-blog-meta {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                font-size: 0.8rem;
-                font-weight: 600;
-                color: #9CA3AF;
-                margin-bottom: 10px;
-            }
-            .home-blog-title {
-                font-size: 1.2rem;
-                font-weight: 800;
-                color: #111827;
-                line-height: 1.4;
-                margin: 0 0 10px;
-            }
-            .home-blog-title a {
-                color: inherit;
-                text-decoration: none;
-                transition: color 0.2s ease;
-            }
-            .home-blog-card:hover .home-blog-title a {
-                color: #C4007A;
-            }
-            .home-blog-excerpt {
-                font-size: 0.92rem;
-                color: #4B5563;
-                line-height: 1.6;
-                margin: 0 0 20px;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-            .home-blog-foot {
-                margin-top: auto;
-                padding-top: 14px;
-                border-top: 1px solid rgba(196, 0, 122, 0.08);
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-            }
-            .home-blog-link {
-                color: #C4007A;
-                font-weight: 700;
-                font-size: 0.88rem;
-                text-decoration: none;
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                transition: transform 0.2s ease;
-            }
-            .home-blog-link:hover {
-                color: #A3005F;
-                transform: translateX(4px);
-            }
-            .home-blog-cta {
-                text-align: center;
-                margin-top: 48px;
-            }
-            .home-blog-all-btn {
-                display: inline-flex;
-                align-items: center;
-                gap: 8px;
-                padding: 13px 32px;
-                border-radius: 50px;
-                font-weight: 700;
-                font-size: 0.95rem;
-                text-decoration: none;
-                color: #fff;
-                background: linear-gradient(90deg, #C4007A, #E0398F);
-                box-shadow: 0 10px 24px rgba(196, 0, 122, 0.25);
-                transition: transform 0.25s ease, box-shadow 0.25s ease;
-            }
-            .home-blog-all-btn:hover {
-                color: #fff;
-                transform: translateY(-3px);
-                box-shadow: 0 14px 30px rgba(196, 0, 122, 0.4);
-            }
+            @media (hover:none){ .xpb-card:hover { translate:none; box-shadow:6px 6px 0 var(--ink); } }
+            @media (prefers-reduced-motion:reduce){ .xpb-card,.xpb-img img,.xpb-btn,.xpb-link { transition:none; } }
         </style>
 
-        <div class="container" style="max-width: 1240px; margin: 0 auto; padding: 0 20px;">
-            <div class="home-blog-header" data-wtm-reveal="fade-up">
-                <div class="home-blog-pill">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
-                    <span>LATEST INSIGHTS</span>
-                </div>
-                <h2 class="home-blog-heading">
-                    Latest
-                    <span class="accent">
-                        Articles &amp; Strategies
-                        <svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.35"/></svg>
-                    </span>
-                </h2>
-                <p class="home-blog-desc">Practical tips, search algorithms, and proven digital growth methodologies from WebTecMart's strategists.</p>
+        <div class="xpb-wrap">
+            <div class="xpb-head" data-wtm-reveal="fade-up">
+                <span class="xpb-kicker">Latest insights</span>
+                <h2>Latest <span>Articles &amp; Strategies</span></h2>
+                <i class="xpb-bar"></i>
+                <p>Practical tips, search algorithms, and proven digital growth methodologies from WebTecMart's strategists.</p>
             </div>
 
-            <div class="row g-4" data-reveal-stagger style="display: flex; flex-wrap: wrap; margin: -12px;">
+            <div class="xpb-grid" data-reveal-stagger>
                 <?php foreach ($posts as $post): ?>
-                    <?php 
+                    <?php
                     $postUrl = blogUrl($post);
                     $postImg = !empty($post['image']) ? $post['image'] : '/assets/images/placeholder.jpg';
                     ?>
-                    <div class="col-12 col-md-6 col-lg-4" style="padding: 12px; flex: 1 1 320px; max-width: 400px;">
-                        <article class="home-blog-card">
-                            <div class="home-blog-img-wrap">
-                                <img src="<?= e($postImg) ?>" alt="<?= e($post['title']) ?>" class="home-blog-img" loading="lazy" onerror="this.src='/assets/images/placeholder.jpg'">
-                                <span class="home-blog-cat"><?= e($post['category'] ?? 'Insights') ?></span>
+                    <article class="xpb-card">
+                        <div class="xpb-img">
+                            <img src="<?= e($postImg) ?>" alt="<?= e($post['title']) ?>" loading="lazy" onerror="this.src='/assets/images/placeholder.jpg'">
+                            <span class="xpb-cat"><?= e($post['category'] ?? 'Insights') ?></span>
+                        </div>
+                        <div class="xpb-body">
+                            <div class="xpb-meta">
+                                <span><?= e($post['date'] ?? date('M d, Y')) ?></span>
+                                <i></i>
+                                <span><?= e($post['readTime'] ?? '4 min read') ?></span>
                             </div>
-                            <div class="home-blog-body">
-                                <div class="home-blog-meta">
-                                    <span><?= e($post['date'] ?? date('M d, Y')) ?></span>
-                                    <span>&bull;</span>
-                                    <span><?= e($post['readTime'] ?? '4 min read') ?></span>
-                                </div>
-                                <h3 class="home-blog-title">
-                                    <a href="<?= e($postUrl) ?>"><?= e($post['title']) ?></a>
-                                </h3>
-                                <p class="home-blog-excerpt">
-                                    <?= e($post['summary'] ?? '') ?>
-                                </p>
-                                <div class="home-blog-foot">
-                                    <a href="<?= e($postUrl) ?>" class="home-blog-link">
-                                        Read Article &rarr;
-                                    </a>
-                                </div>
+                            <h3 class="xpb-title"><a href="<?= e($postUrl) ?>"><?= e($post['title']) ?></a></h3>
+                            <p class="xpb-excerpt"><?= e($post['summary'] ?? '') ?></p>
+                            <div class="xpb-foot">
+                                <a href="<?= e($postUrl) ?>" class="xpb-link">Read Article <span aria-hidden="true">&rarr;</span></a>
                             </div>
-                        </article>
-                    </div>
+                        </div>
+                    </article>
                 <?php endforeach; ?>
             </div>
 
-            <div class="home-blog-cta" data-wtm-reveal="fade-up">
-                <a href="/blogs.php" class="home-blog-all-btn">
-                    Browse All Insights &amp; Guides
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="xpb-cta" data-wtm-reveal="fade-up">
+                <a href="/blogs.php" class="xpb-btn">
+                    <span>Browse All Insights &amp; Guides</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
             </div>
         </div>

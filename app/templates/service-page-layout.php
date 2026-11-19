@@ -1,21 +1,10 @@
 <?php
 /**
- * WebTecMart — Premium Service Page Layout Engine
- * Inspired by industry-leading agency standards (Matebiz reference & WebTecMart design framework).
- * 
- * Comprehensive Architecture:
- * 1. Hero Section with Strategic Value Copy, Checkmarks, Dual CTAs & Matebiz-style Interactive Quote Form
- * 2. Growing Figures / Authority Metrics Counter Banner (1000+ Projects, 13+ Years, 98% Retention, 25+ Countries)
- * 3. Global Industry Credibility Marquee (Top Trade Fairs & Enterprise Brands)
- * 4. Core Solutions & Specialized Offerings Grid (6 Feature Cards with Deliverable Pills)
- * 5. Strategic Advantage / Why Choose WebTecMart (6 Value Pillars: UX, SEO, Speed, Security, Pricing, Support)
- * 6. All-in-One Service Packages & Pricing (Starter, Growth [Most Popular], Enterprise)
- * 7. Modern Technologies & Frameworks Stack
- * 8. 5-Stage Proven Working Process Roadmap
- * 9. Flagship Case Study Spotlight (Bharat Tex & IHGF Delhi Fair)
- * 10. Global Reach & Local NCR Expertise
- * 11. Accessible Interactive FAQ Accordion
- * 12. High-Impact Conversion CTA Banner
+ * WebTecMart — Premium Service Page Layout Engine  ("Expo Floor" design)
+ * Same config API as before: renderServicePageLayout(array $config)
+ *
+ * Sections: Hero + quote badge/ribbon · Brands marquee · Solutions · Why us · Packages ·
+ * Tech stack · Process · Case study · Markets · FAQ · CTA (+ mobile sticky bar)
  */
 
 function renderServicePageLayout(array $config): void
@@ -65,133 +54,51 @@ function renderServicePageLayout(array $config): void
 
     // Domain-Specific Benefits / Why Choose Us
     $benefits = !empty($config['benefits']) ? $config['benefits'] : [
-        [
-            'icon' => 'layout',
-            'title' => 'User Experience (UX) & Clean Navigation',
-            'desc' => 'Intuitive layouts and clear information architecture designed to guide visitors effortlessly toward booking calls, making purchases, or submitting leads.',
-            'metric' => '3.4x Higher Conversion Rate'
-        ],
-        [
-            'icon' => 'search',
-            'title' => 'Built-In SEO & Organic Search Readiness',
-            'desc' => 'Engineered from day one with clean semantic HTML, schema structured data, indexable hierarchy, and keyword alignment to rank on Google faster.',
-            'metric' => 'Top 3 Search Dominance'
-        ],
-        [
-            'icon' => 'zap',
-            'title' => 'Speed Optimization & 95+ PageSpeed',
-            'desc' => 'Lightweight, bloat-free development optimized for sub-1.5 second loading times to reduce bounce rates and maximize Google Core Web Vitals scores.',
-            'metric' => '< 1.5s Avg. Load Time'
-        ],
-        [
-            'icon' => 'shield',
-            'title' => 'Bank-Grade Security & Clean Code',
-            'desc' => 'Strict security protocols, SSL encryption, sanitized inputs, and modular code architecture that keeps your business data safe from vulnerabilities.',
-            'metric' => '99.99% Uptime Guarantee'
-        ],
-        [
-            'icon' => 'target',
-            'title' => 'Transparent Pricing with Zero Hidden Costs',
-            'desc' => 'Clear, milestone-based packages with full intellectual property ownership, zero recurring template lock-ins, and transparent delivery scopes.',
-            'metric' => '100% Scope Transparency'
-        ],
-        [
-            'icon' => 'users',
-            'title' => 'Dedicated In-House Specialists & Support',
-            'desc' => 'Direct access to senior full-stack developers, UI/UX designers, and growth strategists with reliable post-launch maintenance and continuous support.',
-            'metric' => '24/7 Dedicated Support'
-        ]
+        ['icon' => 'layout', 'title' => 'User Experience (UX) & Clean Navigation', 'desc' => 'Intuitive layouts and clear information architecture designed to guide visitors effortlessly toward booking calls, making purchases, or submitting leads.', 'metric' => '3.4x Higher Conversion Rate'],
+        ['icon' => 'search', 'title' => 'Built-In SEO & Organic Search Readiness', 'desc' => 'Engineered from day one with clean semantic HTML, schema structured data, indexable hierarchy, and keyword alignment to rank on Google faster.', 'metric' => 'Top 3 Search Dominance'],
+        ['icon' => 'zap', 'title' => 'Speed Optimization & 95+ PageSpeed', 'desc' => 'Lightweight, bloat-free development optimized for sub-1.5 second loading times to reduce bounce rates and maximize Google Core Web Vitals scores.', 'metric' => '< 1.5s Avg. Load Time'],
+        ['icon' => 'shield', 'title' => 'Bank-Grade Security & Clean Code', 'desc' => 'Strict security protocols, SSL encryption, sanitized inputs, and modular code architecture that keeps your business data safe from vulnerabilities.', 'metric' => '99.99% Uptime Guarantee'],
+        ['icon' => 'target', 'title' => 'Transparent Pricing with Zero Hidden Costs', 'desc' => 'Clear, milestone-based packages with full intellectual property ownership, zero recurring template lock-ins, and transparent delivery scopes.', 'metric' => '100% Scope Transparency'],
+        ['icon' => 'users', 'title' => 'Dedicated In-House Specialists & Support', 'desc' => 'Direct access to senior full-stack developers, UI/UX designers, and growth strategists with reliable post-launch maintenance and continuous support.', 'metric' => '24/7 Dedicated Support']
     ];
 
-    // Packages / Pricing Tiers (Matebiz Signature Feature)
+    // Packages / Pricing Tiers
     $packages = !empty($config['packages']) ? $config['packages'] : [
         [
-            'name' => 'Starter Package',
-            'tagline' => 'For Startups & Small Businesses',
-            'price' => '₹18,500',
-            'period' => 'One-Time',
-            'popular' => false,
+            'name' => 'Starter Package', 'tagline' => 'For Startups & Small Businesses', 'price' => '₹18,500', 'period' => 'One-Time', 'popular' => false,
             'desc' => 'Essential high-impact foundation built to launch your business online with a polished, mobile-friendly design.',
-            'features' => [
-                'Up to 6 Custom Responsive Pages',
-                '100% Mobile & Tablet Optimized',
-                'Modern UI/UX Design (No Generic Themes)',
-                'Contact Form & WhatsApp Chat Integration',
-                'Basic On-Page SEO & Meta Tags Setup',
-                'Fast Loading Speed Optimization',
-                'Social Media & Google Maps Integration',
-                '1 Month Free Post-Launch Support'
-            ],
+            'features' => ['Up to 6 Custom Responsive Pages', '100% Mobile & Tablet Optimized', 'Modern UI/UX Design (No Generic Themes)', 'Contact Form & WhatsApp Chat Integration', 'Basic On-Page SEO & Meta Tags Setup', 'Fast Loading Speed Optimization', 'Social Media & Google Maps Integration', '1 Month Free Post-Launch Support'],
             'cta' => 'Choose Starter Plan'
         ],
         [
-            'name' => 'Growth Package',
-            'tagline' => 'Most Popular for Established Brands',
-            'price' => '₹38,500',
-            'period' => 'One-Time',
-            'popular' => true,
+            'name' => 'Growth Package', 'tagline' => 'Most Popular for Established Brands', 'price' => '₹38,500', 'period' => 'One-Time', 'popular' => true,
             'desc' => 'Complete conversion-focused growth engine engineered to outrank competitors and generate qualified inquiries.',
-            'features' => [
-                'Up to 15 Bespoke Responsive Pages',
-                'Full Custom UI/UX Architecture & Prototyping',
-                'Dynamic CMS (WordPress, Custom PHP or Headless)',
-                'Advanced Lead Funnel & Interactive Forms',
-                'Comprehensive Technical & On-Page SEO',
-                'Core Web Vitals Speed Tuning (<1.5s Load)',
-                'Google Analytics 4 & Meta Pixel Tracking',
-                'Blog / News / Case Studies CMS Engine',
-                '3 Months Priority Support & Maintenance'
-            ],
+            'features' => ['Up to 15 Bespoke Responsive Pages', 'Full Custom UI/UX Architecture & Prototyping', 'Dynamic CMS (WordPress, Custom PHP or Headless)', 'Advanced Lead Funnel & Interactive Forms', 'Comprehensive Technical & On-Page SEO', 'Core Web Vitals Speed Tuning (<1.5s Load)', 'Google Analytics 4 & Meta Pixel Tracking', 'Blog / News / Case Studies CMS Engine', '3 Months Priority Support & Maintenance'],
             'cta' => 'Choose Growth Plan'
         ],
         [
-            'name' => 'Enterprise Package',
-            'tagline' => 'For Scale, E-Commerce & Custom Portals',
-            'price' => 'Custom Quote',
-            'period' => 'Bespoke Scope',
-            'popular' => false,
+            'name' => 'Enterprise Package', 'tagline' => 'For Scale, E-Commerce & Custom Portals', 'price' => 'Custom Quote', 'period' => 'Bespoke Scope', 'popular' => false,
             'desc' => 'Full-scale enterprise architecture, custom e-commerce, or complex web applications built for high traffic.',
-            'features' => [
-                'Unlimited / Scalable Custom Pages',
-                'Custom E-Commerce or Custom Web Application',
-                'Secure Payment Gateway & Multi-Currency Setup',
-                'Custom API Integrations & CRM Synchronization',
-                'Enterprise Security Hardening & Penetration Check',
-                'Dedicated Senior Tech Lead & Project Manager',
-                'Automated Daily Backups & CDN Integration',
-                'Continuous Conversion Rate Optimization (CRO)',
-                '6 Months 24/7 Priority SLA Support'
-            ],
+            'features' => ['Unlimited / Scalable Custom Pages', 'Custom E-Commerce or Custom Web Application', 'Secure Payment Gateway & Multi-Currency Setup', 'Custom API Integrations & CRM Synchronization', 'Enterprise Security Hardening & Penetration Check', 'Dedicated Senior Tech Lead & Project Manager', 'Automated Daily Backups & CDN Integration', 'Continuous Conversion Rate Optimization (CRO)', '6 Months 24/7 Priority SLA Support'],
             'cta' => 'Discuss Enterprise Scope'
         ]
     ];
 
     // Technologies Stack
     $technologies = !empty($config['technologies']) ? $config['technologies'] : [
-        ['name' => 'PHP 8.x', 'cat' => 'Backend'],
-        ['name' => 'WordPress & WooCommerce', 'cat' => 'CMS'],
-        ['name' => 'Shopify', 'cat' => 'E-Commerce'],
-        ['name' => 'React & Next.js', 'cat' => 'Frontend'],
-        ['name' => 'Laravel', 'cat' => 'Framework'],
-        ['name' => 'HTML5 & Modern CSS3', 'cat' => 'Standards'],
-        ['name' => 'Tailwind & Bootstrap', 'cat' => 'UI Framework'],
-        ['name' => 'MySQL & SQLite', 'cat' => 'Database'],
-        ['name' => 'REST APIs & Webhooks', 'cat' => 'Integration'],
-        ['name' => 'Google Cloud & AWS', 'cat' => 'Cloud Hosting']
+        ['name' => 'PHP 8.x', 'cat' => 'Backend'], ['name' => 'WordPress & WooCommerce', 'cat' => 'CMS'], ['name' => 'Shopify', 'cat' => 'E-Commerce'],
+        ['name' => 'React & Next.js', 'cat' => 'Frontend'], ['name' => 'Laravel', 'cat' => 'Framework'], ['name' => 'HTML5 & Modern CSS3', 'cat' => 'Standards'],
+        ['name' => 'Tailwind & Bootstrap', 'cat' => 'UI Framework'], ['name' => 'MySQL & SQLite', 'cat' => 'Database'],
+        ['name' => 'REST APIs & Webhooks', 'cat' => 'Integration'], ['name' => 'Google Cloud & AWS', 'cat' => 'Cloud Hosting']
     ];
 
     // Brand Marquee Logos
     $brandLogos = [
-        ['name' => 'Informa Global', 'cat' => 'Trade Events'],
-        ['name' => 'Bharat Tex Fair', 'cat' => 'Ministry of Textiles'],
-        ['name' => 'IHGF Delhi Autumn Fair 2027', 'cat' => 'Global Sourcing Fair'],
-        ['name' => 'Clarion Events', 'cat' => 'Exhibition Leader'],
-        ['name' => 'London Tech Week', 'cat' => 'Tech Expo'],
-        ['name' => 'Media 10', 'cat' => 'Design & Media'],
-        ['name' => 'Northstar Travel Group', 'cat' => 'Travel Group'],
-        ['name' => 'Premier Logistics', 'cat' => 'Industrial Logistics'],
-        ['name' => 'Innovation Zero', 'cat' => 'CleanTech Congress'],
-        ['name' => 'Stonex Jewellers', 'cat' => 'Luxury Retail'],
+        ['name' => 'Informa Global', 'cat' => 'Trade Events'], ['name' => 'Bharat Tex Fair', 'cat' => 'Ministry of Textiles'],
+        ['name' => 'IHGF Delhi Autumn Fair 2027', 'cat' => 'Global Sourcing Fair'], ['name' => 'Clarion Events', 'cat' => 'Exhibition Leader'],
+        ['name' => 'London Tech Week', 'cat' => 'Tech Expo'], ['name' => 'Media 10', 'cat' => 'Design & Media'],
+        ['name' => 'Northstar Travel Group', 'cat' => 'Travel Group'], ['name' => 'Premier Logistics', 'cat' => 'Industrial Logistics'],
+        ['name' => 'Innovation Zero', 'cat' => 'CleanTech Congress'], ['name' => 'Stonex Jewellers', 'cat' => 'Luxury Retail'],
         ['name' => 'BMJ Future Health', 'cat' => 'Healthcare Publishing']
     ];
 
@@ -211,9 +118,9 @@ function renderServicePageLayout(array $config): void
 
     // Delhi NCR Micro-markets
     $microMarkets = [
-        'Connaught Place (CP)', 'South Delhi & Saket', 'Gurgaon Cyber City', 
-        'Noida Sector 62 & 18', 'Okhla Industrial Area', 'Nehru Place IT Hub', 
-        'Dwarka Commercial Hub', 'Janakpuri & West Delhi', 'Netaji Subhash Place (NSP)', 
+        'Connaught Place (CP)', 'South Delhi & Saket', 'Gurgaon Cyber City',
+        'Noida Sector 62 & 18', 'Okhla Industrial Area', 'Nehru Place IT Hub',
+        'Dwarka Commercial Hub', 'Janakpuri & West Delhi', 'Netaji Subhash Place (NSP)',
         'Faridabad', 'Ghaziabad'
     ];
 
@@ -250,1260 +157,321 @@ function renderServicePageLayout(array $config): void
             return '<svg xmlns="http://www.w3.org/2000/svg" width="' . $size . '" height="' . $size . '" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $path . '</svg>';
         }
     }
+
+    // ---- view helpers (design only) ----
+    $e = function ($v) { return htmlspecialchars((string) $v); };
+    // Heading with optional accent: lead + <span.xp-acc>accent</span> + tail (or fallback HTML)
+    $accentHead = function ($lead, $accent, $tail, $fallbackHtml) use ($e) {
+        if ($accent === '') return $fallbackHtml;
+        return $e($lead) . '<span class="xp-acc">' . $e($accent) . '</span>' . $e($tail);
+    };
+    $ctaArrow = svcIcon('arrow', 16);
     ?>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
 
     <style>
         /* ============================================================
-           MATEBIZ-INSPIRED PREMIER SERVICE PAGE STYLING (WebTecMart)
-           Palette: Magenta #C4007A, Deep Charcoal #111827, Soft Pink #FFF5FA
+           SERVICE PAGE — "Expo Floor" design (shared by every service page)
            ============================================================ */
-        .mb-page {
-            width: 100%;
-            background: #FFFFFF;
-            color: #1F1B2A;
-            overflow-x: hidden;
-            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+        .xp {
+            --ink:#1A0613; --ink2:#2B0B20; --pink:#C4007A; --pink2:#E0398F; --blush:#FBEAF3; --paper:#fff; --mist:#F7F4F8;
+            --gold:#FFB547; --mint:#0E9F6E; --text:#2A2430; --mute:#6C6474; --line:rgba(26,6,19,.12);
+            --disp:'Bricolage Grotesque','Plus Jakarta Sans',system-ui,sans-serif;
+            font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif; color:var(--text); background:var(--paper); overflow-x:clip; width:100%;
         }
-
-        .mb-container {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding-left: 20px;
-            padding-right: 20px;
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Common Section Headings */
-        .mb-section-header {
-            text-align: center;
-            max-width: 820px;
-            margin: 0 auto 32px;
-        }
-        .mb-eyebrow {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: #FFF0F7;
-            border: 1px solid rgba(196, 0, 122, 0.22);
-            padding: 5px 14px;
-            border-radius: 9999px;
-            margin-bottom: 12px;
-            color: #C4007A;
-            font-size: 0.74rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-        .mb-eyebrow svg {
-            width: 13px;
-            height: 13px;
-            color: #C4007A;
-            flex-shrink: 0;
-        }
-        .mb-section-title {
-            font-size: clamp(1.9rem, 3.2vw, 2.65rem);
-            font-weight: 850;
-            color: #111827;
-            margin: 0 0 10px;
-            line-height: 1.15;
-            letter-spacing: -0.03em;
-        }
-        .mb-section-title .accent {
-            color: #C4007A;
-            position: relative;
-            display: inline-block;
-        }
-        .mb-section-title .accent svg {
-            position: absolute;
-            left: 0;
-            bottom: -3px;
-            width: 100%;
-            height: 6px;
-            pointer-events: none;
-        }
-        .mb-section-title::after {
-            content: "";
-            display: block;
-            width: 44px;
-            height: 3px;
-            margin: 10px auto 0;
-            border-radius: 999px;
-            background: linear-gradient(90deg, #C4007A, #E0398F);
-        }
-        .mb-section-sub {
-            font-size: 0.98rem;
-            color: #4B5563;
-            line-height: 1.6;
-            max-width: 720px;
-            margin: 0 auto;
-        }
+        .xp *, .xp *::before, .xp *::after { box-sizing:border-box; }
+        .xp h1,.xp h2,.xp h3,.xp h4 { font-family:var(--disp); margin:0; letter-spacing:-.02em; color:var(--ink); }
+        .xp p { margin:0; }
+        .xp a:focus-visible,.xp button:focus-visible,.xp input:focus-visible,.xp select:focus-visible,.xp textarea:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+        .xp-wrap { max-width:1200px; margin:0 auto; padding:0 22px; position:relative; z-index:1; }
+        @media (min-width:1440px){ .xp-wrap { max-width:1320px; } }
+        .xp img,.xp svg,.xp input,.xp select,.xp textarea { max-width:100%; }
+        .xp h1,.xp h2,.xp h3,.xp p,.xp li { overflow-wrap:anywhere; }
+        .xp-grid { display:grid; gap:18px; grid-template-columns:minmax(0,1fr); }
+        .xp-grid > * { min-width:0; }
+        @media (min-width:640px){ .xp-g3 { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+        @media (min-width:992px){ .xp-g3 { grid-template-columns:repeat(3,minmax(0,1fr)); } }
 
         /* Buttons */
-        .mb-btn-primary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-            color: #FFFFFF !important;
-            font-weight: 700;
-            font-size: 0.94rem;
-            padding: 13px 26px;
-            border-radius: 9999px;
-            text-decoration: none;
-            box-shadow: 0 8px 22px rgba(196, 0, 122, 0.28);
-            transition: all 0.25s ease;
-            white-space: nowrap;
-            border: none;
-            cursor: pointer;
-        }
-        .mb-btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 28px rgba(196, 0, 122, 0.38);
-            color: #FFFFFF !important;
-        }
-        .mb-btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.24);
-            color: #C4007A !important;
-            font-weight: 700;
-            font-size: 0.94rem;
-            padding: 12px 22px;
-            border-radius: 9999px;
-            text-decoration: none;
-            transition: all 0.25s ease;
-            white-space: nowrap;
-            cursor: pointer;
-        }
-        .mb-btn-secondary:hover {
-            background: #FFF0F7;
-            border-color: #C4007A;
-            transform: translateY(-2px);
-        }
+        .xp-btn { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 26px; border-radius:12px; font-weight:700; font-size:.95rem; line-height:1; font-family:inherit; text-decoration:none; white-space:nowrap; border:2px solid transparent; cursor:pointer; transition:translate .2s, box-shadow .2s, background .2s; }
+        .xp-btn svg { flex-shrink:0; }
+        .xp-btn--pink { background:var(--pink); color:#fff !important; box-shadow:0 6px 0 #7E004E; }
+        .xp-btn--pink:hover { translate:0 2px; box-shadow:0 4px 0 #7E004E; }
+        .xp-btn--pink:active { translate:0 6px; box-shadow:0 0 0 #7E004E; }
+        .xp-btn--ghost { background:transparent; color:#fff !important; border-color:rgba(255,255,255,.35); }
+        .xp-btn--ghost:hover { background:rgba(255,255,255,.1); border-color:#fff; }
+        .xp-btn--line { background:#fff; color:var(--pink) !important; border-color:var(--pink); }
+        .xp-btn--line:hover { background:var(--blush); }
+        .xp-btn--block { width:100%; }
+        .xp-actions { display:flex; flex-wrap:wrap; gap:14px; align-items:center; }
 
-        /* ========================================================
-           1. HERO SECTION (2-COL WITH MATEBIZ QUOTE FORM)
-           ======================================================== */
-        .mb-hero {
-            position: relative;
-            padding: 40px 0 34px;
-            background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
-            border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-        }
-        .mb-hero-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 36px;
-            align-items: stretch;
-        }
-        @media (min-width: 992px) {
-            .mb-hero-grid {
-                grid-template-columns: 1.12fr 0.88fr;
-                gap: 44px;
-            }
-            .mb-hero-panel {
-                padding: 28px;
-                background: #FFFFFF;
-                border: 1.5px solid rgba(196, 0, 122, 0.18);
-                border-radius: 20px;
-                box-shadow: 0 16px 40px rgba(196, 0, 122, 0.07);
-            }
-            .mb-hero-right {
-                display: flex;
-            }
-            .mb-hero-right .mb-quote-card {
-                flex: 1;
-            }
-        }
-        .mb-hero-title {
-            font-size: clamp(2rem, 3.4vw, 2.9rem);
-            font-weight: 850;
-            color: #111827;
-            line-height: 1.14;
-            letter-spacing: -0.03em;
-            margin: 0 0 14px;
-        }
-        .mb-hero-title .accent {
-            color: #C4007A;
-            position: relative;
-            display: inline-block;
-        }
-        .mb-hero-title .accent svg {
-            position: absolute;
-            left: 0;
-            bottom: -3px;
-            width: 100%;
-            height: 6px;
-            pointer-events: none;
-        }
-        .mb-hero-desc {
-            font-size: 1.05rem;
-            line-height: 1.62;
-            color: #374151;
-            margin: 0 0 18px;
-        }
-        .mb-hero-message {
-            margin: 0 0 12px;
-            color: #111827;
-            font-size: clamp(1.1rem, 2vw, 1.35rem);
-            font-weight: 800;
-            line-height: 1.35;
-        }
-        .mb-hero-bullet-heading {
-            margin: 0 0 10px;
-            color: #111827;
-            font-size: 0.96rem;
-            font-weight: 800;
-        }
-        .mb-hero-bullets {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 9px;
-            margin: 0 0 22px;
-        }
-        @media (min-width: 600px) {
-            .mb-hero-bullets {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        .mb-bullet-item {
-            display: flex;
-            align-items: center;
-            gap: 9px;
-            font-size: 0.88rem;
-            font-weight: 600;
-            color: #1F2937;
-        }
-        .mb-bullet-item-detailed {
-            align-items: flex-start;
-            padding: 10px;
-            border: 1px solid rgba(196, 0, 122, 0.12);
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.88);
-        }
-        .mb-bullet-copy strong {
-            display: block;
-            margin-bottom: 4px;
-            color: #1F2937;
-            font-size: 0.82rem;
-            line-height: 1.35;
-        }
-        .mb-bullet-copy span {
-            display: block;
-            color: #6B7280;
-            font-size: 0.76rem;
-            font-weight: 400;
-            line-height: 1.45;
-        }
-        .mb-bullet-item .dot {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #FFF0F7;
-            border: 1px solid rgba(196, 0, 122, 0.25);
-            color: #C4007A;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.72rem;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-        .mb-hero-actions {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 22px;
-        }
+        /* Hero */
+        .xp-hero { position:relative; color:#fff; padding:56px 0 0; background:radial-gradient(60% 70% at 85% 10%,rgba(196,0,122,.55),transparent 65%),radial-gradient(40% 50% at 0% 100%,rgba(255,181,71,.16),transparent 70%),var(--ink); overflow:hidden; }
+        .xp-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.2px); background-size:26px 26px; -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%); mask-image:linear-gradient(180deg,#000 30%,transparent 95%); pointer-events:none; }
+        .xp-hero-grid { position:relative; z-index:2; display:grid; gap:44px; align-items:start; padding-bottom:60px; grid-template-columns:minmax(0,1fr); }
+        .xp-hero-grid > * { min-width:0; }
+        @media (min-width:992px){ .xp-hero-grid { grid-template-columns:1.08fr .92fr; gap:56px; align-items:center; } }
+        .xp-tag { display:inline-flex; align-items:center; gap:8px; padding:7px 14px 7px 10px; margin-bottom:20px; border-radius:999px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.2); font-size:.8rem; font-weight:600; color:#FFE3F1; }
+        .xp-tag i { width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(255,181,71,.25); }
+        .xp-hero h1 { color:#fff; font-size:clamp(2.3rem,5vw,4rem); font-weight:800; line-height:1.04; margin-bottom:18px; }
+        .xp-hl { background:linear-gradient(90deg,var(--gold),#FF7BC0,var(--gold)); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:xpShine 4s linear infinite; }
+        @keyframes xpShine { to { background-position:200% 0; } }
+        .xp-hero-sub { font-family:var(--disp); font-size:clamp(1.1rem,2vw,1.4rem); font-weight:600; line-height:1.35; color:#FFD7EB !important; margin-bottom:14px; max-width:600px; }
+        .xp-hero-desc { color:rgba(255,255,255,.78); line-height:1.7; max-width:600px; margin-bottom:22px; }
+        .xp-bh { font:700 .96rem var(--disp); color:#fff !important; margin-bottom:10px; }
+        .xp-bullets { display:grid; gap:10px 14px; grid-template-columns:minmax(0,1fr); max-width:660px; margin-bottom:26px; }
+        @media (min-width:600px){ .xp-bullets { grid-template-columns:1fr 1fr; } }
+        .xp-bullet { display:flex; gap:10px; align-items:flex-start; font-size:.9rem; font-weight:600; line-height:1.45; color:#fff; }
+        .xp-bullet .dot { display:grid; place-items:center; flex-shrink:0; width:22px; height:22px; border-radius:50%; background:var(--gold); color:var(--ink); font-size:.72rem; font-weight:800; }
+        .xp-bullet--card { padding:12px; border-radius:14px; background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.16); }
+        .xp-bullet--card strong { display:block; font-size:.86rem; margin-bottom:3px; color:#fff; }
+        .xp-bullet--card span span { display:block; font-weight:400; font-size:.78rem; line-height:1.5; color:rgba(255,255,255,.7); }
+        .xp-hero-panel .xp-hero-copy { padding:26px; border-radius:20px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.14); }
 
-        /* Hero Quote Form Card (Matebiz Hallmark) */
-        .mb-quote-card {
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.18);
-            border-radius: 20px;
-            padding: 26px 24px;
-            box-shadow: 0 16px 40px rgba(196, 0, 122, 0.09);
-            position: relative;
-        }
-        .mb-quote-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #C4007A, #E0398F);
-            border-radius: 20px 20px 0 0;
-        }
-        .mb-quote-head h3 {
-            font-size: 1.22rem;
-            font-weight: 850;
-            color: #111827;
-            margin: 0 0 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .mb-quote-head p {
-            font-size: 0.85rem;
-            color: #6B7280;
-            margin: 0 0 18px;
-            line-height: 1.45;
-        }
-        .mb-form-group {
-            margin-bottom: 11px;
-        }
-        .mb-form-group input,
-        .mb-form-group select,
-        .mb-form-group textarea {
-            width: 100%;
-            box-sizing: border-box;
-            padding: 11px 14px;
-            border-radius: 10px;
-            border: 1px solid #E5E7EB;
-            background: #FBFAFC;
-            font-size: 0.88rem;
-            color: #111827;
-            font-family: inherit;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-        .mb-form-group input:focus,
-        .mb-form-group select:focus,
-        .mb-form-group textarea:focus {
-            border-color: #C4007A;
-            background: #FFFFFF;
-            box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
-        }
-        .mb-form-group textarea {
-            min-height: 75px;
-            resize: vertical;
-        }
-        .mb-form-trust {
-            font-size: 0.76rem;
-            color: #6B7280;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            margin-top: 10px;
-        }
+        /* Quote form = visitor badge */
+        .xp-badge-wrap { position:relative; display:flex; justify-content:center; padding-top:64px; }
+        .xp-lanyard { position:absolute; top:0; left:50%; width:14px; height:86px; margin-left:-7px; background:linear-gradient(var(--gold),#E58B00); border-radius:0 0 4px 4px; }
+        .xp-lanyard::after { content:''; position:absolute; left:50%; bottom:-4px; width:46px; height:12px; margin-left:-23px; background:#8C94A3; border-radius:4px; }
+        .xp-badge { position:relative; width:100%; max-width:500px; background:#fff; color:var(--text); border-radius:22px; padding:36px 26px 24px; box-shadow:0 30px 60px rgba(0,0,0,.45); }
+        .xp-badge::before { content:''; position:absolute; top:12px; left:50%; width:52px; height:9px; margin-left:-26px; border-radius:99px; background:var(--ink); }
+        .xp-badge h3 { display:flex; align-items:center; gap:8px; font-size:1.3rem; font-weight:800; margin-bottom:6px; }
+        .xp-badge h3 svg { color:var(--pink); flex-shrink:0; }
+        .xp-badge-lead { font-size:.88rem; line-height:1.55; color:var(--mute); margin-bottom:18px; }
+        .xp-fld { margin-bottom:12px; }
+        .xp-fld input,.xp-fld select,.xp-fld textarea { width:100%; min-width:0; padding:13px 14px; border-radius:10px; border:2px solid #E4DCE6; background:#FCFAFD; font:inherit; font-size:.92rem; color:var(--ink); transition:border-color .2s, box-shadow .2s; }
+        .xp-fld textarea { min-height:90px; resize:vertical; }
+        .xp-fld input:focus,.xp-fld select:focus,.xp-fld textarea:focus { border-color:var(--pink); background:#fff; outline:none; box-shadow:0 0 0 4px rgba(196,0,122,.14); }
+        .xp-submit:disabled { opacity:.7; cursor:wait; }
+        .xp-pass { margin:18px -26px -24px; padding:14px 26px 18px; background:var(--blush); border-top:2px dashed rgba(196,0,122,.35); border-radius:0 0 22px 22px; position:relative; text-align:center; font-size:.78rem; font-weight:600; color:#3A2733; }
+        .xp-pass::before,.xp-pass::after { content:''; position:absolute; top:-10px; width:18px; height:18px; border-radius:50%; background:var(--ink2); }
+        .xp-pass::before { left:-9px; } .xp-pass::after { right:-9px; }
 
-        /* ========================================================
-           2. GROWING FIGURES / METRICS STRIP (Matebiz Signature)
-           ======================================================== */
-        .mb-figures-strip {
-            background: linear-gradient(135deg, #111827 0%, #1F1B2A 100%);
-            color: #FFFFFF;
-            padding: 30px 0;
-            position: relative;
-            border-top: 1px solid rgba(196, 0, 122, 0.3);
-            border-bottom: 1px solid rgba(196, 0, 122, 0.3);
-        }
-        .mb-figures-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            text-align: center;
-        }
-        @media (min-width: 900px) {
-            .mb-figures-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 28px;
-            }
-        }
-        .mb-fig-card {
-            padding: 12px 14px;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        .mb-fig-card:last-child {
-            border-right: none;
-        }
-        @media (max-width: 899px) {
-            .mb-fig-card:nth-child(2) {
-                border-right: none;
-            }
-        }
-        .mb-fig-val {
-            font-size: clamp(2rem, 3.2vw, 2.7rem);
-            font-weight: 850;
-            color: #FFFFFF;
-            line-height: 1;
-            margin-bottom: 6px;
-            background: linear-gradient(135deg, #FFFFFF 0%, #FFB6D9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .mb-fig-lbl {
-            font-size: 0.82rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        /* Ribbon (growing figures) */
+        .xp-ribbon { position:relative; z-index:2; background:var(--gold); color:var(--ink); overflow:hidden; border-top:3px solid var(--ink); }
+        .xp-ribbon-track { display:flex; width:max-content; animation:xpRun 38s linear infinite; }
+        .xp-ribbon:hover .xp-ribbon-track { animation-play-state:paused; }
+        .xp-ribbon span { font:800 1.05rem var(--disp); padding:14px 30px; white-space:nowrap; }
+        .xp-ribbon span::after { content:'✦'; margin-left:60px; opacity:.55; }
+        .xp-ribbon span b { display:inline-block; margin-right:8px; padding:2px 11px; border-radius:8px; background:var(--ink); color:var(--gold); }
+        @keyframes xpRun { to { transform:translateX(-50%); } }
 
-        /* ========================================================
-           3. BRAND LOGOS MARQUEE (Global Industry Credibility)
-           ======================================================== */
-        .mb-brands-section {
-            padding: 24px 0 28px;
-            background: #FFFFFF;
-            border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-            overflow: hidden;
-        }
-        .mb-marquee-wrap {
-            overflow: hidden;
-            position: relative;
-            padding: 10px 0;
-        }
-        .mb-marquee-wrap::before,
-        .mb-marquee-wrap::after {
-            content: '';
-            position: absolute;
-            top: 0; bottom: 0;
-            width: 70px;
-            z-index: 2;
-            pointer-events: none;
-        }
-        .mb-marquee-wrap::before {
-            left: 0;
-            background: linear-gradient(90deg, #FFFFFF 0%, rgba(255,255,255,0) 100%);
-        }
-        .mb-marquee-wrap::after {
-            right: 0;
-            background: linear-gradient(270deg, #FFFFFF 0%, rgba(255,255,255,0) 100%);
-        }
-        .mb-marquee-track {
-            display: flex;
-            gap: 16px;
-            width: max-content;
-            animation: mbMarqueeScroll 35s linear infinite;
-        }
-        .mb-marquee-wrap:hover .mb-marquee-track {
-            animation-play-state: paused;
-        }
-        @keyframes mbMarqueeScroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-        .mb-brand-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 16px;
-            background: #FFF8FC;
-            border: 1px solid rgba(196, 0, 122, 0.18);
-            border-radius: 9999px;
-            white-space: nowrap;
-        }
-        .mb-brand-pill .b-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #C4007A;
-        }
-        .mb-brand-pill .b-name {
-            font-size: 0.86rem;
-            font-weight: 800;
-            color: #111827;
-        }
-        .mb-brand-pill .b-cat {
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: #C4007A;
-            text-transform: uppercase;
-        }
+        /* Sections */
+        .xp-sec { position:relative; padding:76px 0; }
+        .xp-head { max-width:760px; margin:0 auto 40px; text-align:center; }
+        .xp-head h2 { font-size:clamp(1.85rem,3.5vw,2.8rem); font-weight:800; line-height:1.1; margin-bottom:14px; }
+        .xp-head p { color:var(--mute); line-height:1.65; font-size:1.02rem; }
+        .xp-head--dark h2 { color:#fff; } .xp-head--dark p { color:rgba(255,255,255,.72); }
+        .xp-kicker { display:inline-block; font-size:.82rem; font-weight:700; color:var(--pink); margin-bottom:12px; padding-left:14px; border-left:4px solid var(--pink); text-align:left; }
+        .xp-head--dark .xp-kicker { color:var(--gold); border-color:var(--gold); }
+        .xp-acc { color:var(--pink); }
+        .xp-head--dark .xp-acc,.xp-cta-card .xp-acc { color:var(--gold); }
+        .xp-bar { display:block; width:84px; height:7px; margin:0 auto 16px; background:repeating-linear-gradient(90deg,var(--pink) 0 12px,var(--gold) 12px 24px); }
+        .xp-mist { background:var(--mist); background-image:radial-gradient(rgba(26,6,19,.07) 1px,transparent 1.2px); background-size:24px 24px; }
+        .xp-dark { background:radial-gradient(50% 60% at 92% 0%,rgba(196,0,122,.38),transparent 70%),radial-gradient(40% 50% at 0% 100%,rgba(255,181,71,.14),transparent 70%),var(--ink); color:#fff; }
+        .xp-scallop::after { content:''; position:absolute; top:0; left:0; right:0; height:18px; pointer-events:none; background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x; }
 
-        /* ========================================================
-           4. CORE SOLUTIONS GRID (6 Distinct Feature Cards)
-           ======================================================== */
-        .mb-solutions-section {
-            padding: 42px 0 46px;
-            background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-        }
-        .mb-solutions-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 20px;
-        }
-        @media (min-width: 640px) {
-            .mb-solutions-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 992px) {
-            .mb-solutions-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 24px;
-            }
-        }
-        .mb-solution-card {
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.14);
-            border-radius: 18px;
-            padding: 24px;
-            box-shadow: 0 4px 18px rgba(196, 0, 122, 0.04);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            flex-direction: column;
-        }
-        .mb-solution-card:hover {
-            transform: translateY(-4px);
-            border-color: #C4007A;
-            box-shadow: 0 12px 30px rgba(196, 0, 122, 0.14);
-        }
-        .mb-sol-icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
-            background: #FFF0F7;
-            border: 1px solid rgba(196, 0, 122, 0.18);
-            color: #C4007A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 14px;
-        }
-        .mb-sol-title {
-            font-size: 1.15rem;
-            font-weight: 800;
-            color: #111827;
-            margin: 0 0 8px;
-        }
-        .mb-sol-desc {
-            font-size: 0.88rem;
-            line-height: 1.55;
-            color: #4B5563;
-            margin: 0 0 16px;
-            flex: 1;
-        }
-        .mb-sol-tags {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: auto;
-            padding-top: 14px;
-            border-top: 1px solid rgba(196, 0, 122, 0.1);
-        }
-        .mb-sol-tag {
-            font-size: 0.78rem;
-            font-weight: 600;
-            color: #374151;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .mb-sol-tag svg {
-            width: 14px;
-            height: 14px;
-            color: #059669;
-            flex-shrink: 0;
-        }
+        /* Brands marquee */
+        .xp-brands { padding:34px 0; background:#fff; border-bottom:3px solid var(--ink); }
+        .xp-brands-label { text-align:center; margin-bottom:16px; font:700 .84rem var(--disp); color:var(--pink); }
+        .xp-marq { overflow:hidden; border:2px solid var(--ink); border-radius:18px; background:#fff; box-shadow:6px 6px 0 var(--ink); padding:16px 0; }
+        .xp-marq-track { display:flex; gap:14px; width:max-content; animation:xpRun 38s linear infinite; padding-left:14px; }
+        .xp-marq:hover .xp-marq-track,.xp-marq:focus-within .xp-marq-track { animation-play-state:paused; }
+        .xp-brand { display:flex; align-items:center; gap:10px; padding:9px 18px; white-space:nowrap; border:2px solid var(--ink); border-radius:999px; background:#fff; box-shadow:3px 3px 0 var(--gold); }
+        .xp-brand i { width:9px; height:9px; border-radius:50%; background:var(--pink); }
+        .xp-brand b { font:700 .88rem var(--disp); color:var(--ink); }
+        .xp-brand span { font-size:.7rem; font-weight:700; color:var(--pink); }
 
-        /* ========================================================
-           5. WHY CHOOSE WEBTECMART (6 Advantage Pillars)
-           ======================================================== */
-        .mb-why-section {
-            padding: 42px 0 46px;
-            background: #FFFFFF;
-        }
-        .mb-why-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-        }
-        @media (min-width: 640px) {
-            .mb-why-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 992px) {
-            .mb-why-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 22px;
-            }
-        }
-        .mb-why-card {
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.14);
-            border-radius: 16px;
-            padding: 22px;
-            transition: all 0.3s ease;
-        }
-        .mb-why-card:hover {
-            transform: translateY(-3px);
-            border-color: #C4007A;
-            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.1);
-        }
-        .mb-why-head {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 10px;
-        }
-        .mb-why-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: #FFF0F7;
-            color: #C4007A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .mb-why-title {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #111827;
-            margin: 0;
-        }
-        .mb-why-desc {
-            font-size: 0.86rem;
-            line-height: 1.55;
-            color: #4B5563;
-            margin: 0 0 12px;
-        }
-        .mb-why-metric {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px 10px;
-            background: #ECFDF5;
-            color: #059669;
-            border-radius: 999px;
-            font-size: 0.74rem;
-            font-weight: 700;
-        }
+        /* Stalls */
+        .xp-stall { position:relative; display:flex; flex-direction:column; background:#fff; border:2px solid var(--ink); border-radius:18px; padding:54px 24px 24px; box-shadow:6px 6px 0 var(--ink); transition:translate .25s, box-shadow .25s; }
+        .xp-stall::before { content:''; position:absolute; top:0; left:0; right:0; height:28px; border-radius:15px 15px 0 0; background:repeating-linear-gradient(90deg,var(--pink) 0 22px,#fff 22px 44px); border-bottom:2px solid var(--ink); }
+        .xp-stall:nth-child(even)::before { background:repeating-linear-gradient(90deg,var(--ink) 0 22px,var(--gold) 22px 44px); }
+        .xp-stall:hover { translate:-4px -4px; box-shadow:10px 10px 0 var(--pink); }
+        .xp-stall h3 { font-size:1.2rem; font-weight:700; line-height:1.25; margin-bottom:8px; }
+        .xp-stall > p { font-size:.92rem; line-height:1.65; color:var(--mute); flex:1; }
+        .xp-ico { display:grid; place-items:center; width:48px; height:48px; margin-bottom:14px; border-radius:12px; background:var(--blush); color:var(--pink); border:2px solid var(--ink); box-shadow:3px 3px 0 var(--gold); transition:rotate .3s, scale .3s; }
+        .xp-stall:hover .xp-ico { rotate:-8deg; scale:1.08; }
+        .xp-tags { display:grid; gap:7px; margin-top:16px; padding-top:14px; border-top:2px dashed var(--line); }
+        .xp-tags div { display:flex; align-items:center; gap:7px; font-size:.8rem; font-weight:600; color:var(--text); }
+        .xp-tags svg { color:var(--mint); flex-shrink:0; }
+        .xp-metric { align-self:flex-start; display:inline-flex; align-items:center; gap:6px; margin-top:14px; padding:5px 12px; border-radius:999px; background:#E6F8F0; color:#0A7A54; border:2px solid var(--ink); font-size:.76rem; font-weight:800; }
 
-        /* ========================================================
-           6. ALL-IN-ONE PACKAGES & PRICING (Matebiz Signature)
-           ======================================================== */
-        .mb-packages-section {
-            padding: 44px 0 50px;
-            background: linear-gradient(180deg, #FFF5FA 0%, #FFFFFF 100%);
-            border-top: 1px solid rgba(196, 0, 122, 0.08);
-            border-bottom: 1px solid rgba(196, 0, 122, 0.08);
-        }
-        .mb-packages-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-            align-items: stretch;
-        }
-        @media (min-width: 992px) {
-            .mb-packages-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 28px;
-            }
-        }
-        .mb-pkg-card {
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.16);
-            border-radius: 22px;
-            padding: 30px 24px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 6px 20px rgba(196, 0, 122, 0.04);
-            transition: all 0.3s ease;
-        }
-        .mb-pkg-card:hover {
-            transform: translateY(-5px);
-            border-color: #C4007A;
-            box-shadow: 0 16px 36px rgba(196, 0, 122, 0.14);
-        }
-        .mb-pkg-card.popular {
-            border: 2.5px solid #C4007A;
-            box-shadow: 0 12px 36px rgba(196, 0, 122, 0.16);
-            background: #FFFFFF;
-        }
-        .mb-pkg-badge-popular {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-            color: #FFFFFF;
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 4px 16px;
-            border-radius: 9999px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            box-shadow: 0 4px 14px rgba(196, 0, 122, 0.35);
-        }
-        .mb-pkg-name {
-            font-size: 1.3rem;
-            font-weight: 850;
-            color: #111827;
-            margin: 0 0 4px;
-        }
-        .mb-pkg-tagline {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #C4007A;
-            margin: 0 0 14px;
-        }
-        .mb-pkg-price-box {
-            margin: 0 0 14px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(196, 0, 122, 0.12);
-        }
-        .mb-pkg-price {
-            font-size: 2.1rem;
-            font-weight: 850;
-            color: #111827;
-            line-height: 1;
-        }
-        .mb-pkg-period {
-            font-size: 0.82rem;
-            color: #6B7280;
-            font-weight: 600;
-        }
-        .mb-pkg-desc {
-            font-size: 0.85rem;
-            color: #4B5563;
-            line-height: 1.5;
-            margin: 0 0 18px;
-        }
-        .mb-pkg-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 9px;
-            flex: 1;
-        }
-        .mb-pkg-features li {
-            font-size: 0.84rem;
-            color: #1F2937;
-            font-weight: 600;
-            display: flex;
-            align-items: flex-start;
-            gap: 8px;
-            line-height: 1.4;
-        }
-        .mb-pkg-features li svg {
-            width: 15px;
-            height: 15px;
-            color: #C4007A;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
+        /* Packages */
+        .xp-pkg { position:relative; display:flex; flex-direction:column; background:#fff; border:2px solid var(--ink); border-radius:22px; padding:32px 26px 28px; box-shadow:6px 6px 0 var(--ink); transition:translate .25s, box-shadow .25s; }
+        .xp-pkg:hover { translate:-3px -3px; box-shadow:9px 9px 0 var(--pink); }
+        .xp-pkg.popular { box-shadow:8px 8px 0 var(--gold); border-width:3px; border-color:var(--pink); }
+        .xp-pkg.popular:hover { box-shadow:11px 11px 0 var(--gold); }
+        .xp-pkg-badge { position:absolute; top:-16px; left:50%; translate:-50% 0; background:var(--gold); color:var(--ink); border:2px solid var(--ink); font:800 .74rem var(--disp); padding:5px 16px; border-radius:999px; box-shadow:3px 3px 0 var(--ink); white-space:nowrap; }
+        .xp-pkg h3 { font-size:1.3rem; font-weight:800; margin-bottom:4px; }
+        .xp-pkg-tag { font-size:.82rem; font-weight:700; color:var(--pink); margin-bottom:16px; }
+        .xp-pkg-price { padding:14px 0; margin-bottom:14px; border-top:2px dashed var(--line); border-bottom:2px dashed var(--line); }
+        .xp-pkg-price b { display:block; font:800 2.2rem var(--disp); color:var(--ink); line-height:1.05; }
+        .xp-pkg-price span { font-size:.82rem; font-weight:600; color:var(--mute); }
+        .xp-pkg-desc { font-size:.88rem; line-height:1.6; color:var(--mute); margin-bottom:18px; }
+        .xp-pkg ul { list-style:none; padding:0; margin:0 0 24px; display:grid; gap:10px; flex:1; }
+        .xp-pkg li { display:flex; gap:9px; font-size:.86rem; font-weight:600; line-height:1.45; color:var(--text); }
+        .xp-pkg li::before { content:'✓'; display:grid; place-items:center; flex-shrink:0; width:20px; height:20px; border-radius:50%; background:var(--pink); color:#fff; font-size:.68rem; font-weight:800; }
 
-        /* ========================================================
-           7. MODERN TECHNOLOGIES STACK
-           ======================================================== */
-        .mb-tech-section {
-            padding: 36px 0 40px;
-            background: #FFFFFF;
-            text-align: center;
-        }
-        .mb-tech-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            justify-content: center;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        .mb-tech-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 16px;
-            border-radius: 9999px;
-            background: #FFF8FC;
-            border: 1px solid rgba(196, 0, 122, 0.2);
-            color: #111827;
-            font-size: 0.86rem;
-            font-weight: 700;
-            transition: all 0.2s ease;
-        }
-        .mb-tech-pill:hover {
-            background: #FFF0F7;
-            border-color: #C4007A;
-            color: #C4007A;
-            transform: translateY(-2px);
-        }
-        .mb-tech-pill .dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: #C4007A;
-        }
+        /* Tech */
+        .xp-pills { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; max-width:940px; margin:0 auto; }
+        .xp-pill { display:inline-flex; align-items:center; gap:8px; padding:9px 18px; border:2px solid var(--ink); border-radius:999px; background:#fff; box-shadow:3px 3px 0 var(--gold); font-weight:700; font-size:.86rem; color:var(--ink); transition:translate .2s, box-shadow .2s; }
+        .xp-pill:hover { translate:-2px -2px; box-shadow:5px 5px 0 var(--pink); }
+        .xp-pill i { width:8px; height:8px; border-radius:50%; background:var(--pink); }
+        .xp-pill small { font-size:.72rem; color:var(--pink); font-weight:700; }
 
-        /* ========================================================
-           8. WORKING PROCESS ROADMAP (5-Step Pipeline)
-           ======================================================== */
-        .mb-process-section {
-            padding: 42px 0 46px;
-            background: linear-gradient(180deg, #FFFFFF 0%, #FFF5FA 100%);
-        }
-        .mb-process-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-        }
-        @media (min-width: 640px) {
-            .mb-process-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-        @media (min-width: 992px) {
-            .mb-process-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 22px;
-            }
-        }
-        .mb-process-card {
-            background: #FFFFFF;
-            border: 1.5px solid rgba(196, 0, 122, 0.14);
-            border-radius: 18px;
-            padding: 24px;
-            position: relative;
-            box-shadow: 0 4px 16px rgba(196, 0, 122, 0.04);
-            transition: all 0.3s ease;
-        }
-        .mb-process-card:hover {
-            transform: translateY(-3px);
-            border-color: #C4007A;
-            box-shadow: 0 10px 24px rgba(196, 0, 122, 0.12);
-        }
-        .mb-proc-num {
-            font-size: 1.8rem;
-            font-weight: 900;
-            color: rgba(196, 0, 122, 0.22);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-        .mb-proc-title {
-            font-size: 1.08rem;
-            font-weight: 800;
-            color: #111827;
-            margin: 0 0 6px;
-        }
-        .mb-proc-desc {
-            font-size: 0.86rem;
-            line-height: 1.55;
-            color: #4B5563;
-            margin: 0;
-        }
+        /* Process */
+        .xp-step { background:#fff; border:2px solid var(--ink); border-radius:18px; padding:24px 22px; box-shadow:6px 6px 0 var(--ink); transition:translate .25s, box-shadow .25s; }
+        .xp-step:hover { translate:-3px -3px; box-shadow:9px 9px 0 var(--pink); }
+        .xp-step-n { display:inline-grid; place-items:center; min-width:46px; height:46px; padding:0 8px; margin-bottom:14px; border-radius:12px; background:var(--gold); color:var(--ink); border:2px solid var(--ink); font:800 1.15rem var(--disp); box-shadow:3px 3px 0 var(--ink); }
+        .xp-step h3 { font-size:1.15rem; font-weight:700; margin-bottom:8px; }
+        .xp-step p { font-size:.9rem; line-height:1.62; color:var(--mute); }
 
-        /* ========================================================
-           9. VERIFIED CASE STUDY SPOTLIGHT
-           ======================================================== */
-        .mb-casestudy-section {
-            padding: 40px 0 44px;
-            background: #FFFFFF;
-        }
-        .mb-casestudy-card {
-            background: linear-gradient(135deg, #111827 0%, #1F1B2A 100%);
-            border-radius: 22px;
-            padding: 34px 30px;
-            color: #FFFFFF;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
-            border: 1.5px solid rgba(196, 0, 122, 0.35);
-        }
-        .mb-cs-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 28px;
-            align-items: center;
-        }
-        @media (min-width: 992px) {
-            .mb-cs-grid {
-                grid-template-columns: 1.15fr 0.85fr;
-                gap: 40px;
-            }
-        }
-        .mb-cs-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(196, 0, 122, 0.25);
-            border: 1px solid rgba(255, 45, 117, 0.5);
-            color: #FFB6D9;
-            font-size: 0.74rem;
-            font-weight: 800;
-            padding: 4px 12px;
-            border-radius: 9999px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-        }
-        .mb-cs-title {
-            font-size: clamp(1.4rem, 2.4vw, 1.9rem);
-            font-weight: 850;
-            color: #FFFFFF;
-            margin: 0 0 10px;
-            line-height: 1.22;
-        }
-        .mb-cs-desc {
-            font-size: 0.94rem;
-            line-height: 1.6;
-            color: rgba(255, 255, 255, 0.85);
-            margin: 0 0 20px;
-        }
-        .mb-cs-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 14px;
-        }
-        .mb-cs-metric-box {
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 14px;
-            padding: 14px 16px;
-            text-align: center;
-        }
-        .mb-cs-metric-val {
-            font-size: 1.7rem;
-            font-weight: 850;
-            color: #FF5A96;
-            line-height: 1;
-            margin-bottom: 4px;
-        }
-        .mb-cs-metric-lbl {
-            font-size: 0.76rem;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.8);
-            text-transform: uppercase;
-        }
-        .mb-cs-gallery {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 18px;
-            margin-top: 24px;
-        }
-        @media (min-width: 768px) {
-            .mb-cs-gallery {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 22px;
-            }
-        }
-        .mb-cs-shot {
-            min-width: 0;
-            margin: 0;
-            padding: 10px;
-            background: #FFFFFF;
-            border: 1px solid rgba(196, 0, 122, 0.16);
-            border-radius: 16px;
-            box-shadow: 0 8px 24px rgba(17, 24, 39, 0.08);
-        }
-        .mb-cs-shot img {
-            display: block;
-            width: 100%;
-            height: auto;
-            max-height: 520px;
-            object-fit: contain;
-            border-radius: 10px;
-            background: #F3F4F6;
-        }
-        .mb-cs-shot figcaption {
-            padding: 10px 4px 2px;
-            color: #1F2937;
-            font-size: 0.84rem;
-            font-weight: 700;
-            line-height: 1.45;
-        }
+        /* Case study */
+        .xp-case { display:grid; gap:28px; align-items:center; padding:34px; border-radius:22px; background:var(--ink2); border:2px solid rgba(255,255,255,.18); box-shadow:8px 8px 0 var(--gold); grid-template-columns:minmax(0,1fr); }
+        .xp-case > * { min-width:0; }
+        @media (min-width:900px){ .xp-case { grid-template-columns:1.1fr .9fr; padding:42px; gap:44px; } }
+        .xp-case-org { display:inline-block; font-size:.78rem; font-weight:700; color:var(--ink); background:var(--gold); padding:6px 12px; border-radius:8px; margin-bottom:14px; }
+        .xp-case h3 { color:#fff; font-size:clamp(1.45rem,2.6vw,2rem); font-weight:800; line-height:1.15; margin-bottom:14px; }
+        .xp-case p { color:rgba(255,255,255,.75); line-height:1.7; margin-bottom:22px; font-size:.96rem; }
+        .xp-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+        .xp-stat { padding:18px 14px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); }
+        .xp-stat b { display:block; font:800 2rem var(--disp); color:var(--gold); line-height:1.05; }
+        .xp-stat span { font-size:.78rem; color:rgba(255,255,255,.7); font-weight:600; }
+        .xp-shots { display:grid; gap:20px; margin-top:28px; grid-template-columns:minmax(0,1fr); }
+        @media (min-width:768px){ .xp-shots { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+        .xp-shot { margin:0; padding:10px; background:#fff; border:2px solid var(--ink); border-radius:16px; box-shadow:6px 6px 0 var(--pink); }
+        .xp-shot img { display:block; width:100%; height:auto; max-height:520px; object-fit:contain; border-radius:10px; background:#F3F4F6; }
+        .xp-shot figcaption { padding:10px 4px 2px; color:var(--ink); font-size:.84rem; font-weight:700; line-height:1.45; }
 
-        /* ========================================================
-           10. MICRO-MARKETS & GLOBAL REACH (Matebiz Hallmark)
-           ======================================================== */
-        .mb-markets-section {
-            padding: 34px 0 38px;
-            background: #FFF8FC;
-            text-align: center;
-            border-top: 1px solid rgba(196, 0, 122, 0.1);
-        }
-        .mb-market-pills {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            max-width: 980px;
-            margin: 14px auto 0;
-        }
-        .mb-market-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 7px 14px;
-            border-radius: 9999px;
-            border: 1px solid rgba(196, 0, 122, 0.25);
-            background: #FFFFFF;
-            color: #111827;
-            font-size: 0.82rem;
-            font-weight: 700;
-        }
-        .mb-market-pill::before {
-            content: "•";
-            color: #C4007A;
-            font-size: 1rem;
-        }
+        /* Markets */
+        .xp-market-card { max-width:960px; margin:0 auto; padding:38px 30px; text-align:center; border:2px solid var(--ink); border-radius:24px; background:#fff; box-shadow:10px 10px 0 var(--ink); }
+        .xp-market-card h3 { font-size:clamp(1.4rem,2.6vw,1.9rem); font-weight:800; margin-bottom:10px; }
+        .xp-market-card > p { max-width:720px; margin:0 auto; color:var(--mute); line-height:1.65; font-size:.94rem; }
+        .xp-places { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin-top:22px; padding:18px; background:var(--blush); border:2px dashed rgba(196,0,122,.4); border-radius:16px; }
+        .xp-place { padding:6px 14px; border:2px solid var(--ink); border-radius:999px; background:#fff; color:var(--pink); font-weight:700; font-size:.82rem; }
 
-        /* ========================================================
-           11. INTERACTIVE FAQ ACCORDION
-           ======================================================== */
-        .mb-faq-section {
-            padding: 42px 0 48px;
-            background: #FFFFFF;
-        }
-        .mb-faq-wrap {
-            max-width: 860px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .mb-faq-item {
-            border: 1.5px solid rgba(196, 0, 122, 0.14);
-            border-radius: 14px;
-            background: #FFFFFF;
-            overflow: hidden;
-            transition: all 0.25s ease;
-        }
-        .mb-faq-item:hover,
-        .mb-faq-item.active {
-            border-color: #C4007A;
-            box-shadow: 0 4px 16px rgba(196, 0, 122, 0.08);
-        }
-        .mb-faq-btn {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px;
-            padding: 16px 20px;
-            background: transparent;
-            border: none;
-            text-align: left;
-            font-size: 0.98rem;
-            font-weight: 800;
-            color: #111827;
-            cursor: pointer;
-            font-family: inherit;
-        }
-        .mb-faq-btn-icon {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #FFF0F7;
-            color: #C4007A;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: transform 0.25s ease;
-        }
-        .mb-faq-item.active .mb-faq-btn-icon {
-            transform: rotate(45deg);
-            background: #C4007A;
-            color: #FFFFFF;
-        }
-        .mb-faq-answer {
-            display: none;
-            padding: 0 20px 18px;
-            font-size: 0.9rem;
-            line-height: 1.6;
-            color: #4B5563;
-        }
-        .mb-faq-item.active .mb-faq-answer {
-            display: block;
-        }
+        /* FAQ */
+        .xp-faq-grid { display:grid; gap:40px; grid-template-columns:minmax(0,1fr); }
+        .xp-faq-grid > * { min-width:0; }
+        @media (min-width:992px){ .xp-faq-grid { grid-template-columns:.8fr 1.2fr; gap:64px; } .xp-faq-grid .xp-head { position:sticky; top:100px; align-self:start; margin:0; text-align:left; } .xp-faq-grid .xp-bar { margin-left:0; } }
+        .mb-faq-item { border:2px solid var(--ink); border-radius:14px; margin-bottom:12px; background:#fff; overflow:hidden; transition:box-shadow .2s; }
+        .mb-faq-item.active { box-shadow:5px 5px 0 var(--pink); }
+        .mb-faq-btn { width:100%; display:flex; justify-content:space-between; align-items:center; gap:16px; padding:18px 20px; background:transparent; border:0; text-align:left; font:700 1.02rem/1.3 var(--disp); color:var(--ink); cursor:pointer; }
+        .mb-faq-btn-icon { flex-shrink:0; display:grid; place-items:center; width:30px; height:30px; border-radius:8px; background:var(--blush); color:var(--pink); transition:transform .25s, background .25s, color .25s; }
+        .mb-faq-item.active .mb-faq-btn-icon { transform:rotate(45deg); background:var(--pink); color:#fff; }
+        .mb-faq-answer { display:none; padding:0 20px 20px; line-height:1.7; color:var(--mute); font-size:.94rem; }
+        .mb-faq-item.active .mb-faq-answer { display:block; }
 
-        /* ========================================================
-           12. CONVERSION CTA BANNER
-           ======================================================== */
-        .mb-cta-section {
-            padding: 38px 0 46px;
-            background: #FFFFFF;
-        }
-        .mb-cta-box {
-            background: linear-gradient(135deg, #111827 0%, #1F1B2A 100%);
-            border-radius: 24px;
-            padding: 44px 32px;
-            text-align: center;
-            color: #FFFFFF;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid rgba(196, 0, 122, 0.35);
-            box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16);
-        }
-        .mb-cta-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(196, 0, 122, 0.25);
-            border: 1px solid rgba(255, 45, 117, 0.5);
-            color: #FFB6D9;
-            font-size: 0.74rem;
-            font-weight: 800;
-            padding: 4px 14px;
-            border-radius: 9999px;
-            margin-bottom: 12px;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-        }
-        .mb-cta-box h2 {
-            font-size: clamp(1.8rem, 3.2vw, 2.6rem);
-            font-weight: 850;
-            color: #FFFFFF;
-            margin: 0 0 12px;
-            line-height: 1.2;
-        }
-        .mb-cta-box h2 span {
-            color: #FF5A96;
-        }
-        .mb-cta-box p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.85);
-            max-width: 680px;
-            margin: 0 auto 24px;
-            line-height: 1.6;
-        }
-        .mb-cta-btns {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
+        /* Final CTA */
+        .xp-cta { padding:0 0 76px; }
+        .xp-cta-card { position:relative; overflow:hidden; background:var(--ink); color:#fff; border-radius:26px; padding:60px 34px; text-align:center; border:3px solid var(--pink); }
+        .xp-cta-card::before { content:''; position:absolute; inset:0; background:radial-gradient(50% 80% at 50% 120%,rgba(196,0,122,.7),transparent 70%),radial-gradient(rgba(255,255,255,.1) 1px,transparent 1.2px) 0 0/26px 26px; }
+        .xp-cta-card > * { position:relative; }
+        .xp-cta-pill { display:inline-flex; align-items:center; gap:7px; margin-bottom:16px; padding:6px 14px; border-radius:999px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.2); font-size:.8rem; font-weight:600; color:#FFE3F1; }
+        .xp-cta-card h2 { color:#fff; font-size:clamp(1.8rem,3.6vw,2.9rem); font-weight:800; line-height:1.12; max-width:860px; margin:0 auto 16px; }
+        .xp-cta-card p { max-width:660px; margin:0 auto 28px; color:rgba(255,255,255,.8); line-height:1.65; }
+        .xp-cta-card .xp-actions { justify-content:center; }
+        .xp-cta-foot { margin-top:24px; display:flex; align-items:center; justify-content:center; gap:7px; font-size:.8rem; color:rgba(255,255,255,.65); }
 
-        @media (max-width: 520px) {
-            .mb-cta-btns {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            .mb-cta-btns a {
-                width: 100%;
-                text-align: center;
-            }
+        /* Mobile sticky bar */
+        .xp-sticky { position:fixed; left:0; right:0; bottom:0; z-index:999; display:none; gap:10px; padding:10px 14px calc(10px + env(safe-area-inset-bottom)); background:var(--ink); border-top:3px solid var(--gold); translate:0 115%; transition:translate .35s cubic-bezier(.16,1,.3,1); }
+        .xp-sticky.on { translate:0 0; }
+        .xp-sticky .xp-btn { padding:13px 16px; font-size:.9rem; }
+        .xp-sticky .xp-btn--pink { flex:1; box-shadow:0 4px 0 #7E004E; }
+
+        /* Responsive */
+        @media (max-width:991px){ .xp-hero-sub,.xp-hero-desc { max-width:none; } }
+        @media (max-width:767px){ .xp-sticky { display:flex; } .xp-cta { padding-bottom:96px; } .xp-ribbon span { font-size:.9rem; padding:12px 20px; } .xp-ribbon span::after { margin-left:36px; } }
+        @media (max-width:575px){
+            .xp-wrap { padding:0 16px; } .xp-sec { padding:56px 0; } .xp-hero { padding-top:36px; }
+            .xp-btn { white-space:normal; text-align:center; line-height:1.3; max-width:100%; padding:14px 18px; min-height:48px; }
+            .xp-actions .xp-btn { width:100%; }
+            .xp-badge { padding:34px 18px 22px; } .xp-pass { margin:18px -18px -22px; padding:14px 18px 18px; }
+            .xp-fld input,.xp-fld select,.xp-fld textarea { font-size:16px; }
+            .xp-stall { padding:50px 20px 22px; box-shadow:4px 4px 0 var(--ink); } .xp-pkg { padding:30px 20px 24px; }
+            .xp-case { padding:24px 18px; box-shadow:5px 5px 0 var(--gold); } .xp-stat b { font-size:1.6rem; }
+            .xp-market-card { padding:28px 18px; box-shadow:6px 6px 0 var(--ink); } .xp-cta-card { padding:44px 20px; border-radius:20px; }
+            .mb-faq-btn { padding:16px; font-size:.98rem; } .mb-faq-answer { padding:0 16px 18px; }
         }
+        @media (max-width:380px){ .xp-stats { grid-template-columns:1fr; } }
+        @media (hover:none){ .xp-stall:hover,.xp-step:hover,.xp-pkg:hover,.xp-pill:hover,.xp-btn--pink:hover { translate:none; } .xp-stall:hover,.xp-step:hover { box-shadow:6px 6px 0 var(--ink); } }
+        @media (prefers-reduced-motion:reduce){ .xp-ribbon-track,.xp-marq-track,.xp-hl { animation:none; } .xp-btn,.xp-stall,.xp-step,.xp-pkg,.xp-pill { transition:none; } }
     </style>
 
-    <main class="mb-page">
+    <main class="xp mb-page">
 
-        <!-- ========================================================
-             1. HERO SECTION (2-COL WITH MATEBIZ QUOTE FORM)
-        ======================================================== -->
-        <section class="mb-hero">
-            <div class="mb-container">
-                <div class="mb-hero-grid">
-
-                    <!-- Left: Hero Headline, Description & CTAs -->
-                    <div class="mb-hero-left <?= $heroPanel ? 'mb-hero-panel' : '' ?>">
-                        <div class="mb-eyebrow">
-                            <?= svcIcon('sparkles') ?>
-                            <span><?= htmlspecialchars($tagline !== '' ? $tagline : 'SMART. SCALABLE. SECURE.') ?></span>
-                        </div>
+        <!-- 1. HERO + QUOTE BADGE + FIGURES RIBBON -->
+        <section class="xp-hero<?= $heroPanel ? ' xp-hero-panel' : '' ?>">
+            <div class="xp-wrap">
+                <div class="xp-hero-grid">
+                    <div class="xp-hero-copy">
+                        <div class="xp-tag"><i></i><span><?= $e($tagline !== '' ? $tagline : 'SMART. SCALABLE. SECURE.') ?></span></div>
 
                         <?php
                         if ($heroTitleAccent !== '') {
-                            $heroHeadingHtml = htmlspecialchars($heroTitleLead)
-                                . '<span class="accent">' . htmlspecialchars($heroTitleAccent)
-                                . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>'
-                                . htmlspecialchars($heroTitleTail);
+                            $heroHeadingHtml = $e($heroTitleLead) . '<span class="xp-hl">' . $e($heroTitleAccent) . '</span>' . $e($heroTitleTail);
                         } else {
                             $rawTitle = trim((string) $heroTitle);
                             $titleWords = preg_split('/\s+/', $rawTitle);
                             if (count($titleWords) > 1) {
                                 $lastWord = array_pop($titleWords);
-                                $firstPart = implode(' ', $titleWords);
-                                $heroHeadingHtml = htmlspecialchars($firstPart) . ' <span class="accent">' . htmlspecialchars($lastWord) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>';
+                                $heroHeadingHtml = $e(implode(' ', $titleWords)) . ' <span class="xp-hl">' . $e($lastWord) . '</span>';
                             } else {
-                                $heroHeadingHtml = '<span class="accent">' . htmlspecialchars($rawTitle) . '<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>';
+                                $heroHeadingHtml = '<span class="xp-hl">' . $e($rawTitle) . '</span>';
                             }
                         }
                         ?>
-                        <h1 class="mb-hero-title">
-                            <?= $heroHeadingHtml ?>
-                        </h1>
+                        <h1><?= $heroHeadingHtml ?></h1>
 
                         <?php if ($heroHeadline !== ''): ?>
-                            <h2 class="mb-hero-message"><?= htmlspecialchars($heroHeadline) ?></h2>
+                            <h2 class="xp-hero-sub"><?= $e($heroHeadline) ?></h2>
                         <?php endif; ?>
 
-                        <p class="mb-hero-desc">
-                            <?= nl2br(htmlspecialchars($heroDescription !== '' ? $heroDescription : $overview)) ?>
-                        </p>
+                        <p class="xp-hero-desc"><?= nl2br($e($heroDescription !== '' ? $heroDescription : $overview)) ?></p>
 
                         <?php if ($showHeroBullets): ?>
                             <?php if (!empty($heroBulletItems)): ?>
-                            <h3 class="mb-hero-bullet-heading"><?= htmlspecialchars($heroBulletHeading !== '' ? $heroBulletHeading : 'Key Highlights') ?></h3>
-                            <div class="mb-hero-bullets">
-                                <?php foreach ($heroBulletItems as $bullet): ?>
-                                    <div class="mb-bullet-item mb-bullet-item-detailed">
-                                        <span class="dot">✓</span>
-                                        <span class="mb-bullet-copy">
-                                            <strong><?= htmlspecialchars($bullet['title']) ?></strong>
-                                            <span><?= htmlspecialchars($bullet['description']) ?></span>
-                                        </span>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
+                                <h3 class="xp-bh"><?= $e($heroBulletHeading !== '' ? $heroBulletHeading : 'Key Highlights') ?></h3>
+                                <div class="xp-bullets">
+                                    <?php foreach ($heroBulletItems as $bullet): ?>
+                                        <div class="xp-bullet xp-bullet--card">
+                                            <span class="dot">✓</span>
+                                            <span><strong><?= $e($bullet['title']) ?></strong><span><?= $e($bullet['description']) ?></span></span>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             <?php else: ?>
-                            <div class="mb-hero-bullets">
-                                <div class="mb-bullet-item">
-                                    <span class="dot">✓</span>
-                                    <span>100% Mobile & Cross-Device Responsive</span>
+                                <div class="xp-bullets">
+                                    <div class="xp-bullet"><span class="dot">✓</span><span>100% Mobile &amp; Cross-Device Responsive</span></div>
+                                    <div class="xp-bullet"><span class="dot">✓</span><span>SEO-Friendly Semantic Architecture</span></div>
+                                    <div class="xp-bullet"><span class="dot">✓</span><span>Custom UI/UX Tailored to Your Brand</span></div>
+                                    <div class="xp-bullet"><span class="dot">✓</span><span>Conversion-Focused Sales Funnel</span></div>
                                 </div>
-                                <div class="mb-bullet-item">
-                                    <span class="dot">✓</span>
-                                    <span>SEO-Friendly Semantic Architecture</span>
-                                </div>
-                                <div class="mb-bullet-item">
-                                    <span class="dot">✓</span>
-                                    <span>Custom UI/UX Tailored to Your Brand</span>
-                                </div>
-                                <div class="mb-bullet-item">
-                                    <span class="dot">✓</span>
-                                    <span>Conversion-Focused Sales Funnel</span>
-                                </div>
-                            </div>
                             <?php endif; ?>
                         <?php endif; ?>
 
                         <?php if ($showHeroActions): ?>
-                        <div class="mb-hero-actions">
-                            <a href="/contact.php" class="mb-btn-primary trigger-enquiry-modal" data-service="<?= htmlspecialchars($title) ?>">
-                                <span>Get Free Consultation</span>
-                                <?= svcIcon('arrow', 16) ?>
-                            </a>
-                            <a href="tel:+919999674255" class="mb-btn-secondary">
-                                <?= svcIcon('phone', 15) ?>
-                                <span>Call: +91-9999674255</span>
-                            </a>
-                        </div>
+                            <div class="xp-actions">
+                                <a href="/contact.php" class="xp-btn xp-btn--pink trigger-enquiry-modal" data-service="<?= $e($title) ?>"><span>Get Free Consultation</span><?= $ctaArrow ?></a>
+                                <a href="tel:+919999674255" class="xp-btn xp-btn--ghost"><?= svcIcon('phone', 15) ?><span>Call: +91-9999674255</span></a>
+                            </div>
                         <?php endif; ?>
                     </div>
 
-                    <!-- Right: Matebiz-Style Interactive Quote Form -->
-                    <div class="mb-hero-right">
-                        <div class="mb-quote-card">
-                            <div class="mb-quote-head">
-                                <h3>
-                                    <?= svcIcon('rocket', 20) ?>
-                                    <span>Get a Custom Strategy &amp; Quote</span>
-                                </h3>
-                                <p>Share your goals to receive a tailored project scope and competitive pricing within 24 hours.</p>
-                            </div>
+                    <!-- Quote form as visitor badge (same IDs / handler) -->
+                    <div class="xp-badge-wrap">
+                        <div class="xp-lanyard"></div>
+                        <div class="xp-badge">
+                            <h3><?= svcIcon('rocket', 20) ?><span>Get a Custom Strategy &amp; Quote</span></h3>
+                            <p class="xp-badge-lead">Share your goals to receive a tailored project scope and competitive pricing within 24 hours.</p>
 
                             <form id="mbServiceQuoteForm" onsubmit="handleMbQuoteSubmit(event, '<?= htmlspecialchars(addslashes($title)) ?>')">
-                                <div class="mb-form-group">
-                                    <input type="text" name="name" placeholder="Your Name *" required>
-                                </div>
-                                <div class="mb-form-group">
-                                    <input type="tel" name="phone" placeholder="Phone Number *" required>
-                                </div>
-                                <div class="mb-form-group">
-                                    <input type="email" name="email" placeholder="Business Email *" required>
-                                </div>
-                                <div class="mb-form-group">
+                                <div class="xp-fld"><input type="text" name="name" placeholder="Your Name *" required></div>
+                                <div class="xp-fld"><input type="tel" name="phone" placeholder="Phone Number *" required></div>
+                                <div class="xp-fld"><input type="email" name="email" placeholder="Business Email *" required></div>
+                                <div class="xp-fld">
                                     <select name="budget">
                                         <option value="" disabled selected>Estimated Project Budget</option>
                                         <option value="₹15,000 - ₹35,000">₹15,000 - ₹35,000 (Starter)</option>
@@ -1512,448 +480,262 @@ function renderServicePageLayout(array $config): void
                                         <option value="₹1,50,000+">₹1,50,000+ (Custom Scope)</option>
                                     </select>
                                 </div>
-                                <div class="mb-form-group">
-                                    <textarea name="message" placeholder="Briefly describe your requirements or goals..."></textarea>
-                                </div>
-                                <button type="submit" class="mb-btn-primary" id="mbQuoteSubmitBtn" style="width: 100%; font-size: 0.96rem; padding: 13px;">
-                                    <span>Request Strategy &amp; Quote &rarr;</span>
-                                </button>
-                                <div id="mbQuoteFeedback" style="display: none; margin-top: 10px; padding: 8px 12px; border-radius: 8px; font-size: 0.84rem; text-align: center; font-weight: 700;"></div>
+                                <div class="xp-fld"><textarea name="message" placeholder="Briefly describe your requirements or goals..."></textarea></div>
+                                <button type="submit" class="xp-btn xp-btn--pink xp-btn--block xp-submit" id="mbQuoteSubmitBtn"><span>Request Strategy &amp; Quote &rarr;</span></button>
+                                <div id="mbQuoteFeedback" style="display:none; margin-top:12px; padding:10px 12px; border-radius:10px; font-size:.86rem; text-align:center; font-weight:700;"></div>
                             </form>
 
-                            <div class="mb-form-trust">
-                                <span>🔒 100% Privacy Protected &bull; Zero Spam &bull; Fast Response</span>
-                            </div>
+                            <div class="xp-pass">🔒 100% Privacy Protected &bull; Zero Spam &bull; Fast Response</div>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <div class="xp-ribbon" aria-hidden="true">
+                <div class="xp-ribbon-track">
+                    <?php for ($i = 0; $i < 4; $i++): ?>
+                        <span><b>1,000+</b> websites &amp; projects delivered</span><span><b>13+</b> years industry leadership</span><span><b>98%</b> client retention</span><span><b>25+</b> countries reached</span>
+                    <?php endfor; ?>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================================
-             2. GROWING FIGURES / METRICS STRIP (Matebiz Signature)
-        ======================================================== -->
-        <section class="mb-figures-strip">
-            <div class="mb-container">
-                <div class="mb-figures-grid">
-                    <div class="mb-fig-card">
-                        <div class="mb-fig-val">1,000+</div>
-                        <div class="mb-fig-lbl">Websites &amp; Projects Delivered</div>
-                    </div>
-                    <div class="mb-fig-card">
-                        <div class="mb-fig-val">13+</div>
-                        <div class="mb-fig-lbl">Years Industry Leadership</div>
-                    </div>
-                    <div class="mb-fig-card">
-                        <div class="mb-fig-val">98%</div>
-                        <div class="mb-fig-lbl">Client Retention Rate</div>
-                    </div>
-                    <div class="mb-fig-card">
-                        <div class="mb-fig-val">25+</div>
-                        <div class="mb-fig-lbl">Countries Reached Globally</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ========================================================
-             3. BRAND LOGOS MARQUEE (Global Industry Credibility)
-        ======================================================== -->
-        <section class="mb-brands-section">
-            <div class="mb-container">
-                <div style="text-align: center; margin-bottom: 12px;">
-                    <span style="font-size: 0.74rem; font-weight: 800; color: #C4007A; letter-spacing: 0.08em; text-transform: uppercase;">
-                        TRUSTED BY INDUSTRY LEADERS &bull; GLOBAL TRADE EXPOS &bull; HIGH-GROWTH BRANDS
-                    </span>
-                </div>
-                <div class="mb-marquee-wrap" tabindex="0">
-                    <div class="mb-marquee-track">
-                        <?php 
-                        $duplicatedLogos = array_merge($brandLogos, $brandLogos);
-                        foreach ($duplicatedLogos as $b): 
-                        ?>
-                            <div class="mb-brand-pill">
-                                <span class="b-dot"></span>
-                                <span class="b-name"><?= htmlspecialchars($b['name']) ?></span>
-                                <span class="b-cat"><?= htmlspecialchars($b['cat']) ?></span>
-                            </div>
+        <!-- 2. BRANDS MARQUEE -->
+        <section class="xp-brands">
+            <div class="xp-wrap">
+                <div class="xp-brands-label">Trusted by industry leaders, global trade expos and high-growth brands</div>
+                <div class="xp-marq" tabindex="0" role="region" aria-label="Client brands">
+                    <div class="xp-marq-track">
+                        <?php foreach (array_merge($brandLogos, $brandLogos) as $b): ?>
+                            <div class="xp-brand"><i></i><b><?= $e($b['name']) ?></b><span><?= $e($b['cat']) ?></span></div>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================================
-             4. CORE SOLUTIONS GRID (6 Distinct Feature Cards)
-        ======================================================== -->
+        <!-- 3. CORE SOLUTIONS -->
         <?php if (!empty($features)): ?>
-        <section class="mb-solutions-section">
-            <div class="mb-container">
-                <div class="mb-section-header">
-                    <div class="mb-eyebrow">
-                        <?= svcIcon('sparkles') ?>
-                        <span><?= htmlspecialchars($featuresEyebrow) ?></span>
-                    </div>
-                    <h2 class="mb-section-title">
-                        <?php if ($featuresTitleAccent !== ''): ?>
-                            <?= htmlspecialchars($featuresTitleLead) ?><span class="accent"><?= htmlspecialchars($featuresTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span><?= htmlspecialchars($featuresTitleTail) ?>
-                        <?php else: ?>
-                            Expert <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> for Every Business Need
-                        <?php endif; ?>
-                    </h2>
-                    <p class="mb-section-sub">
-                        <?= htmlspecialchars($featuresSubtitle !== '' ? $featuresSubtitle : 'Explore our end-to-end capabilities engineered to enhance performance, establish brand credibility, and convert traffic into revenue.') ?>
-                    </p>
+        <section class="xp-sec xp-mist">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker"><?= $e($featuresEyebrow) ?></span>
+                    <h2><?= $accentHead($featuresTitleLead, $featuresTitleAccent, $featuresTitleTail, 'Expert <span class="xp-acc">' . $e($title) . '</span> for Every Business Need') ?></h2>
+                    <i class="xp-bar"></i>
+                    <p><?= $e($featuresSubtitle !== '' ? $featuresSubtitle : 'Explore our end-to-end capabilities engineered to enhance performance, establish brand credibility, and convert traffic into revenue.') ?></p>
                 </div>
-
-                <div class="mb-solutions-grid">
-                    <?php 
-                    $iconsList = ['layout', 'code', 'search', 'smartphone', 'zap', 'shield'];
-                    foreach ($features as $fIdx => $f): 
-                        $curIcon = $iconsList[$fIdx % count($iconsList)];
-                    ?>
-                        <div class="mb-solution-card">
-                            <div class="mb-sol-icon-box">
-                                <?= svcIcon($curIcon, 24) ?>
+                <div class="xp-grid xp-g3">
+                    <?php $iconsList = ['layout', 'code', 'search', 'smartphone', 'zap', 'shield'];
+                    foreach ($features as $fIdx => $f): $curIcon = $iconsList[$fIdx % count($iconsList)]; ?>
+                        <article class="xp-stall">
+                            <span class="xp-ico"><?= svcIcon($curIcon, 24) ?></span>
+                            <h3><?= $e($f['title']) ?></h3>
+                            <p><?= $e($f['description']) ?></p>
+                            <div class="xp-tags">
+                                <div><?= svcIcon('check', 14) ?><span><?= $e($featureTagOne) ?></span></div>
+                                <div><?= svcIcon('check', 14) ?><span><?= $e($featureTagTwo) ?></span></div>
                             </div>
-                            <h3 class="mb-sol-title"><?= htmlspecialchars($f['title']) ?></h3>
-                            <p class="mb-sol-desc"><?= htmlspecialchars($f['description']) ?></p>
-                            <div class="mb-sol-tags">
-                                <div class="mb-sol-tag">
-                                    <?= svcIcon('check', 14) ?>
-                                    <span><?= htmlspecialchars($featureTagOne) ?></span>
-                                </div>
-                                <div class="mb-sol-tag">
-                                    <?= svcIcon('check', 14) ?>
-                                    <span><?= htmlspecialchars($featureTagTwo) ?></span>
-                                </div>
-                            </div>
-                        </div>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             </div>
         </section>
         <?php endif; ?>
 
-        <!-- ========================================================
-             5. WHY CHOOSE WEBTECMART (6 Advantage Pillars)
-        ======================================================== -->
-        <section class="mb-why-section">
-            <div class="mb-container">
-                <div class="mb-section-header">
-                    <div class="mb-eyebrow">
-                        <?= svcIcon('sparkles') ?>
-                        <span>THE WEBTECMART ADVANTAGE</span>
-                    </div>
-                    <h2 class="mb-section-title">
-                        <?php if ($benefitsTitleAccent !== ''): ?>
-                            <?= htmlspecialchars($benefitsTitleLead) ?><span class="accent"><?= htmlspecialchars($benefitsTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span><?= htmlspecialchars($benefitsTitleTail) ?>
-                        <?php else: ?>
-                            Why Choose Our <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> Services?
-                        <?php endif; ?>
-                    </h2>
-                    <p class="mb-section-sub">
-                        <?= htmlspecialchars($benefitsSubtitle !== '' ? $benefitsSubtitle : "We don't build generic websites or run cookie-cutter campaigns. Here is how our strategic approach delivers tangible business impact.") ?>
-                    </p>
+        <!-- 4. WHY WEBTECMART -->
+        <section class="xp-sec<?= !empty($features) ? '' : ' xp-mist' ?>">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker">The WebTecMart advantage</span>
+                    <h2><?= $accentHead($benefitsTitleLead, $benefitsTitleAccent, $benefitsTitleTail, 'Why Choose Our <span class="xp-acc">' . $e($title) . '</span> Services?') ?></h2>
+                    <i class="xp-bar"></i>
+                    <p><?= $e($benefitsSubtitle !== '' ? $benefitsSubtitle : "We don't build generic websites or run cookie-cutter campaigns. Here is how our strategic approach delivers tangible business impact.") ?></p>
                 </div>
-
-                <div class="mb-why-grid">
+                <div class="xp-grid xp-g3">
                     <?php foreach ($benefits as $b): ?>
-                        <div class="mb-why-card">
-                            <div class="mb-why-head">
-                                <div class="mb-why-icon">
-                                    <?= svcIcon($b['icon'] ?? 'target', 20) ?>
-                                </div>
-                                <h3 class="mb-why-title"><?= htmlspecialchars($b['title']) ?></h3>
-                            </div>
-                            <p class="mb-why-desc"><?= htmlspecialchars($b['desc']) ?></p>
+                        <article class="xp-stall">
+                            <span class="xp-ico"><?= svcIcon($b['icon'] ?? 'target', 22) ?></span>
+                            <h3><?= $e($b['title']) ?></h3>
+                            <p><?= $e($b['desc']) ?></p>
                             <?php if (!empty($b['metric'])): ?>
-                                <span class="mb-why-metric">
-                                    <?= svcIcon('trending', 13) ?>
-                                    <span><?= htmlspecialchars($b['metric']) ?></span>
-                                </span>
+                                <span class="xp-metric"><?= svcIcon('trending', 13) ?><span><?= $e($b['metric']) ?></span></span>
                             <?php endif; ?>
-                        </div>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================================
-             6. ALL-IN-ONE PACKAGES & PRICING (Matebiz Signature)
-        ======================================================== -->
+        <!-- 5. PACKAGES -->
         <?php if ($showPackages): ?>
-        <section class="mb-packages-section">
-            <div class="mb-container">
-                <div class="mb-section-header">
-                    <div class="mb-eyebrow">
-                        <?= svcIcon('sparkles') ?>
-                        <span>TRANSPARENT PACKAGES</span>
-                    </div>
-                    <h2 class="mb-section-title">
-                        All-in-One <span class="accent"><?= htmlspecialchars($title) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span> Packages &amp; Pricing
-                    </h2>
-                    <p class="mb-section-sub">
-                        Choose the package tailored to your business scale — from emerging startups to high-volume enterprise platforms. Transparent deliverables with zero hidden costs.
-                    </p>
+        <section class="xp-sec xp-mist xp-scallop">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker">Transparent packages</span>
+                    <h2>All-in-One <span class="xp-acc"><?= $e($title) ?></span> Packages &amp; Pricing</h2>
+                    <i class="xp-bar"></i>
+                    <p>Choose the package tailored to your business scale — from emerging startups to high-volume enterprise platforms. Transparent deliverables with zero hidden costs.</p>
                 </div>
-
-                <div class="mb-packages-grid">
+                <div class="xp-grid xp-g3" style="align-items:stretch; padding-top:10px">
                     <?php foreach ($packages as $pkg): ?>
-                        <div class="mb-pkg-card <?= !empty($pkg['popular']) ? 'popular' : '' ?>">
-                            <?php if (!empty($pkg['popular'])): ?>
-                                <div class="mb-pkg-badge-popular">⭐ MOST POPULAR</div>
-                            <?php endif; ?>
-
-                            <h3 class="mb-pkg-name"><?= htmlspecialchars($pkg['name']) ?></h3>
-                            <div class="mb-pkg-tagline"><?= htmlspecialchars($pkg['tagline']) ?></div>
-
-                            <div class="mb-pkg-price-box">
-                                <div class="mb-pkg-price"><?= htmlspecialchars($pkg['price']) ?></div>
-                                <div class="mb-pkg-period"><?= htmlspecialchars($pkg['period']) ?></div>
-                            </div>
-
-                            <p class="mb-pkg-desc"><?= htmlspecialchars($pkg['desc']) ?></p>
-
-                            <ul class="mb-pkg-features">
-                                <?php foreach ($pkg['features'] as $feat): ?>
-                                    <li>
-                                        <?= svcIcon('check', 15) ?>
-                                        <span><?= htmlspecialchars($feat) ?></span>
-                                    </li>
-                                <?php endforeach; ?>
+                        <article class="xp-pkg<?= !empty($pkg['popular']) ? ' popular' : '' ?>">
+                            <?php if (!empty($pkg['popular'])): ?><div class="xp-pkg-badge">⭐ Most popular</div><?php endif; ?>
+                            <h3><?= $e($pkg['name']) ?></h3>
+                            <div class="xp-pkg-tag"><?= $e($pkg['tagline']) ?></div>
+                            <div class="xp-pkg-price"><b><?= $e($pkg['price']) ?></b><span><?= $e($pkg['period']) ?></span></div>
+                            <p class="xp-pkg-desc"><?= $e($pkg['desc']) ?></p>
+                            <ul>
+                                <?php foreach ($pkg['features'] as $feat): ?><li><span><?= $e($feat) ?></span></li><?php endforeach; ?>
                             </ul>
-
-                            <a href="/contact.php" class="mb-btn-primary trigger-enquiry-modal" data-service="<?= htmlspecialchars($title . ' (' . $pkg['name'] . ')') ?>" style="width: 100%; text-align: center;">
-                                <span><?= htmlspecialchars($pkg['cta'] ?? 'Get Started') ?></span>
-                                <?= svcIcon('arrow', 16) ?>
-                            </a>
-                        </div>
+                            <a href="/contact.php" class="xp-btn xp-btn--pink xp-btn--block trigger-enquiry-modal" data-service="<?= $e($title . ' (' . $pkg['name'] . ')') ?>"><span><?= $e($pkg['cta'] ?? 'Get Started') ?></span><?= $ctaArrow ?></a>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             </div>
         </section>
         <?php endif; ?>
 
-        <!-- ========================================================
-             7. MODERN TECHNOLOGIES STACK
-        ======================================================== -->
+        <!-- 6. TECH STACK -->
         <?php if ($showTechnologies): ?>
-        <section class="mb-tech-section">
-            <div class="mb-container">
-                <div class="mb-section-header">
-                    <div class="mb-eyebrow">
-                        <?= svcIcon('code') ?>
-                        <span>MODERN TECH STACK</span>
-                    </div>
-                    <h2 class="mb-section-title">
-                        Built With <span class="accent">Cutting-Edge Technologies<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                    </h2>
-                    <p class="mb-section-sub">
-                        We leverage modern, secure, and battle-tested frameworks to ensure long-term stability and effortless maintenance.
-                    </p>
+        <section class="xp-sec">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker">Modern tech stack</span>
+                    <h2>Built With <span class="xp-acc">Cutting-Edge Technologies</span></h2>
+                    <i class="xp-bar"></i>
+                    <p>We leverage modern, secure, and battle-tested frameworks to ensure long-term stability and effortless maintenance.</p>
                 </div>
-
-                <div class="mb-tech-pills">
+                <div class="xp-pills">
                     <?php foreach ($technologies as $t): ?>
-                        <div class="mb-tech-pill">
-                            <span class="dot"></span>
-                            <span><?= htmlspecialchars($t['name']) ?></span>
-                            <span style="font-size: 0.72rem; color: #C4007A; text-transform: uppercase;">(<?= htmlspecialchars($t['cat']) ?>)</span>
-                        </div>
+                        <div class="xp-pill"><i></i><span><?= $e($t['name']) ?></span><small>(<?= $e($t['cat']) ?>)</small></div>
                     <?php endforeach; ?>
                 </div>
             </div>
         </section>
         <?php endif; ?>
 
-        <!-- ========================================================
-             8. WORKING PROCESS ROADMAP (5-Step Pipeline)
-        ======================================================== -->
+        <!-- 7. PROCESS -->
         <?php if (!empty($process)): ?>
-        <section class="mb-process-section">
-            <div class="mb-container">
-                <div class="mb-section-header">
-                    <div class="mb-eyebrow">
-                        <?= svcIcon('sparkles') ?>
-                        <span><?= htmlspecialchars($processEyebrow) ?></span>
-                    </div>
-                    <h2 class="mb-section-title">
-                        <?php if ($processTitleAccent !== ''): ?>
-                            <?= htmlspecialchars($processTitleLead) ?><span class="accent"><?= htmlspecialchars($processTitleAccent) ?><svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span><?= htmlspecialchars($processTitleTail) ?>
-                        <?php else: ?>
-                            Our Step-by-Step <span class="accent">Working Process<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                        <?php endif; ?>
-                    </h2>
-                    <p class="mb-section-sub">
-                        <?= htmlspecialchars($processSubtitle !== '' ? $processSubtitle : 'A structured delivery roadmap ensuring on-time delivery, pixel-perfect design, and reliable performance.') ?>
-                    </p>
+        <section class="xp-sec xp-mist xp-scallop">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker"><?= $e($processEyebrow) ?></span>
+                    <h2><?= $accentHead($processTitleLead, $processTitleAccent, $processTitleTail, 'Our Step-by-Step <span class="xp-acc">Working Process</span>') ?></h2>
+                    <i class="xp-bar"></i>
+                    <p><?= $e($processSubtitle !== '' ? $processSubtitle : 'A structured delivery roadmap ensuring on-time delivery, pixel-perfect design, and reliable performance.') ?></p>
                 </div>
-
-                <div class="mb-process-grid">
+                <div class="xp-grid xp-g3">
                     <?php foreach ($process as $step): ?>
-                        <div class="mb-process-card">
-                            <div class="mb-proc-num"><?= htmlspecialchars($step['step'] ?? '01') ?></div>
-                            <h3 class="mb-proc-title"><?= htmlspecialchars($step['title']) ?></h3>
-                            <p class="mb-proc-desc"><?= htmlspecialchars($step['description']) ?></p>
-                        </div>
+                        <article class="xp-step">
+                            <span class="xp-step-n"><?= $e($step['step'] ?? '01') ?></span>
+                            <h3><?= $e($step['title']) ?></h3>
+                            <p><?= $e($step['description']) ?></p>
+                        </article>
                     <?php endforeach; ?>
                 </div>
             </div>
         </section>
         <?php endif; ?>
 
-        <!-- ========================================================
-             9. VERIFIED CASE STUDY SPOTLIGHT
-        ======================================================== -->
+        <!-- 8. CASE STUDY -->
         <?php if ($showCaseStudy): ?>
-        <section class="mb-casestudy-section">
-            <div class="mb-container">
+        <section class="xp-sec xp-dark">
+            <div class="xp-wrap">
                 <?php if ($caseStudyTitle !== ''): ?>
-                <div class="mb-section-header">
-                    <h2 class="mb-section-title"><?= htmlspecialchars($caseStudyTitle) ?></h2>
-                </div>
+                    <div class="xp-head xp-head--dark">
+                        <span class="xp-kicker"><?= $e($caseStudyBadge) ?></span>
+                        <h2><?= $e($caseStudyTitle) ?></h2>
+                        <i class="xp-bar"></i>
+                    </div>
                 <?php endif; ?>
-                <div class="mb-casestudy-card">
-                    <div class="mb-cs-grid">
-                        <div>
-                            <div class="mb-cs-badge">
-                                <?= htmlspecialchars($caseStudyBadge) ?>
-                            </div>
-                            <h3 class="mb-cs-title"><?= htmlspecialchars($caseStudy['client']) ?></h3>
-                            <p class="mb-cs-desc"><?= htmlspecialchars($caseStudy['desc']) ?></p>
-                            <a href="/portfolio.php" class="mb-btn-primary" style="padding: 11px 22px; font-size: 0.88rem;">
-                                <span>Explore Client Portfolio</span>
-                                <?= svcIcon('arrow', 15) ?>
-                            </a>
-                        </div>
-                        <div>
-                            <div class="mb-cs-metrics">
-                                <?php foreach ($caseStudy['metrics'] as $m): ?>
-                                    <div class="mb-cs-metric-box">
-                                        <div class="mb-cs-metric-val"><?= htmlspecialchars($m['val']) ?></div>
-                                        <div class="mb-cs-metric-lbl"><?= htmlspecialchars($m['lbl']) ?></div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                        </div>
+                <div class="xp-case">
+                    <div>
+                        <span class="xp-case-org"><?= $e($caseStudyBadge) ?></span>
+                        <h3><?= $e($caseStudy['client']) ?></h3>
+                        <p><?= $e($caseStudy['desc']) ?></p>
+                        <a href="/portfolio.php" class="xp-btn xp-btn--pink"><span>Explore Client Portfolio</span><?= svcIcon('arrow', 15) ?></a>
+                    </div>
+                    <div class="xp-stats">
+                        <?php foreach ($caseStudy['metrics'] as $m): ?>
+                            <div class="xp-stat"><b><?= $e($m['val']) ?></b><span><?= $e($m['lbl']) ?></span></div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
                 <?php if (!empty($caseStudyScreenshots)): ?>
-                <div class="mb-cs-gallery">
-                    <?php foreach ($caseStudyScreenshots as $screenshot): ?>
-                    <figure class="mb-cs-shot">
-                        <img
-                            src="<?= htmlspecialchars($screenshot['src']) ?>"
-                            alt="<?= htmlspecialchars($screenshot['alt']) ?>"
-                            loading="lazy"
-                            decoding="async"
-                        >
-                        <figcaption><?= htmlspecialchars($screenshot['caption']) ?></figcaption>
-                    </figure>
-                    <?php endforeach; ?>
-                </div>
+                    <div class="xp-shots">
+                        <?php foreach ($caseStudyScreenshots as $screenshot): ?>
+                            <figure class="xp-shot">
+                                <img src="<?= $e($screenshot['src']) ?>" alt="<?= $e($screenshot['alt']) ?>" loading="lazy" decoding="async">
+                                <figcaption><?= $e($screenshot['caption']) ?></figcaption>
+                            </figure>
+                        <?php endforeach; ?>
+                    </div>
                 <?php endif; ?>
             </div>
         </section>
         <?php endif; ?>
 
-        <!-- ========================================================
-             10. MICRO-MARKETS & GLOBAL REACH (Matebiz Hallmark)
-        ======================================================== -->
-        <section class="mb-markets-section">
-            <div class="mb-container">
-                <div class="mb-eyebrow">
-                    <?= svcIcon('globe') ?>
-                    <span>GLOBAL REACH &bull; LOCAL NCR PRESENCE</span>
-                </div>
-                <h3 style="font-size: 1.35rem; font-weight: 850; color: #111827; margin: 0 0 6px;">
-                    Serving Clients Across Delhi NCR &amp; International Markets
-                </h3>
-                <p style="font-size: 0.88rem; color: #4B5563; max-width: 720px; margin: 0 auto;">
-                    From Connaught Place to Cyber City, and international clients across the USA, UK, Canada, Australia, and UAE:
-                </p>
-                <div class="mb-market-pills">
-                    <?php foreach ($microMarkets as $mm): ?>
-                        <span class="mb-market-pill"><?= htmlspecialchars($mm) ?></span>
-                    <?php endforeach; ?>
+        <!-- 9. MARKETS -->
+        <section class="xp-sec xp-mist">
+            <div class="xp-wrap">
+                <div class="xp-market-card">
+                    <span class="xp-kicker">Global reach &bull; Local NCR presence</span>
+                    <h3>Serving Clients Across Delhi NCR &amp; International Markets</h3>
+                    <p>From Connaught Place to Cyber City, and international clients across the USA, UK, Canada, Australia, and UAE:</p>
+                    <div class="xp-places">
+                        <?php foreach ($microMarkets as $mm): ?><span class="xp-place">📍 <?= $e($mm) ?></span><?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ========================================================
-             11. INTERACTIVE FAQ ACCORDION
-        ======================================================== -->
+        <!-- 10. FAQ -->
         <?php if (!empty($faqs)): ?>
-        <section class="mb-faq-section">
-            <div class="mb-container">
-                <div class="mb-section-header">
-                    <div class="mb-eyebrow">
-                        <?= svcIcon('sparkles') ?>
-                        <span>COMMON QUESTIONS</span>
+        <section class="xp-sec">
+            <div class="xp-wrap">
+                <div class="xp-faq-grid">
+                    <div class="xp-head">
+                        <span class="xp-kicker">Common questions</span>
+                        <h2>Frequently Asked <span class="xp-acc">Questions</span></h2>
+                        <i class="xp-bar"></i>
+                        <p>Clear answers to everything you need to know about our <?= $e($title) ?> workflows and delivery standards.</p>
                     </div>
-                    <h2 class="mb-section-title">
-                        Frequently Asked <span class="accent">Questions<svg viewBox="0 0 300 6" preserveAspectRatio="none"><path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg></span>
-                    </h2>
-                    <p class="mb-section-sub">
-                        Clear answers to everything you need to know about our <?= htmlspecialchars($title) ?> workflows and delivery standards.
-                    </p>
-                </div>
-
-                <div class="mb-faq-wrap">
-                    <?php foreach ($faqs as $fIdx => $faq): ?>
-                        <div class="mb-faq-item <?= $fIdx === 0 ? 'active' : '' ?>">
-                            <button type="button" class="mb-faq-btn" onclick="mbToggleFaq(this)" aria-expanded="<?= $fIdx === 0 ? 'true' : 'false' ?>">
-                                <span><?= htmlspecialchars($faq['q'] ?? $faq['question'] ?? '') ?></span>
-                                <span class="mb-faq-btn-icon">
-                                    <?= svcIcon('plus', 16) ?>
-                                </span>
-                            </button>
-                            <div class="mb-faq-answer">
-                                <?= htmlspecialchars($faq['a'] ?? $faq['answer'] ?? '') ?>
+                    <div>
+                        <?php foreach ($faqs as $fIdx => $faq): ?>
+                            <div class="mb-faq-item <?= $fIdx === 0 ? 'active' : '' ?>">
+                                <button type="button" class="mb-faq-btn" onclick="mbToggleFaq(this)" aria-expanded="<?= $fIdx === 0 ? 'true' : 'false' ?>">
+                                    <span><?= $e($faq['q'] ?? $faq['question'] ?? '') ?></span>
+                                    <span class="mb-faq-btn-icon"><?= svcIcon('plus', 16) ?></span>
+                                </button>
+                                <div class="mb-faq-answer"><?= $e($faq['a'] ?? $faq['answer'] ?? '') ?></div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </section>
         <?php endif; ?>
 
-        <!-- ========================================================
-             12. CONVERSION CTA BANNER
-        ======================================================== -->
-        <section class="mb-cta-section">
-            <div class="mb-container">
-                <div class="mb-cta-box">
-                    <div class="mb-cta-pill">
-                        <?= svcIcon('rocket') ?>
-                        <span>READY TO GROW YOUR BUSINESS?</span>
+        <!-- 11. FINAL CTA -->
+        <section class="xp-cta" id="xpCta">
+            <div class="xp-wrap">
+                <div class="xp-cta-card">
+                    <div class="xp-cta-pill"><?= svcIcon('rocket', 15) ?><span>Ready to grow your business?</span></div>
+                    <h2>Ready to Build a High-Performing <span class="xp-acc"><?= $e($title) ?>?</span></h2>
+                    <p>Speak with our senior strategists today for a tailored, complimentary project consultation, competitive gap analysis, and transparent quotation.</p>
+                    <div class="xp-actions">
+                        <a href="/contact.php" class="xp-btn xp-btn--pink trigger-enquiry-modal" data-service="<?= $e($title) ?>"><span>Get Free Consultation</span><?= $ctaArrow ?></a>
+                        <a href="tel:+919999674255" class="xp-btn xp-btn--ghost"><?= svcIcon('phone', 15) ?><span>Call: +91-9999674255</span></a>
                     </div>
-                    <h2>Ready to Build a High-Performing <span><?= htmlspecialchars($title) ?>?</span></h2>
-                    <p>
-                        Speak with our senior strategists today for a tailored, complimentary project consultation, competitive gap analysis, and transparent quotation.
-                    </p>
-
-                    <div class="mb-cta-btns">
-                        <a href="/contact.php" class="mb-btn-primary trigger-enquiry-modal" data-service="<?= htmlspecialchars($title) ?>">
-                            <span>Get Free Consultation</span>
-                            <?= svcIcon('arrow', 16) ?>
-                        </a>
-                        <a href="tel:+919999674255" class="mb-btn-secondary" style="background: rgba(255,255,255,0.1); color: #FFFFFF !important; border-color: rgba(255,255,255,0.25);">
-                            <?= svcIcon('phone', 15) ?>
-                            <span>Call: +91-9999674255</span>
-                        </a>
-                    </div>
-
-                    <div style="margin-top: 20px; font-size: 0.78rem; color: rgba(255,255,255,0.7); display: flex; align-items: center; justify-content: center; gap: 6px;">
-                        <?= svcIcon('shield', 14) ?>
-                        <span>Free Strategy Consultation &bull; Zero Obligation &bull; Tailored Solutions</span>
-                    </div>
+                    <div class="xp-cta-foot"><?= svcIcon('shield', 14) ?><span>Free Strategy Consultation &bull; Zero Obligation &bull; Tailored Solutions</span></div>
                 </div>
             </div>
         </section>
 
+        <div class="xp-sticky" id="xpSticky">
+            <a href="tel:+919999674255" class="xp-btn xp-btn--ghost"><?= svcIcon('phone', 15) ?><span>Call</span></a>
+            <a href="/contact.php" class="xp-btn xp-btn--pink trigger-enquiry-modal" data-service="<?= $e($title) ?>"><span>Free consultation</span><?= $ctaArrow ?></a>
+        </div>
     </main>
 
     <script>
@@ -1998,23 +780,19 @@ function renderServicePageLayout(array $config): void
 
             fetch('/contact.php', {
                 method: 'POST',
-                headers: {
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Accept': 'application/json'
-                },
+                headers: { 'X-Requested-With': 'XMLHttpRequest', 'Accept': 'application/json' },
                 body: formData
             })
             .then(res => res.json())
             .then(data => {
+                feedback.style.display = 'block';
                 if (data.success) {
-                    feedback.style.display = 'block';
                     feedback.style.background = '#ECFDF5';
                     feedback.style.color = '#065F46';
                     feedback.style.border = '1px solid #A7F3D0';
                     feedback.textContent = data.message || 'Thank you! Your enquiry has been received. Our team will contact you shortly.';
                     form.reset();
                 } else {
-                    feedback.style.display = 'block';
                     feedback.style.background = '#FEF2F2';
                     feedback.style.color = '#991B1B';
                     feedback.style.border = '1px solid #FECACA';
@@ -2034,6 +812,16 @@ function renderServicePageLayout(array $config): void
                 btn.innerHTML = originalBtnHtml;
             });
         }
+
+        // Mobile sticky CTA: appears after the hero, hides while the final CTA is on screen
+        (function () {
+            const sticky = document.getElementById('xpSticky'), hero = document.querySelector('.xp-hero'), cta = document.getElementById('xpCta');
+            if (!sticky || !hero || !('IntersectionObserver' in window)) return;
+            let heroOut = false, ctaIn = false;
+            const upd = () => sticky.classList.toggle('on', heroOut && !ctaIn);
+            new IntersectionObserver(e => { heroOut = !e[0].isIntersecting; upd(); }).observe(hero);
+            if (cta) new IntersectionObserver(e => { ctaIn = e[0].isIntersecting; upd(); }, { threshold: 0.2 }).observe(cta);
+        })();
     </script>
 <?php
 }

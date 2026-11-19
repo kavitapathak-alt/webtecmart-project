@@ -179,839 +179,396 @@ function renderSeoSuccessStoriesSection(): void
 
     $maxVisibleKeywords = 6;
 
-    // Icon helper
-    function spoIcon(string $name): string {
-        $icons = [
-            'sparkles' => '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
-            'arrow'    => '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
-            'trending' => '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
-            'clock'    => '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
-            'search'   => '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
-            'external' => '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
-            'rocket'   => '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
-            'trophy'   => '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
-            'chart'    => '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
-            'x'        => '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
-        ];
-        $path = $icons[$name] ?? '';
-        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
+    // Icon helper (guarded so the section can be rendered more than once safely)
+    if (!function_exists('spoIcon')) {
+        function spoIcon(string $name): string {
+            $icons = [
+                'sparkles' => '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
+                'arrow'    => '<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+                'trending' => '<polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>',
+                'clock'    => '<circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>',
+                'search'   => '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+                'external' => '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+                'rocket'   => '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
+                'trophy'   => '<path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/>',
+                'chart'    => '<path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/>',
+                'x'        => '<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+            ];
+            $path = $icons[$name] ?? '';
+            return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
+        }
     }
     ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
     <style>
         /* ============================================================
-           SEO PORTFOLIO SECTION
+           SEO SUCCESS STORIES — "Expo Floor" design
+           Same visual language as the B2B Exhibition SEO page:
+           ink / pink / gold, hard offset shadows, stall awnings,
+           visitor-badge client tags, dot-grid floor.
         ============================================================ */
+        .spo-section, .spo-modal-overlay {
+            --ink: #1A0613;
+            --ink2: #2B0B20;
+            --pink: #C4007A;
+            --pink2: #E0398F;
+            --blush: #FBEAF3;
+            --paper: #FFFFFF;
+            --mist: #F7F4F8;
+            --gold: #FFB547;
+            --mint: #0E9F6E;
+            --text: #2A2430;
+            --mute: #6C6474;
+            --line: rgba(26, 6, 19, .12);
+            --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+            color: var(--text);
+        }
+        .spo-section *, .spo-section *::before, .spo-section *::after,
+        .spo-modal-overlay *, .spo-modal-overlay *::before, .spo-modal-overlay *::after { box-sizing: border-box; }
+        .spo-section h2, .spo-section h3, .spo-modal-overlay h3 { font-family: var(--disp); letter-spacing: -.02em; }
+        .spo-section a:focus-visible, .spo-section button:focus-visible,
+        .spo-modal-overlay a:focus-visible, .spo-modal-overlay button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+        /* ===== Section shell (dot-grid floor) ===== */
         .spo-section {
             position: relative;
             width: 100%;
-            padding: 8px 0;
-            background: #FFF8FC;
+            padding: 84px 0 72px;
+            background-color: var(--mist);
+            background-image: radial-gradient(rgba(26, 6, 19, .07) 1px, transparent 1.2px);
+            background-size: 24px 24px;
             overflow: hidden;
         }
+        .spo-section::before { /* gold scalloped awning edge */
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 18px; z-index: 1; pointer-events: none;
+            background: radial-gradient(circle at 18px 0, var(--gold) 17px, transparent 18px) 0 0 / 36px 18px repeat-x;
+        }
+        .spo-section .container { position: relative; z-index: 2; }
 
-        /* Decorative Background */
-        .spo-bg {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-        }
-        .spo-bg-blob-1 {
-            position: absolute;
-            top: 0; right: 0;
-            width: 50%; height: 50%;
-            background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
-            border-radius: 9999px;
-            filter: blur(64px);
-        }
-        .spo-bg-blob-2 {
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 33.333%; height: 50%;
-            background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
-            border-radius: 9999px;
-            filter: blur(64px);
-        }
-        .spo-bg-shape {
-            position: absolute;
-            fill: none;
-            stroke: #C4007A;
-            opacity: 0.1;
-        }
-        .spo-bg-shape-1 { top: 40px; left: 20px; width: 80px; height: 80px; stroke-width: 2; }
-        .spo-bg-shape-2 { bottom: 40px; right: 20px; width: 96px; height: 96px; stroke-width: 1.5; }
+        /* Decorative background (kept markup, restyled) */
+        .spo-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
+        .spo-bg-blob-1, .spo-bg-blob-2 { position: absolute; border-radius: 50%; filter: blur(80px); }
+        .spo-bg-blob-1 { top: 4%; right: -6%; width: 420px; height: 420px; background: rgba(196, 0, 122, .16); }
+        .spo-bg-blob-2 { bottom: 2%; left: -6%; width: 360px; height: 360px; background: rgba(255, 181, 71, .2); }
+        .spo-bg-shape { position: absolute; fill: none; stroke: var(--ink); opacity: .12; }
+        .spo-bg-shape-1 { top: 70px; left: 24px; width: 90px; height: 90px; stroke-width: 2; }
+        .spo-bg-shape-2 { bottom: 60px; right: 24px; width: 120px; height: 120px; stroke-width: 1.5; }
 
-        /* Header */
-        .spo-header {
-            position: relative;
-            z-index: 10;
-            text-align: center;
-            margin-bottom: 24px;
-        }
+        /* ===== Header ===== */
+        .spo-header { position: relative; z-index: 10; text-align: left; max-width: 720px; margin: 0 0 52px; }
         .spo-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(196, 0, 122, 0.08);
-            border: 1px solid rgba(196, 0, 122, 0.15);
-            padding: 5px 14px;
-            border-radius: 9999px;
-            margin-bottom: 10px;
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 0 0 0 14px;
+            border-left: 4px solid var(--pink); background: none; border-radius: 0; border-top: 0; border-right: 0; border-bottom: 0;
         }
-        .spo-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
-        .spo-pill span {
-            font-size: 0.72rem;
-            color: #C4007A;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
+        .spo-pill svg { width: 14px; height: 14px; color: var(--pink); flex-shrink: 0; }
+        .spo-pill span { font-size: .82rem; font-weight: 700; color: var(--pink); letter-spacing: 0; text-transform: none; }
         .spo-heading {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-            font-weight: 800;
-            color: #111827;
-            margin: 0 0 8px;
-            line-height: 1.18;
-            letter-spacing: -0.02em;
+            font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; line-height: 1.08; color: var(--ink); margin: 0 0 14px;
         }
         .spo-heading .accent {
-            color: #C4007A;
-            position: relative;
-            display: inline-block;
+            position: relative; display: inline-block; color: var(--ink); padding: 0 .12em;
+            background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%);
         }
-        .spo-heading .accent svg {
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 100%;
-            height: 6px;
-        }
-        .spo-subtitle {
-            font-size: 0.95rem;
-            color: #4B5563;
-            max-width: 640px;
-            margin: 0 auto;
-            line-height: 1.55;
+        .spo-heading .accent svg { display: none; }
+        .spo-subtitle { font-size: 1.02rem; color: var(--mute); max-width: 560px; margin: 0; line-height: 1.65; }
+        .spo-header::after { /* stripe bar */
+            content: ''; display: block; width: 84px; height: 7px; margin-top: 20px;
+            background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px);
         }
 
-        /* Case Studies Container */
-        .spo-list {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-        }
+        /* ===== Case list ===== */
+        .spo-list { position: relative; z-index: 10; display: flex; flex-direction: column; gap: 72px; counter-reset: spocase; }
 
-        /* Case Study Block */
         .spo-case {
+            position: relative;
             display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
+            grid-template-columns: minmax(0, 1fr);
+            gap: 44px;
             align-items: start;
             opacity: 0;
             transform: translateY(40px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
+            transition: opacity .7s ease, transform .7s ease;
+            counter-increment: spocase;
         }
-        .spo-case.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .spo-case.visible { opacity: 1; transform: translateY(0); }
+        .spo-case > * { min-width: 0; }
+        .spo-case::before { /* ghost chapter number */
+            content: counter(spocase, decimal-leading-zero);
+            position: absolute; top: -34px; right: 0; z-index: 0; pointer-events: none;
+            font: 800 clamp(4.5rem, 12vw, 9rem)/1 var(--disp); letter-spacing: -.05em;
+            color: transparent; -webkit-text-stroke: 2px rgba(26, 6, 19, .09);
         }
+        .spo-mockup-wrap, .spo-details { position: relative; z-index: 1; }
 
-        /* Mockup Wrapper */
-        .spo-mockup-wrap {
-            position: relative;
+        /* ===== Browser mockup ===== */
+        .spo-mockup-wrap { transition: translate .25s ease; }
+        .spo-mockup-glow { /* gradient plate behind the frame */
+            position: absolute; inset: 0; border-radius: 22px; opacity: .9; translate: 12px 12px; z-index: 0;
         }
-        .spo-mockup-glow {
-            position: absolute;
-            inset: -2px;
-            border-radius: 20px;
-            opacity: 0;
-            filter: blur(12px);
-            transition: opacity 0.5s ease;
-        }
-        .spo-mockup-wrap:hover .spo-mockup-glow { opacity: 0.6; }
-
         .spo-mockup {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            background: #fff;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            position: relative; z-index: 1; border-radius: 20px; overflow: hidden;
+            border: 2px solid var(--ink); background: var(--ink); padding: 10px 10px 10px;
+            box-shadow: 8px 8px 0 var(--ink);
+            transition: translate .25s ease, box-shadow .25s ease;
         }
+        .spo-mockup-wrap:hover .spo-mockup { translate: -4px -4px; box-shadow: 12px 12px 0 var(--pink); }
+        .spo-mockup-wrap:hover .spo-mockup-glow { opacity: 0; }
 
-        /* Browser Chrome */
-        .spo-browser {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            padding: 8px 12px;
-            border-bottom: 1px solid rgba(196, 0, 122, 0.1);
-            background: #FFF8FC;
-        }
-        .spo-browser-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 9999px;
-        }
-        .spo-browser-dot.red { background: rgba(248, 113, 113, 0.6); }
-        .spo-browser-dot.yellow { background: rgba(250, 204, 21, 0.6); }
-        .spo-browser-dot.green { background: rgba(74, 222, 128, 0.6); }
+        .spo-browser { display: flex; align-items: center; gap: 6px; padding: 4px 6px 10px; background: transparent; border: 0; }
+        .spo-browser-dot { width: 11px; height: 11px; border-radius: 50%; background: var(--pink); }
+        .spo-browser-dot.yellow { background: var(--gold); }
+        .spo-browser-dot.green { background: #fff; }
+        .spo-browser-dot.red { background: var(--pink); }
         .spo-browser-url {
-            margin-left: 8px;
-            font-size: 8px;
-            color: #9CA3AF;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            flex: 1; min-width: 0; margin-left: 8px; padding: 6px 12px; border-radius: 8px;
+            background: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .7);
+            font-size: .72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         }
 
-        /* Preview Image */
         .spo-preview {
-            position: relative;
-            height: 224px;
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            cursor: pointer;
-            background: linear-gradient(to bottom right, #FDF0F6, #fff);
+            position: relative; display: flex; align-items: center; justify-content: center;
+            height: 250px; width: 100%; overflow: hidden; cursor: pointer; border-radius: 10px;
+            background: linear-gradient(145deg, #2D051E 0%, var(--pink) 60%, #E98EBE 100%);
         }
-        .spo-preview img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.6s ease;
-        }
+        .spo-preview img { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform .6s ease; }
         .spo-preview img.cover { object-fit: cover; }
-        .spo-preview img.contain {
-            object-fit: contain;
-            padding: 12px;
-            background: linear-gradient(to bottom right, #FDF0F6, #fff);
-        }
+        .spo-preview img.contain { object-fit: contain; padding: 14px; background: #fff; }
         .spo-preview:hover img { transform: scale(1.05); }
+        .spo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26, 6, 19, .55), transparent 55%, rgba(26, 6, 19, .12)); }
 
-        .spo-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent 50%, rgba(0, 0, 0, 0.1));
-        }
-
-        .spo-result-badge {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            border-radius: 9999px;
-            background: #C4007A;
-            color: #fff;
-            font-size: 9px;
-            font-weight: 700;
-            padding: 4px 8px;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        .spo-result-badge { /* gold sticker */
+            position: absolute; top: 14px; right: 14px; z-index: 2; rotate: 3deg;
+            padding: 7px 12px; border-radius: 10px; border: 2px solid var(--ink);
+            background: var(--gold); color: var(--ink); box-shadow: 3px 3px 0 var(--ink);
+            font-family: var(--disp); font-weight: 800; font-size: .78rem; line-height: 1.1;
         }
         .spo-click-hint {
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 8px;
-            padding: 4px 8px;
-            border-radius: 9999px;
-            white-space: nowrap;
+            position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 2;
+            padding: 6px 12px; border-radius: 999px; font-size: .7rem; font-weight: 700; white-space: nowrap;
         }
-        .spo-click-hint.photo {
-            color: rgba(255, 255, 255, 0.5);
-            background: rgba(0, 0, 0, 0.5);
-        }
-        .spo-click-hint.contain {
-            color: #6B7280;
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(196, 0, 122, 0.1);
-        }
+        .spo-click-hint.photo { color: #fff; background: rgba(26, 6, 19, .72); border: 1px solid rgba(255, 255, 255, .3); }
+        .spo-click-hint.contain { color: var(--ink); background: var(--blush); border: 1px solid rgba(196, 0, 122, .3); }
 
-        /* Client Badge */
+        /* Client badge = visitor pass */
         .spo-client-badge {
-            position: absolute;
-            bottom: -16px;
-            left: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #fff;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            border-radius: 12px;
-            padding: 6px 10px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            position: absolute; bottom: -26px; left: 16px; z-index: 3;
+            display: flex; align-items: center; gap: 10px;
+            padding: 8px 14px 8px 10px; border-radius: 12px; background: #fff;
+            border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--gold);
         }
         .spo-client-avatar {
-            width: 28px;
-            height: 28px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            flex-shrink: 0;
+            width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            color: #fff; font-family: var(--disp); font-size: 15px; font-weight: 800; border: 2px solid var(--ink);
         }
-        .spo-client-name {
-            font-size: 10px;
-            font-weight: 600;
-            color: #111827;
-            line-height: 1.1;
-        }
-        .spo-client-country {
-            font-size: 8px;
-            color: #6B7280;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .spo-client-name { font-family: var(--disp); font-size: .85rem; font-weight: 800; color: var(--ink); line-height: 1.15; }
+        .spo-client-country { display: flex; align-items: center; gap: 4px; font-size: .7rem; font-weight: 600; color: var(--mute); }
 
-        /* Details */
-        .spo-details {
-            padding-top: 24px;
-        }
-
-        .spo-meta {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
+        /* ===== Details ===== */
+        .spo-details { padding-top: 14px; }
+        .spo-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 16px; }
         .spo-industry {
-            font-size: 9px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #C4007A;
-            background: rgba(196, 0, 122, 0.1);
-            border: 1px solid rgba(196, 0, 122, 0.2);
-            border-radius: 9999px;
-            padding: 4px 8px;
+            font-size: .74rem; font-weight: 800; color: var(--ink); background: var(--gold);
+            border: 2px solid var(--ink); border-radius: 8px; padding: 5px 11px; text-transform: none; letter-spacing: 0;
         }
-        .spo-duration {
-            font-size: 9px;
-            font-weight: 600;
-            color: #6B7280;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .spo-duration svg { width: 10px; height: 10px; color: #C4007A; }
+        .spo-duration { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; font-weight: 700; color: var(--mute); }
+        .spo-duration svg { width: 14px; height: 14px; color: var(--pink); }
         .spo-website-link {
-            font-size: 9px;
-            font-weight: 600;
-            color: #C4007A;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            text-decoration: none;
+            display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; font-weight: 700;
+            color: var(--pink); text-decoration: none; border-bottom: 2px solid transparent;
         }
-        .spo-website-link:hover { text-decoration: underline; }
-        .spo-website-link svg { width: 10px; height: 10px; }
+        .spo-website-link:hover { border-bottom-color: var(--pink); }
+        .spo-website-link svg { width: 13px; height: 13px; }
 
-        .spo-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 8px;
-        }
-        .spo-description {
-            font-size: 0.75rem;
-            color: #4B5563;
-            line-height: 1.625;
-            margin: 0 0 16px;
-        }
+        .spo-title { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; line-height: 1.12; color: var(--ink); margin: 0 0 12px; }
+        .spo-description { font-size: .98rem; color: var(--mute); line-height: 1.7; margin: 0 0 22px; max-width: 560px; overflow-wrap: anywhere; }
 
-        /* Metrics Grid */
-        .spo-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 6px;
-            margin-bottom: 16px;
-        }
+        /* Metrics = hall signage chips */
+        .spo-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
         .spo-metric {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            gap: 2px;
-            border-radius: 12px;
-            background: rgba(196, 0, 122, 0.05);
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            padding: 6px;
+            display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3px;
+            padding: 14px 6px 12px; border-radius: 14px; background: var(--ink); color: #fff;
+            border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--blush);
+            transition: translate .25s ease;
         }
-        .spo-metric svg {
-            width: 14px;
-            height: 14px;
-            color: #C4007A;
-        }
-        .spo-metric .value {
-            font-size: 0.875rem;
-            font-weight: 700;
-            color: #111827;
-            font-variant-numeric: tabular-nums;
-        }
-        .spo-metric .label {
-            font-size: 9px;
-            color: #6B7280;
-            line-height: 1.2;
-        }
+        .spo-metric:hover { translate: 0 -4px; }
+        .spo-metric svg { width: 18px; height: 18px; color: var(--pink2); }
+        .spo-metric .value { font-family: var(--disp); font-size: 1.5rem; font-weight: 800; line-height: 1.05; color: var(--gold); font-variant-numeric: tabular-nums; }
+        .spo-metric .label { font-size: .68rem; font-weight: 600; opacity: .8; line-height: 1.25; }
 
         /* Keywords */
-        .spo-keywords-title {
-            font-size: 9px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: #6B7280;
-            margin-bottom: 8px;
-        }
-        .spo-keywords {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px 8px;
-        }
-        .spo-keyword {
-            font-size: 9px;
-            padding: 4px 8px;
-            border-radius: 9999px;
-            line-height: 1;
-            white-space: nowrap;
-        }
-        .spo-keyword.top {
-            font-weight: 600;
-            background: #C4007A;
-            color: #fff;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        }
-        .spo-keyword.regular {
-            font-weight: 500;
-            background: #FDF0F6;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            color: #374151;
-        }
+        .spo-keywords-title { font-size: .8rem; font-weight: 800; color: var(--ink); margin-bottom: 12px; padding-left: 10px; border-left: 4px solid var(--gold); text-transform: none; letter-spacing: 0; }
+        .spo-keywords { display: flex; flex-wrap: wrap; gap: 8px; }
+        .spo-keyword { font-size: .76rem; padding: 7px 12px; border-radius: 999px; line-height: 1.1; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+        .spo-keyword.top { font-weight: 700; background: var(--pink); color: #fff; border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); }
+        .spo-keyword.regular { font-weight: 600; background: var(--blush); color: var(--ink); border: 2px solid rgba(26, 6, 19, .14); }
         .spo-keyword-more {
-            font-size: 9px;
-            font-weight: 600;
-            padding: 4px 8px;
-            border-radius: 9999px;
-            border: 1px dashed rgba(196, 0, 122, 0.4);
-            color: #C4007A;
-            text-decoration: none;
-            line-height: 1;
-            transition: all 0.2s ease;
+            font-size: .76rem; font-weight: 800; padding: 7px 12px; border-radius: 999px; line-height: 1.1;
+            border: 2px dashed var(--pink); color: var(--pink); text-decoration: none; background: #fff; transition: background .2s ease;
         }
-        .spo-keyword-more:hover {
-            background: rgba(196, 0, 122, 0.1);
-        }
+        .spo-keyword-more:hover { background: var(--blush); }
 
-        /* View Full Case Study Link */
         .spo-view-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-top: 16px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            color: #C4007A;
-            text-decoration: none;
-            transition: gap 0.3s ease;
+            display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 12px 20px;
+            border-radius: 12px; border: 2px solid var(--pink); background: #fff; color: var(--pink);
+            font-size: .88rem; font-weight: 700; text-decoration: none; line-height: 1;
+            transition: background .2s ease, gap .3s ease;
         }
-        .spo-view-link:hover { gap: 8px; }
-        .spo-view-link svg {
-            width: 12px;
-            height: 12px;
-            transition: transform 0.3s ease;
-        }
-        .spo-view-link:hover svg { transform: translateX(2px); }
+        .spo-view-link:hover { background: var(--blush); gap: 12px; }
+        .spo-view-link svg { width: 15px; height: 15px; }
 
-        /* ===== CTA CARD ===== */
+        /* ===== CTA ===== */
         .spo-cta {
-            position: relative;
-            margin-top: 40px;
-            border-radius: 20px;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            background: #fff;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            text-align: center;
-            overflow: hidden;
+            position: relative; margin-top: 84px; overflow: hidden; border-radius: 26px;
+            background: var(--ink); color: #fff; padding: 56px 28px; text-align: center;
         }
         .spo-cta::before {
-            content: '';
-            position: absolute;
-            top: 0; right: 0;
-            width: 144px; height: 144px;
-            background: rgba(196, 0, 122, 0.05);
-            border-radius: 9999px;
-            filter: blur(48px);
+            content: ''; position: absolute; inset: 0; z-index: 0; width: auto; height: auto; filter: none; border-radius: 0;
+            background: radial-gradient(50% 80% at 50% 120%, rgba(196, 0, 122, .7), transparent 70%),
+                        radial-gradient(rgba(255, 255, 255, .1) 1px, transparent 1.2px) 0 0 / 26px 26px;
         }
-        .spo-cta::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 112px; height: 112px;
-            background: rgba(196, 0, 122, 0.05);
-            border-radius: 9999px;
-            filter: blur(48px);
+        .spo-cta::after { /* conic glow border */
+            content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px; pointer-events: none;
+            width: auto; height: auto; filter: none; bottom: auto; left: 0; right: 0; top: 0;
+            background: conic-gradient(from var(--spoa, 0deg), var(--pink), var(--gold), var(--pink2), var(--pink));
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+            animation: spoAngle 6s linear infinite;
         }
+        @property --spoa { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+        @keyframes spoAngle { to { --spoa: 360deg; } }
         .spo-cta-inner { position: relative; z-index: 10; }
         .spo-cta-icon {
-            width: 40px;
-            height: 40px;
-            margin: 0 auto 12px;
-            border-radius: 16px;
-            background: linear-gradient(to bottom right, #C4007A, #E0398F);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.2);
+            width: 58px; height: 58px; margin: 0 auto 20px; border-radius: 14px; display: grid; place-items: center;
+            background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pink);
         }
-        .spo-cta-icon svg { width: 20px; height: 20px; color: #fff; }
-        .spo-cta h3 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #111827;
-            margin: 0 0 8px;
-        }
-        .spo-cta h3 .accent { color: #C4007A; }
-        .spo-cta p {
-            font-size: 0.75rem;
-            color: #6B7280;
-            max-width: 672px;
-            margin: 0 auto 20px;
-        }
-        .spo-cta-buttons {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .spo-cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            border-radius: 9999px;
-            padding: 10px 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-decoration: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-        .spo-cta-btn.primary {
-            background: linear-gradient(to right, #C4007A, #E0398F);
-            color: #fff;
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
-        }
-        .spo-cta-btn.primary:hover {
-            transform: scale(1.02);
-            box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
-        }
-        .spo-cta-btn.primary svg { width: 12px; height: 12px; }
-        .spo-cta-btn.secondary {
-            border: 2px solid #C4007A;
-            color: #C4007A;
-            background: transparent;
-        }
-        .spo-cta-btn.secondary:hover {
-            background: #C4007A;
-            color: #fff;
-        }
+        .spo-cta-icon svg { width: 28px; height: 28px; color: var(--ink); }
+        .spo-cta h3 { font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; line-height: 1.1; color: #fff; margin: 0 auto 14px; max-width: 760px; }
+        .spo-cta h3 .accent { color: var(--gold); }
+        .spo-cta p { max-width: 600px; margin: 0 auto 30px; color: rgba(255, 255, 255, .8); line-height: 1.65; font-size: 1rem; }
+        .spo-cta-buttons { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 14px; }
 
-        /* Bottom Decorative */
-        .spo-bottom-deco {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 32px;
+        .spo-cta-btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            padding: 14px 26px; border-radius: 12px; font-weight: 700; font-size: .95rem; line-height: 1.2;
+            text-decoration: none; cursor: pointer; border: 2px solid transparent; text-align: center;
+            transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
         }
-        .spo-bottom-line {
-            width: 32px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
-        }
-        .spo-bottom-line.right {
-            background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
-        }
-        .spo-bottom-dots {
-            display: flex;
-            gap: 4px;
-            align-items: center;
-        }
-        .spo-bottom-dots span {
-            display: block;
-            width: 4px; height: 4px;
-            border-radius: 9999px;
-            background: rgba(196, 0, 122, 0.2);
-        }
-        .spo-bottom-dots span.active {
-            width: 16px;
-            background: #C4007A;
-        }
+        .spo-cta-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+        .spo-cta-btn.primary { background: var(--pink); color: #fff; box-shadow: 0 6px 0 #7E004E; }
+        .spo-cta-btn.primary:hover { translate: 0 2px; box-shadow: 0 4px 0 #7E004E; transform: none; }
+        .spo-cta-btn.primary:active { translate: 0 6px; box-shadow: 0 0 0 #7E004E; }
+        .spo-cta-btn.secondary { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .35); }
+        .spo-cta-btn.secondary:hover { background: rgba(255, 255, 255, .1); border-color: #fff; color: #fff; }
+
+        /* Bottom deco */
+        .spo-bottom-deco { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 44px; }
+        .spo-bottom-line { width: 48px; height: 3px; background: linear-gradient(to right, transparent, var(--ink)); }
+        .spo-bottom-line.right { background: linear-gradient(to left, transparent, var(--ink)); }
+        .spo-bottom-dots { display: flex; gap: 5px; align-items: center; }
+        .spo-bottom-dots span { display: block; width: 7px; height: 7px; border-radius: 50%; background: rgba(26, 6, 19, .2); }
+        .spo-bottom-dots span.active { width: 26px; border-radius: 99px; background: var(--pink); }
 
         /* ===== MODAL ===== */
         .spo-modal-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 8px;
-            opacity: 0;
-            transition: opacity 0.25s ease;
+            position: fixed; inset: 0; z-index: 9999; display: none; align-items: center; justify-content: center;
+            padding: 12px; opacity: 0; transition: opacity .25s ease;
         }
-        .spo-modal-overlay.open {
-            display: flex;
-            opacity: 1;
-        }
-        .spo-modal-backdrop {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(4px);
-        }
+        .spo-modal-overlay.open { display: flex; opacity: 1; }
+        .spo-modal-backdrop { position: absolute; inset: 0; background: rgba(26, 6, 19, .78); backdrop-filter: blur(5px); }
         .spo-modal {
-            position: relative;
-            width: 100%;
-            max-width: 672px;
-            max-height: 90vh;
-            overflow-y: auto;
-            border-radius: 20px;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            background: #fff;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transform: translateY(20px) scale(0.97);
-            transition: transform 0.25s ease;
+            position: relative; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto;
+            border-radius: 22px; border: 2px solid var(--ink); background: #fff;
+            box-shadow: 10px 10px 0 var(--gold);
+            transform: translateY(20px) scale(.97); transition: transform .25s ease;
         }
-        .spo-modal-overlay.open .spo-modal {
-            transform: translateY(0) scale(1);
-        }
+        .spo-modal-overlay.open .spo-modal { transform: translateY(0) scale(1); }
         .spo-modal-close {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            z-index: 10;
-            width: 32px;
-            height: 32px;
-            border-radius: 9999px;
-            background: rgba(196, 0, 122, 0.1);
-            color: #C4007A;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s ease;
+            position: absolute; top: 14px; right: 14px; z-index: 10; width: 38px; height: 38px; border-radius: 10px;
+            display: grid; place-items: center; cursor: pointer;
+            background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+            transition: translate .15s, box-shadow .15s, background .2s;
         }
-        .spo-modal-close:hover { background: rgba(196, 0, 122, 0.2); }
+        .spo-modal-close:hover { translate: 0 2px; box-shadow: 0 1px 0 var(--ink); background: #fff; }
         .spo-modal-close svg { width: 16px; height: 16px; }
 
         .spo-modal-hero {
-            height: 112px;
-            position: relative;
-            display: flex;
-            align-items: flex-end;
-            padding: 16px;
-            overflow: hidden;
+            position: relative; display: flex; align-items: flex-end; height: 150px; padding: 20px; overflow: hidden;
+            border-bottom: 2px solid var(--ink); background: var(--ink);
         }
-        .spo-modal-hero img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-        }
+        .spo-modal-hero img { position: absolute; inset: 0; width: 100%; height: 100%; }
         .spo-modal-hero img.cover { object-fit: cover; }
-        .spo-modal-hero img.contain {
-            object-fit: contain;
-            padding: 8px;
-            background: #FDF0F6;
-        }
-        .spo-modal-hero-tint {
-            position: absolute;
-            inset: 0;
-        }
-        .spo-modal-hero-content {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        .spo-modal-hero img.contain { object-fit: contain; padding: 10px; background: var(--blush); }
+        .spo-modal-hero-tint { position: absolute; inset: 0; }
+        .spo-modal-hero-content { position: relative; z-index: 10; display: flex; align-items: center; gap: 12px; }
         .spo-modal-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 9999px;
-            background: rgba(255, 255, 255, 0.2);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
+            width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
+            background: var(--gold); color: var(--ink); border: 2px solid var(--ink);
+            font-family: var(--disp); font-size: 1.15rem; font-weight: 800;
         }
-        .spo-modal-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1.2;
-        }
-        .spo-modal-country {
-            font-size: 10px;
-            color: rgba(255, 255, 255, 0.8);
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
+        .spo-modal-title { font-family: var(--disp); font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.15; text-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
+        .spo-modal-country { display: flex; align-items: center; gap: 4px; font-size: .78rem; font-weight: 600; color: rgba(255, 255, 255, .9); }
+        .spo-modal-body { padding: 22px 20px 26px; }
+        .spo-modal-body .spo-description { max-width: none; }
+        .spo-modal-body .spo-metric { box-shadow: 3px 3px 0 var(--blush); }
 
-        .spo-modal-body {
-            padding: 16px;
+        /* ===== Responsive ===== */
+        @media (min-width: 576px) {
+            .spo-preview { height: 300px; }
+            .spo-cta-buttons { flex-direction: row; align-items: center; }
+            .spo-modal-overlay { padding: 28px; }
+            .spo-modal-body { padding: 28px; }
         }
-
-        /* ============================================================
-           RESPONSIVE
-        ============================================================ */
-
-        @media (min-width: 480px) {
-            .spo-section { padding: 24px 0 22px; }
-            .spo-pill { gap: 8px; padding: 8px 12px; }
-            .spo-pill svg { width: 14px; height: 14px; }
-            .spo-pill span { font-size: 11px; }
-            .spo-heading { font-size: 1.875rem; }
-            .spo-subtitle { font-size: 0.875rem; }
-            .spo-list { gap: 24px; }
-            .spo-browser { gap: 6px; padding: 10px 14px; }
-            .spo-browser-dot { width: 10px; height: 10px; }
-            .spo-browser-url { font-size: 9px; }
-            .spo-preview { height: 256px; }
-            .spo-result-badge { font-size: 10px; padding: 4px 8px; top: 12px; right: 12px; }
-            .spo-click-hint { font-size: 9px; padding: 4px 8px; }
-            .spo-client-badge { bottom: -20px; padding: 8px 12px; gap: 12px; }
-            .spo-client-avatar { width: 32px; height: 32px; font-size: 14px; }
-            .spo-client-name { font-size: 12px; }
-            .spo-client-country { font-size: 9px; }
-            .spo-details { padding-top: 32px; }
-            .spo-industry, .spo-duration, .spo-website-link { font-size: 10px; padding: 4px 10px; }
-            .spo-title { font-size: 1.125rem; margin-bottom: 8px; }
-            .spo-description { font-size: 0.875rem; margin-bottom: 20px; }
-            .spo-metrics { gap: 8px; margin-bottom: 20px; }
-            .spo-metric { padding: 8px; }
-            .spo-metric svg { width: 16px; height: 16px; }
-            .spo-metric .value { font-size: 1rem; }
-            .spo-metric .label { font-size: 10px; }
-            .spo-keywords-title { font-size: 10px; }
-            .spo-keyword, .spo-keyword-more { font-size: 10px; padding: 6px 10px; }
-            .spo-view-link { font-size: 0.875rem; }
-            .spo-view-link svg { width: 14px; height: 14px; }
-            .spo-cta { margin-top: 24px; padding: 24px; border-radius: 24px; }
-            .spo-cta-icon { width: 48px; height: 48px; }
-            .spo-cta-icon svg { width: 24px; height: 24px; }
-            .spo-cta h3 { font-size: 1.5rem; }
-            .spo-cta p { font-size: 0.875rem; margin-bottom: 24px; }
-            .spo-cta-buttons { flex-direction: row; gap: 12px; }
-            .spo-cta-btn { padding: 12px 24px; font-size: 0.875rem; }
-            .spo-cta-btn.primary svg { width: 14px; height: 14px; }
-            .spo-bottom-deco { margin-top: 36px; gap: 12px; }
-            .spo-bottom-line { width: 40px; }
-            .spo-bottom-dots { gap: 4px; }
-            .spo-bottom-dots span { width: 6px; height: 6px; }
-            .spo-bottom-dots span.active { width: 20px; }
-            .spo-modal-hero { height: 128px; padding: 20px; }
-            .spo-modal-avatar { width: 44px; height: 44px; font-size: 1.125rem; }
-            .spo-modal-title { font-size: 1.125rem; }
-            .spo-modal-country { font-size: 12px; }
-            .spo-modal-body { padding: 20px; }
-        }
-
-        @media (min-width: 640px) {
-            .spo-bg-shape-1 { width: 96px; height: 96px; top: 80px; left: 40px; }
-            .spo-bg-shape-2 { width: 128px; height: 128px; bottom: 80px; right: 40px; }
-        }
-
         @media (min-width: 768px) {
-            .spo-section { padding: 24px 0 22px; }
-            .spo-heading { font-size: 1.875rem; }
-            .spo-subtitle { font-size: 1rem; }
-            .spo-list { gap: 28px; }
-            .spo-browser { gap: 6px; padding: 12px 16px; }
-            .spo-browser-dot { width: 10px; height: 10px; }
-            .spo-browser-url { font-size: 10px; margin-left: 12px; }
-            .spo-preview { height: 288px; }
-            .spo-result-badge { font-size: 12px; padding: 4px 12px; top: 16px; right: 16px; }
-            .spo-click-hint { font-size: 12px; padding: 4px 12px; bottom: 16px; }
-            .spo-client-badge { bottom: -20px; left: 24px; padding: 10px; gap: 12px; }
-            .spo-client-avatar { width: 36px; height: 36px; font-size: 14px; }
-            .spo-client-name { font-size: 12px; }
-            .spo-client-country { font-size: 10px; }
-            .spo-details { padding-top: 32px; }
-            .spo-industry, .spo-duration, .spo-website-link { font-size: 11px; }
-            .spo-title { font-size: 1.25rem; margin-bottom: 12px; }
-            .spo-description { font-size: 1rem; margin-bottom: 24px; }
-            .spo-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
-            .spo-metric { padding: 12px; gap: 4px; }
-            .spo-metric svg { width: 20px; height: 20px; }
-            .spo-metric .value { font-size: 1.25rem; }
-            .spo-metric .label { font-size: 11px; }
-            .spo-keywords-title { font-size: 12px; margin-bottom: 12px; }
-            .spo-keyword, .spo-keyword-more { font-size: 12px; padding: 8px 12px; }
-            .spo-view-link { font-size: 0.875rem; margin-top: 24px; }
-            .spo-cta { margin-top: 28px; padding: 32px; }
-            .spo-cta-icon { width: 56px; height: 56px; margin-bottom: 20px; }
-            .spo-cta-icon svg { width: 28px; height: 28px; }
-            .spo-cta h3 { font-size: 1.875rem; margin-bottom: 12px; }
-            .spo-cta p { font-size: 1rem; margin-bottom: 32px; }
-            .spo-cta-buttons { gap: 16px; }
-            .spo-cta-btn { padding: 14px 32px; font-size: 1rem; }
-            .spo-cta-btn.primary svg { width: 16px; height: 16px; }
-            .spo-modal-overlay { padding: 32px; }
-            .spo-modal { border-radius: 24px; }
-            .spo-modal-close { top: 16px; right: 16px; width: 36px; height: 36px; }
-            .spo-modal-close svg { width: 16px; height: 16px; }
-            .spo-modal-hero { height: 160px; padding: 24px; }
-            .spo-modal-avatar { width: 48px; height: 48px; font-size: 1.125rem; }
-            .spo-modal-title { font-size: 1.25rem; }
-            .spo-modal-body { padding: 24px; }
+            .spo-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+            .spo-metric .value { font-size: 1.6rem; }
+            .spo-cta { padding: 68px 48px; }
         }
-
-        @media (min-width: 1024px) {
-            .spo-section { padding: 28px 0 26px; }
-            .spo-header { margin-bottom: 24px; }
-            .spo-heading { font-size: 2.25rem; }
-            .spo-bg-shape-1 { width: 128px; height: 128px; top: 80px; left: 40px; }
-            .spo-bg-shape-2 { width: 160px; height: 160px; bottom: 80px; right: 40px; }
-            .spo-list { gap: 32px; }
-            .spo-preview { height: 384px; }
-            .spo-case {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-                gap: 48px;
-            }
+        @media (min-width: 992px) {
+            .spo-section { padding: 100px 0 84px; }
+            .spo-preview { height: 380px; }
+            .spo-case { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 64px; align-items: center; }
             .spo-case.reversed .spo-mockup-wrap { order: 2; }
             .spo-case.reversed .spo-details { order: 1; }
             .spo-details { padding-top: 0; }
+            .spo-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .spo-case.reversed::before { right: auto; left: 0; }
         }
-
-        @media (min-width: 1280px) {
-            .spo-case { gap: 56px; }
-            .spo-cta { padding: 56px; }
+        @media (min-width: 1200px) {
+            .spo-metrics { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+        @media (max-width: 575px) {
+            .spo-section { padding: 64px 0 56px; }
+            .spo-header { margin-bottom: 40px; }
+            .spo-list { gap: 60px; }
+            .spo-mockup { box-shadow: 5px 5px 0 var(--ink); }
+            .spo-mockup-glow { translate: 7px 7px; }
+            .spo-client-badge { left: 10px; bottom: -24px; }
+            .spo-details { padding-top: 22px; }
+            .spo-cta { margin-top: 60px; padding: 44px 20px; border-radius: 20px; }
+            .spo-cta-btn { width: 100%; }
+            .spo-view-link { width: 100%; justify-content: center; }
+            .spo-modal { box-shadow: 6px 6px 0 var(--gold); }
+            .spo-bg-shape { display: none; }
+        }
+        @media (hover: none) {
+            .spo-mockup-wrap:hover .spo-mockup, .spo-metric:hover { translate: none; }
+            .spo-mockup-wrap:hover .spo-mockup { box-shadow: 8px 8px 0 var(--ink); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .spo-case { opacity: 1; transform: none; transition: none; }
+            .spo-cta::after, .spo-preview img { animation: none; transition: none; }
         }
     </style>
 
     <section class="spo-section" id="portfolioSection">
 
         <!-- Decorative Background -->
-        <div class="spo-bg">
+        <div class="spo-bg" aria-hidden="true">
             <div class="spo-bg-blob-1"></div>
             <div class="spo-bg-blob-2"></div>
             <svg class="spo-bg-shape spo-bg-shape-1" viewBox="0 0 100 100">
@@ -1181,7 +738,7 @@ function renderSeoSuccessStoriesSection(): void
             </div>
 
             <!-- Bottom Decorative -->
-            <div class="spo-bottom-deco">
+            <div class="spo-bottom-deco" aria-hidden="true">
                 <div class="spo-bottom-line"></div>
                 <div class="spo-bottom-dots">
                     <span></span><span></span><span></span>
@@ -1202,7 +759,7 @@ function renderSeoSuccessStoriesSection(): void
 
     <script>
         // ===== Data for JS modal =====
-        const SPO_DATA = <?= json_encode($portfolioItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>;
+        const SPO_DATA = <?= json_encode($portfolioItems, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG) ?>;
         const SPO_MAX_KEYWORDS = <?= $maxVisibleKeywords ?>;
 
         // ===== Icon SVGs (for modal) =====
@@ -1216,6 +773,11 @@ function renderSeoSuccessStoriesSection(): void
             arrow:    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`,
             x:        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`,
         };
+
+        // Escape helper so DB-driven text can't break the modal markup
+        function spoEsc(v) {
+            return String(v == null ? '' : v).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+        }
 
         // ===== Scroll animation (fade in on view) =====
         const spoObserver = new IntersectionObserver((entries) => {
@@ -1260,29 +822,28 @@ function renderSeoSuccessStoriesSection(): void
             const isContain = item.imageFit === 'contain';
             const heroBg = item.image
                 ? ''
-                : `background: linear-gradient(135deg, ${item.accentFrom}, ${item.accentTo});`;
+                : `background: linear-gradient(135deg, ${spoEsc(item.accentFrom)}, ${spoEsc(item.accentTo)});`;
 
             const tint = item.image
                 ? (isContain
-                    ? `background: linear-gradient(135deg, ${item.accentFrom}55, ${item.accentTo}55);`
-                    : `background: linear-gradient(135deg, ${item.accentFrom}CC, ${item.accentTo}CC);`)
+                    ? `background: linear-gradient(135deg, ${spoEsc(item.accentFrom)}55, ${spoEsc(item.accentTo)}55);`
+                    : `background: linear-gradient(135deg, ${spoEsc(item.accentFrom)}CC, ${spoEsc(item.accentTo)}CC);`)
                 : '';
 
-            const websiteClean = item.website ? item.website.replace(/^https?:\/\//, '') : '';
             const visitLink = item.website
-                ? `<a href="${item.website}" target="_blank" rel="noopener noreferrer" class="spo-website-link">Visit Website ${SPO_ICONS.external}</a>`
+                ? `<a href="${spoEsc(item.website)}" target="_blank" rel="noopener noreferrer" class="spo-website-link">Visit Website ${SPO_ICONS.external}</a>`
                 : '';
 
             const metricsHtml = item.metrics.map((m) => `
                 <div class="spo-metric">
                     ${SPO_ICONS[m.icon] || ''}
-                    <div class="value">${m.value}${m.suffix}</div>
-                    <div class="label">${m.label}</div>
+                    <div class="value">${spoEsc(m.value)}${spoEsc(m.suffix)}</div>
+                    <div class="label">${spoEsc(m.label)}</div>
                 </div>
             `).join('');
 
             const keywordsHtml = item.keywords.map((k) => `
-                <span class="spo-keyword ${k.top ? 'top' : 'regular'}">${k.text}</span>
+                <span class="spo-keyword ${k.top ? 'top' : 'regular'}">${spoEsc(k.text)}</span>
             `).join('');
 
             content.innerHTML = `
@@ -1292,26 +853,26 @@ function renderSeoSuccessStoriesSection(): void
 
                 <div class="spo-modal-hero" ${item.image ? '' : `style="${heroBg}"`}>
                     ${item.image ? `
-                        <img src="${item.image}" alt="${item.title}" class="${isContain ? 'contain' : 'cover'}">
+                        <img src="${spoEsc(item.image)}" alt="${spoEsc(item.title)}" class="${isContain ? 'contain' : 'cover'}">
                         <div class="spo-modal-hero-tint" style="${tint}"></div>
                     ` : ''}
                     <div class="spo-modal-hero-content">
-                        <div class="spo-modal-avatar">${item.title.charAt(0)}</div>
+                        <div class="spo-modal-avatar">${spoEsc(String(item.title).charAt(0))}</div>
                         <div>
-                            <div class="spo-modal-title">${item.title}</div>
-                            <div class="spo-modal-country"><span>${item.flag}</span> ${item.country}</div>
+                            <div class="spo-modal-title">${spoEsc(item.title)}</div>
+                            <div class="spo-modal-country"><span>${spoEsc(item.flag)}</span> ${spoEsc(item.country)}</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="spo-modal-body">
                     <div class="spo-meta">
-                        <span class="spo-industry">${item.industry}</span>
-                        <span class="spo-duration">${SPO_ICONS.clock} ${item.duration}</span>
+                        <span class="spo-industry">${spoEsc(item.industry)}</span>
+                        <span class="spo-duration">${SPO_ICONS.clock} ${spoEsc(item.duration)}</span>
                         ${visitLink}
                     </div>
 
-                    <p class="spo-description">${item.description}</p>
+                    <p class="spo-description">${spoEsc(item.description)}</p>
 
                     <div class="spo-metrics">${metricsHtml}</div>
 
@@ -1320,7 +881,7 @@ function renderSeoSuccessStoriesSection(): void
                         <div class="spo-keywords">${keywordsHtml}</div>
                     </div>
 
-                    <a href="/contact.php" class="spo-cta-btn primary" style="margin-top: 24px; display: inline-flex;">
+                    <a href="/contact.php" class="spo-cta-btn primary" style="margin-top: 26px; display: inline-flex;">
                         Get Results Like This
                         ${SPO_ICONS.arrow}
                     </a>

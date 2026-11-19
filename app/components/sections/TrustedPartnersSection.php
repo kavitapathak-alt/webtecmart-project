@@ -11,307 +11,151 @@ function renderTrustedPartnersSection(): void
     // Triple the logos for seamless infinite loop
     $trackLogos = $logos ? array_merge($logos, $logos, $logos) : [];
     ?>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
     <style>
         /* ============================================================
-           TRUSTED PARTNERS SECTION — Infinite Marquee
+           TRUSTED PARTNERS — "Expo Floor" design
+           Logos ride a hall-signage strip as exhibitor badge cards:
+           ink borders, hard offset shadows, gold/pink accents.
         ============================================================ */
         .tp-section {
+            --ink: #1A0613;
+            --pink: #C4007A;
+            --pink2: #E0398F;
+            --blush: #FBEAF3;
+            --mist: #F7F4F8;
+            --gold: #FFB547;
+            --mute: #6C6474;
+            --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             position: relative;
             width: 100%;
-            padding: 24px 0;
-            background: #FFF8FC;
+            padding: 64px 0 56px;
+            background: var(--mist);
             overflow: hidden;
-            border-top: 1px solid rgba(196, 0, 122, 0.05);
-            border-bottom: 1px solid rgba(196, 0, 122, 0.05);
+            border-top: 3px solid var(--ink);
+            border-bottom: 3px solid var(--ink);
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
+        .tp-section *, .tp-section *::before, .tp-section *::after { box-sizing: border-box; }
+        .tp-section button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
 
-        /* Edge fade overlays (full height) */
-        .tp-edge {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            width: 25%;
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .tp-edge-left {
-            left: 0;
-            background: linear-gradient(to right, #FFF8FC, transparent);
-        }
-
-        .tp-edge-right {
-            right: 0;
-            background: linear-gradient(to left, #FFF8FC, transparent);
-        }
+        /* Old full-height edge overlays are replaced by the marquee fades
+           (they would wash out the left-aligned header). Markup is kept. */
+        .tp-edge { display: none; }
 
         /* ===== Header ===== */
-        .tp-header {
-            text-align: center;
-            margin-bottom: 24px;
-        }
-
+        .tp-header { text-align: left; max-width: 720px; margin: 0 0 36px; }
         .tp-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(196, 0, 122, 0.08);
-            border: 1px solid rgba(196, 0, 122, 0.15);
-            padding: 5px 14px;
-            border-radius: 9999px;
-            margin-bottom: 10px;
+            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 0 0 0 14px;
+            background: none; border: 0; border-left: 4px solid var(--pink); border-radius: 0;
         }
-
-        .tp-badge svg {
-            width: 13px;
-            height: 13px;
-            color: #C4007A;
-            flex-shrink: 0;
-        }
-
-        .tp-badge span {
-            font-size: 0.72rem;
-            color: #C4007A;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
+        .tp-badge svg { width: 14px; height: 14px; color: var(--pink); flex-shrink: 0; }
+        .tp-badge span { font-size: .82rem; color: var(--pink); font-weight: 700; letter-spacing: 0; text-transform: none; }
 
         .tp-heading {
-            font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-            font-weight: 800;
-            color: #111827;
-            margin: 0 0 8px;
-            line-height: 1.18;
-            letter-spacing: -0.02em;
+            font-family: var(--disp); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800;
+            color: var(--ink); margin: 0 0 14px; line-height: 1.08; letter-spacing: -.02em;
         }
-
         .tp-heading .brand-highlight {
-            color: #C4007A;
-            position: relative;
-            display: inline-block;
+            position: relative; display: inline-block; color: var(--ink); padding: 0 .12em;
+            background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%);
         }
-
-        .tp-heading .brand-highlight svg {
-            position: absolute;
-            left: 0;
-            bottom: -4px;
-            width: 100%;
-            height: 6px;
-            pointer-events: none;
-        }
-
-        .tp-subtitle {
-            font-size: 0.95rem;
-            color: #4B5563;
-            max-width: 640px;
-            margin: 0 auto;
-            line-height: 1.55;
+        .tp-heading .brand-highlight svg { display: none; }
+        .tp-subtitle { font-size: 1.02rem; color: var(--mute); max-width: 600px; margin: 0; line-height: 1.65; }
+        .tp-header::after { /* stripe bar */
+            content: ''; display: block; width: 84px; height: 7px; margin-top: 20px;
+            background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px);
         }
 
         /* ===== Marquee ===== */
-        .tp-marquee-wrap {
-            position: relative;
-        }
+        .tp-marquee-wrap { position: relative; }
+        .tp-marquee-fade { position: absolute; top: 0; height: 100%; z-index: 10; pointer-events: none; width: 32px; }
+        .tp-marquee-fade-left { left: 0; background: linear-gradient(to right, var(--mist), transparent); }
+        .tp-marquee-fade-right { right: 0; background: linear-gradient(to left, var(--mist), transparent); }
 
-        /* Gradient overlays (marquee specific) */
-        .tp-marquee-fade {
-            position: absolute;
-            top: 0;
-            height: 100%;
-            z-index: 10;
-            pointer-events: none;
-            width: 32px;
-        }
-
-        .tp-marquee-fade-left {
-            left: 0;
-            background: linear-gradient(to right, #FFF8FC, transparent);
-        }
-
-        .tp-marquee-fade-right {
-            right: 0;
-            background: linear-gradient(to left, #FFF8FC, transparent);
-        }
-
-        /* Marquee viewport */
-        .tp-marquee {
-            overflow: hidden;
-            width: 100%;
-        }
-
-        /* Marquee track */
-        .tp-marquee:hover .tp-track { animation-play-state: paused; }
-        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
-        .tp-logo-item:hover { transform: scale(1.08); }
+        .tp-marquee { overflow: hidden; width: 100%; }
         .tp-track {
-            display: flex;
-            width: max-content;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 0;
+            display: flex; width: max-content; align-items: center; gap: 16px;
+            padding: 14px 10px 22px; /* room for the hard shadow */
             will-change: transform;
         }
 
-        /* ===== Logo Card ===== */
+        /* ===== Logo card (exhibitor badge) ===== */
         .tp-card {
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #fff;
-            border-radius: 16px;
-            border: 1px solid rgba(196, 0, 122, 0.1);
-            padding: 8px 10px;
-            width: 120px;
-            height: 80px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            width: 140px; height: 88px; padding: 10px 12px;
+            background: #fff; border: 2px solid var(--ink); border-radius: 14px;
+            box-shadow: 4px 4px 0 var(--ink);
+            transition: translate .25s ease, box-shadow .25s ease;
         }
+        .tp-card:nth-child(3n+2) { box-shadow: 4px 4px 0 var(--gold); }
+        .tp-card:nth-child(3n) { box-shadow: 4px 4px 0 var(--pink); }
+        .tp-card:hover { translate: -3px -3px; box-shadow: 7px 7px 0 var(--pink); }
+        .tp-card-inner { position: relative; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+        .tp-card img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform .3s ease; }
+        .tp-card:hover img { transform: scale(1.06); }
 
-        .tp-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1), 0 4px 6px -2px rgba(196, 0, 122, 0.05);
-            transform: translateY(-4px);
-            border-color: rgba(196, 0, 122, 0.3);
-        }
-
-        .tp-card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .tp-card img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            transition: all 0.3s ease;
-        }
-
-        .tp-card:hover img {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-        }
-
-        /* ===== Dots ===== */
-        .tp-dots {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            margin-top: 24px;
-        }
-
-        .tp-dots-line {
-            width: 32px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
-        }
-
-        .tp-dots-line-right {
-            background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
-        }
-
-        .tp-dots-inner {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-
+        /* ===== Dots (bar pagination) ===== */
+        .tp-dots { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 18px; }
+        .tp-dots-line { width: 40px; height: 3px; background: linear-gradient(to right, transparent, var(--ink)); }
+        .tp-dots-line-right { background: linear-gradient(to left, transparent, var(--ink)); }
+        .tp-dots-inner { display: flex; align-items: center; gap: 8px; }
         .tp-dot {
-            height: 4px;
-            width: 4px;
-            border-radius: 9999px;
-            background: rgba(196, 0, 122, 0.2);
-            border: none;
-            padding: 0;
-            cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 6px; width: 24px; border-radius: 0; border: none; padding: 0; cursor: pointer;
+            background: rgba(26, 6, 19, .22);
+            transition: background .3s ease, width .4s cubic-bezier(.4, 0, .2, 1);
         }
-
-        .tp-dot:hover {
-            background: rgba(196, 0, 122, 0.4);
-        }
-
-        .tp-dot.active {
-            width: 16px;
-            background: #C4007A;
-        }
+        .tp-dot:hover { background: rgba(196, 0, 122, .55); }
+        .tp-dot.active { width: 44px; background: var(--pink); }
 
         /* ============================================================
            RESPONSIVE
         ============================================================ */
-
-        /* Small (≥ 640px) */
         @media (min-width: 640px) {
-            .tp-section { padding: 32px 0; }
-            .tp-header { margin-bottom: 32px; }
-            .tp-badge { gap: 8px; padding: 8px 12px; margin-bottom: 16px; }
-            .tp-badge svg { width: 14px; height: 14px; }
-            .tp-badge span { font-size: 11px; }
-            .tp-heading { font-size: 1.5rem; }
-            .tp-subtitle { font-size: 0.875rem; margin-top: 8px; }
-            .tp-marquee:hover .tp-track { animation-play-state: paused; }
-        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
-        .tp-logo-item:hover { transform: scale(1.08); }
-        .tp-track { gap: 16px; padding: 16px 0; }
-            .tp-card { width: 150px; height: 95px; padding: 10px 12px; border-radius: 18px; }
+            .tp-track { gap: 20px; }
+            .tp-card { width: 160px; height: 100px; padding: 12px 14px; }
             .tp-marquee-fade { width: 48px; }
-            .tp-dots { gap: 12px; margin-top: 28px; }
-            .tp-dots-line { width: 40px; }
-            .tp-dots-inner { gap: 6px; }
-            .tp-dot { height: 6px; width: 6px; }
-            .tp-dot.active { width: 20px; }
         }
-
-        /* Medium (≥ 768px) */
         @media (min-width: 768px) {
-            .tp-section { padding: 40px 0; }
-            .tp-header { margin-bottom: 40px; }
-            .tp-badge svg { width: 16px; height: 16px; }
-            .tp-badge span { font-size: 14px; }
-            .tp-heading { font-size: 1.875rem; }
-            .tp-subtitle { font-size: 1rem; }
-            .tp-marquee:hover .tp-track { animation-play-state: paused; }
-        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
-        .tp-logo-item:hover { transform: scale(1.08); }
-        .tp-track { gap: 20px; }
-            .tp-card { width: 180px; height: 110px; padding: 12px 16px; border-radius: 20px; }
+            .tp-section { padding: 80px 0 68px; }
+            .tp-header { margin-bottom: 44px; }
+            .tp-track { gap: 24px; }
+            .tp-card { width: 190px; height: 115px; padding: 14px 16px; border-radius: 16px; }
             .tp-marquee-fade { width: 64px; }
-            .tp-dots { margin-top: 32px; }
-            .tp-dots-line { width: 48px; }
-            .tp-dot.active { width: 24px; }
         }
-
-        /* Large (≥ 1024px) */
         @media (min-width: 1024px) {
-            .tp-section { padding: 48px 0; }
-            .tp-marquee:hover .tp-track { animation-play-state: paused; }
-        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
-        .tp-logo-item:hover { transform: scale(1.08); }
-        .tp-track { gap: 24px; }
-            .tp-card { width: 210px; height: 130px; padding: 16px 20px; }
+            .tp-track { gap: 28px; }
+            .tp-card { width: 220px; height: 132px; padding: 16px 20px; }
             .tp-marquee-fade { width: 96px; }
         }
-
-        /* Extra Large (≥ 1280px) */
         @media (min-width: 1280px) {
-            .tp-marquee:hover .tp-track { animation-play-state: paused; }
-        .tp-logo-item { transition: transform 0.3s ease, filter 0.3s ease; }
-        .tp-logo-item:hover { transform: scale(1.08); }
-        .tp-track { gap: 28px; }
+            .tp-track { gap: 32px; }
             .tp-card { width: 240px; height: 145px; }
             .tp-marquee-fade { width: 128px; }
+        }
+        @media (max-width: 575px) {
+            .tp-section { padding: 52px 0 44px; }
+            .tp-card { box-shadow: 3px 3px 0 var(--ink); }
+            .tp-card:nth-child(3n+2) { box-shadow: 3px 3px 0 var(--gold); }
+            .tp-card:nth-child(3n) { box-shadow: 3px 3px 0 var(--pink); }
+            .tp-dot { width: 18px; }
+            .tp-dot.active { width: 34px; }
+        }
+        @media (hover: none) {
+            .tp-card:hover { translate: none; box-shadow: 4px 4px 0 var(--ink); }
+            .tp-card:hover img { transform: none; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .tp-card, .tp-card img, .tp-dot { transition: none; }
         }
     </style>
 
     <section class="tp-section" id="trustedPartners">
 
-        <!-- Decorative edge overlays -->
+        <!-- Decorative edge overlays (hidden, replaced by marquee fades) -->
         <div class="tp-edge tp-edge-left"></div>
         <div class="tp-edge tp-edge-right"></div>
 
@@ -401,6 +245,9 @@ function renderTrustedPartnersSection(): void
 
             if (!track || !wrap) return;
 
+            // ===== Respect reduced motion (no auto-scroll, dots still work) =====
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
             // ===== State =====
             let position = 0;                // current translateX offset in px
             let setWidth = 0;                // width of ONE full set of logos
@@ -434,7 +281,7 @@ function renderTrustedPartnersSection(): void
                         }
                     }
                     // Auto-scroll (unless paused)
-                    else if (!isPaused) {
+                    else if (!isPaused && !prefersReduced) {
                         position += SPEED * dt;
                     }
 
@@ -489,12 +336,6 @@ function renderTrustedPartnersSection(): void
                     goToDot(idx);
                 });
             });
-
-            // ===== Respect reduced motion =====
-            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            if (prefersReduced) {
-                // Still show track, just don't auto-scroll
-            }
 
             // ===== Init =====
             function init() {
