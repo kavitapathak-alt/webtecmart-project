@@ -97,7 +97,7 @@ function cpIcon(string $name): string {
         'send'       => '<path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/>',
     ];
     $path = $icons[$name] ?? '';
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $path . '</svg>';
 }
 
 // ===== Contact Info =====
@@ -110,698 +110,149 @@ $contactInfo = [
 ];
 ?>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
 <style>
     /* ============================================================
-       CONTACT PAGE — Webtecmart Next.js clone
+       CONTACT PAGE — "Expo Floor" design
        ============================================================ */
     .cp-main {
-        min-height: 100vh;
-        background: #FFF8FC;
-        padding: 32px 0;
+        --ink:#1A0613; --ink2:#2B0B20; --pink:#C4007A; --blush:#FBEAF3; --gold:#FFB547; --mint:#0E9F6E; --text:#2A2430; --mute:#6C6474; --line:rgba(26,6,19,.14);
+        --disp:'Bricolage Grotesque','Plus Jakarta Sans',system-ui,sans-serif;
+        font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif; color:var(--text); overflow-x:clip; min-height:100vh;
+        background:#F7F4F8 radial-gradient(rgba(26,6,19,.06) 1px,transparent 1.2px) 0 0/24px 24px;
     }
-    @media (min-width: 1024px) { .cp-main { padding: 48px 0; } }
+    .cp-main *, .cp-main *::before, .cp-main *::after { box-sizing:border-box; }
+    .cp-main a:focus-visible,.cp-main button:focus-visible,.cp-main input:focus-visible,.cp-main textarea:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+    .cp-container { position:relative; z-index:1; max-width:1200px; width:100%; margin:0 auto; padding:0 22px; }
+    @media (min-width:1440px){ .cp-container { max-width:1320px; } }
 
-    .cp-container {
-        max-width: 1280px;
-        padding-left: 16px;
-        padding-right: 16px;
-        margin: 0 auto;
-        width: 100%;
-    }
+    /* ===== Hero (the hall) ===== */
+    .cp-hero { position:relative; overflow:hidden; text-align:center; color:#fff; padding:76px 0 120px;
+        background:radial-gradient(60% 70% at 85% 10%,rgba(196,0,122,.55),transparent 65%),radial-gradient(40% 50% at 0% 100%,rgba(255,181,71,.16),transparent 70%),var(--ink); }
+    .cp-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.2px); background-size:26px 26px; -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%); mask-image:linear-gradient(180deg,#000 30%,transparent 95%); pointer-events:none; }
+    .cp-header { display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .cp-pill { display:inline-flex; align-items:center; gap:8px; margin-bottom:22px; padding:7px 14px 7px 10px; border-radius:999px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.22); }
+    .cp-pill svg { width:14px; height:14px; color:var(--gold); flex-shrink:0; }
+    .cp-pill span { font-size:.8rem; font-weight:600; color:#FFE3F1; }
+    .cp-h1 { margin:0 0 16px; max-width:860px; font-family:var(--disp); font-weight:800; font-size:clamp(2.4rem,5.4vw,4.4rem); line-height:1.04; letter-spacing:-.02em; color:#fff; }
+    .cp-h1 .accent { background:linear-gradient(90deg,var(--gold),#FF7BC0,var(--gold)); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:cpShine 4s linear infinite; }
+    .cp-h1 .accent svg { display:none; }
+    @keyframes cpShine { to { background-position:200% 0; } }
+    .cp-subtitle { max-width:640px; margin:0 auto; color:rgba(255,255,255,.78); font-size:1.05rem; line-height:1.7; }
 
-    /* ===== Header ===== */
-    .cp-header-wrap {
-        margin-bottom: 32px;
-    }
-    @media (min-width: 640px) { .cp-header-wrap { margin-bottom: 40px; } }
-    @media (min-width: 768px) { .cp-header-wrap { margin-bottom: 48px; } }
+    /* ===== Body ===== */
+    .cp-body { position:relative; z-index:2; margin-top:-70px; padding-bottom:80px; }
 
-    .cp-header {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
+    /* Grid */
+    .cp-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:28px; align-items:stretch; }
+    .cp-grid > * { min-width:0; display:flex; }
+    @media (min-width:1024px){ .cp-grid { grid-template-columns:2fr 3fr; gap:40px; } }
 
-    .cp-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(196, 0, 122, 0.1);
-        padding: 6px 10px;
-        border-radius: 9999px;
-        margin-bottom: 12px;
-    }
-    @media (min-width: 640px) { .cp-pill { gap: 8px; padding: 8px 12px; margin-bottom: 16px; } }
-    .cp-pill svg { width: 12px; height: 12px; color: #C4007A; flex-shrink: 0; }
-    @media (min-width: 640px) { .cp-pill svg { width: 14px; height: 14px; } }
-    @media (min-width: 768px) { .cp-pill svg { width: 16px; height: 16px; } }
-    .cp-pill span {
-        font-size: 10px;
-        color: #C4007A;
-        font-weight: 600;
-        letter-spacing: 0.05em;
-        text-transform: uppercase;
-    }
-    @media (min-width: 640px) { .cp-pill span { font-size: 11px; } }
-    @media (min-width: 768px) { .cp-pill span { font-size: 14px; } }
+    /* Left info card (dark hall) */
+    .cp-info-card { position:relative; width:100%; display:flex; flex-direction:column; padding:34px 28px; overflow:hidden; color:#fff; border:2px solid var(--ink); border-radius:22px; box-shadow:8px 8px 0 var(--gold);
+        background:radial-gradient(70% 60% at 100% 0%,rgba(196,0,122,.5),transparent 65%),radial-gradient(50% 50% at 0% 100%,rgba(255,181,71,.14),transparent 70%),var(--ink); }
+    .cp-info-card::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.2px); background-size:26px 26px; -webkit-mask-image:linear-gradient(180deg,#000 20%,transparent 95%); mask-image:linear-gradient(180deg,#000 20%,transparent 95%); pointer-events:none; }
+    .cp-info-deco { display:none; }
+    .cp-info-content { position:relative; z-index:1; display:flex; flex-direction:column; flex:1; }
+    .cp-info-top { margin-bottom:18px; }
+    .cp-connect { display:inline-flex; align-items:center; gap:8px; margin:0 0 16px; padding:6px 14px 6px 10px; border-radius:999px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.2); font-size:.78rem; font-weight:600; color:#FFE3F1; }
+    .cp-connect .dot { width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(255,181,71,.25); }
+    .cp-info-title { margin:0 0 8px; font-family:var(--disp); font-size:clamp(1.5rem,2.6vw,2rem); font-weight:800; line-height:1.12; letter-spacing:-.02em; color:#fff; }
+    .cp-info-title .accent { color:var(--gold); }
+    .cp-info-desc { margin:0; font-size:.94rem; line-height:1.65; color:rgba(255,255,255,.75); }
+    .cp-contact-for { margin-bottom:16px; padding:12px 14px; border-radius:14px; background:rgba(255,255,255,.07); border:1px dashed rgba(255,181,71,.55); }
+    .cp-contact-for .label { margin:0 0 3px; font-size:.72rem; font-weight:800; color:var(--gold); }
+    .cp-contact-for .value { margin:0; font-size:.9rem; font-weight:600; color:#fff; }
+    .cp-contact-lines { display:grid; gap:10px; flex:1; align-content:start; }
+    .cp-contact-item { display:flex; align-items:center; gap:12px; padding:11px 12px; border-radius:14px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); color:#fff; text-decoration:none; transition:translate .2s, background .2s, border-color .2s; }
+    .cp-contact-item:hover { translate:4px 0; background:rgba(255,255,255,.12); border-color:var(--gold); color:#fff; }
+    .cp-contact-icon { display:grid; place-items:center; flex-shrink:0; width:40px; height:40px; border:2px solid var(--ink); border-radius:11px; background:var(--gold); color:var(--ink); box-shadow:3px 3px 0 var(--ink); }
+    .cp-contact-icon svg { width:18px; height:18px; }
+    .cp-contact-text { min-width:0; flex:1; }
+    .cp-contact-text .label { margin:0; font-size:.72rem; font-weight:600; color:rgba(255,255,255,.6); }
+    .cp-contact-text .value { margin:0; font-size:.92rem; font-weight:700; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .cp-hours { display:flex; align-items:center; gap:12px; margin-top:20px; padding-top:18px; border-top:2px dashed rgba(255,255,255,.22); }
+    .cp-hours svg { width:22px; height:22px; flex-shrink:0; color:var(--gold); }
+    .cp-hours .label { margin:0; font-size:.72rem; font-weight:600; color:rgba(255,255,255,.6); }
+    .cp-hours .value { margin:0; font-size:.92rem; font-weight:700; color:#fff; }
 
-    .cp-h1 {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-        line-height: 1.18;
-        letter-spacing: -0.02em;
-    }
-    @media (min-width: 640px) { .cp-h1 {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-        line-height: 1.18;
-        letter-spacing: -0.02em;
-    } }
-    @media (min-width: 1024px) { .cp-h1 {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        color: #111827;
-        margin: 0 0 8px;
-        line-height: 1.18;
-        letter-spacing: -0.02em;
-    } }
-    .cp-h1 .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-    }
-    .cp-h1 .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -4px;
-        width: 100%;
-        height: 6px;
-    }
-    @media (min-width: 640px) {
-        .cp-h1 .accent svg { bottom: -8px; }
-    }
+    /* Right form card (visitor badge) */
+    .cp-form-card { position:relative; width:100%; display:flex; flex-direction:column; padding:38px 30px 28px; background:#fff; border:2px solid var(--ink); border-radius:22px; box-shadow:8px 8px 0 var(--ink); }
+    .cp-form-card::before { content:''; position:absolute; top:12px; left:50%; width:52px; height:9px; margin-left:-26px; border-radius:99px; background:var(--ink); }
 
-    .cp-subtitle {
-        color: #6B7280;
-        font-size: 0.875rem;
-        max-width: 672px;
-        margin: 8px auto 0;
-        line-height: 1.625;
-    }
-    @media (min-width: 640px) { .cp-subtitle { font-size: 1rem; margin-top: 12px; } }
-    @media (min-width: 768px) { .cp-subtitle { font-size: 1.125rem; } }
+    .cp-success { flex-direction:column; align-items:center; justify-content:center; flex:1; text-align:center; padding:36px 0; }
+    .cp-success-icon { display:grid; place-items:center; width:64px; height:64px; margin-bottom:16px; border:2px solid var(--ink); border-radius:16px; background:#E6F8F0; color:var(--mint); box-shadow:4px 4px 0 var(--gold); }
+    .cp-success-icon svg { width:30px; height:30px; }
+    .cp-success h3 { margin:0 0 8px; font-family:var(--disp); font-size:1.5rem; font-weight:800; color:var(--ink); }
+    .cp-success p { margin:0; max-width:380px; font-size:.94rem; line-height:1.6; color:var(--mute); }
+    .cp-success-again { margin-top:20px; padding:12px 22px; border:2px solid var(--pink); border-radius:12px; background:#fff; color:var(--pink); font:700 .9rem inherit; font-family:inherit; cursor:pointer; transition:background .2s; }
+    .cp-success-again:hover { background:var(--blush); }
 
-    /* ===== Contact Grid ===== */
-    .cp-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-        align-items: stretch;
-    }
-    @media (min-width: 640px) { .cp-grid { gap: 20px; } }
-    @media (min-width: 768px) { .cp-grid { gap: 24px; } }
-    @media (min-width: 1024px) {
-        .cp-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 32px; }
-    }
+    .cp-form { display:flex; flex-direction:column; flex:1; }
+    .cp-required-note { margin:0 0 16px; font-size:.8rem; font-weight:600; color:var(--mute); }
+    .cp-required-note span { color:var(--pink); }
+    .cp-form-error { margin:0 0 14px; padding:11px 14px; border:2px solid #9e0034; border-radius:12px; background:#ffe6ea; color:#9e0034; font-size:.88rem; font-weight:700; line-height:1.5; }
 
-    /* ===== Left Info Card ===== */
-    .cp-info-wrap {
-        display: flex;
-    }
-    @media (min-width: 1024px) {
-        .cp-info-wrap { grid-column: span 2 / span 2; }
-    }
+    .cp-form-row { display:grid; gap:14px; grid-template-columns:minmax(0,1fr); margin-bottom:14px; }
+    .cp-form-row > * { min-width:0; }
+    @media (min-width:560px){ .cp-form-row { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    .cp-field-label { display:block; margin-bottom:6px; font-size:.82rem; font-weight:700; color:var(--ink); }
+    .cp-field-label span { color:var(--pink); }
+    .cp-input-wrap { position:relative; }
+    .cp-input-wrap svg { position:absolute; left:13px; top:50%; translate:0 -50%; width:16px; height:16px; color:var(--pink); pointer-events:none; }
+    .cp-input-wrap.textarea-wrap svg { top:15px; translate:none; }
+    .cp-input,.cp-textarea { width:100%; min-width:0; padding:13px 14px 13px 38px; border-radius:10px; border:2px solid #E4DCE6; background:#FCFAFD; font:inherit; font-size:.92rem; color:var(--ink); transition:border-color .2s, box-shadow .2s; outline:none; }
+    .cp-input::placeholder,.cp-textarea::placeholder { color:#9A91A1; }
+    .cp-input:focus,.cp-textarea:focus { border-color:var(--pink); background:#fff; box-shadow:0 0 0 4px rgba(196,0,122,.14); }
+    .cp-textarea { resize:vertical; min-height:120px; height:100%; }
+    .cp-message-field { display:flex; flex-direction:column; flex:1; margin-bottom:14px; }
+    .cp-message-field .cp-input-wrap { flex:1; display:flex; }
+    .cp-consent { display:flex; align-items:flex-start; gap:9px; margin-bottom:16px; font-size:.84rem; color:#4D4452; cursor:pointer; }
+    .cp-consent input[type="checkbox"] { margin-top:3px; width:15px; height:15px; accent-color:var(--pink); flex-shrink:0; cursor:pointer; }
 
-    .cp-info-card {
-        position: relative;
-        width: 100%;
-        background: linear-gradient(to bottom right, #1a1a1a, #111111, #2a1420);
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.2);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-    }
-    @media (min-width: 640px) { .cp-info-card { padding: 20px; } }
-    @media (min-width: 768px) { .cp-info-card { padding: 24px; } }
-    @media (min-width: 1024px) { .cp-info-card { padding: 32px; } }
+    .cp-submit { display:flex; align-items:center; justify-content:center; gap:10px; width:100%; padding:15px 24px; border:2px solid transparent; border-radius:12px; background:var(--pink); color:#fff; font:700 .98rem/1.2 inherit; font-family:inherit; cursor:pointer; box-shadow:0 6px 0 #7E004E; transition:translate .2s, box-shadow .2s; }
+    .cp-submit:hover:not(:disabled) { translate:0 2px; box-shadow:0 4px 0 #7E004E; }
+    .cp-submit:active:not(:disabled) { translate:0 6px; box-shadow:0 0 0 #7E004E; }
+    .cp-submit:disabled { opacity:.7; cursor:wait; }
+    .cp-submit svg { width:17px; height:17px; flex-shrink:0; }
+    .cp-submit .spinner { width:14px; height:14px; border:2px solid #fff; border-top-color:transparent; border-radius:9999px; animation:cp-spin .8s linear infinite; }
+    @keyframes cp-spin { to { transform:rotate(360deg); } }
+    @keyframes spin { to { transform:rotate(360deg); } }
 
-    .cp-info-card::before {
-        content: '';
-        position: absolute;
-        top: -64px;
-        right: -40px;
-        width: 224px;
-        height: 224px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
-        filter: blur(48px);
-        pointer-events: none;
-    }
-    .cp-info-card::after {
-        content: '';
-        position: absolute;
-        bottom: -80px;
-        left: -80px;
-        width: 192px;
-        height: 192px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.1);
-        filter: blur(48px);
-        pointer-events: none;
-    }
+    .cp-trust { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px 14px; margin:18px -30px -28px; padding:12px 14px; background:var(--blush); border-top:2px dashed rgba(196,0,122,.35); border-radius:0 0 20px 20px; font-size:.78rem; font-weight:600; color:#3A2733; }
+    .cp-trust-item { display:inline-flex; align-items:center; gap:5px; }
+    .cp-trust-item svg { width:14px; height:14px; color:var(--mint); }
+    .cp-trust-divider { display:none; }
 
-    .cp-info-deco {
-        position: absolute;
-        bottom: 32px;
-        right: 32px;
-        width: 64px;
-        height: 64px;
-        opacity: 0.1;
-        pointer-events: none;
-    }
-    @media (min-width: 640px) { .cp-info-deco { width: 80px; height: 80px; } }
-    @media (min-width: 768px) { .cp-info-deco { width: 96px; height: 96px; } }
-    .cp-info-deco svg {
-        width: 100%;
-        height: 100%;
-        fill: none;
-        stroke: #F9A8D4;
-        stroke-width: 2;
-    }
+    /* Map */
+    .cp-map-wrap { margin-top:48px; }
+    .cp-map-card { padding:24px; background:#fff; border:2px solid var(--ink); border-radius:22px; box-shadow:8px 8px 0 var(--ink); overflow:hidden; }
+    .cp-map-title { margin:0 0 16px; font-family:var(--disp); font-size:1.6rem; font-weight:800; letter-spacing:-.02em; color:var(--ink); }
+    .cp-map-title .accent { color:var(--pink); }
+    .cp-map-iframe { display:block; width:100%; height:340px; border:2px solid var(--ink); border-radius:14px; background:#F3F4F6; }
 
-    .cp-info-content {
-        position: relative;
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        flex: 1;
+    @media (max-width:767px){ .cp-map-iframe { height:260px; } }
+    @media (max-width:575px){
+        .cp-container { padding:0 16px; } .cp-hero { padding:48px 0 100px; } .cp-body { margin-top:-60px; padding-bottom:60px; }
+        .cp-h1 { font-size:clamp(2rem,9.5vw,2.6rem); }
+        .cp-info-card { padding:28px 20px; box-shadow:5px 5px 0 var(--gold); }
+        .cp-form-card { padding:36px 18px 24px; box-shadow:5px 5px 0 var(--ink); }
+        .cp-trust { margin:18px -18px -24px; }
+        .cp-input,.cp-textarea { font-size:16px; }
+        .cp-map-card { padding:18px 16px; box-shadow:5px 5px 0 var(--ink); } .cp-map-title { font-size:1.35rem; }
     }
-
-    .cp-info-top {
-        margin-bottom: 12px;
-    }
-    @media (min-width: 640px) { .cp-info-top { margin-bottom: 16px; } }
-
-    .cp-connect {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        font-size: 10px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.25em;
-        color: #F9A8D4;
-        margin: 0;
-    }
-    @media (min-width: 640px) { .cp-connect { gap: 8px; font-size: 12px; } }
-    .cp-connect .dot {
-        width: 4px;
-        height: 4px;
-        border-radius: 9999px;
-        background: #F9A8D4;
-        display: inline-block;
-    }
-    @media (min-width: 640px) { .cp-connect .dot { width: 6px; height: 6px; } }
-
-    .cp-info-title {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #fff;
-        margin: 6px 0 0;
-        line-height: 1.2;
-    }
-    @media (min-width: 640px) { .cp-info-title { font-size: 1.25rem; } }
-    @media (min-width: 768px) { .cp-info-title { font-size: 1.5rem; } }
-    .cp-info-title .accent { color: #C4007A; }
-
-    .cp-info-desc {
-        font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.7);
-        margin: 4px 0 0;
-        line-height: 1.625;
-    }
-    @media (min-width: 640px) { .cp-info-desc { font-size: 0.875rem; } }
-
-    /* Contact For */
-    .cp-contact-for {
-        margin-bottom: 12px;
-        padding: 8px 10px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    @media (min-width: 640px) { .cp-contact-for { padding: 10px 12px; margin-bottom: 16px; } }
-    .cp-contact-for .label {
-        font-size: 9px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #F9A8D4;
-        margin: 0 0 2px;
-    }
-    @media (min-width: 640px) { .cp-contact-for .label { font-size: 10px; } }
-    @media (min-width: 768px) { .cp-contact-for .label { font-size: 12px; } }
-    .cp-contact-for .value {
-        font-size: 0.75rem;
-        color: rgba(255, 255, 255, 0.85);
-        margin: 0;
-    }
-    @media (min-width: 640px) { .cp-contact-for .value { font-size: 0.875rem; } }
-
-    /* Contact Lines */
-    .cp-contact-lines {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-    }
-    @media (min-width: 640px) { .cp-contact-lines { gap: 10px; } }
-
-    .cp-contact-item {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 10px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    @media (min-width: 640px) { .cp-contact-item { gap: 12px; padding: 10px; } }
-    .cp-contact-item:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(196, 0, 122, 0.3);
-    }
-
-    .cp-contact-icon {
-        width: 28px;
-        height: 28px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
-        color: #C4007A;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: transform 0.3s ease;
-    }
-    @media (min-width: 640px) { .cp-contact-icon { width: 32px; height: 32px; } }
-    @media (min-width: 768px) { .cp-contact-icon { width: 36px; height: 36px; } }
-    .cp-contact-item:hover .cp-contact-icon { transform: scale(1.1); }
-    .cp-contact-icon svg { width: 14px; height: 14px; }
-    @media (min-width: 640px) { .cp-contact-icon svg { width: 16px; height: 16px; } }
-
-    .cp-contact-text {
-        min-width: 0;
-        flex: 1;
-    }
-    .cp-contact-text .label {
-        font-size: 9px;
-        color: rgba(255, 255, 255, 0.5);
-        margin: 0;
-    }
-    @media (min-width: 640px) { .cp-contact-text .label { font-size: 10px; } }
-    @media (min-width: 768px) { .cp-contact-text .label { font-size: 12px; } }
-    .cp-contact-text .value {
-        font-size: 10px;
-        color: #fff;
-        margin: 0;
-        transition: color 0.3s ease;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
-    @media (min-width: 640px) { .cp-contact-text .value { font-size: 12px; } }
-    @media (min-width: 768px) { .cp-contact-text .value { font-size: 14px; } }
-    .cp-contact-item:hover .cp-contact-text .value { color: #F9A8D4; }
-
-    /* Working Hours */
-    .cp-hours {
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    @media (min-width: 640px) { .cp-hours { margin-top: 16px; padding-top: 16px; gap: 12px; } }
-    .cp-hours svg {
-        width: 16px;
-        height: 16px;
-        color: #F9A8D4;
-        flex-shrink: 0;
-    }
-    @media (min-width: 640px) { .cp-hours svg { width: 20px; height: 20px; } }
-    .cp-hours .label {
-        font-size: 9px;
-        color: rgba(255, 255, 255, 0.5);
-        margin: 0;
-    }
-    @media (min-width: 640px) { .cp-hours .label { font-size: 10px; } }
-    @media (min-width: 768px) { .cp-hours .label { font-size: 12px; } }
-    .cp-hours .value {
-        font-size: 10px;
-        color: rgba(255, 255, 255, 0.8);
-        margin: 0;
-    }
-    @media (min-width: 640px) { .cp-hours .value { font-size: 12px; } }
-    @media (min-width: 768px) { .cp-hours .value { font-size: 14px; } }
-
-    /* ===== Right Form Card ===== */
-    .cp-form-wrap {
-        display: flex;
-    }
-    @media (min-width: 1024px) {
-        .cp-form-wrap { grid-column: span 3 / span 3; }
-    }
-
-    .cp-form-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    @media (min-width: 640px) { .cp-form-card { padding: 20px; } }
-    @media (min-width: 768px) { .cp-form-card { padding: 24px; } }
-    @media (min-width: 1024px) { .cp-form-card { padding: 32px; } }
-
-    /* Success State */
-    .cp-success {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex: 1;
-        text-align: center;
-        padding: 24px 0;
-    }
-    @media (min-width: 640px) { .cp-success { padding: 32px 0; } }
-
-    .cp-success-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 9999px;
-        background: #DCFCE7;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 12px;
-    }
-    @media (min-width: 640px) { .cp-success-icon { width: 56px; height: 56px; margin-bottom: 16px; } }
-    @media (min-width: 768px) { .cp-success-icon { width: 64px; height: 64px; } }
-    .cp-success-icon svg { width: 24px; height: 24px; color: #22C55E; }
-    @media (min-width: 640px) { .cp-success-icon svg { width: 28px; height: 28px; } }
-    @media (min-width: 768px) { .cp-success-icon svg { width: 32px; height: 32px; } }
-
-    .cp-success h3 {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0 0 6px;
-    }
-    @media (min-width: 640px) { .cp-success h3 { font-size: 1.25rem; margin-bottom: 8px; } }
-    .cp-success p {
-        font-size: 0.75rem;
-        color: #4B5563;
-        margin: 0;
-    }
-    @media (min-width: 640px) { .cp-success p { font-size: 0.875rem; } }
-
-    .cp-success-again {
-        margin-top: 16px;
-        background: none;
-        border: none;
-        color: #C4007A;
-        font-size: 0.875rem;
-        font-weight: 600;
-        cursor: pointer;
-        font-family: inherit;
-    }
-    .cp-success-again:hover { text-decoration: underline; }
-
-    /* Form */
-    .cp-form { display: flex; flex-direction: column; flex: 1; }
-
-    .cp-required-note {
-        font-size: 10px;
-        font-weight: 500;
-        color: #9CA3AF;
-        margin: 0 0 12px;
-    }
-    @media (min-width: 640px) { .cp-required-note { font-size: 12px; margin-bottom: 16px; } }
-    .cp-required-note span { color: #C4007A; }
-
-    .cp-form-error {
-        margin: 0 0 12px;
-        color: #B42318;
-        font-size: 0.875rem;
-        line-height: 1.5;
-    }
-
-    .cp-form-row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 8px;
-        margin-bottom: 8px;
-    }
-    @media (min-width: 400px) { .cp-form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (min-width: 640px) { .cp-form-row { gap: 12px; margin-bottom: 12px; } }
-
-    .cp-field-label {
-        display: block;
-        margin-bottom: 2px;
-        font-size: 10px;
-        font-weight: 600;
-        color: #1F2937;
-    }
-    @media (min-width: 640px) { .cp-field-label { font-size: 12px; margin-bottom: 4px; } }
-    .cp-field-label span { color: #C4007A; }
-
-    .cp-input-wrap {
-        position: relative;
-    }
-    .cp-input-wrap svg {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 14px;
-        height: 14px;
-        color: #9CA3AF;
-        pointer-events: none;
-    }
-    @media (min-width: 640px) { .cp-input-wrap svg { width: 16px; height: 16px; left: 12px; } }
-    .cp-input-wrap.textarea-wrap svg {
-        top: 10px;
-        transform: none;
-    }
-    @media (min-width: 640px) { .cp-input-wrap.textarea-wrap svg { top: 12px; } }
-
-    .cp-input,
-    .cp-textarea {
-        width: 100%;
-        border-radius: 8px;
-        border: 1px solid #E5E7EB;
-        background: #FFF8FC;
-        padding: 8px 10px 8px 28px;
-        font-size: 0.75rem;
-        color: #111827;
-        font-family: inherit;
-        transition: all 0.2s ease;
-        outline: none;
-    }
-    @media (min-width: 640px) {
-        .cp-input, .cp-textarea { padding: 10px 12px 10px 36px; font-size: 0.875rem; }
-    }
-    .cp-input::placeholder,
-    .cp-textarea::placeholder { color: #9CA3AF; }
-    .cp-input:focus,
-    .cp-textarea:focus {
-        border-color: #C4007A;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.1);
-    }
-    .cp-textarea {
-        resize: none;
-        min-height: 100px;
-    }
-    @media (min-width: 640px) { .cp-textarea { min-height: 120px; } }
-
-    /* Message field grows */
-    .cp-message-field {
-        margin-bottom: 12px;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-    @media (min-width: 640px) { .cp-message-field { margin-bottom: 16px; } }
-    .cp-message-field .cp-input-wrap {
-        flex: 1;
-        display: flex;
-    }
-    .cp-textarea {
-        height: 100%;
-    }
-
-    /* Consent */
-    .cp-consent {
-        display: flex;
-        cursor: pointer;
-        align-items: flex-start;
-        gap: 6px;
-        font-size: 10px;
-        color: #4B5563;
-        margin-bottom: 10px;
-    }
-    @media (min-width: 640px) { .cp-consent { gap: 8px; font-size: 12px; margin-bottom: 12px; } }
-    .cp-consent input[type="checkbox"] {
-        margin-top: 2px;
-        width: 12px;
-        height: 12px;
-        accent-color: #C4007A;
-        flex-shrink: 0;
-        cursor: pointer;
-    }
-    @media (min-width: 640px) { .cp-consent input[type="checkbox"] { width: 14px; height: 14px; } }
-
-    /* Submit */
-    .cp-submit {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-        width: 100%;
-        border-radius: 9999px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-        padding: 10px 20px;
-        font-weight: 600;
-        color: #fff;
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
-        transition: all 0.3s ease;
-        font-size: 0.75rem;
-        border: none;
-        cursor: pointer;
-        font-family: inherit;
-    }
-    @media (min-width: 640px) { .cp-submit { padding: 12px 24px; font-size: 0.875rem; gap: 8px; } }
-    .cp-submit:hover:not(:disabled) {
-        transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.4);
-    }
-    .cp-submit:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
-    .cp-submit svg {
-        width: 14px;
-        height: 14px;
-        transition: transform 0.3s ease;
-    }
-    @media (min-width: 640px) { .cp-submit svg { width: 16px; height: 16px; } }
-    .cp-submit:hover:not(:disabled) svg { transform: translateX(4px); }
-    .cp-submit .spinner {
-        width: 14px;
-        height: 14px;
-        border: 2px solid #fff;
-        border-top-color: transparent;
-        border-radius: 9999px;
-        animation: cp-spin 0.8s linear infinite;
-    }
-    @keyframes cp-spin {
-        to { transform: rotate(360deg); }
-    }
-
-    /* Trust Badges */
-    .cp-trust {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 10px;
-        font-size: 9px;
-        color: #9CA3AF;
-        flex-wrap: wrap;
-    }
-    @media (min-width: 640px) { .cp-trust { gap: 12px; font-size: 12px; margin-top: 12px; } }
-    .cp-trust-item {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-    }
-    .cp-trust-item svg {
-        width: 10px;
-        height: 10px;
-        color: #C4007A;
-    }
-    @media (min-width: 640px) { .cp-trust-item svg { width: 12px; height: 12px; } }
-    .cp-trust-divider {
-        width: 1px;
-        height: 10px;
-        background: #E5E7EB;
-    }
-    @media (min-width: 640px) { .cp-trust-divider { height: 12px; } }
-
-    /* ===== Map Section ===== */
-    .cp-map-wrap {
-        margin-top: 32px;
-    }
-    @media (min-width: 640px) { .cp-map-wrap { margin-top: 40px; } }
-    @media (min-width: 768px) { .cp-map-wrap { margin-top: 48px; } }
-
-    .cp-map-card {
-        background: #fff;
-        border-radius: 16px;
-        padding: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-    }
-    @media (min-width: 640px) { .cp-map-card { padding: 20px; } }
-    @media (min-width: 768px) { .cp-map-card { padding: 24px; } }
-
-    .cp-map-title {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0 0 12px;
-    }
-    @media (min-width: 640px) { .cp-map-title { font-size: 1.25rem; margin-bottom: 16px; } }
-    .cp-map-title .accent { color: #C4007A; }
-
-    .cp-map-iframe {
-        width: 100%;
-        height: 200px;
-        border-radius: 12px;
-        overflow: hidden;
-        background: #F3F4F6;
-        border: 0;
-    }
-    @media (min-width: 640px) { .cp-map-iframe { height: 250px; } }
-    @media (min-width: 768px) { .cp-map-iframe { height: 300px; } }
+    @media (hover:none){ .cp-contact-item:hover { translate:none; } }
+    @media (prefers-reduced-motion:reduce){ .cp-h1 .accent { animation:none; } .cp-contact-item,.cp-submit { transition:none; } }
 </style>
 
 <main class="cp-main">
-    <div class="cp-container">
 
-        <!-- ===== Page Header ===== -->
-        <div class="cp-header-wrap">
+    <!-- ===== Page Header (hero) ===== -->
+    <section class="cp-hero">
+        <div class="cp-container">
             <div class="cp-header">
                 <div class="cp-pill">
                     <?= cpIcon('sparkles') ?>
@@ -824,220 +275,216 @@ $contactInfo = [
                 </p>
             </div>
         </div>
+    </section>
 
-        <!-- ===== Contact Grid ===== -->
-        <div class="cp-grid">
+    <div class="cp-body" id="contact">
+        <div class="cp-container">
 
-            <!-- LEFT — Info Card -->
-            <div class="cp-info-wrap">
-                <div class="cp-info-card">
+            <!-- ===== Contact Grid ===== -->
+            <div class="cp-grid">
 
-                    <!-- Decorative -->
-                    <div class="cp-info-deco">
-                        <svg viewBox="0 0 100 100">
-                            <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)"/>
-                        </svg>
-                    </div>
+                <!-- LEFT — Info Card -->
+                <div class="cp-info-wrap">
+                    <div class="cp-info-card">
 
-                    <div class="cp-info-content">
-
-                        <!-- Header -->
-                        <div class="cp-info-top">
-                            <p class="cp-connect">
-                                <span class="dot"></span>
-                                Let's Connect
-                            </p>
-                            <h3 class="cp-info-title">
-                                Let's work <span class="accent">together</span>
-                            </h3>
-                            <p class="cp-info-desc">
-                                We'd love to hear about your project and how we can help.
-                            </p>
+                        <!-- Decorative (hidden in this design) -->
+                        <div class="cp-info-deco">
+                            <svg viewBox="0 0 100 100">
+                                <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)"/>
+                            </svg>
                         </div>
 
-                        <!-- Contact For -->
-                        <div class="cp-contact-for">
-                            <p class="label">Contact For</p>
-                            <p class="value">Digital, Ecommerce, Creative, PR &amp; Websites</p>
-                        </div>
+                        <div class="cp-info-content">
 
-                        <!-- Contact Lines -->
-                        <div class="cp-contact-lines">
-                            <?php foreach ($contactInfo as $item): ?>
-                                <a
-                                    href="<?= htmlspecialchars($item['href']) ?>"
-                                    class="cp-contact-item"
-                                    <?= $item['external'] ? 'target="_blank" rel="noopener noreferrer"' : '' ?>
-                                >
-                                    <span class="cp-contact-icon">
-                                        <?= cpIcon($item['icon']) ?>
-                                    </span>
-                                    <div class="cp-contact-text">
-                                        <p class="label"><?= htmlspecialchars($item['label']) ?></p>
-                                        <p class="value"><?= htmlspecialchars($item['value']) ?></p>
-                                    </div>
-                                </a>
-                            <?php endforeach; ?>
-                        </div>
-
-                        <!-- Working Hours -->
-                        <div class="cp-hours">
-                            <?= cpIcon('clock') ?>
-                            <div>
-                                <p class="label">Working Hours</p>
-                                <p class="value">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                            <!-- Header -->
+                            <div class="cp-info-top">
+                                <p class="cp-connect">
+                                    <span class="dot"></span>
+                                    Let's Connect
+                                </p>
+                                <h3 class="cp-info-title">
+                                    Let's work <span class="accent">together</span>
+                                </h3>
+                                <p class="cp-info-desc">
+                                    We'd love to hear about your project and how we can help.
+                                </p>
                             </div>
-                        </div>
 
+                            <!-- Contact For -->
+                            <div class="cp-contact-for">
+                                <p class="label">Contact For</p>
+                                <p class="value">Digital, Ecommerce, Creative, PR &amp; Websites</p>
+                            </div>
+
+                            <!-- Contact Lines -->
+                            <div class="cp-contact-lines">
+                                <?php foreach ($contactInfo as $item): ?>
+                                    <a
+                                        href="<?= htmlspecialchars($item['href']) ?>"
+                                        class="cp-contact-item"
+                                        <?= $item['external'] ? 'target="_blank" rel="noopener noreferrer"' : '' ?>
+                                    >
+                                        <span class="cp-contact-icon">
+                                            <?= cpIcon($item['icon']) ?>
+                                        </span>
+                                        <div class="cp-contact-text">
+                                            <p class="label"><?= htmlspecialchars($item['label']) ?></p>
+                                            <p class="value"><?= htmlspecialchars($item['value']) ?></p>
+                                        </div>
+                                    </a>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <!-- Working Hours -->
+                            <div class="cp-hours">
+                                <?= cpIcon('clock') ?>
+                                <div>
+                                    <p class="label">Working Hours</p>
+                                    <p class="value">Mon - Sat: 9:00 AM - 7:00 PM</p>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- RIGHT — Form Card -->
-            <div class="cp-form-wrap">
-                <div class="cp-form-card">
+                <!-- RIGHT — Form Card -->
+                <div class="cp-form-wrap">
+                    <div class="cp-form-card">
 
-                    <!-- Success State (hidden by default) -->
-                    <div class="cp-success" id="cpSuccess" style="display: <?= in_array($formStatus, ['success', 'email_failed'], true) ? 'flex' : 'none' ?>;">
-                        <div class="cp-success-icon">
-                            <?= cpIcon('check') ?>
+                        <!-- Success State -->
+                        <div class="cp-success" id="cpSuccess" style="display: <?= in_array($formStatus, ['success', 'email_failed'], true) ? 'flex' : 'none' ?>;">
+                            <div class="cp-success-icon">
+                                <?= cpIcon('check') ?>
+                            </div>
+                            <h3><?= $formStatus === 'success' ? 'Enquiry Received' : 'Enquiry Saved' ?></h3>
+                            <p>
+                                <?php if ($formStatus === 'success'): ?>
+                                    Your enquiry was saved successfully. We'll get back to you within 24 hours.
+                                <?php elseif ($formStatus === 'email_failed'): ?>
+                                    Your enquiry was saved, but our email notification could not be sent. Please contact us by phone.
+                                <?php endif; ?>
+                            </p>
+                            <button type="button" class="cp-success-again" onclick="cpResetForm()">
+                                Send another message
+                            </button>
                         </div>
-                        <h3><?= $formStatus === 'success' ? 'Enquiry Received' : 'Enquiry Saved' ?></h3>
-                        <p>
-                            <?php if ($formStatus === 'success'): ?>
-                                Your enquiry was saved successfully. We'll get back to you within 24 hours.
-                            <?php elseif ($formStatus === 'email_failed'): ?>
-                                Your enquiry was saved, but our email notification could not be sent. Please contact us by phone.
+
+                        <!-- Form -->
+                        <form class="cp-form" id="cpForm" method="POST" action="/contact.php" style="display: <?= in_array($formStatus, ['success', 'email_failed'], true) ? 'none' : 'flex' ?>;">
+
+                            <?php if (in_array($formStatus, ['invalid', 'error'], true)): ?>
+                                <p class="cp-form-error" role="alert">
+                                    <?= $formStatus === 'invalid'
+                                        ? 'Please enter your name, phone number, and a valid email address.'
+                                        : 'We could not save your enquiry. Please try again or contact us by phone.' ?>
+                                </p>
                             <?php endif; ?>
-                        </p>
-                        <button type="button" class="cp-success-again" onclick="cpResetForm()">
-                            Send another message
-                        </button>
-                    </div>
 
-                    <!-- Form -->
-                    <form class="cp-form" id="cpForm" method="POST" action="/contact.php" style="display: <?= in_array($formStatus, ['success', 'email_failed'], true) ? 'none' : 'flex' ?>;">
-
-                        <?php if (in_array($formStatus, ['invalid', 'error'], true)): ?>
-                            <p class="cp-form-error" role="alert">
-                                <?= $formStatus === 'invalid'
-                                    ? 'Please enter your name, phone number, and a valid email address.'
-                                    : 'We could not save your enquiry. Please try again or contact us by phone.' ?>
+                            <p class="cp-required-note">
+                                <span>*</span> required fields
                             </p>
-                        <?php endif; ?>
 
-                        <p class="cp-required-note">
-                            <span>*</span> required fields
-                        </p>
-
-                        <!-- Row 1: Name + Email -->
-                        <div class="cp-form-row">
-                            <div>
-                                <label class="cp-field-label">
-                                    Full Name <span>*</span>
-                                </label>
-                                <div class="cp-input-wrap">
-                                    <?= cpIcon('user') ?>
-                                    <input type="text" name="name" class="cp-input" placeholder="Your full name" required>
+                            <!-- Row 1: Name + Email -->
+                            <div class="cp-form-row">
+                                <div>
+                                    <label class="cp-field-label">
+                                        Full Name <span>*</span>
+                                    </label>
+                                    <div class="cp-input-wrap">
+                                        <?= cpIcon('user') ?>
+                                        <input type="text" name="name" class="cp-input" placeholder="Your full name" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="cp-field-label">
+                                        Email Address <span>*</span>
+                                    </label>
+                                    <div class="cp-input-wrap">
+                                        <?= cpIcon('mail') ?>
+                                        <input type="email" name="email" class="cp-input" placeholder="you@example.com" required>
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <label class="cp-field-label">
-                                    Email Address <span>*</span>
-                                </label>
-                                <div class="cp-input-wrap">
-                                    <?= cpIcon('mail') ?>
-                                    <input type="email" name="email" class="cp-input" placeholder="you@example.com" required>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Row 2: Phone + Company -->
-                        <div class="cp-form-row">
-                            <div>
-                                <label class="cp-field-label">
-                                    Phone Number <span>*</span>
-                                </label>
-                                <div class="cp-input-wrap">
-                                    <?= cpIcon('phone') ?>
-                                    <input type="tel" name="phone" class="cp-input" placeholder="+91 XXXXX XXXXX" required>
+                            <!-- Row 2: Phone + Company -->
+                            <div class="cp-form-row">
+                                <div>
+                                    <label class="cp-field-label">
+                                        Phone Number <span>*</span>
+                                    </label>
+                                    <div class="cp-input-wrap">
+                                        <?= cpIcon('phone') ?>
+                                        <input type="tel" name="phone" class="cp-input" placeholder="+91 XXXXX XXXXX" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="cp-field-label">
+                                        Company Name
+                                    </label>
+                                    <div class="cp-input-wrap">
+                                        <?= cpIcon('globe') ?>
+                                        <input type="text" name="company" class="cp-input" placeholder="Your company name">
+                                    </div>
                                 </div>
                             </div>
-                            <div>
-                                <label class="cp-field-label">
-                                    Company Name
-                                </label>
-                                <div class="cp-input-wrap">
-                                    <?= cpIcon('globe') ?>
-                                    <input type="text" name="company" class="cp-input" placeholder="Your company name">
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- Message -->
-                        <div class="cp-message-field">
-                            <label class="cp-field-label">
-                                Your Message <span>*</span>
+                            <!-- Message -->
+                            <div class="cp-message-field">
+                                <label class="cp-field-label">
+                                    Your Message <span>*</span>
+                                </label>
+                                <div class="cp-input-wrap textarea-wrap">
+                                    <?= cpIcon('message') ?>
+                                    <textarea name="message" class="cp-textarea" placeholder="Tell us about your needs..." required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Consent -->
+                            <label class="cp-consent">
+                                <input type="checkbox" name="consent" required>
+                                <span>Yes, I'm happy for you to use my information.</span>
                             </label>
-                            <div class="cp-input-wrap textarea-wrap">
-                                <?= cpIcon('message') ?>
-                                <textarea name="message" class="cp-textarea" placeholder="Tell us about your needs..." required></textarea>
+
+                            <!-- Submit -->
+                            <button type="submit" class="cp-submit" id="cpSubmit">
+                                <span class="cp-submit-text">Send Message</span>
+                                <?= cpIcon('send') ?>
+                            </button>
+
+                            <!-- Trust Badges -->
+                            <div class="cp-trust">
+                                <span class="cp-trust-item"><?= cpIcon('check') ?>Secure Form</span>
+                                <span class="cp-trust-divider"></span>
+                                <span class="cp-trust-item"><?= cpIcon('check') ?>24/7 Support</span>
+                                <span class="cp-trust-divider"></span>
+                                <span class="cp-trust-item"><?= cpIcon('check') ?>Fast Response</span>
                             </div>
-                        </div>
 
-                        <!-- Consent -->
-                        <label class="cp-consent">
-                            <input type="checkbox" name="consent" required>
-                            <span>Yes, I'm happy for you to use my information.</span>
-                        </label>
+                        </form>
+                    </div>
+                </div>
 
-                        <!-- Submit -->
-                        <button type="submit" class="cp-submit" id="cpSubmit">
-                            <span class="cp-submit-text">Send Message</span>
-                            <?= cpIcon('send') ?>
-                        </button>
+            </div>
 
-                        <!-- Trust Badges -->
-                        <div class="cp-trust">
-                            <span class="cp-trust-item">
-                                <?= cpIcon('check') ?>
-                                Secure Form
-                            </span>
-                            <span class="cp-trust-divider"></span>
-                            <span class="cp-trust-item">
-                                <?= cpIcon('check') ?>
-                                24/7 Support
-                            </span>
-                            <span class="cp-trust-divider"></span>
-                            <span class="cp-trust-item">
-                                <?= cpIcon('check') ?>
-                                Fast Response
-                            </span>
-                        </div>
-
-                    </form>
+            <!-- ===== Map Section ===== -->
+            <div class="cp-map-wrap">
+                <div class="cp-map-card">
+                    <h3 class="cp-map-title">
+                        Find Us <span class="accent">Here</span>
+                    </h3>
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094197!2d144.9537353153167!3d-37.81627997975159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5df1f5a3f7%3A0x5045675218ce6e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        class="cp-map-iframe"
+                        allowfullscreen
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="WebTecMart Location"
+                    ></iframe>
                 </div>
             </div>
 
         </div>
-
-        <!-- ===== Map Section ===== -->
-        <div class="cp-map-wrap">
-            <div class="cp-map-card">
-                <h3 class="cp-map-title">
-                    Find Us <span class="accent">Here</span>
-                </h3>
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094197!2d144.9537353153167!3d-37.81627997975159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5df1f5a3f7%3A0x5045675218ce6e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
-                    class="cp-map-iframe"
-                    allowfullscreen
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    title="WebTecMart Location"
-                ></iframe>
-            </div>
-        </div>
-
     </div>
 </main>
 
@@ -1090,7 +537,6 @@ $contactInfo = [
                 } else {
                     const alertDiv = document.createElement('div');
                     alertDiv.className = 'cp-ajax-alert cp-form-error alert alert-danger';
-                    alertDiv.style.cssText = 'padding:12px 16px;border-radius:12px;background:#ffe6ea;border:1px solid #f5a3b8;color:#9e0034;margin-bottom:16px;font-weight:600;font-size:0.92rem;';
                     alertDiv.textContent = data.message || 'Please verify your information.';
                     form.insertBefore(alertDiv, form.firstChild);
                     alertDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });

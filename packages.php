@@ -1,7 +1,7 @@
 <?php require_once __DIR__ . '/app/templates/header.php'; ?>
 
 <?php
-// ===== Icon Helper =====
+// ===== Icon Helper (unchanged) =====
 function pkgIcon(string $name): string {
     $icons = [
         'sparkles'   => '<path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/>',
@@ -31,605 +31,216 @@ $faqs = $packagesPage['faqs'];
 $trustBadges = $packagesPage['trust_badges'];
 ?>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
 <style>
-    /* ============================================================
-       PACKAGES PAGE — Webtecmart Next.js clone
-       ============================================================ */
-    .pkg-page {
-        position: relative;
-        width: 100%;
-        background: #FFF8FC;
-        overflow: hidden;
-        color: #1F1B2A;
-    }
+/* ============================================================
+   PACKAGES PAGE — "Expo Floor" design
+   Pricing cards are event passes: perforation, punch holes, barcode.
+   ============================================================ */
+.pkg-page {
+    --ink: #1A0613; --ink2: #2B0B20; --pink: #C4007A; --pink2: #E0398F;
+    --blush: #FBEAF3; --mist: #F7F4F8; --gold: #FFB547; --mint: #0E9F6E;
+    --text: #2A2430; --mute: #6C6474; --line: rgba(26, 6, 19, .12);
+    --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+    position: relative; width: 100%; overflow-x: clip; background: #fff; color: var(--text);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+}
+.pkg-page *, .pkg-page *::before, .pkg-page *::after { box-sizing: border-box; }
+.pkg-page h1, .pkg-page h2, .pkg-page h3 { margin: 0; font-family: var(--disp); letter-spacing: -.02em; }
+.pkg-page p { margin: 0; }
+.pkg-page :is(a, button, summary):focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+.pkg-page ::selection { background: var(--pink); color: #fff; }
+.pkg-page h1, .pkg-page h2, .pkg-page h3, .pkg-page p { overflow-wrap: anywhere; }
+.pkg-container { position: relative; z-index: 2; width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 22px; }
 
-    .pkg-container {
-        max-width: 1280px;
-        padding-left: 16px;
-        padding-right: 16px;
-        margin: 0 auto;
-        width: 100%;
-        position: relative;
-        z-index: 10;
-    }
+/* ---------- hero ---------- */
+.pkg-hero-sec { position: relative; padding: 76px 0 150px; text-align: center; color: #fff; background: radial-gradient(60% 70% at 85% 0%, rgba(196,0,122,.55), transparent 65%), radial-gradient(40% 50% at 0% 100%, rgba(255,181,71,.16), transparent 70%), var(--ink); }
+.pkg-hero-sec::before { content: ''; position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(255,255,255,.14) 1px, transparent 1.2px); background-size: 26px 26px; -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 95%); mask-image: linear-gradient(180deg, #000 30%, transparent 95%); }
+.pkg-aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.pkg-aurora i { position: absolute; border-radius: 50%; filter: blur(80px); opacity: .5; animation: pkgDrift 14s ease-in-out infinite alternate; }
+.pkg-aurora i:nth-child(1) { width: 420px; height: 420px; left: -8%; top: 4%; background: var(--pink); }
+.pkg-aurora i:nth-child(2) { width: 340px; height: 340px; right: 10%; bottom: -12%; background: var(--gold); opacity: .26; animation-duration: 18s; }
+.pkg-aurora i:nth-child(3) { width: 300px; height: 300px; left: 40%; top: -14%; background: var(--pink2); opacity: .3; animation-duration: 22s; }
+@keyframes pkgDrift { to { transform: translate(60px, 40px) scale(1.2); } }
+.pkg-pill { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px; padding: 7px 15px 7px 11px; border-radius: 999px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.22); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.pkg-pill svg { width: 15px; height: 15px; color: var(--gold); flex-shrink: 0; }
+.pkg-pill span { font-size: .76rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #FFE3F1; }
+.pkg-h1 { max-width: 900px; margin: 0 auto; font-size: clamp(2.2rem, 5.4vw, 4rem); font-weight: 800; line-height: 1.06; letter-spacing: -.035em; }
+.pkg-h1 .accent { position: relative; display: inline-block; color: var(--gold); }
+.pkg-h1 .accent svg { position: absolute; left: 0; bottom: -6px; width: 100%; height: 8px; }
+.pkg-w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .12em; margin-bottom: -.12em; }
+.pkg-w > span { display: inline-block; }
+.pkg-subtitle { max-width: 700px; margin: 22px auto 0; font-size: clamp(1rem, 1.6vw, 1.15rem); line-height: 1.7; color: rgba(255,255,255,.78); }
 
-    /* Decorative Background */
-    .pkg-bg {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-    }
-    .pkg-bg-blob-1 {
-        position: absolute;
-        top: 0; right: 0;
-        width: 50%; height: 50%;
-        background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
-        border-radius: 9999px;
-        filter: blur(64px);
-    }
-    .pkg-bg-blob-2 {
-        position: absolute;
-        bottom: 0; left: 0;
-        width: 33.333%; height: 50%;
-        background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
-        border-radius: 9999px;
-        filter: blur(64px);
-    }
-    .pkg-bg-shape {
-        position: absolute;
-        fill: none;
-        stroke: #C4007A;
-        opacity: 0.1;
-    }
-    .pkg-bg-shape-1 { top: 80px; right: 40px; width: 128px; height: 128px; stroke-width: 2; }
-    .pkg-bg-shape-2 { bottom: 80px; left: 40px; width: 160px; height: 160px; stroke-width: 1.5; }
+/* ---------- billing toggle ---------- */
+.pkg-toggle-wrap { display: inline-flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; margin-top: 34px; padding: 10px 20px; border-radius: 999px; background: rgba(255,255,255,.09); border: 1px solid rgba(255,255,255,.2); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
+.pkg-toggle-label { display: inline-flex; align-items: center; gap: 8px; font-size: .92rem; font-weight: 700; transition: color .3s ease; }
+.pkg-toggle-label.active { color: var(--gold); }
+.pkg-toggle-label.inactive { color: rgba(255,255,255,.6); }
+.pkg-toggle { position: relative; width: 66px; height: 36px; padding: 0; border: 2px solid var(--ink); border-radius: 999px; background: var(--gold); cursor: pointer; box-shadow: 0 3px 0 #B77400; transition: background .3s ease; }
+.pkg-toggle.yearly { background: var(--pink); box-shadow: 0 3px 0 #7E004E; }
+.pkg-toggle-knob { position: absolute; top: 3px; left: 3px; width: 26px; height: 26px; border-radius: 50%; background: #fff; border: 2px solid var(--ink); transition: transform .35s cubic-bezier(.34, 1.56, .64, 1); }
+.pkg-toggle.yearly .pkg-toggle-knob { transform: translateX(30px); }
+.pkg-save-badge { padding: 3px 10px; border-radius: 999px; background: var(--mint); color: #fff; font-size: .72rem; font-weight: 800; }
 
-    /* ===== HERO ===== */
-    .pkg-hero {
-        position: relative;
-        padding: 48px 0;
-        text-align: center;
-    }
-    @media (min-width: 768px) { .pkg-hero { padding: 48px 0; } }
+/* ---------- pass cards ---------- */
+.pkg-main-sec { position: relative; z-index: 3; margin-top: -92px; padding-bottom: 80px; }
+.pkg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); gap: 28px; align-items: stretch;  perspective: 1200px; }
+.pkg-card { position: relative; display: flex; flex-direction: column; overflow: hidden; padding: 30px 28px 0; background: #fff; border: 2px solid var(--ink); border-radius: 24px; box-shadow: 8px 8px 0 var(--ink); transition: translate .25s ease, box-shadow .25s ease; }
+.pkg-card:hover { translate: -4px -4px; box-shadow: 12px 12px 0 var(--pink); }
+.pkg-card-head { text-align: center; }
+.pkg-icon-wrap { display: grid; place-items: center; width: 62px; height: 62px; margin: 0 auto 16px; border-radius: 16px; background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink); transition: rotate .3s ease; }
+.pkg-card:hover .pkg-icon-wrap { rotate: -8deg; }
+.pkg-icon-wrap svg { width: 30px; height: 30px; }
+.pkg-name { font-size: 1.6rem; font-weight: 800; color: var(--ink); }
+.pkg-desc { margin-top: 8px; font-size: .92rem; line-height: 1.55; color: var(--mute); }
 
-    .pkg-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.15);
-        padding: 5px 14px;
-        border-radius: 9999px;
-        margin-bottom: 10px;
-    }
-    .pkg-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
-    .pkg-pill span {
-        color: #C4007A;
-        font-weight: 700;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
+/* perforation + punch holes */
+.pkg-perf { position: relative; margin: 26px -28px; border-top: 2px dashed var(--ink); }
+.pkg-perf::before, .pkg-perf::after { content: ''; position: absolute; top: -14px; width: 26px; height: 26px; border-radius: 50%; background: var(--mist); border: 2px solid var(--ink); }
+.pkg-perf::before { left: -15px; }
+.pkg-perf::after { right: -15px; }
 
-    .pkg-h1 {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        color: #111827;
-        line-height: 1.18;
-        letter-spacing: -0.02em;
-        margin: 0 0 8px;
-    }
-    @media (min-width: 768px) { .pkg-h1 {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        color: #111827;
-        line-height: 1.18;
-        letter-spacing: -0.02em;
-        margin: 0 0 8px;
-    } }
+.pkg-price-wrap { text-align: center; margin-bottom: 24px; }
+.pkg-price { display: inline-block; font-family: var(--disp); font-size: clamp(2.4rem, 4vw, 3.1rem); font-weight: 800; line-height: 1; letter-spacing: -.03em; color: var(--pink); font-variant-numeric: tabular-nums; }
+.pkg-price-label { margin-left: 6px; font-size: .9rem; font-weight: 600; color: var(--mute); }
+.pkg-features { flex: 1; display: flex; flex-direction: column; gap: 13px; margin: 0 0 28px; padding: 0; list-style: none; }
+.pkg-feature { display: flex; align-items: flex-start; gap: 10px; font-size: .92rem; line-height: 1.5; color: #4D4655; }
+.pkg-feature svg { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; color: var(--mint); }
 
-    .pkg-h1 .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-    }
-    .pkg-h1 .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -8px;
-        width: 100%;
-        height: 8px;
-    }
+.pkg-cta { position: relative; overflow: hidden; display: block; width: 100%; padding: 15px; border-radius: 12px; border: 2px solid var(--ink); font: 800 1rem/1.2 'Plus Jakarta Sans', sans-serif; text-align: center; text-decoration: none; cursor: pointer; transition: translate .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease; }
+.pkg-cta.regular { background: #fff; color: var(--ink); box-shadow: 0 5px 0 var(--ink); }
+.pkg-cta.regular:hover { background: var(--gold); translate: 0 2px; box-shadow: 0 3px 0 var(--ink); }
+.pkg-cta.popular { background: radial-gradient(150px circle at var(--bx, 50%) var(--by, 50%), var(--pink2) 0, var(--pink) 72%); color: #fff; border-color: var(--ink); box-shadow: 0 5px 0 #7E004E; }
+.pkg-cta.popular:hover { translate: 0 2px; box-shadow: 0 3px 0 #7E004E; color: #fff; }
+.pkg-cta:active { translate: 0 5px; box-shadow: 0 0 0 transparent; }
+.pkg-ripple { position: absolute; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: currentColor; opacity: .3; pointer-events: none; animation: pkgRipple .65s ease-out forwards; }
+@keyframes pkgRipple { to { transform: scale(22); opacity: 0; } }
 
-    .pkg-subtitle {
-        color: #6B7280;
-        font-size: 1rem;
-        max-width: 768px;
-        margin: 16px auto 0;
-        line-height: 1.625;
-    }
-    @media (min-width: 768px) { .pkg-subtitle { font-size: 1.125rem; } }
+/* ticket stub footer */
+.pkg-stub { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 26px -28px 0; padding: 14px 28px; background: var(--blush); border-top: 2px solid var(--ink); }
+.pkg-barcode { flex: 0 0 auto; width: 92px; height: 30px; background: repeating-linear-gradient(90deg, var(--ink) 0 2px, transparent 2px 4px, var(--ink) 4px 5px, transparent 5px 8px, var(--ink) 8px 11px, transparent 11px 13px); }
+.pkg-code { font-size: .7rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; color: var(--ink); }
 
-    /* ===== Billing Toggle ===== */
-    .pkg-toggle-wrap {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-        margin-bottom: 48px;
-    }
+/* popular = VIP pass */
+.pkg-card.popular { color: #fff; background: radial-gradient(70% 50% at 100% 0%, rgba(196,0,122,.55), transparent 70%), var(--ink); box-shadow: 8px 8px 0 var(--gold); }
+.pkg-card.popular:hover { box-shadow: 12px 12px 0 var(--pink); }
+.pkg-card.popular::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px; pointer-events: none; background: conic-gradient(from var(--pkga), var(--pink), var(--gold), var(--pink2), var(--pink)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: pkgAngle 6s linear infinite; }
+@property --pkga { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes pkgAngle { to { --pkga: 360deg; } }
+.pkg-card.popular .pkg-name { color: #fff; }
+.pkg-card.popular .pkg-desc { color: rgba(255,255,255,.7); }
+.pkg-card.popular .pkg-icon-wrap { background: var(--gold); box-shadow: 4px 4px 0 var(--pink); }
+.pkg-card.popular .pkg-perf { border-top-color: rgba(255,255,255,.5); }
+.pkg-card.popular .pkg-perf::before, .pkg-card.popular .pkg-perf::after { border-color: var(--gold); }
+.pkg-card.popular .pkg-price { color: var(--gold); }
+.pkg-card.popular .pkg-price-label { color: rgba(255,255,255,.65); }
+.pkg-card.popular .pkg-feature { color: rgba(255,255,255,.85); }
+.pkg-card.popular .pkg-feature svg { color: var(--gold); }
+.pkg-card.popular .pkg-stub { background: rgba(255,255,255,.08); border-top-color: rgba(255,255,255,.3); }
+.pkg-card.popular .pkg-barcode { background: repeating-linear-gradient(90deg, var(--gold) 0 2px, transparent 2px 4px, var(--gold) 4px 5px, transparent 5px 8px, var(--gold) 8px 11px, transparent 11px 13px); }
+.pkg-card.popular .pkg-code { color: var(--gold); }
+.pkg-popular-badge { position: absolute; top: 0; left: 50%; z-index: 3; translate: -50% 0; padding: 7px 18px; border: 2px solid var(--ink); border-top: 0; border-radius: 0 0 14px 14px; background: var(--gold); color: var(--ink); font: 800 .74rem/1 'Plus Jakarta Sans', sans-serif; letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; }
+.pkg-card.popular { padding-top: 48px; }
+@media (min-width: 992px) {
+    .pkg-card.popular { translate: 0 -16px; }
+    .pkg-card.popular:hover { translate: -4px -20px; }
+}
 
-    .pkg-toggle-label {
-        font-size: 0.875rem;
-        font-weight: 600;
-        transition: color 0.3s ease;
-    }
-    .pkg-toggle-label.active { color: #C4007A; }
-    .pkg-toggle-label.inactive { color: #9CA3AF; }
+/* ---------- section shell ---------- */
+.pkg-sec { position: relative; padding: 84px 0; }
+.pkg-head { max-width: 720px; margin: 0 auto 44px; text-align: center; }
+.pkg-kicker { display: inline-block; margin-bottom: 14px; padding: 6px 13px; border-radius: 8px; background: var(--ink); color: var(--gold); font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.pkg-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 800; line-height: 1.1; color: var(--ink); }
+.pkg-head h2 .accent { position: relative; display: inline-block; color: var(--pink); }
+.pkg-head p { margin-top: 14px; font-size: 1.02rem; line-height: 1.65; color: var(--mute); }
+.pkg-bar { display: block; width: 84px; height: 7px; margin: 16px auto 0; background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px); }
 
-    .pkg-toggle {
-        position: relative;
-        width: 64px;
-        height: 36px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
-        border: none;
-        cursor: pointer;
-        transition: background 0.3s ease;
-        padding: 0;
-    }
-    .pkg-toggle-knob {
-        position: absolute;
-        top: 4px;
-        left: 4px;
-        width: 28px;
-        height: 28px;
-        border-radius: 9999px;
-        background: #C4007A;
-        transition: transform 0.3s ease;
-    }
-    .pkg-toggle.yearly .pkg-toggle-knob {
-        transform: translateX(28px);
-    }
+/* ---------- add-ons ---------- */
+.pkg-addons-sec { background: var(--mist); background-image: radial-gradient(rgba(26,6,19,.07) 1px, transparent 1.2px); background-size: 24px 24px; }
+.pkg-addons-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.pkg-addon { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 16px 18px; background: #fff; border: 2px solid var(--ink); border-radius: 14px; box-shadow: 4px 4px 0 var(--ink); transition: translate .25s ease, box-shadow .25s ease; }
+.pkg-addon:hover { translate: -3px -3px; box-shadow: 7px 7px 0 var(--pink); }
+.pkg-addon-name { font-size: .93rem; font-weight: 700; color: var(--ink); }
+.pkg-addon-price { flex-shrink: 0; padding: 5px 12px; border-radius: 999px; background: var(--gold); border: 2px solid var(--ink); font-size: .84rem; font-weight: 800; color: var(--ink); white-space: nowrap; }
 
-    .pkg-save-badge {
-        margin-left: 8px;
-        font-size: 12px;
-        background: #DCFCE7;
-        color: #16A34A;
-        padding: 2px 8px;
-        border-radius: 9999px;
-        font-weight: 700;
-    }
+/* ---------- trust ---------- */
+.pkg-trust { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 16px; }
+.pkg-trust-card { padding: 22px 14px; text-align: center; background: #fff; border: 2px solid var(--ink); border-radius: 18px; box-shadow: 5px 5px 0 var(--ink); transition: translate .25s ease, box-shadow .25s ease; }
+.pkg-trust-card:hover { translate: -3px -3px; box-shadow: 8px 8px 0 var(--gold); }
+.pkg-trust-ico { display: grid; place-items: center; width: 46px; height: 46px; margin: 0 auto 12px; border-radius: 12px; background: var(--blush); color: var(--pink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--gold); }
+.pkg-trust-ico svg { width: 22px; height: 22px; }
+.pkg-trust-title { font-size: .92rem; font-weight: 800; color: var(--ink); }
+.pkg-trust-sub { margin-top: 4px; font-size: .78rem; line-height: 1.4; color: var(--mute); }
 
-    /* ===== Packages Grid ===== */
-    .pkg-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 32px;
-        margin-bottom: 64px;
-    }
-    @media (min-width: 768px) {
-        .pkg-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
+/* ---------- FAQ accordion ---------- */
+.pkg-faq-sec { background: var(--blush); }
+.pkg-faq-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; align-items: start; }
+@media (min-width: 768px) { .pkg-faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pkg-faq-card { background: #fff; border: 2px solid var(--ink); border-radius: 16px; box-shadow: 4px 4px 0 var(--ink); transition: box-shadow .25s ease; }
+.pkg-faq-card[open] { box-shadow: 6px 6px 0 var(--pink); }
+.pkg-faq-q { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; font: 700 1.02rem/1.3 var(--disp); color: var(--ink); cursor: pointer; list-style: none; }
+.pkg-faq-q::-webkit-details-marker { display: none; }
+.pkg-plus { position: relative; flex: 0 0 30px; width: 30px; height: 30px; border-radius: 8px; background: var(--blush); transition: rotate .25s ease, background .25s ease; }
+.pkg-plus::before, .pkg-plus::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; margin: -1px 0 0 -6px; background: var(--pink); transition: background .25s; }
+.pkg-plus::after { rotate: 90deg; }
+.pkg-faq-card[open] .pkg-plus { rotate: 45deg; background: var(--pink); }
+.pkg-faq-card[open] .pkg-plus::before, .pkg-faq-card[open] .pkg-plus::after { background: #fff; }
+.pkg-faq-a { padding: 0 20px 20px; font-size: .94rem; line-height: 1.7; color: var(--mute); animation: pkgFade .35s ease; }
+@keyframes pkgFade { from { opacity: 0; translate: 0 -8px; } to { opacity: 1; translate: 0 0; } }
 
-    .pkg-card {
-        position: relative;
-        background: #fff;
-        border-radius: 16px;
-        padding: 32px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        transition: all 0.5s ease;
-    }
-    .pkg-card:hover {
-        transform: translateY(-8px);
-        border-color: rgba(196, 0, 122, 0.3);
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.1);
-    }
-    .pkg-card.popular {
-        border-color: #C4007A;
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.2);
-        transform: scale(1.02);
-    }
-    .pkg-card.popular:hover {
-        transform: scale(1.02) translateY(-8px);
-    }
+/* ---------- CTA ---------- */
+.pkg-cta-sec { padding: 84px 0 96px; background: #fff; }
+.pkg-cta-section { position: relative; overflow: hidden; padding: 64px 34px; text-align: center; color: #fff; border-radius: 28px; background: radial-gradient(50% 80% at 50% 120%, rgba(196,0,122,.75), transparent 70%), radial-gradient(rgba(255,255,255,.1) 1px, transparent 1.2px) 0 0 / 26px 26px, var(--ink); }
+.pkg-cta-section::after { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px; pointer-events: none; background: conic-gradient(from var(--pkga), var(--pink), var(--gold), var(--pink2), var(--pink)); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); animation: pkgAngle 6s linear infinite; }
+.pkg-cta-inner { position: relative; z-index: 2; }
+.pkg-cta-h2 { max-width: 800px; margin: 0 auto 16px; font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; line-height: 1.1; color: #fff; }
+.pkg-cta-sub { max-width: 640px; margin: 0 auto 30px; line-height: 1.7; color: rgba(255,255,255,.8); }
+.pkg-cta-btns { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px; }
+.pkg-cta-btn-1, .pkg-cta-btn-2 { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 26px; border-radius: 12px; border: 2px solid transparent; font: 700 .95rem/1.2 'Plus Jakarta Sans', sans-serif; text-decoration: none; text-align: center; transition: translate .2s ease, box-shadow .2s ease, background .2s ease; }
+.pkg-cta-btn-1 { background: radial-gradient(150px circle at var(--bx, 50%) var(--by, 50%), var(--pink2) 0, var(--pink) 72%); color: #fff; box-shadow: 0 6px 0 #7E004E; }
+.pkg-cta-btn-1:hover { translate: 0 2px; box-shadow: 0 4px 0 #7E004E; color: #fff; }
+.pkg-cta-btn-2 { background: transparent; color: #fff; border-color: rgba(255,255,255,.4); }
+.pkg-cta-btn-2:hover { background: rgba(255,255,255,.1); border-color: #fff; color: #fff; }
+.pkg-cta-btn-1 svg, .pkg-cta-btn-2 svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    .pkg-popular-badge {
-        position: absolute;
-        top: -12px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #C4007A;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 4px 16px;
-        border-radius: 9999px;
-        white-space: nowrap;
-    }
+/* ---------- progress bar + motion states (desktop mouse only) ---------- */
+.pkg-progress { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 9999; transform-origin: 0 50%; transform: scaleX(0); background: linear-gradient(90deg, var(--gold), var(--pink)); }
+.pkg-js .pkg-progress { display: block; }
+.pkg-js [data-rv], .pkg-js .pkg-hero-sec [data-hero] { opacity: 0; }
 
-    .pkg-card-head {
-        text-align: center;
-        margin-bottom: 24px;
-    }
-
-    .pkg-icon-wrap {
-        width: 56px;
-        height: 56px;
-        border-radius: 9999px;
-        background: #FDF0F6;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 16px;
-    }
-    .pkg-card.popular .pkg-icon-wrap {
-        box-shadow: 0 0 0 2px #C4007A;
-    }
-    .pkg-icon-wrap svg {
-        width: 28px;
-        height: 28px;
-        color: #C4007A;
-    }
-
-    .pkg-name {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0;
-    }
-
-    .pkg-desc {
-        font-size: 0.875rem;
-        color: #6B7280;
-        margin: 8px 0 0;
-    }
-
-    .pkg-price-wrap {
-        text-align: center;
-        margin-bottom: 24px;
-    }
-    .pkg-price {
-        font-size: 2.25rem;
-        font-weight: 700;
-        color: #C4007A;
-    }
-    .pkg-price-label {
-        font-size: 0.875rem;
-        color: #9CA3AF;
-        margin-left: 4px;
-    }
-
-    .pkg-features {
-        list-style: none;
-        padding: 0;
-        margin: 0 0 32px;
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    .pkg-feature {
-        display: flex;
-        align-items: flex-start;
-        gap: 8px;
-        font-size: 0.875rem;
-        color: #4B5563;
-    }
-    .pkg-feature svg {
-        width: 16px;
-        height: 16px;
-        color: #C4007A;
-        flex-shrink: 0;
-        margin-top: 2px;
-    }
-
-    .pkg-cta {
-        display: block;
-        width: 100%;
-        text-align: center;
-        border-radius: 9999px;
-        padding: 14px;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.3s ease;
-        font-size: 1rem;
-        cursor: pointer;
-        border: none;
-        font-family: inherit;
-    }
-    .pkg-cta.popular {
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-        color: #fff;
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
-    }
-    .pkg-cta.popular:hover {
-        transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
-        color: #fff;
-    }
-    .pkg-cta.regular {
-        border: 2px solid #C4007A;
-        color: #C4007A;
-        background: transparent;
-    }
-    .pkg-cta.regular:hover {
-        background: #C4007A;
-        color: #fff;
-    }
-
-    /* ===== Add-ons ===== */
-    .pkg-addons {
-        background: linear-gradient(to bottom right, #FDF0F6, #fff);
-        border-radius: 16px;
-        padding: 32px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        margin-bottom: 64px;
-    }
-    @media (min-width: 768px) { .pkg-addons { padding: 48px; } }
-
-    .pkg-addons-header {
-        text-align: center;
-        margin-bottom: 32px;
-    }
-    .pkg-addons-h2 {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0;
-    }
-    @media (min-width: 768px) { .pkg-addons-h2 { font-size: 1.875rem; } }
-    .pkg-addons-h2 .accent { color: #C4007A; }
-    .pkg-addons-sub {
-        color: #6B7280;
-        font-size: 0.875rem;
-        max-width: 672px;
-        margin: 8px auto 0;
-    }
-
-    .pkg-addons-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    @media (min-width: 768px) { .pkg-addons-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (min-width: 1024px) { .pkg-addons-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-
-    .pkg-addon {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: #fff;
-        border-radius: 12px;
-        padding: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        transition: all 0.3s ease;
-    }
-    .pkg-addon:hover {
-        border-color: rgba(196, 0, 122, 0.3);
-        box-shadow: 0 4px 6px -1px rgba(196, 0, 122, 0.1);
-    }
-    .pkg-addon-name {
-        font-size: 0.875rem;
-        color: #374151;
-    }
-    .pkg-addon-price {
-        font-size: 0.875rem;
-        font-weight: 700;
-        color: #C4007A;
-    }
-
-    /* ===== Trust Badges ===== */
-    .pkg-trust {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-        margin-bottom: 64px;
-    }
-    @media (min-width: 768px) { .pkg-trust { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-
-    .pkg-trust-card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 16px;
-        text-align: center;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-    }
-    .pkg-trust-card svg {
-        width: 24px;
-        height: 24px;
-        color: #C4007A;
-        margin: 0 auto 8px;
-        display: block;
-    }
-    .pkg-trust-title {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #111827;
-    }
-    .pkg-trust-sub {
-        font-size: 0.75rem;
-        color: #6B7280;
-        margin-top: 2px;
-    }
-
-    /* ===== FAQ ===== */
-    .pkg-faq-header {
-        text-align: center;
-        margin-bottom: 40px;
-    }
-    .pkg-faq-h2 {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0;
-    }
-    @media (min-width: 768px) { .pkg-faq-h2 { font-size: 1.875rem; } }
-    .pkg-faq-h2 .accent { color: #C4007A; }
-    .pkg-faq-sub {
-        color: #6B7280;
-        font-size: 0.875rem;
-        max-width: 672px;
-        margin: 8px auto 0;
-    }
-
-    .pkg-faq-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 24px;
-        margin-bottom: 64px;
-    }
-    @media (min-width: 768px) { .pkg-faq-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-
-    .pkg-faq-card {
-        background: #fff;
-        border-radius: 12px;
-        padding: 24px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        transition: all 0.3s ease;
-    }
-    .pkg-faq-card:hover {
-        box-shadow: 0 4px 6px -1px rgba(196, 0, 122, 0.1);
-    }
-    .pkg-faq-q {
-        font-weight: 700;
-        color: #111827;
-        margin: 0 0 8px;
-        font-size: 1rem;
-    }
-    .pkg-faq-a {
-        font-size: 0.875rem;
-        color: #4B5563;
-        margin: 0;
-        line-height: 1.625;
-    }
-
-    /* ===== CTA ===== */
-    .pkg-cta-section {
-        position: relative;
-        background: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        overflow: hidden;
-        margin-bottom: 0;
-    }
-    @media (min-width: 768px) { .pkg-cta-section { padding: 48px; } }
-
-    .pkg-cta-pattern {
-        position: absolute;
-        inset: 0;
-        opacity: 0.1;
-    }
-    .pkg-cta-pattern svg { width: 100%; height: 100%; }
-
-    .pkg-cta-inner {
-        position: relative;
-        z-index: 10;
-    }
-    .pkg-cta-h2 {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #fff;
-        margin: 0 0 12px;
-    }
-    @media (min-width: 768px) { .pkg-cta-h2 { font-size: 1.875rem; } }
-
-    .pkg-cta-sub {
-        color: rgba(255, 255, 255, 0.8);
-        max-width: 672px;
-        margin: 0 auto 24px;
-        font-size: 0.875rem;
-    }
-    @media (min-width: 768px) { .pkg-cta-sub { font-size: 1rem; } }
-
-    .pkg-cta-btns {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-    }
-    @media (min-width: 640px) { .pkg-cta-btns { flex-direction: row; } }
-
-    .pkg-cta-btn-1 {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border-radius: 9999px;
-        background: #fff;
-        padding: 14px 32px;
-        font-weight: 700;
-        color: #C4007A;
-        text-decoration: none;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-    }
-    .pkg-cta-btn-1:hover {
-        transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-        color: #C4007A;
-    }
-    .pkg-cta-btn-1 svg { width: 16px; height: 16px; }
-
-    .pkg-cta-btn-2 {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border-radius: 9999px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        padding: 14px 32px;
-        font-weight: 600;
-        color: #fff;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    .pkg-cta-btn-2:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.5);
-        color: #fff;
-    }
-    .pkg-cta-btn-2 svg { width: 16px; height: 16px; }
-
-    /* ===== Bottom Decorative ===== */
-    .pkg-bottom-deco {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        margin: 40px 0 8px;
-    }
-    .pkg-bottom-line {
-        width: 48px;
-        height: 1px;
-        background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
-    }
-    .pkg-bottom-line.right {
-        background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
-    }
-    .pkg-bottom-dots {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-    }
-    .pkg-bottom-dots span {
-        display: block;
-        width: 6px;
-        height: 6px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
-    }
-    .pkg-bottom-dots span.active {
-        width: 24px;
-        background: #C4007A;
-    }
+/* ---------- responsive ---------- */
+@media (max-width: 991px) { .pkg-sec { padding: 70px 0; } .pkg-card.popular { order: -1; } }
+@media (max-width: 575px) {
+    .pkg-container { padding: 0 16px; }
+    .pkg-hero-sec { padding: 52px 0 130px; }
+    .pkg-main-sec { margin-top: -80px; padding-bottom: 56px; }
+    .pkg-toggle-wrap { gap: 10px; padding: 10px 14px; }
+    .pkg-card { padding: 26px 20px 0; box-shadow: 5px 5px 0 var(--ink); border-radius: 20px; }
+    .pkg-card.popular { padding-top: 46px; box-shadow: 5px 5px 0 var(--gold); }
+    .pkg-perf, .pkg-stub { margin-left: -20px; margin-right: -20px; }
+    .pkg-stub { padding: 12px 20px; }
+    .pkg-sec { padding: 56px 0; }
+    .pkg-head { margin-bottom: 32px; }
+    .pkg-cta-section { padding: 44px 20px; border-radius: 20px; }
+    .pkg-cta-sec { padding: 56px 0 64px; }
+    .pkg-cta-btns > a { width: 100%; }
+    .pkg-aurora i { filter: blur(50px); }
+    .pkg-faq-q { padding: 16px; font-size: .98rem; }
+    .pkg-faq-a { padding: 0 16px 18px; }
+}
+@media (hover: none) {
+    .pkg-card:hover, .pkg-addon:hover, .pkg-trust-card:hover { translate: none; }
+    .pkg-card:hover { box-shadow: 8px 8px 0 var(--ink); }
+    .pkg-card.popular:hover { box-shadow: 8px 8px 0 var(--gold); }
+}
+@media (prefers-reduced-motion: reduce) {
+    .pkg-aurora i, .pkg-card.popular::after, .pkg-cta-section::after { animation: none; }
+    .pkg-toggle-knob, .pkg-card, .pkg-faq-a { transition: none; animation: none; }
+}
 </style>
 
 <main
@@ -638,24 +249,23 @@ $trustBadges = $packagesPage['trust_badges'];
     data-monthly-period="<?= e((string) $packagesPage['monthly_period_label']) ?>"
     data-yearly-period="<?= e((string) $packagesPage['yearly_period_label']) ?>"
 >
+<script>
+/* hidden-start animation states only on desktop mouse devices; phones/tablets/reduced-motion get the plain page */
+(function (s) {
+    try {
+        var desk = matchMedia('(min-width: 992px)').matches && matchMedia('(pointer: fine)').matches;
+        var calm = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (desk && !calm) s.parentElement.classList.add('pkg-js');
+    } catch (e) {}
+})(document.currentScript);
+</script>
+<div class="pkg-progress" aria-hidden="true"></div>
 
-    <!-- Decorative Background -->
-    <div class="pkg-bg">
-        <div class="pkg-bg-blob-1"></div>
-        <div class="pkg-bg-blob-2"></div>
-        <svg class="pkg-bg-shape pkg-bg-shape-1" viewBox="0 0 100 100">
-            <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)"/>
-        </svg>
-        <svg class="pkg-bg-shape pkg-bg-shape-2" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="35"/>
-        </svg>
-    </div>
-
-    <div class="pkg-container">
-
-        <!-- ===== HERO ===== -->
-        <div class="pkg-hero">
-            <div class="pkg-pill">
+    <!-- ===== HERO ===== -->
+    <section class="pkg-hero-sec">
+        <div class="pkg-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="pkg-container">
+            <div class="pkg-pill" data-hero>
                 <?= pkgIcon('sparkles') ?>
                 <span><?= e((string) $packagesPage['hero_badge']) ?></span>
             </div>
@@ -664,165 +274,175 @@ $trustBadges = $packagesPage['trust_badges'];
                 <?= e((string) $packagesPage['heading_prefix']) ?>
                 <span class="accent">
                     <?= e((string) $packagesPage['heading_highlight']) ?>
-                    <svg viewBox="0 0 300 8" preserveAspectRatio="none">
-                        <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
+                    <svg viewBox="0 0 300 8" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M2 4C60 1 240 1 298 4" stroke="#FFB547" stroke-width="2.5" stroke-linecap="round" fill="none" opacity="0.7"/>
                     </svg>
                 </span>
             </h1>
 
-            <p class="pkg-subtitle"><?= e((string) $packagesPage['summary']) ?></p>
+            <p class="pkg-subtitle" data-hero><?= e((string) $packagesPage['summary']) ?></p>
+
+            <!-- ===== Billing Toggle ===== -->
+            <div class="pkg-toggle-wrap" data-hero>
+                <span class="pkg-toggle-label active" id="pkgLabelMonthly"><?= e((string) $packagesPage['monthly_label']) ?></span>
+                <button type="button" class="pkg-toggle" id="pkgToggle" onclick="pkgToggleBilling()" aria-label="Toggle billing cycle">
+                    <span class="pkg-toggle-knob"></span>
+                </button>
+                <span class="pkg-toggle-label inactive" id="pkgLabelYearly">
+                    <?= e((string) $packagesPage['yearly_label']) ?>
+                    <span class="pkg-save-badge"><?= e((string) $packagesPage['save_badge']) ?></span>
+                </span>
+            </div>
         </div>
+    </section>
 
-        <!-- ===== Billing Toggle ===== -->
-        <div class="pkg-toggle-wrap">
-            <span class="pkg-toggle-label active" id="pkgLabelMonthly"><?= e((string) $packagesPage['monthly_label']) ?></span>
-            <button type="button" class="pkg-toggle" id="pkgToggle" onclick="pkgToggleBilling()" aria-label="Toggle billing cycle">
-                <span class="pkg-toggle-knob"></span>
-            </button>
-            <span class="pkg-toggle-label inactive" id="pkgLabelYearly">
-                <?= e((string) $packagesPage['yearly_label']) ?>
-                <span class="pkg-save-badge"><?= e((string) $packagesPage['save_badge']) ?></span>
-            </span>
-        </div>
+    <!-- ===== Packages Grid (event passes) ===== -->
+    <section class="pkg-main-sec">
+        <div class="pkg-container">
+            <div class="pkg-grid">
+                <?php foreach ($packages as $i => $pkg):
+                    $isPopular = !empty($pkg['popular']);
+                ?>
+                    <div class="pkg-card <?= $isPopular ? 'popular' : '' ?>"
+                         data-pkg-id="<?= htmlspecialchars($pkg['id']) ?>"
+                         data-price-monthly="<?= (int) $pkg['monthly'] ?>"
+                         data-price-yearly="<?= (int) $pkg['yearly'] ?>"
+                         data-popular="<?= $isPopular ? '1' : '0' ?>"
+                         data-rv="up" data-d="<?= min($i, 5) * 0.1 ?>">
 
-        <!-- ===== Packages Grid ===== -->
-        <div class="pkg-grid">
-            <?php foreach ($packages as $pkg):
-                $isPopular = !empty($pkg['popular']);
-            ?>
-                <div class="pkg-card <?= $isPopular ? 'popular' : '' ?>"
-                     data-pkg-id="<?= htmlspecialchars($pkg['id']) ?>"
-                     data-price-monthly="<?= (int) $pkg['monthly'] ?>"
-                     data-price-yearly="<?= (int) $pkg['yearly'] ?>"
-                     data-popular="<?= $isPopular ? '1' : '0' ?>">
+                        <?php if ($isPopular): ?>
+                            <div class="pkg-popular-badge"><?= e((string) $packagesPage['popular_badge']) ?></div>
+                        <?php endif; ?>
 
-                    <?php if ($isPopular): ?>
-                        <div class="pkg-popular-badge"><?= e((string) $packagesPage['popular_badge']) ?></div>
-                    <?php endif; ?>
-
-                    <div class="pkg-card-head">
-                        <div class="pkg-icon-wrap">
-                            <?= pkgIcon($pkg['icon']) ?>
+                        <div class="pkg-card-head">
+                            <div class="pkg-icon-wrap"><?= pkgIcon($pkg['icon']) ?></div>
+                            <h3 class="pkg-name"><?= htmlspecialchars($pkg['name']) ?></h3>
+                            <p class="pkg-desc"><?= htmlspecialchars($pkg['description']) ?></p>
                         </div>
-                        <h3 class="pkg-name"><?= htmlspecialchars($pkg['name']) ?></h3>
-                        <p class="pkg-desc"><?= htmlspecialchars($pkg['description']) ?></p>
+
+                        <div class="pkg-perf" aria-hidden="true"></div>
+
+                        <div class="pkg-price-wrap">
+                            <span class="pkg-price" data-pkg-price>₹<?= number_format((int) $pkg['monthly']) ?></span>
+                            <span class="pkg-price-label" data-pkg-label><?= e((string) $packagesPage['monthly_period_label']) ?></span>
+                        </div>
+
+                        <ul class="pkg-features">
+                            <?php foreach (($pkg['features'] ?? []) as $feature): ?>
+                                <li class="pkg-feature">
+                                    <?= pkgIcon('check') ?>
+                                    <span><?= htmlspecialchars($feature) ?></span>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+
+                        <a href="<?= e((string) ($pkg['buttonHref'] ?? '/contact.php')) ?>" class="pkg-cta <?= $isPopular ? 'popular' : 'regular' ?>">
+                            <?= e((string) $pkg['buttonText']) ?>
+                        </a>
+
+                        <div class="pkg-stub" aria-hidden="true">
+                            <span class="pkg-code">Pass &middot; <?= htmlspecialchars(strtoupper((string) $pkg['id'])) ?></span>
+                            <span class="pkg-barcode"></span>
+                        </div>
                     </div>
-
-                    <div class="pkg-price-wrap">
-                        <span class="pkg-price" data-pkg-price>₹<?= number_format((int) $pkg['monthly']) ?></span>
-                        <span class="pkg-price-label" data-pkg-label><?= e((string) $packagesPage['monthly_period_label']) ?></span>
-                    </div>
-
-                    <ul class="pkg-features">
-                        <?php foreach (($pkg['features'] ?? []) as $feature): ?>
-                            <li class="pkg-feature">
-                                <?= pkgIcon('check') ?>
-                                <?= htmlspecialchars($feature) ?>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-
-                    <a href="<?= e((string) ($pkg['buttonHref'] ?? '/contact.php')) ?>" class="pkg-cta <?= $isPopular ? 'popular' : 'regular' ?>">
-                        <?= e((string) $pkg['buttonText']) ?>
-                    </a>
-                </div>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
         </div>
+    </section>
 
-        <!-- ===== Add-ons ===== -->
-        <div class="pkg-addons">
-            <div class="pkg-addons-header">
-                <h2 class="pkg-addons-h2">
+    <!-- ===== Add-ons ===== -->
+    <section class="pkg-sec pkg-addons-sec">
+        <div class="pkg-container">
+            <div class="pkg-head" data-rv="up">
+                <span class="pkg-kicker">Customise your pass</span>
+                <h2>
                     <?= e((string) $packagesPage['addons_heading_prefix']) ?>
                     <span class="accent"><?= e((string) $packagesPage['addons_heading_highlight']) ?></span>
                 </h2>
-                <p class="pkg-addons-sub"><?= e((string) $packagesPage['addons_subtitle']) ?></p>
+                <p><?= e((string) $packagesPage['addons_subtitle']) ?></p>
+                <i class="pkg-bar"></i>
             </div>
 
             <div class="pkg-addons-grid">
-                <?php foreach ($addons as $addon): ?>
-                    <div class="pkg-addon">
+                <?php foreach ($addons as $i => $addon): ?>
+                    <div class="pkg-addon" data-rv="up" data-d="<?= min($i, 5) * 0.06 ?>">
                         <span class="pkg-addon-name"><?= htmlspecialchars($addon['name']) ?></span>
                         <span class="pkg-addon-price"><?= htmlspecialchars($addon['price']) ?></span>
                     </div>
                 <?php endforeach; ?>
             </div>
         </div>
+    </section>
 
-        <!-- ===== Trust Badges ===== -->
-        <div class="pkg-trust">
-            <?php foreach ($trustBadges as $badge): ?>
-                <div class="pkg-trust-card">
-                    <?= pkgIcon($badge['icon']) ?>
-                    <div class="pkg-trust-title"><?= htmlspecialchars($badge['title']) ?></div>
-                    <div class="pkg-trust-sub"><?= htmlspecialchars($badge['subtitle']) ?></div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- ===== FAQ ===== -->
-        <div class="pkg-faq-header">
-            <h2 class="pkg-faq-h2">
-                <?= e((string) $packagesPage['faq_heading_prefix']) ?>
-                <span class="accent"><?= e((string) $packagesPage['faq_heading_highlight']) ?></span>
-            </h2>
-            <p class="pkg-faq-sub"><?= e((string) $packagesPage['faq_subtitle']) ?></p>
-        </div>
-
-        <div class="pkg-faq-grid">
-            <?php foreach ($faqs as $faq): ?>
-                <div class="pkg-faq-card">
-                    <h3 class="pkg-faq-q"><?= htmlspecialchars($faq['question']) ?></h3>
-                    <p class="pkg-faq-a"><?= htmlspecialchars($faq['answer']) ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- ===== CTA ===== -->
-        <div class="pkg-cta-section">
-            <div class="pkg-cta-pattern">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <pattern id="cta-grid-packages" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <rect x="0" y="0" width="1" height="1" fill="white"/>
-                        </pattern>
-                    </defs>
-                    <rect x="0" y="0" width="100" height="100" fill="url(#cta-grid-packages)"/>
-                </svg>
-            </div>
-            <div class="pkg-cta-inner">
-                <h2 class="pkg-cta-h2"><?= e((string) $packagesPage['cta_title']) ?></h2>
-                <p class="pkg-cta-sub"><?= e((string) $packagesPage['cta_description']) ?></p>
-
-                <div class="pkg-cta-btns">
-                    <a href="<?= e((string) $packagesPage['cta_primary_href']) ?>" class="pkg-cta-btn-1">
-                        <?= e((string) $packagesPage['cta_primary_label']) ?>
-                        <?= pkgIcon('arrow') ?>
-                    </a>
-                    <a href="tel:<?= e((string) $packagesPage['cta_phone']) ?>" class="pkg-cta-btn-2">
-                        <?= pkgIcon('phone') ?>
-                        <?= e((string) $packagesPage['cta_phone_label']) ?>
-                    </a>
-                </div>
+    <!-- ===== Trust Badges ===== -->
+    <section class="pkg-sec" style="padding-top: 56px; padding-bottom: 56px;">
+        <div class="pkg-container">
+            <div class="pkg-trust">
+                <?php foreach ($trustBadges as $i => $badge): ?>
+                    <div class="pkg-trust-card" data-rv="up" data-d="<?= min($i, 5) * 0.08 ?>">
+                        <div class="pkg-trust-ico"><?= pkgIcon($badge['icon']) ?></div>
+                        <div class="pkg-trust-title"><?= htmlspecialchars($badge['title']) ?></div>
+                        <div class="pkg-trust-sub"><?= htmlspecialchars($badge['subtitle']) ?></div>
+                    </div>
+                <?php endforeach; ?>
             </div>
         </div>
+    </section>
 
-        <!-- ===== Bottom Decorative ===== -->
-        <div class="pkg-bottom-deco">
-            <div class="pkg-bottom-line"></div>
-            <div class="pkg-bottom-dots">
-                <span></span><span></span><span></span>
-                <span class="active"></span>
-                <span></span><span></span><span></span>
+    <!-- ===== FAQ ===== -->
+    <section class="pkg-sec pkg-faq-sec">
+        <div class="pkg-container">
+            <div class="pkg-head" data-rv="up">
+                <span class="pkg-kicker">Questions, answered</span>
+                <h2>
+                    <?= e((string) $packagesPage['faq_heading_prefix']) ?>
+                    <span class="accent"><?= e((string) $packagesPage['faq_heading_highlight']) ?></span>
+                </h2>
+                <p><?= e((string) $packagesPage['faq_subtitle']) ?></p>
+                <i class="pkg-bar"></i>
             </div>
-            <div class="pkg-bottom-line right"></div>
-        </div>
 
-    </div>
+            <div class="pkg-faq-grid">
+                <?php foreach ($faqs as $i => $faq): ?>
+                    <details class="pkg-faq-card" <?= $i === 0 ? 'open' : '' ?> data-rv="up" data-d="<?= min($i, 5) * 0.06 ?>">
+                        <summary class="pkg-faq-q">
+                            <span><?= htmlspecialchars($faq['question']) ?></span>
+                            <i class="pkg-plus" aria-hidden="true"></i>
+                        </summary>
+                        <p class="pkg-faq-a"><?= htmlspecialchars($faq['answer']) ?></p>
+                    </details>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="pkg-cta-sec">
+        <div class="pkg-container">
+            <div class="pkg-cta-section" data-rv="scale">
+                <div class="pkg-cta-inner">
+                    <h2 class="pkg-cta-h2"><?= e((string) $packagesPage['cta_title']) ?></h2>
+                    <p class="pkg-cta-sub"><?= e((string) $packagesPage['cta_description']) ?></p>
+
+                    <div class="pkg-cta-btns">
+                        <a href="<?= e((string) $packagesPage['cta_primary_href']) ?>" class="pkg-cta-btn-1">
+                            <span><?= e((string) $packagesPage['cta_primary_label']) ?></span>
+                            <?= pkgIcon('arrow') ?>
+                        </a>
+                        <a href="tel:<?= e((string) $packagesPage['cta_phone']) ?>" class="pkg-cta-btn-2">
+                            <?= pkgIcon('phone') ?>
+                            <span><?= e((string) $packagesPage['cta_phone_label']) ?></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 </main>
 
 <script>
-    // ===== Billing toggle =====
+    // ===== Billing toggle (logic unchanged, price now rolls between values) =====
     let pkgBillingCycle = 'monthly';
     const pkgPage = document.getElementById('packagesPage');
     const pkgPeriodLabels = {
@@ -835,6 +455,18 @@ $trustBadges = $packagesPage['trust_badges'];
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
     });
+    const pkgCalm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function pkgRollPrice(el, from, to) {
+        if (pkgCalm || from === to) { el.textContent = pkgInrFormatter.format(to); return; }
+        const t0 = performance.now(), dur = 650;
+        (function tick(now) {
+            const p = Math.min(1, (now - t0) / dur);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = pkgInrFormatter.format(Math.round(from + (to - from) * eased));
+            if (p < 1) requestAnimationFrame(tick);
+        })(t0);
+    }
 
     function pkgToggleBilling() {
         pkgBillingCycle = (pkgBillingCycle === 'monthly') ? 'yearly' : 'monthly';
@@ -867,14 +499,112 @@ $trustBadges = $packagesPage['trust_badges'];
             const yearly = parseInt(card.dataset.priceYearly, 10) || 0;
 
             if (pkgBillingCycle === 'monthly') {
-                priceEl.textContent = pkgInrFormatter.format(monthly);
+                pkgRollPrice(priceEl, yearly, monthly);
                 labelEl.textContent = pkgPeriodLabels.monthly;
             } else {
-                priceEl.textContent = pkgInrFormatter.format(yearly);
+                pkgRollPrice(priceEl, monthly, yearly);
                 labelEl.textContent = pkgPeriodLabels.yearly;
             }
         });
     }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/motion@11.18.2/dist/motion.js"></script>
+<script>
+(function () {
+    var root = document.getElementById('packagesPage');
+    if (!root) return;
+
+    /* ---------- everywhere (no library): button glow + click ripple ---------- */
+    root.querySelectorAll('.pkg-cta.popular, .pkg-cta-btn-1').forEach(function (b) {
+        b.addEventListener('pointermove', function (e) {
+            var r = b.getBoundingClientRect();
+            b.style.setProperty('--bx', (e.clientX - r.left) + 'px');
+            b.style.setProperty('--by', (e.clientY - r.top) + 'px');
+        });
+    });
+    root.addEventListener('click', function (e) {
+        var b = e.target.closest && e.target.closest('.pkg-cta, .pkg-cta-btn-1, .pkg-cta-btn-2');
+        if (!b) return;
+        var r = b.getBoundingClientRect(), d = document.createElement('i');
+        d.className = 'pkg-ripple';
+        d.style.left = (e.clientX - r.left) + 'px';
+        d.style.top = (e.clientY - r.top) + 'px';
+        b.appendChild(d);
+        setTimeout(function () { d.remove(); }, 700);
+    });
+
+    /* ---------- desktop animations (Motion) ---------- */
+    var M = window.Motion;
+    var fallback = function () { root.classList.remove('pkg-js'); };
+    if (!M || !root.classList.contains('pkg-js')) { fallback(); return; }
+    try {
+        var animate = M.animate, inView = M.inView, scroll = M.scroll, stagger = M.stagger;
+        var spring = { type: 'spring', stiffness: 110, damping: 16 };
+
+        var bar = root.querySelector('.pkg-progress');
+        if (bar && scroll) scroll(animate(bar, { scaleX: [0, 1] }, { ease: 'linear' }));
+
+        /* word-by-word mask reveal (hero h1 + section headings) */
+        var split = function (el) {
+            var walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), list = [], n;
+            while ((n = walker.nextNode())) { if (n.nodeValue.trim()) list.push(n); }
+            list.forEach(function (node) {
+                var frag = document.createDocumentFragment();
+                node.nodeValue.split(/(\s+)/).forEach(function (part) {
+                    if (!part) return;
+                    if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+                    var w = document.createElement('span'), inner = document.createElement('span');
+                    w.className = 'pkg-w'; inner.textContent = part; w.appendChild(inner); frag.appendChild(w);
+                });
+                node.parentNode.replaceChild(frag, node);
+            });
+            return el.querySelectorAll('.pkg-w > span');
+        };
+        var h1 = root.querySelector('.pkg-h1');
+        if (h1) animate(split(h1), { y: ['110%', '0%'] }, { duration: 0.85, delay: stagger(0.06, { startDelay: 0.1 }), ease: [0.22, 1, 0.36, 1] });
+        animate(root.querySelectorAll('.pkg-hero-sec [data-hero]'), { opacity: [0, 1], y: [26, 0] }, { duration: 0.7, delay: stagger(0.12, { startDelay: 0.5 }), ease: 'easeOut' });
+
+        root.querySelectorAll('.pkg-head h2').forEach(function (h) {
+            var sp = split(h);
+            sp.forEach(function (s) { s.style.transform = 'translateY(110%)'; });
+            inView(h, function () { animate(sp, { y: ['110%', '0%'] }, { duration: 0.8, delay: stagger(0.05), ease: [0.22, 1, 0.36, 1] }); }, { amount: 0.6 });
+        });
+
+        /* reveals */
+        root.querySelectorAll('[data-rv]').forEach(function (el) {
+            var kind = el.getAttribute('data-rv'), d = parseFloat(el.getAttribute('data-d') || '0');
+            var kf = { opacity: [0, 1] };
+            if (kind === 'scale') kf.scale = [0.92, 1];
+            else kf.y = [50, 0];
+            inView(el, function () { animate(el, kf, Object.assign({ delay: d }, spring)); }, { amount: 0.12 });
+        });
+
+        /* stripe bars draw themselves */
+        root.querySelectorAll('.pkg-bar').forEach(function (b) {
+            b.style.transform = 'scaleX(0)';
+            inView(b, function () { animate(b, { scaleX: [0, 1] }, { duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }); }, { amount: 0.8 });
+        });
+
+        /* 3D tilt on the regular passes (the VIP pass stays calm) */
+        root.querySelectorAll('.pkg-card:not(.popular)').forEach(function (c) {
+            c.addEventListener('pointermove', function (e) {
+                var r = c.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+                animate(c, { rotateY: nx * 6, rotateX: -ny * 6 }, { duration: 0.3 });
+            });
+            c.addEventListener('pointerleave', function () { animate(c, { rotateX: 0, rotateY: 0 }, { type: 'spring', stiffness: 200, damping: 15 }); });
+        });
+
+        /* magnetic pink buttons */
+        root.querySelectorAll('.pkg-cta.popular, .pkg-cta-btn-1').forEach(function (b) {
+            b.addEventListener('pointermove', function (e) {
+                var r = b.getBoundingClientRect();
+                animate(b, { x: (e.clientX - r.left - r.width / 2) * 0.2, y: (e.clientY - r.top - r.height / 2) * 0.28 }, { duration: 0.25 });
+            });
+            b.addEventListener('pointerleave', function () { animate(b, { x: 0, y: 0 }, { type: 'spring', stiffness: 300, damping: 14 }); });
+        });
+    } catch (err) { fallback(); }
+})();
 </script>
 
 <?php require_once __DIR__ . '/app/templates/footer.php'; ?>

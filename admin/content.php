@@ -78,7 +78,6 @@ $homeSections = [
 ];
 
 $selectedSection = trim($_GET['section'] ?? $_POST['section'] ?? 'collection:service');
-$blogWordLimit = 3000;
 if ($selectedSection === 'registry:partners') $selectedSection = 'collection:partner';
 if ($selectedSection === 'registry:about') $selectedSection = 'collection:homepage_about';
 if ($selectedSection === 'registry:visibility') $selectedSection = 'collection:homepage_visibility';
@@ -424,9 +423,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $blogText = html_entity_decode(strip_tags($body), ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     $blogWordCount = preg_match_all('/[\p{L}\p{N}]+(?:[\'’][\p{L}\p{N}]+)*/u', $blogText);
                     if ($blogWordCount === false) throw new RuntimeException('The blog article contains text that could not be counted.');
-                    if ($blogWordCount > $blogWordLimit) {
-                        throw new RuntimeException('Blog article content cannot exceed ' . number_format($blogWordLimit) . ' words.');
-                    }
                     $readTime = trim((string) ($_POST['read_time'] ?? ''));
                     if ($readTime === '') {
                         $readTime = max(1, (int) ceil($blogWordCount / 200)) . ' min read';
@@ -1127,7 +1123,7 @@ require_once __DIR__ . '/templates/header.php';
                                     ] as $field => $label): ?>
                                         <div class="col-md-6">
                                             <label class="form-label fw-semibold" for="partner-setting-<?= e($field) ?>"><?= e($label) ?></label>
-                                            <input type="text" class="form-control" id="partner-setting-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e($trustedPartnersSection[$field] ?? '') ?>">
+                                            <input type="text" class="form-control" id="partner-setting-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($trustedPartnersSection[$field] ?? '') ?>">
                                         </div>
                                     <?php endforeach; ?>
                                     <div class="col-12">
@@ -1266,7 +1262,7 @@ require_once __DIR__ . '/templates/header.php';
                             <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-title">Title / name</label>
-                                    <input type="text" class="form-control" id="f-title" name="title" required maxlength="250" value="<?= e($editingItem['title'] ?? '') ?>">
+                                    <input type="text" class="form-control" id="f-title" name="title" required value="<?= e($editingItem['title'] ?? '') ?>">
                                 </div>
                             <?php endif; ?>
 
@@ -1278,10 +1274,10 @@ require_once __DIR__ . '/templates/header.php';
                             <?php if (in_array($sectionType, ['blog', 'page', 'hero_content', 'service_detail'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-body"><?= $sectionType === 'blog' ? 'Article content' : ($sectionType === 'hero_content' ? 'Main hero description' : ($sectionType === 'service_detail' ? 'Service overview' : 'Additional details')) ?></label>
-                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' data-word-limit="' . (int) $blogWordLimit . '" aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
+                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
                                     <?php if ($sectionType === 'blog'): ?>
                                         <div class="form-text" id="blog-body-help">
-                                            Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items. Maximum <?= number_format($blogWordLimit) ?> words.
+                                            Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items.
                                             <span id="blog-word-count" class="ms-1" aria-live="polite"></span>
                                         </div>
                                     <?php endif; ?>
@@ -1327,7 +1323,7 @@ require_once __DIR__ . '/templates/header.php';
                                             <textarea class="form-control" id="f-hero-<?= e($field) ?>" name="<?= e($field) ?>" rows="<?= in_array($field, ['benefits', 'service_options'], true) ? '5' : '2' ?>"><?= e($formMeta[$field] ?? '') ?></textarea>
                                             <?php if ($field === 'benefits' || $field === 'service_options'): ?><div class="form-text">One item per line. Remove a line to remove that item from the hero.</div><?php endif; ?>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-hero-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" maxlength="250" <?= $field === 'phone_number' ? 'inputmode="tel"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-hero-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= $field === 'phone_number' ? 'inputmode="tel"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1371,7 +1367,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <?php foreach ($aboutTextFields as $field => $label): ?>
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold" for="f-about-<?= e($field) ?>"><?= e($label) ?></label>
-                                        <input type="text" class="form-control" id="f-about-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                        <input type="text" class="form-control" id="f-about-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="col-12">
@@ -1430,7 +1426,7 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if ($field === 'usp_description'): ?>
                                             <textarea class="form-control" id="f-home-about-<?= e($field) ?>" name="<?= e($field) ?>" rows="3"><?= e($formMeta[$field] ?? '') ?></textarea>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-home-about-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e($formMeta[$field] ?? '') ?>" <?= $field === 'cta_href' ? 'placeholder="/about.php"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-home-about-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= $field === 'cta_href' ? 'placeholder="/about.php"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1476,9 +1472,9 @@ require_once __DIR__ . '/templates/header.php';
                                     <div class="<?= in_array($field, ['heading_prefix', 'heading_highlight'], true) ? 'col-md-6' : 'col-md-6' ?>">
                                         <label class="form-label fw-semibold" for="f-visibility-<?= e($field) ?>"><?= e($label) ?></label>
                                         <?php if ($field === 'quote_href'): ?>
-                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" placeholder="/contact.php">
+                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" placeholder="/contact.php">
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e((string) ($formMeta[$field] ?? '')) ?>">
+                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>">
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1533,7 +1529,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <?php foreach ($portfolioTextFields as $field => $label): ?>
                                     <div class="<?= in_array($field, ['cta_primary_href', 'cta_secondary_href'], true) ? 'col-md-6' : 'col-md-6' ?>">
                                         <label class="form-label fw-semibold" for="f-portfolio-<?= e($field) ?>"><?= e($label) ?></label>
-                                        <input type="text" class="form-control" id="f-portfolio-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                        <input type="text" class="form-control" id="f-portfolio-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="col-12">
@@ -1668,7 +1664,7 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if (in_array($field, ['page_meta_description', 'website_description'], true)): ?>
                                             <textarea class="form-control" id="f-services-<?= e($field) ?>" name="<?= e($field) ?>" rows="3"><?= e($formMeta[$field] ?? '') ?></textarea>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-services-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-services-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1739,7 +1735,7 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if (in_array($field, ['page_meta_description', 'addons_subtitle', 'faq_subtitle', 'cta_description'], true)): ?>
                                             <textarea class="form-control" id="f-packages-<?= e($field) ?>" name="<?= e($field) ?>" rows="2"><?= e($formMeta[$field] ?? '') ?></textarea>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-packages-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= $field === 'cta_primary_href' ? 'placeholder="/contact.php"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-packages-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= $field === 'cta_primary_href' ? 'placeholder="/contact.php"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1770,7 +1766,7 @@ require_once __DIR__ . '/templates/header.php';
                             <?php elseif ($sectionType === 'service'): ?>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-icon">Icon or emoji</label>
-                                    <input type="text" class="form-control" id="f-icon" name="icon" value="<?= e($formMeta['icon'] ?? '') ?>" maxlength="80">
+                                    <input type="text" class="form-control" id="f-icon" name="icon" value="<?= e($formMeta['icon'] ?? '') ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-href">Destination URL</label>
@@ -1797,7 +1793,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-service-tagline">Hero tagline</label>
-                                    <input type="text" class="form-control" id="f-service-tagline" name="tagline" required maxlength="250" value="<?= e((string) ($formMeta['tagline'] ?? '')) ?>">
+                                    <input type="text" class="form-control" id="f-service-tagline" name="tagline" required value="<?= e((string) ($formMeta['tagline'] ?? '')) ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-service-hero-description">Hero description</label>
@@ -1935,16 +1931,12 @@ require_once __DIR__ . '/templates/header.php';
     const form = document.getElementById('cmsForm');
     const blogBody = document.getElementById('f-body');
     const blogWordCount = document.getElementById('blog-word-count');
-    const blogWordLimit = Number(blogBody?.dataset.wordLimit || 0);
 
-    if (blogBody && blogWordCount && blogWordLimit > 0) {
+    if (blogBody && blogWordCount) {
         const countWords = text => (text.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) || []).length;
         const updateBlogWordCount = () => {
             const count = countWords(blogBody.value);
-            const isOverLimit = count > blogWordLimit;
-            blogWordCount.textContent = `${count.toLocaleString()} / ${blogWordLimit.toLocaleString()} words`;
-            blogWordCount.classList.toggle('text-danger', isOverLimit);
-            blogBody.setCustomValidity(isOverLimit ? `Blog articles cannot exceed ${blogWordLimit.toLocaleString()} words.` : '');
+            blogWordCount.textContent = `${count.toLocaleString()} words`;
         };
         blogBody.addEventListener('input', updateBlogWordCount);
         updateBlogWordCount();

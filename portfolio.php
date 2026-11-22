@@ -25,10 +25,10 @@ function portIcon(string $name): string {
         'phone'      => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
     ];
     $path = $icons[$name] ?? '';
-    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' . $path . '</svg>';
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' . $path . '</svg>';
 }
 
-// ===== Categories =====
+// ===== Categories (fallback defaults — overridden by portfolioPageContent() below) =====
 $categories = [
     ['id' => 'all',      'label' => 'All Projects'],
     ['id' => 'branding', 'label' => 'Branding'],
@@ -38,116 +38,17 @@ $categories = [
     ['id' => 'app',      'label' => 'App Development'],
 ];
 
-// ===== Projects =====
+// ===== Projects (fallback defaults — overridden by portfolioProjects() below) =====
 $projects = [
-    [
-        'id' => 1,
-        'title' => 'TechSolutions India',
-        'category' => 'branding',
-        'categoryLabel' => 'Branding',
-        'description' => 'Complete digital branding and identity design for a leading tech solutions company. We created a modern, professional brand identity that reflects their innovative approach.',
-        'image' => '/portfolio/project-1.jpg',
-        'results' => ['300% Brand Recognition', '50% Increase in Leads', 'Award Winning Design'],
-        'client' => 'TechSolutions India',
-        'year' => '2024',
-        'link' => '#',
-    ],
-    [
-        'id' => 2,
-        'title' => 'StyleHub Fashion',
-        'category' => 'web',
-        'categoryLabel' => 'Web Design',
-        'description' => 'Responsive e-commerce website design and development for a premium fashion brand. The website features seamless shopping experience and modern UI/UX.',
-        'image' => '/portfolio/project-2.jpg',
-        'results' => ['400% Increase in Sales', '200% More Traffic', '5-Star User Rating'],
-        'client' => 'StyleHub Fashion',
-        'year' => '2024',
-        'link' => '#',
-    ],
-    [
-        'id' => 3,
-        'title' => 'GreenTech Solutions',
-        'category' => 'seo',
-        'categoryLabel' => 'SEO',
-        'description' => 'Comprehensive SEO strategy that helped a green tech company rank #1 on Google for 50+ keywords and achieve 300% organic growth.',
-        'image' => '/portfolio/project-3.jpg',
-        'results' => ['50+ Keywords Ranked #1', '300% Organic Growth', '200% More Leads'],
-        'client' => 'GreenTech Solutions',
-        'year' => '2023',
-        'link' => '#',
-    ],
-    [
-        'id' => 4,
-        'title' => 'Wellness World',
-        'category' => 'social',
-        'categoryLabel' => 'Social Media',
-        'description' => 'Social media management and content strategy that grew a wellness brand\'s following from 5K to 50K+ followers with 5x engagement.',
-        'image' => '/portfolio/project-4.jpg',
-        'results' => ['50K+ Followers', '5x Engagement Rate', '200% More Traffic'],
-        'client' => 'Wellness World',
-        'year' => '2023',
-        'link' => '#',
-    ],
-    [
-        'id' => 5,
-        'title' => 'FinTech Solutions',
-        'category' => 'app',
-        'categoryLabel' => 'App Development',
-        'description' => 'Cross-platform mobile app for a fintech startup. The app features secure payments, user-friendly interface, and real-time analytics.',
-        'image' => '/portfolio/project-5.jpg',
-        'results' => ['10K+ Downloads', '4.8 Star Rating', '100K+ Transactions'],
-        'client' => 'FinTech Solutions',
-        'year' => '2024',
-        'link' => '#',
-    ],
-    [
-        'id' => 6,
-        'title' => 'DigitalFirst Agency',
-        'category' => 'branding',
-        'categoryLabel' => 'Branding',
-        'description' => 'Complete rebranding for a digital marketing agency including logo design, brand guidelines, and marketing collateral.',
-        'image' => '/portfolio/project-6.jpg',
-        'results' => ['200% Brand Recognition', '150% More Inquiries', 'Industry Award'],
-        'client' => 'DigitalFirst Agency',
-        'year' => '2024',
-        'link' => '#',
-    ],
-    [
-        'id' => 7,
-        'title' => 'GreenEnergy Hub',
-        'category' => 'seo',
-        'categoryLabel' => 'SEO',
-        'description' => 'Local SEO campaign for a green energy company that increased foot traffic and online inquiries by 300% across 10+ locations.',
-        'image' => '/portfolio/project-7.jpg',
-        'results' => ['10+ Locations Ranked #1', '300% Foot Traffic', '500% Online Inquiries'],
-        'client' => 'GreenEnergy Hub',
-        'year' => '2023',
-        'link' => '#',
-    ],
-    [
-        'id' => 8,
-        'title' => 'ShopSmart App',
-        'category' => 'app',
-        'categoryLabel' => 'App Development',
-        'description' => 'E-commerce mobile app with AI-powered product recommendations, seamless checkout, and personalized shopping experience.',
-        'image' => '/portfolio/project-8.jpg',
-        'results' => ['50K+ Downloads', '4.9 Star Rating', '200% More Sales'],
-        'client' => 'ShopSmart',
-        'year' => '2024',
-        'link' => '#',
-    ],
-    [
-        'id' => 9,
-        'title' => 'EcoFriendly Living',
-        'category' => 'web',
-        'categoryLabel' => 'Web Design',
-        'description' => 'Modern, sustainable website design for an eco-friendly lifestyle brand with focus on user experience and conversion optimization.',
-        'image' => '/portfolio/project-9.jpg',
-        'results' => ['150% More Conversions', '100% Traffic Increase', 'Best Design Award'],
-        'client' => 'EcoFriendly Living',
-        'year' => '2023',
-        'link' => '#',
-    ],
+    ['id' => 1, 'title' => 'TechSolutions India', 'category' => 'branding', 'categoryLabel' => 'Branding', 'description' => 'Complete digital branding and identity design for a leading tech solutions company. We created a modern, professional brand identity that reflects their innovative approach.', 'image' => '/portfolio/project-1.jpg', 'results' => ['300% Brand Recognition', '50% Increase in Leads', 'Award Winning Design'], 'client' => 'TechSolutions India', 'year' => '2024', 'link' => '#'],
+    ['id' => 2, 'title' => 'StyleHub Fashion', 'category' => 'web', 'categoryLabel' => 'Web Design', 'description' => 'Responsive e-commerce website design and development for a premium fashion brand. The website features seamless shopping experience and modern UI/UX.', 'image' => '/portfolio/project-2.jpg', 'results' => ['400% Increase in Sales', '200% More Traffic', '5-Star User Rating'], 'client' => 'StyleHub Fashion', 'year' => '2024', 'link' => '#'],
+    ['id' => 3, 'title' => 'GreenTech Solutions', 'category' => 'seo', 'categoryLabel' => 'SEO', 'description' => 'Comprehensive SEO strategy that helped a green tech company rank #1 on Google for 50+ keywords and achieve 300% organic growth.', 'image' => '/portfolio/project-3.jpg', 'results' => ['50+ Keywords Ranked #1', '300% Organic Growth', '200% More Leads'], 'client' => 'GreenTech Solutions', 'year' => '2023', 'link' => '#'],
+    ['id' => 4, 'title' => 'Wellness World', 'category' => 'social', 'categoryLabel' => 'Social Media', 'description' => 'Social media management and content strategy that grew a wellness brand\'s following from 5K to 50K+ followers with 5x engagement.', 'image' => '/portfolio/project-4.jpg', 'results' => ['50K+ Followers', '5x Engagement Rate', '200% More Traffic'], 'client' => 'Wellness World', 'year' => '2023', 'link' => '#'],
+    ['id' => 5, 'title' => 'FinTech Solutions', 'category' => 'app', 'categoryLabel' => 'App Development', 'description' => 'Cross-platform mobile app for a fintech startup. The app features secure payments, user-friendly interface, and real-time analytics.', 'image' => '/portfolio/project-5.jpg', 'results' => ['10K+ Downloads', '4.8 Star Rating', '100K+ Transactions'], 'client' => 'FinTech Solutions', 'year' => '2024', 'link' => '#'],
+    ['id' => 6, 'title' => 'DigitalFirst Agency', 'category' => 'branding', 'categoryLabel' => 'Branding', 'description' => 'Complete rebranding for a digital marketing agency including logo design, brand guidelines, and marketing collateral.', 'image' => '/portfolio/project-6.jpg', 'results' => ['200% Brand Recognition', '150% More Inquiries', 'Industry Award'], 'client' => 'DigitalFirst Agency', 'year' => '2024', 'link' => '#'],
+    ['id' => 7, 'title' => 'GreenEnergy Hub', 'category' => 'seo', 'categoryLabel' => 'SEO', 'description' => 'Local SEO campaign for a green energy company that increased foot traffic and online inquiries by 300% across 10+ locations.', 'image' => '/portfolio/project-7.jpg', 'results' => ['10+ Locations Ranked #1', '300% Foot Traffic', '500% Online Inquiries'], 'client' => 'GreenEnergy Hub', 'year' => '2023', 'link' => '#'],
+    ['id' => 8, 'title' => 'ShopSmart App', 'category' => 'app', 'categoryLabel' => 'App Development', 'description' => 'E-commerce mobile app with AI-powered product recommendations, seamless checkout, and personalized shopping experience.', 'image' => '/portfolio/project-8.jpg', 'results' => ['50K+ Downloads', '4.9 Star Rating', '200% More Sales'], 'client' => 'ShopSmart', 'year' => '2024', 'link' => '#'],
+    ['id' => 9, 'title' => 'EcoFriendly Living', 'category' => 'web', 'categoryLabel' => 'Web Design', 'description' => 'Modern, sustainable website design for an eco-friendly lifestyle brand with focus on user experience and conversion optimization.', 'image' => '/portfolio/project-9.jpg', 'results' => ['150% More Conversions', '100% Traffic Increase', 'Best Design Award'], 'client' => 'EcoFriendly Living', 'year' => '2023', 'link' => '#'],
 ];
 
 $stats = [
@@ -175,824 +76,295 @@ $categories = array_merge(
 );
 ?>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+
 <style>
     /* ============================================================
-       PORTFOLIO PAGE — Webtecmart Next.js clone
+       PORTFOLIO PAGE — "Expo Floor" design
+       (class names kept as port-* so the filter / modal JS keeps working)
        ============================================================ */
-    .port-page {
-        position: relative;
-        width: 100%;
-        background: #FFF8FC;
-        overflow: hidden;
-        color: #1F1B2A;
+    .port-page, .port-modal {
+        --ink:#1A0613; --ink2:#2B0B20; --pink:#C4007A; --pink2:#E0398F; --blush:#FBEAF3; --gold:#FFB547; --mint:#0E9F6E; --text:#2A2430; --mute:#6C6474; --line:rgba(26,6,19,.12);
+        --disp:'Bricolage Grotesque','Plus Jakarta Sans',system-ui,sans-serif;
+        font-family:'Plus Jakarta Sans',system-ui,-apple-system,sans-serif; color:var(--text);
     }
+    .port-page *, .port-page *::before, .port-page *::after, .port-modal *, .port-modal *::before, .port-modal *::after { box-sizing:border-box; }
+    .port-page { position:relative; width:100%; background:#fff; overflow-x:clip; }
+    .port-page h1,.port-page h2,.port-page h3,.port-page h4,.port-modal h3,.port-modal h4 { font-family:var(--disp); letter-spacing:-.02em; }
+    .port-page a:focus-visible,.port-page button:focus-visible,.port-modal a:focus-visible,.port-modal button:focus-visible { outline:3px solid var(--gold); outline-offset:2px; }
+    .port-container { position:relative; z-index:1; max-width:1200px; width:100%; margin:0 auto; padding:0 22px; }
+    @media (min-width:1440px){ .port-container { max-width:1320px; } }
 
-    .port-container {
-        max-width: 1280px;
-        padding-left: 16px;
-        padding-right: 16px;
-        margin: 0 auto;
-        width: 100%;
-        position: relative;
-        z-index: 10;
-    }
+    /* ===== HERO (the hall) ===== */
+    .port-hero { position:relative; overflow:hidden; color:#fff; text-align:center; padding:72px 0 64px;
+        background:radial-gradient(60% 70% at 85% 10%,rgba(196,0,122,.55),transparent 65%),radial-gradient(40% 50% at 0% 100%,rgba(255,181,71,.16),transparent 70%),var(--ink); }
+    .port-hero::before { content:''; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.14) 1px,transparent 1.2px); background-size:26px 26px; -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%); mask-image:linear-gradient(180deg,#000 30%,transparent 95%); pointer-events:none; }
+    .port-pill { display:inline-flex; align-items:center; gap:8px; padding:7px 14px 7px 10px; margin-bottom:22px; border-radius:999px; background:rgba(255,255,255,.09); border:1px solid rgba(255,255,255,.2); font-size:.8rem; font-weight:600; color:#FFE3F1; }
+    .port-pill i { width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(255,181,71,.25); }
+    .port-h1 { margin:0 auto 18px; max-width:900px; font-size:clamp(2.4rem,5.4vw,4.4rem); font-weight:800; line-height:1.04; color:#fff; }
+    .port-h1 .accent { background:linear-gradient(90deg,var(--gold),#FF7BC0,var(--gold)); background-size:200% 100%; -webkit-background-clip:text; background-clip:text; color:transparent; animation:portShine 4s linear infinite; }
+    @keyframes portShine { to { background-position:200% 0; } }
+    .port-subtitle { max-width:720px; margin:0 auto; color:rgba(255,255,255,.78); font-size:1.05rem; line-height:1.7; }
 
-    /* Decorative Background */
-    .port-bg {
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-    }
-    .port-bg-blob-1 {
-        position: absolute;
-        top: 0; right: 0;
-        width: 50%; height: 50%;
-        background: linear-gradient(to bottom left, rgba(196, 0, 122, 0.05), transparent);
-        border-radius: 9999px;
-        filter: blur(64px);
-    }
-    .port-bg-blob-2 {
-        position: absolute;
-        bottom: 0; left: 0;
-        width: 33.333%; height: 50%;
-        background: linear-gradient(to top right, rgba(196, 0, 122, 0.05), transparent);
-        border-radius: 9999px;
-        filter: blur(64px);
-    }
-    .port-bg-shape {
-        position: absolute;
-        fill: none;
-        stroke: #C4007A;
-        opacity: 0.1;
-    }
-    .port-bg-shape-1 { top: 80px; right: 40px; width: 128px; height: 128px; stroke-width: 2; }
-    .port-bg-shape-2 { bottom: 80px; left: 40px; width: 160px; height: 160px; stroke-width: 1.5; }
+    /* Stats */
+    .port-stats { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; max-width:960px; margin:44px auto 0; }
+    @media (min-width:768px){ .port-stats { grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; } }
+    .port-stat { padding:20px 12px; text-align:center; border-radius:16px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.16); transition:translate .25s, border-color .25s; }
+    .port-stat:hover { translate:0 -4px; border-color:var(--gold); }
+    .port-stat svg { display:block; width:26px; height:26px; margin:0 auto 8px; color:var(--gold); }
+    .port-stat-value { font:800 2rem/1.05 var(--disp); color:var(--gold); }
+    .port-stat-label { margin-top:4px; font-size:.8rem; font-weight:600; color:rgba(255,255,255,.75); }
 
-    /* ===== HERO ===== */
-    .port-hero {
-        position: relative;
-        padding: 48px 0;
-        text-align: center;
-    }
-    .port-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        background: rgba(196, 0, 122, 0.08);
-        border: 1px solid rgba(196, 0, 122, 0.15);
-        padding: 5px 14px;
-        border-radius: 9999px;
-        margin-bottom: 10px;
-    }
-    .port-pill svg { width: 13px; height: 13px; color: #C4007A; flex-shrink: 0; }
-    .port-pill span {
-        color: #C4007A;
-        font-weight: 700;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-    }
+    /* Gold ribbon strip under hero */
+    .port-ribbon { background:var(--gold); border-top:3px solid var(--ink); border-bottom:3px solid var(--ink); overflow:hidden; }
+    .port-ribbon-track { display:flex; width:max-content; animation:portRun 40s linear infinite; }
+    .port-ribbon span { padding:13px 30px; white-space:nowrap; font:800 1.05rem var(--disp); color:var(--ink); }
+    .port-ribbon span::after { content:'✦'; margin-left:60px; opacity:.55; }
+    @keyframes portRun { to { transform:translateX(-50%); } }
 
-    .port-h1 {
-        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        font-size: clamp(1.85rem, 3.2vw, 2.5rem);
-        font-weight: 800;
-        color: #111827;
-        line-height: 1.18;
-        letter-spacing: -0.02em;
-        margin: 0 0 8px;
-    }
-    .port-h1 .accent {
-        color: #C4007A;
-        position: relative;
-        display: inline-block;
-    }
-    .port-h1 .accent svg {
-        position: absolute;
-        left: 0;
-        bottom: -8px;
-        width: 100%;
-        height: 8px;
-    }
+    /* ===== Gallery section ===== */
+    .port-gallery { position:relative; padding:72px 0 76px; background:#F7F4F8 radial-gradient(rgba(26,6,19,.07) 1px,transparent 1.2px) 0 0/24px 24px; }
+    .port-gallery-head { max-width:720px; margin:0 auto 32px; text-align:center; }
+    .port-kicker { display:inline-block; margin-bottom:12px; padding-left:14px; border-left:4px solid var(--pink); font-size:.82rem; font-weight:700; color:var(--pink); text-align:left; }
+    .port-gallery-head h2 { margin:0 0 14px; font-size:clamp(1.85rem,3.5vw,2.8rem); font-weight:800; line-height:1.1; color:var(--ink); }
+    .port-bar { display:block; width:84px; height:7px; margin:0 auto; background:repeating-linear-gradient(90deg,var(--pink) 0 12px,var(--gold) 12px 24px); }
 
-    .port-subtitle {
-        color: #6B7280;
-        font-size: 1rem;
-        max-width: 768px;
-        margin: 16px auto 0;
-        line-height: 1.625;
-    }
-    @media (min-width: 768px) { .port-subtitle { font-size: 1.125rem; } }
+    /* Filters */
+    .port-filters { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:10px; margin-bottom:40px; }
+    .port-filter { padding:11px 20px; border-radius:12px; font:700 .88rem/1 inherit; font-family:inherit; border:2px solid var(--ink); background:#fff; color:var(--ink); cursor:pointer; box-shadow:3px 3px 0 var(--ink); transition:translate .15s, box-shadow .15s, background .2s, color .2s; }
+    .port-filter:hover { background:var(--blush); color:var(--pink); translate:-1px -1px; box-shadow:4px 4px 0 var(--ink); }
+    .port-filter.active { background:var(--pink); color:#fff; border-color:var(--ink); box-shadow:3px 3px 0 var(--gold); }
 
-    /* ===== Stats ===== */
-    .port-stats {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 16px;
-        margin-bottom: 48px;
-    }
-    @media (min-width: 768px) {
-        .port-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
-    }
+    /* Projects grid */
+    .port-grid { display:grid; grid-template-columns:minmax(0,1fr); gap:28px; }
+    @media (min-width:768px){ .port-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:30px; } }
+    @media (min-width:1024px){ .port-grid { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+    .port-card { display:flex; flex-direction:column; min-width:0; background:#fff; border:2px solid var(--ink); border-radius:18px; overflow:hidden; box-shadow:6px 6px 0 var(--ink); transition:translate .25s, box-shadow .25s; }
+    .port-card:hover { translate:-4px -4px; box-shadow:10px 10px 0 var(--pink); }
+    .port-img { position:relative; height:220px; overflow:hidden; display:flex; align-items:center; justify-content:center; border-bottom:2px solid var(--ink);
+        background:radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.55) 0 8%,transparent 9%),linear-gradient(145deg,#2D051E 0%,#C4007A 55%,#E98EBE 100%); }
+    .port-project-image { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+    .port-card:hover .port-project-image { transform:scale(1.05); }
+    .port-img-icon { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+    .port-img-icon svg { width:64px; height:64px; color:rgba(255,255,255,.35); }
+    .port-cat-badge { position:absolute; top:14px; left:14px; z-index:2; padding:5px 12px; background:var(--gold); color:var(--ink); border:2px solid var(--ink); border-radius:8px; box-shadow:3px 3px 0 var(--ink); font-size:.74rem; font-weight:800; }
+    .port-year-badge { position:absolute; bottom:12px; right:12px; z-index:2; padding:4px 11px; background:#fff; color:var(--ink); border:2px solid var(--ink); border-radius:999px; font:800 .74rem var(--disp); }
+    .port-hover-overlay { position:absolute; inset:0; z-index:3; display:flex; align-items:center; justify-content:center; padding:0; border:0; background:rgba(26,6,19,.62); opacity:0; cursor:pointer; font-family:inherit; transition:opacity .3s; }
+    .port-card:hover .port-hover-overlay,.port-hover-overlay:focus-visible { opacity:1; }
+    .port-hover-overlay span { padding:11px 20px; border-radius:12px; background:var(--pink); color:#fff; font-weight:700; font-size:.88rem; box-shadow:0 4px 0 #7E004E; }
+    .port-body { display:flex; flex-direction:column; flex:1; padding:22px 22px 20px; }
+    .port-title-row { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; margin-bottom:8px; }
+    .port-title { margin:0; font-size:1.25rem; font-weight:700; line-height:1.25; color:var(--ink); transition:color .25s; overflow-wrap:anywhere; }
+    .port-card:hover .port-title { color:var(--pink); }
+    .port-client { flex-shrink:0; max-width:40%; font-size:.74rem; font-weight:700; color:var(--mute); text-align:right; overflow-wrap:anywhere; }
+    .port-desc { margin:0 0 16px; font-size:.9rem; line-height:1.65; color:var(--mute); overflow-wrap:anywhere; }
+    .port-results { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:18px; }
+    .port-result-tag { padding:4px 11px; border:1.5px solid var(--ink); border-radius:999px; background:var(--blush); color:var(--pink); font-size:.74rem; font-weight:700; }
+    .port-link { align-self:flex-start; margin-top:auto; display:inline-flex; align-items:center; gap:7px; padding-top:14px; width:100%; border-top:2px dashed var(--line); font-weight:800; font-size:.9rem; color:var(--pink); text-decoration:none; transition:gap .25s; }
+    .port-link:hover { gap:12px; color:var(--pink); }
+    .port-link svg { width:15px; height:15px; flex-shrink:0; }
 
-    .port-stat {
-        background: #fff;
-        border-radius: 16px;
-        padding: 24px;
-        text-align: center;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        transition: all 0.3s ease;
-    }
-    .port-stat:hover {
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.1);
-        transform: translateY(-4px);
-    }
-    .port-stat svg {
-        width: 24px;
-        height: 24px;
-        color: #C4007A;
-        margin: 0 auto 8px;
-        display: block;
-    }
-    .port-stat-value {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #C4007A;
-    }
-    @media (min-width: 768px) { .port-stat-value { font-size: 1.875rem; } }
-    .port-stat-label {
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #111827;
-    }
-
-    /* ===== Filter Buttons ===== */
-    .port-filters {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin-bottom: 40px;
-    }
-
-    .port-filter {
-        padding: 10px 20px;
-        border-radius: 9999px;
-        font-size: 0.875rem;
-        font-weight: 600;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        background: #fff;
-        color: #4B5563;
-        cursor: pointer;
-        font-family: inherit;
-        transition: all 0.3s ease;
-    }
-    .port-filter:hover {
-        background: #FDF0F6;
-        color: #C4007A;
-    }
-    .port-filter.active {
-        background: #C4007A;
-        color: #fff;
-        border-color: #C4007A;
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.3);
-    }
-
-    /* ===== Projects Grid ===== */
-    .port-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 24px;
-        margin-bottom: 64px;
-    }
-    @media (min-width: 768px) {
-        .port-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
-    }
-    @media (min-width: 1024px) {
-        .port-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-
-    .port-card {
-        background: #fff;
-        border-radius: 16px;
-        overflow: hidden;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-        transition: all 0.5s ease;
-    }
-    .port-card:hover {
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.1);
-        transform: translateY(-8px);
-    }
-
-    /* Image / Icon area */
-    .port-img {
-        position: relative;
-        height: 208px;
-        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.1), #FDF0F6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-    }
-    .port-project-image {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-    .port-img-icon {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: transform 0.5s ease;
-    }
-    .port-card:hover .port-img-icon { transform: scale(1.1); }
-    .port-img-icon svg {
-        width: 64px;
-        height: 64px;
-        color: rgba(196, 0, 122, 0.2);
-    }
-
-    .port-cat-badge {
-        position: absolute;
-        top: 12px;
-        left: 12px;
-        background: #C4007A;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 4px 12px;
-        border-radius: 9999px;
-    }
-
-    .port-year-badge {
-        position: absolute;
-        bottom: 12px;
-        right: 12px;
-        background: rgba(255, 255, 255, 0.9);
-        backdrop-filter: blur(4px);
-        color: #C4007A;
-        font-size: 12px;
-        font-weight: 700;
-        padding: 4px 12px;
-        border-radius: 9999px;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-
-    .port-hover-overlay {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.5);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-        font-family: inherit;
-    }
-    .port-card:hover .port-hover-overlay { opacity: 1; }
-    .port-hover-overlay span {
-        background: #fff;
-        color: #C4007A;
-        padding: 8px 16px;
-        border-radius: 9999px;
-        font-size: 0.875rem;
-        font-weight: 700;
-    }
-
-    /* Card content */
-    .port-body {
-        padding: 24px;
-    }
-
-    .port-title-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 8px;
-        margin-bottom: 8px;
-    }
-    .port-title {
-        font-size: 1.125rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0;
-        transition: color 0.3s ease;
-    }
-    @media (min-width: 768px) { .port-title { font-size: 1.25rem; } }
-    .port-card:hover .port-title { color: #C4007A; }
-
-    .port-client {
-        font-size: 12px;
-        color: #9CA3AF;
-        white-space: nowrap;
-    }
-
-    .port-desc {
-        font-size: 0.875rem;
-        color: #4B5563;
-        line-height: 1.625;
-        margin: 0 0 16px;
-        overflow-wrap: break-word;
-    }
-
-    .port-results {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 16px;
-    }
-    .port-result-tag {
-        font-size: 12px;
-        background: #FDF0F6;
-        color: #C4007A;
-        padding: 4px 8px;
-        border-radius: 9999px;
-    }
-
-    .port-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 4px;
-        font-size: 0.875rem;
-        font-weight: 600;
-        color: #C4007A;
-        text-decoration: none;
-        transition: gap 0.3s ease;
-    }
-    .port-link:hover { gap: 8px; }
-    .port-link svg { width: 14px; height: 14px; }
-
-    /* Empty state */
-    .port-empty {
-        text-align: center;
-        padding: 48px 0;
-    }
-    .port-empty svg {
-        width: 48px;
-        height: 48px;
-        color: #D1D5DB;
-        margin: 0 auto 16px;
-        display: block;
-    }
-    .port-empty p {
-        color: #6B7280;
-        font-size: 0.875rem;
-        margin: 0;
-    }
+    .port-empty { text-align:center; padding:56px 0; }
+    .port-empty svg { display:block; width:52px; height:52px; margin:0 auto 16px; color:var(--pink); }
+    .port-empty p { margin:0; color:var(--mute); font-weight:600; }
 
     /* ===== CTA ===== */
-    .port-cta {
-        position: relative;
-        background: linear-gradient(90deg, #A3005F, #C4007A, #E0398F);
-        border-radius: 16px;
-        padding: 32px;
-        text-align: center;
-        overflow: hidden;
-    }
-    @media (min-width: 768px) { .port-cta { padding: 48px; } }
+    .port-cta-sec { padding:0 0 76px; }
+    .port-cta { position:relative; overflow:hidden; padding:60px 34px; text-align:center; background:var(--ink); color:#fff; border:3px solid var(--pink); border-radius:26px; }
+    .port-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(50% 80% at 50% 120%,rgba(196,0,122,.7),transparent 70%),radial-gradient(rgba(255,255,255,.1) 1px,transparent 1.2px) 0 0/26px 26px; }
+    .port-cta-pattern { display:none; }
+    .port-cta-inner { position:relative; }
+    .port-cta-inner > svg { display:block; width:46px; height:46px; margin:0 auto 16px; color:var(--gold); }
+    .port-cta-h2 { max-width:820px; margin:0 auto 14px; font-size:clamp(1.8rem,3.6vw,2.9rem); font-weight:800; line-height:1.12; color:#fff; }
+    .port-cta-sub { max-width:640px; margin:0 auto 28px; color:rgba(255,255,255,.8); line-height:1.65; }
+    .port-cta-btns { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:14px; }
+    .port-cta-btn-1,.port-cta-btn-2,.port-modal-cta { display:inline-flex; align-items:center; justify-content:center; gap:10px; padding:14px 26px; border:2px solid transparent; border-radius:12px; font-weight:700; font-size:.95rem; line-height:1.2; text-decoration:none; cursor:pointer; font-family:inherit; transition:translate .2s, box-shadow .2s, background .2s; }
+    .port-cta-btn-1,.port-modal-cta { background:var(--pink); color:#fff; box-shadow:0 6px 0 #7E004E; }
+    .port-cta-btn-1:hover,.port-modal-cta:hover { color:#fff; translate:0 2px; box-shadow:0 4px 0 #7E004E; }
+    .port-cta-btn-2 { background:transparent; color:#fff; border-color:rgba(255,255,255,.35); }
+    .port-cta-btn-2:hover { color:#fff; background:rgba(255,255,255,.1); border-color:#fff; }
+    .port-cta-btn-1 svg,.port-modal-cta svg { width:16px; height:16px; flex-shrink:0; }
 
-    .port-cta-pattern {
-        position: absolute;
-        inset: 0;
-        opacity: 0.1;
-    }
-    .port-cta-pattern svg { width: 100%; height: 100%; }
-
-    .port-cta-inner {
-        position: relative;
-        z-index: 10;
-    }
-    .port-cta-inner > svg {
-        width: 48px;
-        height: 48px;
-        color: #fff;
-        margin: 0 auto 16px;
-        display: block;
-    }
-    .port-cta-h2 {
-        font-family: 'Plus Jakarta Sans', sans-serif;
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #fff;
-        margin: 0 0 12px;
-    }
-    @media (min-width: 768px) { .port-cta-h2 { font-size: 1.875rem; } }
-
-    .port-cta-sub {
-        color: rgba(255, 255, 255, 0.8);
-        max-width: 672px;
-        margin: 0 auto 24px;
-        font-size: 0.875rem;
-    }
-    @media (min-width: 768px) { .port-cta-sub { font-size: 1rem; } }
-
-    .port-cta-btns {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 16px;
-    }
-    @media (min-width: 640px) { .port-cta-btns { flex-direction: row; } }
-
-    .port-cta-btn-1 {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border-radius: 9999px;
-        background: #fff;
-        padding: 14px 32px;
-        font-weight: 700;
-        color: #C4007A;
-        text-decoration: none;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
-        transition: all 0.3s ease;
-    }
-    .port-cta-btn-1:hover {
-        transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-        color: #C4007A;
-    }
-    .port-cta-btn-1 svg { width: 16px; height: 16px; }
-
-    .port-cta-btn-2 {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border-radius: 9999px;
-        border: 2px solid rgba(255, 255, 255, 0.3);
-        padding: 14px 32px;
-        font-weight: 600;
-        color: #fff;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    }
-    .port-cta-btn-2:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.5);
-        color: #fff;
-    }
-
-    /* ===== Bottom Decorative ===== */
-    .port-bottom-deco {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        margin: 40px 0 32px;
-    }
-    .port-bottom-line {
-        width: 48px;
-        height: 1px;
-        background: linear-gradient(to right, transparent, rgba(196, 0, 122, 0.3));
-    }
-    .port-bottom-line.right {
-        background: linear-gradient(to left, transparent, rgba(196, 0, 122, 0.3));
-    }
-    .port-bottom-dots {
-        display: flex;
-        gap: 4px;
-        align-items: center;
-    }
-    .port-bottom-dots span {
-        display: block;
-        width: 6px;
-        height: 6px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.2);
-    }
-    .port-bottom-dots span.active {
-        width: 24px;
-        background: #C4007A;
-    }
+    /* Bottom deco (kept, restyled) */
+    .port-bottom-deco { display:none; }
 
     /* ===== Project Modal ===== */
-    .port-modal {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        opacity: 0;
-        transition: opacity 0.25s ease;
-    }
-    .port-modal.open {
-        display: flex;
-        opacity: 1;
-    }
-    .port-modal-backdrop {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(4px);
-    }
-    .port-modal-box {
-        position: relative;
-        width: 100%;
-        max-width: 640px;
-        max-height: 90vh;
-        overflow-y: auto;
-        border-radius: 16px;
-        border: 1px solid rgba(196, 0, 122, 0.1);
-        background: #fff;
-        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-        transform: translateY(20px) scale(0.97);
-        transition: transform 0.25s ease;
-    }
-    .port-modal.open .port-modal-box {
-        transform: translateY(0) scale(1);
-    }
-    .port-modal-close {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        z-index: 10;
-        width: 36px;
-        height: 36px;
-        border-radius: 9999px;
-        background: rgba(196, 0, 122, 0.1);
-        color: #C4007A;
-        border: none;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: background 0.2s ease;
-    }
-    .port-modal-close:hover { background: rgba(196, 0, 122, 0.2); }
-    .port-modal-close svg { width: 16px; height: 16px; }
+    .port-modal { position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; padding:16px; opacity:0; transition:opacity .25s ease; }
+    .port-modal.open { display:flex; opacity:1; }
+    .port-modal-backdrop { position:absolute; inset:0; background:rgba(26,6,19,.78); backdrop-filter:blur(4px); }
+    .port-modal-box { position:relative; width:100%; max-width:660px; max-height:90vh; overflow-y:auto; border:2px solid var(--ink); border-radius:22px; background:#fff; box-shadow:10px 10px 0 var(--gold); transform:translateY(20px) scale(.97); transition:transform .25s ease; }
+    .port-modal.open .port-modal-box { transform:translateY(0) scale(1); }
+    .port-modal-close { position:absolute; top:12px; right:12px; z-index:10; display:flex; align-items:center; justify-content:center; width:38px; height:38px; border:2px solid var(--ink); border-radius:10px; background:#fff; color:var(--ink); cursor:pointer; box-shadow:3px 3px 0 var(--ink); transition:background .2s, color .2s; }
+    .port-modal-close:hover { background:var(--pink); color:#fff; }
+    .port-modal-close svg { width:16px; height:16px; }
+    .port-modal-hero { position:relative; display:flex; align-items:center; justify-content:center; height:170px; border-bottom:2px solid var(--ink);
+        background:radial-gradient(ellipse at 70% 30%,rgba(255,255,255,.55) 0 8%,transparent 9%),linear-gradient(145deg,#2D051E 0%,#C4007A 55%,#E98EBE 100%); }
+    .port-modal-hero svg { width:64px; height:64px; color:rgba(255,255,255,.45); }
+    .port-modal-body { padding:26px 26px 28px; }
+    .port-modal-cat { display:inline-block; margin-bottom:12px; padding:5px 12px; background:var(--gold); color:var(--ink); border:2px solid var(--ink); border-radius:8px; box-shadow:3px 3px 0 var(--ink); font-size:.74rem; font-weight:800; }
+    .port-modal-title { margin:0 0 4px; font-size:1.7rem; font-weight:800; line-height:1.15; color:var(--ink); }
+    .port-modal-meta { margin:0 0 16px; font-size:.86rem; font-weight:700; color:var(--pink); }
+    .port-modal-desc { margin:0 0 18px; font-size:.95rem; line-height:1.7; color:var(--mute); }
+    .port-modal-body p a { color:var(--pink); font-weight:700; }
+    .port-modal-results-title { margin:0 0 10px; font-size:.95rem; font-weight:800; color:var(--ink); }
+    .port-modal-results { display:grid; gap:9px; margin-bottom:24px; padding:16px; border:2px dashed rgba(196,0,122,.4); border-radius:14px; background:var(--blush); }
+    .port-modal-result { display:flex; align-items:center; gap:9px; font-size:.9rem; font-weight:600; color:#3A2733; }
+    .port-modal-result svg { width:17px; height:17px; flex-shrink:0; color:var(--mint); }
 
-    .port-modal-hero {
-        height: 160px;
-        background: linear-gradient(to bottom right, rgba(196, 0, 122, 0.15), #FDF0F6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        position: relative;
+    /* Responsive */
+    @media (max-width:767px){ .port-ribbon span { font-size:.9rem; padding:12px 20px; } .port-ribbon span::after { margin-left:36px; } }
+    @media (max-width:575px){
+        .port-container { padding:0 16px; } .port-hero { padding:48px 0 44px; } .port-gallery { padding:56px 0; }
+        .port-card { box-shadow:4px 4px 0 var(--ink); } .port-stat-value { font-size:1.6rem; }
+        .port-cta { padding:44px 20px; border-radius:20px; } .port-cta-btns > a,.port-modal-cta { width:100%; white-space:normal; text-align:center; min-height:48px; }
+        .port-modal-box { box-shadow:6px 6px 0 var(--gold); } .port-modal-body { padding:22px 18px 24px; } .port-modal-title { font-size:1.4rem; }
+        .port-filter { padding:10px 14px; font-size:.82rem; }
     }
-    .port-modal-hero svg {
-        width: 64px;
-        height: 64px;
-        color: rgba(196, 0, 122, 0.4);
-    }
-
-    .port-modal-body {
-        padding: 24px;
-    }
-    .port-modal-cat {
-        display: inline-block;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        color: #C4007A;
-        background: rgba(196, 0, 122, 0.1);
-        padding: 4px 12px;
-        border-radius: 9999px;
-        margin-bottom: 12px;
-    }
-    .port-modal-title {
-        font-size: 1.5rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0 0 4px;
-    }
-    .port-modal-meta {
-        font-size: 0.875rem;
-        color: #6B7280;
-        margin: 0 0 16px;
-    }
-    .port-modal-desc {
-        font-size: 0.9375rem;
-        color: #4B5563;
-        line-height: 1.625;
-        margin: 0 0 20px;
-    }
-    .port-modal-results-title {
-        font-size: 0.875rem;
-        font-weight: 700;
-        color: #111827;
-        margin: 0 0 8px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-    }
-    .port-modal-results {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 24px;
-    }
-    .port-modal-result {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 0.875rem;
-        color: #4B5563;
-    }
-    .port-modal-result svg {
-        width: 16px;
-        height: 16px;
-        color: #C4007A;
-        flex-shrink: 0;
-    }
-    .port-modal-cta {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        border-radius: 9999px;
-        background: linear-gradient(90deg, #C4007A, #E0398F);
-        padding: 12px 24px;
-        font-weight: 700;
-        color: #fff;
-        text-decoration: none;
-        box-shadow: 0 10px 15px -3px rgba(196, 0, 122, 0.25);
-        transition: all 0.3s ease;
-        font-size: 0.875rem;
-        border: none;
-        cursor: pointer;
-    }
-    .port-modal-cta:hover {
-        transform: scale(1.02);
-        box-shadow: 0 20px 25px -5px rgba(196, 0, 122, 0.35);
-        color: #fff;
-    }
-    .port-modal-cta svg { width: 14px; height: 14px; }
+    @media (hover:none){ .port-card:hover { translate:none; box-shadow:6px 6px 0 var(--ink); } .port-stat:hover { translate:none; } .port-hover-overlay { display:none; } }
+    @media (prefers-reduced-motion:reduce){ .port-ribbon-track,.port-h1 .accent { animation:none; } .port-card,.port-filter,.port-stat { transition:none; } }
 </style>
 
 <main class="port-page" id="portfolioPage">
 
-    <!-- Decorative Background -->
-    <div class="port-bg">
-        <div class="port-bg-blob-1"></div>
-        <div class="port-bg-blob-2"></div>
-        <svg class="port-bg-shape port-bg-shape-1" viewBox="0 0 100 100">
-            <rect x="15" y="15" width="70" height="70" transform="rotate(45 50 50)"/>
-        </svg>
-        <svg class="port-bg-shape port-bg-shape-2" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="35"/>
-        </svg>
-    </div>
-
-    <div class="port-container">
-
-        <!-- ===== HERO ===== -->
-        <div class="port-hero">
-            <div class="port-pill">
-                <?= portIcon('sparkles') ?>
-                <span><?= e((string) $portfolioPage['badge']) ?></span>
-            </div>
+    <!-- ===== HERO ===== -->
+    <section class="port-hero">
+        <div class="port-container">
+            <div class="port-pill"><i></i><span><?= e((string) $portfolioPage['badge']) ?></span></div>
 
             <h1 class="port-h1">
                 <?= e((string) $portfolioPage['heading_prefix']) ?>
-                <span class="accent">
-                    <?= e((string) $portfolioPage['heading_highlight']) ?>
-                    <svg viewBox="0 0 300 8" preserveAspectRatio="none">
-                        <path d="M2 4C60 1 240 1 298 4" stroke="#C4007A" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.3"/>
-                    </svg>
-                </span>
+                <span class="accent"><?= e((string) $portfolioPage['heading_highlight']) ?></span>
             </h1>
 
-            <p class="port-subtitle">
-                <?= e((string) $portfolioPage['summary']) ?>
-            </p>
-        </div>
+            <p class="port-subtitle"><?= e((string) $portfolioPage['summary']) ?></p>
 
-        <!-- ===== Stats ===== -->
-        <div class="port-stats">
-            <?php foreach ($stats as $stat): ?>
-                <div class="port-stat">
-                    <?= portIcon((string) ($stat['icon'] ?? '')) ?>
-                    <div class="port-stat-value"><?= e((string) ($stat['value'] ?? '')) ?></div>
-                    <div class="port-stat-label"><?= e((string) ($stat['label'] ?? '')) ?></div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- ===== Filters ===== -->
-        <div class="port-filters" id="portFilters">
-            <?php foreach ($categories as $cat): ?>
-                <button
-                    type="button"
-                    class="port-filter <?= $cat['id'] === 'all' ? 'active' : '' ?>"
-                    data-filter="<?= htmlspecialchars($cat['id']) ?>"
-                    onclick="portSetFilter('<?= htmlspecialchars($cat['id']) ?>')"
-                >
-                    <?= e((string) $cat['label']) ?>
-                </button>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- ===== Projects Grid ===== -->
-        <div class="port-grid" id="portGrid">
-            <?php foreach ($projects as $p):
-                $icon = $categoryIconMap[$p['category']] ?? 'briefcase';
-            ?>
-                <div class="port-card" data-category="<?= e((string) $p['category']) ?>">
-                    <!-- Image / Icon area -->
-                    <div class="port-img">
-                        <?php if (!empty($p['image'])): ?><img class="port-project-image" src="<?= e((string) $p['image']) ?>" alt="<?= e((string) $p['title']) ?>" onerror="this.remove()"><?php endif; ?>
-                        <div class="port-img-icon">
-                            <?= portIcon($icon) ?>
-                        </div>
-
-                        <div class="port-cat-badge"><?= e((string) $p['categoryLabel']) ?></div>
-                        <div class="port-year-badge"><?= e((string) $p['year']) ?></div>
-
-                        <button
-                            type="button"
-                            class="port-hover-overlay"
-                            onclick="portOpenModal(<?= (int) $p['id'] ?>)"
-                            aria-label="<?= e((string) $portfolioPage['view_details_label']) ?>"
-                        >
-                            <span><?= e((string) $portfolioPage['view_details_label']) ?></span>
-                        </button>
+            <!-- Stats -->
+            <div class="port-stats">
+                <?php foreach ($stats as $stat): ?>
+                    <div class="port-stat">
+                        <?= portIcon((string) ($stat['icon'] ?? '')) ?>
+                        <div class="port-stat-value"><?= e((string) ($stat['value'] ?? '')) ?></div>
+                        <div class="port-stat-label"><?= e((string) ($stat['label'] ?? '')) ?></div>
                     </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    </section>
 
-                    <!-- Content -->
-                    <div class="port-body">
-                        <div class="port-title-row">
-                            <h3 class="port-title"><?= e((string) $p['title']) ?></h3>
-                            <span class="port-client"><?= e((string) $p['client']) ?></span>
+    <!-- Ribbon (built from the same stats) -->
+    <div class="port-ribbon" aria-hidden="true">
+        <div class="port-ribbon-track">
+            <?php for ($i = 0; $i < 4; $i++): foreach ($stats as $stat): ?>
+                <span><?= e((string) ($stat['value'] ?? '')) ?> <?= e((string) ($stat['label'] ?? '')) ?></span>
+            <?php endforeach; endfor; ?>
+        </div>
+    </div>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="port-gallery">
+        <div class="port-container">
+
+            <div class="port-gallery-head">
+                <span class="port-kicker"><?= e((string) $portfolioPage['badge']) ?></span>
+                <h2><?= e((string) $portfolioPage['heading_prefix']) ?> <span style="color:var(--pink)"><?= e((string) $portfolioPage['heading_highlight']) ?></span></h2>
+                <i class="port-bar"></i>
+            </div>
+
+            <!-- Filters -->
+            <div class="port-filters" id="portFilters">
+                <?php foreach ($categories as $cat): ?>
+                    <button
+                        type="button"
+                        class="port-filter <?= $cat['id'] === 'all' ? 'active' : '' ?>"
+                        data-filter="<?= htmlspecialchars($cat['id']) ?>"
+                        onclick="portSetFilter('<?= htmlspecialchars($cat['id']) ?>')"
+                    >
+                        <?= e((string) $cat['label']) ?>
+                    </button>
+                <?php endforeach; ?>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="port-grid" id="portGrid">
+                <?php foreach ($projects as $p):
+                    $icon = $categoryIconMap[$p['category']] ?? 'briefcase';
+                ?>
+                    <div class="port-card" data-category="<?= e((string) $p['category']) ?>">
+                        <!-- Image / Icon area -->
+                        <div class="port-img">
+                            <?php if (!empty($p['image'])): ?><img class="port-project-image" src="<?= e((string) $p['image']) ?>" alt="<?= e((string) $p['title']) ?>" loading="lazy" onerror="this.remove()"><?php endif; ?>
+                            <div class="port-img-icon"><?= portIcon($icon) ?></div>
+
+                            <div class="port-cat-badge"><?= e((string) $p['categoryLabel']) ?></div>
+                            <div class="port-year-badge"><?= e((string) $p['year']) ?></div>
+
+                            <button
+                                type="button"
+                                class="port-hover-overlay"
+                                onclick="portOpenModal(<?= (int) $p['id'] ?>)"
+                                aria-label="<?= e((string) $portfolioPage['view_details_label']) ?>"
+                            >
+                                <span><?= e((string) $portfolioPage['view_details_label']) ?></span>
+                            </button>
                         </div>
 
-                        <p class="port-desc"><?= e((string) $p['description']) ?></p>
+                        <!-- Content -->
+                        <div class="port-body">
+                            <div class="port-title-row">
+                                <h3 class="port-title"><?= e((string) $p['title']) ?></h3>
+                                <span class="port-client"><?= e((string) $p['client']) ?></span>
+                            </div>
 
-                        <div class="port-results">
-                            <?php foreach ($p['results'] as $r): ?>
-                                <span class="port-result-tag"><?= e((string) $r) ?></span>
-                            <?php endforeach; ?>
+                            <p class="port-desc"><?= e((string) $p['description']) ?></p>
+
+                            <div class="port-results">
+                                <?php foreach ($p['results'] as $r): ?>
+                                    <span class="port-result-tag"><?= e((string) $r) ?></span>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <a href="<?= e((string) $p['link']) ?>" class="port-link" onclick="event.preventDefault(); portOpenModal(<?= (int) $p['id'] ?>);">
+                                <?= e((string) $portfolioPage['view_project_label']) ?>
+                                <?= portIcon('external') ?>
+                            </a>
                         </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
 
-                        <a href="<?= e((string) $p['link']) ?>" class="port-link" onclick="event.preventDefault(); portOpenModal(<?= (int) $p['id'] ?>);">
-                            <?= e((string) $portfolioPage['view_project_label']) ?>
-                            <?= portIcon('external') ?>
+            <!-- Empty state (hidden by default) -->
+            <div class="port-empty" id="portEmpty" style="display: none;">
+                <?= portIcon('search') ?>
+                <p><?= e((string) $portfolioPage['empty_message']) ?></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="port-cta-sec">
+        <div class="port-container">
+            <div class="port-cta">
+                <div class="port-cta-inner">
+                    <?= portIcon('rocket') ?>
+                    <h2 class="port-cta-h2"><?= e((string) $portfolioPage['cta_heading']) ?></h2>
+                    <p class="port-cta-sub"><?= e((string) $portfolioPage['cta_description']) ?></p>
+
+                    <div class="port-cta-btns">
+                        <a href="<?= e((string) $portfolioPage['cta_primary_href']) ?>" class="port-cta-btn-1">
+                            <span><?= e((string) $portfolioPage['cta_primary_label']) ?></span>
+                            <?= portIcon('arrow') ?>
+                        </a>
+                        <a href="<?= e((string) $portfolioPage['cta_secondary_href']) ?>" class="port-cta-btn-2">
+                            <span><?= e((string) $portfolioPage['cta_secondary_label']) ?></span>
                         </a>
                     </div>
                 </div>
-            <?php endforeach; ?>
-        </div>
-
-        <!-- Empty state (hidden by default) -->
-        <div class="port-empty" id="portEmpty" style="display: none;">
-            <?= portIcon('search') ?>
-            <p><?= e((string) $portfolioPage['empty_message']) ?></p>
-        </div>
-
-        <!-- ===== CTA ===== -->
-        <div class="port-cta" style="margin-top: 16px;">
-            <div class="port-cta-pattern">
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none">
-                    <defs>
-                        <pattern id="cta-grid-portfolio" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                            <rect x="0" y="0" width="1" height="1" fill="white"/>
-                        </pattern>
-                    </defs>
-                    <rect x="0" y="0" width="100" height="100" fill="url(#cta-grid-portfolio)"/>
-                </svg>
-            </div>
-            <div class="port-cta-inner">
-                <?= portIcon('rocket') ?>
-                <h2 class="port-cta-h2"><?= e((string) $portfolioPage['cta_heading']) ?></h2>
-                <p class="port-cta-sub">
-                    <?= e((string) $portfolioPage['cta_description']) ?>
-                </p>
-
-                <div class="port-cta-btns">
-                    <a href="<?= e((string) $portfolioPage['cta_primary_href']) ?>" class="port-cta-btn-1">
-                        <?= e((string) $portfolioPage['cta_primary_label']) ?>
-                        <?= portIcon('arrow') ?>
-                    </a>
-                    <a href="<?= e((string) $portfolioPage['cta_secondary_href']) ?>" class="port-cta-btn-2">
-                        <?= e((string) $portfolioPage['cta_secondary_label']) ?>
-                    </a>
-                </div>
             </div>
         </div>
+    </section>
 
-        <!-- ===== Bottom Decorative ===== -->
-        <div class="port-bottom-deco">
-            <div class="port-bottom-line"></div>
-            <div class="port-bottom-dots">
-                <span></span><span></span><span></span>
-                <span class="active"></span>
-                <span></span><span></span><span></span>
-            </div>
-            <div class="port-bottom-line right"></div>
-        </div>
-
-    </div>
 </main>
 
 <!-- ===== Project Modal ===== -->
