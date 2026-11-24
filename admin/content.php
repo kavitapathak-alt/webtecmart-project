@@ -28,6 +28,22 @@ if (!function_exists('str_contains')) {
         return $needle === '' || strpos($haystack, $needle) !== false;
     }
 }
+if (!function_exists('mb_strlen')) {
+    function mb_strlen($value, $encoding = null)
+    {
+        $chars = preg_split('//u', (string) $value, -1, PREG_SPLIT_NO_EMPTY);
+        return $chars === false ? strlen((string) $value) : count($chars);
+    }
+}
+if (!function_exists('mb_substr')) {
+    function mb_substr($value, $start, $length = null, $encoding = null)
+    {
+        $chars = preg_split('//u', (string) $value, -1, PREG_SPLIT_NO_EMPTY);
+        if ($chars === false) return substr((string) $value, $start, $length);
+        $slice = $length === null ? array_slice($chars, $start) : array_slice($chars, $start, $length);
+        return implode('', $slice);
+    }
+}
 
 require_once __DIR__ . '/../functions.php';
 ensureAdmin();
@@ -78,6 +94,7 @@ $homeSections = [
 ];
 
 $selectedSection = trim($_GET['section'] ?? $_POST['section'] ?? 'collection:service');
+$blogCharacterLimit = 30000;
 if ($selectedSection === 'registry:partners') $selectedSection = 'collection:partner';
 if ($selectedSection === 'registry:about') $selectedSection = 'collection:homepage_about';
 if ($selectedSection === 'registry:visibility') $selectedSection = 'collection:homepage_visibility';
@@ -420,6 +437,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                     if ($summary === '') throw new RuntimeException('A blog excerpt is required.');
                     if ($body === '') throw new RuntimeException('Add the blog article content before saving.');
+                    $blogCharacterCount = mb_strlen($body, 'UTF-8');
+                    if ($blogCharacterCount > $blogCharacterLimit) {
+                        throw new RuntimeException('Blog article content cannot exceed ' . number_format($blogCharacterLimit) . ' characters.');
+                    }
                     $blogText = html_entity_decode(strip_tags($body), ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     $blogWordCount = preg_match_all('/[\p{L}\p{N}]+(?:[\'’][\p{L}\p{N}]+)*/u', $blogText);
                     if ($blogWordCount === false) throw new RuntimeException('The blog article contains text that could not be counted.');
@@ -1274,11 +1295,11 @@ require_once __DIR__ . '/templates/header.php';
                             <?php if (in_array($sectionType, ['blog', 'page', 'hero_content', 'service_detail'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-body"><?= $sectionType === 'blog' ? 'Article content' : ($sectionType === 'hero_content' ? 'Main hero description' : ($sectionType === 'service_detail' ? 'Service overview' : 'Additional details')) ?></label>
-                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
+                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '7' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' data-character-limit="' . (int) $blogCharacterLimit . '" aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
                                     <?php if ($sectionType === 'blog'): ?>
                                         <div class="form-text" id="blog-body-help">
                                             Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items.
-                                            <span id="blog-word-count" class="ms-1" aria-live="polite"></span>
+                                            <span id="blog-character-count" class="ms-1 fw-semibold" aria-live="polite"></span>
                                         </div>
                                     <?php endif; ?>
                                 </div>
@@ -1930,16 +1951,24 @@ require_once __DIR__ . '/templates/header.php';
     const modalEl = document.getElementById('cmsModal');
     const form = document.getElementById('cmsForm');
     const blogBody = document.getElementById('f-body');
-    const blogWordCount = document.getElementById('blog-word-count');
+    const blogCharacterCount = document.getElementById('blog-character-count');
+    const blogCharacterLimit = Number(blogBody?.dataset.characterLimit || 0);
 
-    if (blogBody && blogWordCount) {
-        const countWords = text => (text.match(/[\p{L}\p{N}]+(?:['’][\p{L}\p{N}]+)*/gu) || []).length;
-        const updateBlogWordCount = () => {
-            const count = countWords(blogBody.value);
-            blogWordCount.textContent = `${count.toLocaleString()} words`;
+    if (blogBody && blogCharacterCount && blogCharacterLimit > 0) {
+        const updateBlogCharacterCount = () => {
+            const count = Array.from(blogBody.value).length;
+            const remaining = blogCharacterLimit - count;
+            const isOverLimit = remaining < 0;
+            blogCharacterCount.textContent = `${count.toLocaleString()} / ${blogCharacterLimit.toLocaleString()} characters — ${isOverLimit ? `${Math.abs(remaining).toLocaleString()} characters over limit` : `${remaining.toLocaleString()} characters remaining`}`;
+            blogCharacterCount.classList.toggle('text-danger', isOverLimit);
+            blogBody.setCustomValidity(isOverLimit ? `Blog article cannot exceed ${blogCharacterLimit.toLocaleString()} characters.` : '');
         };
-        blogBody.addEventListener('input', updateBlogWordCount);
-        updateBlogWordCount();
+        blogBody.addEventListener('input', updateBlogCharacterCount);
+        form?.addEventListener('submit', event => {
+            updateBlogCharacterCount();
+            if (!blogBody.checkValidity()) event.preventDefault();
+        });
+        updateBlogCharacterCount();
     }
 
     // Delete confirm
