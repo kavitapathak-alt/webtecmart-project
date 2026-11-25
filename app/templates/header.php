@@ -61,18 +61,19 @@ $navItems = [
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         :root {
-            /* Expo Floor tokens — identical to the B2B Exhibition SEO page */
-            --ink: #1A0613;
-            --ink2: #2B0B20;
+            /* Expo Floor colour tokens — NO BLACK, uses deep magenta instead */
             --pink: #C4007A;
             --pink2: #E0398F;
+            --pink3: #FF7BC0;
+            --deep: #7E004E;            /* replaces the old black --ink */
+            --head: #5E0B45;            /* headings */
             --blush: #FBEAF3;
+            --soft: #FFF4FA;
             --paper: #FFFFFF;
             --gold: #FFB547;
             --mint: #0E9F6E;
-            --deep: #1A0613;
-            --muted: #6C6474;
-            --border-soft: rgba(26, 6, 19, 0.12);
+            --muted: #7A6574;
+            --border-soft: rgba(126, 0, 78, 0.14);
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             --font-family-base: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
@@ -87,7 +88,7 @@ $navItems = [
         body {
             font-family: var(--font-family-base);
             background: var(--paper);
-            color: var(--deep);
+            color: var(--head);
             line-height: 1.6;
             margin: 0;
             padding: 0;
@@ -109,7 +110,7 @@ $navItems = [
            ============================================================ */
         .top-bar {
             background: var(--gold);
-            color: var(--ink);
+            color: var(--deep);
             font-size: 12.5px;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -120,7 +121,7 @@ $navItems = [
             overflow: hidden;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid var(--ink);
+            border-bottom: 2px solid var(--deep);
         }
 
         /* dotted floor-plan overlay */
@@ -128,7 +129,7 @@ $navItems = [
             content: '';
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(26,6,19,.16) 1px, transparent 1.2px);
+            background-image: radial-gradient(rgba(126,0,78,.16) 1px, transparent 1.2px);
             background-size: 18px 18px;
             opacity: .5;
             pointer-events: none;
@@ -141,7 +142,7 @@ $navItems = [
             display: flex;
             align-items: center;
             padding: 0 16px;
-            background: var(--ink);
+            background: var(--deep);
             color: var(--gold);
             font-family: var(--disp);
             font-weight: 800;
@@ -166,7 +167,7 @@ $navItems = [
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            color: var(--ink);
+            color: var(--deep);
             font-weight: 700;
             transition: color .2s ease, translate .2s ease;
             white-space: nowrap;
@@ -197,7 +198,7 @@ $navItems = [
            ============================================================ */
         .site-header {
             background: #fff;
-            border-bottom: 2px solid var(--ink);
+            border-bottom: 2px solid var(--deep);
             position: fixed;
             top: var(--topbar-h);
             left: 0; right: 0;
@@ -206,7 +207,7 @@ $navItems = [
             transition: box-shadow .35s ease, translate .35s ease;
             height: auto;
             min-height: var(--header-h);
-            box-shadow: 0 6px 0 rgba(26, 6, 19, .08);
+            box-shadow: 0 6px 0 rgba(126, 0, 78, .08);
         }
 
         .site-header.scrolled {
@@ -220,7 +221,7 @@ $navItems = [
             left: 0; right: 0; bottom: -2px;
             height: 6px;
             background: repeating-linear-gradient(90deg, var(--pink) 0 22px, #fff 22px 44px);
-            border-top: 2px solid var(--ink);
+            border-top: 2px solid var(--deep);
         }
 
         /* small pink tick marks at corners (stall pegs) */
@@ -253,7 +254,7 @@ $navItems = [
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            color: var(--ink);
+            color: var(--head);
             flex-shrink: 0;
             transition: translate .25s ease;
         }
@@ -269,8 +270,8 @@ $navItems = [
             flex-shrink: 0;
             border-radius: 14px;
             background: var(--blush);
-            border: 2px solid var(--ink);
-            box-shadow: 4px 4px 0 var(--ink);
+            border: 2px solid var(--deep);
+            box-shadow: 4px 4px 0 var(--gold);
             transition: box-shadow .25s ease, translate .25s ease;
         }
 
@@ -302,7 +303,7 @@ $navItems = [
             font-family: var(--disp);
             font-size: 1.45rem;
             font-weight: 800;
-            color: var(--ink);
+            color: var(--head);
             letter-spacing: -.02em;
             line-height: 1;
             margin: 0;
@@ -318,7 +319,7 @@ $navItems = [
             top: -4px;
             right: -12px;
             font-size: 8px;
-            background: var(--ink);
+            background: var(--deep);
             color: var(--gold);
             padding: 2px 5px;
             border-radius: 9999px;
@@ -351,7 +352,7 @@ $navItems = [
             font-family: var(--disp);
             font-weight: 800;
             font-size: 1.6rem;
-            border: 2px solid var(--ink);
+            border: 2px solid var(--deep);
             box-shadow: 4px 4px 0 var(--gold);
             flex-shrink: 0;
         }
@@ -366,7 +367,7 @@ $navItems = [
         }
 
         .nav-link {
-            color: var(--ink);
+            color: var(--head);
             font-weight: 600;
             font-size: 13.5px;
             padding: 9px 15px;
@@ -421,7 +422,7 @@ $navItems = [
         .services-modal .modal-content {
             height: min(580px, calc(100vh - 40px));
             overflow: hidden;
-            border: 2px solid var(--ink);
+            border: 2px solid var(--deep);
             border-radius: 20px;
             background: #fff;
             box-shadow: 10px 10px 0 var(--pink);
@@ -459,7 +460,7 @@ $navItems = [
 
         .services-modal-title {
             margin: 0;
-            color: var(--ink);
+            color: var(--head);
             font-family: var(--disp);
             font-size: clamp(1.35rem, 3vw, 1.8rem);
             font-weight: 800;
@@ -482,10 +483,10 @@ $navItems = [
             gap: 13px;
             min-height: 94px;
             padding: 16px;
-            border: 2px solid var(--ink);
+            border: 2px solid var(--deep);
             border-radius: 14px;
             background: #fff;
-            color: var(--ink);
+            color: var(--head);
             text-decoration: none;
             box-shadow: 4px 4px 0 var(--blush);
             transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
@@ -496,7 +497,7 @@ $navItems = [
             translate: -2px -2px;
             box-shadow: 7px 7px 0 var(--pink);
             background: var(--blush);
-            color: var(--ink);
+            color: var(--head);
         }
 
         .services-modal-icon {
@@ -506,12 +507,12 @@ $navItems = [
             flex: 0 0 38px;
             place-items: center;
             border-radius: 10px;
-            background: var(--ink);
+            background: var(--deep);
             color: var(--gold);
             font-family: var(--disp);
             font-size: .92rem;
             font-weight: 800;
-            border: 2px solid var(--ink);
+            border: 2px solid var(--deep);
         }
         .services-modal-link:nth-child(even) .services-modal-icon {
             background: var(--pink);
@@ -560,9 +561,9 @@ $navItems = [
             font-weight: 700;
             font-size: 13.5px;
             color: #fff;
-            box-shadow: 0 4px 0 #7E004E;
+            box-shadow: 0 4px 0 var(--deep);
             transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
-            border: 2px solid var(--ink);
+            border: 2px solid var(--deep);
             position: relative;
             overflow: hidden;
             flex-shrink: 0;
@@ -594,7 +595,7 @@ $navItems = [
 
         .header-cta:hover {
             translate: 0 2px;
-            box-shadow: 0 2px 0 #7E004E;
+            box-shadow: 0 2px 0 var(--deep);
         }
 
         .header-cta:hover .cta-overlay { opacity: 1; }
@@ -609,25 +610,25 @@ $navItems = [
             height: 44px;
             border-radius: 11px;
             background: var(--blush);
-            border: 2px solid var(--ink);
-            color: var(--ink);
+            border: 2px solid var(--deep);
+            color: var(--head);
             cursor: pointer;
             align-items: center;
             justify-content: center;
             padding: 0;
             transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
             flex-shrink: 0;
-            box-shadow: 3px 3px 0 var(--ink);
+            box-shadow: 3px 3px 0 var(--deep);
         }
 
         .menu-toggle:hover {
             background: var(--pink);
             color: #fff;
             translate: -1px -1px;
-            box-shadow: 4px 4px 0 var(--ink);
+            box-shadow: 4px 4px 0 var(--deep);
         }
 
-        .menu-toggle:active { translate: 2px 2px; box-shadow: 0 0 0 var(--ink); }
+        .menu-toggle:active { translate: 2px 2px; box-shadow: 0 0 0 var(--deep); }
 
         .menu-toggle svg {
             width: 20px;
@@ -643,9 +644,9 @@ $navItems = [
         .mobile-menu {
             display: none;
             background: #fff;
-            border-top: 2px solid var(--ink);
+            border-top: 2px solid var(--deep);
             padding: 16px 0 24px;
-            box-shadow: 0 25px 50px -12px rgba(26, 6, 19, .22);
+            box-shadow: 0 25px 50px -12px rgba(126, 0, 78, .22);
             animation: slideDown .3s ease-out;
             max-height: calc(100vh - var(--header-h) - var(--topbar-h));
             overflow-y: auto;
@@ -684,7 +685,7 @@ $navItems = [
             border-radius: 10px;
             font-size: .96rem;
             font-weight: 600;
-            color: var(--ink);
+            color: var(--head);
             text-align: left;
             border: 2px solid transparent;
             background: transparent;
@@ -700,8 +701,8 @@ $navItems = [
         .mobile-menu .nav-link.active {
             color: var(--pink);
             background: var(--blush);
-            border-color: var(--ink);
-            box-shadow: 3px 3px 0 var(--ink);
+            border-color: var(--deep);
+            box-shadow: 3px 3px 0 var(--gold);
             translate: -1px -1px;
         }
 
@@ -717,14 +718,14 @@ $navItems = [
             font-weight: 700;
             color: #fff;
             font-size: .95rem;
-            box-shadow: 0 4px 0 #7E004E;
-            border: 2px solid var(--ink);
+            box-shadow: 0 4px 0 var(--deep);
+            border: 2px solid var(--deep);
             transition: translate .2s ease, box-shadow .2s ease;
         }
 
         .mobile-cta:hover {
             translate: 0 2px;
-            box-shadow: 0 2px 0 #7E004E;
+            box-shadow: 0 2px 0 var(--deep);
             color: #fff;
         }
 
@@ -745,7 +746,7 @@ $navItems = [
             padding: 9px 10px;
             border-radius: 8px;
             font-size: .875rem;
-            color: var(--ink);
+            color: var(--head);
             font-weight: 600;
             transition: background .2s ease, color .2s ease;
         }
@@ -773,7 +774,7 @@ $navItems = [
             gap: 12px;
             font-size: .74rem;
             font-weight: 700;
-            color: var(--ink);
+            color: var(--head);
             flex-wrap: wrap;
         }
 
@@ -784,7 +785,7 @@ $navItems = [
             padding: 5px 10px;
             border-radius: 99px;
             background: var(--blush);
-            border: 1.5px solid var(--ink);
+            border: 1.5px solid var(--deep);
         }
 
         .mobile-proof svg {
@@ -835,7 +836,7 @@ $navItems = [
             .site-header { top: 0; }
             .site-header::before { left: 16px; right: 16px; }
 
-            .brand-logo-wrap { width: 46px; height: 46px; border-radius: 12px; box-shadow: 3px 3px 0 var(--ink); }
+            .brand-logo-wrap { width: 46px; height: 46px; border-radius: 12px; box-shadow: 3px 3px 0 var(--gold); }
             .brand-logo { width: 34px; height: 34px; }
             .brand-name { font-size: 1.1rem; }
             .brand-tagline { font-size: 9.5px; letter-spacing: .15em; }

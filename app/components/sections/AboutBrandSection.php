@@ -6,7 +6,6 @@ function renderAboutBrandSection(): void
     $whyChooseUs = $content['why_points'];
     $features = $content['features'];
 
-    // Icon SVG helper
     if (!function_exists('abIcon')) {
         function abIcon(string $name): string {
             $icons = [
@@ -35,46 +34,41 @@ function renderAboutBrandSection(): void
 
     <style>
         /* ============================================================
-           ABOUT — "Expo Floor" design
-           Brand story as a stall walk-through: ink-framed photo with a
-           visitor-pass badge, dark stat chips, awning "why us" card,
-           dark USP signboard and a 3D-press CTA.
-        ============================================================ */
+           ABOUT — "Expo Floor" colour edition (matches portfolio page)
+           ============================================================ */
         .about-section {
-            --ink: #1A0613;
-            --ink2: #2B0B20;
             --pink: #C4007A;
             --pink2: #E0398F;
+            --pink3: #FF7BC0;
+            --deep: #7E004E;
+            --head: #5E0B45;
             --blush: #FBEAF3;
+            --soft: #FFF4FA;
             --gold: #FFB547;
             --mint: #0E9F6E;
-            --text: #2A2430;
-            --mute: #6C6474;
+            --text: #4A3342;
+            --mute: #7A6574;
+            --line: rgba(126, 0, 78, 0.14);
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             position: relative;
             width: 100%;
             padding: 96px 0 88px;
-            background: #fff;
+            background: var(--soft) radial-gradient(rgba(126, 0, 78, .07) 1px, transparent 1.2px) 0 0 / 24px 24px;
             overflow: hidden;
             color: var(--text);
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
         .about-section *, .about-section *::before, .about-section *::after { box-sizing: border-box; }
+        .about-section h2, .about-section h3, .about-section h4, .about-section h5 { font-family: var(--disp); letter-spacing: -.02em; }
         .about-section a:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
         .about-section .container { position: relative; z-index: 2; padding-left: 22px !important; padding-right: 22px !important; }
 
-        /* Decorative Background (kept markup, restyled) */
+        /* Decorative background */
         .about-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
-        .about-bg-grid {
-            position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(26, 6, 19, .08) 1px, transparent 1.2px);
-            background-size: 24px 24px;
-            -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
-                    mask-image: linear-gradient(180deg, #000 30%, transparent 100%);
-        }
+        .about-bg-grid { display: none; }
         .about-bg-blob-1, .about-bg-blob-2 { position: absolute; border-radius: 50%; filter: blur(80px); }
-        .about-bg-blob-1 { top: -8%; right: -6%; width: 480px; height: 480px; background: rgba(196, 0, 122, .14); }
-        .about-bg-blob-2 { bottom: -8%; left: -6%; width: 400px; height: 400px; background: rgba(255, 181, 71, .2); }
+        .about-bg-blob-1 { top: -8%; right: -6%; width: 480px; height: 480px; background: rgba(196, 0, 122, .16); }
+        .about-bg-blob-2 { bottom: -8%; left: -6%; width: 400px; height: 400px; background: rgba(255, 181, 71, .22); }
 
         /* ===== Header ===== */
         .about-header { position: relative; z-index: 10; text-align: left; max-width: 720px; margin: 0 0 56px; }
@@ -83,18 +77,18 @@ function renderAboutBrandSection(): void
             background: none; border: 0; border-left: 4px solid var(--pink); border-radius: 0; box-shadow: none;
         }
         .about-pill .ab-svg-icon { width: 14px; height: 14px; color: var(--pink); }
-        .about-pill span { font-size: .82rem; color: var(--pink); font-weight: 700; letter-spacing: 0; text-transform: none; }
+        .about-pill span { font-size: .82rem; color: var(--pink); font-weight: 800; letter-spacing: 0; text-transform: none; }
         .about-heading {
             font-family: var(--disp); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800;
-            color: var(--ink); margin: 0 0 16px; line-height: 1.08; letter-spacing: -.02em;
+            color: var(--head); margin: 0 0 16px; line-height: 1.08; letter-spacing: -.02em;
         }
         .about-heading .accent {
-            position: relative; display: inline-block; color: var(--ink); padding: 0 .12em;
+            position: relative; display: inline-block; color: var(--head); padding: 0 .12em;
             background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%);
         }
         .about-heading .accent svg { display: none; }
         .about-subtitle { font-size: 1.02rem; color: var(--mute); max-width: 650px; margin: 0; line-height: 1.65; }
-        .about-header::after { /* stripe bar */
+        .about-header::after {
             content: ''; display: block; width: 84px; height: 7px; margin-top: 22px;
             background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px);
         }
@@ -108,114 +102,118 @@ function renderAboutBrandSection(): void
         .about-left { display: flex; flex-direction: column; gap: 30px; }
 
         .about-image-card {
-            position: relative; border-radius: 20px; overflow: hidden; background: var(--ink);
-            border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink);
+            position: relative; border-radius: 20px; overflow: hidden; background: var(--deep);
+            border: 2px solid var(--deep); box-shadow: 8px 8px 0 var(--gold);
             transition: translate .25s ease, box-shadow .25s ease;
         }
-        .about-image-card:hover { translate: -4px -4px; box-shadow: 12px 12px 0 var(--pink); transform: none; }
+        .about-image-card:hover { translate: -4px -4px; box-shadow: 12px 12px 0 var(--pink); }
         .about-image-inner { position: relative; width: 100%; aspect-ratio: 4 / 3; }
         .about-image-inner img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .about-image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26, 6, 19, .78), transparent 60%); }
+        .about-image-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(126, 0, 78, .82), transparent 60%); }
 
-        .about-brand-badge { /* visitor pass */
+        .about-brand-badge {
             position: absolute; bottom: 18px; left: 18px;
-            background: #fff; backdrop-filter: none; border: 2px solid var(--ink); border-radius: 12px;
+            background: #fff; border: 2px solid var(--deep); border-radius: 12px;
             padding: 10px 16px; box-shadow: 4px 4px 0 var(--gold);
         }
         .about-brand-badge h3 { font-family: var(--disp); font-size: 1.1rem; font-weight: 800; color: var(--pink); margin: 0 0 2px; letter-spacing: -.01em; }
-        .about-brand-badge p { font-size: .75rem; color: var(--text); font-weight: 600; margin: 0; }
+        .about-brand-badge p { font-size: .75rem; color: var(--text); font-weight: 700; margin: 0; }
 
-        /* Stats = dark signage chips */
+        /* Stats = deep signage chips */
         .about-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
         .about-stat {
-            background: var(--ink); border: 2px solid var(--ink); border-radius: 14px; padding: 20px 14px; text-align: center;
-            box-shadow: 4px 4px 0 var(--blush); transition: translate .25s ease;
+            background: var(--deep); border: 2px solid var(--deep); border-radius: 14px; padding: 20px 14px; text-align: center;
+            box-shadow: 4px 4px 0 var(--gold); transition: translate .25s ease, box-shadow .25s ease;
         }
-        .about-stat:hover { translate: 0 -4px; box-shadow: 4px 4px 0 var(--blush); border-color: var(--ink); transform: none; }
+        .about-stat:hover { translate: -3px -3px; box-shadow: 7px 7px 0 var(--pink); }
         .about-stat .ab-svg-icon {
             display: block; width: 24px; height: 24px; margin: 0 auto 12px; padding: 7px; box-sizing: content-box;
-            background: var(--gold); color: var(--ink); border-radius: 10px; border: 2px solid #fff;
+            background: var(--gold); color: var(--deep); border-radius: 10px; border: 2px solid #fff;
         }
         .about-stat .value { font-family: var(--disp); font-size: 1.7rem; font-weight: 800; color: var(--gold); line-height: 1.1; }
-        .about-stat .label { font-size: .8rem; font-weight: 600; color: rgba(255, 255, 255, .75); margin-top: 6px; }
+        .about-stat .label { font-size: .8rem; font-weight: 700; color: rgba(255, 255, 255, .85); margin-top: 6px; }
 
         /* Why choose us = awning stall */
         .about-why {
-            position: relative; background: #fff; border: 2px solid var(--ink); border-radius: 18px;
-            padding: 52px 26px 26px; box-shadow: 6px 6px 0 var(--ink);
+            position: relative; background: #fff; border: 2px solid var(--deep); border-radius: 18px;
+            padding: 52px 26px 26px; box-shadow: 6px 6px 0 var(--gold);
         }
-        .about-why::before { /* awning */
+        .about-why::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 26px; border-radius: 15px 15px 0 0;
-            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, #fff 22px 44px);
-            border-bottom: 2px solid var(--ink);
+            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, var(--gold) 22px 44px);
+            border-bottom: 2px solid var(--deep);
         }
-        .about-why h4 { font-family: var(--disp); font-weight: 800; color: var(--ink); font-size: 1.35rem; letter-spacing: -.02em; margin: 0 0 16px; }
+        .about-why h4 { font-family: var(--disp); font-weight: 800; color: var(--head); font-size: 1.35rem; letter-spacing: -.02em; margin: 0 0 16px; }
         .about-why ul { list-style: none; padding: 0; margin: 0 0 24px; display: flex; flex-direction: column; gap: 12px; }
         .about-why li { display: flex; align-items: flex-start; gap: 12px; }
-        .about-why li .ab-svg-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--pink); background: var(--blush); border-radius: 50%; padding: 1px; }
+        .about-why li .ab-svg-icon { width: 22px; height: 22px; flex-shrink: 0; color: var(--deep); background: var(--gold); border-radius: 50%; padding: 2px; border: 2px solid #fff; }
         .about-why li span { font-size: .95rem; color: var(--text); line-height: 1.55; font-weight: 500; overflow-wrap: anywhere; }
 
         .about-why-footer { padding-top: 20px; display: flex; align-items: center; gap: 16px; border-top: 2px dashed rgba(196, 0, 122, .35); }
         .about-avatars { display: flex; }
         .about-avatars > div {
             width: 34px; height: 34px; border-radius: 50%; margin-left: -10px; display: grid; place-items: center;
-            background: var(--gold); border: 2px solid var(--ink); box-shadow: none;
+            background: var(--gold); border: 2px solid var(--deep); box-shadow: 2px 2px 0 var(--deep);
         }
         .about-avatars > div:nth-child(even) { background: var(--blush); }
         .about-avatars > div:first-child { margin-left: 0; }
-        .about-avatars .ab-svg-icon { width: 16px; height: 16px; color: var(--ink); }
+        .about-avatars .ab-svg-icon { width: 16px; height: 16px; color: var(--deep); }
         .about-trust-text { font-size: .85rem; color: var(--mute); font-weight: 500; margin: 0; }
         .about-trust-text .bold { font-weight: 800; color: var(--pink); }
 
         /* ===== RIGHT ===== */
         .about-right { display: flex; flex-direction: column; gap: 34px; }
-        .about-right h3 { font-family: var(--disp); font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 800; color: var(--ink); margin: 0 0 16px; line-height: 1.15; letter-spacing: -.02em; }
-        .about-right h3 .accent { color: var(--ink); padding: 0 .1em; background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%); }
+        .about-right h3 { font-family: var(--disp); font-size: clamp(1.6rem, 2.8vw, 2.3rem); font-weight: 800; color: var(--head); margin: 0 0 16px; line-height: 1.15; letter-spacing: -.02em; }
+        .about-right h3 .accent { color: var(--head); padding: 0 .1em; background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%); }
         .about-right p { font-size: 1rem; color: var(--mute); line-height: 1.75; margin: 0 0 16px; overflow-wrap: anywhere; }
         .about-right p .bold { font-weight: 700; color: var(--pink); }
 
         /* Features = mini stalls */
         .about-features { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
         .about-feature {
-            background: #fff; border: 2px solid var(--ink); border-radius: 16px; padding: 22px 20px;
-            box-shadow: 4px 4px 0 var(--blush); transition: translate .25s ease, box-shadow .25s ease;
+            background: #fff; border: 2px solid var(--deep); border-radius: 16px; padding: 22px 20px;
+            box-shadow: 4px 4px 0 var(--gold); transition: translate .25s ease, box-shadow .25s ease;
         }
-        .about-feature:hover { translate: -3px -3px; box-shadow: 7px 7px 0 var(--pink); border-color: var(--ink); transform: none; }
+        .about-feature:hover { translate: -3px -3px; box-shadow: 7px 7px 0 var(--pink); }
         .about-feature .ab-svg-icon {
             display: block; width: 22px; height: 22px; margin-bottom: 14px; padding: 8px; box-sizing: content-box;
-            color: var(--pink); background: var(--blush); border: 2px solid var(--ink); border-radius: 10px; box-shadow: 3px 3px 0 var(--gold);
+            color: var(--pink); background: var(--blush); border: 2px solid var(--deep); border-radius: 10px; box-shadow: 3px 3px 0 var(--gold);
         }
-        .about-feature h4 { font-family: var(--disp); font-weight: 700; color: var(--ink); font-size: 1.1rem; letter-spacing: -.01em; margin: 0 0 6px; }
+        .about-feature h4 { font-family: var(--disp); font-weight: 800; color: var(--head); font-size: 1.1rem; letter-spacing: -.01em; margin: 0 0 6px; }
         .about-feature p { font-size: .88rem; color: var(--mute); line-height: 1.6; margin: 0; }
 
-        /* USP = dark signboard */
+        /* USP = deep-pink signboard */
         .about-usp {
             position: relative; overflow: hidden; border-radius: 18px; padding: 24px 24px 24px 28px;
-            background: radial-gradient(60% 90% at 100% 0%, rgba(196, 0, 122, .5), transparent 70%), var(--ink);
-            border: 2px solid var(--ink); box-shadow: 6px 6px 0 var(--gold);
+            background: radial-gradient(60% 90% at 100% 0%, rgba(255, 181, 71, .35), transparent 70%),
+                        linear-gradient(135deg, #A8006A 0%, #C4007A 50%, #E0398F 100%);
+            border: 2px solid var(--deep); box-shadow: 6px 6px 0 var(--gold);
         }
-        .about-usp::before { top: 0; left: 0; width: 8px; height: 100%; background: repeating-linear-gradient(180deg, var(--gold) 0 14px, var(--pink) 14px 28px); }
+        .about-usp::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 8px; height: 100%;
+            background: repeating-linear-gradient(180deg, var(--gold) 0 14px, var(--pink3) 14px 28px);
+        }
         .about-usp-inner { position: relative; display: flex; align-items: flex-start; gap: 16px; }
         .about-usp-icon {
             width: 46px; height: 46px; border-radius: 12px; flex-shrink: 0; display: grid; place-items: center;
-            background: var(--gold); border: 2px solid #fff; box-shadow: none;
+            background: var(--gold); border: 2px solid #fff; box-shadow: 0 3px 0 var(--deep);
         }
-        .about-usp-icon .ab-svg-icon { width: 22px; height: 22px; color: var(--ink); }
-        .about-usp h5 { font-family: var(--disp); font-weight: 800; color: #fff; font-size: 1.2rem; letter-spacing: -.01em; margin: 0 0 6px; }
-        .about-usp p { font-size: .92rem; color: rgba(255, 255, 255, .78); line-height: 1.6; margin: 0; }
+        .about-usp-icon .ab-svg-icon { width: 22px; height: 22px; color: var(--deep); }
+        .about-usp h5 { font-family: var(--disp); font-weight: 800; color: #fff; font-size: 1.2rem; letter-spacing: -.01em; margin: 0 0 6px; text-shadow: 0 2px 0 rgba(126,0,78,.4); }
+        .about-usp p { font-size: .92rem; color: rgba(255, 255, 255, .92); line-height: 1.6; margin: 0; }
 
         /* CTA row */
         .about-cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 20px; margin-top: 6px; }
         .about-cta-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 15px 28px; border-radius: 12px; border: 2px solid transparent;
-            background: var(--pink); color: #fff; font-weight: 700; font-size: 1rem; line-height: 1.2; text-decoration: none; cursor: pointer;
-            box-shadow: 0 6px 0 #7E004E; transition: translate .2s ease, box-shadow .2s ease;
+            padding: 15px 28px; border-radius: 12px; border: 2px solid var(--deep);
+            background: var(--pink); color: #fff; font-weight: 800; font-size: 1rem; line-height: 1.2; text-decoration: none; cursor: pointer;
+            box-shadow: 0 6px 0 var(--deep); transition: translate .2s ease, box-shadow .2s ease;
         }
-        .about-cta-btn:hover { translate: 0 2px; transform: none; box-shadow: 0 4px 0 #7E004E; background: var(--pink); color: #fff; }
-        .about-cta-btn:active { translate: 0 6px; box-shadow: 0 0 0 #7E004E; }
+        .about-cta-btn:hover { translate: 0 2px; box-shadow: 0 4px 0 var(--deep); background: var(--pink); color: #fff; }
+        .about-cta-btn:active { translate: 0 6px; box-shadow: 0 0 0 var(--deep); }
         .about-cta-btn .ab-svg-icon { width: 18px; height: 18px; flex-shrink: 0; }
-        .about-cta-excellence { display: flex; align-items: center; gap: 8px; font-size: .95rem; font-weight: 600; color: var(--text); }
+        .about-cta-excellence { display: flex; align-items: center; gap: 8px; font-size: .95rem; font-weight: 700; color: var(--text); }
         .about-cta-excellence .ab-svg-icon { width: 22px; height: 22px; color: var(--mint); flex-shrink: 0; }
 
         /* ===== Responsive ===== */
@@ -226,10 +224,10 @@ function renderAboutBrandSection(): void
             .about-header { margin-bottom: 40px; }
             .about-grid { gap: 44px; }
             .about-features { grid-template-columns: minmax(0, 1fr); }
-            .about-image-card { box-shadow: 5px 5px 0 var(--ink); }
+            .about-image-card { box-shadow: 5px 5px 0 var(--gold); }
             .about-brand-badge { bottom: 12px; left: 12px; padding: 8px 12px; box-shadow: 3px 3px 0 var(--gold); }
             .about-brand-badge h3 { font-size: .95rem; }
-            .about-why { padding: 50px 20px 22px; box-shadow: 4px 4px 0 var(--ink); }
+            .about-why { padding: 50px 20px 22px; box-shadow: 4px 4px 0 var(--gold); }
             .about-usp { padding: 22px 18px 22px 24px; box-shadow: 4px 4px 0 var(--gold); }
             .about-cta-row { flex-direction: column; align-items: stretch; }
             .about-cta-btn { width: 100%; min-height: 48px; }
@@ -239,8 +237,9 @@ function renderAboutBrandSection(): void
         @media (max-width: 380px) { .about-stats { grid-template-columns: minmax(0, 1fr); } }
         @media (hover: none) {
             .about-image-card:hover, .about-feature:hover, .about-stat:hover { translate: none; }
-            .about-image-card:hover { box-shadow: 8px 8px 0 var(--ink); }
-            .about-feature:hover { box-shadow: 4px 4px 0 var(--blush); }
+            .about-image-card:hover { box-shadow: 8px 8px 0 var(--gold); }
+            .about-feature:hover { box-shadow: 4px 4px 0 var(--gold); }
+            .about-stat:hover { box-shadow: 4px 4px 0 var(--gold); }
         }
         @media (prefers-reduced-motion: reduce) {
             .about-image-card, .about-feature, .about-stat, .about-cta-btn { transition: none; }
@@ -248,7 +247,6 @@ function renderAboutBrandSection(): void
     </style>
 
     <section class="about-section" id="aboutSection">
-        <!-- Decorative Background -->
         <div class="about-bg" aria-hidden="true">
             <div class="about-bg-grid"></div>
             <div class="about-bg-blob-1"></div>
@@ -269,23 +267,20 @@ function renderAboutBrandSection(): void
                         <span class="accent">
                             <?= e((string) $content['heading_highlight']) ?>
                             <svg viewBox="0 0 300 6" preserveAspectRatio="none">
-                                <path d="M2 3C60 1 240 1 298 3" stroke="#C4007A" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.4"/>
+                                <path d="M2 3C60 1 240 1 298 3" stroke="#FFB547" stroke-width="4" stroke-linecap="round" fill="none" opacity="0.9"/>
                             </svg>
                         </span>
                     <?php endif; ?>
                     <?= e((string) $content['heading_suffix']) ?>
                 </h2>
 
-                <p class="about-subtitle">
-                    <?= e((string) $content['summary']) ?>
-                </p>
+                <p class="about-subtitle"><?= e((string) $content['summary']) ?></p>
             </div>
 
             <!-- Main Grid -->
             <div class="about-grid">
                 <!-- LEFT COLUMN -->
                 <div class="about-left">
-                    <!-- Image Card -->
                     <div class="about-image-card" data-wtm-reveal="fade-right">
                         <div class="about-image-inner">
                             <img src="<?= e((string) $content['image_src']) ?>" alt="<?= e((string) $content['image_alt']) ?>" loading="lazy">
@@ -297,7 +292,6 @@ function renderAboutBrandSection(): void
                         </div>
                     </div>
 
-                    <!-- Stats Cards -->
                     <div class="about-stats">
                         <?php foreach ($stats as $stat): ?>
                             <div class="about-stat">
@@ -308,7 +302,6 @@ function renderAboutBrandSection(): void
                         <?php endforeach; ?>
                     </div>
 
-                    <!-- Why Choose Us -->
                     <div class="about-why">
                         <h4><?= e((string) $content['why_heading']) ?></h4>
                         <ul>
@@ -344,7 +337,6 @@ function renderAboutBrandSection(): void
                         <?php endforeach; ?>
                     </div>
 
-                    <!-- Features Grid -->
                     <div class="about-features" data-reveal-stagger>
                         <?php foreach ($features as $feature): ?>
                             <div class="about-feature">
@@ -355,7 +347,6 @@ function renderAboutBrandSection(): void
                         <?php endforeach; ?>
                     </div>
 
-                    <!-- USP Badge -->
                     <div class="about-usp">
                         <div class="about-usp-inner">
                             <div class="about-usp-icon">
@@ -368,7 +359,6 @@ function renderAboutBrandSection(): void
                         </div>
                     </div>
 
-                    <!-- CTA -->
                     <div class="about-cta-row">
                         <a href="<?= e((string) $content['cta_href']) ?>" class="about-cta-btn">
                             <?= e((string) $content['cta_label']) ?>

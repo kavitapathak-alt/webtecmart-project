@@ -29,37 +29,37 @@ function renderHeroSection(): void
 
     <style>
         /* ============================================================
-           HERO — "Expo Floor" design
-           The hall entrance: dark ink hall with aurora glow and a dot
-           grid; the enquiry form is the registration pass (white card,
-           ink border, gold offset shadow, awning stripe on top).
-        ============================================================ */
+           HERO — "Expo Floor" colour edition (matches portfolio page)
+           ============================================================ */
         .hero {
-            --ink: #1A0613;
-            --ink2: #2B0B20;
             --pink: #C4007A;
             --pink2: #E0398F;
+            --pink3: #FF7BC0;
+            --deep: #7E004E;
+            --head: #5E0B45;
             --blush: #FBEAF3;
+            --soft: #FFF4FA;
             --gold: #FFB547;
             --mint: #0E9F6E;
-            --text: #2A2430;
-            --mute: #6C6474;
+            --text: #4A3342;
+            --mute: #7A6574;
+            --line: rgba(126, 0, 78, 0.14);
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             position: relative;
             width: 100%;
-            padding: 56px 0 64px;
+            padding: 64px 0 72px;
             overflow: hidden;
             color: #fff;
             background:
-                radial-gradient(60% 70% at 88% 8%, rgba(196, 0, 122, .55), transparent 65%),
-                radial-gradient(40% 50% at 0% 100%, rgba(255, 181, 71, .16), transparent 70%),
-                var(--ink);
+                radial-gradient(60% 70% at 85% 10%, rgba(255,255,255,.18), transparent 65%),
+                radial-gradient(40% 50% at 0% 100%, rgba(255,181,71,.3), transparent 70%),
+                linear-gradient(135deg, #A8006A 0%, #C4007A 45%, #E0398F 100%);
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
         .hero *, .hero *::before, .hero *::after { box-sizing: border-box; }
-        .hero::before { /* floor-plan dot grid */
+        .hero::before {
             content: ''; position: absolute; inset: 0; pointer-events: none;
-            background-image: radial-gradient(rgba(255, 255, 255, .14) 1px, transparent 1.2px);
+            background-image: radial-gradient(rgba(255,255,255,.15) 1px, transparent 1.2px);
             background-size: 26px 26px;
             -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
                     mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
@@ -67,60 +67,63 @@ function renderHeroSection(): void
         .hero a:focus-visible, .hero button:focus-visible, .hero input:focus-visible,
         .hero select:focus-visible, .hero textarea:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
         .hero .container { position: relative; z-index: 2; }
+        .hero h1, .hero h2 { font-family: var(--disp); letter-spacing: -.02em; }
 
-        /* Decorative background (kept markup, restyled) */
+        /* Decorative background */
         .hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
         .hero-bg-blob-1, .hero-bg-blob-2 { position: absolute; border-radius: 50%; filter: blur(80px); }
-        .hero-bg-blob-1 { top: -10%; right: 6%; width: 420px; height: 420px; background: rgba(255, 181, 71, .22); }
-        .hero-bg-blob-2 { bottom: -12%; left: 30%; width: 360px; height: 360px; background: rgba(224, 57, 143, .28); }
+        .hero-bg-blob-1 { top: -10%; right: 6%; width: 420px; height: 420px; background: rgba(255, 181, 71, .28); }
+        .hero-bg-blob-2 { bottom: -12%; left: 30%; width: 360px; height: 360px; background: rgba(224, 57, 143, .35); }
         .hero-bg-svg { position: absolute; fill: none; stroke: rgba(255, 255, 255, .5); stroke-width: 1.5; }
         .hero-bg-svg-1 { top: -30px; right: 15%; width: 110px; height: 110px; opacity: .3; }
         .hero-bg-svg-2 { top: 25%; right: 3%; width: 70px; height: 70px; opacity: .22; }
         .hero-bg-svg-3 { bottom: 12%; left: 46%; width: 80px; height: 80px; opacity: .18; }
 
-        /* Grid layout */
+        /* Grid */
         .hero-inner { position: relative; z-index: 10; display: grid; grid-template-columns: minmax(0, 1fr); gap: 44px; align-items: center; }
         .hero-inner > * { min-width: 0; }
 
-        /* ============================================================
-           LEFT — hero copy
-        ============================================================ */
-        .hero-left {
-            display: flex; flex-direction: column; justify-content: center; height: 100%;
-            background: none; border: 0; border-radius: 0; box-shadow: none; padding: 0;
-        }
+        /* LEFT copy */
+        .hero-left { display: flex; flex-direction: column; justify-content: center; height: 100%; }
 
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px; width: fit-content; margin-bottom: 22px;
-            padding: 7px 14px 7px 10px; border-radius: 999px;
-            background: rgba(255, 255, 255, .09); border: 1px solid rgba(255, 255, 255, .2);
+            padding: 7px 15px 7px 11px; border-radius: 999px;
+            background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.45);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
         .hero-badge svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
-        .hero-badge span { color: #FFE3F1; font-weight: 600; font-size: .8rem; letter-spacing: 0; text-transform: none; }
+        .hero-badge span { color: #fff; font-weight: 700; font-size: .8rem; }
+        .hero-badge::before {
+            content: ''; width: 8px; height: 8px; border-radius: 50%;
+            background: var(--gold); box-shadow: 0 0 0 4px rgba(255,181,71,.3);
+            flex-shrink: 0;
+        }
+        .hero-badge > svg:first-child { display: none; }
 
         .hero-heading {
-            font-family: var(--disp); font-weight: 800; color: #fff; line-height: 1.04; letter-spacing: -.02em;
+            font-family: var(--disp); font-weight: 800; color: #fff; line-height: 1.06; letter-spacing: -.035em;
             font-size: clamp(2.3rem, 5vw, 4rem); margin: 0 0 20px; word-break: normal; overflow-wrap: break-word;
+            text-shadow: 0 4px 0 var(--deep), 0 8px 24px rgba(126,0,78,.5);
+            position: relative; z-index: 5;
         }
-        .hero-heading .accent { color: var(--gold); }
+        .hero-heading .accent { color: var(--gold); text-shadow: 0 3px 0 var(--pink); }
         .hero-heading .underline-wrap { position: relative; display: inline-block; color: var(--gold); }
-        .hero-heading .underline-svg { position: absolute; left: 0; bottom: -4px; width: 100%; height: 8px; pointer-events: none; }
-        .hero-heading .underline-svg path { stroke: var(--pink2); opacity: 1; }
+        .hero-heading .underline-svg { position: absolute; left: 0; bottom: -6px; width: 100%; height: 10px; pointer-events: none; }
+        .hero-heading .underline-svg path { stroke: #fff; opacity: .9; stroke-width: 3; }
         .hero-heading .highlight-wrap { position: relative; display: inline-block; }
         .hero-heading .highlight-wrap .text {
-            position: relative; z-index: 2;
-            background: linear-gradient(90deg, #FF7BC0, var(--gold), #FF7BC0); background-size: 200% 100%;
-            -webkit-background-clip: text; background-clip: text; color: transparent;
-            animation: heroShine 4s linear infinite;
-        }
-        .hero-heading .highlight-wrap .highlight { display: none; }
+    position: relative; 
+    z-index: 2;
+    color: var(--gold); /* Solid Yellow */
+    text-shadow: 0 4px 0 var(--deep), 0 8px 24px rgba(126,0,78,.5); /* Portfolio wali deep shadow */
+}
         @keyframes heroShine { to { background-position: 200% 0; } }
 
-        .hero-desc { font-size: 1.05rem; color: rgba(255, 255, 255, .8); margin: 0 0 12px; line-height: 1.7; max-width: 600px; }
+        .hero-desc { font-size: 1.05rem; color: rgba(255,255,255,.88); margin: 0 0 12px; line-height: 1.7; max-width: 600px; }
         .hero-desc-sm {
-            font-size: .9rem; color: rgba(255, 255, 255, .62); margin: 0 0 24px; line-height: 1.65; max-width: 600px;
-            padding-top: 14px; border-top: 1px dashed rgba(255, 255, 255, .25);
+            font-size: .9rem; color: rgba(255,255,255,.72); margin: 0 0 24px; line-height: 1.65; max-width: 600px;
+            padding-top: 14px; border-top: 1px dashed rgba(255,255,255,.35);
         }
 
         .hero-benefits { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
@@ -129,48 +132,45 @@ function renderHeroSection(): void
             width: 24px; height: 24px; border-radius: 50%; flex-shrink: 0; margin-top: 0;
             display: grid; place-items: center; background: var(--gold); border: 2px solid #fff;
         }
-        .hero-benefits .check-icon svg { width: 16px; height: 16px; color: var(--ink); }
-        .hero-benefits .text { font-size: .95rem; color: rgba(255, 255, 255, .9); line-height: 1.55; font-weight: 500; overflow-wrap: anywhere; }
+        .hero-benefits .check-icon svg { width: 16px; height: 16px; color: var(--deep); }
+        .hero-benefits .text { font-size: .95rem; color: rgba(255,255,255,.95); line-height: 1.55; font-weight: 500; overflow-wrap: anywhere; }
 
-        /* ============================================================
-           RIGHT — contact form (registration pass)
-        ============================================================ */
+        /* RIGHT — form card (registration pass) */
         .hero-right {
             position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; height: 100%;
             background: #fff; color: var(--text);
-            border: 2px solid var(--ink); border-radius: 22px; padding: 42px 22px 24px;
+            border: 2px solid var(--deep); border-radius: 22px; padding: 42px 22px 24px;
             box-shadow: 8px 8px 0 var(--gold);
         }
-        .hero-right::before { /* awning */
+        .hero-right::before {
             content: ''; position: absolute; top: 0; left: 0; right: 0; width: auto; height: 14px; border-radius: 0; border: 0;
-            border-bottom: 2px solid var(--ink); background: repeating-linear-gradient(90deg, var(--pink) 0 22px, var(--ink) 22px 44px);
+            border-bottom: 2px solid var(--deep);
+            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, var(--deep) 22px 44px);
         }
-        .hero-right::after { display: none; }
         .hero-right-blob { display: none; }
-
         .hero-form-content { position: relative; z-index: 10; display: flex; flex-direction: column; height: 100%; }
 
         .hero-form-header { margin-bottom: 18px; }
         .hero-form-top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 12px; flex-wrap: wrap; }
         .hero-form-kicker {
             display: inline-flex; align-items: center; gap: 6px; padding-left: 10px; border-left: 4px solid var(--pink);
-            color: var(--pink); font-size: .8rem; font-weight: 700; text-transform: none; letter-spacing: 0;
+            color: var(--pink); font-size: .8rem; font-weight: 800;
         }
         .hero-form-kicker svg { width: 14px; height: 14px; color: var(--pink); flex-shrink: 0; }
-        .hero-rating-badge { /* gold sticker */
+        .hero-rating-badge {
             display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; rotate: 2deg;
-            background: var(--gold); border: 2px solid var(--ink); border-radius: 10px; padding: 5px 10px;
-            box-shadow: 3px 3px 0 var(--ink); font-size: .72rem; font-weight: 600; color: var(--ink);
+            background: var(--gold); border: 2px solid var(--deep); border-radius: 10px; padding: 5px 10px;
+            box-shadow: 3px 3px 0 var(--deep); font-size: .72rem; font-weight: 700; color: var(--deep);
         }
-        .hero-rating-badge span { color: var(--ink); font-weight: 800; }
+        .hero-rating-badge span { color: var(--deep); font-weight: 800; }
 
         .hero-form-header h2 {
-            display: block; width: 100%; margin: 0 0 6px; font-family: var(--disp); font-weight: 800; color: var(--ink);
+            display: block; width: 100%; margin: 0 0 6px; font-family: var(--disp); font-weight: 800; color: var(--head);
             font-size: clamp(1.4rem, 2.2vw, 1.8rem); line-height: 1.15; letter-spacing: -.02em;
         }
         .hero-form-header .subtitle { color: var(--mute); font-size: .88rem; line-height: 1.55; margin: 0 0 6px; }
         .hero-form-header .contact-for { font-size: .78rem; color: var(--mute); margin: 0; line-height: 1.45; }
-        .hero-form-header .contact-for .label { font-weight: 700; color: var(--pink); }
+        .hero-form-header .contact-for .label { font-weight: 800; color: var(--pink); }
 
         /* Form */
         .hero-form { display: flex; flex-direction: column; }
@@ -182,17 +182,17 @@ function renderHeroSection(): void
 
         .hero-input, .hero-textarea, .hero-select {
             width: 100%; min-width: 0; border-radius: 10px; border: 2px solid #E4DCE6; background: #FCFAFD;
-            padding: 11px 12px 11px 34px; font-size: .88rem; color: var(--ink); font-family: inherit;
-            transition: border-color .2s, box-shadow .2s, background .2s; outline: none; box-sizing: border-box;
+            padding: 11px 12px 11px 34px; font-size: .88rem; color: var(--deep); font-family: inherit;
+            transition: border-color .2s, box-shadow .2s, background .2s; outline: none;
         }
         .hero-select {
             appearance: none; -webkit-appearance: none; -moz-appearance: none;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C4007A' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
             background-repeat: no-repeat; background-position: right 12px center; background-size: 14px 14px;
-            padding-right: 34px; cursor: pointer; accent-color: var(--pink); color-scheme: light;
+            padding-right: 34px; cursor: pointer; color-scheme: light;
         }
         .hero-select:invalid { color: #9C94A4; }
-        .hero-select option { color: var(--ink); background: #fff; }
+        .hero-select option { color: var(--deep); background: #fff; }
         .hero-input::placeholder, .hero-textarea::placeholder { color: #9C94A4; }
         .hero-input:focus, .hero-textarea:focus, .hero-select:focus {
             border-color: var(--pink); background: #fff; box-shadow: 0 0 0 4px rgba(196, 0, 122, .14);
@@ -205,49 +205,54 @@ function renderHeroSection(): void
         .hero-check-label { display: flex; cursor: pointer; align-items: flex-start; gap: 8px; font-size: .74rem; color: var(--mute); line-height: 1.45; }
         .hero-check-label input[type="checkbox"] { margin-top: 2px; width: 15px; height: 15px; accent-color: var(--pink); cursor: pointer; flex-shrink: 0; }
         .hero-check-box {
-            display: flex; align-items: center; gap: 10px; border-radius: 10px; border: 2px solid #E4DCE6; background: #FCFAFD; padding: 8px 12px;
+            display: flex; align-items: center; gap: 10px; border-radius: 10px; border: 2px solid #E4DCE6;
+            background: #FCFAFD; padding: 8px 12px;
         }
         .hero-check-box input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--pink); cursor: pointer; flex-shrink: 0; }
-        .hero-check-box .text { font-size: .8rem; color: var(--text); font-weight: 500; }
+        .hero-check-box .text { font-size: .8rem; color: var(--text); font-weight: 600; }
         .hero-check-box .recaptcha { margin-left: auto; font-size: .6rem; color: #9C94A4; }
 
-        /* Submit (3D press) */
+        /* Submit */
         .hero-submit {
             position: relative; overflow: hidden; width: 100%; display: flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 15px 20px; border-radius: 12px; border: 2px solid transparent; cursor: pointer; font-family: inherit;
-            background: var(--pink); color: #fff; font-weight: 700; font-size: .95rem; line-height: 1.2;
-            box-shadow: 0 6px 0 #7E004E; transition: translate .2s ease, box-shadow .2s ease;
+            padding: 15px 20px; border-radius: 12px; border: 2px solid var(--deep); cursor: pointer; font-family: inherit;
+            background: var(--pink); color: #fff; font-weight: 800; font-size: .95rem; line-height: 1.2;
+            box-shadow: 0 6px 0 var(--deep); transition: translate .2s ease, box-shadow .2s ease;
         }
-        .hero-submit:hover { translate: 0 2px; transform: none; box-shadow: 0 4px 0 #7E004E; }
-        .hero-submit:active { translate: 0 6px; box-shadow: 0 0 0 #7E004E; }
+        .hero-submit:hover { translate: 0 2px; box-shadow: 0 4px 0 var(--deep); }
+        .hero-submit:active { translate: 0 6px; box-shadow: 0 0 0 var(--deep); }
         .hero-submit:disabled { opacity: .7; cursor: wait; }
         .hero-submit svg { width: 16px; height: 16px; flex-shrink: 0; }
         .hero-submit::after {
             content: ''; position: absolute; top: 0; bottom: 0; left: -60%; width: 40%; transform: skewX(-20deg); pointer-events: none;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .35), transparent); animation: heroSweep 3.2s ease-in-out infinite;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,.35), transparent); animation: heroSweep 3.2s ease-in-out infinite;
         }
         @keyframes heroSweep { 0% { left: -60%; } 55%, 100% { left: 130%; } }
 
         .hero-callout { text-align: center; font-size: .8rem; color: var(--mute); margin: 14px 0 0; }
-        .hero-callout a { color: var(--pink); font-weight: 700; text-decoration: none; }
+        .hero-callout a { color: var(--pink); font-weight: 800; text-decoration: none; }
         .hero-callout a:hover { text-decoration: underline; }
 
         /* Trust strip */
-        .hero-trust { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding-top: 16px; margin-top: 16px; border-top: 2px dashed rgba(196, 0, 122, .35); }
+        .hero-trust {
+            display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px;
+            padding-top: 16px; margin-top: 16px; border-top: 2px dashed rgba(196, 0, 122, .35);
+        }
         .hero-trust-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
-        .hero-trust-icon { width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); border: 2px solid var(--ink); }
-        .hero-trust-icon svg { width: 15px; height: 15px; color: var(--ink); }
-        .hero-trust-item .label { font-size: .7rem; color: var(--text); font-weight: 600; line-height: 1.3; }
+        .hero-trust-icon {
+            width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center;
+            background: var(--gold); border: 2px solid var(--deep); box-shadow: 2px 2px 0 var(--deep);
+        }
+        .hero-trust-icon svg { width: 15px; height: 15px; color: var(--deep); }
+        .hero-trust-item .label { font-size: .7rem; color: var(--text); font-weight: 700; line-height: 1.3; }
 
-        /* ============================================================
-           RESPONSIVE
-        ============================================================ */
+        /* Responsive */
         @media (min-width: 640px) {
             .hero-form-row { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .hero-right { padding: 44px 30px 28px; }
         }
         @media (min-width: 1024px) {
-            .hero { padding: 72px 0 80px; }
+            .hero { padding: 80px 0 88px; }
             .hero-inner { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); gap: 56px; }
         }
         @media (min-width: 1440px) { .hero .container { max-width: 1320px; } }
@@ -256,7 +261,7 @@ function renderHeroSection(): void
             .hero-bg-svg { display: none; }
         }
         @media (max-width: 575px) {
-            .hero { padding: 44px 0 52px; }
+            .hero { padding: 48px 0 56px; }
             .hero-right { border-radius: 18px; box-shadow: 5px 5px 0 var(--gold); }
             .hero-input, .hero-textarea, .hero-select { font-size: 16px; }
             .hero-submit { min-height: 50px; }
@@ -268,11 +273,9 @@ function renderHeroSection(): void
     </style>
 
     <section class="hero">
-        <!-- Decorative Background Elements -->
         <div class="hero-bg" aria-hidden="true">
             <div class="hero-bg-blob-1"></div>
             <div class="hero-bg-blob-2"></div>
-
             <svg class="hero-bg-svg hero-bg-svg-1" viewBox="0 0 100 100">
                 <rect x="20" y="20" width="60" height="60" transform="rotate(45 50 50)" />
             </svg>
@@ -290,20 +293,18 @@ function renderHeroSection(): void
                 <!-- LEFT SIDE -->
                 <div class="hero-left" data-wtm-reveal="fade-right">
 
-                    <!-- Badge -->
                     <div class="hero-badge">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>
                         <span><?= e((string) ($content['badge'] ?? 'DIGITAL GROWTH AGENCY')) ?></span>
                     </div>
 
-                    <!-- Main Heading -->
                     <h1 class="hero-heading">
                         <?= e((string) ($content['heading_prefix'] ?? '')) ?>
                         <?php if (!empty($content['heading_underline'])): ?>
                             <span class="underline-wrap">
                                 <span class="text accent"><?= e((string) $content['heading_underline']) ?></span>
                                 <svg class="underline-svg" viewBox="0 0 300 12" preserveAspectRatio="none">
-                                    <path d="M2 6C60 2 240 2 298 6" stroke="#C4007A" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.35"/>
+                                    <path d="M2 6C60 2 240 2 298 6" stroke="#FFB547" stroke-width="3" stroke-linecap="round" fill="none" opacity="0.9"/>
                                 </svg>
                             </span>
                         <?php endif; ?>
@@ -315,7 +316,6 @@ function renderHeroSection(): void
                         <span class="accent"><?= e((string) ($content['heading_suffix'] ?? '')) ?></span>
                     </h1>
 
-                    <!-- Description -->
                     <?php if ($mainDescription !== ''): ?>
                         <p class="hero-desc"><?= e($mainDescription) ?></p>
                     <?php endif; ?>
@@ -324,7 +324,6 @@ function renderHeroSection(): void
                         <p class="hero-desc-sm"><?= e((string) $content['description_secondary']) ?></p>
                     <?php endif; ?>
 
-                    <!-- Benefits Checklist -->
                     <ul class="hero-benefits" data-reveal-stagger>
                         <?php foreach ($benefits as $benefit): ?>
                         <li>
@@ -342,7 +341,6 @@ function renderHeroSection(): void
                     <div class="hero-right-blob"></div>
 
                     <div class="hero-form-content">
-                        <!-- Form Header (Rating Badge positioned in dedicated meta row, NEVER overlapping heading) -->
                         <div class="hero-form-header">
                             <div class="hero-form-top-row">
                                 <div class="hero-form-kicker">
@@ -358,10 +356,8 @@ function renderHeroSection(): void
                             </p>
                         </div>
 
-                        <!-- Form -->
                         <form class="hero-form" method="POST" action="/contact.php">
 
-                            <!-- Row 1: Name + Email -->
                             <div class="hero-form-row">
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -373,7 +369,6 @@ function renderHeroSection(): void
                                 </div>
                             </div>
 
-                            <!-- Row 2: Phone + Company -->
                             <div class="hero-form-row">
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -385,7 +380,6 @@ function renderHeroSection(): void
                                 </div>
                             </div>
 
-                            <!-- Row 3: Service Required -->
                             <div class="hero-form-row" style="grid-template-columns: 1fr;">
                                 <div class="hero-input-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
@@ -398,7 +392,6 @@ function renderHeroSection(): void
                                 </div>
                             </div>
 
-                            <!-- Message -->
                             <div class="hero-form-row" style="grid-template-columns: 1fr; margin-bottom: 10px;">
                                 <div class="hero-input-wrap textarea-wrap">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
@@ -406,7 +399,6 @@ function renderHeroSection(): void
                                 </div>
                             </div>
 
-                            <!-- Checkboxes -->
                             <div class="hero-checks">
                                 <label class="hero-check-label">
                                     <input type="checkbox" checked>
@@ -420,20 +412,17 @@ function renderHeroSection(): void
                                 </div>
                             </div>
 
-                            <!-- Submit Button -->
                             <button type="submit" class="hero-submit">
                                 <?= e((string) ($content['submit_label'] ?? 'Submit')) ?>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                             </button>
 
-                            <!-- Phone CTA -->
                             <p class="hero-callout">
                                 <?= e((string) ($content['phone_label'] ?? 'or call us on')) ?> <a href="tel:<?= e((string) $phoneHref) ?>"><?= e($phoneNumber) ?></a>
                             </p>
 
                         </form>
 
-                        <!-- Trust Strip -->
                         <div class="hero-trust">
                             <div class="hero-trust-item">
                                 <div class="hero-trust-icon">
@@ -505,8 +494,8 @@ function renderHeroSection(): void
             const msgBox = document.createElement('div');
             msgBox.className = 'hero-ajax-msg';
             msgBox.style.cssText = data.success
-                ? 'background:#e6f9ed;border:1px solid #7be495;color:#155724;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:600;font-size:0.92rem;text-align:center;'
-                : 'background:#ffe6ea;border:1px solid #f5a3b8;color:#9e0034;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:600;font-size:0.92rem;text-align:center;';
+                ? 'background:#e6f9ed;border:2px solid #0E9F6E;color:#0E9F6E;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:700;font-size:0.92rem;text-align:center;'
+                : 'background:#ffe6ea;border:2px solid #C4007A;color:#9e0034;padding:12px 16px;border-radius:12px;margin-bottom:16px;font-weight:700;font-size:0.92rem;text-align:center;';
             msgBox.textContent = data.message || (data.success ? 'Consultation booked successfully!' : 'Please check your inputs.');
             heroForm.insertBefore(msgBox, heroForm.firstChild);
             if (data.success) {

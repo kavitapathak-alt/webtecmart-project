@@ -78,99 +78,130 @@ function renderTestimonialsSection(): void
     <style>
         /* ============================================================
            TESTIMONIALS — "Expo Floor" design
-           Visitor feedback on exhibitor-badge cards: ink borders,
-           hard offset shadows, gold stars, gold arrow keys.
+           Magenta (#C4007A) + Gold (#FFB547) + Deep (#7E004E)
+           Exhibitor-badge cards, gold stars, gold arrow keys.
+           Matches B2B / SEO Delhi / Services / Contact / Blog pages.
         ============================================================ */
         .testi-section {
-            --ink: #1A0613;
             --pink: #C4007A;
             --pink2: #E0398F;
+            --pink3: #FF7BC0;
+            --deep: #7E004E;
+            --head: #5E0B45;
             --blush: #FBEAF3;
+            --soft: #FFF4FA;
             --gold: #FFB547;
-            --text: #2A2430;
-            --mute: #6C6474;
+            --mint: #0E9F6E;
+            --text: #4A3342;
+            --mute: #7A6574;
+            --line: rgba(126, 0, 78, .14);
+
+            /* Legacy alias */
+            --ink: var(--deep);
+
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             position: relative;
             width: 100%;
             padding: 96px 0 88px;
-            background: radial-gradient(40% 50% at 100% 0%, rgba(255, 181, 71, .28), transparent 70%), var(--blush);
+            background:
+                radial-gradient(40% 50% at 100% 0%, rgba(255, 181, 71, .28), transparent 70%),
+                var(--blush);
             overflow: hidden;
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
         .testi-section *, .testi-section *::before, .testi-section *::after { box-sizing: border-box; }
         .testi-section button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+        .testi-section ::selection { background: var(--pink); color: #fff; }
 
-        /* Background Elements (kept markup, restyled) */
+        /* Background Elements */
         .testi-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
         .testi-bg-grid {
             position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(26, 6, 19, .08) 1px, transparent 1.2px);
+            background-image: radial-gradient(rgba(126, 0, 78, .08) 1px, transparent 1.2px);
             background-size: 24px 24px;
             -webkit-mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
                     mask-image: linear-gradient(180deg, #000 40%, transparent 100%);
         }
         .testi-bg-blob-1, .testi-bg-blob-2 { position: absolute; border-radius: 50%; filter: blur(80px); }
-        .testi-bg-blob-1 { top: 6%; left: -8%; width: 440px; height: 440px; background: rgba(196, 0, 122, .16); }
-        .testi-bg-blob-2 { bottom: 4%; right: -8%; width: 380px; height: 380px; background: rgba(255, 181, 71, .22); }
+        .testi-bg-blob-1 { top: 6%; left: -8%; width: 440px; height: 440px; background: rgba(255, 181, 71, .22); }
+        .testi-bg-blob-2 { bottom: 4%; right: -8%; width: 380px; height: 380px; background: rgba(196, 0, 122, .16); }
 
         .testi-container { max-width: 1280px; margin: 0 auto; padding: 0 22px; position: relative; z-index: 2; }
 
         /* ===== Header ===== */
         .testi-header { text-align: left; max-width: 720px; margin: 0 0 36px; }
         .testi-pill {
-            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 0 0 0 14px;
-            background: none; border: 0; border-left: 4px solid var(--pink); border-radius: 0; box-shadow: none;
-            color: var(--pink); font-size: .82rem; font-weight: 700; letter-spacing: 0; text-transform: none;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-bottom: 16px; padding: 0 0 0 14px;
+            background: none; border: 0; border-left: 4px solid var(--pink);
+            border-radius: 0; box-shadow: none;
+            color: var(--pink); font-size: .82rem; font-weight: 800;
+            letter-spacing: .06em; text-transform: uppercase;
         }
         .testi-pill svg { width: 14px; height: 14px; color: var(--pink); flex-shrink: 0; }
         .testi-title {
             font-family: var(--disp); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800;
-            color: var(--ink); margin: 0 0 16px; line-height: 1.08; letter-spacing: -.02em;
+            color: var(--head); margin: 0 0 16px; line-height: 1.08; letter-spacing: -.02em;
         }
         .testi-title .accent {
-            position: relative; display: inline-block; color: var(--ink); padding: 0 .12em;
+            position: relative; display: inline-block; color: var(--head); padding: 0 .12em;
             background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%);
         }
         .testi-title .accent svg { display: none; }
         .testi-subtitle { font-size: 1.02rem; color: var(--mute); margin: 0; line-height: 1.65; max-width: 600px; }
-        .testi-header::after { /* stripe bar */
+        .testi-header::after {
             content: ''; display: block; width: 84px; height: 7px; margin-top: 22px;
             background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px);
         }
 
-        /* ===== Arrow controls (gold keys) ===== */
+        /* ===== Arrow controls ===== */
         .testi-controls-bar { display: flex; justify-content: flex-start; align-items: center; gap: 12px; margin-bottom: 14px; }
         .testi-nav-btn {
             display: grid; place-items: center; width: 50px; height: 50px; border-radius: 12px;
-            background: var(--gold); color: var(--ink); border: 2px solid var(--ink); cursor: pointer;
-            box-shadow: 0 4px 0 #B77400;
-            transition: translate .15s, box-shadow .15s, background .2s;
+            background: var(--gold); color: var(--deep);
+            border: 2px solid var(--deep); cursor: pointer;
+            box-shadow: 0 4px 0 var(--deep);
+            transition: translate .15s, box-shadow .15s, background .2s, color .2s;
         }
-        .testi-nav-btn:hover { translate: 0 2px; box-shadow: 0 2px 0 #B77400; background: #fff; color: var(--ink); border-color: var(--ink); transform: none; }
-        .testi-nav-btn:active { translate: 0 4px; box-shadow: 0 0 0 #B77400; }
+        .testi-nav-btn:hover {
+            translate: 0 2px; box-shadow: 0 2px 0 var(--deep);
+            background: #fff; color: var(--deep); border-color: var(--deep);
+            transform: none;
+        }
+        .testi-nav-btn:active { translate: 0 4px; box-shadow: 0 0 0 var(--deep); }
         .testi-nav-btn svg { width: 22px; height: 22px; stroke-width: 2.5; }
 
         /* ===== Slider ===== */
         .testi-slider-outer { width: 100%; overflow: hidden; padding: 30px 0 30px; cursor: grab; }
         .testi-slider-outer:active { cursor: grabbing; }
         .testi-slider-track { display: flex; transition: transform .6s cubic-bezier(.16, 1, .3, 1); will-change: transform; }
-        .testi-slide { box-sizing: border-box; flex-shrink: 0; padding: 0 16px; padding-top: 40px; /* room for floating avatar */ }
+        .testi-slide { box-sizing: border-box; flex-shrink: 0; padding: 0 16px; padding-top: 40px; }
 
-        /* Card */
+        /* Card (visitor badge) */
         .testi-card-box {
             position: relative; display: flex; flex-direction: column; height: 100%;
-            background: #fff; border: 2px solid var(--ink); border-radius: 18px;
-            padding: 52px 28px 26px; box-shadow: 6px 6px 0 var(--ink);
+            background: #fff;
+            border: 2px solid var(--deep); border-radius: 18px;
+            padding: 52px 28px 26px;
+            box-shadow: 6px 6px 0 var(--deep);
             transition: translate .25s ease, box-shadow .25s ease;
         }
         .testi-slide:nth-child(3n+2) .testi-card-box { box-shadow: 6px 6px 0 var(--gold); }
         .testi-slide:nth-child(3n) .testi-card-box { box-shadow: 6px 6px 0 var(--pink); }
-        .testi-card-box:hover { translate: -3px -3px; border-color: var(--ink); box-shadow: 10px 10px 0 var(--pink); transform: none; }
+        .testi-card-box:hover {
+            translate: -3px -3px;
+            border-color: var(--deep);
+            box-shadow: 10px 10px 0 var(--pink);
+            transform: none;
+        }
 
         /* Avatar (visitor photo, pinned like a badge) */
         .testi-avatar {
-            position: absolute; top: -38px; left: 26px; width: 76px; height: 76px; border-radius: 50%;
-            border: 3px solid var(--ink); background: var(--blush); overflow: hidden;
+            position: absolute; top: -38px; left: 26px;
+            width: 76px; height: 76px; border-radius: 50%;
+            border: 3px solid var(--deep);
+            background: var(--blush);
+            overflow: hidden;
             box-shadow: 3px 3px 0 var(--gold);
         }
         .testi-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -178,12 +209,14 @@ function renderTestimonialsSection(): void
         /* Quote mark */
         .testi-quote-mark {
             position: absolute; top: 14px; right: 22px; pointer-events: none;
-            font: 800 5.5rem/1 var(--disp); color: transparent; -webkit-text-stroke: 2px rgba(196, 0, 122, .25);
+            font: 800 5.5rem/1 var(--disp);
+            color: transparent;
+            -webkit-text-stroke: 2px rgba(126, 0, 78, .28);
         }
 
         /* Stars */
         .testi-stars { display: flex; gap: 3px; color: var(--gold); margin-bottom: 16px; }
-        .testi-stars svg { width: 20px; height: 20px; fill: currentColor; stroke: var(--ink); stroke-width: 1.2; stroke-linejoin: round; }
+        .testi-stars svg { width: 20px; height: 20px; fill: currentColor; stroke: var(--deep); stroke-width: 1.2; stroke-linejoin: round; }
 
         .testi-quote-body {
             position: relative; z-index: 2; flex-grow: 1; margin: 0 0 22px;
@@ -191,21 +224,25 @@ function renderTestimonialsSection(): void
         }
 
         /* Author */
-        .testi-author-info { margin-top: auto; padding-top: 16px; border-top: 2px dashed rgba(196, 0, 122, .35); }
-        .testi-author-name { font-family: var(--disp); font-size: 1.2rem; font-weight: 800; color: var(--ink); margin: 0 0 6px; letter-spacing: -.01em; }
+        .testi-author-info { margin-top: auto; padding-top: 16px; border-top: 2px dashed rgba(126, 0, 78, .35); }
+        .testi-author-name {
+            font-family: var(--disp); font-size: 1.2rem; font-weight: 800;
+            color: var(--head); margin: 0 0 6px; letter-spacing: -.01em;
+        }
         .testi-author-role {
-            display: inline-block; padding: 4px 10px; border-radius: 8px; background: var(--blush);
-            color: var(--pink); font-size: .78rem; font-weight: 700;
+            display: inline-block; padding: 4px 10px; border-radius: 8px;
+            background: var(--blush);
+            color: var(--pink); font-size: .78rem; font-weight: 800;
         }
 
         /* ===== Dots (bar pagination) ===== */
         .testi-dots-row { display: flex; justify-content: flex-start; align-items: center; gap: 8px; margin-top: 22px; }
         .wtm-slider-dot {
             width: 44px; height: 6px; border-radius: 0; border: none; padding: 0; cursor: pointer;
-            background: rgba(26, 6, 19, .22);
+            background: rgba(126, 0, 78, .22);
             transition: background .3s ease, width .4s cubic-bezier(.16, 1, .3, 1);
         }
-        .wtm-slider-dot:hover { background: rgba(196, 0, 122, .55); }
+        .wtm-slider-dot:hover { background: rgba(196, 0, 122, .6); }
         .wtm-slider-dot.active { width: 72px; background: var(--pink); box-shadow: none; }
 
         /* ===== Responsive ===== */
@@ -213,7 +250,7 @@ function renderTestimonialsSection(): void
         @media (max-width: 768px) {
             .testi-section { padding: 68px 0 64px; }
             .testi-container { padding: 0 16px; }
-            .testi-card-box { padding: 48px 22px 22px; box-shadow: 4px 4px 0 var(--ink); }
+            .testi-card-box { padding: 48px 22px 22px; box-shadow: 4px 4px 0 var(--deep); }
             .testi-slide:nth-child(3n+2) .testi-card-box { box-shadow: 4px 4px 0 var(--gold); }
             .testi-slide:nth-child(3n) .testi-card-box { box-shadow: 4px 4px 0 var(--pink); }
             .testi-avatar { top: -34px; left: 20px; width: 68px; height: 68px; }

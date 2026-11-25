@@ -13,46 +13,59 @@ function renderSearchVisibilitySection(): void
     <style>
         /* =========================================================
            SEARCH VISIBILITY — "Expo Floor" design
-           The dark hall: ink background, aurora glow, white stall
-           cards with gold offset shadows and gold number tabs.
+           Magenta (#C4007A) + Gold (#FFB547) + Deep (#7E004E)
+           Matches B2B / SEO Delhi / Services / Contact pages.
         ========================================================= */
 
         .search-visibility-section {
-            --ink: #1A0613;
-            --ink2: #2B0B20;
             --pink: #C4007A;
             --pink2: #E0398F;
+            --pink3: #FF7BC0;
+            --deep: #7E004E;
+            --head: #5E0B45;
             --blush: #FBEAF3;
+            --soft: #FFF4FA;
             --gold: #FFB547;
-            --text: #2A2430;
-            --mute: #6C6474;
+            --mint: #0E9F6E;
+            --text: #4A3342;
+            --mute: #7A6574;
+            --line: rgba(126, 0, 78, .14);
+
+            /* Legacy aliases — magenta system me remap */
+            --ink: var(--deep);
+            --ink2: #5C0038;
+
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
+
             position: relative;
             width: 100%;
             padding: 96px 0 88px;
             color: #fff;
             background:
-                radial-gradient(50% 60% at 92% 0%, rgba(196, 0, 122, .38), transparent 70%),
-                radial-gradient(40% 50% at 0% 100%, rgba(255, 181, 71, .14), transparent 70%),
-                var(--ink);
+                radial-gradient(50% 60% at 92% 0%, rgba(255, 181, 71, .25), transparent 70%),
+                radial-gradient(40% 50% at 0% 100%, rgba(255, 255, 255, .14), transparent 70%),
+                linear-gradient(160deg, var(--deep) 0%, #A8006A 100%);
             overflow: hidden;
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
         }
         .search-visibility-section *, .search-visibility-section *::before, .search-visibility-section *::after { box-sizing: border-box; }
         .search-visibility-section a:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+        .search-visibility-section ::selection { background: var(--pink); color: #fff; }
 
-        /* Decorative background (kept markup, restyled) */
+        /* Decorative background */
         .search-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
         .search-bg-grid {
             position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, .14) 1px, transparent 1.2px);
+            background-image: radial-gradient(rgba(255, 255, 255, .15) 1px, transparent 1.2px);
             background-size: 26px 26px;
             -webkit-mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
                     mask-image: linear-gradient(180deg, #000 30%, transparent 95%);
         }
-        .search-bg-glow-top, .search-bg-glow-bottom { position: absolute; border-radius: 50%; filter: blur(80px); }
-        .search-bg-glow-top { top: -12%; right: -6%; width: 520px; height: 520px; background: rgba(196, 0, 122, .35); }
-        .search-bg-glow-bottom { bottom: -14%; left: 30%; width: 420px; height: 420px; background: rgba(255, 181, 71, .16); }
+        .search-bg-glow-top, .search-bg-glow-bottom {
+            position: absolute; border-radius: 50%; filter: blur(80px);
+        }
+        .search-bg-glow-top { top: -12%; right: -6%; width: 520px; height: 520px; background: rgba(255, 181, 71, .3); }
+        .search-bg-glow-bottom { bottom: -14%; left: 30%; width: 420px; height: 420px; background: rgba(255, 255, 255, .14); }
 
         .search-visibility-wrap {
             position: relative; z-index: 2; text-align: left;
@@ -62,77 +75,105 @@ function renderSearchVisibilitySection(): void
         /* ===== Header ===== */
         .search-section-header { position: relative; z-index: 10; text-align: left; max-width: 720px; margin: 0 0 56px; }
         .search-section-pill {
-            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; padding: 0 0 0 14px;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-bottom: 16px; padding: 0 0 0 14px;
             background: none; border: 0; border-left: 4px solid var(--gold); border-radius: 0; box-shadow: none;
-            color: var(--gold); font-size: .82rem; font-weight: 700; letter-spacing: 0; text-transform: none;
+            color: var(--gold); font-size: .82rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
         }
         .search-section-pill svg { width: 14px; height: 14px; color: var(--gold); flex-shrink: 0; }
         .search-section-header h2 {
-            font-family: var(--disp); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800;
+            font-family: var(--disp);
+            font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800;
             color: #fff; margin: 0 0 16px; line-height: 1.08; letter-spacing: -.02em;
+            text-shadow: 0 3px 0 rgba(126, 0, 78, .35);
         }
         .search-heading-highlight { position: relative; display: inline-block; color: var(--gold); }
-        .search-heading-highlight svg { position: absolute; left: 0; bottom: -6px; width: 100%; height: 8px; pointer-events: none; overflow: visible; }
-        .search-heading-highlight path { fill: none; stroke: var(--pink2); stroke-width: 3; stroke-linecap: round; opacity: 1; }
-        .search-visibility-intro { font-size: 1.05rem; line-height: 1.7; color: rgba(255, 255, 255, .75); max-width: 600px; margin: 0; }
+        .search-heading-highlight svg {
+            position: absolute; left: 0; bottom: -6px;
+            width: 100%; height: 8px; pointer-events: none; overflow: visible;
+        }
+        .search-heading-highlight path {
+            fill: none; stroke: var(--pink3); stroke-width: 3; stroke-linecap: round; opacity: 1;
+        }
+        .search-visibility-intro {
+            font-size: 1.05rem; line-height: 1.7;
+            color: rgba(255, 255, 255, .85); max-width: 600px; margin: 0;
+        }
         .search-section-header::after { /* stripe bar */
             content: ''; display: block; width: 84px; height: 7px; margin-top: 24px;
             background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px);
         }
 
         /* ===== Grid ===== */
-        .search-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-bottom: 64px; }
+        .search-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px; margin-bottom: 64px; perspective: 1200px; }
         .search-grid > * { min-width: 0; }
 
         .search-card {
             position: relative; overflow: hidden; text-align: left; color: var(--text);
             padding: 30px 26px 24px; background: #fff;
-            border: 2px solid var(--ink); border-radius: 18px;
+            border: 2px solid var(--deep); border-radius: 18px;
             box-shadow: 6px 6px 0 var(--gold);
             transition: translate .25s ease, box-shadow .25s ease;
         }
-        .search-card::before { /* top tab line */
+        .search-card::before { /* top awning stripes */
             content: ''; position: absolute; top: 0; left: 0; right: 0; height: 8px;
-            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, var(--ink) 22px 44px);
-            border-bottom: 2px solid var(--ink);
+            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, #fff 22px 44px);
+            border-bottom: 2px solid var(--deep);
         }
-        .search-card:hover { translate: -4px -4px; box-shadow: 10px 10px 0 var(--pink); border-color: var(--ink); }
+        .search-card:nth-child(even)::before {
+            background: repeating-linear-gradient(90deg, var(--gold) 0 22px, #fff 22px 44px);
+        }
+        .search-card:hover { translate: -4px -4px; box-shadow: 10px 10px 0 var(--pink); border-color: var(--deep); }
         .search-card-content { position: relative; z-index: 2; padding-top: 8px; }
 
         /* Icon + number */
-        .search-icon-wrap { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; }
+        .search-icon-wrap {
+            position: relative; display: flex; align-items: center; justify-content: space-between;
+            gap: 12px; margin-bottom: 22px;
+        }
         .search-icon-box {
-            display: grid; place-items: center; flex-shrink: 0; width: 56px; height: 56px; border-radius: 12px;
-            background: var(--blush); color: var(--pink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--gold);
+            display: grid; place-items: center; flex-shrink: 0; width: 56px; height: 56px;
+            border-radius: 12px;
+            background: var(--blush); color: var(--pink);
+            border: 2px solid var(--deep);
+            box-shadow: 3px 3px 0 var(--gold);
             transition: rotate .3s ease, scale .3s ease, background .25s ease, color .25s ease;
         }
-        .search-card:hover .search-icon-box { rotate: -8deg; scale: 1.08; background: var(--pink); color: #fff; box-shadow: 3px 3px 0 var(--gold); transform: none; }
+        .search-card:hover .search-icon-box {
+            rotate: -8deg; scale: 1.08;
+            background: var(--pink); color: #fff;
+            box-shadow: 3px 3px 0 var(--gold); transform: none;
+        }
         .search-icon-box svg { width: 26px; height: 26px; stroke-width: 2; }
 
-        .search-card-number { /* gold number tab */
+        .search-card-number {
             display: inline-grid; place-items: center; min-width: 46px; padding: 6px 10px; border-radius: 10px;
-            background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+            background: var(--gold); color: var(--deep);
+            border: 2px solid var(--deep);
+            box-shadow: 3px 3px 0 var(--deep);
             font-family: var(--disp); font-size: 1.1rem; line-height: 1; font-weight: 800;
             rotate: 3deg; transition: rotate .3s ease;
         }
-        .search-card:hover .search-card-number { color: var(--ink); rotate: -3deg; }
+        .search-card:hover .search-card-number { color: var(--deep); rotate: -3deg; }
 
         /* Content */
         .search-card h3 {
-            margin: 0 0 10px; font-family: var(--disp); color: var(--ink);
-            font-size: 1.3rem; line-height: 1.25; font-weight: 700; letter-spacing: -.02em; overflow-wrap: anywhere;
+            margin: 0 0 10px; font-family: var(--disp); color: var(--head);
+            font-size: 1.3rem; line-height: 1.25; font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere;
         }
-        .search-card:hover h3 { color: var(--ink); }
+        .search-card:hover h3 { color: var(--head); }
         .search-card p { margin: 0; color: var(--mute); font-size: .94rem; line-height: 1.65; font-weight: 400; overflow-wrap: anywhere; }
 
         /* Learn more */
         .search-learn-more {
-            position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
-            margin-top: 22px; padding-top: 18px; border-top: 2px dashed rgba(196, 0, 122, .35);
-            color: var(--pink); font-size: .9rem; font-weight: 700; text-decoration: none;
+            position: relative; z-index: 2;
+            display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%;
+            margin-top: 22px; padding-top: 18px;
+            border-top: 2px dashed rgba(126, 0, 78, .35);
+            color: var(--pink); font-size: .9rem; font-weight: 800; text-decoration: none;
             transition: gap .3s ease, color .3s ease;
         }
-        .search-learn-more:hover { color: #7E004E; }
+        .search-learn-more:hover { color: var(--deep); }
         .search-learn-more svg { width: 18px; height: 18px; flex-shrink: 0; transition: transform .3s ease; }
         .search-card:hover .search-learn-more svg { transform: translateX(6px); }
 
@@ -141,12 +182,16 @@ function renderSearchVisibilitySection(): void
         .search-center-cta .search-quote-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 12px;
             padding: 16px 30px; border-radius: 12px; border: 2px solid transparent;
-            background: var(--pink); color: #fff !important; font-size: 1rem; font-weight: 700; line-height: 1.2; text-decoration: none;
-            box-shadow: 0 6px 0 #7E004E;
+            background: var(--pink); color: #fff !important;
+            font-size: 1rem; font-weight: 800; line-height: 1.2; text-decoration: none;
+            box-shadow: 0 6px 0 var(--deep);
             transition: translate .2s ease, box-shadow .2s ease;
         }
-        .search-center-cta .search-quote-btn:hover { translate: 0 2px; transform: none; background: var(--pink); box-shadow: 0 4px 0 #7E004E; }
-        .search-center-cta .search-quote-btn:active { translate: 0 6px; box-shadow: 0 0 0 #7E004E; }
+        .search-center-cta .search-quote-btn:hover {
+            translate: 0 2px; transform: none;
+            background: var(--pink); box-shadow: 0 4px 0 var(--deep);
+        }
+        .search-center-cta .search-quote-btn:active { translate: 0 6px; box-shadow: 0 0 0 var(--deep); }
         .search-quote-btn svg { width: 18px; height: 18px; flex-shrink: 0; }
 
         /* =========================================================
@@ -170,7 +215,10 @@ function renderSearchVisibilitySection(): void
         }
         @media (hover: none) {
             .search-card:hover { translate: none; box-shadow: 6px 6px 0 var(--gold); }
-            .search-card:hover .search-icon-box { rotate: none; scale: 1; background: var(--blush); color: var(--pink); }
+            .search-card:hover .search-icon-box {
+                rotate: none; scale: 1;
+                background: var(--blush); color: var(--pink);
+            }
         }
         @media (prefers-reduced-motion: reduce) {
             .search-card, .search-icon-box, .search-card-number, .search-learn-more svg { transition: none; }

@@ -206,23 +206,29 @@ function renderSeoSuccessStoriesSection(): void
     <style>
         /* ============================================================
            SEO SUCCESS STORIES — "Expo Floor" design
-           Same visual language as the B2B Exhibition SEO page:
-           ink / pink / gold, hard offset shadows, stall awnings,
-           visitor-badge client tags, dot-grid floor.
+           Magenta (#C4007A) + Gold (#FFB547) + Deep (#7E004E)
+           Matches B2B / SEO Delhi / Services / Contact / Blog pages.
         ============================================================ */
         .spo-section, .spo-modal-overlay {
-            --ink: #1A0613;
-            --ink2: #2B0B20;
             --pink: #C4007A;
             --pink2: #E0398F;
+            --pink3: #FF7BC0;
+            --deep: #7E004E;
+            --head: #5E0B45;
             --blush: #FBEAF3;
-            --paper: #FFFFFF;
-            --mist: #F7F4F8;
+            --soft: #FFF4FA;
             --gold: #FFB547;
             --mint: #0E9F6E;
-            --text: #2A2430;
-            --mute: #6C6474;
-            --line: rgba(26, 6, 19, .12);
+            --text: #4A3342;
+            --mute: #7A6574;
+            --line: rgba(126, 0, 78, .14);
+
+            /* Legacy aliases — magenta system me remap */
+            --ink: var(--deep);
+            --ink2: #5C0038;
+            --mist: var(--soft);
+            --paper: #fff;
+
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
             color: var(--text);
@@ -232,14 +238,14 @@ function renderSeoSuccessStoriesSection(): void
         .spo-section h2, .spo-section h3, .spo-modal-overlay h3 { font-family: var(--disp); letter-spacing: -.02em; }
         .spo-section a:focus-visible, .spo-section button:focus-visible,
         .spo-modal-overlay a:focus-visible, .spo-modal-overlay button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+        .spo-section ::selection { background: var(--pink); color: #fff; }
 
-        /* ===== Section shell (dot-grid floor) ===== */
+        /* ===== Section shell ===== */
         .spo-section {
-            position: relative;
-            width: 100%;
+            position: relative; width: 100%;
             padding: 84px 0 72px;
-            background-color: var(--mist);
-            background-image: radial-gradient(rgba(26, 6, 19, .07) 1px, transparent 1.2px);
+            background-color: var(--soft);
+            background-image: radial-gradient(rgba(126, 0, 78, .07) 1px, transparent 1.2px);
             background-size: 24px 24px;
             overflow: hidden;
         }
@@ -249,28 +255,31 @@ function renderSeoSuccessStoriesSection(): void
         }
         .spo-section .container { position: relative; z-index: 2; }
 
-        /* Decorative background (kept markup, restyled) */
+        /* Decorative background */
         .spo-bg { position: absolute; inset: 0; pointer-events: none; z-index: 0; }
         .spo-bg-blob-1, .spo-bg-blob-2 { position: absolute; border-radius: 50%; filter: blur(80px); }
-        .spo-bg-blob-1 { top: 4%; right: -6%; width: 420px; height: 420px; background: rgba(196, 0, 122, .16); }
-        .spo-bg-blob-2 { bottom: 2%; left: -6%; width: 360px; height: 360px; background: rgba(255, 181, 71, .2); }
-        .spo-bg-shape { position: absolute; fill: none; stroke: var(--ink); opacity: .12; }
+        .spo-bg-blob-1 { top: 4%; right: -6%; width: 420px; height: 420px; background: rgba(255, 181, 71, .25); }
+        .spo-bg-blob-2 { bottom: 2%; left: -6%; width: 360px; height: 360px; background: rgba(196, 0, 122, .14); }
+        .spo-bg-shape { position: absolute; fill: none; stroke: var(--deep); opacity: .12; }
         .spo-bg-shape-1 { top: 70px; left: 24px; width: 90px; height: 90px; stroke-width: 2; }
         .spo-bg-shape-2 { bottom: 60px; right: 24px; width: 120px; height: 120px; stroke-width: 1.5; }
 
         /* ===== Header ===== */
         .spo-header { position: relative; z-index: 10; text-align: left; max-width: 720px; margin: 0 0 52px; }
         .spo-pill {
-            display: inline-flex; align-items: center; gap: 8px; margin-bottom: 14px; padding: 0 0 0 14px;
-            border-left: 4px solid var(--pink); background: none; border-radius: 0; border-top: 0; border-right: 0; border-bottom: 0;
+            display: inline-flex; align-items: center; gap: 8px;
+            margin-bottom: 14px; padding: 0 0 0 14px;
+            border-left: 4px solid var(--pink);
+            background: none; border-radius: 0; border-top: 0; border-right: 0; border-bottom: 0;
         }
         .spo-pill svg { width: 14px; height: 14px; color: var(--pink); flex-shrink: 0; }
-        .spo-pill span { font-size: .82rem; font-weight: 700; color: var(--pink); letter-spacing: 0; text-transform: none; }
+        .spo-pill span { font-size: .82rem; font-weight: 800; color: var(--pink); letter-spacing: .06em; text-transform: uppercase; }
         .spo-heading {
-            font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; line-height: 1.08; color: var(--ink); margin: 0 0 14px;
+            font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; line-height: 1.08;
+            color: var(--head); margin: 0 0 14px;
         }
         .spo-heading .accent {
-            position: relative; display: inline-block; color: var(--ink); padding: 0 .12em;
+            position: relative; display: inline-block; color: var(--head); padding: 0 .12em;
             background: linear-gradient(transparent 58%, var(--gold) 58% 92%, transparent 92%);
         }
         .spo-heading .accent svg { display: none; }
@@ -300,22 +309,20 @@ function renderSeoSuccessStoriesSection(): void
             content: counter(spocase, decimal-leading-zero);
             position: absolute; top: -34px; right: 0; z-index: 0; pointer-events: none;
             font: 800 clamp(4.5rem, 12vw, 9rem)/1 var(--disp); letter-spacing: -.05em;
-            color: transparent; -webkit-text-stroke: 2px rgba(26, 6, 19, .09);
+            color: transparent; -webkit-text-stroke: 2px rgba(126, 0, 78, .12);
         }
         .spo-mockup-wrap, .spo-details { position: relative; z-index: 1; }
 
         /* ===== Browser mockup ===== */
         .spo-mockup-wrap { transition: translate .25s ease; }
-        .spo-mockup-glow { /* gradient plate behind the frame */
-            position: absolute; inset: 0; border-radius: 22px; opacity: .9; translate: 12px 12px; z-index: 0;
-        }
+        .spo-mockup-glow { position: absolute; inset: 0; border-radius: 22px; opacity: .9; translate: 12px 12px; z-index: 0; }
         .spo-mockup {
             position: relative; z-index: 1; border-radius: 20px; overflow: hidden;
-            border: 2px solid var(--ink); background: var(--ink); padding: 10px 10px 10px;
-            box-shadow: 8px 8px 0 var(--ink);
+            border: 2px solid var(--deep); background: var(--deep); padding: 10px 10px 10px;
+            box-shadow: 8px 8px 0 var(--deep);
             transition: translate .25s ease, box-shadow .25s ease;
         }
-        .spo-mockup-wrap:hover .spo-mockup { translate: -4px -4px; box-shadow: 12px 12px 0 var(--pink); }
+        .spo-mockup-wrap:hover .spo-mockup { translate: -4px -4px; box-shadow: 12px 12px 0 var(--gold); }
         .spo-mockup-wrap:hover .spo-mockup-glow { opacity: 0; }
 
         .spo-browser { display: flex; align-items: center; gap: 6px; padding: 4px 6px 10px; background: transparent; border: 0; }
@@ -325,115 +332,141 @@ function renderSeoSuccessStoriesSection(): void
         .spo-browser-dot.red { background: var(--pink); }
         .spo-browser-url {
             flex: 1; min-width: 0; margin-left: 8px; padding: 6px 12px; border-radius: 8px;
-            background: rgba(255, 255, 255, .1); color: rgba(255, 255, 255, .7);
+            background: rgba(255, 255, 255, .15); color: rgba(255, 255, 255, .85);
             font-size: .72rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
         }
 
         .spo-preview {
             position: relative; display: flex; align-items: center; justify-content: center;
             height: 250px; width: 100%; overflow: hidden; cursor: pointer; border-radius: 10px;
-            background: linear-gradient(145deg, #2D051E 0%, var(--pink) 60%, #E98EBE 100%);
+            background: linear-gradient(145deg, var(--deep) 0%, var(--pink) 60%, #E98EBE 100%);
         }
         .spo-preview img { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform .6s ease; }
         .spo-preview img.cover { object-fit: cover; }
         .spo-preview img.contain { object-fit: contain; padding: 14px; background: #fff; }
         .spo-preview:hover img { transform: scale(1.05); }
-        .spo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26, 6, 19, .55), transparent 55%, rgba(26, 6, 19, .12)); }
+        .spo-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(126, 0, 78, .55), transparent 55%, rgba(126, 0, 78, .12)); }
 
-        .spo-result-badge { /* gold sticker */
+        .spo-result-badge {
             position: absolute; top: 14px; right: 14px; z-index: 2; rotate: 3deg;
-            padding: 7px 12px; border-radius: 10px; border: 2px solid var(--ink);
-            background: var(--gold); color: var(--ink); box-shadow: 3px 3px 0 var(--ink);
+            padding: 7px 12px; border-radius: 10px;
+            border: 2px solid var(--deep);
+            background: var(--gold); color: var(--deep);
+            box-shadow: 3px 3px 0 var(--deep);
             font-family: var(--disp); font-weight: 800; font-size: .78rem; line-height: 1.1;
         }
         .spo-click-hint {
             position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); z-index: 2;
             padding: 6px 12px; border-radius: 999px; font-size: .7rem; font-weight: 700; white-space: nowrap;
         }
-        .spo-click-hint.photo { color: #fff; background: rgba(26, 6, 19, .72); border: 1px solid rgba(255, 255, 255, .3); }
-        .spo-click-hint.contain { color: var(--ink); background: var(--blush); border: 1px solid rgba(196, 0, 122, .3); }
+        .spo-click-hint.photo { color: #fff; background: rgba(126, 0, 78, .78); border: 1px solid rgba(255, 255, 255, .35); }
+        .spo-click-hint.contain { color: var(--head); background: var(--blush); border: 1px solid rgba(126, 0, 78, .35); }
 
-        /* Client badge = visitor pass */
+        /* Client badge — visitor pass */
         .spo-client-badge {
             position: absolute; bottom: -26px; left: 16px; z-index: 3;
             display: flex; align-items: center; gap: 10px;
             padding: 8px 14px 8px 10px; border-radius: 12px; background: #fff;
-            border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--gold);
+            border: 2px solid var(--deep); box-shadow: 4px 4px 0 var(--gold);
         }
         .spo-client-avatar {
             width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
-            color: #fff; font-family: var(--disp); font-size: 15px; font-weight: 800; border: 2px solid var(--ink);
+            color: #fff; font-family: var(--disp); font-size: 15px; font-weight: 800;
+            border: 2px solid var(--deep);
         }
-        .spo-client-name { font-family: var(--disp); font-size: .85rem; font-weight: 800; color: var(--ink); line-height: 1.15; }
+        .spo-client-name { font-family: var(--disp); font-size: .85rem; font-weight: 800; color: var(--head); line-height: 1.15; }
         .spo-client-country { display: flex; align-items: center; gap: 4px; font-size: .7rem; font-weight: 600; color: var(--mute); }
 
         /* ===== Details ===== */
         .spo-details { padding-top: 14px; }
         .spo-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 16px; }
         .spo-industry {
-            font-size: .74rem; font-weight: 800; color: var(--ink); background: var(--gold);
-            border: 2px solid var(--ink); border-radius: 8px; padding: 5px 11px; text-transform: none; letter-spacing: 0;
+            font-size: .74rem; font-weight: 800; color: var(--deep); background: var(--gold);
+            border: 2px solid var(--deep); border-radius: 8px; padding: 5px 11px;
+            text-transform: none; letter-spacing: 0;
+            box-shadow: 2px 2px 0 var(--deep);
         }
         .spo-duration { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; font-weight: 700; color: var(--mute); }
         .spo-duration svg { width: 14px; height: 14px; color: var(--pink); }
         .spo-website-link {
-            display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; font-weight: 700;
-            color: var(--pink); text-decoration: none; border-bottom: 2px solid transparent;
+            display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; font-weight: 800;
+            color: var(--pink); text-decoration: none;
+            border-bottom: 2px solid transparent;
         }
         .spo-website-link:hover { border-bottom-color: var(--pink); }
         .spo-website-link svg { width: 13px; height: 13px; }
 
-        .spo-title { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; line-height: 1.12; color: var(--ink); margin: 0 0 12px; }
+        .spo-title { font-size: clamp(1.5rem, 2.8vw, 2.1rem); font-weight: 800; line-height: 1.12; color: var(--head); margin: 0 0 12px; }
         .spo-description { font-size: .98rem; color: var(--mute); line-height: 1.7; margin: 0 0 22px; max-width: 560px; overflow-wrap: anywhere; }
 
-        /* Metrics = hall signage chips */
+        /* Metrics — hall signage chips */
         .spo-metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
         .spo-metric {
             display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3px;
-            padding: 14px 6px 12px; border-radius: 14px; background: var(--ink); color: #fff;
-            border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--blush);
-            transition: translate .25s ease;
+            padding: 14px 6px 12px; border-radius: 14px;
+            background: var(--deep); color: #fff;
+            border: 2px solid var(--deep);
+            box-shadow: 4px 4px 0 var(--gold);
+            transition: translate .25s ease, box-shadow .25s ease;
         }
-        .spo-metric:hover { translate: 0 -4px; }
-        .spo-metric svg { width: 18px; height: 18px; color: var(--pink2); }
+        .spo-metric:hover { translate: 0 -4px; box-shadow: 4px 8px 0 var(--gold); }
+        .spo-metric svg { width: 18px; height: 18px; color: var(--gold); }
         .spo-metric .value { font-family: var(--disp); font-size: 1.5rem; font-weight: 800; line-height: 1.05; color: var(--gold); font-variant-numeric: tabular-nums; }
-        .spo-metric .label { font-size: .68rem; font-weight: 600; opacity: .8; line-height: 1.25; }
+        .spo-metric .label { font-size: .68rem; font-weight: 600; opacity: .85; line-height: 1.25; }
 
         /* Keywords */
-        .spo-keywords-title { font-size: .8rem; font-weight: 800; color: var(--ink); margin-bottom: 12px; padding-left: 10px; border-left: 4px solid var(--gold); text-transform: none; letter-spacing: 0; }
+        .spo-keywords-title {
+            font-size: .8rem; font-weight: 800; color: var(--head); margin-bottom: 12px;
+            padding-left: 10px; border-left: 4px solid var(--gold);
+            text-transform: none; letter-spacing: 0;
+        }
         .spo-keywords { display: flex; flex-wrap: wrap; gap: 8px; }
         .spo-keyword { font-size: .76rem; padding: 7px 12px; border-radius: 999px; line-height: 1.1; white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
-        .spo-keyword.top { font-weight: 700; background: var(--pink); color: #fff; border: 2px solid var(--ink); box-shadow: 2px 2px 0 var(--ink); }
-        .spo-keyword.regular { font-weight: 600; background: var(--blush); color: var(--ink); border: 2px solid rgba(26, 6, 19, .14); }
+        .spo-keyword.top {
+            font-weight: 800; background: var(--pink); color: #fff;
+            border: 2px solid var(--deep); box-shadow: 2px 2px 0 var(--deep);
+        }
+        .spo-keyword.regular {
+            font-weight: 600; background: var(--blush); color: var(--head);
+            border: 2px solid rgba(126, 0, 78, .18);
+        }
         .spo-keyword-more {
             font-size: .76rem; font-weight: 800; padding: 7px 12px; border-radius: 999px; line-height: 1.1;
-            border: 2px dashed var(--pink); color: var(--pink); text-decoration: none; background: #fff; transition: background .2s ease;
+            border: 2px dashed var(--pink); color: var(--pink); text-decoration: none;
+            background: #fff;
+            transition: background .2s ease;
         }
         .spo-keyword-more:hover { background: var(--blush); }
 
         .spo-view-link {
             display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; padding: 12px 20px;
-            border-radius: 12px; border: 2px solid var(--pink); background: #fff; color: var(--pink);
-            font-size: .88rem; font-weight: 700; text-decoration: none; line-height: 1;
-            transition: background .2s ease, gap .3s ease;
+            border-radius: 12px;
+            border: 2px solid var(--deep); background: #fff; color: var(--pink);
+            font-size: .88rem; font-weight: 800; text-decoration: none; line-height: 1;
+            box-shadow: 0 4px 0 var(--deep);
+            transition: background .2s ease, gap .3s ease, translate .2s ease, box-shadow .2s ease;
         }
-        .spo-view-link:hover { background: var(--blush); gap: 12px; }
+        .spo-view-link:hover { background: var(--blush); gap: 12px; translate: 0 2px; box-shadow: 0 2px 0 var(--deep); }
         .spo-view-link svg { width: 15px; height: 15px; }
 
         /* ===== CTA ===== */
         .spo-cta {
             position: relative; margin-top: 84px; overflow: hidden; border-radius: 26px;
-            background: var(--ink); color: #fff; padding: 56px 28px; text-align: center;
+            background: linear-gradient(135deg, #A8006A 0%, var(--pink) 50%, var(--pink2) 100%);
+            color: #fff; padding: 56px 28px; text-align: center;
+            box-shadow: 10px 10px 0 var(--gold);
         }
         .spo-cta::before {
-            content: ''; position: absolute; inset: 0; z-index: 0; width: auto; height: auto; filter: none; border-radius: 0;
-            background: radial-gradient(50% 80% at 50% 120%, rgba(196, 0, 122, .7), transparent 70%),
-                        radial-gradient(rgba(255, 255, 255, .1) 1px, transparent 1.2px) 0 0 / 26px 26px;
+            content: ''; position: absolute; inset: 0; z-index: 0;
+            width: auto; height: auto; filter: none; border-radius: 0;
+            background:
+                radial-gradient(50% 80% at 50% 120%, rgba(255, 181, 71, .45), transparent 70%),
+                radial-gradient(rgba(255, 255, 255, .18) 1px, transparent 1.2px) 0 0 / 26px 26px;
         }
-        .spo-cta::after { /* conic glow border */
+        .spo-cta::after {
             content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 3px; pointer-events: none;
             width: auto; height: auto; filter: none; bottom: auto; left: 0; right: 0; top: 0;
-            background: conic-gradient(from var(--spoa, 0deg), var(--pink), var(--gold), var(--pink2), var(--pink));
+            background: conic-gradient(from var(--spoa, 0deg), var(--gold), #fff, var(--pink3), var(--gold));
             -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
             -webkit-mask-composite: xor;
             mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
@@ -444,33 +477,35 @@ function renderSeoSuccessStoriesSection(): void
         .spo-cta-inner { position: relative; z-index: 10; }
         .spo-cta-icon {
             width: 58px; height: 58px; margin: 0 auto 20px; border-radius: 14px; display: grid; place-items: center;
-            background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--pink);
+            background: var(--gold); color: var(--deep);
+            border: 2px solid var(--deep);
+            box-shadow: 4px 4px 0 var(--deep);
         }
-        .spo-cta-icon svg { width: 28px; height: 28px; color: var(--ink); }
-        .spo-cta h3 { font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; line-height: 1.1; color: #fff; margin: 0 auto 14px; max-width: 760px; }
+        .spo-cta-icon svg { width: 28px; height: 28px; color: var(--deep); }
+        .spo-cta h3 { font-size: clamp(1.9rem, 3.8vw, 3rem); font-weight: 800; line-height: 1.1; color: #fff; margin: 0 auto 14px; max-width: 760px; text-shadow: 0 3px 0 rgba(126, 0, 78, .35); }
         .spo-cta h3 .accent { color: var(--gold); }
-        .spo-cta p { max-width: 600px; margin: 0 auto 30px; color: rgba(255, 255, 255, .8); line-height: 1.65; font-size: 1rem; }
+        .spo-cta p { max-width: 600px; margin: 0 auto 30px; color: rgba(255, 255, 255, .92); line-height: 1.65; font-size: 1rem; }
         .spo-cta-buttons { display: flex; flex-direction: column; align-items: stretch; justify-content: center; gap: 14px; }
 
         .spo-cta-btn {
             display: inline-flex; align-items: center; justify-content: center; gap: 10px;
-            padding: 14px 26px; border-radius: 12px; font-weight: 700; font-size: .95rem; line-height: 1.2;
+            padding: 14px 26px; border-radius: 12px; font-weight: 800; font-size: .95rem; line-height: 1.2;
             text-decoration: none; cursor: pointer; border: 2px solid transparent; text-align: center;
             transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
         }
         .spo-cta-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-        .spo-cta-btn.primary { background: var(--pink); color: #fff; box-shadow: 0 6px 0 #7E004E; }
-        .spo-cta-btn.primary:hover { translate: 0 2px; box-shadow: 0 4px 0 #7E004E; transform: none; }
-        .spo-cta-btn.primary:active { translate: 0 6px; box-shadow: 0 0 0 #7E004E; }
-        .spo-cta-btn.secondary { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .35); }
-        .spo-cta-btn.secondary:hover { background: rgba(255, 255, 255, .1); border-color: #fff; color: #fff; }
+        .spo-cta-btn.primary { background: var(--pink); color: #fff; box-shadow: 0 6px 0 var(--deep); }
+        .spo-cta-btn.primary:hover { translate: 0 2px; box-shadow: 0 4px 0 var(--deep); transform: none; }
+        .spo-cta-btn.primary:active { translate: 0 6px; box-shadow: 0 0 0 var(--deep); }
+        .spo-cta-btn.secondary { background: transparent; color: #fff; border-color: rgba(255, 255, 255, .5); }
+        .spo-cta-btn.secondary:hover { background: rgba(255, 255, 255, .12); border-color: #fff; color: #fff; }
 
         /* Bottom deco */
         .spo-bottom-deco { display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 44px; }
-        .spo-bottom-line { width: 48px; height: 3px; background: linear-gradient(to right, transparent, var(--ink)); }
-        .spo-bottom-line.right { background: linear-gradient(to left, transparent, var(--ink)); }
+        .spo-bottom-line { width: 48px; height: 3px; background: linear-gradient(to right, transparent, var(--deep)); }
+        .spo-bottom-line.right { background: linear-gradient(to left, transparent, var(--deep)); }
         .spo-bottom-dots { display: flex; gap: 5px; align-items: center; }
-        .spo-bottom-dots span { display: block; width: 7px; height: 7px; border-radius: 50%; background: rgba(26, 6, 19, .2); }
+        .spo-bottom-dots span { display: block; width: 7px; height: 7px; border-radius: 50%; background: rgba(126, 0, 78, .25); }
         .spo-bottom-dots span.active { width: 26px; border-radius: 99px; background: var(--pink); }
 
         /* ===== MODAL ===== */
@@ -479,10 +514,10 @@ function renderSeoSuccessStoriesSection(): void
             padding: 12px; opacity: 0; transition: opacity .25s ease;
         }
         .spo-modal-overlay.open { display: flex; opacity: 1; }
-        .spo-modal-backdrop { position: absolute; inset: 0; background: rgba(26, 6, 19, .78); backdrop-filter: blur(5px); }
+        .spo-modal-backdrop { position: absolute; inset: 0; background: rgba(126, 0, 78, .82); backdrop-filter: blur(5px); }
         .spo-modal {
             position: relative; width: 100%; max-width: 700px; max-height: 90vh; overflow-y: auto;
-            border-radius: 22px; border: 2px solid var(--ink); background: #fff;
+            border-radius: 22px; border: 2px solid var(--deep); background: #fff;
             box-shadow: 10px 10px 0 var(--gold);
             transform: translateY(20px) scale(.97); transition: transform .25s ease;
         }
@@ -490,15 +525,18 @@ function renderSeoSuccessStoriesSection(): void
         .spo-modal-close {
             position: absolute; top: 14px; right: 14px; z-index: 10; width: 38px; height: 38px; border-radius: 10px;
             display: grid; place-items: center; cursor: pointer;
-            background: var(--gold); color: var(--ink); border: 2px solid var(--ink); box-shadow: 0 3px 0 var(--ink);
+            background: var(--gold); color: var(--deep);
+            border: 2px solid var(--deep);
+            box-shadow: 0 3px 0 var(--deep);
             transition: translate .15s, box-shadow .15s, background .2s;
         }
-        .spo-modal-close:hover { translate: 0 2px; box-shadow: 0 1px 0 var(--ink); background: #fff; }
+        .spo-modal-close:hover { translate: 0 2px; box-shadow: 0 1px 0 var(--deep); background: #fff; }
         .spo-modal-close svg { width: 16px; height: 16px; }
 
         .spo-modal-hero {
             position: relative; display: flex; align-items: flex-end; height: 150px; padding: 20px; overflow: hidden;
-            border-bottom: 2px solid var(--ink); background: var(--ink);
+            border-bottom: 2px solid var(--deep);
+            background: var(--deep);
         }
         .spo-modal-hero img { position: absolute; inset: 0; width: 100%; height: 100%; }
         .spo-modal-hero img.cover { object-fit: cover; }
@@ -507,14 +545,15 @@ function renderSeoSuccessStoriesSection(): void
         .spo-modal-hero-content { position: relative; z-index: 10; display: flex; align-items: center; gap: 12px; }
         .spo-modal-avatar {
             width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; flex-shrink: 0;
-            background: var(--gold); color: var(--ink); border: 2px solid var(--ink);
+            background: var(--gold); color: var(--deep);
+            border: 2px solid var(--deep);
             font-family: var(--disp); font-size: 1.15rem; font-weight: 800;
         }
-        .spo-modal-title { font-family: var(--disp); font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.15; text-shadow: 0 2px 10px rgba(0, 0, 0, .35); }
-        .spo-modal-country { display: flex; align-items: center; gap: 4px; font-size: .78rem; font-weight: 600; color: rgba(255, 255, 255, .9); }
+        .spo-modal-title { font-family: var(--disp); font-size: 1.3rem; font-weight: 800; color: #fff; line-height: 1.15; text-shadow: 0 2px 10px rgba(126, 0, 78, .45); }
+        .spo-modal-country { display: flex; align-items: center; gap: 4px; font-size: .78rem; font-weight: 600; color: rgba(255, 255, 255, .92); }
         .spo-modal-body { padding: 22px 20px 26px; }
         .spo-modal-body .spo-description { max-width: none; }
-        .spo-modal-body .spo-metric { box-shadow: 3px 3px 0 var(--blush); }
+        .spo-modal-body .spo-metric { box-shadow: 3px 3px 0 var(--gold); }
 
         /* ===== Responsive ===== */
         @media (min-width: 576px) {
@@ -545,11 +584,11 @@ function renderSeoSuccessStoriesSection(): void
             .spo-section { padding: 64px 0 56px; }
             .spo-header { margin-bottom: 40px; }
             .spo-list { gap: 60px; }
-            .spo-mockup { box-shadow: 5px 5px 0 var(--ink); }
+            .spo-mockup { box-shadow: 5px 5px 0 var(--deep); }
             .spo-mockup-glow { translate: 7px 7px; }
             .spo-client-badge { left: 10px; bottom: -24px; }
             .spo-details { padding-top: 22px; }
-            .spo-cta { margin-top: 60px; padding: 44px 20px; border-radius: 20px; }
+            .spo-cta { margin-top: 60px; padding: 44px 20px; border-radius: 20px; box-shadow: 6px 6px 0 var(--gold); }
             .spo-cta-btn { width: 100%; }
             .spo-view-link { width: 100%; justify-content: center; }
             .spo-modal { box-shadow: 6px 6px 0 var(--gold); }
@@ -557,7 +596,7 @@ function renderSeoSuccessStoriesSection(): void
         }
         @media (hover: none) {
             .spo-mockup-wrap:hover .spo-mockup, .spo-metric:hover { translate: none; }
-            .spo-mockup-wrap:hover .spo-mockup { box-shadow: 8px 8px 0 var(--ink); }
+            .spo-mockup-wrap:hover .spo-mockup { box-shadow: 8px 8px 0 var(--deep); }
         }
         @media (prefers-reduced-motion: reduce) {
             .spo-case { opacity: 1; transform: none; transition: none; }
