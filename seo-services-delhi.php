@@ -454,20 +454,22 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
 .xp-dark{background:radial-gradient(50% 60% at 92% 0%,rgba(255,181,71,.15),transparent 70%),linear-gradient(160deg,var(--deep) 0%,#A8006A 100%);color:#fff}
 .xp-scallop::after{content:'';position:absolute;top:0;left:0;right:0;height:18px;pointer-events:none;background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x}
 
-/* ===== Brands ===== */
-.xp-brands{padding:44px 0;background:#fff;border-bottom:3px solid var(--deep)}
-.xp-brands .xp-head{margin-bottom:24px}
-.xp-marq{position:relative;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;cursor:grab;border:2px solid var(--deep);border-radius:18px;background:#fff;box-shadow:6px 6px 0 var(--gold);padding:16px 14px}
-.xp-marq::-webkit-scrollbar{display:none}
-.xp-marq-track{display:flex;gap:14px;width:max-content;align-items:center;animation:xpRun3 40s linear infinite}
-.xp-marq:hover .xp-marq-track,.xp-marq:focus-within .xp-marq-track,.xp-marq:active .xp-marq-track{animation-play-state:paused}
-@keyframes xpRun3{to{transform:translateX(-33.333%)}}
-.xp-brand{display:flex;align-items:center;gap:10px;padding:8px 16px;white-space:nowrap;border:2px solid var(--deep);border-radius:999px;background:#fff;box-shadow:3px 3px 0 var(--gold)}
-.xp-brand img{height:30px;width:auto;max-width:80px;object-fit:contain;filter:grayscale(1)}
-.xp-brand:hover img{filter:none}
-.xp-brand b{display:block;font:700 .86rem var(--disp);color:var(--head)}
-.xp-brand span{display:block;font-size:.68rem;font-weight:700;color:var(--pink)}
-.xp-mono{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:var(--blush);color:var(--pink);font:800 .75rem var(--disp)}
+/* ===== Brands (logo cards slider) ===== */
+.xp-brands{padding:56px 0 48px;background:#fff;border-bottom:3px solid var(--deep)}
+.xp-brands .xp-head{margin-bottom:26px}
+.xp-lg{position:relative}
+.xp-lg .swiper{overflow:hidden;padding:10px 12px 22px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
+.xp-lg .swiper-slide{height:auto}
+.xp-lg-card{display:grid;place-items:center;height:180px;padding:20px;background:#fff;border:2px solid var(--deep);border-radius:20px;box-shadow:5px 5px 0 var(--deep);transition:translate .25s,box-shadow .25s}
+.xp-lg-card--1{box-shadow:5px 5px 0 var(--gold)}
+.xp-lg-card--2{box-shadow:5px 5px 0 var(--pink)}
+.xp-lg-card:hover{translate:-3px -3px}
+.xp-lg-card img{max-width:100%;max-height:138px;width:auto;height:auto;object-fit:contain;display:block}
+.xp-lg-pag{display:flex;justify-content:center;gap:8px;margin-top:4px}
+.xp-lg-pag .swiper-pagination-bullet{width:30px;height:6px;border-radius:0;background:#E3BFD5;opacity:1;margin:0!important;cursor:pointer;transition:background .3s,width .3s}
+.xp-lg-pag .swiper-pagination-bullet-active{width:56px;background:var(--pink)}
+.xp-mono{display:grid;place-items:center;width:84px;height:84px;border-radius:20px;background:var(--blush);color:var(--pink);font:800 1.6rem var(--disp)}
+@media(max-width:575px){.xp-lg-card{height:130px;padding:14px}.xp-lg-card img{max-height:96px}}
 
 /* ===== Stalls ===== */
 .xp-stall{position:relative;background:#fff;border:2px solid var(--deep);border-radius:18px;padding:54px 24px 24px;box-shadow:6px 6px 0 var(--gold);transition:translate .25s,box-shadow .25s;display:block;text-decoration:none;color:inherit}
@@ -654,7 +656,8 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
 .del-theme-dark .site-header .brand,.del-theme-dark .site-header .brand-name,.del-theme-dark .site-header .nav-link{color:#F8FAFC}
 .del-theme-dark .mobile-menu{background:#1B1022;border-color:rgba(255,255,255,.12)}
 /* Dark-mode tweaks for cards */
-.del-theme-dark .xp-stall,.del-theme-dark .xp-badge,.del-theme-dark .xp-brands,.del-theme-dark .xp-brand,.del-theme-dark .xp-marq,.del-theme-dark .xp-out,.del-theme-dark .xp-rc,.del-theme-dark .xp-table-wrap,.del-theme-dark .xp-wrapcard,.del-theme-dark .xp-fcard,.del-theme-dark .del-faq-item{background:var(--card);color:var(--text)}
+.del-theme-dark .xp-stall,.del-theme-dark .xp-badge,.del-theme-dark .xp-brands,.del-theme-dark .xp-lg-card,.del-theme-dark .xp-out,.del-theme-dark .xp-rc,.del-theme-dark .xp-table-wrap,.del-theme-dark .xp-wrapcard,.del-theme-dark .xp-fcard,.del-theme-dark .del-faq-item{background:var(--card);color:var(--text)}
+.del-theme-dark .xp-lg-card img{background:#fff;border-radius:10px;padding:6px}
 .del-theme-dark .xp-stall h3,.del-theme-dark .xp-stall h4,.del-theme-dark .xp-fmain h3,.del-theme-dark .xp-wrapcard h2,.del-theme-dark .del-faq-btn,.del-theme-dark .xp-step h3,.del-theme-dark .xp-out h4,.del-theme-dark .xp-badge h3{color:var(--h)}
 .del-theme-dark .xp-fld input,.del-theme-dark .xp-fld textarea{background:#150A16;color:#fff;border-color:#5A2A52}
 .del-theme-dark .xp-consent{color:#B9A6B4}
@@ -699,12 +702,12 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
     #delFeedbackSwiper .swiper-pagination-bullet-active{width:44px}
 }
 @media(hover:none){
-    .xp-stall:hover,.xp-rc:hover,.xp-step:hover,.xp-btn--pink:hover,.xp-btn--white:hover{translate:none}
+    .xp-stall:hover,.xp-rc:hover,.xp-step:hover,.xp-btn--pink:hover,.xp-btn--white:hover,.xp-lg-card:hover{translate:none}
     .xp-stall:hover{box-shadow:6px 6px 0 var(--gold)}
 }
 @media(prefers-reduced-motion:reduce){
-    .xp-ribbon-track,.xp-marq-track,.xp-cta-card::before{animation:none}
-    .xp-btn,.xp-stall,.xp-rc,.xp-step{transition:none}
+    .xp-ribbon-track,.xp-cta-card::before{animation:none}
+    .xp-btn,.xp-stall,.xp-rc,.xp-step,.xp-lg-card{transition:none}
 }
 </style>
 
@@ -785,20 +788,23 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
                 <i class="xp-bar"></i>
                 <p>Here are just a few of the organisers, global trade expos, and high-growth brands we've helped with strategic search optimisation campaigns.</p>
             </div>
-            <div class="xp-marq" tabindex="0" role="region" aria-label="Client brands, horizontally scrollable">
-                <div class="xp-marq-track">
-                    <?php $tripleLogos = array_merge($brandLogos, $brandLogos, $brandLogos);
-                    foreach ($tripleLogos as $b): $imgPath = $b['logo'] ?? ''; ?>
-                        <div class="xp-brand">
-                            <?php if (!empty($imgPath)): ?>
-                                <img src="<?= $e($imgPath) ?>" alt="<?= $e($b['name']) ?>" loading="lazy">
-                            <?php else: ?>
-                                <div class="xp-mono"><?= $e(substr($b['name'], 0, 2)) ?></div>
-                            <?php endif; ?>
-                            <div><b><?= $e($b['name']) ?></b><span><?= $e($b['category'] ?? 'Enterprise Brand') ?></span></div>
-                        </div>
-                    <?php endforeach; ?>
+            <div class="xp-lg">
+                <div class="swiper" id="delBrandSwiper">
+                    <div class="swiper-wrapper">
+                        <?php foreach ($brandLogos as $bi => $b): $imgPath = $b['logo'] ?? ''; ?>
+                            <div class="swiper-slide">
+                                <div class="xp-lg-card xp-lg-card--<?= $bi % 3 ?>" title="<?= $e($b['name']) ?>">
+                                    <?php if (!empty($imgPath)): ?>
+                                        <img src="<?= $e($imgPath) ?>" alt="<?= $e($b['name']) ?>" loading="lazy">
+                                    <?php else: ?>
+                                        <div class="xp-mono"><?= $e(substr($b['name'], 0, 2)) ?></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
+                <div class="xp-lg-pag"></div>
             </div>
         </div>
     </section>
@@ -1206,6 +1212,19 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
                 autoplay: { delay: 5000, disableOnInteraction: false, pauseOnMouseEnter: true },
                 pagination: { el: '#delFeedbackSwiper .swiper-pagination', clickable: true },
                 breakpoints: { 768: { slidesPerView: 2, spaceBetween: 22 } }
+            });
+        }
+
+        // Brand logos slider
+        if (typeof Swiper !== 'undefined' && document.getElementById('delBrandSwiper')) {
+            new Swiper('#delBrandSwiper', {
+                slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 16, rewind: true, grabCursor: true,
+                autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
+                pagination: { el: '.xp-lg-pag', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 22 },
+                    992: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 24 }
+                }
             });
         }
 
