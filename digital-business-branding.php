@@ -54,6 +54,10 @@ $serviceData = [
         ['q' => 'What if I already have a logo but need a full identity?', 'a' => 'Perfect — we can build a complete visual identity system around your existing logo, or refine it if needed.'],
         ['q' => 'Do you help with brand rollout?',                       'a' => 'Yes, we assist with applying your new identity across your website, social media, packaging, and other touchpoints.'],
         ['q' => 'How much does branding cost?',                          'a' => 'Pricing depends on scope — a simple logo project vs. a full rebrand. Contact us for a free consultation and custom quote.'],
+        ['q' => 'What is included in a complete branding package?',      'a' => 'Brand strategy, primary & secondary logo suite, color palette, typography hierarchy, brand voice guidelines, stationery, and social media templates.'],
+        ['q' => 'Do you design packaging, boxes, and merchandise?',      'a' => 'Yes, we design custom product packaging, boxes, labels, employee kits, and trade expo merchandise.'],
+        ['q' => 'How does strategic branding impact customer trust?',    'a' => 'A cohesive, professional brand identity builds immediate commercial credibility, commanding higher perceived value and loyalty.'],
+        ['q' => 'How do we get started with a branding project?',         'a' => 'Contact our team for a brand discovery session. We will audit your current positioning and deliver a custom roadmap.']
     ],
 ];
 

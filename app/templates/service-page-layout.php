@@ -49,6 +49,90 @@ function renderServicePageLayout(array $config): void
     $slug            = $config['slug'] ?? 'website-design-development';
     $category        = $config['category'] ?? 'Digital Solutions';
 
+    // Strategic In-Depth Narrative
+    $narrative = $config['strategic_narrative'] ?? ($config['narrative'] ?? [
+        'eyebrow' => 'ENGINEERED ARCHITECTURE • PROVEN CONVERSIONS • BUSINESS GROWTH',
+        'title'   => 'High-Performance ' . $title . ' Designed to Outrank, Engage & Convert',
+        'lead'    => 'Your digital touchpoints are the foundation of buyer trust. We engineer data-driven solutions that turn curious visitors into high-value clients.',
+        'p1'      => 'At WebTecMart, we combine clean semantic engineering, conversion rate optimization (CRO), and strategic marketing to build platforms that deliver measurable ROI.',
+        'p2'      => 'From emerging startups in Delhi NCR to established multi-national brands, our team delivers custom solutions with zero generic templates, sub-1.5 second loading speeds, and robust search rankings.',
+        'callout' => '💡 Great design is not just what it looks like — it is how efficiently it generates qualified buyer inquiries.'
+    ]);
+
+    // Common Business Challenges We Solve (6 Challenge Cards)
+    $challenges = $config['challenges'] ?? [
+        'eyebrow' => 'COMMON OBSTACLES WE SOLVE',
+        'title'   => 'What is Holding Your Business Back Online?',
+        'lead'    => 'Many businesses struggle to turn digital visibility into commercial revenue. Here are the common obstacles our engineered solutions eliminate:',
+        'items'   => [
+            ['icon' => '⚔️', 'title' => 'Intense Market Competition', 'desc' => 'Generic websites and unoptimized campaigns get lost in crowded search results. We build unique, high-authority digital presence tailored to your buyers.'],
+            ['icon' => '📉', 'title' => 'Low Conversion Rates & Bounce', 'desc' => 'Visitors bounce when pages take over 3 seconds to load or lack clear value propositions. We design sub-1.5s pages with targeted buyer conversion pathways.'],
+            ['icon' => '🎯', 'title' => 'Poor Audience Alignment', 'desc' => 'Attracting irrelevant clicks drains marketing budget without generating inquiries. We engineer content and UX specifically for high-intent decision-makers.'],
+            ['icon' => '📱', 'title' => 'Fragmented Mobile Experience', 'desc' => 'Over 70% of traffic is mobile, yet most sites break on tablets and smartphones. Every layout is 100% responsive and verified across 30+ screen resolutions.'],
+            ['icon' => '⚙️', 'title' => 'Technical Debt & Slow Speeds', 'desc' => 'Bloated themes and messy code destroy Core Web Vitals and search rankings. We build clean, lightweight, semantic HTML with sub-second execution.'],
+            ['icon' => '💸', 'title' => 'High Customer Acquisition Costs', 'desc' => 'Over-relying on paid ads without strong organic foundations causes ad fatigue. We build sustainable compounding digital assets that keep delivering leads.']
+        ]
+    ];
+    $challengeItems = !empty($challenges['items']) ? $challenges['items'] : (is_array($challenges) && isset($challenges[0]) ? $challenges : []);
+
+    // Meet the Experts / Strategists
+    $experts = $config['founder_section'] ?? ($config['experts'] ?? [
+        'eyebrow' => 'MEET THE STRATEGISTS',
+        'title'   => 'The People Behind Your Digital Growth',
+        'lead'    => 'Strategy, Design, Code and Performance Marketing — Working Together to deliver compounding digital advantage.',
+        'name'    => 'Jitin Madaan',
+        'role'    => 'Performance Marketing Strategist',
+        'image'   => '/assets/images/jitin-madaan.png',
+        'stats'   => [
+            ['val' => '13+ Years', 'label' => 'Industry Leadership'],
+            ['val' => '1,000+', 'label' => 'Projects & Businesses Served'],
+            ['val' => '95%', 'label' => 'Client Retention Rate']
+        ],
+        'pillars' => [
+            ['icon' => '⚙️', 'title' => 'Architecture & Engineering Excellence', 'desc' => 'Custom-coded, modular frameworks built for sub-second speeds, enterprise security, and 100% mobile adaptability.'],
+            ['icon' => '🎯', 'title' => 'Intent-Focused Conversion Strategy', 'desc' => 'User journeys, persuasive copy, and clear information hierarchy engineered to convert passive visitors into paying customers.'],
+            ['icon' => '🚀', 'title' => 'Continuous Full-Funnel Growth', 'desc' => 'Integrated analytics, GA4 telemetry, Google Core Web Vitals tuning, and ongoing performance marketing optimization.']
+        ]
+    ]);
+
+    // Client Feedback Endorsements
+    $clientFeedback = !empty($config['client_feedback']) ? $config['client_feedback'] : [
+        ['quote' => "WebTecMart has completely transformed our online presence. Our commercial conversion rate jumped by 340% within 90 days of launching the new digital platform. Hands down the most capable tech and marketing team in Delhi NCR.", 'author' => 'Libby Powell', 'role' => 'Marketing Director', 'company' => 'Innovation Zero', 'rating' => 5],
+        ['quote' => "Converting our legacy domain to an optimized search architecture led to a 731% increase in website users and a 164% uplift in organic conversions. Flawless execution from wireframe to launch.", 'author' => 'Louise Smith', 'role' => 'Associate Director', 'company' => 'Society of Petroleum Engineers', 'rating' => 5],
+        ['quote' => "Their support, technical architecture, and best-practice guidance ensured we now have a fast, user-friendly, and high-performing site that serves buyers across India and international trade markets.", 'author' => 'Ali McQueen', 'role' => 'Head of Marketing', 'company' => 'RoarB2B', 'rating' => 5],
+        ['quote' => "From zero digital inquiries to generating over 45 high-value corporate inquiries every month. WebTecMart is transparent, data-driven, and genuinely committed to our business results.", 'author' => 'Rajesh Singhania', 'role' => 'Managing Director', 'company' => 'Stonex Luxury Retail', 'rating' => 5]
+    ];
+
+    // Master 12-Item FAQs (Merged so every service page has 10-12 rich FAQs)
+    $masterFaqs = [
+        ['q' => 'How long does project delivery take from start to launch?', 'a' => 'Most standard business websites and marketing campaigns take 4–6 weeks. Larger e-commerce stores, custom web applications, or multi-channel growth systems take 8–14 weeks depending on the feature scope and integrations. Every project follows a clear milestone schedule with weekly progress reviews.'],
+        ['q' => 'Will the website or application be 100% mobile-friendly and cross-browser tested?', 'a' => 'Yes, absolutely. We design mobile-first and test rigorously across all modern screen sizes (smartphones, tablets, laptops, 4K displays) and browsers (Chrome, Safari, Firefox, Edge). Every element is optimized for touch gestures, accessibility, and fast rendering.'],
+        ['q' => 'Do you use generic pre-made templates or build custom solutions?', 'a' => 'We do not use generic, bloated themes. Every layout, color system, and user flow is custom-designed around your unique brand identity, target demographic, and conversion objectives. This delivers superior speed, unique branding, and higher conversion rates.'],
+        ['q' => 'Can our internal team easily update content, images, and pages ourselves?', 'a' => 'Yes. We configure an intuitive, non-technical Content Management System (CMS) that allows your team to easily add blog posts, update copy, replace images, and manage inquiries without writing a single line of code. We also provide full training and video walkthroughs.'],
+        ['q' => 'Do you provide domain registration, cloud hosting, SSL certificates, and server setup?', 'a' => 'Yes. WebTecMart handles complete server configuration, SSL certificate installation, DNS routing, automated daily backups, and CDN acceleration (Cloudflare/AWS) to ensure bank-grade security and 99.9% uptime.'],
+        ['q' => 'Is Search Engine Optimization (SEO) included in the development?', 'a' => 'Yes, fundamental on-page and technical SEO is built directly into our development workflow. This includes semantic HTML5 tags, optimized heading structures (H1-H6), Schema.org JSON-LD structured data, XML sitemaps, robots.txt, fast load times, and meta descriptions.'],
+        ['q' => 'How does this service help generate qualified inquiries and real business revenue?', 'a' => 'We design every page around commercial buyer psychology. This includes strategic Call-to-Action (CTA) placements, frictionless lead inquiry forms, WhatsApp chat triggers, trust badges, client case proof, and GA4 event tracking to turn passive visitors into paying customers.'],
+        ['q' => 'Who owns the intellectual property, source code, and design assets after project completion?', 'a' => 'You do. Upon final project completion and invoice settlement, 100% of the source code, design assets (Figma, vector logos), and intellectual property rights are handed over to your organization with zero recurring proprietary lock-ins or licensing fees.'],
+        ['q' => 'What ongoing post-launch maintenance, security updates, and warranty support do you provide?', 'a' => 'All projects include complimentary post-launch bug fixing and support for 30 to 90 days. After that, we offer flexible monthly maintenance retainers covering security updates, plugin patches, cloud monitoring, speed tuning, and ongoing feature development.'],
+        ['q' => 'What is your pricing structure and payment milestone schedule?', 'a' => 'We operate on clear, milestone-based pricing with zero hidden fees. Typically, projects are structured around 3 to 4 milestones: initial strategy & wireframing (30%), design approval (30%), development & testing (30%), and final launch handover (10%).'],
+        ['q' => 'Can you integrate third-party tools like CRMs, payment gateways, WhatsApp, and email automation?', 'a' => 'Yes. We seamlessly connect CRM platforms (HubSpot, Zoho, Salesforce), payment processors (Razorpay, Stripe, PayU), WhatsApp Business API, email marketing (Mailchimp, Klaviyo), and analytics suites (Google Analytics 4, Meta Pixel).'],
+        ['q' => 'How do we get started with WebTecMart for our project?', 'a' => 'Simply fill out the quick consultation form on this page or call our senior strategists directly at +91-9999674255. We will schedule a complimentary 30-minute discovery session, review your current digital presence, and deliver a tailored roadmap and quotation within 24 hours.']
+    ];
+
+    $allFaqs = !empty($faqs) ? $faqs : [];
+    $existingQuestions = array_map(function($f) {
+        return strtolower(trim((string)($f['q'] ?? $f['question'] ?? '')));
+    }, $allFaqs);
+
+    foreach ($masterFaqs as $mf) {
+        $qText = strtolower(trim($mf['q']));
+        if (!in_array($qText, $existingQuestions, true)) {
+            $allFaqs[] = $mf;
+            $existingQuestions[] = $qText;
+        }
+        if (count($allFaqs) >= 12) break;
+    }
+
     $benefits = !empty($config['benefits']) ? $config['benefits'] : [
         ['icon' => 'layout', 'title' => 'User Experience (UX) & Clean Navigation', 'desc' => 'Intuitive layouts and clear information architecture designed to guide visitors effortlessly toward booking calls, making purchases, or submitting leads.', 'metric' => '3.4x Higher Conversion Rate'],
         ['icon' => 'search', 'title' => 'Built-In SEO & Organic Search Readiness', 'desc' => 'Engineered from day one with clean semantic HTML, schema structured data, indexable hierarchy, and keyword alignment to rank on Google faster.', 'metric' => 'Top 3 Search Dominance'],
@@ -286,8 +370,8 @@ function renderServicePageLayout(array $config): void
         @keyframes xpRun { to { transform:translateX(-50%); } }
 
         /* Sections */
-        .xp-sec { position:relative; padding:76px 0; }
-        .xp-head { max-width:760px; margin:0 auto 40px; text-align:center; }
+        .xp-sec { position:relative; padding:48px 0; }
+        .xp-head { max-width:760px; margin:0 auto 24px; text-align:center; }
         .xp-head h2 { font-size:clamp(1.85rem,3.5vw,2.8rem); font-weight:800; line-height:1.1; margin-bottom:14px; color:var(--head); }
         .xp-head p { color:var(--mute); line-height:1.65; font-size:1.02rem; }
         .xp-head--dark h2 { color:#fff; } .xp-head--dark p { color:rgba(255,255,255,.85); }
@@ -299,6 +383,50 @@ function renderServicePageLayout(array $config): void
         .xp-mist { background:var(--soft); background-image:radial-gradient(rgba(126,0,78,.07) 1px,transparent 1.2px); background-size:24px 24px; }
         .xp-dark { background:radial-gradient(50% 60% at 92% 0%,rgba(255,255,255,.18),transparent 70%),radial-gradient(40% 50% at 0% 100%,rgba(255,181,71,.3),transparent 70%),linear-gradient(135deg, #A8006A 0%, #C4007A 45%, #E0398F 100%); color:#fff; }
         .xp-scallop::after { content:''; position:absolute; top:0; left:0; right:0; height:18px; pointer-events:none; background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x; }
+
+        /* Split layout */
+        .xp-split { display:grid; grid-template-columns:minmax(0,1fr); gap:36px; align-items:center; }
+        @media (min-width:992px){ .xp-split { grid-template-columns:1.05fr .95fr; gap:48px; } }
+        .xp-narrative-copy h2 { font-size:clamp(1.75rem,3vw,2.5rem); font-weight:800; line-height:1.15; margin-bottom:14px; color:var(--head); }
+        .xp-narrative-copy .xp-lead { font-size:1.08rem; font-weight:700; color:var(--head); line-height:1.6; margin-bottom:14px; }
+        .xp-narrative-copy p { font-size:.95rem; color:var(--mute); line-height:1.7; margin-bottom:14px; }
+        .xp-callout-box { background:var(--blush); border-left:4px solid var(--pink); border-radius:0 12px 12px 0; padding:12px 16px; margin:18px 0 22px; font-weight:700; font-size:.88rem; color:var(--head); }
+
+        /* Telemetry card */
+        .xp-terminal { background:#0F172A; border:2px solid var(--deep); border-radius:22px; padding:24px; color:#F8FAFC; box-shadow:8px 8px 0 var(--gold); position:relative; overflow:hidden; }
+        .xp-term-top { display:flex; align-items:center; gap:10px; padding-bottom:14px; margin-bottom:16px; border-bottom:1px solid rgba(255,255,255,0.12); }
+        .xp-dots { display:flex; gap:6px; }
+        .xp-dot { width:10px; height:10px; border-radius:50%; }
+        .xp-dot.red { background:#EF4444; } .xp-dot.yellow { background:#F59E0B; } .xp-dot.green { background:#10B981; }
+        .xp-term-url { background:#1E293B; border-radius:8px; padding:4px 12px; font-size:.74rem; font-family:monospace; color:#94A3B8; flex-grow:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+        .xp-term-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:16px; }
+        .xp-term-badge { background:rgba(196,0,122,0.25); border:1px solid var(--pink); color:#FF80D5; padding:4px 12px; border-radius:999px; font-size:.74rem; font-weight:800; display:inline-flex; align-items:center; gap:6px; }
+        .xp-term-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-bottom:16px; }
+        .xp-term-box { background:#1E293B; border:1px solid rgba(255,255,255,0.08); border-radius:14px; padding:14px 12px; transition:transform .2s, border-color .2s; }
+        .xp-term-box:hover { transform:translateY(-2px); border-color:var(--pink); }
+        .xp-term-val { font-size:1.6rem; font-weight:800; font-family:var(--disp); color:var(--gold); line-height:1.1; margin-bottom:4px; }
+        .xp-term-lbl { font-size:.72rem; color:#94A3B8; font-weight:700; text-transform:uppercase; letter-spacing:.04em; }
+        .xp-term-pill { background:rgba(255,181,71,0.12); border:1px dashed var(--gold); color:var(--gold); padding:8px 12px; border-radius:10px; font-size:.78rem; font-weight:700; text-align:center; }
+
+        /* Expert card */
+        .xp-expert-card { background:#fff; border:2px solid var(--deep); border-radius:24px; padding:32px 26px; box-shadow:8px 8px 0 var(--gold); }
+        .xp-expert-top { display:flex; align-items:center; gap:20px; margin-bottom:20px; padding-bottom:18px; border-bottom:2px dashed var(--line); }
+        .xp-expert-img { width:80px; height:80px; border-radius:50%; object-fit:cover; border:3px solid var(--pink); box-shadow:0 4px 14px rgba(196,0,122,0.3); flex-shrink:0; }
+        .xp-expert-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+        .xp-expert-stat { background:var(--soft); border:1.5px solid rgba(126,0,78,0.18); border-radius:12px; padding:10px 8px; text-align:center; }
+        .xp-expert-stat b { display:block; font-size:1.2rem; font-weight:800; font-family:var(--disp); color:var(--pink); }
+        .xp-expert-stat span { font-size:.7rem; color:var(--mute); font-weight:700; }
+        .xp-pillar-row { display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; }
+        .xp-pillar-ico { width:36px; height:36px; border-radius:10px; background:var(--blush); color:var(--pink); border:1.5px solid var(--deep); display:grid; place-items:center; font-size:1rem; flex-shrink:0; }
+
+        /* Reviews */
+        .xp-rev-card { background:#fff; border:2px solid var(--deep); border-radius:18px; padding:22px 20px; box-shadow:5px 5px 0 var(--gold); display:flex; flex-direction:column; justify-content:space-between; }
+        .xp-rev-stars { color:#F59E0B; font-size:.9rem; margin-bottom:10px; letter-spacing:2px; }
+        .xp-rev-quote { font-size:.88rem; line-height:1.65; color:var(--text); margin-bottom:16px; font-style:italic; flex-grow:1; }
+        .xp-rev-author { display:flex; align-items:center; gap:10px; padding-top:12px; border-top:1px dashed var(--line); }
+        .xp-rev-av { width:38px; height:38px; border-radius:50%; background:var(--blush); color:var(--pink); font-weight:800; font-size:.85rem; display:grid; place-items:center; border:1.5px solid var(--deep); flex-shrink:0; }
+        .xp-rev-meta b { display:block; font-size:.85rem; color:var(--head); }
+        .xp-rev-meta span { font-size:.72rem; color:var(--mute); }
 
         /* Brands (logo cards slider) */
         .xp-brands { padding:60px 0 48px; background:var(--soft); background-image:radial-gradient(rgba(126,0,78,.07) 1px,transparent 1.2px); background-size:24px 24px; border-bottom:3px solid var(--deep); }
@@ -566,6 +694,67 @@ function renderServicePageLayout(array $config): void
             </div>
         </section>
 
+        <!-- 2.5 STRATEGIC IN-DEPTH NARRATIVE & TELEMETRY -->
+        <section class="xp-sec">
+            <div class="xp-wrap">
+                <div class="xp-split">
+                    <div class="xp-narrative-copy">
+                        <span class="xp-kicker"><?= $e($narrative['eyebrow'] ?? 'STRATEGIC ARCHITECTURE & CONVERSION') ?></span>
+                        <h2><?= $e($narrative['title'] ?? 'High-Performance ' . $title . ' Designed for Measurable Growth') ?></h2>
+                        <i class="xp-bar" style="margin-left:0; margin-bottom:20px;"></i>
+                        <div class="xp-lead"><?= $e($narrative['lead'] ?? '') ?></div>
+                        <p><?= nl2br($e($narrative['p1'] ?? '')) ?></p>
+                        <p><?= nl2br($e($narrative['p2'] ?? '')) ?></p>
+                        <?php if (!empty($narrative['callout'])): ?>
+                            <div class="xp-callout-box"><?= $e($narrative['callout']) ?></div>
+                        <?php endif; ?>
+                        <div class="xp-actions mt-3">
+                            <a href="/contact.php" class="xp-btn xp-btn--pink trigger-enquiry-modal" data-service="<?= $e($title) ?>"><span>Schedule Free Strategy Call</span><?= $ctaArrow ?></a>
+                            <a href="tel:+919999674255" class="xp-btn xp-btn--line"><?= svcIcon('phone', 15) ?><span>+91-9999674255</span></a>
+                        </div>
+                    </div>
+                    <div>
+                        <!-- Interactive Live Search Telemetry Terminal -->
+                        <div class="xp-terminal">
+                            <div class="xp-term-top">
+                                <div class="xp-dots">
+                                    <span class="xp-dot red"></span>
+                                    <span class="xp-dot yellow"></span>
+                                    <span class="xp-dot green"></span>
+                                </div>
+                                <div class="xp-term-url">google.com/search?q=best+<?= urlencode(strtolower(str_replace('&', 'and', $title))) ?>+delhi</div>
+                            </div>
+                            <div class="xp-term-head">
+                                <span class="xp-term-badge">🏆 #1 RANKED IN DELHI NCR</span>
+                                <span style="font-size:0.75rem; color:#94A3B8; font-weight:700;"><i class="bi bi-broadcast text-danger me-1"></i> LIVE TELEMETRY</span>
+                            </div>
+                            <div style="font-size:1.15rem; font-weight:800; color:#fff; margin-bottom:6px; font-family:var(--disp);">WebTecMart &mdash; Top <?= $e($title) ?> Agency</div>
+                            <p style="font-size:0.82rem; color:#94A3B8; line-height:1.5; margin-bottom:18px;">Driving verified buyer conversions with 13+ years industry experience, 1,000+ completed client campaigns, and high-intent commercial strategies.</p>
+                            <div class="xp-term-grid">
+                                <div class="xp-term-box">
+                                    <div class="xp-term-val">+380%</div>
+                                    <div class="xp-term-lbl">Lead Growth</div>
+                                </div>
+                                <div class="xp-term-box">
+                                    <div class="xp-term-val">80+</div>
+                                    <div class="xp-term-lbl">#1 Keywords</div>
+                                </div>
+                                <div class="xp-term-box">
+                                    <div class="xp-term-val">1,393%</div>
+                                    <div class="xp-term-lbl">Search Clicks</div>
+                                </div>
+                                <div class="xp-term-box">
+                                    <div class="xp-term-val">&lt; 1.2s</div>
+                                    <div class="xp-term-lbl">Core Web Vitals</div>
+                                </div>
+                            </div>
+                            <div class="xp-term-pill">⚡ AI Overview Featured Entity &bull; Google Knowledge Graph Indexed</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- 3. CORE SOLUTIONS -->
         <?php if (!empty($features)): ?>
         <section class="xp-sec xp-mist">
@@ -587,6 +776,29 @@ function renderServicePageLayout(array $config): void
                                 <div><?= svcIcon('check', 14) ?><span><?= $e($featureTagOne) ?></span></div>
                                 <div><?= svcIcon('check', 14) ?><span><?= $e($featureTagTwo) ?></span></div>
                             </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+        <?php endif; ?>
+
+        <!-- 3.5 CHALLENGES WE SOLVE -->
+        <?php if (!empty($challengeItems)): ?>
+        <section class="xp-sec">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker"><?= $e($challenges['eyebrow'] ?? 'COMMON OBSTACLES WE SOLVE') ?></span>
+                    <h2><?= $e($challenges['title'] ?? 'What is Holding Your Business Back Online?') ?></h2>
+                    <i class="xp-bar"></i>
+                    <p><?= $e($challenges['lead'] ?? 'Many businesses struggle to turn online visibility into commercial revenue. Here are the common obstacles our engineered solutions eliminate:') ?></p>
+                </div>
+                <div class="xp-grid xp-g3">
+                    <?php foreach ($challengeItems as $cItem): ?>
+                        <article class="xp-stall">
+                            <span class="xp-ico" style="font-size:1.3rem;"><?= $e($cItem['icon'] ?? '⚡') ?></span>
+                            <h3><?= $e($cItem['title'] ?? '') ?></h3>
+                            <p><?= $e($cItem['desc'] ?? '') ?></p>
                         </article>
                     <?php endforeach; ?>
                 </div>
@@ -727,6 +939,76 @@ function renderServicePageLayout(array $config): void
         </section>
         <?php endif; ?>
 
+        <!-- 8.5 MEET THE STRATEGISTS -->
+        <section class="xp-sec xp-mist">
+            <div class="xp-wrap">
+                <div class="xp-expert-card">
+                    <div class="row align-items-center g-4">
+                        <div class="col-lg-5">
+                            <div class="xp-expert-top">
+                                <img src="<?= $e($experts['image'] ?? '/assets/images/jitin-madaan.png') ?>" alt="<?= $e($experts['name'] ?? 'Jitin Madaan') ?>" class="xp-expert-img" onerror="this.src='/assets/images/placeholder.jpg'">
+                                <div>
+                                    <div style="font-size:0.76rem; font-weight:800; color:var(--pink); text-transform:uppercase; letter-spacing:0.06em;"><?= $e($experts['eyebrow'] ?? 'MEET THE STRATEGISTS') ?></div>
+                                    <h3 style="font-size:1.45rem; font-weight:800; color:var(--head); margin-bottom:2px;"><?= $e($experts['name'] ?? 'Jitin Madaan') ?></h3>
+                                    <div style="font-size:0.86rem; font-weight:700; color:var(--mute);"><?= $e($experts['role'] ?? 'Performance Marketing Strategist') ?></div>
+                                </div>
+                            </div>
+                            <p style="font-size:0.92rem; color:var(--mute); line-height:1.65; margin-bottom:20px;"><?= $e($experts['lead'] ?? 'Strategy, Design, Code and Performance Marketing — Working Together to deliver compounding digital advantage.') ?></p>
+                            <div class="xp-expert-stats">
+                                <?php foreach (($experts['stats'] ?? []) as $st): ?>
+                                    <div class="xp-expert-stat">
+                                        <b><?= $e($st['val'] ?? '') ?></b>
+                                        <span><?= $e($st['label'] ?? '') ?></span>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <h4 style="font-size:1.15rem; font-weight:800; color:var(--head); margin-bottom:16px;">Core Growth Pillars for Your Business</h4>
+                            <?php foreach (($experts['pillars'] ?? []) as $pil): ?>
+                                <div class="xp-pillar-row">
+                                    <div class="xp-pillar-ico"><?= $e($pil['icon'] ?? '⚙️') ?></div>
+                                    <div>
+                                        <div style="font-size:0.95rem; font-weight:800; color:var(--head); margin-bottom:3px;"><?= $e($pil['title'] ?? '') ?></div>
+                                        <div style="font-size:0.86rem; color:var(--mute); line-height:1.55;"><?= $e($pil['desc'] ?? '') ?></div>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8.6 CLIENT REVIEWS -->
+        <?php if (!empty($clientFeedback)): ?>
+        <section class="xp-sec">
+            <div class="xp-wrap">
+                <div class="xp-head">
+                    <span class="xp-kicker">Verified Client Reviews</span>
+                    <h2>What Industry Leaders Say About <span class="xp-acc">WebTecMart</span></h2>
+                    <i class="xp-bar"></i>
+                    <p>Real feedback from founders, marketing directors, and enterprise decision-makers whose businesses grow with our digital expertise.</p>
+                </div>
+                <div class="xp-grid xp-g3">
+                    <?php foreach ($clientFeedback as $rev): ?>
+                        <div class="xp-rev-card">
+                            <div class="xp-rev-stars">★★★★★</div>
+                            <div class="xp-rev-quote">&ldquo;<?= $e($rev['quote'] ?? '') ?>&rdquo;</div>
+                            <div class="xp-rev-author">
+                                <div class="xp-rev-av"><?= $e(substr($rev['author'] ?? 'C', 0, 1)) ?></div>
+                                <div class="xp-rev-meta">
+                                    <b><?= $e($rev['author'] ?? 'Client') ?></b>
+                                    <span><?= $e($rev['role'] ?? 'Director') ?> &bull; <?= $e($rev['company'] ?? 'Enterprise') ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+        </section>
+        <?php endif; ?>
+
         <!-- 9. MARKETS -->
         <section class="xp-sec xp-mist">
             <div class="xp-wrap">
@@ -741,31 +1023,51 @@ function renderServicePageLayout(array $config): void
             </div>
         </section>
 
-        <!-- 10. FAQ -->
-        <?php if (!empty($faqs)): ?>
+        <!-- 10. FAQ (DHER SAARE FAQS - 10 TO 12 ITEMS) -->
+        <?php if (!empty($allFaqs)): ?>
         <section class="xp-sec">
             <div class="xp-wrap">
                 <div class="xp-faq-grid">
                     <div class="xp-head">
-                        <span class="xp-kicker">Common questions</span>
-                        <h2>Frequently Asked <span class="xp-acc">Questions</span></h2>
+                        <span class="xp-kicker">Comprehensive Knowledge Base</span>
+                        <h2>Frequently Asked <span class="xp-acc">Questions (<?= count($allFaqs) ?>)</span></h2>
                         <i class="xp-bar"></i>
-                        <p>Clear answers to everything you need to know about our <?= $e($title) ?> workflows and delivery standards.</p>
+                        <p>Clear, transparent answers to everything you need to know about our <?= $e($title) ?> workflows, deliverables, pricing, and performance guarantees.</p>
                     </div>
                     <div>
-                        <?php foreach ($faqs as $fIdx => $faq): ?>
+                        <?php foreach ($allFaqs as $fIdx => $faq): ?>
                             <div class="mb-faq-item <?= $fIdx === 0 ? 'active' : '' ?>">
                                 <button type="button" class="mb-faq-btn" onclick="mbToggleFaq(this)" aria-expanded="<?= $fIdx === 0 ? 'true' : 'false' ?>">
                                     <span><?= $e($faq['q'] ?? $faq['question'] ?? '') ?></span>
                                     <span class="mb-faq-btn-icon"><?= svcIcon('plus', 16) ?></span>
                                 </button>
-                                <div class="mb-faq-answer"><?= $e($faq['a'] ?? $faq['answer'] ?? '') ?></div>
+                                <div class="mb-faq-answer"><?= nl2br($e($faq['a'] ?? $faq['answer'] ?? '')) ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- Google Schema.org FAQPage JSON-LD -->
+        <script type="application/ld+json">
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            <?php foreach ($allFaqs as $fIdx => $fq): ?>
+            {
+              "@type": "Question",
+              "name": <?= json_encode((string)($fq['q'] ?? $fq['question'] ?? ''), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": <?= json_encode((string)($fq['a'] ?? $fq['answer'] ?? ''), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE) ?>
+              }
+            }<?= $fIdx < count($allFaqs) - 1 ? ',' : '' ?>
+            <?php endforeach; ?>
+          ]
+        }
+        </script>
         <?php endif; ?>
 
         <!-- 11. FINAL CTA -->

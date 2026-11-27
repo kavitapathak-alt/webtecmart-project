@@ -186,6 +186,15 @@ $hasImage = !empty($post['image']) && !$isNotFound;
 $authorName = (string) ($post['author'] ?? '');
 $authorInitial = $authorName !== '' ? strtoupper(substr($authorName, 0, 1)) : 'W';
 $imgErr = "onerror=\"this.closest('.has-fallback').classList.add('noimg')\"";
+// Title ke last 2 words gold accent me
+$titleWords = preg_split('/\s+/', trim((string) ($post['title'] ?? '')));
+if (count($titleWords) > 3) {
+    $titlePlain  = implode(' ', array_slice($titleWords, 0, -2));
+    $titleAccent = implode(' ', array_slice($titleWords, -2));
+} else {
+    $titlePlain  = '';
+    $titleAccent = implode(' ', $titleWords);
+}
 ?>
 
 <!-- Bootstrap 5 GRID only (reboot nahi) taaki header ki styling na bigde -->
@@ -583,40 +592,138 @@ $imgErr = "onerror=\"this.closest('.has-fallback').classList.add('noimg')\"";
         main * { transition:none !important; }
         #bpProgress { transition:none; }
     }
+    /* ========== NEW HERO (blogs.php style) ========== */
+.bp-hero2 {
+    position:relative; overflow:hidden; text-align:center; color:#fff;
+    padding:48px 0 64px;
+    background:
+        radial-gradient(70% 80% at 85% 10%, rgba(255,255,255,.15), transparent 60%),
+        radial-gradient(50% 50% at 10% 90%, rgba(255,181,71,.3), transparent 70%),
+        linear-gradient(135deg, #C4007A 0%, #E0398F 50%, #FF7BC0 100%);
+}
+.bp-hero2::before {
+    content:''; position:absolute; inset:0; pointer-events:none;
+    background-image:radial-gradient(rgba(255,255,255,.15) 1px,transparent 1.2px);
+    background-size:26px 26px;
+    -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 95%);
+    mask-image:linear-gradient(180deg,#000 30%,transparent 95%);
+}
+.bp-aurora { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
+.bp-aurora i { position:absolute; border-radius:50%; filter:blur(80px); animation:bpDrift 14s ease-in-out infinite alternate; }
+.bp-aurora i:nth-child(1) { width:420px; height:420px; left:-8%; top:4%; background:var(--pink3); opacity:.45; }
+.bp-aurora i:nth-child(2) { width:340px; height:340px; right:10%; bottom:-12%; background:var(--gold); opacity:.4; animation-duration:18s; }
+@keyframes bpDrift { to { transform:translate(60px,40px) scale(1.2); } }
+
+.bp-hero2 .container { position:relative; z-index:2; }
+.bp-crumbs2 { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:8px; margin-bottom:22px; font-size:.84rem; font-weight:700; }
+.bp-crumbs2 a {
+    display:inline-flex; align-items:center; gap:6px; padding:6px 14px; border-radius:999px;
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.45);
+    color:#fff; text-decoration:none; transition:background .2s,color .2s;
+}
+.bp-crumbs2 a:hover { background:var(--gold); color:var(--deep); }
+.bp-crumbs2 > i { color:var(--gold); font-size:.75rem; }
+
+.bp-pill2 {
+    display:inline-flex; align-items:center; gap:8px; margin-bottom:22px;
+    padding:7px 16px 7px 12px; border-radius:999px;
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.45);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+}
+.bp-pill2 i { color:var(--gold); }
+.bp-pill2 span { font-size:.76rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#fff; }
+
+.bp-h1 {
+    max-width: 900px; margin: 0 auto 26px; text-align: center;
+    font-family: var(--disp); font-weight: 800; line-height: 1.08; letter-spacing: -.035em;
+    /* 👇 Yahan size chhota kiya gaya hai */
+    font-size: clamp(1.8rem, 4vw, 2.8rem); 
+    overflow-wrap: anywhere;
+    text-shadow: 0 3px 0 rgba(126,0,78,.35);
+}
+.bp-h1 .accent { position:relative; display:inline-block; color:var(--gold); }
+.bp-h1 .accent svg { position:absolute; left:0; bottom:-6px; width:100%; height:8px; }
+
+.bp-meta2 { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+.bp-chip2 {
+    display:inline-flex; align-items:center; gap:8px; padding:9px 16px; border-radius:999px;
+    font-size:.85rem; font-weight:600; color:#fff;
+    background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.45);
+}
+.bp-chip2 i { color:var(--gold); }
+.bp-avatar2 {
+    display:inline-flex; align-items:center; justify-content:center;
+    width:26px; height:26px; margin:-4px 0 -4px -8px; border-radius:50%;
+    background:var(--deep); color:#fff; border:2px solid var(--gold); font:800 .75rem var(--disp);
+}
+
+/* gold ribbon */
+.bp-ribbon { overflow:hidden; background:var(--gold); color:var(--deep); border-top:3px solid var(--deep); border-bottom:3px solid var(--deep); }
+.bp-ribbon-track { display:flex; width:max-content; animation:bpRun 40s linear infinite; }
+.bp-ribbon:hover .bp-ribbon-track { animation-play-state:paused; }
+.bp-ribbon span { padding:12px 28px; font:800 1rem var(--disp); white-space:nowrap; }
+.bp-ribbon span::after { content:'\2726'; margin-left:50px; color:var(--pink); opacity:.8; }
+@keyframes bpRun { to { transform:translateX(-50%); } }
+
+/* ribbon aa gaya, isliye card ko upar overlap nahi karna */
+.bp-wrap { margin-top:48px; }
+
+@media (max-width:991.98px) { .bp-wrap { margin-top:36px; } }
+@media (max-width:575.98px) {
+    .bp-hero2 { padding:32px 0 44px; }
+    .bp-h1 { font-size:1.75rem; line-height:1.12; }
+    .bp-meta2 { flex-wrap:nowrap; justify-content:flex-start; overflow-x:auto; margin:0 -14px; padding:2px 14px 6px; scrollbar-width:none; }
+    .bp-meta2::-webkit-scrollbar { display:none; }
+    .bp-chip2 { flex-shrink:0; white-space:nowrap; font-size:.78rem; }
+    .bp-ribbon span { font-size:.9rem; padding:11px 20px; }
+}
+@media (prefers-reduced-motion:reduce) {
+    .bp-aurora i, .bp-ribbon-track { animation:none; }
+}
 </style>
 
 <div id="bpProgress"></div>
 
 <main>
     <!-- ===== HERO ===== -->
-    <section class="bp-hero">
-        <?php if ($hasImage): ?><img class="bp-hero-bg" src="<?= e((string) $post['image']) ?>" alt="" aria-hidden="true" onerror="this.style.display='none'"><?php endif; ?>
-        <div class="container">
-            <div class="bp-crumbs">
-                <a href="/"><i class="bi bi-house-fill"></i> Home</a>
-                <i class="bi bi-chevron-right"></i>
-                <a href="/blogs.php">Blog</a>
+      <!-- ===== HERO ===== -->
+   <section class="bp-hero2">
+    <div class="bp-aurora" aria-hidden="true"><i></i><i></i></div>
+    <div class="container">
+        <!-- Breadcrumbs aur Category Pill yahan se hata diya gaya hai -->
+
+        <h1 class="bp-h1">
+            <?= e($titlePlain) ?>
+            <span class="accent">
+                <?= e($titleAccent) ?>
+                <svg viewBox="0 0 300 8" preserveAspectRatio="none" aria-hidden="true">
+                    <path d="M2 4C60 1 240 1 298 4" stroke="#FFB547" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                </svg>
+            </span>
+        </h1>
+
+        <?php if (!$isNotFound): ?>
+            <div class="bp-meta2">
+                <?php if ($authorName !== ''): ?><span class="bp-chip2"><span class="bp-avatar2"><?= e($authorInitial) ?></span><?= e($authorName) ?></span><?php endif; ?>
+                <?php if (!empty($post['date'])): ?><span class="bp-chip2"><i class="bi bi-calendar3"></i><?= e((string) $post['date']) ?></span><?php endif; ?>
+                <?php if (!empty($post['readTime'])): ?><span class="bp-chip2"><i class="bi bi-clock"></i><?= e((string) $post['readTime']) ?></span><?php endif; ?>
             </div>
+        <?php endif; ?>
+    </div>
+</section>
 
-            <?php if (!empty($post['category'])): ?><span class="bp-cat"><?= e((string) $post['category']) ?></span><?php endif; ?>
-
-            <h1 class="bp-title"><?= e((string) $post['title']) ?></h1>
-
-            <?php if (!$isNotFound): ?>
-                <div class="bp-chips">
-                    <?php if ($authorName !== ''): ?><span class="bp-chip"><span class="bp-avatar"><?= e($authorInitial) ?></span><?= e($authorName) ?></span><?php endif; ?>
-                    <?php if (!empty($post['date'])): ?><span class="bp-chip plain"><i class="bi bi-calendar3"></i><?= e((string) $post['date']) ?></span><?php endif; ?>
-                    <?php if (!empty($post['readTime'])): ?><span class="bp-chip plain"><i class="bi bi-clock"></i><?= e((string) $post['readTime']) ?></span><?php endif; ?>
-                </div>
-            <?php endif; ?>
-        </div>
-        <div class="bp-wave">
-            <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <path fill="#FFF5FA" d="M0,48 C240,100 480,0 720,40 C960,80 1200,100 1440,36 L1440,90 L0,90 Z"/>
-            </svg>
-        </div>
-    </section>
-
+<?php if (!$isNotFound): ?>
+<div class="bp-ribbon" aria-hidden="true">
+    <div class="bp-ribbon-track">
+        <?php for ($i = 0; $i < 6; $i++): ?>
+            <span><?= e((string) ($post['category'] ?? 'Digital Marketing')) ?></span>
+            <span><?= e((string) ($post['readTime'] ?? '5 min read')) ?></span>
+            <span>SEO &amp; growth playbooks</span>
+            <span>WebTecMart Insights</span>
+        <?php endfor; ?>
+    </div>
+</div>
+<?php endif; ?>
     <!-- ===== BODY ===== -->
     <section class="bp-wrap">
         <div class="container">

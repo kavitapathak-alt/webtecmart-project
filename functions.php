@@ -396,10 +396,16 @@ function ensureServiceDetailExists(string $slug): ?array
                     ['step' => '05', 'title' => 'Testing & Launch', 'description' => 'Rigorous cross-browser testing, mobile verification, and smooth deployment.']
                 ],
                 'faqs' => [
-                    ['q' => 'How long does a website take to build?', 'a' => 'Most business websites take 4–8 weeks; larger e-commerce stores take 8–14 weeks.'],
-                    ['q' => 'Will my website be mobile-friendly?', 'a' => 'Yes, every website is fully mobile-responsive and tested across modern screen sizes.'],
-                    ['q' => 'Can I update content myself?', 'a' => 'Yes, we provide an easy admin panel to update text, images, and pages anytime.'],
-                    ['q' => 'Is SEO included in website development?', 'a' => 'Yes, SEO fundamentals like clean code, meta tags, schema, and fast speeds are built in.']
+                    ['q' => 'How long does a website take to build?', 'a' => 'Most business websites take 4–6 weeks; larger e-commerce stores take 8–14 weeks depending on scope.'],
+                    ['q' => 'Will my website be mobile-friendly and responsive?', 'a' => 'Yes, every website is fully mobile-responsive and tested across smartphones, tablets, laptops, and desktops.'],
+                    ['q' => 'Can our team update content, text, and images ourselves?', 'a' => 'Yes, we provide an easy, non-technical admin panel to update text, images, blogs, and pages anytime without a developer.'],
+                    ['q' => 'Is SEO included in website development?', 'a' => 'Yes, core technical SEO like clean semantic HTML, meta tags, schema data, fast speeds, and indexing structure is built in.'],
+                    ['q' => 'Do you use pre-made templates or custom design?', 'a' => 'We create bespoke custom designs around your unique brand identity, target demographic, and conversion goals.'],
+                    ['q' => 'Do you provide hosting, domain, and SSL security?', 'a' => 'Yes, WebTecMart configures secure cloud hosting, SSL encryption, DNS setup, automated backups, and Cloudflare CDN.'],
+                    ['q' => 'Who owns the intellectual property and source code?', 'a' => 'You do. Upon project completion, 100% of the code, design assets, and intellectual property rights belong entirely to you.'],
+                    ['q' => 'Can you integrate third-party tools like CRMs and payment gateways?', 'a' => 'Yes, we seamlessly integrate Razorpay, Stripe, WhatsApp Business API, HubSpot, Zoho, and email automation.'],
+                    ['q' => 'How does the website help generate qualified leads?', 'a' => 'We build strategic conversion funnels, clear CTAs, inquiry forms, and GA4 event tracking to turn visitors into inquiries.'],
+                    ['q' => 'What post-launch support and maintenance do you offer?', 'a' => 'All packages include complimentary post-launch support, followed by flexible ongoing maintenance retainers.']
                 ]
             ],
             'digital-business-branding' => [
@@ -429,7 +435,14 @@ function ensureServiceDetailExists(string $slug): ?array
                 'faqs' => [
                     ['q' => 'What is included in a branding package?', 'a' => 'Logo suite, brand guidelines, color system, typography, business stationery, and social media kit.'],
                     ['q' => 'How long does a branding project take?', 'a' => 'Typically 2 to 4 weeks for complete brand identity and guidelines.'],
-                    ['q' => 'Do I get full copyright ownership of my brand assets?', 'a' => 'Yes, you receive 100% intellectual property ownership and source vector files.']
+                    ['q' => 'Do I get full copyright ownership of my brand assets?', 'a' => 'Yes, you receive 100% intellectual property ownership and source vector files.'],
+                    ['q' => 'What if I already have a logo but need a full identity?', 'a' => 'We can build a complete visual identity system around your existing logo, or modernize it if desired.'],
+                    ['q' => 'Do you help with digital and print rollout?', 'a' => 'Yes, we assist with applying your brand across website, social channels, business stationery, and marketing decks.'],
+                    ['q' => 'How does strategic branding impact customer trust?', 'a' => 'A cohesive, professional brand identity builds immediate commercial credibility, commanding higher perceived value and loyalty.'],
+                    ['q' => 'Will I receive vector source files?', 'a' => 'Yes, you get all vector files (AI, EPS, SVG, PDF, Figma) and high-res exports for web, mobile, and print use.'],
+                    ['q' => 'How many design revisions are included?', 'a' => 'Our branding packages include collaborative revision rounds to ensure every element aligns with your vision.'],
+                    ['q' => 'Do you create packaging and merchandise design?', 'a' => 'Yes, we design custom packaging, boxes, labels, employee kits, and trade expo merchandise.'],
+                    ['q' => 'How do we get started with a branding project?', 'a' => 'Contact our team for a brand discovery session. We will audit your current positioning and deliver a custom roadmap.']
                 ]
             ],
             'search-engine-marketing' => [
@@ -457,9 +470,16 @@ function ensureServiceDetailExists(string $slug): ?array
                     ['step' => '04', 'title' => 'Weekly ROAS Optimization', 'description' => 'Bid adjustments, query pruning, ad testing, and budget reallocation for top performance.']
                 ],
                 'faqs' => [
-                    ['q' => 'How much budget do I need for Google Ads?', 'a' => 'Budgets vary by industry competition; we recommend starting with ₹20,000 to ₹50,000/month in ad spend.'],
-                    ['q' => 'How quickly will I see leads from PPC?', 'a' => 'Campaigns can generate qualified leads within 24 to 48 hours of going live.'],
-                    ['q' => 'Do you take a percentage of ad spend or a flat fee?', 'a' => 'We offer transparent, milestone-based management packages with zero hidden fees.']
+                    ['q' => 'How much budget do I need for Google Ads?', 'a' => 'Budgets vary by industry competition; we recommend starting with ₹20,000 to ₹50,000/month in ad spend to gather sufficient statistical data and optimize campaigns efficiently.'],
+                    ['q' => 'How quickly will I see qualified leads from PPC?', 'a' => 'Google Ads campaigns can start driving high-intent traffic and qualified buyer leads within 24 to 48 hours of campaign launch.'],
+                    ['q' => 'Do you take a percentage of ad spend or a flat fee?', 'a' => 'We offer transparent, milestone-based management packages with zero hidden fees. You pay the ad network directly, and our fee is purely for expert campaign architecture, daily optimization, and reporting.'],
+                    ['q' => 'What campaign types do you handle in Google Ads?', 'a' => 'We manage Google Search Ads, Performance Max (PMax), Display Banner Remarketing, YouTube In-Stream Ads, and Google Shopping campaigns for e-commerce.'],
+                    ['q' => 'How do you lower Cost-Per-Click (CPC) and improve Quality Score?', 'a' => 'We craft hyper-relevant ad copy, build tightly themed ad groups, add comprehensive ad assets/extensions, and optimize landing page speed and relevance to achieve 8/10 to 10/10 Quality Scores.'],
+                    ['q' => 'How do you prevent wasted budget on junk clicks?', 'a' => 'We conduct weekly negative keyword audits, exclude irrelevant audience segments, eliminate click-fraud traffic, and restrict geo-targeting strictly to profitable commercial locations.'],
+                    ['q' => 'Who owns our Google Ads account and campaign data?', 'a' => 'You do. The Google Ads account is created under your corporate billing profile. You retain 100% ownership of your historical ad data, conversion tags, and campaign assets at all times.'],
+                    ['q' => 'How do you track conversions and prove Return on Ad Spend (ROAS)?', 'a' => 'We configure Google Tag Manager (GTM), GA4 eCommerce tracking, enhanced conversions, and offline CRM lead value tracking to report exact cost-per-lead (CPL) and return on ad spend.'],
+                    ['q' => 'Can you audit and repair an existing, underperforming Google Ads account?', 'a' => 'Yes. We perform a complete 40-point Google Ads audit analyzing wasted ad spend, negative keyword gaps, bidding strategies, and landing page bottlenecks with actionable fixes.'],
+                    ['q' => 'What is the synergy between Google Ads (SEM) and Organic SEO?', 'a' => 'Google Ads gives you immediate top-of-page visibility while testing high-converting keywords. We take the highest-converting PPC search queries and feed them into your SEO strategy for long-term organic authority.']
                 ]
             ],
             'social-media-optimization' => [
@@ -487,9 +507,16 @@ function ensureServiceDetailExists(string $slug): ?array
                     ['step' => '04', 'title' => 'Publishing & Engagement', 'description' => 'Scheduled posting, active community engagement, and performance analysis.']
                 ],
                 'faqs' => [
-                    ['q' => 'How many posts will be published each week?', 'a' => 'Our standard packages include 3 to 5 high-quality posts and reels per week.'],
-                    ['q' => 'Do you create the graphics and write the copy?', 'a' => 'Yes, our in-house team handles complete graphic design, copywriting, hashtags, and video editing.'],
-                    ['q' => 'Which platforms do you manage?', 'a' => 'Instagram, LinkedIn, Facebook, YouTube, and X (Twitter).']
+                    ['q' => 'How many posts and reels will be published each week?', 'a' => 'Our standard packages include 3 to 5 high-impact posts and viral short-form reels per week, complemented by daily interactive stories and community engagement.'],
+                    ['q' => 'Do you create all graphics, captions, and short videos in-house?', 'a' => 'Yes. Our creative team handles complete concept ideation, custom graphic design, copywriting, hashtag research, and video reel editing with trending audio.'],
+                    ['q' => 'Which social media platforms do you specialize in?', 'a' => 'We manage and scale Instagram, LinkedIn, Facebook, YouTube, and X (formerly Twitter), tailoring content formats to each platform’s unique audience.'],
+                    ['q' => 'How do you grow authentic followers and avoid fake bots?', 'a' => 'We focus strictly on organic audience attraction: high-value carousel graphics, algorithm-favored video reels, niche community interactions, and targeted hashtag strategies. We never use fake followers or bots.'],
+                    ['q' => 'Can you run paid social advertising (Meta & LinkedIn Ads)?', 'a' => 'Yes. We build high-converting paid social funnels for lead generation, retargeting website visitors, and driving e-commerce transactions across Facebook, Instagram, and LinkedIn.'],
+                    ['q' => 'Can our team review and approve posts before they go live?', 'a' => 'Yes. We prepare monthly content calendars with completed designs and copy 7 to 10 days in advance for your review and approval before scheduling.'],
+                    ['q' => 'How do you handle comments and customer inquiries on our profiles?', 'a' => 'We monitor comments, mentions, and direct messages, providing friendly responses, filtering spam, and escalating high-priority customer inquiries directly to your sales team.'],
+                    ['q' => 'What metrics are included in the monthly performance report?', 'a' => 'We track reach, impressions, follower growth rate, engagement rate, website referral clicks, top-performing posts, and lead conversions.'],
+                    ['q' => 'How long does it take to see measurable brand engagement from social media?', 'a' => 'Visual consistency and engagement improvements typically appear within 3 to 4 weeks. Meaningful follower community growth and inbound inquiries compound strongly over 60 to 90 days.'],
+                    ['q' => 'Do you offer personal branding for founders and executives on LinkedIn?', 'a' => 'Yes. We curate executive thought-leadership articles, opinion carousels, and networking strategies that position company leaders as industry authorities.']
                 ]
             ],
             'mobile-app-development' => [
@@ -517,9 +544,16 @@ function ensureServiceDetailExists(string $slug): ?array
                     ['step' => '04', 'title' => 'QA & Store Launch', 'description' => 'Device testing, bug fixing, and managing complete Google Play & Apple App Store publishing.']
                 ],
                 'faqs' => [
-                    ['q' => 'Which is better: Flutter/React Native or Native iOS/Android?', 'a' => 'Cross-platform (Flutter/React Native) cuts cost and time by 40% while delivering near-native performance for 90% of business apps.'],
-                    ['q' => 'Do you help with publishing to the App Store and Google Play?', 'a' => 'Yes, we handle the entire submission, review compliance, and approval process on both stores.'],
-                    ['q' => 'Will I receive full source code?', 'a' => 'Yes, upon project completion you receive 100% ownership of the repository and intellectual property.']
+                    ['q' => 'Which is better: Flutter/React Native or Native iOS/Android?', 'a' => 'Cross-platform frameworks (Flutter & React Native) cut development costs and time-to-market by 40% while delivering 60fps native performance for 90% of business applications. For hardware-intensive apps or 3D gaming, we develop native Swift and Kotlin.'],
+                    ['q' => 'Do you handle the entire Google Play and Apple App Store submission?', 'a' => 'Yes. We manage end-to-end publishing, including App Store compliance review, screenshot graphics, privacy declarations, and developer account setup.'],
+                    ['q' => 'Will I receive 100% ownership of the mobile app source code?', 'a' => 'Yes. Upon final project completion, full repository code ownership, API documentation, and intellectual property rights are transferred entirely to your organization.'],
+                    ['q' => 'How long does it take to develop a custom mobile application?', 'a' => 'A Minimum Viable Product (MVP) or business app takes 6 to 10 weeks. Complex platforms with multi-role portals and real-time APIs typically take 12 to 16 weeks.'],
+                    ['q' => 'Can you build a web admin panel to manage app users and data?', 'a' => 'Yes. Every mobile app we develop comes with a responsive, secure web-based admin dashboard where you can manage user accounts, push notifications, orders, and analytical data.'],
+                    ['q' => 'How do you ensure app security and customer data privacy?', 'a' => 'We implement SSL/TLS certificate pinning, end-to-end data encryption, JWT token-based authentication, and follow OWASP Mobile Security guidelines.'],
+                    ['q' => 'Can you integrate payment gateways like Razorpay, Stripe, and Apple Pay?', 'a' => 'Yes. We seamlessly integrate Razorpay, Stripe, PayU, Apple Pay, Google Pay, biometric logins (FaceID / Fingerprint), and SMS/WhatsApp OTP verification.'],
+                    ['q' => 'How do you test apps to prevent crashes across different devices?', 'a' => 'We run automated and manual QA across 50+ real Android and iOS device models, verifying memory consumption, battery drain, offline caching, and responsive UI scaling.'],
+                    ['q' => 'What post-launch maintenance and OS updates do you provide?', 'a' => 'All apps include 3 months of complimentary warranty support. We also provide annual maintenance packages to ensure ongoing compatibility with new iOS and Android OS releases.'],
+                    ['q' => 'Do you provide App Store Optimization (ASO) to get more downloads?', 'a' => 'Yes. We optimize your app title, subtitle, keyword tags, description copy, and icon/screenshot design to maximize discoverability and organic downloads.']
                 ]
             ],
             'b2b-exhibition-seo' => [
@@ -547,9 +581,16 @@ function ensureServiceDetailExists(string $slug): ?array
                     ['step' => '04', 'title' => 'Sprint to Show Dates', 'description' => 'Aggressive optimization during peak registration windows to fill the hall.']
                 ],
                 'faqs' => [
-                    ['q' => 'When should event SEO begin before a trade show?', 'a' => 'Ideally 6 to 9 months before opening date to establish top Google rankings during registration peaks.'],
-                    ['q' => 'Can SEO help sell exhibitor booths?', 'a' => 'Yes, targeting commercial exhibitor keywords like "exhibit at textile fair" drives inbound stall inquiries.'],
-                    ['q' => 'Do you optimize past edition websites?', 'a' => 'Yes, we preserve historical domain authority while redirecting and rebranding for the upcoming edition.']
+                    ['q' => 'When should event SEO begin before an upcoming trade exhibition?', 'a' => 'Ideally 6 to 9 months before opening date. This allows sufficient time to index event pages, rank for competitive industry trade queries, and capture delegate registrations as soon as visitor campaigns launch.'],
+                    ['q' => 'Can SEO help sell commercial exhibitor booths as well as attract visitors?', 'a' => 'Yes. We target high-intent commercial exhibitor queries such as "book stall at textile expo", "exhibit at B2B manufacturing fair", and product sourcing searches to generate qualified inbound exhibitor leads.'],
+                    ['q' => 'How do you preserve historical domain authority when updating websites for new annual editions?', 'a' => 'We establish a permanent URL hierarchy (e.g., domain.com/edition-2027) while maintaining evergreen canonical master pages and 301 redirects, ensuring your site accumulates search equity year after year without link rot.'],
+                    ['q' => 'Do you implement Schema markup for Event dates, venues, tickets, and speaker schedules?', 'a' => 'Yes. We embed Google-compliant Event Schema (JSON-LD) with start/end dates, venue geo-coordinates, ticket availability, performer/speaker profiles, and organizer credentials for rich snippets in Google Search.'],
+                    ['q' => 'How do you target international trade buyers and global sourcing delegations?', 'a' => 'We implement multi-regional hreflang tags, currency selectors, and international buyer keyword targeting to attract trade delegations from the Middle East, Europe, North America, and Asia.'],
+                    ['q' => 'Can you build an indexable exhibitor directory that drives long-tail search traffic?', 'a' => 'Yes. We structure indexable exhibitor profile pages highlighting individual product catalogs and booth numbers, capturing thousands of niche B2B product search queries.'],
+                    ['q' => 'How do you track delegate registrations and exhibitor inquiries in GA4?', 'a' => 'We configure GA4 custom event tracking for badge registrations, PDF brochure downloads, hall layout views, and exhibitor inquiry forms with automated attribution modeling.'],
+                    ['q' => 'What digital PR and trade media backlink strategies do you use for expos?', 'a' => 'We secure editorial placements, press release syndication, and calendar listings across verified trade publications, government export boards, and industry associations.'],
+                    ['q' => 'What post-event SEO strategy do you implement between exhibition editions?', 'a' => 'Post-show, we publish post-show reports, highlight reels, and pre-registration interest lists for the next edition, maintaining search visibility and building anticipation all year round.'],
+                    ['q' => 'What proof of results do you have in the trade exhibition industry?', 'a' => 'WebTecMart has successfully optimized major trade expos including Bharat Tex (Ministry of Textiles), IHGF Delhi Autumn & Spring Fair, Clarion Events, Innovation Zero, and BMJ Future Health with over 400% organic attendance growth.']
                 ]
             ]
         ];
