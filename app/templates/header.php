@@ -15,7 +15,6 @@ $serviceNavItems = [
     ['label' => 'Performance Marketing', 'path' => '/performance-marketing.php', 'description' => 'Data-driven paid ads across Meta, Google, and YouTube with relentless ROAS focus.'],
 ];
 
-// Dynamically enrich navigation items with live database records
 $dbPagesBySlugNav = [];
 try {
     foreach (serviceDetailPages() as $dp) {
@@ -61,12 +60,12 @@ $navItems = [
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         :root {
-            /* Expo Floor colour tokens — NO BLACK, uses deep magenta instead */
+            /* Expo Floor colour tokens — NO BLACK, deep magenta family */
             --pink: #C4007A;
             --pink2: #E0398F;
             --pink3: #FF7BC0;
-            --deep: #7E004E;            /* replaces the old black --ink */
-            --head: #5E0B45;            /* headings */
+            --deep: #7E004E;
+            --head: #5E0B45;
             --blush: #FBEAF3;
             --soft: #FFF4FA;
             --paper: #FFFFFF;
@@ -77,12 +76,11 @@ $navItems = [
             --disp: 'Bricolage Grotesque', 'Plus Jakarta Sans', system-ui, sans-serif;
             --font-family-base: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-            --topbar-h: 40px;
+            --topbar-h: 42px;
             --header-h: 84px;
         }
 
         * { box-sizing: border-box; }
-
         html { scroll-behavior: smooth; overflow-x: hidden; }
 
         body {
@@ -100,17 +98,14 @@ $navItems = [
         }
 
         a { text-decoration: none; }
-        a:focus-visible, button:focus-visible {
-            outline: 3px solid var(--gold);
-            outline-offset: 2px;
-        }
+        a:focus-visible, button:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
 
         /* ============================================================
-           TOP BAR — gold "badge ribbon"
+           TOP BAR — deep-pink ribbon with gold accents
            ============================================================ */
         .top-bar {
-            background: var(--gold);
-            color: var(--deep);
+            background: var(--deep);
+            color: var(--gold);
             font-size: 12.5px;
             font-weight: 700;
             letter-spacing: 0.02em;
@@ -121,33 +116,33 @@ $navItems = [
             overflow: hidden;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid var(--deep);
+            border-bottom: 2px solid var(--pink);
         }
 
-        /* dotted floor-plan overlay */
+        /* dotted overlay */
         .top-bar::before {
             content: '';
             position: absolute;
             inset: 0;
-            background-image: radial-gradient(rgba(126,0,78,.16) 1px, transparent 1.2px);
+            background-image: radial-gradient(rgba(255,181,71,.18) 1px, transparent 1.2px);
             background-size: 18px 18px;
-            opacity: .5;
+            opacity: .6;
             pointer-events: none;
         }
-        /* left tag — "badge scan" strip */
+
+        /* left "badge scan" tag — gold, tight */
         .top-bar::after {
             content: 'LIVE • EXPO DESK';
             position: absolute;
             left: 0; top: 0; bottom: 0;
-            display: flex;
-            align-items: center;
-            padding: 0 16px;
-            background: var(--deep);
-            color: var(--gold);
+            display: flex; align-items: center;
+            padding: 0 14px;
+            background: var(--gold);
+            color: var(--deep);
             font-family: var(--disp);
             font-weight: 800;
-            font-size: 10.5px;
-            letter-spacing: .14em;
+            font-size: 10px;
+            letter-spacing: .15em;
             z-index: 2;
         }
 
@@ -155,9 +150,9 @@ $navItems = [
             display: flex;
             justify-content: flex-end;
             align-items: center;
-            gap: 18px;
+            gap: 20px;
             min-height: var(--topbar-h);
-            padding: 8px 0 8px 130px;
+            padding: 8px 0 8px 140px;
             position: relative;
             z-index: 1;
             width: 100%;
@@ -167,29 +162,17 @@ $navItems = [
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            color: var(--deep);
+            color: var(--gold);
             font-weight: 700;
             transition: color .2s ease, translate .2s ease;
             white-space: nowrap;
         }
-
-        .top-bar-item:hover {
-            color: var(--pink);
-            translate: 0 -1px;
-        }
-
-        .top-bar-item svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-            color: var(--pink);
-        }
+        .top-bar-item:hover { color: #fff; translate: 0 -1px; }
+        .top-bar-item svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--gold); }
 
         .top-bar-divider {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--pink);
+            width: 6px; height: 6px; border-radius: 50%;
+            background: rgba(255,181,71,.55);
             flex-shrink: 0;
         }
 
@@ -204,27 +187,26 @@ $navItems = [
             left: 0; right: 0;
             width: 100%;
             z-index: 1000;
-            transition: box-shadow .35s ease, translate .35s ease;
+            transition: box-shadow .35s ease;
             height: auto;
             min-height: var(--header-h);
-            box-shadow: 0 6px 0 rgba(126, 0, 78, .08);
+            box-shadow: 0 6px 0 rgba(126, 0, 78, .06);
         }
-
         .site-header.scrolled {
             box-shadow: 0 8px 0 var(--blush), 0 4px 24px rgba(196,0,122,.12);
         }
 
-        /* awning stripe on the header bottom — mirrors the stall signboard */
+        /* awning stripe — pink/deep like portfolio CTA */
         .site-header::after {
             content: '';
             position: absolute;
             left: 0; right: 0; bottom: -2px;
             height: 6px;
-            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, #fff 22px 44px);
+            background: repeating-linear-gradient(90deg, var(--pink) 0 22px, var(--deep) 22px 44px);
             border-top: 2px solid var(--deep);
         }
 
-        /* small pink tick marks at corners (stall pegs) */
+        /* corner pegs */
         .site-header::before {
             content: '';
             position: absolute;
@@ -248,7 +230,7 @@ $navItems = [
         }
 
         /* ============================================================
-           BRAND — logo tile with gold offset shadow
+           BRAND — gold stall signboard
            ============================================================ */
         .brand {
             display: inline-flex;
@@ -258,46 +240,36 @@ $navItems = [
             flex-shrink: 0;
             transition: translate .25s ease;
         }
-
         .brand:hover { translate: -2px -2px; }
 
         .brand-logo-wrap {
             position: relative;
             display: grid;
             place-items: center;
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             flex-shrink: 0;
             border-radius: 14px;
-            background: var(--blush);
+            background: linear-gradient(135deg, #FFD27F, var(--gold) 55%, #E89A1F);
             border: 2px solid var(--deep);
-            box-shadow: 4px 4px 0 var(--gold);
+            box-shadow: 4px 4px 0 var(--pink);
             transition: box-shadow .25s ease, translate .25s ease;
         }
-
         .brand:hover .brand-logo-wrap {
             box-shadow: 6px 6px 0 var(--pink);
+            translate: 0 -1px;
         }
 
         .brand-logo {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             max-width: 44px;
             object-fit: contain;
             position: relative;
             z-index: 1;
             transition: transform .3s ease;
         }
+        .brand:hover .brand-logo { transform: scale(1.08) rotate(-3deg); }
 
-        .brand:hover .brand-logo {
-            transform: scale(1.08) rotate(-3deg);
-        }
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1;
-        }
+        .brand-text { display: flex; flex-direction: column; line-height: 1; }
 
         .brand-name {
             font-family: var(--disp);
@@ -309,23 +281,26 @@ $navItems = [
             margin: 0;
             transition: letter-spacing .3s ease;
         }
-
         .brand:hover .brand-name { letter-spacing: 0; }
 
-        .brand-name .accent { color: var(--pink); position: relative; }
+        .brand-name .accent {
+            color: var(--pink);
+            position: relative;
+        }
 
         .brand-name .reg-mark {
             position: absolute;
-            top: -4px;
-            right: -12px;
+            top: -4px; right: -14px;
             font-size: 8px;
-            background: var(--deep);
-            color: var(--gold);
+            background: var(--gold);
+            color: var(--deep);
             padding: 2px 5px;
             border-radius: 9999px;
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-weight: 800;
             letter-spacing: 0;
+            border: 1px solid var(--deep);
+            line-height: 1.2;
         }
 
         .brand-tagline {
@@ -337,58 +312,44 @@ $navItems = [
             font-weight: 700;
             transition: color .3s ease;
         }
-
         .brand:hover .brand-tagline { color: var(--pink); }
 
-        /* fallback icon if the logo image is missing */
         .brand-icon {
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             border-radius: 14px;
-            background: var(--pink);
-            color: #fff;
+            background: linear-gradient(135deg, #FFD27F, var(--gold) 55%, #E89A1F);
+            color: var(--deep);
             display: grid;
             place-items: center;
             font-family: var(--disp);
             font-weight: 800;
             font-size: 1.6rem;
             border: 2px solid var(--deep);
-            box-shadow: 4px 4px 0 var(--gold);
+            box-shadow: 4px 4px 0 var(--pink);
             flex-shrink: 0;
         }
 
         /* ============================================================
-           NAVIGATION
+           NAVIGATION — clean pill hover + gold underline on active
            ============================================================ */
         .main-nav {
             display: flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
         }
 
         .nav-link {
             color: var(--head);
-            font-weight: 600;
+            font-weight: 700;
             font-size: 13.5px;
-            padding: 9px 15px;
+            padding: 9px 14px;
             border-radius: 10px;
             white-space: nowrap;
-            transition: color .2s ease, background .2s ease, translate .2s ease;
+            transition: color .2s ease, background .2s ease, translate .2s ease, box-shadow .2s ease;
             position: relative;
             display: inline-flex;
             align-items: center;
-            gap: 7px;
-        }
-
-        /* pink dot marker on each link */
-        .nav-link::before {
-            content: '';
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: rgba(196, 0, 122, .35);
-            flex-shrink: 0;
-            transition: background .2s ease, scale .2s ease;
+            border: 2px solid transparent;
         }
 
         .nav-link:hover {
@@ -396,21 +357,19 @@ $navItems = [
             background: var(--blush);
             translate: 0 -1px;
         }
-        .nav-link:hover::before { background: var(--pink); scale: 1.3; }
 
         .nav-link.active {
             color: var(--pink);
             background: var(--blush);
+            border-color: var(--deep);
+            box-shadow: 3px 3px 0 var(--gold);
         }
-        .nav-link.active::before { background: var(--pink); }
 
-        /* active underline peg */
+        /* gold dashed underline on active */
         .nav-link.active::after {
             content: '';
             position: absolute;
-            left: 15px;
-            right: 15px;
-            bottom: 4px;
+            left: 14px; right: 14px; bottom: 3px;
             height: 2px;
             background: repeating-linear-gradient(90deg, var(--pink) 0 4px, transparent 4px 8px);
             border-radius: 2px;
@@ -420,25 +379,22 @@ $navItems = [
            SERVICES MODAL
            ============================================================ */
         .services-modal .modal-content {
-            height: min(580px, calc(100vh - 40px));
+            height: min(600px, calc(100vh - 40px));
             overflow: hidden;
             border: 2px solid var(--deep);
             border-radius: 20px;
             background: #fff;
-            box-shadow: 10px 10px 0 var(--pink);
+            box-shadow: 10px 10px 0 var(--gold);
         }
-
         .services-modal .modal-dialog {
             width: calc(100% - 48px);
             max-width: 1320px;
         }
-
         .services-modal .modal-header {
             padding: 22px 28px 12px;
             border: 0;
             position: relative;
         }
-        /* awning on modal header */
         .services-modal .modal-header::after {
             content: '';
             position: absolute;
@@ -446,9 +402,8 @@ $navItems = [
             height: 4px;
             background: repeating-linear-gradient(90deg, var(--pink) 0 18px, var(--gold) 18px 36px);
             border-radius: 2px;
-            opacity: .85;
+            opacity: .9;
         }
-
         .services-modal-kicker {
             margin: 0 0 5px;
             color: var(--pink);
@@ -457,7 +412,6 @@ $navItems = [
             letter-spacing: .14em;
             text-transform: uppercase;
         }
-
         .services-modal-title {
             margin: 0;
             color: var(--head);
@@ -465,18 +419,15 @@ $navItems = [
             font-size: clamp(1.35rem, 3vw, 1.8rem);
             font-weight: 800;
         }
-
         .services-modal .modal-body {
             padding: 16px 28px 28px;
             overflow-y: auto;
         }
-
         .services-modal-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
         }
-
         .services-modal-link {
             display: flex;
             align-items: flex-start;
@@ -488,10 +439,9 @@ $navItems = [
             background: #fff;
             color: var(--head);
             text-decoration: none;
-            box-shadow: 4px 4px 0 var(--blush);
+            box-shadow: 4px 4px 0 var(--gold);
             transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
         }
-
         .services-modal-link:hover,
         .services-modal-link:focus-visible {
             translate: -2px -2px;
@@ -499,11 +449,9 @@ $navItems = [
             background: var(--blush);
             color: var(--head);
         }
-
         .services-modal-icon {
             display: grid;
-            width: 38px;
-            height: 38px;
+            width: 38px; height: 38px;
             flex: 0 0 38px;
             place-items: center;
             border-radius: 10px;
@@ -513,21 +461,21 @@ $navItems = [
             font-size: .92rem;
             font-weight: 800;
             border: 2px solid var(--deep);
+            box-shadow: 2px 2px 0 var(--gold);
         }
         .services-modal-link:nth-child(even) .services-modal-icon {
             background: var(--pink);
             color: #fff;
+            box-shadow: 2px 2px 0 var(--deep);
         }
-
         .services-modal-link-title {
             display: block;
             margin: 0 0 4px;
             font-family: var(--disp);
             font-size: .92rem;
-            font-weight: 700;
+            font-weight: 800;
             line-height: 1.35;
         }
-
         .services-modal-link-description {
             display: block;
             color: var(--muted);
@@ -540,7 +488,7 @@ $navItems = [
             .services-modal .modal-content {
                 height: auto;
                 max-height: calc(100vh - 24px);
-                box-shadow: 6px 6px 0 var(--pink);
+                box-shadow: 6px 6px 0 var(--gold);
             }
             .services-modal .modal-header { padding: 18px 20px 12px; }
             .services-modal .modal-body { padding: 12px 20px 20px; }
@@ -549,7 +497,7 @@ $navItems = [
         }
 
         /* ============================================================
-           CTA BUTTON
+           CTA BUTTON — 3D press, matches .port-cta-btn-1
            ============================================================ */
         .header-cta {
             display: inline-flex;
@@ -557,11 +505,11 @@ $navItems = [
             gap: 8px;
             border-radius: 11px;
             background: var(--pink);
-            padding: 12px 22px;
-            font-weight: 700;
+            padding: 12px 20px;
+            font-weight: 800;
             font-size: 13.5px;
             color: #fff;
-            box-shadow: 0 4px 0 var(--deep);
+            box-shadow: 0 5px 0 var(--deep);
             transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
             border: 2px solid var(--deep);
             position: relative;
@@ -570,15 +518,13 @@ $navItems = [
             cursor: pointer;
             text-decoration: none;
         }
-
         .header-cta .cta-overlay {
             position: absolute;
             inset: 0;
-            background: radial-gradient(150px circle at var(--bx, 50%) var(--by, 50%), #E0398F 0, var(--pink) 72%);
+            background: radial-gradient(150px circle at var(--bx, 50%) var(--by, 50%), var(--pink2) 0, var(--pink) 72%);
             opacity: 0;
             transition: opacity .3s ease;
         }
-
         .header-cta .cta-text {
             position: relative;
             z-index: 2;
@@ -586,67 +532,57 @@ $navItems = [
             align-items: center;
             gap: 8px;
         }
-
         .header-cta svg {
-            width: 14px;
-            height: 14px;
+            width: 14px; height: 14px;
             transition: transform .4s ease;
         }
-
         .header-cta:hover {
             translate: 0 2px;
-            box-shadow: 0 2px 0 var(--deep);
+            box-shadow: 0 3px 0 var(--deep);
         }
-
         .header-cta:hover .cta-overlay { opacity: 1; }
         .header-cta:hover svg { transform: rotate(90deg); }
 
         /* ============================================================
-           MOBILE MENU TOGGLE
+           MOBILE MENU TOGGLE — gold stall key
            ============================================================ */
         .menu-toggle {
             display: none;
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 11px;
-            background: var(--blush);
+            background: linear-gradient(135deg, #FFD27F, var(--gold) 55%, #E89A1F);
             border: 2px solid var(--deep);
-            color: var(--head);
+            color: var(--deep);
             cursor: pointer;
             align-items: center;
             justify-content: center;
             padding: 0;
-            transition: translate .2s ease, box-shadow .2s ease, background .2s ease;
+            transition: translate .2s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
             flex-shrink: 0;
             box-shadow: 3px 3px 0 var(--deep);
         }
-
         .menu-toggle:hover {
             background: var(--pink);
             color: #fff;
             translate: -1px -1px;
             box-shadow: 4px 4px 0 var(--deep);
         }
-
         .menu-toggle:active { translate: 2px 2px; box-shadow: 0 0 0 var(--deep); }
-
         .menu-toggle svg {
-            width: 20px;
-            height: 20px;
+            width: 20px; height: 20px;
             transition: transform .3s ease;
         }
-
         .menu-toggle.open svg { transform: rotate(90deg); }
 
         /* ============================================================
-           MOBILE MENU PANEL
+           MOBILE MENU PANEL — soft blush + scallop
            ============================================================ */
         .mobile-menu {
             display: none;
-            background: #fff;
+            background: var(--soft);
             border-top: 2px solid var(--deep);
             padding: 16px 0 24px;
-            box-shadow: 0 25px 50px -12px rgba(126, 0, 78, .22);
+            box-shadow: 0 25px 50px -12px rgba(126, 0, 78, .25);
             animation: slideDown .3s ease-out;
             max-height: calc(100vh - var(--header-h) - var(--topbar-h));
             overflow-y: auto;
@@ -659,8 +595,10 @@ $navItems = [
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
-            height: 4px;
-            background: repeating-linear-gradient(90deg, var(--pink) 0 18px, var(--gold) 18px 36px);
+            height: 10px;
+            background:
+                radial-gradient(circle at 10px 0, var(--pink) 9px, transparent 10px) 0 0/20px 10px repeat-x,
+                radial-gradient(circle at 10px 0, var(--gold) 9px, transparent 10px) 10px 0/20px 10px repeat-x;
             opacity: .9;
         }
 
@@ -672,10 +610,10 @@ $navItems = [
         }
 
         .mobile-menu-inner {
-            padding: 6px 20px 0;
+            padding: 14px 20px 0;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
 
         .mobile-menu .nav-link {
@@ -684,23 +622,20 @@ $navItems = [
             padding: 12px 16px;
             border-radius: 10px;
             font-size: .96rem;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--head);
             text-align: left;
             border: 2px solid transparent;
             background: transparent;
+            box-shadow: none;
         }
 
-        .mobile-menu .nav-link::before { background: rgba(196,0,122,.35); }
-
-        .mobile-menu .nav-link::after {
-            display: none;
-        }
+        .mobile-menu .nav-link::after { display: none; }
 
         .mobile-menu .nav-link:hover,
         .mobile-menu .nav-link.active {
             color: var(--pink);
-            background: var(--blush);
+            background: #fff;
             border-color: var(--deep);
             box-shadow: 3px 3px 0 var(--gold);
             translate: -1px -1px;
@@ -715,86 +650,81 @@ $navItems = [
             background: var(--pink);
             padding: 14px 20px;
             text-align: center;
-            font-weight: 700;
+            font-weight: 800;
             color: #fff;
             font-size: .95rem;
             box-shadow: 0 4px 0 var(--deep);
             border: 2px solid var(--deep);
             transition: translate .2s ease, box-shadow .2s ease;
         }
-
         .mobile-cta:hover {
             translate: 0 2px;
             box-shadow: 0 2px 0 var(--deep);
             color: #fff;
         }
 
-        /* mobile contact */
+        /* mobile contact — ticket-stub style */
         .mobile-contact {
             padding-top: 16px;
-            margin-top: 12px;
+            margin-top: 14px;
             border-top: 2px dashed var(--border-soft);
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
-
         .mobile-contact a {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 9px 10px;
-            border-radius: 8px;
+            padding: 10px 12px;
+            border-radius: 10px;
             font-size: .875rem;
             color: var(--head);
-            font-weight: 600;
-            transition: background .2s ease, color .2s ease;
+            font-weight: 700;
+            background: #fff;
+            border: 1.5px solid rgba(126,0,78,.12);
+            transition: background .2s ease, color .2s ease, border-color .2s ease, translate .2s ease;
         }
-
         .mobile-contact a:hover {
             background: var(--blush);
             color: var(--pink);
+            border-color: var(--deep);
+            translate: 2px 0;
         }
-
         .mobile-contact svg {
-            width: 16px;
-            height: 16px;
+            width: 16px; height: 16px;
             color: var(--pink);
             flex-shrink: 0;
         }
 
-        /* mobile proof chips */
+        /* mobile proof chips — gold stickers */
         .mobile-proof {
-            padding-top: 12px;
-            margin-top: 10px;
+            padding-top: 14px;
+            margin-top: 12px;
             border-top: 2px dashed var(--border-soft);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
             font-size: .74rem;
-            font-weight: 700;
-            color: var(--head);
+            font-weight: 800;
+            color: var(--deep);
             flex-wrap: wrap;
         }
-
         .mobile-proof .item {
             display: inline-flex;
             align-items: center;
             gap: 5px;
-            padding: 5px 10px;
+            padding: 5px 11px;
             border-radius: 99px;
-            background: var(--blush);
-            border: 1.5px solid var(--deep);
+            background: var(--gold);
+            border: 2px solid var(--deep);
+            box-shadow: 2px 2px 0 var(--deep);
         }
-
         .mobile-proof svg {
-            width: 12px;
-            height: 12px;
-            color: var(--pink);
+            width: 12px; height: 12px;
+            color: var(--deep);
         }
-
-        .mobile-proof .divider { display: none; }
 
         /* Container */
         .container {
@@ -804,6 +734,7 @@ $navItems = [
             margin: 0 auto;
             width: 100%;
         }
+        @media (min-width: 1440px) { .container { max-width: 1320px; } }
 
         /* ============================================================
            RESPONSIVE
@@ -821,12 +752,12 @@ $navItems = [
             :root { --header-h: 76px; }
             .top-bar { font-size: .74rem; }
             .top-bar::after { padding: 0 12px; font-size: 9.5px; }
-            .top-bar-inner { gap: 14px; padding-left: 110px; }
+            .top-bar-inner { gap: 14px; padding-left: 118px; }
             .brand-logo-wrap { width: 50px; height: 50px; }
             .brand-logo { width: 38px; height: 38px; }
             .brand-name { font-size: 1.2rem; }
             .brand-tagline { font-size: 9px; letter-spacing: .2em; }
-            .brand-name .reg-mark { font-size: 8px; top: -3px; right: -10px; padding: 1px 4px; }
+            .brand-name .reg-mark { font-size: 8px; top: -3px; right: -11px; padding: 1px 4px; }
         }
 
         @media (max-width: 767px) {
@@ -836,7 +767,7 @@ $navItems = [
             .site-header { top: 0; }
             .site-header::before { left: 16px; right: 16px; }
 
-            .brand-logo-wrap { width: 46px; height: 46px; border-radius: 12px; box-shadow: 3px 3px 0 var(--gold); }
+            .brand-logo-wrap { width: 46px; height: 46px; border-radius: 12px; box-shadow: 3px 3px 0 var(--pink); }
             .brand-logo { width: 34px; height: 34px; }
             .brand-name { font-size: 1.1rem; }
             .brand-tagline { font-size: 9.5px; letter-spacing: .15em; }
@@ -854,7 +785,7 @@ $navItems = [
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .brand, .nav-link, .header-cta, .menu-toggle, .mobile-menu .nav-link { transition: none; }
+            .brand, .nav-link, .header-cta, .menu-toggle, .mobile-menu .nav-link, .mobile-contact a { transition: none; }
             .mobile-menu { animation: none; }
         }
     </style>
@@ -863,7 +794,7 @@ $navItems = [
     <script defer src="/assets/js/webtecmart-motion.js"></script>
 </head>
 <body>
-    <!-- ===== TOP BAR (hidden on mobile) ===== -->
+    <!-- ===== TOP BAR ===== -->
     <div class="top-bar" id="topBar">
         <div class="container top-bar-inner">
             <a href="mailto:info@webtecmart.com" class="top-bar-item">
@@ -887,7 +818,6 @@ $navItems = [
     <header class="site-header" id="siteHeader">
         <div class="container nav-wrap">
 
-            <!-- LOGO -->
             <a href="/" class="brand" aria-label="WebTecMart Home">
                 <span class="brand-logo-wrap" id="brandLogoWrap">
                     <img
@@ -907,7 +837,6 @@ $navItems = [
                 </div>
             </a>
 
-            <!-- DESKTOP NAV -->
             <nav class="main-nav" aria-label="Main navigation">
                 <?php foreach ($navItems as $item): ?>
                     <a
@@ -920,7 +849,6 @@ $navItems = [
                 <?php endforeach; ?>
             </nav>
 
-            <!-- DESKTOP CTA -->
             <a href="/contact.php" class="header-cta">
                 <span class="cta-overlay"></span>
                 <span class="cta-text">
@@ -929,13 +857,11 @@ $navItems = [
                 </span>
             </a>
 
-            <!-- MOBILE TOGGLE -->
             <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu" aria-expanded="false">
                 <svg id="menuIcon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
         </div>
 
-        <!-- MOBILE MENU -->
         <div class="mobile-menu" id="mobileMenu">
             <div class="mobile-menu-inner">
                 <?php foreach ($navItems as $item): ?>
@@ -954,7 +880,6 @@ $navItems = [
                     </a>
                 </div>
 
-                <!-- Mobile contact info -->
                 <div class="mobile-contact">
                     <a href="mailto:info@webtecmart.com">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
@@ -970,7 +895,6 @@ $navItems = [
                     </a>
                 </div>
 
-                <!-- Social proof -->
                 <div class="mobile-proof">
                     <span class="item">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M12 2 9.5 8.5 3 9.2l4.9 4.2-1.4 6.6L12 16.7 17.5 20l-1.4-6.6L21 9.2l-6.5-.7z"/></svg>
@@ -989,6 +913,8 @@ $navItems = [
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
+                    <p class="services-modal-kicker mb-1">Expo Floor · Service Directory</p>
+                    <h2 class="services-modal-title" id="servicesModalTitle">Browse our service stalls</h2>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close services"></button>
                 </div>
                 <div class="modal-body">
@@ -1050,7 +976,6 @@ $navItems = [
                 siteHeader.classList.toggle('scrolled', window.scrollY > 20);
             }, { passive: true });
 
-            /* CTA pointer spotlight */
             if (headerCta) {
                 headerCta.addEventListener('pointermove', (e) => {
                     const r = headerCta.getBoundingClientRect();

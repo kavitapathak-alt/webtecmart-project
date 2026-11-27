@@ -137,7 +137,7 @@ function renderBlogContent(string $content, string $articleTitle = ''): void
         }
 
         // Section step headings: "1. Perform Keyword Research"
-        if (preg_match('/^(\d+)[.)]\s+([A-Z0-9].{3,85})$/', $trimmed, $numberedSection) && !str_ends_with($trimmed, '.')) {
+        if (preg_match('/^(\d+)[.)]\s+([A-Z0-9].{3,85})$/', $trimmed, $numberedSection) && substr($trimmed, -1) !== '.') {
             $flushParagraph();
             $flushList();
             $stepNum = $numberedSection[1];

@@ -4,3 +4,4 @@
 !/.env.example
 /storage/site.db
 /storage/mail.log
+/error_log.txt
