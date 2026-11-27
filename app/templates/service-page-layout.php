@@ -301,8 +301,8 @@ function renderServicePageLayout(array $config): void
         .xp-scallop::after { content:''; position:absolute; top:0; left:0; right:0; height:18px; pointer-events:none; background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x; }
 
         /* Brands (logo cards slider) */
-        .xp-brands { padding:52px 0 44px; background:var(--soft); background-image:radial-gradient(rgba(126,0,78,.07) 1px,transparent 1.2px); background-size:24px 24px; border-bottom:3px solid var(--deep); }
-        .xp-brands-label { text-align:center; margin-bottom:22px; font:700 .95rem var(--disp); color:var(--pink); }
+        .xp-brands { padding:60px 0 48px; background:var(--soft); background-image:radial-gradient(rgba(126,0,78,.07) 1px,transparent 1.2px); background-size:24px 24px; border-bottom:3px solid var(--deep); }
+        .xp-brands .xp-head { margin-bottom:26px; }
         .xp-lg { position:relative; }
         .xp-lg .swiper { overflow:hidden; padding:10px 12px 22px; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
         .xp-lg .swiper-slide { height:auto; }
@@ -539,7 +539,12 @@ function renderServicePageLayout(array $config): void
         <!-- 2. BRANDS (logo cards slider) -->
         <section class="xp-brands">
             <div class="xp-wrap">
-                <div class="xp-brands-label">Trusted by industry leaders, global trade expos and high-growth brands</div>
+                <div class="xp-head">
+                    <span class="xp-kicker">Global industry credibility</span>
+                    <h2>Top Event Brands Embracing <span class="xp-acc"><?= $e($title) ?></span></h2>
+                    <i class="xp-bar"></i>
+                    <p>Here are just a few of the organisers, global trade expos, and high-growth brands we've helped grow with our digital expertise.</p>
+                </div>
                 <div class="xp-lg">
                     <div class="swiper" id="mbBrandSwiper">
                         <div class="swiper-wrapper">
