@@ -256,6 +256,358 @@ function serviceDetailPages(): array
     }
 }
 
+function ensureServiceDetailExists(string $slug): ?array
+{
+    $cleanSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $slug), '-'));
+    if ($cleanSlug === '') return null;
+
+    try {
+        $stmt = db()->prepare('SELECT * FROM content_items WHERE content_type = "service_detail" AND (metadata LIKE :s1 OR metadata LIKE :s2 OR title LIKE :s3) LIMIT 1');
+        $stmt->execute([
+            ':s1' => '%"slug":"' . $cleanSlug . '"%',
+            ':s2' => '%"slug":"' . $slug . '"%',
+            ':s3' => '%' . $slug . '%',
+        ]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            $meta = json_decode($row['metadata'] ?: '', true);
+            if (is_array($meta)) {
+                if (isset($meta['metadata']) && is_array($meta['metadata'])) {
+                    $meta = array_merge($meta, $meta['metadata']);
+                }
+                $row = array_merge($row, $meta);
+            }
+            return $row;
+        }
+
+        // Define default blueprints for all services
+        $serviceCatalog = [
+            'seo-services-delhi' => [
+                'title' => 'SEO Services in Delhi',
+                'category' => 'SEO',
+                'slug' => 'seo-services-delhi',
+                'icon' => 'search',
+                'tagline' => 'Result-Driven SEO to Grow Your Business',
+                'hero_title' => 'SEO Services in Delhi',
+                'hero_accent' => 'Result-Driven SEO to Grow Your Business',
+                'hero_description' => 'Boost your website’s search visibility, improve Google rankings, and attract relevant visitors with our Organic SEO services. Our SEO strategies focus on increasing organic traffic, improving keyword rankings, and strengthening your online presence for sustainable growth.',
+                'summary' => 'Boost your website’s search visibility, improve Google rankings, and attract relevant visitors with our Organic SEO services.',
+                'body' => "The digital market is extremely competitive in Delhi. There are customers who are always looking in Google for businesses, products and services — and businesses that show up at the right time have a higher chance of capturing that customer.\n\nWebTecMart offers SEO services in Delhi, which goes beyond rankings. We use technical SEO, keyword research, content optimisation, local SEO and authority building to create a search strategy that's in line with your business goals.",
+                'founder_name' => 'Jitin Madaan',
+                'founder_role' => 'Performance Marketing Strategist',
+                'founder_image' => '/assets/images/jitin-madaan.png',
+                'is_delhi_seo' => 1,
+                'hero_bullets' => [
+                    'Enhance Google Rankings for relevant, high-value keywords',
+                    'Bring in Targeted Organic Traffic from ready-to-buy customers',
+                    'Increase website leads and enquiries with search optimisation',
+                    'Create Long-Term Visibility by following a sustainable organic strategy'
+                ],
+                'offers' => [
+                    ['icon' => 'code', 'title' => 'Technical SEO', 'desc' => 'We enhance the performance of your site by addressing crawling, indexing, Core Web Vitals, server response times, and architecture to ensure search bots navigate effortlessly.', 'link' => '/technical-seo.php', 'link_text' => 'Explore Technical SEO →'],
+                    ['icon' => 'layout', 'title' => 'On-Page Optimization', 'desc' => 'Content without optimization cannot perform. We optimize title tags, meta descriptions, header structures (H1-H6), internal linking, and semantic keyword relevance.', 'link' => '/on-page-seo.php', 'link_text' => 'Explore On-Page SEO →'],
+                    ['icon' => 'search', 'title' => 'Keyword Research & Strategy', 'desc' => 'Searching for the appropriate keywords will guide users straight to your site. We dissect intent, competition, and search volume to capture high-value buyer searches.', 'link' => '/keyword-research.php', 'link_text' => 'Explore Keyword Research →'],
+                    ['icon' => 'map-pin', 'title' => 'Local SEO & Google 3-Pack', 'desc' => 'Dominate Google Maps across Delhi, Noida, Gurgaon, and NCR. Optimize your Google Business Profile, citations, reviews, and proximity signals to drive nearby calls.', 'link' => '/local-seo.php', 'link_text' => 'Explore Local SEO →'],
+                    ['icon' => 'link', 'title' => 'High-Authority Link Building', 'desc' => 'Earn high-authority editorial backlinks and digital PR citations from verified Indian media and industry portals that supercharge domain trust.', 'link' => '/off-page-seo.php', 'link_text' => 'Explore Off-Page SEO →'],
+                    ['icon' => 'sparkles', 'title' => 'AI-Ready SEO (AEO & GEO)', 'desc' => 'Position your brand prominently within Google AI Overviews, Perplexity, Gemini, and ChatGPT search recommendations through structured entity data.', 'link' => '/ai-seo-strategy.php', 'link_text' => 'Explore AI-Ready SEO →']
+                ],
+                'why_cards' => [
+                    ['icon' => '🎯', 'title' => 'Business-First Keyword Targeting', 'desc' => 'We target high-intent transactional and commercial search queries that attract real decision-makers.'],
+                    ['icon' => '⚙️', 'title' => 'Technical SEO Foundations', 'desc' => 'Clean code, Core Web Vitals optimization, mobile responsiveness, and structured schema data.'],
+                    ['icon' => '📍', 'title' => 'Delhi NCR Local Domination', 'desc' => 'Local 3-Pack rankings, verified Google Business Profile signals, and location landing pages.'],
+                    ['icon' => '📈', 'title' => 'Transparent ROI & Analytics', 'desc' => 'Real-time GA4 tracking, keyword telemetry, lead tracking, and monthly executive performance reviews.'],
+                    ['icon' => '⚡', 'title' => 'AI Search Optimization', 'desc' => 'Optimized for Google AI Overviews, Gemini, ChatGPT search, and semantic knowledge graphs.'],
+                    ['icon' => '🏆', 'title' => '13+ Years of Proven Experience', 'desc' => 'Battle-tested digital expertise across search engines, content marketing, websites, and growth strategy.']
+                ],
+                'challenges' => [
+                    'eyebrow' => 'SEO CHALLENGES',
+                    'title' => 'What is Holding Your Site Back in Google Search?',
+                    'lead' => 'There are several common SEO challenges that businesses in Delhi encounter. Delhi is among the most competitive business hubs in India. Whether it is a local service provider, a start-up, or a reputable brand, businesses are vying for the same search audience.',
+                    'items' => [
+                        ['icon' => '⚔️', 'title' => 'Intense Local Competition', 'desc' => 'Firms fight it out for exposure in Google Search and Google Maps in Delhi. A basic SEO campaign is not sufficient to beat competitors.'],
+                        ['icon' => '📉', 'title' => 'Low or Irrelevant Organic Traffic', 'desc' => 'Getting visitors does not equal getting prospective customers. When you get visitors that do not buy, you get zero enquiries.'],
+                        ['icon' => '🎯', 'title' => 'Poor Keyword Targeting', 'desc' => 'Competing for vanity keywords that do not have buyer intent wastes valuable time and resources.'],
+                        ['icon' => '📍', 'title' => 'Weak Local Search Visibility', 'desc' => 'Local visibility is vital if customers look for services nearby. We optimize your Google Business Profile and local citations.'],
+                        ['icon' => '⚙️', 'title' => 'Technical SEO Problems', 'desc' => 'Slow pages, broken links, indexing problems, duplicate content, and weak internal linking impact search crawlers.'],
+                        ['icon' => '💸', 'title' => 'Overdependence on Paid Advertising', 'desc' => 'Paid ads provide instant exposure, but stop the second ad spend pauses. SEO creates an organic stream that continues delivering.']
+                    ]
+                ],
+                'founder_section' => [
+                    'eyebrow' => 'MEET THE EXPERTS',
+                    'title' => 'The People Behind Your SEO Growth',
+                    'lead' => 'Strategy, SEO, Content and Technical Expertise — Working Together. We deliver sustainable search growth by leveraging SEO strategy, technical optimisation, content expertise and digital experience.',
+                    'name' => 'Jitin Madaan',
+                    'role' => 'Performance Marketing Strategist',
+                    'stats' => [
+                        ['val' => '13+ Years', 'label' => 'Industry Experience'],
+                        ['val' => '1000+', 'label' => 'Projects & Businesses Served'],
+                        ['val' => '95%', 'label' => 'Client Retention Rate']
+                    ],
+                    'pillars' => [
+                        ['icon' => '⚙️', 'title' => 'SEO Strategy & Technical Expertise', 'desc' => 'Keyword strategy, technical audits, competitor analysis, website structure and performance optimization.'],
+                        ['icon' => '📝', 'title' => 'Content & Search Optimisation', 'desc' => 'Useful, search-optimized content aligned to user intent, keyword opportunities and your brand expertise.'],
+                        ['icon' => '🚀', 'title' => 'Digital Growth Support', 'desc' => 'Interconnected growth across SEO, content, website development and performance marketing.']
+                    ]
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Research & Discovery', 'description' => 'Keyword analysis, competitor research, search intent and an in-depth website review.'],
+                    ['step' => '02', 'title' => 'Technical Audit & Foundation', 'description' => 'Solid technical restructuring to ensure your site is properly crawled, indexed and ranked by Google.'],
+                    ['step' => '03', 'title' => 'Keyword Strategy & Search Intent', 'description' => 'Finding keywords that have the right balance of search volume, competition and commercial buyer intent.'],
+                    ['step' => '04', 'title' => 'On-Page & Content Optimisation', 'description' => 'Optimizing headers, metadata, internal links, and creating high-value topical content clusters.'],
+                    ['step' => '05', 'title' => 'Authority Building & Off-Page Signals', 'description' => 'Quality external backlinks, local citations and high-authority PR placements to boost domain credibility.'],
+                    ['step' => '06', 'title' => 'Measurement, Refinement & Growth', 'description' => 'Continuous tracking of keyword rankings, organic traffic, leads and conversions in GA4 and Search Console.']
+                ],
+                'faqs' => [
+                    ['q' => 'What are SEO services and why does my business need them?', 'a' => "SEO Services increase your site's presence in search engines and make it easier for anyone searching for your goods or services to find your site."],
+                    ['q' => 'How long does SEO take to show results?', 'a' => "SEO is a long-term approach; on-page and technical updates can reflect in 30-60 days, while competitive rankings build sustainably over 3-6 months."],
+                    ['q' => 'How can Local SEO help my Delhi business?', 'a' => "Local SEO puts your business in Google Maps 3-Pack and localized search results when customers in Delhi NCR search for your services."],
+                    ['q' => 'What does an SEO agency in Delhi actually do?', 'a' => "We handle keyword research, technical SEO, on-page optimization, content marketing, local citations, backlink authority, and monthly reporting."],
+                    ['q' => 'Is it possible to create leads with SEO and not just traffic?', 'a' => "Yes. The goal of commercial SEO is targeting high-intent buyer keywords and conversion-optimized landing pages to generate inquiries and sales."],
+                    ['q' => 'Which is better, SEO or Google Ads?', 'a' => "Google Ads provides immediate paid traffic, while SEO creates compounding, permanent organic authority without paying per click."],
+                    ['q' => 'How to select the ideal SEO firm in Delhi?', 'a' => "Choose an agency with verified case studies, transparent reporting, white-hat practices, and clear business growth metrics like WebTecMart."],
+                    ['q' => 'Which businesses can benefit from SEO services?', 'a' => "B2B brands, e-commerce stores, local clinics, lawyers, real estate, manufacturing, educational institutes, and startups."],
+                    ['q' => 'Does WebTecMart provide Local, National and International SEO?', 'a' => "Yes, we tailor search campaigns for local Delhi NCR micro-markets, pan-India commercial reach, and multi-lingual international markets."],
+                    ['q' => 'What is the price of SEO services in Delhi?', 'a' => "Pricing depends on your industry competition and scope. We offer transparent monthly packages tailored to your growth goals."]
+                ]
+            ],
+            'website-design-development' => [
+                'title' => 'Website Design & Development',
+                'category' => 'Web Development',
+                'slug' => 'website-design-development',
+                'icon' => 'layout',
+                'tagline' => 'Websites That Convert',
+                'hero_title' => 'Website Design & Development',
+                'hero_description' => 'High-performance, conversion-focused websites designed to strengthen your online presence, engage your audience, and turn visitors into customers with WebTecMart.',
+                'summary' => 'High-performance, conversion-focused websites designed to strengthen your online presence.',
+                'body' => "Your website is the foundation of your digital presence — and we help make it work harder for your business. At WebTecMart, we design and develop responsive, user-friendly, SEO-ready websites that are built to attract visitors, build trust, and generate results. With 13+ years of experience and 1000+ websites delivered, our team combines creative design, performance-focused development, and digital marketing expertise.",
+                'features' => [
+                    ['title' => 'Custom Design', 'description' => 'No generic templates — designed around your brand, your audience, and your business goals.'],
+                    ['title' => 'Responsive Development', 'description' => 'Fast, responsive layouts that deliver seamless experiences across mobile, tablet, and desktop.'],
+                    ['title' => 'E-Commerce Solutions', 'description' => 'Online stores with secure payment integration, product management, and smooth checkouts.'],
+                    ['title' => 'CMS Integration', 'description' => 'Intuitive CMS solutions letting your team update pages, text, and images without a developer.'],
+                    ['title' => 'SEO-Friendly Architecture', 'description' => 'Built with clean semantic HTML, schema data, fast loading speeds, and indexable hierarchy.'],
+                    ['title' => 'Performance & Security', 'description' => 'Optimized for sub-1.5s loading, SSL encryption, and high Google Core Web Vitals scores.']
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Discovery', 'description' => 'Understanding your business, target audience, competitors, and goals.'],
+                    ['step' => '02', 'title' => 'Strategy & Wireframe', 'description' => 'Planning website structure, user journey, content hierarchy, and conversion points.'],
+                    ['step' => '03', 'title' => 'UI/UX Design', 'description' => 'Modern, engaging visual interface reflecting your brand identity.'],
+                    ['step' => '04', 'title' => 'Development', 'description' => 'Coding clean, fast, secure, and SEO-friendly pages.'],
+                    ['step' => '05', 'title' => 'Testing & Launch', 'description' => 'Rigorous cross-browser testing, mobile verification, and smooth deployment.']
+                ],
+                'faqs' => [
+                    ['q' => 'How long does a website take to build?', 'a' => 'Most business websites take 4–8 weeks; larger e-commerce stores take 8–14 weeks.'],
+                    ['q' => 'Will my website be mobile-friendly?', 'a' => 'Yes, every website is fully mobile-responsive and tested across modern screen sizes.'],
+                    ['q' => 'Can I update content myself?', 'a' => 'Yes, we provide an easy admin panel to update text, images, and pages anytime.'],
+                    ['q' => 'Is SEO included in website development?', 'a' => 'Yes, SEO fundamentals like clean code, meta tags, schema, and fast speeds are built in.']
+                ]
+            ],
+            'digital-business-branding' => [
+                'title' => 'Digital Business Branding',
+                'category' => 'Branding',
+                'slug' => 'digital-business-branding',
+                'icon' => 'paintbrush',
+                'tagline' => 'Branding That Leaves a Lasting Impression',
+                'hero_title' => 'Digital Business Branding',
+                'hero_description' => 'Build an authoritative, memorable brand identity that stands out in competitive digital markets and commands buyer trust with WebTecMart.',
+                'summary' => 'Build an authoritative, memorable brand identity that commands buyer trust.',
+                'body' => 'Branding is the foundation of digital business success. We craft comprehensive brand positioning, visual identities, logo suites, typography systems, and brand guidelines that resonate with your customers and set you apart from competitors.',
+                'features' => [
+                    ['title' => 'Brand Strategy & Positioning', 'description' => 'Define your brand archetype, core value proposition, tone of voice, and competitive edge.'],
+                    ['title' => 'Visual Identity & Logo Design', 'description' => 'Iconic logos, brand typography, color palettes, and stationery designed for modern screens.'],
+                    ['title' => 'Brand Style Guidelines', 'description' => 'Comprehensive brand manuals defining rules for digital, print, and social media consistency.'],
+                    ['title' => 'Marketing Collateral', 'description' => 'Brochures, pitch decks, business cards, letterheads, and social media kit assets.'],
+                    ['title' => 'Digital Brand Experience', 'description' => 'Cohesive brand storytelling across websites, landing pages, email templates, and ads.'],
+                    ['title' => 'Reputation & Entity Branding', 'description' => 'Building online brand trust and Google Knowledge Panel entity credibility.']
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Brand Discovery', 'description' => 'Exploring your vision, company history, competitors, and target demographics.'],
+                    ['step' => '02', 'title' => 'Concept & Strategy', 'description' => 'Developing brand moodboards, positioning angles, and creative directions.'],
+                    ['step' => '03', 'title' => 'Design & Iteration', 'description' => 'Crafting logos, visual assets, and typography systems with collaborative feedback.'],
+                    ['step' => '04', 'title' => 'Guidelines & Delivery', 'description' => 'Final vector assets, brand manual, and digital rollout toolkit.']
+                ],
+                'faqs' => [
+                    ['q' => 'What is included in a branding package?', 'a' => 'Logo suite, brand guidelines, color system, typography, business stationery, and social media kit.'],
+                    ['q' => 'How long does a branding project take?', 'a' => 'Typically 2 to 4 weeks for complete brand identity and guidelines.'],
+                    ['q' => 'Do I get full copyright ownership of my brand assets?', 'a' => 'Yes, you receive 100% intellectual property ownership and source vector files.']
+                ]
+            ],
+            'search-engine-marketing' => [
+                'title' => 'Search Engine Marketing (Google Ads)',
+                'category' => 'Paid Advertising',
+                'slug' => 'search-engine-marketing',
+                'icon' => 'megaphone',
+                'tagline' => 'High-ROAS Paid Search Campaigns',
+                'hero_title' => 'Search Engine Marketing (PPC)',
+                'hero_description' => 'Maximize your return on ad spend with precision-targeted Google Search, Display, Shopping, and Remarketing campaigns managed by certified PPC specialists.',
+                'summary' => 'Maximize return on ad spend with precision-targeted Google Ads campaigns.',
+                'body' => 'Pay-Per-Click advertising delivers immediate commercial visibility. At WebTecMart, we engineer high-converting PPC campaigns that eliminate wasted ad spend and drive qualified inquiries.',
+                'features' => [
+                    ['title' => 'Google Search Ads', 'description' => 'Capture high-intent buyers the exact moment they search for your products or services.'],
+                    ['title' => 'Display & Remarketing', 'description' => 'Re-engage past website visitors across Google Display Network to boost conversion rates.'],
+                    ['title' => 'Google Shopping Campaigns', 'description' => 'Drive e-commerce product sales with optimized Performance Max and Merchant Center feeds.'],
+                    ['title' => 'Landing Page Optimization', 'description' => 'High-converting landing pages built for quality scores, fast load, and maximum lead capture.'],
+                    ['title' => 'Negative Keyword Pruning', 'description' => 'Relentless negative keyword management to eliminate junk clicks and stretch budget further.'],
+                    ['title' => 'Conversion Tracking & GA4', 'description' => 'Accurate revenue attribution, offline conversion tracking, and transparent ROAS reporting.']
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Audit & Account Setup', 'description' => 'Analyzing past account history, competitor bids, and commercial search queries.'],
+                    ['step' => '02', 'title' => 'Campaign Architecture', 'description' => 'Structuring ad groups, keyword match types, ad copy variants, and ad extensions.'],
+                    ['step' => '03', 'title' => 'Tracking & Launch', 'description' => 'Setting up Google Tag Manager, enhanced conversions, and launching campaigns.'],
+                    ['step' => '04', 'title' => 'Weekly ROAS Optimization', 'description' => 'Bid adjustments, query pruning, ad testing, and budget reallocation for top performance.']
+                ],
+                'faqs' => [
+                    ['q' => 'How much budget do I need for Google Ads?', 'a' => 'Budgets vary by industry competition; we recommend starting with ₹20,000 to ₹50,000/month in ad spend.'],
+                    ['q' => 'How quickly will I see leads from PPC?', 'a' => 'Campaigns can generate qualified leads within 24 to 48 hours of going live.'],
+                    ['q' => 'Do you take a percentage of ad spend or a flat fee?', 'a' => 'We offer transparent, milestone-based management packages with zero hidden fees.']
+                ]
+            ],
+            'social-media-optimization' => [
+                'title' => 'Social Media Optimization & Marketing',
+                'category' => 'Social Media',
+                'slug' => 'social-media-optimization',
+                'icon' => 'share',
+                'tagline' => 'Engage, Grow & Convert Across Social',
+                'hero_title' => 'Social Media Optimization',
+                'hero_description' => 'Build a loyal, engaged community and turn followers into paying customers with creative social media management, reel production, and paid social campaigns.',
+                'summary' => 'Build an engaged community and turn followers into customers with creative social media.',
+                'body' => 'In today’s connected marketplace, social media is your digital storefront. We design thumb-stopping graphics, viral short-form video reels, and data-backed content calendars that amplify your brand reach across Instagram, LinkedIn, Facebook, and YouTube.',
+                'features' => [
+                    ['title' => 'Monthly Content Calendar', 'description' => 'Planned strategic content themes, carousel infographics, educational posts, and promotional graphics.'],
+                    ['title' => 'Reels & Short-Form Video', 'description' => 'Engaging video scripts, editing, captions, and trending audio tailored for Instagram Reels and YouTube Shorts.'],
+                    ['title' => 'LinkedIn B2B Thought Leadership', 'description' => 'Executive personal branding and company page growth to attract corporate decision-makers.'],
+                    ['title' => 'Community Management', 'description' => 'Daily comment moderation, DM responses, follower engagement, and hashtag strategy.'],
+                    ['title' => 'Paid Social Advertising', 'description' => 'Targeted Meta (Facebook & Instagram) ad funnels for lead generation, retargeting, and sales.'],
+                    ['title' => 'Analytics & Growth Reports', 'description' => 'Monthly tracking of follower growth, reach, engagement rate, website clicks, and conversions.']
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Social Audit', 'description' => 'Reviewing existing profiles, audience demographics, and competitor benchmarks.'],
+                    ['step' => '02', 'title' => 'Strategy & Moodboard', 'description' => 'Establishing visual aesthetic, content pillars, voice tone, and posting schedules.'],
+                    ['step' => '03', 'title' => 'Creation & Approval', 'description' => 'Designing graphics and editing reels in advance for client review and sign-off.'],
+                    ['step' => '04', 'title' => 'Publishing & Engagement', 'description' => 'Scheduled posting, active community engagement, and performance analysis.']
+                ],
+                'faqs' => [
+                    ['q' => 'How many posts will be published each week?', 'a' => 'Our standard packages include 3 to 5 high-quality posts and reels per week.'],
+                    ['q' => 'Do you create the graphics and write the copy?', 'a' => 'Yes, our in-house team handles complete graphic design, copywriting, hashtags, and video editing.'],
+                    ['q' => 'Which platforms do you manage?', 'a' => 'Instagram, LinkedIn, Facebook, YouTube, and X (Twitter).']
+                ]
+            ],
+            'mobile-app-development' => [
+                'title' => 'Mobile App Development',
+                'category' => 'App Development',
+                'slug' => 'mobile-app-development',
+                'icon' => 'smartphone',
+                'tagline' => 'Seamless Mobile Experiences for iOS & Android',
+                'hero_title' => 'Mobile App Development',
+                'hero_description' => 'Turn your app vision into reality with native and cross-platform mobile apps for iOS and Android, engineered for performance, security, and user retention.',
+                'summary' => 'Native and cross-platform mobile apps for iOS and Android engineered for high retention.',
+                'body' => 'With mobile representing over 70% of digital traffic, a dedicated mobile application gives your business a direct, high-engagement channel to your customers. WebTecMart builds intuitive, secure mobile apps using Flutter, React Native, iOS Swift, and Android Kotlin.',
+                'features' => [
+                    ['title' => 'Cross-Platform Apps', 'description' => 'Single codebase Flutter and React Native apps delivering 100% native performance on iOS & Android.'],
+                    ['title' => 'Native iOS & Android', 'description' => 'Platform-specific Swift and Kotlin development for complex hardware and performance needs.'],
+                    ['title' => 'UI/UX Mobile Design', 'description' => 'Figma interactive prototypes, user journey mapping, and intuitive mobile gesture navigation.'],
+                    ['title' => 'Backend API Architecture', 'description' => 'Scalable REST/GraphQL APIs, cloud databases, user authentication, and third-party integrations.'],
+                    ['title' => 'Push Notifications & Engagement', 'description' => 'Targeted push messaging, in-app messaging, and analytics to maximize retention and lifetime value.'],
+                    ['title' => 'App Store Optimization (ASO)', 'description' => 'Optimizing app titles, descriptions, screenshots, and keywords to rank in Google Play and App Store.']
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'App Discovery', 'description' => 'Defining app architecture, features, user personas, and technical specifications.'],
+                    ['step' => '02', 'title' => 'UI/UX Prototyping', 'description' => 'Creating clickable wireframes and high-fidelity screen designs in Figma.'],
+                    ['step' => '03', 'title' => 'Agile Development', 'description' => 'Sprint-based frontend and backend development with bi-weekly progress demos.'],
+                    ['step' => '04', 'title' => 'QA & Store Launch', 'description' => 'Device testing, bug fixing, and managing complete Google Play & Apple App Store publishing.']
+                ],
+                'faqs' => [
+                    ['q' => 'Which is better: Flutter/React Native or Native iOS/Android?', 'a' => 'Cross-platform (Flutter/React Native) cuts cost and time by 40% while delivering near-native performance for 90% of business apps.'],
+                    ['q' => 'Do you help with publishing to the App Store and Google Play?', 'a' => 'Yes, we handle the entire submission, review compliance, and approval process on both stores.'],
+                    ['q' => 'Will I receive full source code?', 'a' => 'Yes, upon project completion you receive 100% ownership of the repository and intellectual property.']
+                ]
+            ],
+            'b2b-exhibition-seo' => [
+                'title' => 'B2B & Exhibition SEO Services',
+                'category' => 'SEO',
+                'slug' => 'b2b-exhibition-seo',
+                'icon' => 'sparkles',
+                'tagline' => 'Event SEO That Fills Trade Halls',
+                'hero_title' => 'B2B & Exhibition SEO Services',
+                'hero_description' => 'We uncover hidden search opportunities and build a customized, deadline-driven Event SEO strategy that drives pre-registered trade buyers, sells out exhibitor stalls, and delivers measurable results.',
+                'summary' => 'Deadline-driven Event SEO strategy that drives pre-registered trade buyers and sells out exhibitor stalls.',
+                'body' => 'High-performance websites for B2B trade fairs and exhibitions, combining event website development with strategic SEO to drive organic growth and registrations.',
+                'features' => [
+                    ['title' => 'Event Intent Keyword Strategy', 'description' => 'Capturing buyer registrations and exhibitor inquiries around trade show dates and product categories.'],
+                    ['title' => 'Fast Event Landing Pages', 'description' => 'High-converting mobile registration pages built for speed and deadline-driven attendance.'],
+                    ['title' => 'Exhibitor SEO Directory', 'description' => 'Indexable exhibitor portals that earn topical authority and long-tail product queries.'],
+                    ['title' => 'Speaker & Agenda Schema', 'description' => 'Structured Event schema markup to win rich Google search result snippets.'],
+                    ['title' => 'International Trade PR & Backlinks', 'description' => 'Editorial mentions on global trade portals that build immense domain authority.'],
+                    ['title' => 'Registration Funnel GA4 Tracking', 'description' => 'Real-time tracking of buyer delegate registrations and commercial exhibition inquiries.']
+                ],
+                'process' => [
+                    ['step' => '01', 'title' => 'Event Search Audit', 'description' => 'Analyzing past edition search footprint, competitors, and sourcing demand.'],
+                    ['step' => '02', 'title' => 'Technical & Schema Architecture', 'description' => 'Restructuring event URLs, Event schema, and exhibitor listings.'],
+                    ['step' => '03', 'title' => 'Topical Content Sprint', 'description' => 'Publishing targeted buyer guides, exhibitor highlights, and attendee information.'],
+                    ['step' => '04', 'title' => 'Sprint to Show Dates', 'description' => 'Aggressive optimization during peak registration windows to fill the hall.']
+                ],
+                'faqs' => [
+                    ['q' => 'When should event SEO begin before a trade show?', 'a' => 'Ideally 6 to 9 months before opening date to establish top Google rankings during registration peaks.'],
+                    ['q' => 'Can SEO help sell exhibitor booths?', 'a' => 'Yes, targeting commercial exhibitor keywords like "exhibit at textile fair" drives inbound stall inquiries.'],
+                    ['q' => 'Do you optimize past edition websites?', 'a' => 'Yes, we preserve historical domain authority while redirecting and rebranding for the upcoming edition.']
+                ]
+            ]
+        ];
+
+        $data = $serviceCatalog[$cleanSlug] ?? [
+            'title' => ucwords(str_replace('-', ' ', $cleanSlug)),
+            'category' => 'Digital Marketing',
+            'slug' => $cleanSlug,
+            'icon' => 'sparkles',
+            'tagline' => 'Specialized Digital Growth Solutions',
+            'hero_title' => ucwords(str_replace('-', ' ', $cleanSlug)),
+            'hero_description' => 'Professional digital marketing, design, and search engine optimization services engineered to drive measurable growth for your business.',
+            'summary' => 'Professional digital solutions engineered to drive measurable business growth.',
+            'body' => 'WebTecMart delivers data-driven digital marketing solutions designed around your commercial objectives.',
+            'features' => [
+                ['title' => 'Strategic Planning', 'description' => 'Comprehensive market research and customized execution roadmap.'],
+                ['title' => 'Execution Excellence', 'description' => 'Delivered by senior in-house developers, designers, and growth strategists.'],
+                ['title' => 'Measurable ROI', 'description' => 'Transparent analytics tracking and continuous optimization.']
+            ],
+            'process' => [
+                ['step' => '01', 'title' => 'Discovery', 'description' => 'Understanding business objectives and target audience.'],
+                ['step' => '02', 'title' => 'Strategy', 'description' => 'Crafting an actionable roadmap.'],
+                ['step' => '03', 'title' => 'Execution', 'description' => 'Implementation with precision and quality.'],
+                ['step' => '04', 'title' => 'Optimization', 'description' => 'Continuous refinement based on performance data.']
+            ],
+            'faqs' => [
+                ['q' => 'How do we get started?', 'a' => 'Contact our team for a free strategy consultation and custom proposal.'],
+                ['q' => 'What is the turnaround time?', 'a' => 'Timelines depend on project scope; standard delivery is 2 to 6 weeks.']
+            ]
+        ];
+
+        $nextOrder = (int) db()->query("SELECT COALESCE(MAX(sort_order), -1) + 1 FROM content_items WHERE content_type = 'service_detail'")->fetchColumn();
+        $payloadJson = json_encode($data, JSON_UNESCAPED_UNICODE);
+        
+        $insert = db()->prepare('INSERT INTO content_items (content_type, title, summary, body, metadata, sort_order, is_active) VALUES ("service_detail", :title, :summary, :body, :metadata, :sort_order, 1)');
+        $insert->execute([
+            ':title' => $data['title'],
+            ':summary' => $data['summary'],
+            ':body' => $data['body'],
+            ':metadata' => $payloadJson,
+            ':sort_order' => $nextOrder
+        ]);
+        $newId = (int) db()->lastInsertId();
+
+        $stmt = db()->prepare('SELECT * FROM content_items WHERE id = :id LIMIT 1');
+        $stmt->execute([':id' => $newId]);
+        $newRow = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($newRow) {
+            $newRow = array_merge($newRow, $data);
+            return $newRow;
+        }
+    } catch (\Throwable $e) {
+        error_log('ensureServiceDetailExists error: ' . $e->getMessage());
+    }
+
+    return null;
+}
+
 function getServiceBySlug(string $slug): ?array
 {
     $cleanSlug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $slug), '-'));
@@ -285,7 +637,9 @@ function getServiceBySlug(string $slug): ?array
             return $row;
         }
     } catch (\Throwable $e) {}
-    return null;
+
+    // Auto-seed and return if not found
+    return ensureServiceDetailExists($slug);
 }
 
 function pricingPlans(): array

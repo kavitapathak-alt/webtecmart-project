@@ -497,7 +497,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['admin_flash_success'] = 'New service "' . htmlspecialchars($title) . '" published successfully!';
         }
 
-        redirect('/admin/services.php');
+        redirect('/admin/services.php?slug=' . urlencode($slug));
     }
 }
 
@@ -526,14 +526,48 @@ unset($svc);
 // Collect distinct categories
 $categories = ['All', 'SEO', 'Web Development', 'Paid Advertising', 'Social Media', 'Branding', 'Digital Strategy'];
 
-// Check if currently editing a specific service
-$editingId = isset($_GET['edit']) ? (int) $_GET['edit'] : null;
+// Check if currently editing a specific service (by ID or Slug)
+$editingSlug = trim($_GET['slug'] ?? '');
+if (!$editingSlug && isset($_GET['edit']) && !is_numeric($_GET['edit'])) {
+    $editingSlug = trim((string) $_GET['edit']);
+}
+$editingId = isset($_GET['edit']) && is_numeric($_GET['edit']) ? (int) $_GET['edit'] : null;
 $editingService = null;
+
 if ($editingId) {
     foreach ($servicesList as $s) {
-        if ((int) $s['id'] === $editingId) {
+        if ((int) ($s['id'] ?? 0) === $editingId) {
             $editingService = $s;
             break;
+        }
+    }
+}
+
+if (!$editingService && $editingSlug !== '') {
+    foreach ($servicesList as $s) {
+        $candidateSlug = strtolower(trim((string) ($s['slug'] ?? '')));
+        if ($candidateSlug === strtolower($editingSlug) || (isset($s['id']) && (string) $s['id'] === $editingSlug)) {
+            $editingService = $s;
+            $editingId = (int) ($s['id'] ?? 0);
+            break;
+        }
+    }
+    if (!$editingService && function_exists('ensureServiceDetailExists')) {
+        $editingService = ensureServiceDetailExists($editingSlug);
+        if ($editingService) {
+            $editingId = (int) ($editingService['id'] ?? 0);
+            // Refresh servicesList to include newly seeded service
+            $servicesList = db()->query("SELECT * FROM content_items WHERE content_type = 'service_detail' ORDER BY sort_order ASC, id ASC")->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($servicesList as &$svc) {
+                $meta = json_decode($svc['metadata'] ?: '', true);
+                if (is_array($meta)) {
+                    if (isset($meta['metadata']) && is_array($meta['metadata'])) {
+                        $meta = array_merge($meta, $meta['metadata']);
+                    }
+                    $svc = array_merge($svc, $meta);
+                }
+            }
+            unset($svc);
         }
     }
 }

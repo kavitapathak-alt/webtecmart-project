@@ -130,17 +130,16 @@ $categories = array_merge(
         position: relative;
         z-index: 5;
     }
-    .port-h1 .accent { 
-        position: relative;
-        display: inline-block;
-        background:linear-gradient(90deg,var(--gold),#FF7BC0,var(--gold)); 
-        background-size:200% 100%; 
-        -webkit-background-clip:text; 
-        background-clip:text; 
-        color:transparent; 
-        animation:portShine 4s linear infinite; 
-        text-shadow: 0 4px 0 var(--pink), 0 8px 24px rgba(196, 0, 122, 0.4);
-    }
+   .port-h1 .accent {
+    position: relative;
+    display: inline-block;
+    color: #FFB547;            /* solid yellow */
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    animation: none;
+    text-shadow: 0 4px 0 var(--deep), 0 8px 24px rgba(126, 0, 78, 0.5);
+}
     .port-h1 .accent svg {
         position: absolute;
         left: 0;

@@ -1,6 +1,7 @@
 deployment:
     tasks:
         - export DEPLOYPATH=/home/wwwwebtecmart/public_html/
-        - /bin/cp -r * $DEPLOYPATH
+        - /usr/bin/find . -mindepth 1 -maxdepth 1 ! -name '.*' ! -name storage -exec /bin/cp -r {} "$DEPLOYPATH" \;
+        - /bin/mkdir -p "$DEPLOYPATH/storage"
         - /bin/cp .htaccess $DEPLOYPATH/.htaccess
         - /bin/cp .user.ini $DEPLOYPATH/.user.ini 2>/dev/null || true

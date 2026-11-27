@@ -151,8 +151,9 @@ $serviceData = [
 ];
 
 renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
-    'heroDescription' => $serviceData['heroDescription'],
-    'heroHeadline' => $serviceData['heroHeadline'],
+    'title' => $dbService['title'] ?? $serviceData['title'],
+    'heroDescription' => $dbService['hero_description'] ?? ($dbService['summary'] ?? $serviceData['heroDescription']),
+    'heroHeadline' => $dbService['hero_headline'] ?? ($dbService['tagline'] ?? $serviceData['heroHeadline']),
     'heroBulletHeading' => $serviceData['heroBulletHeading'],
     'heroBulletItems' => $serviceData['heroBulletItems'],
     'featuresTitleLead' => $serviceData['featuresTitleLead'],
@@ -164,7 +165,7 @@ renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
     'benefitsTitleAccent' => $serviceData['benefitsTitleAccent'],
     'benefitsTitleTail' => $serviceData['benefitsTitleTail'],
     'benefitsSubtitle' => $serviceData['benefitsSubtitle'],
-    'benefits' => $serviceData['benefits'],
+    'benefits' => !empty($dbService['benefits']) ? $dbService['benefits'] : $serviceData['benefits'],
     'processEyebrow' => $serviceData['processEyebrow'],
     'processTitleLead' => $serviceData['processTitleLead'],
     'processTitleAccent' => $serviceData['processTitleAccent'],
@@ -175,7 +176,7 @@ renderServicePageLayout($dbService ? array_merge($serviceData, $dbService, [
     'showTechnologies' => $serviceData['showTechnologies'],
     'overview' => $dbService['body'] ?? ($serviceData['overview'] ?? ''),
     'features' => !empty($dbService['features']) ? $dbService['features'] : ($serviceData['features'] ?? []),
-    'process' => $serviceData['process'],
+    'process' => !empty($dbService['process']) ? $dbService['process'] : $serviceData['process'],
     'faqs' => !empty($dbService['faqs']) ? $dbService['faqs'] : ($serviceData['faqs'] ?? []),
 ]) : $serviceData);
 

@@ -106,7 +106,7 @@ $contactInfo = [
     ['icon' => 'phone',      'label' => 'Phone / WhatsApp',   'value' => '+91-9999674255',         'href' => 'tel:+919999674255',                  'external' => false],
     ['icon' => 'headphones', 'label' => 'Technical Support',  'value' => '+91-9511012625',         'href' => 'tel:+919511012625',                  'external' => false],
     ['icon' => 'globe',      'label' => 'Website',            'value' => 'www.webtecmart.com',     'href' => 'https://www.webtecmart.com',         'external' => true],
-    ['icon' => 'mappin',     'label' => 'Address',            'value' => 'India',                  'href' => '#',                                  'external' => false],
+    ['icon' => 'mappin',     'label' => 'Address',            'value' => "Web Tec Mart\nD14/255, Pocket C-13, Sector 3\nRohini, Delhi, 110085", 'href' => 'https://www.google.com/maps/search/?api=1&query=Web%20Tec%20Mart%2C%20D14%2F255%2C%20Pocket%20C-13%2C%20Sector%203%2C%20Rohini%2C%20Delhi%20110085', 'external' => true],
 ];
 ?>
 
@@ -252,7 +252,7 @@ $contactInfo = [
     .cp-contact-icon svg { width:18px; height:18px; }
     .cp-contact-text { min-width:0; flex:1; }
     .cp-contact-text .label { margin:0; font-size:.72rem; font-weight:600; color:rgba(255,255,255,.7); }
-    .cp-contact-text .value { margin:0; font-size:.92rem; font-weight:800; color:#fff; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .cp-contact-text .value { margin:0; font-size:.92rem; font-weight:800; color:#fff; line-height:1.45; overflow:hidden; white-space:normal; }
     .cp-hours {
         display:flex; align-items:center; gap:12px; margin-top:20px; padding-top:18px;
         border-top:2px dashed rgba(255,255,255,.28);
@@ -491,7 +491,7 @@ $contactInfo = [
                                         </span>
                                         <div class="cp-contact-text">
                                             <p class="label"><?= htmlspecialchars($item['label']) ?></p>
-                                            <p class="value"><?= htmlspecialchars($item['value']) ?></p>
+                                            <p class="value"><?= nl2br(htmlspecialchars($item['value'], ENT_QUOTES, 'UTF-8')) ?></p>
                                         </div>
                                     </a>
                                 <?php endforeach; ?>
@@ -636,7 +636,7 @@ $contactInfo = [
                         Find Us <span class="accent">Here</span>
                     </h3>
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345094197!2d144.9537353153167!3d-37.81627997975159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d5df1f5a3f7%3A0x5045675218ce6e0!2sMelbourne%20VIC%2C%20Australia!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                        src="https://www.google.com/maps?q=D14%2F255%2C%20Pocket%20C-13%2C%20Sector%203%2C%20Rohini%2C%20Delhi%20110085&output=embed"
                         class="cp-map-iframe"
                         allowfullscreen
                         loading="lazy"

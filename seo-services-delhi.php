@@ -22,9 +22,9 @@ $heroBullets = $dbService['hero_bullets'] ?? [
     'Create Long-Term Visibility by following a sustainable organic strategy'
 ];
 $heroVisibleBullets = is_array($heroBullets) ? $heroBullets : [];
-$founderName = $dbService['founder_name'] ?? 'Jitin Madaan';
-$founderRole = $dbService['founder_role'] ?? 'Performance Marketing Strategist';
-$founderImage = $dbService['founder_image'] ?? '/assets/images/jitin-madaan.png';
+$founderName = !empty($dbService['founder_name']) ? $dbService['founder_name'] : 'Jitin Madaan';
+$founderRole = !empty($dbService['founder_role']) ? $dbService['founder_role'] : 'Performance Marketing Strategist';
+$founderImage = !empty($dbService['founder_image']) ? $dbService['founder_image'] : '/assets/images/jitin-madaan.png';
 $founderInitial = 'JM';
 
 $rankingKeywords = $dbService['keyword_ranking_showcase'] ?? [
@@ -105,7 +105,7 @@ if (preg_match('/\s+(Glance|Overview|Guide)\s*$/i', $takeawaysTitle, $titleMatch
     $takeawaysTitleBase = trim(substr($takeawaysTitle, 0, $titleMatch[0][1]));
 }
 
-$offers = $dbService['offers'] ?? [
+$defaultOffers = [
     ['icon' => 'code', 'title' => 'Technical SEO', 'desc' => 'We enhance the performance of your site by addressing crawling, indexing, Core Web Vitals, server response times, and architecture to ensure search bots navigate effortlessly.', 'link' => '/technical-seo.php', 'link_text' => 'Explore Technical SEO →'],
     ['icon' => 'layout', 'title' => 'On-Page Optimization', 'desc' => 'Content without optimization cannot perform. We optimize title tags, meta descriptions, header structures (H1-H6), internal linking, and semantic keyword relevance.', 'link' => '/on-page-seo.php', 'link_text' => 'Explore On-Page SEO →'],
     ['icon' => 'search', 'title' => 'Keyword Research & Strategy', 'desc' => 'Searching for the appropriate keywords will guide users straight to your site. We dissect intent, competition, and search volume to capture high-value buyer searches.', 'link' => '/keyword-research.php', 'link_text' => 'Explore Keyword Research →'],
@@ -113,6 +113,10 @@ $offers = $dbService['offers'] ?? [
     ['icon' => 'link', 'title' => 'High-Authority Link Building', 'desc' => 'Earn high-authority editorial backlinks and digital PR citations from verified Indian media and industry portals that supercharge domain trust.', 'link' => '/off-page-seo.php', 'link_text' => 'Explore Off-Page SEO →'],
     ['icon' => 'sparkles', 'title' => 'AI-Ready SEO (AEO & GEO)', 'desc' => 'Position your brand prominently within Google AI Overviews, Perplexity, Gemini, and ChatGPT search recommendations through structured entity data.', 'link' => '/ai-seo-strategy.php', 'link_text' => 'Explore AI-Ready SEO →']
 ];
+$offers = !empty($dbService['offers']) && is_array($dbService['offers']) ? $dbService['offers'] : $defaultOffers;
+if (empty($offers)) {
+    $offers = $defaultOffers;
+}
 
 $challenges = $dbService['challenges'] ?? [
     'eyebrow' => 'SEO CHALLENGES',
@@ -135,7 +139,7 @@ if (preg_match('/\s+(Google Search\??)\s*$/i', $challengesTitle, $titleMatch, PR
     $challengesTitleAccent = trim($titleMatch[1][0]);
 }
 
-$founderSection = $dbService['founder_section'] ?? [
+$founderSection = [
     'eyebrow' => 'MEET THE EXPERTS',
     'title' => 'The People Behind Your SEO Growth',
     'lead' => 'Strategy, SEO, Content and Technical Expertise — Working Together. To win at SEO you need more than publishing keywords or link building. We deliver sustainable search growth by leveraging SEO strategy, technical optimisation, content expertise and digital experience.',
@@ -152,6 +156,11 @@ $founderSection = $dbService['founder_section'] ?? [
         ['icon' => '🚀', 'title' => 'Digital Growth Support', 'desc' => 'SEO is best suited when it is integrated with the broader digital landscape. Our team has SEO, content, website development and digital marketing skills to build a more interconnected growth strategy.']
     ]
 ];
+if (!empty($dbService['founder_section']) && is_array($dbService['founder_section'])) {
+    $founderSection = array_merge($founderSection, $dbService['founder_section']);
+    $founderSection['name'] = !empty($dbService['founder_section']['name']) ? $dbService['founder_section']['name'] : 'Jitin Madaan';
+    $founderSection['role'] = !empty($dbService['founder_section']['role']) ? $dbService['founder_section']['role'] : 'Performance Marketing Strategist';
+}
 $founderTitle = trim((string) ($founderSection['title'] ?? 'The People Behind Your SEO Growth'));
 $founderTitleBase = $founderTitle;
 $founderTitleAccent = '';
@@ -437,64 +446,64 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
 @keyframes xpRun{to{transform:translateX(-50%)}}
 
 /* ===== Sections ===== */
-.xp-sec{position:relative;padding:76px 0}
-.xp-head{max-width:760px;margin-bottom:40px}
-.xp-head h2{font-size:clamp(1.85rem,3.5vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:14px;color:var(--head)}
-.xp-head p{color:var(--mute);line-height:1.65;font-size:1.02rem}
+.xp-sec{position:relative;padding:46px 0}
+.xp-head{max-width:760px;margin-bottom:24px}
+.xp-head h2{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:800;line-height:1.15;margin-bottom:10px;color:var(--head)}
+.xp-head p{color:var(--mute);line-height:1.6;font-size:.98rem}
 .xp-head--dark h2{color:#fff}
 .xp-head--dark p{color:rgba(255,255,255,.8)}
 .xp-head--c{margin-left:auto;margin-right:auto;text-align:center}
-.xp-kicker{display:inline-block;font-size:.82rem;font-weight:800;color:var(--pink);margin-bottom:12px;padding-left:14px;border-left:4px solid var(--pink);text-transform:uppercase;letter-spacing:.06em}
+.xp-kicker{display:inline-block;font-size:.8rem;font-weight:800;color:var(--pink);margin-bottom:8px;padding-left:12px;border-left:4px solid var(--pink);text-transform:uppercase;letter-spacing:.06em}
 .xp-head--dark .xp-kicker{color:var(--gold);border-color:var(--gold)}
 .xp-acc{color:var(--pink)}
 .xp-head--dark .xp-acc,.xp-cta-card .xp-acc{color:var(--gold)}
-.xp-bar{display:block;width:84px;height:7px;margin:0 0 16px;background:repeating-linear-gradient(90deg,var(--pink) 0 12px,var(--gold) 12px 24px)}
+.xp-bar{display:block;width:72px;height:5px;margin:0 0 12px;background:repeating-linear-gradient(90deg,var(--pink) 0 12px,var(--gold) 12px 24px)}
 .xp-head--c .xp-bar{margin-left:auto;margin-right:auto}
 .xp-mist{background:var(--soft);background-image:radial-gradient(rgba(126,0,78,.07) 1px,transparent 1.2px);background-size:24px 24px}
 .xp-dark{background:radial-gradient(50% 60% at 92% 0%,rgba(255,181,71,.15),transparent 70%),linear-gradient(160deg,var(--deep) 0%,#A8006A 100%);color:#fff}
-.xp-scallop::after{content:'';position:absolute;top:0;left:0;right:0;height:18px;pointer-events:none;background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x}
+.xp-scallop::after{content:'';position:absolute;top:0;left:0;right:0;height:14px;pointer-events:none;background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 14px repeat-x}
 
 /* ===== Brands (logo cards slider) ===== */
-.xp-brands{padding:56px 0 48px;background:#fff;border-bottom:3px solid var(--deep)}
-.xp-brands .xp-head{margin-bottom:26px}
+.xp-brands{padding:38px 0 32px;background:#fff;border-bottom:3px solid var(--deep)}
+.xp-brands .xp-head{margin-bottom:18px}
 .xp-lg{position:relative}
 .xp-lg .swiper{overflow:hidden;padding:10px 12px 22px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
 .xp-lg .swiper-slide{height:auto}
-.xp-lg-card{display:grid;place-items:center;height:180px;padding:20px;background:#fff;border:2px solid var(--deep);border-radius:20px;box-shadow:5px 5px 0 var(--deep);transition:translate .25s,box-shadow .25s}
+.xp-lg-card{display:grid;place-items:center;height:160px;padding:16px;background:#fff;border:2px solid var(--deep);border-radius:18px;box-shadow:5px 5px 0 var(--deep);transition:translate .25s,box-shadow .25s}
 .xp-lg-card--1{box-shadow:5px 5px 0 var(--gold)}
 .xp-lg-card--2{box-shadow:5px 5px 0 var(--pink)}
 .xp-lg-card:hover{translate:-3px -3px}
-.xp-lg-card img{max-width:100%;max-height:138px;width:auto;height:auto;object-fit:contain;display:block}
+.xp-lg-card img{max-width:100%;max-height:120px;width:auto;height:auto;object-fit:contain;display:block}
 .xp-lg-pag{display:flex;justify-content:center;gap:8px;margin-top:4px}
 .xp-lg-pag .swiper-pagination-bullet{width:30px;height:6px;border-radius:0;background:#E3BFD5;opacity:1;margin:0!important;cursor:pointer;transition:background .3s,width .3s}
 .xp-lg-pag .swiper-pagination-bullet-active{width:56px;background:var(--pink)}
 .xp-mono{display:grid;place-items:center;width:84px;height:84px;border-radius:20px;background:var(--blush);color:var(--pink);font:800 1.6rem var(--disp)}
-@media(max-width:575px){.xp-lg-card{height:130px;padding:14px}.xp-lg-card img{max-height:96px}}
+@media(max-width:575px){.xp-lg-card{height:120px;padding:12px}.xp-lg-card img{max-height:86px}}
 
 /* ===== Stalls ===== */
-.xp-stall{position:relative;background:#fff;border:2px solid var(--deep);border-radius:18px;padding:54px 24px 24px;box-shadow:6px 6px 0 var(--gold);transition:translate .25s,box-shadow .25s;display:block;text-decoration:none;color:inherit}
-.xp-stall::before{content:'';position:absolute;top:0;left:0;right:0;height:28px;border-radius:15px 15px 0 0;background:repeating-linear-gradient(90deg,var(--pink) 0 22px,#fff 22px 44px);border-bottom:2px solid var(--deep)}
-.xp-stall:nth-child(even)::before{background:repeating-linear-gradient(90deg,var(--gold) 0 22px,#fff 22px 44px)}
-.xp-stall:hover{translate:-4px -4px;box-shadow:10px 10px 0 var(--pink)}
-.xp-stall h3,.xp-stall h4{font-size:1.2rem;font-weight:800;line-height:1.25;margin-bottom:8px;color:var(--head)}
-.xp-stall p{font-size:.92rem;line-height:1.65;color:var(--mute)}
-.xp-ico{display:grid;place-items:center;width:48px;height:48px;margin-bottom:14px;border-radius:12px;background:var(--blush);color:var(--pink);border:2px solid var(--deep);box-shadow:3px 3px 0 var(--gold);font-size:1.4rem;transition:rotate .3s,scale .3s}
+.xp-stall{position:relative;background:#fff;border:2px solid var(--deep);border-radius:16px;padding:44px 20px 20px;box-shadow:5px 5px 0 var(--gold);transition:translate .25s,box-shadow .25s;display:block;text-decoration:none;color:inherit}
+.xp-stall::before{content:'';position:absolute;top:0;left:0;right:0;height:24px;border-radius:13px 13px 0 0;background:repeating-linear-gradient(90deg,var(--pink) 0 20px,#fff 20px 40px);border-bottom:2px solid var(--deep)}
+.xp-stall:nth-child(even)::before{background:repeating-linear-gradient(90deg,var(--gold) 0 20px,#fff 20px 40px)}
+.xp-stall:hover{translate:-4px -4px;box-shadow:8px 8px 0 var(--pink)}
+.xp-stall h3,.xp-stall h4{font-size:1.15rem;font-weight:800;line-height:1.25;margin-bottom:8px;color:var(--head)}
+.xp-stall p{font-size:.9rem;line-height:1.6;color:var(--mute)}
+.xp-ico{display:grid;place-items:center;width:44px;height:44px;margin-bottom:12px;border-radius:12px;background:var(--blush);color:var(--pink);border:2px solid var(--deep);box-shadow:3px 3px 0 var(--gold);font-size:1.3rem;transition:rotate .3s,scale .3s}
 .xp-stall:hover .xp-ico{rotate:-8deg;scale:1.08}
 .xp-stall--flex{display:flex;flex-direction:column;height:100%}
 .xp-stall--flex p{flex-grow:1}
-.xp-more{margin-top:16px;font-weight:800;font-size:.88rem;color:var(--pink)}
-.xp-stall--sm{padding:46px 20px 20px}
-.xp-stall--sm::before{height:22px;border-radius:15px 15px 0 0}
+.xp-more{margin-top:14px;font-weight:800;font-size:.86rem;color:var(--pink)}
+.xp-stall--sm{padding:38px 18px 18px}
+.xp-stall--sm::before{height:20px;border-radius:13px 13px 0 0}
 
 /* ===== Split ===== */
-.xp-split{display:grid;gap:44px;align-items:center;grid-template-columns:minmax(0,1fr)}
+.xp-split{display:grid;gap:36px;align-items:center;grid-template-columns:minmax(0,1fr)}
 .xp-split>*{min-width:0}
-@media(min-width:992px){.xp-split{grid-template-columns:1fr 1fr;gap:60px}}
-.xp-copy h2{font-size:clamp(1.85rem,3.5vw,2.8rem);font-weight:800;line-height:1.1;margin-bottom:16px;color:var(--head)}
-.xp-copy p{line-height:1.7;color:var(--mute);margin-bottom:14px}
-.xp-copy p.xp-lead{font-size:1.08rem;font-weight:600;color:var(--text)}
-.xp-callout{margin:6px 0 22px;padding:14px 16px;border-left:5px solid var(--pink);background:var(--blush);border-radius:0 12px 12px 0;font-weight:700;color:var(--pink);font-size:.92rem}
-.xp-browser{background:var(--deep);border-radius:18px;padding:12px;box-shadow:14px 14px 0 var(--blush),0 0 0 2px var(--deep)}
+@media(min-width:992px){.xp-split{grid-template-columns:1fr 1fr;gap:48px;align-items:center}}
+.xp-copy h2{font-size:clamp(1.75rem,3.2vw,2.5rem);font-weight:800;line-height:1.15;margin-bottom:14px;color:var(--head)}
+.xp-copy p{line-height:1.65;color:var(--mute);margin-bottom:12px}
+.xp-copy p.xp-lead{font-size:1.02rem;font-weight:600;color:var(--text)}
+.xp-callout{margin:4px 0 18px;padding:12px 14px;border-left:5px solid var(--pink);background:var(--blush);border-radius:0 12px 12px 0;font-weight:700;color:var(--pink);font-size:.9rem}
+.xp-browser{background:var(--deep);border-radius:18px;padding:12px;box-shadow:12px 12px 0 var(--blush),0 0 0 2px var(--deep)}
 .xp-browser-bar{display:flex;align-items:center;gap:14px;padding:4px 6px 12px}
 .xp-dots{display:flex;gap:6px}
 .xp-dots span{width:11px;height:11px;border-radius:50%;background:var(--pink)}
@@ -502,7 +511,7 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
 .xp-dots span:nth-child(3){background:#fff}
 .xp-url{flex:1;min-width:0;background:rgba(255,255,255,.15);color:rgba(255,255,255,.85);font-size:.72rem;padding:6px 12px;border-radius:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .xp-screen{position:relative;background:#fff;border-radius:10px;overflow:hidden}
-.xp-screen img{display:block;width:100%;height:auto}
+.xp-screen img{display:block;width:100%;height:auto;max-height:380px;object-fit:contain}
 .xp-float{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:12px;background:var(--gold);color:var(--deep);border:2px solid var(--deep);box-shadow:3px 3px 0 var(--deep);font:800 .76rem var(--disp)}
 .xp-float i{width:8px;height:8px;border-radius:50%;background:var(--mint);box-shadow:0 0 0 3px rgba(14,159,110,.25)}
 
@@ -732,11 +741,7 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
                     </div>
                     <div class="xp-author">
                         <div class="xp-author-av">
-                            <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
-                                <img src="<?= $e($founderImage) ?>" alt="<?= $e($founderName) ?>">
-                            <?php else: ?>
-                                <span><?= $e($founderInitial) ?></span>
-                            <?php endif; ?>
+                            <img src="<?= $e($founderImage) ?>" alt="<?= $e($founderName) ?>" onerror="this.onerror=null;this.src='/assets/images/jitin-madaan.png'">
                         </div>
                         <div>
                             <b><?= $e($founderName) ?><i></i></b>
@@ -868,9 +873,9 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
                 <i class="xp-bar"></i>
                 <p><?= $e($takeaways['lead'] ?? '') ?></p>
             </div>
-            <div class="xp-split" style="align-items:start">
+            <div class="xp-split" style="align-items:center">
                 <div class="xp-copy">
-                    <h3 style="font-size:1.2rem;font-weight:800">What's included in our SEO services:</h3>
+                    <h3 style="font-size:1.18rem;font-weight:800;margin-bottom:12px;color:var(--head);">What's included in our SEO services:</h3>
                     <ul class="xp-check">
                         <?php foreach (($takeaways['checklist'] ?? []) as $chk): ?><li><span><?= $e($chk) ?></span></li><?php endforeach; ?>
                     </ul>
@@ -885,20 +890,27 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
                     <a href="/contact.php" class="xp-btn xp-btn--pink trigger-enquiry-modal" data-service="SEO Services in Delhi"><span>Book Your Free SEO Consultation</span><?= $arrow ?></a>
                 </div>
                 <div class="xp-tele">
-                    <div class="xp-browser-bar">
-                        <div class="xp-dots"><span></span><span></span><span></span></div>
-                        <div class="xp-url">google.com/search?q=best+seo+company+delhi</div>
+                    <div class="xp-browser-bar" style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:4px 6px 10px;border-bottom:1px solid rgba(255,255,255,0.12);margin-bottom:12px;">
+                        <div class="xp-dots" style="display:flex;gap:6px;"><span style="width:10px;height:10px;border-radius:50%;background:#EF4444;"></span><span style="width:10px;height:10px;border-radius:50%;background:#F59E0B;"></span><span style="width:10px;height:10px;border-radius:50%;background:#10B981;"></span></div>
+                        <div class="xp-url" style="flex:1;min-width:0;background:rgba(255,255,255,0.12);color:rgba(255,255,255,0.9);font-size:0.72rem;padding:5px 10px;border-radius:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:monospace;">google.com/search?q=best+seo+company+delhi</div>
+                        <span style="font-size:0.66rem;font-weight:800;color:#FBBF24;letter-spacing:0.04em;white-space:nowrap;">LIVE TELEMETRY</span>
                     </div>
-                    <div class="xp-tele-body">
-                        <div class="xp-live"><i></i>🏆 #1 Ranked in Delhi NCR</div>
-                        <h4>WebTecMart &mdash; Top SEO Agency in Delhi NCR</h4>
-                        <p>Driving qualified organic buyer revenue with 13+ years experience, 1,000+ verified client campaigns, and high-intent keyword strategies.</p>
-                        <div class="xp-chips">
-                            <div class="xp-chip"><b>+400%</b><span>Organic Growth</span></div>
-                            <div class="xp-chip"><b>80+</b><span>#1 Keywords</span></div>
-                            <div class="xp-chip"><b>1,393%</b><span>Search Clicks</span></div>
+                    <div class="xp-tele-body" style="background:#5C0038;border-radius:12px;padding:18px 16px;">
+                        <div class="xp-live" style="display:inline-flex;align-items:center;gap:7px;background:#E6F8F0;color:#0A7A54;font-size:0.74rem;font-weight:800;padding:4px 10px;border-radius:99px;margin-bottom:10px;">
+                            <i style="width:7px;height:7px;border-radius:50%;background:#10B981;box-shadow:0 0 0 3px rgba(16,185,129,0.25);"></i>
+                            🏆 #1 RANKED IN DELHI NCR
                         </div>
-                        <div class="xp-tele-foot"><b>⚡ AI Overview Featured Entity</b><span>Verified GA4 &bull; Search Console 2026</span></div>
+                        <h4 style="color:#fff;font-size:1.18rem;font-weight:800;line-height:1.25;margin-bottom:8px;">WebTecMart &mdash; Top SEO Agency in Delhi NCR</h4>
+                        <p style="font-size:0.85rem;line-height:1.55;color:rgba(255,255,255,0.85);margin-bottom:14px;">Driving qualified organic buyer revenue with 13+ years experience, 1,000+ verified client campaigns, and high-intent keyword strategies.</p>
+                        <div class="xp-chips" style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:12px;">
+                            <div class="xp-chip" style="text-align:center;padding:10px 4px;border-radius:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);"><b style="display:block;font:800 1.25rem var(--disp);color:#FBBF24;line-height:1.1;">+400%</b><span style="font-size:0.66rem;font-weight:600;color:rgba(255,255,255,0.85);display:block;">ORGANIC GROWTH</span></div>
+                            <div class="xp-chip" style="text-align:center;padding:10px 4px;border-radius:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);"><b style="display:block;font:800 1.25rem var(--disp);color:#FBBF24;line-height:1.1;">80+</b><span style="font-size:0.66rem;font-weight:600;color:rgba(255,255,255,0.85);display:block;">#1 KEYWORDS</span></div>
+                            <div class="xp-chip" style="text-align:center;padding:10px 4px;border-radius:10px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.22);"><b style="display:block;font:800 1.25rem var(--disp);color:#FBBF24;line-height:1.1;">1,393%</b><span style="font-size:0.66rem;font-weight:600;color:rgba(255,255,255,0.85);display:block;">SEARCH CLICKS</span></div>
+                        </div>
+                        <div class="xp-tele-foot" style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid rgba(255,255,255,0.15);font-size:0.72rem;">
+                            <span style="color:#FBBF24;font-weight:700;">⚡ AI Overview Featured Entity</span>
+                            <span style="color:rgba(255,255,255,0.72);">Verified GA4 &bull; Search Console 2026</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -961,9 +973,7 @@ body.del-theme-dark .xp { --paper:#150A16; --card:#1E0F22; --mist:#1A0D1E; --tex
             <div class="xp-fcard">
                 <div class="xp-fside">
                     <div class="xp-fphoto">
-                        <?php if (!empty($founderImage) && file_exists(__DIR__ . $founderImage)): ?>
-                            <img src="<?= $e($founderImage) ?>" alt="<?= $e($founderName) ?>">
-                        <?php else: ?><span><?= $e($founderInitial) ?></span><?php endif; ?>
+                        <img src="<?= $e($founderImage) ?>" alt="<?= $e($founderName) ?>" onerror="this.onerror=null;this.src='/assets/images/jitin-madaan.png'">
                     </div>
                     <h4><?= $e($founderName) ?></h4>
                     <b><?= $e($founderRole) ?></b>

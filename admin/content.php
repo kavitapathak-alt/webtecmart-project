@@ -95,6 +95,35 @@ $homeSections = [
 
 $selectedSection = trim($_GET['section'] ?? $_POST['section'] ?? 'collection:service');
 $blogCharacterLimit = 30000;
+
+// Direct routing for all service pages into Services CMS Editor
+$servicePageRedirects = [
+    'page:seo-services-delhi.php' => 'seo-services-delhi',
+    'page:website-design-development.php' => 'website-design-development',
+    'page:digital-business-branding.php' => 'digital-business-branding',
+    'page:search-engine-marketing.php' => 'search-engine-marketing',
+    'page:social-media-optimization.php' => 'social-media-optimization',
+    'page:mobile-app-development.php' => 'mobile-app-development',
+    'page:ecommerce-seo.php' => 'ecommerce-seo',
+    'page:b2b-exhibition-seo.php' => 'b2b-exhibition-seo',
+    'page:local-seo.php' => 'local-seo',
+    'page:national-seo.php' => 'national-seo',
+    'page:international-seo.php' => 'international-seo',
+    'page:content-marketing.php' => 'content-marketing',
+    'page:performance-marketing.php' => 'performance-marketing',
+    'seo-services-delhi.php' => 'seo-services-delhi',
+    'website-design-development.php' => 'website-design-development',
+    'digital-business-branding.php' => 'digital-business-branding',
+    'search-engine-marketing.php' => 'search-engine-marketing',
+    'social-media-optimization.php' => 'social-media-optimization',
+    'mobile-app-development.php' => 'mobile-app-development',
+    'b2b-exhibition-seo.php' => 'b2b-exhibition-seo',
+];
+
+if (isset($servicePageRedirects[$selectedSection])) {
+    redirect('/admin/services.php?slug=' . urlencode($servicePageRedirects[$selectedSection]));
+}
+
 if ($selectedSection === 'registry:partners') $selectedSection = 'collection:partner';
 if ($selectedSection === 'registry:about') $selectedSection = 'collection:homepage_about';
 if ($selectedSection === 'registry:visibility') $selectedSection = 'collection:homepage_visibility';
@@ -1053,10 +1082,19 @@ require_once __DIR__ . '/templates/header.php';
                                                 <span class="cms-count"><?= (int) ($itemCountByType['portfolio_project'] ?? 0) ?></span>
                                             </a>
                                         <?php endif; ?>
-                                        <a class="cms-link <?= $selectedSection === 'page:' . $pageFile ? 'active' : '' ?>" href="?section=page%3A<?= rawurlencode($pageFile) ?>">
-                                            <span class="cms-ico"><i class="bi bi-plus-lg"></i></span>Page content blocks
-                                            <span class="cms-count"><?= (int) ($itemCountByPage[$pageFile] ?? 0) ?></span>
-                                        </a>
+                                        <?php if (isset($servicePageRedirects['page:' . $pageFile])): 
+                                            $sSlug = $servicePageRedirects['page:' . $pageFile];
+                                        ?>
+                                            <a class="cms-link fw-bold" style="color:#C4007A; background:#FFF0F7; border:1px solid rgba(196,0,122,0.25);" href="/admin/services.php?slug=<?= urlencode($sSlug) ?>">
+                                                <span class="cms-ico"><i class="bi bi-pencil-square text-danger"></i></span>Edit Full Service CMS
+                                                <span class="badge" style="background:#C4007A; color:#fff; font-size:0.65rem;">Page Editor</span>
+                                            </a>
+                                        <?php else: ?>
+                                            <a class="cms-link <?= $selectedSection === 'page:' . $pageFile ? 'active' : '' ?>" href="?section=page%3A<?= rawurlencode($pageFile) ?>">
+                                                <span class="cms-ico"><i class="bi bi-plus-lg"></i></span>Page content blocks
+                                                <span class="cms-count"><?= (int) ($itemCountByPage[$pageFile] ?? 0) ?></span>
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

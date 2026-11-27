@@ -38,15 +38,17 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{DOCUMENT_ROOT}/$1.php -f
 RewriteRule ^([^/]+)/?$ $1.php [QSA,L]
 
-# 7. PHP upload limits (allow uploads up to 16M so 4 MB CMS images upload smoothly)
+# 7. PHP request and upload limits
 <IfModule mod_php7.c>
-    php_value upload_max_filesize 16M
-    php_value post_max_size 16M
-    php_value memory_limit 128M
+    php_value post_max_size 64M
+    php_value upload_max_filesize 32M
+    php_value max_input_vars 5000
+    php_value memory_limit 256M
 </IfModule>
 <IfModule mod_php.c>
-    php_value upload_max_filesize 16M
-    php_value post_max_size 16M
-    php_value memory_limit 128M
+    php_value post_max_size 64M
+    php_value upload_max_filesize 32M
+    php_value max_input_vars 5000
+    php_value memory_limit 256M
 </IfModule>
 

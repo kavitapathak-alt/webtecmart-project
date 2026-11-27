@@ -434,15 +434,40 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/services.php?edit=68" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 68 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                    <a href="/admin/services.php?slug=b2b-exhibition-seo" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'b2b-exhibition-seo') || (!empty($_GET['edit']) && ($_GET['edit'] === 'b2b-exhibition-seo' || (int)$_GET['edit'] === 68)) ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
                         <span><i class="bi bi-calendar2-event text-danger"></i> B2B &amp; Exhibition SEO</span>
                         <span class="badge" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/admin/services.php?edit=69" class="adm-nav-link <?= !empty($_GET['edit']) && (int)$_GET['edit'] === 69 ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                    <a href="/admin/services.php?slug=seo-services-delhi" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'seo-services-delhi') || (!empty($_GET['edit']) && ($_GET['edit'] === 'seo-services-delhi' || (int)$_GET['edit'] === 69)) ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
                         <span><i class="bi bi-geo-alt text-primary"></i> SEO Services in Delhi</span>
                         <span class="badge" style="background: #C4007A; color: #fff; font-size: 0.62rem; padding: 2px 6px;">Flagship</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/services.php?slug=website-design-development" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'website-design-development') || (!empty($_GET['edit']) && $_GET['edit'] === 'website-design-development') ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-code-slash text-success"></i> Web Design &amp; Dev</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/services.php?slug=digital-business-branding" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'digital-business-branding') || (!empty($_GET['edit']) && $_GET['edit'] === 'digital-business-branding') ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-brush text-warning"></i> Business Branding</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/services.php?slug=search-engine-marketing" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'search-engine-marketing') || (!empty($_GET['edit']) && $_GET['edit'] === 'search-engine-marketing') ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-megaphone text-info"></i> Google Ads (SEM)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/services.php?slug=social-media-optimization" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'social-media-optimization') || (!empty($_GET['edit']) && $_GET['edit'] === 'social-media-optimization') ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-share text-secondary"></i> Social Media (SMO)</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin/services.php?slug=mobile-app-development" class="adm-nav-link <?= (!empty($_GET['slug']) && $_GET['slug'] === 'mobile-app-development') || (!empty($_GET['edit']) && $_GET['edit'] === 'mobile-app-development') ? 'active' : '' ?>" style="padding-left: 28px; font-size: 0.84rem;">
+                        <span><i class="bi bi-phone text-dark"></i> Mobile App Dev</span>
                     </a>
                 </li>
                 <li>
