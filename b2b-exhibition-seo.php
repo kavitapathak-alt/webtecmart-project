@@ -51,6 +51,21 @@ $faqs = [
     ['How did WebTecMart achieve 400% organic growth for Bharat Tex Fair?', 'We implemented a multi-tiered technical taxonomy, optimized over 200+ global textile keywords, built Event and Organization schema hierarchies, and executed digital PR that earned coverage from global trade portals, securing #1 Google rankings for high-intent search queries worldwide.'],
     ['How do you prevent trade show websites from losing rank once the fair ends?', 'We build evergreen URL structures alongside annual archive slugs. Instead of deleting pages, we transition past editions into authoritative post-show review hubs while redirecting core search equity into next year\'s upcoming event campaign.'],
 ];
+
+$brandLogos = [
+    ['name' => 'Informa Global', 'logo' => '/assets/images/logo-1.png'],
+    ['name' => 'Bharat Tex Fair', 'logo' => '/assets/images/logos-10.jpeg'],
+    ['name' => 'IHGF Delhi Autumn Fair 2027', 'logo' => '/assets/images/logos-11.jpeg'],
+    ['name' => 'Clarion Events', 'logo' => '/assets/images/logos-2.png'],
+    ['name' => 'London Tech Week', 'logo' => '/assets/images/logos-3.jpeg'],
+    ['name' => 'Media 10', 'logo' => '/assets/images/logos-4.jpeg'],
+    ['name' => 'The AI Summit', 'logo' => '/assets/images/logos-5.jpeg'],
+    ['name' => 'Northstar Travel Group', 'logo' => '/assets/images/logos-6.jpeg'],
+    ['name' => 'BMJ Future Health', 'logo' => '/assets/images/logos-7.jpeg'],
+    ['name' => 'Stonex Jewellers', 'logo' => '/assets/images/stonex-jewellers-logo.png'],
+    ['name' => 'Innovation Zero', 'logo' => '/assets/images/logos-8.jpeg'],
+    ['name' => 'Premier Logistics', 'logo' => '/assets/images/logos-9.jpeg'],
+];
 ?>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -170,6 +185,26 @@ $faqs = [
 .xp-ribbon span b { display: inline-block; margin-right: 8px; padding: 2px 11px; border-radius: 8px; background: var(--deep); color: var(--gold); font-size: 1em; }
 .xp-ribbon span::after { content: '✦'; margin-left: 60px; opacity: .55; }
 @keyframes xp-run { to { transform: translateX(-50%); } }
+
+/* Brands (logo cards slider) */
+.xp-head--c { margin-left: auto; margin-right: auto; text-align: center; }
+.xp-acc { color: var(--pink); }
+.xp-bar { display: block; width: 84px; height: 7px; margin: 0 auto 16px; background: repeating-linear-gradient(90deg, var(--pink) 0 12px, var(--gold) 12px 24px); }
+.xp-brands { padding: 56px 0 48px; background: #fff; border-bottom: 3px solid var(--deep); }
+.xp-brands .xp-head { margin-bottom: 26px; }
+.xp-lg { position: relative; }
+.xp-lg .swiper { overflow: hidden; padding: 10px 12px 22px; -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%); mask-image: linear-gradient(90deg, transparent 0, #000 7%, #000 93%, transparent 100%); }
+.xp-lg .swiper-slide { height: auto; }
+.xp-lg-card { display: grid; place-items: center; height: 180px; padding: 20px; background: #fff; border: 2px solid var(--deep); border-radius: 20px; box-shadow: 5px 5px 0 var(--deep); transition: translate .25s ease, box-shadow .25s ease; }
+.xp-lg-card--1 { box-shadow: 5px 5px 0 var(--gold); }
+.xp-lg-card--2 { box-shadow: 5px 5px 0 var(--pink); }
+.xp-lg-card:hover { translate: -3px -3px; }
+.xp-lg-card img { max-width: 100%; max-height: 138px; width: auto; height: auto; object-fit: contain; display: block; }
+.xp-lg-pag { display: flex; justify-content: center; gap: 8px; margin-top: 4px; }
+.xp-lg-pag .swiper-pagination-bullet { width: 30px; height: 6px; border-radius: 0; background: #E3BFD5; opacity: 1; margin: 0 !important; cursor: pointer; transition: background .3s, width .3s; }
+.xp-lg-pag .swiper-pagination-bullet-active { width: 56px; background: var(--pink); }
+.xp-mono { display: grid; place-items: center; width: 84px; height: 84px; border-radius: 20px; background: var(--blush); color: var(--pink); font: 800 1.6rem var(--disp); }
+@media (max-width: 575px) { .xp-lg-card { height: 130px; padding: 14px; } .xp-lg-card img { max-height: 96px; } }
 
 /* Section shells */
 .xp-sec { padding: 84px 0; position: relative; }
@@ -407,7 +442,7 @@ $faqs = [
     .xp-btn, .xp-stall, .xp-rc, .xp-stat { transition: none; }
 }
 @media (hover: none) {
-    .xp-stall:hover, .xp-rc:hover, .xp-btn--pink:hover, .xp-stat:hover { translate: none; }
+    .xp-stall:hover, .xp-rc:hover, .xp-btn--pink:hover, .xp-stat:hover, .xp-lg-card:hover { translate: none; }
     .xp-stall:hover { box-shadow: 6px 6px 0 var(--gold); }
     .xp-rc:hover { box-shadow: 4px 4px 0 var(--gold); }
 }
@@ -475,6 +510,36 @@ $faqs = [
                 <?php for ($i = 0; $i < 4; $i++): ?>
                     <span><b>400%</b> organic growth</span><span><b>200+</b> keywords ranked</span><span><b>80+</b> top 3 worldwide</span><span><b>10,000+</b> buyer registrations</span>
                 <?php endfor; ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1B. BRANDS (logo cards slider) -->
+    <section class="xp-brands">
+        <div class="xp-wrap">
+            <div class="xp-head xp-head--c">
+                <span class="xp-kicker">Global industry credibility</span>
+                <h2>Top Event Brands Embracing <span class="xp-acc">SEO</span></h2>
+                <i class="xp-bar"></i>
+                <p>Here are just a few of the organisers, global trade expos, and high-growth brands we've helped with strategic search optimisation campaigns.</p>
+            </div>
+            <div class="xp-lg">
+                <div class="swiper" id="evBrandSwiper">
+                    <div class="swiper-wrapper">
+                        <?php foreach ($brandLogos as $bi => $b): $imgPath = $b['logo'] ?? ''; ?>
+                            <div class="swiper-slide">
+                                <div class="xp-lg-card xp-lg-card--<?= $bi % 3 ?>" title="<?= htmlspecialchars($b['name']) ?>">
+                                    <?php if (!empty($imgPath)): ?>
+                                        <img src="<?= htmlspecialchars($imgPath) ?>" alt="<?= htmlspecialchars($b['name']) ?>" loading="lazy">
+                                    <?php else: ?>
+                                        <div class="xp-mono"><?= htmlspecialchars(substr($b['name'], 0, 2)) ?></div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="xp-lg-pag"></div>
             </div>
         </div>
     </section>
@@ -856,6 +921,19 @@ $faqs = [
             keyboard: { enabled: true },
             navigation: { nextEl: '.xp-next', prevEl: '.xp-prev' },
             pagination: { el: '.xp-pag', clickable: true }
+        });
+    }
+
+    /* brand logos slider */
+    if (window.Swiper && document.getElementById('evBrandSwiper')) {
+        new Swiper('#evBrandSwiper', {
+            slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 16, rewind: true, grabCursor: true,
+            autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
+            pagination: { el: '.xp-lg-pag', clickable: true },
+            breakpoints: {
+                768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 22 },
+                992: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 24 }
+            }
         });
     }
 

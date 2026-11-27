@@ -87,12 +87,18 @@ function renderServicePageLayout(array $config): void
     ];
 
     $brandLogos = [
-        ['name' => 'Informa Global', 'cat' => 'Trade Events'], ['name' => 'Bharat Tex Fair', 'cat' => 'Ministry of Textiles'],
-        ['name' => 'IHGF Delhi Autumn Fair 2027', 'cat' => 'Global Sourcing Fair'], ['name' => 'Clarion Events', 'cat' => 'Exhibition Leader'],
-        ['name' => 'London Tech Week', 'cat' => 'Tech Expo'], ['name' => 'Media 10', 'cat' => 'Design & Media'],
-        ['name' => 'Northstar Travel Group', 'cat' => 'Travel Group'], ['name' => 'Premier Logistics', 'cat' => 'Industrial Logistics'],
-        ['name' => 'Innovation Zero', 'cat' => 'CleanTech Congress'], ['name' => 'Stonex Jewellers', 'cat' => 'Luxury Retail'],
-        ['name' => 'BMJ Future Health', 'cat' => 'Healthcare Publishing']
+        ['name' => 'Informa Global', 'cat' => 'Trade Events', 'logo' => '/assets/images/logo-1.png'],
+        ['name' => 'Bharat Tex Fair', 'cat' => 'Ministry of Textiles', 'logo' => '/assets/images/logos-10.jpeg'],
+        ['name' => 'IHGF Delhi Autumn Fair 2027', 'cat' => 'Global Sourcing Fair', 'logo' => '/assets/images/logos-11.jpeg'],
+        ['name' => 'Clarion Events', 'cat' => 'Exhibition Leader', 'logo' => '/assets/images/logos-2.png'],
+        ['name' => 'London Tech Week', 'cat' => 'Tech Expo', 'logo' => '/assets/images/logos-3.jpeg'],
+        ['name' => 'Media 10', 'cat' => 'Design & Media', 'logo' => '/assets/images/logos-4.jpeg'],
+        ['name' => 'The AI Summit', 'cat' => 'Enterprise AI', 'logo' => '/assets/images/logos-5.jpeg'],
+        ['name' => 'Northstar Travel Group', 'cat' => 'Travel Group', 'logo' => '/assets/images/logos-6.jpeg'],
+        ['name' => 'Premier Logistics', 'cat' => 'Industrial Logistics', 'logo' => '/assets/images/logos-9.jpeg'],
+        ['name' => 'Innovation Zero', 'cat' => 'CleanTech Congress', 'logo' => '/assets/images/logos-8.jpeg'],
+        ['name' => 'Stonex Jewellers', 'cat' => 'Luxury Retail', 'logo' => '/assets/images/stonex-jewellers-logo.png'],
+        ['name' => 'BMJ Future Health', 'cat' => 'Healthcare Publishing', 'logo' => '/assets/images/logos-7.jpeg']
     ];
 
     $caseStudy = $config['caseStudy'] ?? [
@@ -159,6 +165,7 @@ function renderServicePageLayout(array $config): void
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <style>
         /* ============================================================
@@ -207,24 +214,24 @@ function renderServicePageLayout(array $config): void
         @media (min-width:992px){ .xp-hero-grid { grid-template-columns:1.08fr .92fr; gap:56px; align-items:center; } }
         .xp-tag { display:inline-flex; align-items:center; gap:8px; padding:7px 14px 7px 10px; margin-bottom:20px; border-radius:999px; background:rgba(255,255,255,.18); border:1px solid rgba(255,255,255,.45); font-size:.8rem; font-weight:700; color:#fff; -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); }
         .xp-tag i { width:8px; height:8px; border-radius:50%; background:var(--gold); box-shadow:0 0 0 4px rgba(255,181,71,.3); }
-        
+
         /* 🔥 UPDATED HERO HEADING (Blog Style) 🔥 */
-        .xp-hero h1 { 
-            color:#fff; 
-            font-size:clamp(2.4rem, 6vw, 4.5rem); 
-            font-weight:800; 
-            line-height:1.06; 
-            margin-bottom:18px; 
+        .xp-hero h1 {
+            color:#fff;
+            font-size:clamp(2.4rem, 6vw, 4.5rem);
+            font-weight:800;
+            line-height:1.06;
+            margin-bottom:18px;
             text-shadow: 0 4px 0 var(--deep), 0 8px 24px rgba(126, 0, 78, 0.5);
             position: relative;
             z-index: 5;
         }
-        .xp-hl { 
-    position: relative;
-    display: inline-block;
-    color: var(--gold); /* Solid Yellow */
-    text-shadow: 0 4px 0 var(--deep), 0 8px 24px rgba(126, 0, 78, 0.5); /* Portfolio wali deep shadow */
-}
+        .xp-hl {
+            position: relative;
+            display: inline-block;
+            color: var(--gold); /* Solid Yellow */
+            text-shadow: 0 4px 0 var(--deep), 0 8px 24px rgba(126, 0, 78, 0.5); /* Portfolio wali deep shadow */
+        }
         .xp-hl svg {
             position: absolute;
             left: 0;
@@ -238,7 +245,7 @@ function renderServicePageLayout(array $config): void
             stroke-width: 3;
         }
         @keyframes xpShine { to { background-position:200% 0; } }
-        
+
         .xp-hero-sub { font-family:var(--disp); font-size:clamp(1.1rem,2vw,1.4rem); font-weight:600; line-height:1.35; color:#FFD7EB !important; margin-bottom:14px; max-width:600px; }
         .xp-hero-desc { color:rgba(255,255,255,.88); line-height:1.7; max-width:600px; margin-bottom:22px; }
         .xp-bh { font:700 .96rem var(--disp); color:#fff !important; margin-bottom:10px; }
@@ -293,16 +300,22 @@ function renderServicePageLayout(array $config): void
         .xp-dark { background:radial-gradient(50% 60% at 92% 0%,rgba(255,255,255,.18),transparent 70%),radial-gradient(40% 50% at 0% 100%,rgba(255,181,71,.3),transparent 70%),linear-gradient(135deg, #A8006A 0%, #C4007A 45%, #E0398F 100%); color:#fff; }
         .xp-scallop::after { content:''; position:absolute; top:0; left:0; right:0; height:18px; pointer-events:none; background:radial-gradient(circle at 18px 0,var(--gold) 17px,transparent 18px) 0 0/36px 18px repeat-x; }
 
-        /* Brands marquee */
-        .xp-brands { padding:34px 0; background:#fff; border-bottom:3px solid var(--deep); }
-        .xp-brands-label { text-align:center; margin-bottom:16px; font:700 .84rem var(--disp); color:var(--pink); }
-        .xp-marq { overflow:hidden; border:2px solid var(--deep); border-radius:18px; background:#fff; box-shadow:6px 6px 0 var(--gold); padding:16px 0; }
-        .xp-marq-track { display:flex; gap:14px; width:max-content; animation:xpRun 38s linear infinite; padding-left:14px; }
-        .xp-marq:hover .xp-marq-track,.xp-marq:focus-within .xp-marq-track { animation-play-state:paused; }
-        .xp-brand { display:flex; align-items:center; gap:10px; padding:9px 18px; white-space:nowrap; border:2px solid var(--deep); border-radius:999px; background:#fff; box-shadow:3px 3px 0 var(--gold); }
-        .xp-brand i { width:9px; height:9px; border-radius:50%; background:var(--pink); }
-        .xp-brand b { font:700 .88rem var(--disp); color:var(--head); }
-        .xp-brand span { font-size:.7rem; font-weight:700; color:var(--pink); }
+        /* Brands (logo cards slider) */
+        .xp-brands { padding:52px 0 44px; background:var(--soft); background-image:radial-gradient(rgba(126,0,78,.07) 1px,transparent 1.2px); background-size:24px 24px; border-bottom:3px solid var(--deep); }
+        .xp-brands-label { text-align:center; margin-bottom:22px; font:700 .95rem var(--disp); color:var(--pink); }
+        .xp-lg { position:relative; }
+        .xp-lg .swiper { overflow:hidden; padding:10px 12px 22px; -webkit-mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%); }
+        .xp-lg .swiper-slide { height:auto; }
+        .xp-lg-card { display:grid; place-items:center; height:180px; padding:20px; background:#fff; border:2px solid var(--deep); border-radius:20px; box-shadow:5px 5px 0 var(--deep); transition:translate .25s, box-shadow .25s; }
+        .xp-lg-card--1 { box-shadow:5px 5px 0 var(--gold); }
+        .xp-lg-card--2 { box-shadow:5px 5px 0 var(--pink); }
+        .xp-lg-card:hover { translate:-3px -3px; }
+        .xp-lg-card img { max-width:100%; max-height:138px; width:auto; height:auto; object-fit:contain; display:block; }
+        .xp-lg-pag { display:flex; justify-content:center; gap:8px; margin-top:4px; }
+        .xp-lg-pag .swiper-pagination-bullet { width:30px; height:6px; border-radius:0; background:#E3BFD5; opacity:1; margin:0 !important; cursor:pointer; transition:background .3s, width .3s; }
+        .xp-lg-pag .swiper-pagination-bullet-active { width:56px; background:var(--pink); }
+        .xp-mono { display:grid; place-items:center; width:84px; height:84px; border-radius:20px; background:var(--blush); color:var(--pink); font:800 1.6rem var(--disp); }
+        @media (max-width:575px){ .xp-lg-card { height:130px; padding:14px; } .xp-lg-card img { max-height:96px; } }
 
         /* Stalls */
         .xp-stall { position:relative; display:flex; flex-direction:column; background:#fff; border:2px solid var(--deep); border-radius:18px; padding:54px 24px 24px; box-shadow:6px 6px 0 var(--gold); transition:translate .25s, box-shadow .25s; }
@@ -419,8 +432,8 @@ function renderServicePageLayout(array $config): void
             .xp-hero h1 { font-size:clamp(2rem, 9.5vw, 2.6rem); }
         }
         @media (max-width:380px){ .xp-stats { grid-template-columns:1fr; } }
-        @media (hover:none){ .xp-stall:hover,.xp-step:hover,.xp-pkg:hover,.xp-pill:hover,.xp-btn--pink:hover { translate:none; } .xp-stall:hover,.xp-step:hover { box-shadow:6px 6px 0 var(--gold); } }
-        @media (prefers-reduced-motion:reduce){ .xp-ribbon-track,.xp-marq-track,.xp-hl,.xp-cta-card::after { animation:none; } .xp-btn,.xp-stall,.xp-step,.xp-pkg,.xp-pill { transition:none; } }
+        @media (hover:none){ .xp-stall:hover,.xp-step:hover,.xp-pkg:hover,.xp-pill:hover,.xp-btn--pink:hover,.xp-lg-card:hover { translate:none; } .xp-stall:hover,.xp-step:hover { box-shadow:6px 6px 0 var(--gold); } }
+        @media (prefers-reduced-motion:reduce){ .xp-ribbon-track,.xp-hl,.xp-cta-card::after { animation:none; } .xp-btn,.xp-stall,.xp-step,.xp-pkg,.xp-pill,.xp-lg-card { transition:none; } }
     </style>
 
     <main class="xp mb-page">
@@ -523,16 +536,27 @@ function renderServicePageLayout(array $config): void
             </div>
         </section>
 
-        <!-- 2. BRANDS MARQUEE -->
+        <!-- 2. BRANDS (logo cards slider) -->
         <section class="xp-brands">
             <div class="xp-wrap">
                 <div class="xp-brands-label">Trusted by industry leaders, global trade expos and high-growth brands</div>
-                <div class="xp-marq" tabindex="0" role="region" aria-label="Client brands">
-                    <div class="xp-marq-track">
-                        <?php foreach (array_merge($brandLogos, $brandLogos) as $b): ?>
-                            <div class="xp-brand"><i></i><b><?= $e($b['name']) ?></b><span><?= $e($b['cat']) ?></span></div>
-                        <?php endforeach; ?>
+                <div class="xp-lg">
+                    <div class="swiper" id="mbBrandSwiper">
+                        <div class="swiper-wrapper">
+                            <?php foreach ($brandLogos as $bi => $b): $imgPath = $b['logo'] ?? ''; ?>
+                                <div class="swiper-slide">
+                                    <div class="xp-lg-card xp-lg-card--<?= $bi % 3 ?>" title="<?= $e($b['name']) ?>">
+                                        <?php if (!empty($imgPath)): ?>
+                                            <img src="<?= $e($imgPath) ?>" alt="<?= $e($b['name']) ?>" loading="lazy">
+                                        <?php else: ?>
+                                            <div class="xp-mono"><?= $e(substr($b['name'], 0, 2)) ?></div>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
                     </div>
+                    <div class="xp-lg-pag"></div>
                 </div>
             </div>
         </section>
@@ -761,6 +785,7 @@ function renderServicePageLayout(array $config): void
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         function mbToggleFaq(btn) {
             const item = btn.closest('.mb-faq-item');
@@ -835,6 +860,20 @@ function renderServicePageLayout(array $config): void
                 btn.innerHTML = originalBtnHtml;
             });
         }
+
+        // Brand logos slider
+        (function () {
+            if (typeof Swiper === 'undefined' || !document.getElementById('mbBrandSwiper')) return;
+            new Swiper('#mbBrandSwiper', {
+                slidesPerView: 2, slidesPerGroup: 2, spaceBetween: 16, rewind: true, grabCursor: true,
+                autoplay: { delay: 3200, disableOnInteraction: false, pauseOnMouseEnter: true },
+                pagination: { el: '.xp-lg-pag', clickable: true },
+                breakpoints: {
+                    768: { slidesPerView: 3, slidesPerGroup: 3, spaceBetween: 22 },
+                    992: { slidesPerView: 4, slidesPerGroup: 4, spaceBetween: 24 }
+                }
+            });
+        })();
 
         // Mobile sticky CTA: appears after the hero, hides while the final CTA is on screen
         (function () {
