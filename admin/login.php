@@ -27,249 +27,74 @@ require_once __DIR__ . '/templates/header.php';
 ?>
 
 <style>
-    :root {
-        --auth-ink: #1f1b2a;
-        --auth-muted: #6b6478;
-        --auth-pink: #ec2c7a;
-        --auth-pink-deep: #d11869;
-        --auth-plum: #2a1233;
-        --auth-plum-soft: #4a1d52;
-        --auth-paper: #f6efe8;
-        --auth-line: rgba(209, 24, 105, 0.18);
-    }
-
-    .admin-auth-page {
-        min-height: 75vh;
-        display: grid;
-        place-items: center;
-        padding: 56px 0 80px;
-        background:
-            radial-gradient(900px 400px at 85% -10%, rgba(236, 44, 122, 0.14), transparent 60%),
-            var(--auth-paper);
-    }
+    .admin-auth-page { min-height: 100vh; display: grid; place-items: center; padding: 32px 16px; }
 
     .auth-shell {
-        display: grid;
-        grid-template-columns: 1fr 1.05fr;
-        max-width: 960px;
-        margin: 0 auto;
-        border-radius: 28px;
-        overflow: hidden;
-        background: #fff;
-        box-shadow: 0 30px 70px rgba(42, 18, 51, 0.18);
+        display: grid; grid-template-columns: 1fr 1.05fr; width: 100%; max-width: 940px; margin: 0 auto;
+        background: #fff; border-radius: 32px; padding: 12px; gap: 12px;
+        box-shadow: 0 30px 70px rgba(0, 0, 0, .10);
     }
 
-    /* ---------- Left brand panel ---------- */
+    /* ---------- Left dark brand panel ---------- */
     .auth-brand {
-        position: relative;
-        padding: 48px 40px;
-        color: #fff;
-        background: linear-gradient(160deg, var(--auth-plum-soft) 0%, var(--auth-plum) 70%);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        gap: 40px;
-        overflow: hidden;
+        position: relative; padding: 40px 34px; color: #fff; background: var(--adm-ink);
+        border-radius: 22px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; overflow: hidden;
     }
+    .auth-logo { width: 44px; height: 44px; border-radius: 50%; background: var(--adm-lime); color: var(--adm-ink); display: grid; place-items: center; font-size: 1.25rem; margin-bottom: 22px; position: relative; z-index: 1; }
+    .auth-brand h2 { margin: 0 0 12px; font-size: clamp(1.7rem, 3vw, 2.1rem); line-height: 1.12; font-weight: 600; letter-spacing: -.03em; position: relative; z-index: 1; }
+    .auth-brand p { margin: 0; color: #a9a9a9; line-height: 1.6; max-width: 32ch; font-size: .92rem; position: relative; z-index: 1; }
 
-    .auth-brand::after {
-        content: "";
-        position: absolute;
-        width: 320px;
-        height: 320px;
-        right: -120px;
-        bottom: -120px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(236, 44, 122, 0.55), transparent 70%);
-        pointer-events: none;
-    }
-
-    .auth-brand h2 {
-        margin: 0 0 14px;
-        font-size: clamp(1.7rem, 3vw, 2.2rem);
-        line-height: 1.15;
-        letter-spacing: -0.04em;
-        position: relative;
-        z-index: 1;
-    }
-
-    .auth-brand p {
-        margin: 0;
-        color: rgba(255, 255, 255, 0.72);
-        line-height: 1.6;
-        max-width: 34ch;
-        position: relative;
-        z-index: 1;
-    }
-
-    .auth-points {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        display: grid;
-        gap: 14px;
-        position: relative;
-        z-index: 1;
-    }
-
-    .auth-points li {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-weight: 600;
-        font-size: 0.95rem;
-    }
-
-    .auth-points svg {
-        flex: none;
-        width: 34px;
-        height: 34px;
-        padding: 8px;
-        border-radius: 10px;
-        background: rgba(255, 255, 255, 0.12);
-        stroke: #fff;
-    }
+    .auth-chips { display: flex; flex-direction: column; gap: 10px; position: relative; z-index: 1; }
+    .auth-chip { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 16px; font-size: .88rem; font-weight: 500; background: #1b1b1b; }
+    .auth-chip:nth-child(1) { background: var(--adm-yellow); color: var(--adm-ink); }
+    .auth-chip:nth-child(2) { background: var(--adm-red); color: #fff; }
+    .auth-chip:nth-child(3) { background: var(--adm-blue); color: #fff; }
+    .auth-chip i { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,.28); display: grid; place-items: center; font-size: .95rem; flex: none; }
+    .auth-chip:nth-child(1) i { background: rgba(0,0,0,.08); }
 
     /* ---------- Right form panel ---------- */
-    .auth-panel {
-        padding: 48px 44px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-    }
+    .auth-panel { padding: 40px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .auth-panel h1 { margin: 0 0 6px; font-size: 1.8rem; font-weight: 600; letter-spacing: -.03em; color: var(--adm-ink); }
+    .auth-panel > p { margin: 0 0 26px; color: #777; font-size: .92rem; }
 
-    .auth-panel h1 {
-        margin: 0 0 6px;
-        font-size: 1.9rem;
-        letter-spacing: -0.05em;
-        color: var(--auth-ink);
-    }
-
-    .auth-panel > p {
-        margin: 0 0 26px;
-        color: var(--auth-muted);
-    }
-
-    .admin-error {
-        display: flex;
-        gap: 10px;
-        align-items: flex-start;
-        border-radius: 12px;
-        padding: 12px 14px;
-        margin-bottom: 20px;
-        background: rgba(239, 68, 68, 0.08);
-        border: 1px solid rgba(239, 68, 68, 0.22);
-        color: #b91c1c;
-        font-weight: 600;
-        font-size: 0.92rem;
-        line-height: 1.45;
-    }
-
+    .admin-error { display: flex; gap: 10px; align-items: flex-start; border-radius: 16px; padding: 12px 14px; margin-bottom: 20px; background: #FFE9E5; border: 1px solid #FFC6BD; color: #B3270F; font-weight: 500; font-size: .88rem; line-height: 1.45; }
     .admin-error svg { flex: none; margin-top: 2px; }
 
     .admin-auth-form { display: grid; gap: 18px; }
-
     .field { display: grid; gap: 8px; }
-
-    .field > span {
-        font-weight: 700;
-        font-size: 0.92rem;
-        color: var(--auth-ink);
-    }
-
+    .field > span { font-weight: 500; font-size: .85rem; color: #444; }
     .input-wrap { position: relative; }
-
-    .input-wrap > svg.lead {
-        position: absolute;
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 18px;
-        height: 18px;
-        stroke: #a39bb0;
-        pointer-events: none;
-        transition: stroke 0.15s ease;
-    }
-
+    .input-wrap > svg.lead { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; stroke: #9a9a9a; pointer-events: none; transition: stroke .15s; }
     .input-wrap input {
-        width: 100%;
-        box-sizing: border-box;
-        padding: 14px 44px 14px 44px;
-        border: 1.5px solid var(--auth-line);
-        border-radius: 12px;
-        background: #fffdfb;
-        font: inherit;
-        color: var(--auth-ink);
-        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        width: 100%; box-sizing: border-box; padding: 14px 46px 14px 46px; border: 1px solid #E3E3E3; border-radius: 999px;
+        background: #fff; font: inherit; font-size: .92rem; color: var(--adm-ink); transition: border-color .15s, box-shadow .15s;
     }
+    .input-wrap input::placeholder { color: #b5b5b5; }
+    .input-wrap input:focus { outline: none; border-color: var(--adm-ink); box-shadow: 0 0 0 4px rgba(230, 247, 58, .6); }
+    .input-wrap:focus-within > svg.lead { stroke: var(--adm-ink); }
 
-    .input-wrap input::placeholder { color: #b6aec2; }
-
-    .input-wrap input:focus {
-        outline: none;
-        border-color: var(--auth-pink);
-        box-shadow: 0 0 0 4px rgba(236, 44, 122, 0.14);
-    }
-
-    .input-wrap:focus-within > svg.lead { stroke: var(--auth-pink); }
-
-    .toggle-pass {
-        position: absolute;
-        right: 6px;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 38px;
-        height: 38px;
-        display: grid;
-        place-items: center;
-        border: 0;
-        border-radius: 10px;
-        background: transparent;
-        color: #a39bb0;
-        cursor: pointer;
-    }
-
-    .toggle-pass:hover { color: var(--auth-pink-deep); background: rgba(236, 44, 122, 0.08); }
-    .toggle-pass:focus-visible { outline: 2px solid var(--auth-pink); }
+    .toggle-pass { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: #9a9a9a; cursor: pointer; }
+    .toggle-pass:hover { color: var(--adm-ink); background: #F1F1F1; }
+    .toggle-pass:focus-visible { outline: 2px solid var(--adm-ink); }
     .toggle-pass svg { width: 19px; height: 19px; }
     .toggle-pass .eye-off { display: none; }
     .toggle-pass[aria-pressed="true"] .eye-on { display: none; }
     .toggle-pass[aria-pressed="true"] .eye-off { display: block; }
 
-    .auth-submit {
-        margin-top: 6px;
-        width: 100%;
-        padding: 15px 18px;
-        border: 0;
-        border-radius: 12px;
-        font: inherit;
-        font-weight: 700;
-        color: #fff;
-        cursor: pointer;
-        background: linear-gradient(135deg, var(--auth-pink) 0%, var(--auth-pink-deep) 100%);
-        box-shadow: 0 12px 24px rgba(236, 44, 122, 0.28);
-        transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-    }
-
-    .auth-submit:hover { transform: translateY(-1px); box-shadow: 0 16px 28px rgba(236, 44, 122, 0.34); }
+    .auth-submit { margin-top: 6px; width: 100%; padding: 15px 18px; border: 0; border-radius: 999px; font: inherit; font-weight: 600; font-size: .95rem; color: var(--adm-lime); background: var(--adm-ink); cursor: pointer; transition: background .15s, transform .15s, opacity .15s; }
+    .auth-submit:hover { background: #2a2a2a; transform: translateY(-1px); }
     .auth-submit:active { transform: translateY(0); }
-    .auth-submit:focus-visible { outline: 3px solid rgba(236, 44, 122, 0.4); outline-offset: 2px; }
-    .auth-submit[disabled] { opacity: 0.7; cursor: progress; transform: none; }
+    .auth-submit:focus-visible { outline: 3px solid var(--adm-lime); outline-offset: 2px; }
+    .auth-submit[disabled] { opacity: .7; cursor: progress; transform: none; }
 
-    .auth-foot {
-        margin: 22px 0 0;
-        font-size: 0.85rem;
-        color: var(--auth-muted);
-        text-align: center;
-    }
+    .auth-foot { margin: 22px 0 0; font-size: .82rem; color: #888; text-align: center; }
 
     @media (max-width: 820px) {
-        .auth-shell { grid-template-columns: 1fr; max-width: 480px; }
-        .auth-brand { padding: 32px 28px; gap: 24px; }
-        .auth-points { display: none; }
-        .auth-panel { padding: 32px 26px 36px; }
+        .auth-shell { grid-template-columns: 1fr; max-width: 460px; }
+        .auth-brand { padding: 28px 24px; gap: 20px; }
+        .auth-chips { display: none; }
+        .auth-panel { padding: 28px 20px 30px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
         .auth-submit, .input-wrap input, .input-wrap > svg.lead { transition: none; }
     }
@@ -281,23 +106,15 @@ require_once __DIR__ . '/templates/header.php';
 
             <aside class="auth-brand">
                 <div>
+                    <div class="auth-logo"><i class="bi bi-x-diamond-fill"></i></div>
                     <h2>WebTecMart Admin</h2>
                     <p>Website se aane wali har enquiry aur lead yahin se dekhein aur manage karein.</p>
                 </div>
-                <ul class="auth-points">
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v12H5.2L4 17.2V4z"/><path d="M8 9h8M8 12h5"/></svg>
-                        Nayi enquiries dekhein
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M17 11l1.8 1.8L22 9.5"/></svg>
-                        Leads ko follow up karein
-                    </li>
-                    <li>
-                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.2 4.2L19 7"/></svg>
-                        Status update karein
-                    </li>
-                </ul>
+                <div class="auth-chips">
+                    <div class="auth-chip"><i class="bi bi-inbox"></i> Nayi enquiries dekhein</div>
+                    <div class="auth-chip"><i class="bi bi-person-check"></i> Leads ko follow up karein</div>
+                    <div class="auth-chip"><i class="bi bi-check2-circle"></i> Status update karein</div>
+                </div>
             </aside>
 
             <div class="auth-panel">

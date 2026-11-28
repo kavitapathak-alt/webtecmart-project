@@ -587,449 +587,105 @@ require_once __DIR__ . '/templates/header.php';
 ?>
 
 <style>
-    /* ===== SERVICES CMS DASHBOARD STYLES ===== */
-    .scms-header-row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 16px;
-        margin-bottom: 24px;
-    }
-    .scms-title-wrap h1 {
-        font-size: clamp(1.4rem, 2.5vw, 1.85rem) !important;
-        font-weight: 800 !important;
-        color: #0F172A;
-        margin: 0 0 4px !important;
-        letter-spacing: -0.02em;
-    }
-    .scms-title-wrap p {
-        font-size: 0.92rem !important;
-        color: #64748B;
-        margin: 0 !important;
-    }
+    /* ===== SERVICES CMS — reference-style theme (only CSS changes, all HTML/PHP stays the same) ===== */
+    .scms-header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+    .scms-title-wrap h1 { font-size: clamp(1.4rem, 2.4vw, 1.8rem) !important; font-weight: 600 !important; color: #0E0E0E; margin: 0 0 4px !important; letter-spacing: -.02em; }
+    .scms-title-wrap p { font-size: .88rem !important; color: #777; margin: 0 !important; }
 
-    /* Stat Cards */
-    .scms-stats-grid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 18px;
-        margin-bottom: 28px;
-    }
-    @media (min-width: 576px) {
-        .scms-stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 992px) {
-        .scms-stats-grid { grid-template-columns: repeat(4, 1fr); }
-    }
-    .scms-stat-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 20px 22px;
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .scms-stat-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
-    }
-    .scms-stat-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: 12px;
-        display: grid;
-        place-items: center;
-        font-size: 1.35rem;
-        flex-shrink: 0;
-    }
-    .scms-stat-icon.pink { background: #FFF0F7; color: #C4007A; }
-    .scms-stat-icon.green { background: #ECFDF5; color: #059669; }
-    .scms-stat-icon.amber { background: #FFFBEB; color: #D97706; }
-    .scms-stat-icon.blue { background: #EFF6FF; color: #2563EB; }
-    .scms-stat-num {
-        font-size: 1.6rem;
-        font-weight: 800;
-        color: #0F172A;
-        line-height: 1.1;
-    }
-    .scms-stat-lbl {
-        font-size: 0.8rem;
-        font-weight: 600;
-        color: #64748B;
-        margin-top: 2px;
-    }
+    /* Stat cards -> yellow / red / blue / black */
+    .scms-stats-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
+    @media (min-width: 576px) { .scms-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 992px) { .scms-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    .scms-stat-card { border: 0; border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: flex-end; min-height: 112px; box-shadow: none; transition: none; }
+    .scms-stat-card:hover { transform: none; box-shadow: none; }
+    .scms-stat-card:nth-child(1) { background: var(--adm-yellow); color: #0E0E0E; }
+    .scms-stat-card:nth-child(2) { background: var(--adm-red); color: #fff; }
+    .scms-stat-card:nth-child(3) { background: var(--adm-blue); color: #fff; }
+    .scms-stat-card:nth-child(4) { background: #0E0E0E; color: #fff; }
+    .scms-stat-icon { width: 38px; height: 38px; border-radius: 50%; font-size: 1.05rem; background: rgba(255,255,255,.3) !important; color: inherit !important; align-self: flex-start; }
+    .scms-stat-card:nth-child(1) .scms-stat-icon { background: rgba(0,0,0,.08) !important; }
+    .scms-stat-num { font-size: 2.2rem; font-weight: 600; color: inherit; letter-spacing: -.03em; line-height: 1; }
+    .scms-stat-lbl { font-size: .82rem; font-weight: 500; color: inherit; opacity: .85; margin-top: 6px; }
 
-    /* Actions Bar */
-    .scms-bar {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 16px 20px;
-        margin-bottom: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 14px;
-    }
-    .scms-search-wrap {
-        position: relative;
-        flex: 1;
-        min-width: 240px;
-        max-width: 400px;
-    }
-    .scms-search-wrap i {
-        position: absolute;
-        left: 14px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: #94A3B8;
-        font-size: 0.95rem;
-    }
-    .scms-search-input {
-        width: 100%;
-        padding: 9px 14px 9px 38px;
-        border: 1.5px solid #E2E8F0;
-        border-radius: 10px;
-        font-size: 0.88rem;
-        font-family: inherit;
-        outline: none;
-        transition: border-color 0.2s ease;
-    }
-    .scms-search-input:focus {
-        border-color: #C4007A;
-    }
-
-    .scms-cat-pills {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-    .scms-cat-pill {
-        background: #F1F5F9;
-        border: 1px solid #E2E8F0;
-        color: #475569;
-        font-size: 0.78rem;
-        font-weight: 700;
-        padding: 6px 14px;
-        border-radius: 9999px;
-        cursor: pointer;
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-    .scms-cat-pill:hover,
-    .scms-cat-pill.active {
-        background: #FFF0F7;
-        color: #C4007A;
-        border-color: rgba(196, 0, 122, 0.3);
-    }
+    /* Search + category pills */
+    .scms-bar { background: #fff; border: 1px solid #EDEDED; border-radius: 999px; padding: 8px 10px 8px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .scms-search-wrap { position: relative; flex: 1; min-width: 240px; max-width: 400px; }
+    .scms-search-wrap i { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: #999; font-size: .95rem; }
+    .scms-search-input { width: 100%; padding: 9px 0 9px 28px; border: 0; background: transparent; font-size: .88rem; font-family: inherit; outline: none; }
+    .scms-cat-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+    .scms-cat-pill { background: transparent; border: 0; color: #0E0E0E; font-size: .8rem; font-weight: 500; padding: 8px 16px; border-radius: 999px; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .scms-cat-pill:hover { background: #F1F1F1; color: #0E0E0E; border: 0; }
+    .scms-cat-pill.active { background: #0E0E0E; color: #fff; border: 0; }
 
     /* Table */
-    .scms-table-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        overflow: hidden;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-    }
-    .scms-table {
-        width: 100%;
-        border-collapse: collapse;
-        text-align: left;
-    }
-    .scms-table th {
-        background: #F8FAFC;
-        padding: 14px 18px;
-        font-size: 0.75rem;
-        font-weight: 800;
-        color: #64748B;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        border-bottom: 1px solid #E2E8F0;
-    }
-    .scms-table td {
-        padding: 16px 18px;
-        font-size: 0.88rem;
-        color: #1E293B;
-        border-bottom: 1px solid #F1F5F9;
-        vertical-align: middle;
-    }
-    .scms-table tr:last-child td {
-        border-bottom: none;
-    }
-    .scms-table tr:hover td {
-        background: #FCFDFE;
-    }
+    .scms-table-card { background: #fff; border: 1px solid #EDEDED; border-radius: 26px; overflow: hidden; box-shadow: none; }
+    .scms-table { width: 100%; border-collapse: collapse; text-align: left; }
+    .scms-table th { background: #FAFAFA; padding: 14px 20px; font-size: .75rem; font-weight: 500; color: #888; text-transform: none; letter-spacing: 0; border-bottom: 1px solid #EEE; }
+    .scms-table td { padding: 16px 20px; font-size: .86rem; color: #1c1c1c; border-bottom: 1px solid #F3F3F3; vertical-align: middle; }
+    .scms-table tr:last-child td { border-bottom: 0; }
+    .scms-table tr:hover td { background: #FAFAFA; }
+    .scms-svc-cell { display: flex; align-items: center; gap: 14px; }
+    .scms-svc-icon-box { width: 42px; height: 42px; border-radius: 50%; background: var(--adm-lime); color: #0E0E0E; display: grid; place-items: center; font-size: 1.1rem; flex-shrink: 0; }
+    .scms-svc-name { font-weight: 600; color: #0E0E0E; font-size: .94rem; margin-bottom: 2px; }
+    .scms-svc-name .badge { background: #0E0E0E !important; color: var(--adm-lime) !important; font-weight: 600; border-radius: 99px; }
+    .scms-svc-tagline { font-size: .78rem; color: #777; }
+    .scms-svc-slug { font-size: .72rem; color: #aaa; font-family: monospace; }
+    .scms-badge-cat { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: .74rem; font-weight: 500; background: #F6F6F6; color: #0E0E0E; border: 1px solid #EAEAEA; }
 
-    .scms-svc-cell {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }
-    .scms-svc-icon-box {
-        width: 42px;
-        height: 42px;
-        border-radius: 10px;
-        background: #FFF0F7;
-        color: #C4007A;
-        display: grid;
-        place-items: center;
-        font-size: 1.15rem;
-        flex-shrink: 0;
-    }
-    .scms-svc-name {
-        font-weight: 800;
-        color: #0F172A;
-        font-size: 0.94rem;
-        margin-bottom: 2px;
-    }
-    .scms-svc-tagline {
-        font-size: 0.78rem;
-        color: #64748B;
-    }
-    .scms-svc-slug {
-        font-size: 0.72rem;
-        color: #94A3B8;
-        font-family: monospace;
-    }
+    .scms-status-btn { border: 0; background: none; padding: 0; cursor: pointer; }
+    .scms-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: .74rem; font-weight: 600; text-transform: none; letter-spacing: 0; }
+    .scms-status-badge.published { background: var(--adm-lime); color: #0E0E0E; border: 0; }
+    .scms-status-badge.draft { background: #F1F1F1; color: #666; border: 0; }
+    .scms-status-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-    .scms-badge-cat {
-        display: inline-block;
-        padding: 4px 10px;
-        border-radius: 6px;
-        font-size: 0.72rem;
-        font-weight: 700;
-        background: #EFF6FF;
-        color: #2563EB;
-        border: 1px solid rgba(37, 99, 235, 0.15);
-    }
+    .scms-actions-cell { display: flex; align-items: center; gap: 8px; }
+    .scms-btn-action { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: .85rem; border: 0; background: #F4F4F4; color: #0E0E0E; text-decoration: none; cursor: pointer; transition: .2s; }
+    .scms-btn-action:hover { background: #0E0E0E; color: var(--adm-lime); border: 0; }
+    .scms-btn-action.edit:hover { background: #0E0E0E; color: var(--adm-lime); border: 0; }
+    .scms-btn-action.del:hover { background: var(--adm-red); color: #fff; border: 0; }
 
-    .scms-status-btn {
-        border: none;
-        background: none;
-        padding: 0;
-        cursor: pointer;
-    }
-    .scms-status-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 12px;
-        border-radius: 9999px;
-        font-size: 0.75rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-    }
-    .scms-status-badge.published {
-        background: #ECFDF5;
-        color: #059669;
-        border: 1px solid rgba(5, 150, 105, 0.25);
-    }
-    .scms-status-badge.draft {
-        background: #FFFBEB;
-        color: #D97706;
-        border: 1px solid rgba(217, 119, 6, 0.25);
-    }
-    .scms-status-badge .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: currentColor;
-    }
+    /* Editor */
+    .scms-editor-card { background: #fff; border: 1px solid #EDEDED; border-radius: 26px; padding: 28px; box-shadow: none; margin-bottom: 32px; }
+    .scms-editor-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #EEE; margin-bottom: 22px; gap: 12px; flex-wrap: wrap; }
+    .scms-editor-title { font-size: 1.25rem; font-weight: 600; color: #0E0E0E; margin: 0; }
+    .scms-editor-card .text-primary { color: #0E0E0E !important; }
+    .scms-editor-card .btn-outline-primary { color: #0E0E0E; border-color: #0E0E0E; border-radius: 999px; }
+    .scms-editor-card .btn-outline-primary:hover { background: #0E0E0E; color: var(--adm-lime); }
+    .scms-editor-card .btn-outline-secondary, .scms-header-row .btn-outline-secondary { border-radius: 999px; color: #0E0E0E; border-color: #0E0E0E; }
+    .scms-editor-card .btn-outline-secondary:hover, .scms-header-row .btn-outline-secondary:hover { background: #0E0E0E; color: #fff; }
+    .scms-editor-card .form-check-input:checked { background-color: #0E0E0E; border-color: #0E0E0E; }
 
-    .scms-actions-cell {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-    .scms-btn-action {
-        width: 32px;
-        height: 32px;
-        border-radius: 8px;
-        display: grid;
-        place-items: center;
-        font-size: 0.85rem;
-        border: 1px solid #E2E8F0;
-        background: #FFFFFF;
-        color: #475569;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.2s ease;
-    }
-    .scms-btn-action:hover {
-        background: #F8FAFC;
-        color: #0F172A;
-        border-color: #CBD5E1;
-    }
-    .scms-btn-action.edit:hover {
-        background: #FFF0F7;
-        color: #C4007A;
-        border-color: #C4007A;
-    }
-    .scms-btn-action.del:hover {
-        background: #FEF2F2;
-        color: #DC2626;
-        border-color: #F87171;
-    }
+    .scms-form-group { margin-bottom: 20px; }
+    .scms-form-group label { display: block; font-size: .8rem; font-weight: 500; color: #555; margin-bottom: 6px; text-transform: none; letter-spacing: 0; }
+    .scms-form-control { width: 100%; padding: 10px 16px; border: 1px solid #E3E3E3; border-radius: 14px; font-size: .9rem; font-family: inherit; outline: none; background: #fff; transition: border-color .2s, box-shadow .2s; }
+    .scms-form-control:focus { border-color: #0E0E0E; box-shadow: 0 0 0 3px rgba(230,247,58,.55); }
+    textarea.scms-form-control { min-height: 90px; resize: vertical; border-radius: 16px; }
 
-    /* ===== EDITOR STYLES ===== */
-    .scms-editor-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 20px;
-        padding: 28px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-        margin-bottom: 32px;
-    }
-    .scms-editor-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding-bottom: 20px;
-        border-bottom: 1px solid #E2E8F0;
-        margin-bottom: 24px;
-    }
-    .scms-editor-title {
-        font-size: 1.35rem;
-        font-weight: 800;
-        color: #0F172A;
-        margin: 0;
-    }
+    /* Tabs as pills (also overrides the inline pink tab) */
+    .scms-tabs { display: flex; gap: 6px; border-bottom: 0; margin-bottom: 24px; overflow-x: auto; padding: 6px; background: #F4F4F4; border-radius: 999px; }
+    .scms-tab-btn, .scms-tab-btn[style] { padding: 9px 18px; border: 0 !important; background: transparent !important; font-family: inherit; font-size: .84rem; font-weight: 500 !important; color: #0E0E0E !important; cursor: pointer; position: relative; white-space: nowrap; border-radius: 999px; transition: .2s; }
+    .scms-tab-btn:hover, .scms-tab-btn[style]:hover { background: #E8E8E8 !important; }
+    .scms-tab-btn.active, .scms-tab-btn.active[style] { background: #0E0E0E !important; color: #fff !important; }
+    .scms-tab-btn.active::after { display: none; }
 
-    .scms-form-group {
-        margin-bottom: 20px;
-    }
-    .scms-form-group label {
-        display: block;
-        font-size: 0.82rem;
-        font-weight: 700;
-        color: #334155;
-        margin-bottom: 6px;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-    }
-    .scms-form-control {
-        width: 100%;
-        padding: 10px 14px;
-        border: 1.5px solid #E2E8F0;
-        border-radius: 10px;
-        font-size: 0.92rem;
-        font-family: inherit;
-        outline: none;
-        transition: border-color 0.2s ease;
-    }
-    .scms-form-control:focus {
-        border-color: #C4007A;
-        box-shadow: 0 0 0 3px rgba(196, 0, 122, 0.08);
-    }
-    textarea.scms-form-control {
-        min-height: 90px;
-        resize: vertical;
-    }
+    /* Info banners inside tabs (override inline pink) */
+    .scms-editor-card .alert.alert-light[style] { background: #FBFFD6 !important; border: 1px solid var(--adm-lime) !important; border-radius: 18px; }
+    .scms-editor-card .alert strong[style] { color: #0E0E0E !important; }
 
-    .scms-tabs {
-        display: flex;
-        gap: 8px;
-        border-bottom: 2px solid #E2E8F0;
-        margin-bottom: 24px;
-        overflow-x: auto;
-    }
-    .scms-tab-btn {
-        padding: 10px 18px;
-        border: none;
-        background: none;
-        font-family: inherit;
-        font-size: 0.88rem;
-        font-weight: 700;
-        color: #64748B;
-        cursor: pointer;
-        position: relative;
-        white-space: nowrap;
-        transition: color 0.2s ease;
-    }
-    .scms-tab-btn:hover {
-        color: #C4007A;
-    }
-    .scms-tab-btn.active {
-        color: #C4007A;
-    }
-    .scms-tab-btn.active::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 0;
-        right: 0;
-        height: 2px;
-        background: #C4007A;
-    }
+    .scms-repeater-box, .scms-item-card { background: #FAFAFA; border: 1px solid #EDEDED; border-radius: 18px; padding: 16px; margin-bottom: 12px; position: relative; }
+    .scms-item-card.bg-white { background: #fff; }
+    .scms-repeater-box .del-btn { position: absolute; top: 12px; right: 12px; background: #FFE3DF; color: #D6301A; border: 0; width: 26px; height: 26px; border-radius: 50%; font-size: .8rem; cursor: pointer; display: grid; place-items: center; }
+    .scms-btn-add { background: var(--adm-lime); color: #0E0E0E; border: 0; font-weight: 600; font-size: .84rem; padding: 9px 18px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: .2s; }
+    .scms-btn-add:hover { background: #0E0E0E; color: var(--adm-lime); }
 
-    .scms-repeater-box {
-        background: #F8FAFC;
-        border: 1px solid #E2E8F0;
-        border-radius: 14px;
-        padding: 16px;
-        margin-bottom: 12px;
-        position: relative;
-    }
-    .scms-repeater-box .del-btn {
-        position: absolute;
-        top: 12px;
-        right: 12px;
-        background: #FEE2E2;
-        color: #DC2626;
-        border: none;
-        width: 26px;
-        height: 26px;
-        border-radius: 6px;
-        font-size: 0.8rem;
-        cursor: pointer;
-        display: grid;
-        place-items: center;
-    }
-    .scms-btn-add {
-        background: #FFF0F7;
-        color: #C4007A;
-        border: 1.5px dashed #C4007A;
-        font-weight: 700;
-        font-size: 0.84rem;
-        padding: 9px 18px;
-        border-radius: 10px;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        transition: all 0.2s ease;
-    }
-    .scms-btn-add:hover {
-        background: #C4007A;
-        color: #FFFFFF;
-    }
+    .scms-primary-btn { background: #0E0E0E; color: #fff; border: 0; padding: 12px 26px; border-radius: 999px; font-weight: 600; font-size: .9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: none; transition: .2s; }
+    .scms-primary-btn:hover { background: #2a2a2a; color: var(--adm-lime); transform: none; box-shadow: none; }
+    .scms-primary-btn i { color: var(--adm-lime); }
 
-    .scms-primary-btn {
-        background: linear-gradient(135deg, #C4007A 0%, #E0398F 100%);
-        color: #FFFFFF;
-        border: none;
-        padding: 12px 28px;
-        border-radius: 10px;
-        font-weight: 700;
-        font-size: 0.94rem;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.25);
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    .scms-primary-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 20px rgba(196, 0, 122, 0.35);
-        color: #FFFFFF;
-    }
+    /* Delete modal */
+    #scmsDeleteModal .modal-content { border-radius: 26px; overflow: hidden; }
+    #scmsDeleteModal .btn-danger { background: var(--adm-red); border-color: var(--adm-red); border-radius: 999px; }
+    #scmsDeleteModal .btn-outline-secondary { border-radius: 999px; }
 </style>
 
 <div class="scms-main-wrap">

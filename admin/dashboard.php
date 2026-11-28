@@ -2,370 +2,398 @@
 require_once __DIR__ . '/../functions.php';
 ensureAdmin();
 
-// Real SQLite Statistics
+// ---------- Real SQLite statistics (unchanged) ----------
 $leadCount = (int) db()->query('SELECT COUNT(*) as total FROM leads')->fetch()['total'];
 $contactCount = (int) db()->query('SELECT COUNT(*) as total FROM contacts')->fetch()['total'];
-
 $serviceCount = (int) db()->query("SELECT COUNT(*) FROM content_items WHERE content_type = 'service_detail'")->fetchColumn();
 $blogCount = (int) db()->query("SELECT COUNT(*) as total FROM content_items WHERE content_type = 'blog'")->fetch()['total'];
 $partnerCount = (int) db()->query("SELECT COUNT(*) as total FROM content_items WHERE content_type = 'partner'")->fetch()['total'];
 $totalContentItems = (int) db()->query('SELECT COUNT(*) as total FROM content_items')->fetch()['total'];
 
 $recentLeads = latestLeads();
-
 $adminName = $_SESSION['admin_name'] ?? 'Admin';
+$latestLead = $recentLeads[0] ?? null;
+
 $initial = static function (string $name): string {
     $name = trim($name);
     if ($name === '') return '?';
-    return function_exists('mb_strtoupper') ? mb_strtoupper(mb_substr($name, 0, 1)) : strtoupper(substr($name, 0, 1));
+    return strtoupper(substr($name, 0, 1));
 };
+
+// ---------- Helpers for charts ----------
+$countByDay = static function (string $table, string $fromDate): array {
+    try {
+        $st = db()->prepare("SELECT strftime('%Y-%m-%d', created_at) AS d, COUNT(*) AS c FROM {$table} WHERE created_at >= ? GROUP BY d");
+        $st->execute([$fromDate]);
+        $out = [];
+        foreach ($st->fetchAll() as $r) $out[$r['d']] = (int) $r['c'];
+        return $out;
+    } catch (\Throwable $e) { return []; }
+};
+$countByMonth = static function (string $table, string $fromDate): array {
+    try {
+        $st = db()->prepare("SELECT strftime('%Y-%m', created_at) AS m, COUNT(*) AS c FROM {$table} WHERE created_at >= ? GROUP BY m");
+        $st->execute([$fromDate]);
+        $out = [];
+        foreach ($st->fetchAll() as $r) $out[$r['m']] = (int) $r['c'];
+        return $out;
+    } catch (\Throwable $e) { return []; }
+};
+// smooth cubic-bezier path through points
+$smooth = static function (array $pts): string {
+    $n = count($pts);
+    if ($n === 0) return '';
+    $d = sprintf('M%.1f,%.1f', $pts[0][0], $pts[0][1]);
+    for ($i = 0; $i < $n - 1; $i++) {
+        $p0 = $pts[max($i - 1, 0)]; $p1 = $pts[$i]; $p2 = $pts[$i + 1]; $p3 = $pts[min($i + 2, $n - 1)];
+        $c1x = $p1[0] + ($p2[0] - $p0[0]) / 6; $c1y = $p1[1] + ($p2[1] - $p0[1]) / 6;
+        $c2x = $p2[0] - ($p3[0] - $p1[0]) / 6; $c2y = $p2[1] - ($p3[1] - $p1[1]) / 6;
+        $d .= sprintf(' C%.1f,%.1f %.1f,%.1f %.1f,%.1f', $c1x, $c1y, $c2x, $c2y, $p2[0], $p2[1]);
+    }
+    return $d;
+};
+
+// ---- Monthly: last 6 months leads vs contacts ----
+$months = [];
+for ($i = 5; $i >= 0; $i--) {
+    $dt = new DateTime('first day of this month');
+    $dt->modify("-{$i} month");
+    $months[] = ['key' => $dt->format('Y-m'), 'label' => $dt->format('M')];
+}
+$mFrom = $months[0]['key'] . '-01';
+$leadsByMonth = $countByMonth('leads', $mFrom);
+$contactsByMonth = $countByMonth('contacts', $mFrom);
+$leadSeries = $contactSeries = [];
+foreach ($months as $m) {
+    $leadSeries[] = $leadsByMonth[$m['key']] ?? 0;
+    $contactSeries[] = $contactsByMonth[$m['key']] ?? 0;
+}
+$maxM = max(1, max($leadSeries), max($contactSeries));
+$W = 800; $H = 220; $padT = 20; $padB = 20;
+$toPts = static function (array $series) use ($W, $H, $padT, $padB, $maxM): array {
+    $n = count($series); $pts = [];
+    foreach ($series as $i => $v) {
+        $x = $n > 1 ? $i * ($W / ($n - 1)) : $W / 2;
+        $y = $H - $padB - ($v / $maxM) * ($H - $padT - $padB);
+        $pts[] = [$x, $y];
+    }
+    return $pts;
+};
+$leadPath = $smooth($toPts($leadSeries));
+$contactPath = $smooth($toPts($contactSeries));
+
+// ---- Weekly: last 7 days leads (area chart) ----
+$days = [];
+for ($i = 6; $i >= 0; $i--) {
+    $dt = new DateTime("-{$i} day");
+    $days[] = ['key' => $dt->format('Y-m-d'), 'label' => $dt->format('D')];
+}
+$leadsByDay = $countByDay('leads', $days[0]['key']);
+$daySeries = [];
+foreach ($days as $d) $daySeries[] = $leadsByDay[$d['key']] ?? 0;
+$maxD = max(1, max($daySeries));
+$AW = 300; $AH = 110;
+$aPts = [];
+foreach ($daySeries as $i => $v) {
+    $aPts[] = [$i * ($AW / 6), $AH - 10 - ($v / $maxD) * ($AH - 30)];
+}
+$areaLine = $smooth($aPts);
+$areaFill = $areaLine . sprintf(' L%d,%d L0,%d Z', $AW, $AH, $AH);
+
+// ---- Content breakdown (replaces "Weekly Report" list) ----
+try {
+    $contentBreakdown = db()->query("SELECT content_type, COUNT(*) AS c FROM content_items GROUP BY content_type ORDER BY c DESC")->fetchAll();
+} catch (\Throwable $e) { $contentBreakdown = []; }
+
+// ---- Calendar for current month, dots on days that received leads ----
+$monthStart = new DateTime('first day of this month');
+$daysInMonth = (int) $monthStart->format('t');
+$firstDow = (int) $monthStart->format('w'); // 0=Sun
+$leadDays = [];
+foreach ($countByDay('leads', $monthStart->format('Y-m-01')) as $k => $v) $leadDays[(int) substr($k, 8, 2)] = $v;
+$todayNum = (int) date('j');
+
+$maxLeadStat = $leadCount;
 
 require_once __DIR__ . '/templates/header.php';
 ?>
 
 <style>
-    /* Dashboard specific overrides */
-    .dash-greeting {
-        margin-bottom: 28px;
-    }
-    .dash-greeting h1 {
-        font-size: clamp(1.5rem, 2.5vw, 1.85rem) !important;
-        font-weight: 800 !important;
-        color: #0F172A;
-        letter-spacing: -0.02em;
-        margin: 0 0 6px !important;
-    }
-    .dash-greeting p {
-        font-size: 0.95rem !important;
-        color: #64748B;
-        margin: 0 !important;
-    }
+    .bx-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+    .bx-left, .bx-right { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    @media (max-width: 1100px) { .bx-grid { grid-template-columns: 1fr; } }
 
-    /* Stat Cards */
-    .dash-stat-grid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 20px;
-        margin-bottom: 32px;
-    }
-    @media (min-width: 640px) {
-        .dash-stat-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (min-width: 1100px) {
-        .dash-stat-grid { grid-template-columns: repeat(4, 1fr); }
-    }
+    .bx-card { background: #fff; border-radius: 26px; padding: 22px; border: 1px solid #EDEDED; }
+    .bx-card h3 { font-size: .95rem; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 8px; }
 
-    .adm-card {
-        background: #FFFFFF;
-        border: 1px solid #E2E8F0;
-        border-radius: 16px;
-        padding: 24px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-    .adm-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.06);
-    }
+    .bx-search { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #EDEDED; border-radius: 999px; padding: 12px 20px; }
+    .bx-search input { border: 0; outline: 0; width: 100%; font: inherit; font-size: .88rem; background: transparent; }
 
-    .dash-stat-card {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-    }
-    .dash-stat-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 14px;
-        display: grid;
-        place-items: center;
-        font-size: 1.4rem;
-        flex-shrink: 0;
-    }
-    .dash-stat-icon.pink { background: #FFF0F7; color: #C4007A; }
-    .dash-stat-icon.blue { background: #EFF6FF; color: #2563EB; }
-    .dash-stat-icon.green { background: #ECFDF5; color: #059669; }
-    .dash-stat-icon.amber { background: #FFFBEB; color: #D97706; }
+    .bx-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 700px) { .bx-stats { grid-template-columns: 1fr; } }
+    .bx-stat { border-radius: 20px; padding: 18px 20px 20px; position: relative; min-height: 140px; display: flex; flex-direction: column; justify-content: space-between; }
+    .bx-stat-top { display: flex; justify-content: space-between; align-items: center; font-size: .88rem; font-weight: 500; }
+    .bx-stat-tag { background: #0E0E0E; color: #fff; font-size: .68rem; font-weight: 600; padding: 4px 10px; border-radius: 99px; }
+    .bx-stat-val { font-size: 2.3rem; font-weight: 600; letter-spacing: -.03em; }
+    .bx-yellow { background: var(--adm-yellow); color: #0E0E0E; }
+    .bx-red { background: var(--adm-red); color: #fff; }
+    .bx-blue { background: var(--adm-blue); color: #fff; }
 
-    .dash-stat-info .num {
-        font-size: 1.75rem;
-        font-weight: 800;
-        color: #0F172A;
-        line-height: 1.15;
-        letter-spacing: -0.02em;
-    }
-    .dash-stat-info .label {
-        font-size: 0.825rem;
-        font-weight: 600;
-        color: #64748B;
-        margin-top: 2px;
-    }
+    .bx-legend { display: flex; gap: 14px; font-size: .68rem; color: #777; align-items: center; }
+    .bx-legend i { font-size: .45rem; }
+    .bx-chart { width: 100%; height: 230px; margin-top: 14px; }
+    .bx-xaxis { display: flex; justify-content: space-between; font-size: .72rem; color: #999; margin-top: 4px; }
 
-    /* Quick Actions */
-    .dash-quick-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 32px;
-    }
-    .dash-action-btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 10px 18px;
-        border-radius: 12px;
-        background: #FFFFFF;
-        border: 1.5px solid #E2E8F0;
-        color: #1E293B;
-        font-size: 0.875rem;
-        font-weight: 700;
-        text-decoration: none;
-        transition: all 0.2s ease;
-    }
-    .dash-action-btn i { font-size: 1.05rem; color: #C4007A; }
-    .dash-action-btn:hover {
-        background: #FFF0F7;
-        border-color: #F1C6DC;
-        color: #C4007A;
-        transform: translateY(-1px);
-    }
-    .dash-action-btn.primary {
-        background: #C4007A;
-        color: #FFFFFF !important;
-        border-color: #C4007A;
-        box-shadow: 0 4px 14px rgba(196, 0, 122, 0.25);
-    }
-    .dash-action-btn.primary i { color: #FFFFFF; }
-    .dash-action-btn.primary:hover {
-        background: #A3005F;
-        border-color: #A3005F;
-    }
+    .bx-two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 800px) { .bx-two { grid-template-columns: 1fr; } }
 
-    /* Leads Table Card */
-    .dash-table-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 20px 24px;
-        border-bottom: 1px solid #E2E8F0;
-    }
-    .dash-table-head h2 {
-        font-size: 1.15rem !important;
-        font-weight: 800 !important;
-        color: #0F172A;
-        margin: 0 !important;
-    }
-    .dash-table-head a {
-        font-size: 0.85rem;
-        font-weight: 700;
-        color: #C4007A;
-        text-decoration: none;
-    }
-    .dash-table-head a:hover { text-decoration: underline; }
+    .bx-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: #F6F6F6; border-radius: 12px; padding: 9px 12px; margin-top: 8px; font-size: .8rem; }
+    .bx-row .n { color: #888; width: 18px; }
+    .bx-row .t { flex: 1; font-weight: 500; text-transform: capitalize; }
+    .bx-row .c { color: #777; font-size: .75rem; }
+    .bx-mini { background: var(--adm-red); color: #fff; border-radius: 99px; font-size: .64rem; font-weight: 600; padding: 5px 12px; text-decoration: none; }
+    .bx-mini:hover { color: #fff; background: #e63e27; }
 
-    .adm-table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    .adm-table th {
-        background: #F8FAFC;
-        padding: 12px 24px;
-        font-size: 0.72rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        color: #64748B;
-        text-align: left;
-        border-bottom: 1px solid #E2E8F0;
-    }
-    .adm-table td {
-        padding: 16px 24px;
-        font-size: 0.88rem;
-        color: #1E293B;
-        border-bottom: 1px solid #F1F5F9;
-        vertical-align: middle;
-    }
-    .adm-table tr:last-child td { border-bottom: none; }
-    .adm-table tr:hover td { background: #FAFAFA; }
+    .bx-cal { width: 100%; font-size: .75rem; margin-top: 10px; text-align: center; border-collapse: collapse; }
+    .bx-cal th { color: #999; font-weight: 500; padding: 5px 0; }
+    .bx-cal td { padding: 3px 0; height: 30px; }
+    .bx-cal span { display: inline-grid; place-items: center; width: 26px; height: 26px; border-radius: 50%; position: relative; }
+    .bx-cal .today { background: #0E0E0E; color: #fff; font-weight: 600; }
+    .bx-cal .has::after { content: ''; position: absolute; bottom: 0; width: 4px; height: 4px; border-radius: 50%; background: var(--adm-red); }
 
-    .lead-avatar-cell {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-    .lead-avatar-circle {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: #FCE8F3;
-        color: #C4007A;
-        font-weight: 800;
-        font-size: 0.9rem;
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
-    }
-    .lead-badge-service {
-        display: inline-flex;
-        align-items: center;
-        padding: 4px 10px;
-        border-radius: 9999px;
-        background: #FFF0F7;
-        color: #C4007A;
-        font-size: 0.76rem;
-        font-weight: 700;
-    }
+    /* Black notch card + analysis frame */
+    .bx-notice { background: #0E0E0E; color: #fff; border-radius: 26px 26px 0 0; padding: 18px 24px 22px; text-align: center; font-size: .8rem; line-height: 1.5; }
+    .bx-notice b { color: var(--adm-red); font-weight: 600; }
+    .bx-frame { background: #0E0E0E; border-radius: 0 0 26px 26px; padding: 0 12px 12px; margin-top: -20px; }
+    .bx-frame-inner { border-radius: 20px; overflow: hidden; }
+    .bx-an-top { background: #fff; padding: 16px 16px 8px; }
+    .bx-an-top h4 { font-size: .85rem; font-weight: 600; margin: 0 0 8px; }
+    .bx-an-bot { background: var(--adm-yellow); padding: 14px 16px 16px; font-size: .72rem; }
+    .bx-an-bot .hd { font-size: .8rem; font-weight: 500; }
+    .bx-an-bot .hd b { color: var(--adm-red); }
+    .bx-an-bot .dl { font-weight: 600; font-size: .85rem; margin: 6px 0; }
+    .bx-an-btn { background: #0E0E0E; color: #fff; border-radius: 99px; padding: 8px 14px; font-size: .7rem; font-weight: 600; text-decoration: none; white-space: nowrap; }
+    .bx-an-btn:hover { color: #fff; background: #333; }
+
+    .bx-member { display: flex; align-items: center; gap: 12px; padding: 12px 0; }
+    .bx-member + .bx-member { border-top: 1px solid #F0F0F0; }
+    .bx-av { width: 42px; height: 42px; border-radius: 50%; background: var(--adm-lime); display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
+    .bx-member b { display: block; font-size: .85rem; font-weight: 600; }
+    .bx-member span { font-size: .72rem; color: #8a8a8a; }
+    .bx-member .when { margin-left: auto; font-size: .68rem; color: #aaa; white-space: nowrap; }
+    .bx-pillsel { border: 1px solid #E6E6E6; border-radius: 99px; padding: 6px 14px; font-size: .75rem; font-weight: 500; text-decoration: none; color: #0E0E0E; }
+
+    .bx-table { width: 100%; border-collapse: collapse; }
+    .bx-table th { text-align: left; padding: 12px 22px; font-size: .72rem; color: #888; font-weight: 500; background: #FAFAFA; border-bottom: 1px solid #EEE; }
+    .bx-table td { padding: 14px 22px; border-bottom: 1px solid #F3F3F3; font-size: .85rem; }
+    .bx-table tr:hover td { background: #FAFAFA; }
 </style>
 
-<div class="dash-greeting">
-    <h1>Welcome back, <?= e($adminName) ?></h1>
-    <p>Here's what is happening across your WebTecMart website today.</p>
-</div>
+<div class="bx-grid">
 
-<!-- 4 Real Data Metric Cards -->
-<div class="dash-stat-grid">
-    <div class="adm-card dash-stat-card">
-        <div class="dash-stat-icon pink">
-            <i class="bi bi-people-fill"></i>
-        </div>
-        <div class="dash-stat-info">
-            <div class="num"><?= $leadCount ?></div>
-            <div class="label">Total Leads Received</div>
-        </div>
-    </div>
+    <!-- ================= LEFT ================= -->
+    <div class="bx-left">
 
-    <div class="adm-card dash-stat-card">
-        <div class="dash-stat-icon blue">
-            <i class="bi bi-briefcase-fill"></i>
+        <div class="bx-search">
+            <i class="bi bi-search text-muted"></i>
+            <input type="text" id="bxSearch" placeholder="Search leads...">
         </div>
-        <div class="dash-stat-info">
-            <div class="num"><?= $serviceCount ?></div>
-            <div class="label">Live Service Pages</div>
-        </div>
-    </div>
 
-    <div class="adm-card dash-stat-card">
-        <div class="dash-stat-icon green">
-            <i class="bi bi-journal-check"></i>
-        </div>
-        <div class="dash-stat-info">
-            <div class="num"><?= $blogCount ?></div>
-            <div class="label">Published Blog Posts</div>
-        </div>
-    </div>
-
-    <div class="adm-card dash-stat-card">
-        <div class="dash-stat-icon amber">
-            <i class="bi bi-database-fill-check"></i>
-        </div>
-        <div class="dash-stat-info">
-            <div class="num"><?= $totalContentItems ?></div>
-            <div class="label">CMS Content Records</div>
-        </div>
-    </div>
-</div>
-
-<!-- Quick Actions -->
-<div class="dash-quick-actions">
-        <a href="/admin/services.php?edit=68" class="dash-action-btn" style="border-color: rgba(196, 0, 122, 0.35); background: #FFF5FA; color: #C4007A; font-weight: 700;">
-        <i class="bi bi-star-fill text-warning me-1"></i> B2B &amp; Exhibition SEO
-        <span class="badge ms-1" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem;">Flagship</span>
-    </a>
-    <a href="/admin/services.php?edit=69" class="dash-action-btn" style="border-color: rgba(196, 0, 122, 0.35); background: #FFF5FA; color: #C4007A; font-weight: 700;">
-        <i class="bi bi-geo-alt-fill text-danger me-1"></i> SEO Services in Delhi
-        <span class="badge ms-1" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem;">Flagship Hub</span>
-    </a>
-    <a href="/admin/services.php" class="dash-action-btn primary">
-        <i class="bi bi-briefcase-fill"></i> Manage Services CMS (<?= $serviceCount ?>)
-    </a>
-    <a href="/admin/content.php?section=collection:blog" class="dash-action-btn">
-        <i class="bi bi-journal-check"></i> Blog Articles
-    </a>
-    <a href="/admin/content.php?section=collection:hero_content" class="dash-action-btn">
-        <i class="bi bi-lightning-charge"></i> Edit Homepage Hero
-    </a>
-    <a href="/admin/content.php?section=collection:service" class="dash-action-btn">
-        <i class="bi bi-boxes"></i> Edit Core Services
-    </a>
-    <a href="/admin/leads.php" class="dash-action-btn">
-        <i class="bi bi-inbox-fill"></i> View All Inquiries (<?= $leadCount ?>)
-    </a>
-    <a href="/" target="_blank" class="dash-action-btn">
-        <i class="bi bi-box-arrow-up-right"></i> Open Public Website
-    </a>
-</div>
-
-<!-- Recent Leads Table -->
-<div class="adm-card p-0 overflow-hidden mb-4">
-    <div class="dash-table-head">
-        <h2>Recent Website Leads &amp; Consultations</h2>
-        <a href="/admin/leads.php">View All Leads <i class="bi bi-arrow-right"></i></a>
-    </div>
-
-    <?php if (empty($recentLeads)): ?>
-        <div style="padding: 48px 24px; text-align: center;">
-            <div style="width: 56px; height: 56px; border-radius: 16px; background: #FFF0F7; color: #C4007A; display: inline-flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 12px;">
-                <i class="bi bi-inbox"></i>
+        <div class="bx-stats">
+            <div class="bx-stat bx-yellow">
+                <div class="bx-stat-top"><span>Total Leads</span><span class="bx-stat-tag"><?= $leadCount ?> total</span></div>
+                <div class="bx-stat-val"><?= $leadCount ?></div>
             </div>
-            <h4 style="font-size: 1rem; font-weight: 700; color: #0F172A; margin: 0 0 4px;">No inquiries logged yet</h4>
-            <p style="font-size: 0.85rem; color: #64748B; margin: 0;">New consultation requests submitted from the website forms will appear here.</p>
+            <div class="bx-stat bx-red">
+                <div class="bx-stat-top"><span>Contacts</span><span class="bx-stat-tag"><?= $contactCount ?> total</span></div>
+                <div class="bx-stat-val"><?= $contactCount ?></div>
+            </div>
+            <div class="bx-stat bx-blue">
+                <div class="bx-stat-top"><span>Service Pages</span><span class="bx-stat-tag">Live</span></div>
+                <div class="bx-stat-val"><?= $serviceCount ?></div>
+            </div>
         </div>
-    <?php else: ?>
-        <div style="overflow-x: auto;">
-            <table class="adm-table">
-                <thead>
-                    <tr>
-                        <th>Client / Company</th>
-                        <th>Contact Email</th>
-                        <th>Phone Number</th>
-                        <th>Requested Service</th>
-                        <th>Received On</th>
-                    </tr>
-                </thead>
-                <tbody>
+
+        <!-- Enquiries report -->
+        <div class="bx-card">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3><i class="bi bi-bar-chart-line"></i> Enquiries Report</h3>
+                <div class="bx-legend">
+                    <span><i class="bi bi-circle-fill" style="color:#FF4B33"></i> Leads</span>
+                    <span><i class="bi bi-circle-fill" style="color:#3B3BC8"></i> Contacts</span>
+                    <span class="bx-pillsel">Last 6 months</span>
+                </div>
+            </div>
+            <svg viewBox="0 0 <?= $W ?> <?= $H ?>" preserveAspectRatio="none" class="bx-chart" role="img" aria-label="Leads and contacts over the last 6 months">
+                <?php for ($g = 0; $g < 5; $g++): $gy = $padT + $g * (($H - $padT - $padB) / 4); ?>
+                    <line x1="0" y1="<?= $gy ?>" x2="<?= $W ?>" y2="<?= $gy ?>" stroke="#EFEFEF" stroke-width="1"/>
+                <?php endfor; ?>
+                <path d="<?= $contactPath ?>" fill="none" stroke="#3B3BC8" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+                <path d="<?= $leadPath ?>" fill="none" stroke="#FF4B33" stroke-width="2.5" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+            </svg>
+            <div class="bx-xaxis"><?php foreach ($months as $m): ?><span><?= e($m['label']) ?></span><?php endforeach; ?></div>
+        </div>
+
+        <div class="bx-two">
+            <!-- Content breakdown -->
+            <div class="bx-card">
+                <h3><i class="bi bi-collection"></i> Content Overview</h3>
+                <?php if (!$contentBreakdown): ?>
+                    <p class="text-muted mt-3 mb-0" style="font-size:.8rem">No content yet.</p>
+                <?php endif; ?>
+                <?php foreach (array_slice($contentBreakdown, 0, 6) as $i => $row):
+                    $type = (string) $row['content_type'];
+                    $href = $type === 'service_detail' ? '/admin/services.php' : '/admin/content.php?section=' . urlencode('collection:' . $type);
+                ?>
+                    <div class="bx-row">
+                        <span class="n"><?= $i + 1 ?></span>
+                        <span class="t"><?= e(str_replace('_', ' ', $type)) ?></span>
+                        <span class="c"><?= (int) $row['c'] ?> items</span>
+                        <a class="bx-mini" href="<?= e($href) ?>">View</a>
+                    </div>
+                <?php endforeach; ?>
+                <div class="bx-row" style="background:#0E0E0E;color:#fff">
+                    <span class="t">Total content items</span><span><?= $totalContentItems ?></span>
+                </div>
+            </div>
+
+            <!-- Calendar -->
+            <div class="bx-card">
+                <h3><i class="bi bi-calendar3"></i> This Month</h3>
+                <div class="text-center fw-semibold mt-3" style="font-size:.85rem"><?= date('F') ?></div>
+                <table class="bx-cal">
+                    <thead><tr><?php foreach (['Su','Mo','Tu','We','Th','Fr','Sa'] as $dn): ?><th><?= $dn ?></th><?php endforeach; ?></tr></thead>
+                    <tbody>
+                    <?php
+                    $cell = 0;
+                    echo '<tr>';
+                    for ($b = 0; $b < $firstDow; $b++) { echo '<td></td>'; $cell++; }
+                    for ($day = 1; $day <= $daysInMonth; $day++) {
+                        if ($cell % 7 === 0 && $cell > 0) echo '</tr><tr>';
+                        $cls = ($day === $todayNum ? 'today ' : '') . (isset($leadDays[$day]) ? 'has' : '');
+                        $title = isset($leadDays[$day]) ? $leadDays[$day] . ' lead(s)' : '';
+                        echo '<td><span class="' . $cls . '" title="' . $title . '">' . $day . '</span></td>';
+                        $cell++;
+                    }
+                    while ($cell % 7 !== 0) { echo '<td></td>'; $cell++; }
+                    echo '</tr>';
+                    ?>
+                    </tbody>
+                </table>
+                <div class="text-muted mt-2" style="font-size:.68rem"><i class="bi bi-circle-fill" style="color:#FF4B33;font-size:.4rem"></i> days with new leads</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= RIGHT ================= -->
+    <div class="bx-right">
+
+        <div>
+            <div class="bx-notice">
+                <?php if ($latestLead): ?>
+                    New enquiry from <b><?= e($latestLead['name']) ?></b><br>
+                    Received <?= e(formatDatabaseDateTime((string) $latestLead['created_at'])) ?>
+                <?php else: ?>
+                    No enquiries yet.<br>Share your <b>website</b> to start getting leads.
+                <?php endif; ?>
+            </div>
+            <div class="bx-frame">
+                <div class="bx-frame-inner">
+                    <div class="bx-an-top">
+                        <h4>Leads This Week</h4>
+                        <svg viewBox="0 0 <?= $AW ?> <?= $AH ?>" preserveAspectRatio="none" style="width:100%;height:110px" role="img" aria-label="Leads in the last 7 days">
+                            <defs><linearGradient id="bxg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF4B33" stop-opacity=".85"/><stop offset="1" stop-color="#FF4B33" stop-opacity=".05"/></linearGradient></defs>
+                            <path d="<?= $areaFill ?>" fill="url(#bxg)"/>
+                            <path d="<?= $areaLine ?>" fill="none" stroke="#FF4B33" stroke-width="2" vector-effect="non-scaling-stroke"/>
+                        </svg>
+                        <div class="bx-xaxis" style="font-size:.62rem"><?php foreach ($days as $d): ?><span><?= e($d['label']) ?></span><?php endforeach; ?></div>
+                    </div>
+                    <div class="bx-an-bot">
+                        <div class="hd">Latest Lead: <b><?= $latestLead ? e($latestLead['service'] ?? 'General') : 'None' ?></b></div>
+                        <div class="dl"><?= array_sum($daySeries) ?> new in the last 7 days</div>
+                        <div class="d-flex justify-content-between align-items-end gap-2">
+                            <span>Total <?= $leadCount ?> leads · <?= $blogCount ?> blogs · <?= $partnerCount ?> partners</span>
+                            <a href="/admin/leads.php" class="bx-an-btn">Lead Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bx-card">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h3><i class="bi bi-people-fill"></i> Recent Leads</h3>
+                <a href="/admin/leads.php" class="bx-pillsel">View all</a>
+            </div>
+            <?php if (empty($recentLeads)): ?>
+                <p class="text-muted mt-3 mb-0" style="font-size:.85rem"><i class="bi bi-inbox"></i> No inquiries logged yet.</p>
+            <?php else: foreach (array_slice($recentLeads, 0, 4) as $lead): ?>
+                <div class="bx-member">
+                    <div class="bx-av"><?= e($initial((string) $lead['name'])) ?></div>
+                    <div style="min-width:0">
+                        <b><?= e($lead['name']) ?></b>
+                        <span><?= e($lead['service'] ?? 'General') ?></span>
+                    </div>
+                    <span class="when"><?= e(formatDatabaseDateTime((string) $lead['created_at'])) ?></span>
+                </div>
+            <?php endforeach; endif; ?>
+        </div>
+
+        <div class="bx-card">
+            <h3 class="mb-2"><i class="bi bi-lightning-charge"></i> Quick Actions</h3>
+            <div class="bx-row"><span class="t">B2B Exhibition SEO</span><a class="bx-mini" href="/admin/services.php?edit=68">Edit</a></div>
+            <div class="bx-row"><span class="t">SEO in Delhi</span><a class="bx-mini" href="/admin/services.php?edit=69">Edit</a></div>
+            <div class="bx-row"><span class="t">Manage Services (<?= $serviceCount ?>)</span><a class="bx-mini" href="/admin/services.php">View</a></div>
+        </div>
+    </div>
+
+    <!-- ================= FULL-WIDTH LEADS TABLE ================= -->
+    <div class="bx-card" style="grid-column: 1 / -1; padding: 0; overflow: hidden;">
+        <div style="padding: 20px 22px; display:flex; justify-content:space-between; align-items:center;">
+            <h3><i class="bi bi-inbox"></i> Recent Website Leads</h3>
+            <a href="/admin/leads.php" class="bx-pillsel">View all</a>
+        </div>
+        <?php if (empty($recentLeads)): ?>
+            <div style="padding: 40px; text-align: center; color: #888;">No inquiries logged yet.</div>
+        <?php else: ?>
+            <div style="overflow-x:auto">
+                <table class="bx-table" id="bxLeadTable">
+                    <thead><tr><th>Client / Company</th><th>Contact Info</th><th>Service Requested</th><th>Date Received</th></tr></thead>
+                    <tbody>
                     <?php foreach ($recentLeads as $lead): ?>
                         <tr>
                             <td>
-                                <div class="lead-avatar-cell">
-                                    <div class="lead-avatar-circle"><?= e($initial((string) $lead['name'])) ?></div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="bx-av" style="width:38px;height:38px"><?= e($initial((string) $lead['name'])) ?></div>
                                     <div>
-                                        <div style="font-weight: 700; color: #0F172A;"><?= e($lead['name']) ?></div>
-                                        <?php if (!empty($lead['company'])): ?>
-                                            <div style="font-size: 0.76rem; color: #64748B;"><?= e($lead['company']) ?></div>
-                                        <?php endif; ?>
+                                        <div class="fw-semibold"><?= e($lead['name']) ?></div>
+                                        <div style="font-size:.76rem;color:#888"><?= e($lead['company'] ?? 'Individual') ?></div>
                                     </div>
                                 </div>
                             </td>
                             <td>
-                                <a href="mailto:<?= e($lead['email']) ?>" style="color: #475569; text-decoration: none; font-weight: 500;">
-                                    <i class="bi bi-envelope me-1 text-muted"></i><?= e($lead['email']) ?>
-                                </a>
+                                <div class="fw-medium"><?= e($lead['email']) ?></div>
+                                <div style="font-size:.76rem;color:#888"><?= e($lead['phone'] ?? '—') ?></div>
                             </td>
-                            <td>
-                                <?php if (!empty($lead['phone'])): ?>
-                                    <a href="tel:<?= e($lead['phone']) ?>" style="color: #475569; text-decoration: none; font-weight: 500;">
-                                        <i class="bi bi-telephone me-1 text-muted"></i><?= e($lead['phone']) ?>
-                                    </a>
-                                <?php else: ?>
-                                    <span style="color: #94A3B8;">—</span>
-                                <?php endif; ?>
-                            </td>
-                            <td>
-                                <?php if (!empty($lead['service'])): ?>
-                                    <span class="lead-badge-service"><?= e($lead['service']) ?></span>
-                                <?php else: ?>
-                                    <span style="color: #94A3B8;">General Inquiry</span>
-                                <?php endif; ?>
-                            </td>
-                            <td style="color: #64748B; font-size: 0.825rem; white-space: nowrap;">
-                                <?= formatDatabaseDateTime((string) $lead['created_at']) ?>
-                            </td>
+                            <td><span style="background:#F6F6F6;border:1px solid #EAEAEA;padding:5px 12px;border-radius:99px;font-size:.76rem;font-weight:500"><?= e($lead['service'] ?? 'General') ?></span></td>
+                            <td style="color:#666;font-size:.8rem"><?= formatDatabaseDateTime((string) $lead['created_at']) ?></td>
                         </tr>
                     <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>
-    <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        <?php endif; ?>
+    </div>
 </div>
+
+<script>
+// live filter for the recent-leads table
+document.getElementById('bxSearch')?.addEventListener('input', function () {
+    const q = this.value.toLowerCase();
+    document.querySelectorAll('#bxLeadTable tbody tr').forEach(tr => {
+        tr.style.display = tr.textContent.toLowerCase().includes(q) ? '' : 'none';
+    });
+});
+</script>
 
 <?php require_once __DIR__ . '/templates/footer.php'; ?>
