@@ -17,6 +17,9 @@ RewriteCond %{HTTPS} !=on [OR]
 RewriteCond %{HTTP_HOST} ^www\.webtecmart\.com$ [NC]
 RewriteRule ^ https://webtecmart.com%{REQUEST_URI} [R=301,L]
 
+# Serve a fresh XML sitemap from the current published content.
+RewriteRule ^sitemap\.xml$ sitemap-xml.php [QSA,L]
+
 # 3. Blog Pretty Routing
 RewriteRule ^blogs/?$ blogs.php [QSA,L]
 RewriteRule ^blog/([0-9]+)/?$ blog.php?id=$1 [QSA,L]
