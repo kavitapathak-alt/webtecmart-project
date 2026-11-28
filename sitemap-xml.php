@@ -34,13 +34,22 @@ foreach ($staticPaths as $path) {
 
 $blogPosts = blogPosts();
 $updatedAtByBlogId = [];
-$statement = db()->query("SELECT id, updated_at FROM content_items WHERE content_type = 'blog' AND is_active = 1");
-foreach ($statement->fetchAll() as $row) {
-    $id = (int) ($row['id'] ?? 0);
-    $updatedAt = trim((string) ($row['updated_at'] ?? ''));
-    if ($id > 0 && $updatedAt !== '') {
-        $date = new DateTimeImmutable($updatedAt, new DateTimeZone('UTC'));
-        $updatedAtByBlogId[$id] = $date->format('Y-m-d\TH:i:sP');
+$contentColumns = db()->query("PRAGMA table_info('content_items')")->fetchAll();
+$hasUpdatedAt = in_array('updated_at', array_column($contentColumns, 'name'), true);
+if ($hasUpdatedAt) {
+    $statement = db()->query("SELECT id, updated_at FROM content_items WHERE content_type = 'blog' AND is_active = 1");
+    foreach ($statement->fetchAll() as $row) {
+        $id = (int) ($row['id'] ?? 0);
+        $updatedAt = trim((string) ($row['updated_at'] ?? ''));
+        if ($id <= 0 || $updatedAt === '') {
+            continue;
+        }
+
+        $date = DateTimeImmutable::createFromFormat('!Y-m-d H:i:s', $updatedAt, new DateTimeZone('UTC'));
+        $dateErrors = DateTimeImmutable::getLastErrors();
+        if ($date !== false && ($dateErrors === false || ($dateErrors['warning_count'] === 0 && $dateErrors['error_count'] === 0))) {
+            $updatedAtByBlogId[$id] = $date->format('Y-m-d\TH:i:sP');
+        }
     }
 }
 
