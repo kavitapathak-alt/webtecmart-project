@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         redirect('/admin/dashboard.php');
     }
 
-    $_SESSION['login_error'] = 'Email ya password galat hai. Dobara check karke try karein.';
+    $_SESSION['login_error'] = 'Incorrect email or password. Please check and try again.';
 }
 
 require_once __DIR__ . '/templates/header.php';
@@ -108,18 +108,18 @@ require_once __DIR__ . '/templates/header.php';
                 <div>
                     <div class="auth-logo"><i class="bi bi-x-diamond-fill"></i></div>
                     <h2>WebTecMart Admin</h2>
-                    <p>Website se aane wali har enquiry aur lead yahin se dekhein aur manage karein.</p>
+                    <p>View and manage every enquiry and lead from your website in one place.</p>
                 </div>
                 <div class="auth-chips">
-                    <div class="auth-chip"><i class="bi bi-inbox"></i> Nayi enquiries dekhein</div>
-                    <div class="auth-chip"><i class="bi bi-person-check"></i> Leads ko follow up karein</div>
-                    <div class="auth-chip"><i class="bi bi-check2-circle"></i> Status update karein</div>
+                    <div class="auth-chip"><i class="bi bi-inbox"></i> View new enquiries</div>
+                    <div class="auth-chip"><i class="bi bi-person-check"></i> Follow up with leads</div>
+                    <div class="auth-chip"><i class="bi bi-check2-circle"></i> Update lead status</div>
                 </div>
             </aside>
 
             <div class="auth-panel">
-                <h1>Admin login</h1>
-                <p>Apne account se sign in karein.</p>
+                <h1>Admin sign in</h1>
+                <p>Sign in to your account.</p>
 
                 <?php if (!empty($_SESSION['login_error'])): ?>
                     <div class="admin-error" role="alert">
@@ -141,18 +141,18 @@ require_once __DIR__ . '/templates/header.php';
                         <span>Password</span>
                         <div class="input-wrap">
                             <svg class="lead" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>
-                            <input type="password" name="password" id="adminPassword" placeholder="Apna password likhein" autocomplete="current-password" required>
-                            <button type="button" class="toggle-pass" id="togglePass" aria-label="Password dikhayein" aria-pressed="false">
+                            <input type="password" name="password" id="adminPassword" placeholder="Enter your password" autocomplete="current-password" required>
+                            <button type="button" class="toggle-pass" id="togglePass" aria-label="Show password" aria-pressed="false">
                                 <svg class="eye-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
                                 <svg class="eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.2A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4"/><path d="M6.5 6.6C3.7 8.4 2 12 2 12s3.6 7 10 7c1.6 0 3-.4 4.2-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg>
                             </button>
                         </div>
                     </label>
 
-                    <button type="submit" class="auth-submit" id="loginBtn">Login</button>
+                    <button type="submit" class="auth-submit" id="loginBtn">Sign in</button>
                 </form>
 
-                <p class="auth-foot">Sirf authorised admin ke liye.</p>
+                <p class="auth-foot">Authorised administrators only.</p>
             </div>
 
         </div>
@@ -170,12 +170,12 @@ require_once __DIR__ . '/templates/header.php';
             var show = pass.type === 'password';
             pass.type = show ? 'text' : 'password';
             toggle.setAttribute('aria-pressed', show ? 'true' : 'false');
-            toggle.setAttribute('aria-label', show ? 'Password chhupayein' : 'Password dikhayein');
+            toggle.setAttribute('aria-label', show ? 'Hide password' : 'Show password');
         });
 
         form.addEventListener('submit', function () {
             btn.disabled = true;
-            btn.textContent = 'Login ho raha hai...';
+            btn.textContent = 'Signing in...';
         });
     })();
 </script>

@@ -5,12 +5,15 @@
         <footer class="adm-footer">
             <div class="adm-footer-inner">
                 <div class="adm-footer-brand">
-                    &copy; <?= date('Y') ?> <strong>WebTecMart</strong> Content Management System. All rights reserved.
+                    <span class="adm-footer-dot" aria-hidden="true"></span>
+                    <span>&copy; <?= date('Y') ?> <strong>WebTecMart</strong> Content Management System. All rights reserved.</span>
                 </div>
                 <div class="adm-footer-links">
                     <a href="/" target="_blank" class="adm-footer-link">
                         Visit Live Site
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        <span class="adm-footer-arrow">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+                        </span>
                     </a>
                 </div>
             </div>
@@ -21,14 +24,16 @@
 
 <style>
     /* ============================================================
-       PREMIUM ADMIN FOOTER
+       ADMIN FOOTER — matches the black / lime admin theme
        ============================================================ */
     .adm-footer {
-        background: #FFFFFF;
-        border-top: 1px solid rgba(26, 6, 19, 0.08);
-        padding: 20px 32px;
+        --ft-ink: #0E0E0E;
+        --ft-lime: var(--adm-lime, #E6F73A);
+        background: transparent;
+        border: 0;
+        padding: 8px 0 24px;
         margin-top: auto;
-        font-family: 'Plus Jakarta Sans', -apple-system, sans-serif;
+        font-family: var(--adm-font, 'Space Grotesk', system-ui, -apple-system, sans-serif);
     }
 
     .adm-footer-inner {
@@ -36,54 +41,80 @@
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
-        gap: 16px;
-        max-width: 1400px;
-        margin: 0 auto;
+        gap: 14px 20px;
+        max-width: none;
+        margin: 0;
+        padding: 12px 14px 12px 22px;
+        background: #FFFFFF;
+        border: 1px solid #EDEDED;
+        border-radius: 999px;
     }
 
     .adm-footer-brand {
-        font-size: 0.85rem;
-        color: #6C6474;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.84rem;
+        color: #777;
         font-weight: 500;
-        letter-spacing: -0.01em;
+        letter-spacing: 0;
+    }
+
+    .adm-footer-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--ft-lime);
+        box-shadow: 0 0 0 4px rgba(230, 247, 58, 0.35);
+        flex-shrink: 0;
     }
 
     .adm-footer-brand strong {
-        color: #C4007A;
+        color: var(--ft-ink);
         font-weight: 700;
-        margin: 0 2px;
+        margin: 0 1px;
     }
 
     .adm-footer-links {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 12px;
     }
 
     .adm-footer-link {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
-        font-size: 0.85rem;
+        gap: 10px;
+        font-size: 0.84rem;
         font-weight: 600;
-        color: #1A0613;
+        color: #fff;
         text-decoration: none;
-        padding: 6px 12px;
-        border-radius: 8px;
-        transition: all 0.2s ease;
-        background: transparent;
+        padding: 7px 8px 7px 18px;
+        border-radius: 999px;
+        background: var(--ft-ink);
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .adm-footer-arrow {
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--ft-lime);
+        color: var(--ft-ink);
     }
 
     .adm-footer-link:hover {
-        background: rgba(196, 0, 122, 0.05);
-        color: #C4007A;
+        background: #2a2a2a;
+        color: var(--ft-lime);
     }
 
-    .adm-footer-link svg {
+    .adm-footer-arrow svg {
         transition: transform 0.2s ease;
     }
 
-    .adm-footer-link:hover svg {
+    .adm-footer-link:hover .adm-footer-arrow svg {
         transform: translate(2px, -2px);
     }
 
@@ -92,21 +123,21 @@
        ============================================================ */
     @media (max-width: 768px) {
         .adm-footer {
-            padding: 20px 20px;
+            padding: 8px 0 20px;
         }
         .adm-footer-inner {
             flex-direction: column;
             text-align: center;
             gap: 12px;
+            padding: 16px;
+            border-radius: 26px;
         }
         .adm-footer-brand {
             font-size: 0.8rem;
+            justify-content: center;
         }
         .adm-footer-link {
-            font-size: 0.8rem;
-            padding: 8px 16px;
-            background: #FAFAFC;
-            border: 1px solid rgba(196, 0, 122, 0.1);
+            font-size: 0.82rem;
         }
     }
 </style>

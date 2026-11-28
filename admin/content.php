@@ -834,36 +834,39 @@ require_once __DIR__ . '/templates/header.php';
     a { text-decoration: none; }
 
     .cms-shell {
-        --brand: #C4007A;
-        --brand-deep: #A3005F;
-        --brand-soft: #FCE8F3;
-        --brand-faint: #FFF4FA;
+        --brand: #0E0E0E;
+        --brand-deep: #2A2A2A;
+        --brand-soft: #F1F1F1;
+        --brand-faint: #F7F7F7;
 
         --bs-primary: var(--brand);
-        --bs-primary-rgb: 196, 0, 122;
+        --bs-primary-rgb: 14, 14, 14;
         --bs-link-color: var(--brand);
         --bs-link-hover-color: var(--brand-deep);
         --bs-body-font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
 
         font-family: var(--bs-body-font-family);
         letter-spacing: normal;
-        background: #FFF8FC;
-        color: #1f1b24;
+        background: #E9ECEB;
+        color: #0E0E0E;
         min-height: calc(100vh - 72px);
-        padding: 1.5rem 0 3rem;
+        padding: 0 0 3rem;
     }
 
     /* Brand buttons */
     .cms-shell .btn-primary {
-        --bs-btn-bg: var(--brand);
-        --bs-btn-border-color: var(--brand);
-        --bs-btn-hover-bg: var(--brand-deep);
-        --bs-btn-hover-border-color: var(--brand-deep);
-        --bs-btn-active-bg: var(--brand-deep);
-        --bs-btn-active-border-color: var(--brand-deep);
-        --bs-btn-disabled-bg: var(--brand);
-        --bs-btn-disabled-border-color: var(--brand);
-        --bs-btn-focus-shadow-rgb: 196, 0, 122;
+        --bs-btn-bg: #E6F73A;
+        --bs-btn-border-color: #E6F73A;
+        --bs-btn-color: #0E0E0E;
+        --bs-btn-hover-bg: #D7E82C;
+        --bs-btn-hover-border-color: #D7E82C;
+        --bs-btn-hover-color: #0E0E0E;
+        --bs-btn-active-bg: #CEDC20;
+        --bs-btn-active-border-color: #CEDC20;
+        --bs-btn-active-color: #0E0E0E;
+        --bs-btn-disabled-bg: #E6F73A;
+        --bs-btn-disabled-border-color: #E6F73A;
+        --bs-btn-focus-shadow-rgb: 230, 247, 58;
         font-weight: 600;
     }
     .cms-shell .btn { font-weight: 600; }
@@ -871,17 +874,17 @@ require_once __DIR__ . '/templates/header.php';
     /* Form focus ring in brand color */
     .cms-shell .form-control:focus,
     .cms-shell .form-select:focus {
-        border-color: #e0398f;
-        box-shadow: 0 0 0 .22rem rgba(196, 0, 122, .14);
+        border-color: #A5B20F;
+        box-shadow: 0 0 0 .22rem rgba(230, 247, 58, .28);
     }
-    .cms-shell .form-check-input:checked { background-color: var(--brand); border-color: var(--brand); }
-    .cms-shell .form-check-input:focus { border-color: #e0398f; box-shadow: 0 0 0 .22rem rgba(196, 0, 122, .14); }
+    .cms-shell .form-check-input:checked { background-color: #0E0E0E; border-color: #0E0E0E; }
+    .cms-shell .form-check-input:focus { border-color: #A5B20F; box-shadow: 0 0 0 .22rem rgba(230, 247, 58, .28); }
 
     /* Page title (header ka global h1 size override) */
     .cms-shell .cms-title { font-size: 1.35rem !important; line-height: 1.3 !important; font-weight: 700 !important; letter-spacing: -.01em !important; margin: 0 0 .25rem !important; }
 
     /* Cards */
-    .cms-card { border: 1px solid rgba(36, 26, 38, .07); border-radius: 1rem; box-shadow: 0 8px 24px rgba(35, 19, 32, .05); background: #fff; }
+    .cms-card { border: 1px solid #EDEDED; border-radius: 26px; box-shadow: none; background: #fff; }
 
     /* Sidebar */
     @media (min-width: 992px) {
@@ -895,11 +898,11 @@ require_once __DIR__ . '/templates/header.php';
         color: #4b4452; font-size: .86rem; line-height: 1.3;
         transition: background .15s, color .15s;
     }
-    .cms-link:hover { background: var(--brand-faint); color: var(--brand-deep); }
-    .cms-link.active { background: var(--brand-soft); color: var(--brand-deep); font-weight: 700; }
-    .cms-ico { width: 1.15rem; flex: none; text-align: center; color: var(--brand); }
-    .cms-count { margin-left: auto; font-size: .7rem; font-weight: 600; color: #7d7583; background: #f4eff3; border-radius: 50rem; padding: .12rem .5rem; }
-    .cms-link.active .cms-count { background: #fff; color: var(--brand-deep); }
+    .cms-link:hover { background: #F7F7F7; color: #0E0E0E; }
+    .cms-link.active { background: #E6F73A; color: #0E0E0E; font-weight: 700; }
+    .cms-ico { width: 1.15rem; flex: none; text-align: center; color: #0E0E0E; }
+    .cms-count { margin-left: auto; font-size: .7rem; font-weight: 600; color: #777; background: #F1F1F1; border-radius: 50rem; padding: .12rem .5rem; }
+    .cms-link.active .cms-count { background: #0E0E0E; color: #E6F73A; }
 
     .cms-group-toggle {
         display: flex; align-items: center; gap: .65rem; width: 100%;
@@ -1085,9 +1088,9 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if (isset($servicePageRedirects['page:' . $pageFile])): 
                                             $sSlug = $servicePageRedirects['page:' . $pageFile];
                                         ?>
-                                            <a class="cms-link fw-bold" style="color:#C4007A; background:#FFF0F7; border:1px solid rgba(196,0,122,0.25);" href="/admin/services.php?slug=<?= urlencode($sSlug) ?>">
-                                                <span class="cms-ico"><i class="bi bi-pencil-square text-danger"></i></span>Edit Full Service CMS
-                                                <span class="badge" style="background:#C4007A; color:#fff; font-size:0.65rem;">Page Editor</span>
+                                            <a class="cms-link fw-bold" style="color:#0E0E0E; background:#E6F73A; border:1px solid #D7E82C;" href="/admin/services.php?slug=<?= urlencode($sSlug) ?>">
+                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Edit Full Service CMS
+                                                <span class="badge" style="background:#0E0E0E; color:#E6F73A; font-size:0.65rem;">Page Editor</span>
                                             </a>
                                         <?php else: ?>
                                             <a class="cms-link <?= $selectedSection === 'page:' . $pageFile ? 'active' : '' ?>" href="?section=page%3A<?= rawurlencode($pageFile) ?>">
