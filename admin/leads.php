@@ -51,50 +51,106 @@ require_once __DIR__ . '/templates/header.php';
 ?>
 
 <style>
+    /* ===== LEADS — fully responsive ===== */
     .ld-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
-    .ld-head h1 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 600; letter-spacing: -.02em; margin: 0 0 4px; }
+    .ld-head > div:first-child { min-width: 0; }
+    .ld-head h1 { font-size: clamp(1.3rem, 2.4vw, 1.8rem); font-weight: 600; letter-spacing: -.02em; margin: 0 0 4px; }
     .ld-head p { font-size: .88rem; color: #777; margin: 0; }
-    .ld-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 20px; border-radius: 999px; font-size: .85rem; font-weight: 600; text-decoration: none; border: 1px solid #0E0E0E; transition: .2s; }
+    .ld-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+    .ld-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 10px 20px; border-radius: 999px; font-size: .85rem; font-weight: 600; text-decoration: none; border: 1px solid #0E0E0E; transition: .2s; white-space: nowrap; }
     .ld-btn.light { background: #fff; color: #0E0E0E; }
     .ld-btn.light:hover { background: #F4F4F4; color: #0E0E0E; }
     .ld-btn.dark { background: #0E0E0E; color: #fff; }
     .ld-btn.dark:hover { background: #2a2a2a; color: #fff; }
 
-    .ld-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
-    @media (max-width: 700px) { .ld-stats { grid-template-columns: 1fr; } }
-    .ld-stat { border-radius: 20px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: flex-end; min-height: 100px; }
+    /* Stats */
+    .ld-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-bottom: 20px; }
+    .ld-stat { border-radius: 20px; padding: 16px 20px; display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; min-height: 100px; }
     .ld-stat span { font-size: .85rem; font-weight: 500; }
     .ld-stat b { font-size: 2.1rem; font-weight: 600; letter-spacing: -.03em; line-height: 1; }
     .ld-yellow { background: var(--adm-yellow); color: #0E0E0E; }
     .ld-red { background: var(--adm-red); color: #fff; }
     .ld-blue { background: var(--adm-blue); color: #fff; }
 
+    /* Toolbar */
     .ld-toolbar { background: #fff; border: 1px solid #EDEDED; border-radius: 999px; padding: 8px 8px 8px 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
-    .ld-search { position: relative; flex: 1 1 280px; max-width: 460px; }
+    .ld-search { position: relative; flex: 1 1 280px; max-width: 460px; min-width: 0; }
     .ld-search i { position: absolute; top: 50%; left: 0; transform: translateY(-50%); color: #999; }
     .ld-search input { width: 100%; border: 0; outline: 0; padding: 10px 0 10px 28px; font: inherit; font-size: .88rem; background: transparent; }
-    .ld-count { background: #0E0E0E; color: #fff; border-radius: 999px; padding: 9px 18px; font-size: .78rem; font-weight: 500; }
+    .ld-count { background: #0E0E0E; color: #fff; border-radius: 999px; padding: 9px 18px; font-size: .78rem; font-weight: 500; white-space: nowrap; }
     .ld-count strong { color: var(--adm-lime); font-weight: 600; }
 
+    /* Card + table */
     .ld-card { background: #fff; border: 1px solid #EDEDED; border-radius: 26px; overflow: hidden; }
     .ld-table { width: 100%; border-collapse: collapse; }
     .ld-table th { background: #FAFAFA; padding: 14px 22px; font-size: .75rem; font-weight: 500; color: #888; border-bottom: 1px solid #EEE; text-align: left; white-space: nowrap; }
-    .ld-table td { padding: 16px 22px; vertical-align: top; font-size: .86rem; border-bottom: 1px solid #F3F3F3; color: #1c1c1c; }
+    .ld-table td { padding: 16px 22px; vertical-align: top; font-size: .86rem; border-bottom: 1px solid #F3F3F3; color: #1c1c1c; overflow-wrap: anywhere; }
     .ld-table tr:last-child td { border-bottom: 0; }
     .ld-table tr:hover td { background: #FAFAFA; }
 
     .ld-av { width: 40px; height: 40px; border-radius: 50%; background: var(--adm-lime); color: #0E0E0E; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
-    .ld-tag { display: inline-flex; padding: 4px 12px; border-radius: 999px; background: #F6F6F6; border: 1px solid #EAEAEA; font-size: .76rem; font-weight: 500; }
+    .ld-tag { display: inline-flex; padding: 4px 12px; border-radius: 999px; background: #F6F6F6; border: 1px solid #EAEAEA; font-size: .76rem; font-weight: 500; max-width: 100%; overflow-wrap: anywhere; }
     .ld-icon { width: 34px; height: 34px; border-radius: 50%; background: #F4F4F4; color: #0E0E0E; display: inline-flex; align-items: center; justify-content: center; text-decoration: none; transition: .2s; }
     .ld-icon:hover { background: #0E0E0E; color: var(--adm-lime); }
 
+    .ld-noresult { display: none; padding: 48px 20px; text-align: center; color: #777; font-size: .9rem; }
+    .ld-noresult i { display: block; font-size: 1.6rem; color: #0E0E0E; margin-bottom: 8px; }
+
+    /* Mobile cards */
+    .ld-mobile { display: none; flex-direction: column; gap: 12px; padding: 14px; }
+    .ld-mcard { background: #fff; border: 1px solid #EDEDED; border-radius: 20px; padding: 16px; }
+    .ld-mcard-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+    .ld-mcard-who { display: flex; gap: 10px; align-items: center; min-width: 0; }
+    .ld-mcard-who > div:last-child { min-width: 0; }
+    .ld-mcard-name { font-weight: 600; overflow-wrap: anywhere; }
+    .ld-mcard-sub { font-size: .76rem; color: #888; }
+    .ld-mcard-line { font-size: .86rem; margin-bottom: 8px; overflow-wrap: anywhere; }
+    .ld-mcard-line a { text-decoration: none; }
+    .ld-mcard-budget { font-size: .78rem; font-weight: 600; color: #0a8a5a; margin-bottom: 8px; }
+    .ld-mcard-msg { background: #F6F6F6; border-radius: 12px; padding: 10px 12px; font-size: .84rem; color: #555; margin-top: 8px; overflow-wrap: anywhere; }
+    .ld-mcard-actions { display: flex; gap: 8px; margin-top: 12px; }
+    .ld-mcard-actions a { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 9px 12px; border-radius: 999px; background: #F4F4F4; color: #0E0E0E; font-size: .8rem; font-weight: 600; text-decoration: none; transition: .2s; }
+    .ld-mcard-actions a:hover { background: #0E0E0E; color: var(--adm-lime); }
+
+    /* ---------- Breakpoints ---------- */
+    /* Laptop / small desktop: drop the long message column so the table never overflows */
+    @media (max-width: 1280px) {
+        .ld-col-msg { display: none; }
+        .ld-table th, .ld-table td { padding-left: 16px; padding-right: 16px; }
+    }
+    /* Tablet + phone: switch table -> cards */
     @media (max-width: 860px) {
         .ld-desktop { display: none; }
-        .ld-mobile { display: flex; flex-direction: column; gap: 12px; padding: 14px; }
-        .ld-toolbar { border-radius: 24px; padding: 14px 16px; }
+        .ld-mobile { display: flex; }
+        .ld-toolbar { border-radius: 24px; padding: 12px 16px; }
+        .ld-search { max-width: none; }
     }
-    @media (min-width: 861px) { .ld-mobile { display: none; } }
-    .ld-mcard { background: #fff; border: 1px solid #EDEDED; border-radius: 20px; padding: 16px; }
+    @media (min-width: 640px) and (max-width: 860px) {
+        /* tablets get a 2-column card grid */
+        .ld-mobile { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 700px) {
+        .ld-stat { padding: 14px 16px; min-height: 88px; }
+        .ld-stat b { font-size: 1.7rem; }
+    }
+    @media (max-width: 575px) {
+        .ld-head { align-items: stretch; }
+        .ld-actions { width: 100%; }
+        .ld-actions .ld-btn { flex: 1 1 calc(50% - 5px); padding: 11px 12px; }
+        /* stats: first card full width, other two side by side */
+        .ld-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+        .ld-stats .ld-stat:first-child { grid-column: 1 / -1; }
+        .ld-stat { flex-direction: column; align-items: flex-start; justify-content: space-between; gap: 6px; }
+        .ld-stats .ld-stat:first-child { flex-direction: row; align-items: flex-end; }
+        .ld-toolbar { flex-direction: column; align-items: stretch; }
+        .ld-search { flex: none; width: 100%; }
+        .ld-count { text-align: center; }
+        .ld-card { border-radius: 22px; }
+        .ld-mobile { padding: 12px; }
+    }
+    @media (max-width: 380px) {
+        .ld-actions .ld-btn { flex: 1 1 100%; }
+    }
 </style>
 
 <div class="ld-head">
@@ -102,7 +158,7 @@ require_once __DIR__ . '/templates/header.php';
         <h1>Leads &amp; Enquiries</h1>
         <p>Manage and export all potential clients submitted through your website forms.</p>
     </div>
-    <div class="d-flex gap-2 flex-wrap">
+    <div class="ld-actions">
         <a href="/admin/leads.php?export=csv" class="ld-btn light"><i class="bi bi-download"></i> Export to CSV</a>
         <a href="/admin/dashboard.php" class="ld-btn dark"><i class="bi bi-house-door"></i> Dashboard</a>
     </div>
@@ -119,7 +175,7 @@ require_once __DIR__ . '/templates/header.php';
         <i class="bi bi-search"></i>
         <input type="text" id="leadSearch" placeholder="Search by name, email, phone, company..." aria-label="Search leads">
     </div>
-    <span class="ld-count">Total Records: <strong><?= $totalLeads ?></strong></span>
+    <span class="ld-count">Showing: <strong id="leadVisible"><?= $totalLeads ?></strong> / <?= $totalLeads ?></span>
 </div>
 
 <div class="ld-card">
@@ -138,7 +194,7 @@ require_once __DIR__ . '/templates/header.php';
                         <th>Client Info</th>
                         <th>Contact Details</th>
                         <th>Service / Scope</th>
-                        <th>Message</th>
+                        <th class="ld-col-msg">Message</th>
                         <th>Date &amp; Time</th>
                         <th>Quick Actions</th>
                     </tr>
@@ -178,12 +234,12 @@ require_once __DIR__ . '/templates/header.php';
                                     <div style="font-size:.76rem;color:#0a8a5a;font-weight:600;margin-top:5px;">Budget: <?= e($l['budget']) ?></div>
                                 <?php endif; ?>
                             </td>
-                            <td>
+                            <td class="ld-col-msg">
                                 <div style="max-width:280px;font-size:.84rem;color:#555;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;">
                                     <?= !empty($l['message']) ? e($l['message']) : '<span style="color:#aaa">—</span>' ?>
                                 </div>
                             </td>
-                            <td style="white-space:nowrap;color:#777;font-size:.82rem;"><?= formatDatabaseDateTime((string) $l['created_at']) ?></td>
+                            <td style="color:#777;font-size:.82rem;"><?= formatDatabaseDateTime((string) $l['created_at']) ?></td>
                             <td>
                                 <div class="d-flex gap-2">
                                     <a href="mailto:<?= e($l['email']) ?>" class="ld-icon" title="Send Email"><i class="bi bi-envelope"></i></a>
@@ -198,7 +254,7 @@ require_once __DIR__ . '/templates/header.php';
             </table>
         </div>
 
-        <!-- Mobile Stacked Card View -->
+        <!-- Mobile / Tablet Card View -->
         <div class="ld-mobile" id="leadsMobileList">
             <?php foreach ($leads as $l):
                 $searchText = strtolower(implode(' ', [
@@ -207,32 +263,43 @@ require_once __DIR__ . '/templates/header.php';
                 ]));
             ?>
                 <div class="ld-mcard lead-card-mobile" data-search="<?= e($searchText) ?>">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <div class="d-flex gap-2 align-items-center">
+                    <div class="ld-mcard-top">
+                        <div class="ld-mcard-who">
                             <div class="ld-av"><?= e($initial((string) $l['name'])) ?></div>
                             <div>
-                                <div style="font-weight:600;"><?= e($l['name']) ?></div>
-                                <div style="font-size:.76rem;color:#888;"><?= formatDatabaseDateTime((string) $l['created_at']) ?></div>
+                                <div class="ld-mcard-name"><?= e($l['name']) ?></div>
+                                <?php if (!empty($l['company'])): ?><div class="ld-mcard-sub"><?= e($l['company']) ?></div><?php endif; ?>
+                                <div class="ld-mcard-sub"><?= formatDatabaseDateTime((string) $l['created_at']) ?></div>
                             </div>
                         </div>
                         <?php if (!empty($l['service'])): ?><span class="ld-tag"><?= e($l['service']) ?></span><?php endif; ?>
                     </div>
 
-                    <div style="font-size:.86rem;margin-bottom:8px;">
-                        <a href="mailto:<?= e($l['email']) ?>" style="color:#0E0E0E;text-decoration:none;font-weight:500;"><i class="bi bi-envelope me-1"></i><?= e($l['email']) ?></a>
+                    <div class="ld-mcard-line">
+                        <a href="mailto:<?= e($l['email']) ?>" style="color:#0E0E0E;font-weight:500;"><i class="bi bi-envelope me-1"></i><?= e($l['email']) ?></a>
                     </div>
                     <?php if (!empty($l['phone'])): ?>
-                        <div style="font-size:.86rem;margin-bottom:10px;">
-                            <a href="tel:<?= e($l['phone']) ?>" style="color:#555;text-decoration:none;"><i class="bi bi-telephone me-1"></i><?= e($l['phone']) ?></a>
+                        <div class="ld-mcard-line">
+                            <a href="tel:<?= e($l['phone']) ?>" style="color:#555;"><i class="bi bi-telephone me-1"></i><?= e($l['phone']) ?></a>
                         </div>
+                    <?php endif; ?>
+                    <?php if (!empty($l['budget'])): ?>
+                        <div class="ld-mcard-budget">Budget: <?= e($l['budget']) ?></div>
                     <?php endif; ?>
 
                     <?php if (!empty($l['message'])): ?>
-                        <div style="background:#F6F6F6;border-radius:12px;padding:10px 12px;font-size:.84rem;color:#555;margin-top:8px;"><?= e($l['message']) ?></div>
+                        <div class="ld-mcard-msg"><?= e($l['message']) ?></div>
                     <?php endif; ?>
+
+                    <div class="ld-mcard-actions">
+                        <a href="mailto:<?= e($l['email']) ?>"><i class="bi bi-envelope"></i> Email</a>
+                        <?php if (!empty($l['phone'])): ?><a href="tel:<?= e($l['phone']) ?>"><i class="bi bi-telephone"></i> Call</a><?php endif; ?>
+                    </div>
                 </div>
             <?php endforeach; ?>
         </div>
+
+        <div class="ld-noresult" id="leadNoResult"><i class="bi bi-search"></i>No leads match your search.</div>
     <?php endif; ?>
 </div>
 
@@ -240,14 +307,21 @@ require_once __DIR__ . '/templates/header.php';
 (function() {
     const input = document.getElementById('leadSearch');
     if (!input) return;
+    const visibleEl = document.getElementById('leadVisible');
+    const noResult = document.getElementById('leadNoResult');
     input.addEventListener('input', function() {
         const query = this.value.trim().toLowerCase();
+        let visible = 0;
         document.querySelectorAll('.lead-row').forEach(row => {
-            row.style.display = (row.getAttribute('data-search') || '').includes(query) ? '' : 'none';
+            const match = (row.getAttribute('data-search') || '').includes(query);
+            row.style.display = match ? '' : 'none';
+            if (match) visible++;
         });
         document.querySelectorAll('.lead-card-mobile').forEach(card => {
             card.style.display = (card.getAttribute('data-search') || '').includes(query) ? '' : 'none';
         });
+        if (visibleEl) visibleEl.textContent = visible;
+        if (noResult) noResult.style.display = visible === 0 ? 'block' : 'none';
     });
 })();
 </script>

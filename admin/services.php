@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Preserve existing metadata (e.g. custom rankings, case_results, etc.)
+        // Preserve existing metadata
         $existingMeta = [];
         if ($id !== null) {
             $prev = db()->prepare('SELECT metadata FROM content_items WHERE id = :id');
@@ -308,7 +308,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $metadata['is_delhi_seo'] = 1;
             $metadata['hero_accent'] = trim($_POST['hero_accent'] ?? ($existingMeta['hero_accent'] ?? 'Result-Driven SEO to Grow Your Business'));
             $metadata['hero_readiness_badge'] = trim($_POST['hero_readiness_badge'] ?? ($existingMeta['hero_readiness_badge'] ?? '⚡ Ready for Google to find you?'));
-            
+
             if (!empty($_POST['hero_bullets_text'])) {
                 $bLines = array_filter(array_map('trim', explode("\n", $_POST['hero_bullets_text'])));
                 if (!empty($bLines)) {
@@ -587,67 +587,117 @@ require_once __DIR__ . '/templates/header.php';
 ?>
 
 <style>
-    /* ===== SERVICES CMS — reference-style theme (only CSS changes, all HTML/PHP stays the same) ===== */
-    .scms-header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
-    .scms-title-wrap h1 { font-size: clamp(1.4rem, 2.4vw, 1.8rem) !important; font-weight: 600 !important; color: #0E0E0E; margin: 0 0 4px !important; letter-spacing: -.02em; }
-    .scms-title-wrap p { font-size: .88rem !important; color: #777; margin: 0 !important; }
+    /* ===== SERVICES CMS — Responsive & Fixed Theme ===== */
+    .scms-main-wrap { width: 100%; max-width: 100%; overflow-x: hidden; }
 
-    /* Stat cards -> yellow / red / blue / black */
+    .scms-header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+    .scms-title-wrap h1 { font-size: clamp(1.4rem, 2.4vw, 1.8rem) !important; font-weight: 600 !important; color: #0E0E0E; margin: 0 0 4px !important; letter-spacing: -.02em; word-break: break-word; }
+    .scms-title-wrap p { font-size: .88rem !important; color: #777; margin: 0 !important; max-width: 70ch; }
+
+    /* Stat cards (Fixed for Mobile) */
     .scms-stats-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
     @media (min-width: 576px) { .scms-stats-grid { grid-template-columns: repeat(2, 1fr); } }
     @media (min-width: 992px) { .scms-stats-grid { grid-template-columns: repeat(4, 1fr); } }
-    .scms-stat-card { border: 0; border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: flex-end; min-height: 112px; box-shadow: none; transition: none; }
+    
+    .scms-stat-card { 
+        border: 0; 
+        border-radius: 20px; 
+        padding: 20px; 
+        display: flex; 
+        flex-direction: row; /* Icon left, Text right */
+        align-items: center; 
+        justify-content: space-between; 
+        min-height: 110px; 
+        box-shadow: none; 
+        min-width: 0; 
+    }
+    
     .scms-stat-card:hover { transform: none; box-shadow: none; }
     .scms-stat-card:nth-child(1) { background: var(--adm-yellow); color: #0E0E0E; }
     .scms-stat-card:nth-child(2) { background: var(--adm-red); color: #fff; }
     .scms-stat-card:nth-child(3) { background: var(--adm-blue); color: #fff; }
     .scms-stat-card:nth-child(4) { background: #0E0E0E; color: #fff; }
-    .scms-stat-icon { width: 38px; height: 38px; border-radius: 50%; font-size: 1.05rem; background: rgba(255,255,255,.3) !important; color: inherit !important; align-self: flex-start; }
+    
+    .scms-stat-icon { 
+        width: 44px; 
+        height: 44px; 
+        border-radius: 50%; 
+        font-size: 1.15rem; 
+        display: grid;
+        place-items: center;
+        background: rgba(255,255,255,.3) !important; 
+        color: inherit !important; 
+        flex-shrink: 0;
+    }
     .scms-stat-card:nth-child(1) .scms-stat-icon { background: rgba(0,0,0,.08) !important; }
-    .scms-stat-num { font-size: 2.2rem; font-weight: 600; color: inherit; letter-spacing: -.03em; line-height: 1; }
-    .scms-stat-lbl { font-size: .82rem; font-weight: 500; color: inherit; opacity: .85; margin-top: 6px; }
+    
+    .scms-stat-content {
+        text-align: right;
+        min-width: 0;
+    }
+    .scms-stat-num { 
+        font-size: clamp(1.6rem, 4vw, 2.2rem); 
+        font-weight: 600; 
+        color: inherit; 
+        letter-spacing: -.03em; 
+        line-height: 1.1; 
+    }
+    .scms-stat-lbl { 
+        font-size: .82rem; 
+        font-weight: 500; 
+        color: inherit; 
+        opacity: .85; 
+        margin-top: 4px; 
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
     /* Search + category pills */
-    .scms-bar { background: #fff; border: 1px solid #EDEDED; border-radius: 999px; padding: 8px 10px 8px 20px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-    .scms-search-wrap { position: relative; flex: 1; min-width: 240px; max-width: 400px; }
+    .scms-bar { background: #fff; border: 1px solid #EDEDED; border-radius: 999px; padding: 10px 12px 10px 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .scms-search-wrap { position: relative; flex: 1 1 220px; min-width: 0; max-width: 400px; }
     .scms-search-wrap i { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: #999; font-size: .95rem; }
     .scms-search-input { width: 100%; padding: 9px 0 9px 28px; border: 0; background: transparent; font-size: .88rem; font-family: inherit; outline: none; }
-    .scms-cat-pills { display: flex; flex-wrap: wrap; gap: 6px; }
-    .scms-cat-pill { background: transparent; border: 0; color: #0E0E0E; font-size: .8rem; font-weight: 500; padding: 8px 16px; border-radius: 999px; cursor: pointer; text-decoration: none; transition: background .2s; }
+    .scms-cat-pills { display: flex; flex-wrap: nowrap; gap: 6px; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 2px; scrollbar-width: thin; }
+    .scms-cat-pills::-webkit-scrollbar { height: 4px; }
+    .scms-cat-pills::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+    .scms-cat-pill { flex-shrink: 0; background: transparent; border: 0; color: #0E0E0E; font-size: .8rem; font-weight: 500; padding: 8px 16px; border-radius: 999px; cursor: pointer; text-decoration: none; transition: background .2s; }
     .scms-cat-pill:hover { background: #F1F1F1; color: #0E0E0E; border: 0; }
     .scms-cat-pill.active { background: #0E0E0E; color: #fff; border: 0; }
 
     /* Table */
     .scms-table-card { background: #fff; border: 1px solid #EDEDED; border-radius: 26px; overflow: hidden; box-shadow: none; }
-    .scms-table { width: 100%; border-collapse: collapse; text-align: left; }
-    .scms-table th { background: #FAFAFA; padding: 14px 20px; font-size: .75rem; font-weight: 500; color: #888; text-transform: none; letter-spacing: 0; border-bottom: 1px solid #EEE; }
+    .scms-table-card .table-responsive { -webkit-overflow-scrolling: touch; overflow-x: auto; }
+    .scms-table { width: 100%; border-collapse: collapse; text-align: left; min-width: 760px; }
+    .scms-table th { background: #FAFAFA; padding: 14px 20px; font-size: .75rem; font-weight: 500; color: #888; border-bottom: 1px solid #EEE; white-space: nowrap; }
     .scms-table td { padding: 16px 20px; font-size: .86rem; color: #1c1c1c; border-bottom: 1px solid #F3F3F3; vertical-align: middle; }
     .scms-table tr:last-child td { border-bottom: 0; }
     .scms-table tr:hover td { background: #FAFAFA; }
-    .scms-svc-cell { display: flex; align-items: center; gap: 14px; }
+    .scms-svc-cell { display: flex; align-items: center; gap: 14px; min-width: 0; }
     .scms-svc-icon-box { width: 42px; height: 42px; border-radius: 50%; background: var(--adm-lime); color: #0E0E0E; display: grid; place-items: center; font-size: 1.1rem; flex-shrink: 0; }
-    .scms-svc-name { font-weight: 600; color: #0E0E0E; font-size: .94rem; margin-bottom: 2px; }
-    .scms-svc-name .badge { background: #0E0E0E !important; color: var(--adm-lime) !important; font-weight: 600; border-radius: 99px; }
-    .scms-svc-tagline { font-size: .78rem; color: #777; }
-    .scms-svc-slug { font-size: .72rem; color: #aaa; font-family: monospace; }
+    .scms-svc-name { font-weight: 600; color: #0E0E0E; font-size: .94rem; margin-bottom: 2px; display: flex; align-items: center; gap: 6px; min-width: 0; }
+    .scms-svc-name > .scms-svc-title-text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .scms-svc-name .badge { background: #0E0E0E !important; color: var(--adm-lime) !important; font-weight: 600; border-radius: 99px; flex-shrink: 0; }
+    .scms-svc-tagline { font-size: .78rem; color: #777; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px; }
+    .scms-svc-slug { font-size: .72rem; color: #aaa; font-family: monospace; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 300px; }
     .scms-badge-cat { display: inline-block; padding: 4px 12px; border-radius: 999px; font-size: .74rem; font-weight: 500; background: #F6F6F6; color: #0E0E0E; border: 1px solid #EAEAEA; }
 
     .scms-status-btn { border: 0; background: none; padding: 0; cursor: pointer; }
-    .scms-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: .74rem; font-weight: 600; text-transform: none; letter-spacing: 0; }
+    .scms-status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 999px; font-size: .74rem; font-weight: 600; white-space: nowrap; }
     .scms-status-badge.published { background: var(--adm-lime); color: #0E0E0E; border: 0; }
     .scms-status-badge.draft { background: #F1F1F1; color: #666; border: 0; }
     .scms-status-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
 
-    .scms-actions-cell { display: flex; align-items: center; gap: 8px; }
-    .scms-btn-action { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: .85rem; border: 0; background: #F4F4F4; color: #0E0E0E; text-decoration: none; cursor: pointer; transition: .2s; }
+    .scms-actions-cell { display: flex; align-items: center; gap: 8px; flex-wrap: nowrap; }
+    .scms-btn-action { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; font-size: .85rem; border: 0; background: #F4F4F4; color: #0E0E0E; text-decoration: none; cursor: pointer; transition: .2s; flex-shrink: 0; }
     .scms-btn-action:hover { background: #0E0E0E; color: var(--adm-lime); border: 0; }
     .scms-btn-action.edit:hover { background: #0E0E0E; color: var(--adm-lime); border: 0; }
     .scms-btn-action.del:hover { background: var(--adm-red); color: #fff; border: 0; }
 
     /* Editor */
-    .scms-editor-card { background: #fff; border: 1px solid #EDEDED; border-radius: 26px; padding: 28px; box-shadow: none; margin-bottom: 32px; }
-    .scms-editor-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #EEE; margin-bottom: 22px; gap: 12px; flex-wrap: wrap; }
-    .scms-editor-title { font-size: 1.25rem; font-weight: 600; color: #0E0E0E; margin: 0; }
+    .scms-editor-card { background: #fff; border: 1px solid #EDEDED; border-radius: 26px; padding: 24px; box-shadow: none; margin-bottom: 32px; min-width: 0; }
+    .scms-editor-header { display: flex; align-items: center; justify-content: space-between; padding-bottom: 18px; border-bottom: 1px solid #EEE; margin-bottom: 22px; gap: 10px; flex-wrap: wrap; }
+    .scms-editor-title { font-size: clamp(1.05rem, 2.5vw, 1.25rem); font-weight: 600; color: #0E0E0E; margin: 0; word-break: break-word; }
     .scms-editor-card .text-primary { color: #0E0E0E !important; }
     .scms-editor-card .btn-outline-primary { color: #0E0E0E; border-color: #0E0E0E; border-radius: 999px; }
     .scms-editor-card .btn-outline-primary:hover { background: #0E0E0E; color: var(--adm-lime); }
@@ -655,37 +705,108 @@ require_once __DIR__ . '/templates/header.php';
     .scms-editor-card .btn-outline-secondary:hover, .scms-header-row .btn-outline-secondary:hover { background: #0E0E0E; color: #fff; }
     .scms-editor-card .form-check-input:checked { background-color: #0E0E0E; border-color: #0E0E0E; }
 
-    .scms-form-group { margin-bottom: 20px; }
-    .scms-form-group label { display: block; font-size: .8rem; font-weight: 500; color: #555; margin-bottom: 6px; text-transform: none; letter-spacing: 0; }
-    .scms-form-control { width: 100%; padding: 10px 16px; border: 1px solid #E3E3E3; border-radius: 14px; font-size: .9rem; font-family: inherit; outline: none; background: #fff; transition: border-color .2s, box-shadow .2s; }
+    .scms-form-group { margin-bottom: 20px; min-width: 0; }
+    .scms-form-group label { display: block; font-size: .8rem; font-weight: 500; color: #555; margin-bottom: 6px; }
+    .scms-form-control { width: 100%; max-width: 100%; padding: 10px 16px; border: 1px solid #E3E3E3; border-radius: 14px; font-size: .9rem; font-family: inherit; outline: none; background: #fff; transition: border-color .2s, box-shadow .2s; }
     .scms-form-control:focus { border-color: #0E0E0E; box-shadow: 0 0 0 3px rgba(230,247,58,.55); }
     textarea.scms-form-control { min-height: 90px; resize: vertical; border-radius: 16px; }
+    .row > [class*="col-"] { min-width: 0; }
 
-    /* Tabs as pills (also overrides the inline pink tab) */
-    .scms-tabs { display: flex; gap: 6px; border-bottom: 0; margin-bottom: 24px; overflow-x: auto; padding: 6px; background: #F4F4F4; border-radius: 999px; }
-    .scms-tab-btn, .scms-tab-btn[style] { padding: 9px 18px; border: 0 !important; background: transparent !important; font-family: inherit; font-size: .84rem; font-weight: 500 !important; color: #0E0E0E !important; cursor: pointer; position: relative; white-space: nowrap; border-radius: 999px; transition: .2s; }
+    /* Tabs as pills */
+    .scms-tabs { display: flex; gap: 6px; border-bottom: 0; margin-bottom: 24px; overflow-x: auto; overflow-y: hidden; padding: 6px; background: #F4F4F4; border-radius: 999px; flex-wrap: nowrap; scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch; scrollbar-width: thin; }
+    .scms-tabs::-webkit-scrollbar { height: 4px; }
+    .scms-tabs::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+    .scms-tab-btn, .scms-tab-btn[style] { flex-shrink: 0; scroll-snap-align: start; padding: 8px 14px; border: 0 !important; background: transparent !important; font-family: inherit; font-size: .8rem; font-weight: 500 !important; color: #0E0E0E !important; cursor: pointer; position: relative; white-space: nowrap; border-radius: 999px; transition: .2s; }
     .scms-tab-btn:hover, .scms-tab-btn[style]:hover { background: #E8E8E8 !important; }
     .scms-tab-btn.active, .scms-tab-btn.active[style] { background: #0E0E0E !important; color: #fff !important; }
     .scms-tab-btn.active::after { display: none; }
 
-    /* Info banners inside tabs (override inline pink) */
     .scms-editor-card .alert.alert-light[style] { background: #FBFFD6 !important; border: 1px solid var(--adm-lime) !important; border-radius: 18px; }
     .scms-editor-card .alert strong[style] { color: #0E0E0E !important; }
 
-    .scms-repeater-box, .scms-item-card { background: #FAFAFA; border: 1px solid #EDEDED; border-radius: 18px; padding: 16px; margin-bottom: 12px; position: relative; }
+    .scms-repeater-box, .scms-item-card { background: #FAFAFA; border: 1px solid #EDEDED; border-radius: 18px; padding: 16px; margin-bottom: 12px; position: relative; min-width: 0; }
     .scms-item-card.bg-white { background: #fff; }
-    .scms-repeater-box .del-btn { position: absolute; top: 12px; right: 12px; background: #FFE3DF; color: #D6301A; border: 0; width: 26px; height: 26px; border-radius: 50%; font-size: .8rem; cursor: pointer; display: grid; place-items: center; }
+    .scms-repeater-box .del-btn { position: absolute; top: 12px; right: 12px; background: #FFE3DF; color: #D6301A; border: 0; width: 26px; height: 26px; border-radius: 50%; font-size: .8rem; cursor: pointer; display: grid; place-items: center; z-index: 2; }
     .scms-btn-add { background: var(--adm-lime); color: #0E0E0E; border: 0; font-weight: 600; font-size: .84rem; padding: 9px 18px; border-radius: 999px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: .2s; }
     .scms-btn-add:hover { background: #0E0E0E; color: var(--adm-lime); }
 
-    .scms-primary-btn { background: #0E0E0E; color: #fff; border: 0; padding: 12px 26px; border-radius: 999px; font-weight: 600; font-size: .9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: none; transition: .2s; }
+    .scms-primary-btn { background: #0E0E0E; color: #fff; border: 0; padding: 12px 26px; border-radius: 999px; font-weight: 600; font-size: .9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; text-decoration: none; box-shadow: none; transition: .2s; white-space: nowrap; }
     .scms-primary-btn:hover { background: #2a2a2a; color: var(--adm-lime); transform: none; box-shadow: none; }
     .scms-primary-btn i { color: var(--adm-lime); }
 
+    /* Submit bar */
+    .scms-submit-bar { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-top: 18px; margin-top: 18px; border-top: 1px solid #EEE; }
+
     /* Delete modal */
+    #scmsDeleteModal .modal-dialog { margin: 1rem; }
     #scmsDeleteModal .modal-content { border-radius: 26px; overflow: hidden; }
     #scmsDeleteModal .btn-danger { background: var(--adm-red); border-color: var(--adm-red); border-radius: 999px; }
     #scmsDeleteModal .btn-outline-secondary { border-radius: 999px; }
+
+    /* ============================================================
+       RESPONSIVE BREAKPOINTS
+       ============================================================ */
+    @media (max-width: 768px) {
+        .scms-editor-card { padding: 18px; border-radius: 20px; }
+        .scms-table-card { border-radius: 20px; }
+        .scms-header-row { margin-bottom: 16px !important; }
+        .scms-table th, .scms-table td { padding: 12px 14px; }
+        .scms-svc-icon-box { width: 36px; height: 36px; font-size: 1rem; }
+        .scms-svc-name { font-size: .88rem; }
+        .scms-svc-tagline, .scms-svc-slug { max-width: 200px; }
+    }
+
+    @media (max-width: 576px) {
+        .scms-header-row { flex-direction: column; align-items: flex-start; }
+        .scms-header-row > div:last-child { width: 100%; }
+        .scms-header-row .btn { width: 100%; justify-content: center; }
+        
+        .scms-stat-card { padding: 16px; min-height: 90px; }
+        .scms-stat-icon { width: 36px; height: 36px; font-size: 1rem; }
+        .scms-stat-num { font-size: 1.4rem; }
+
+        .scms-editor-card { padding: 14px; border-radius: 16px; margin-bottom: 20px; }
+        .scms-editor-header { padding-bottom: 14px; margin-bottom: 16px; }
+        .scms-editor-header .btn { font-size: .78rem; padding: 6px 12px; }
+        .scms-title-wrap h1 { font-size: 1.25rem !important; }
+        .scms-title-wrap p { font-size: .8rem !important; }
+
+        .scms-stats-grid { gap: 10px; margin-bottom: 14px; }
+
+        .scms-bar { border-radius: 18px; padding: 8px; }
+        .scms-search-wrap { flex-basis: 100%; }
+        .scms-search-input { padding: 8px 0 8px 26px; font-size: .84rem; }
+        .scms-cat-pill { padding: 6px 12px; font-size: .74rem; }
+
+        .scms-table th, .scms-table td { padding: 10px 12px; font-size: .8rem; }
+        .scms-svc-tagline, .scms-svc-slug { max-width: 150px; }
+        .scms-btn-action { width: 30px; height: 30px; font-size: .78rem; }
+        .scms-actions-cell { gap: 5px; }
+
+        .scms-tabs { padding: 4px; border-radius: 14px; }
+        .scms-tab-btn, .scms-tab-btn[style] { font-size: .74rem !important; padding: 7px 12px !important; }
+
+        .scms-repeater-box .row > [class*="col-"],
+        .scms-item-card .row > [class*="col-"] { margin-bottom: 8px; }
+        .scms-item-card { padding: 12px !important; border-radius: 14px; }
+        .scms-repeater-box { padding: 12px !important; }
+
+        .scms-form-control { font-size: .86rem; padding: 9px 14px; }
+        textarea.scms-form-control { min-height: 70px; }
+
+        .scms-primary-btn { padding: 10px 20px; font-size: .82rem; }
+
+        #scmsDeleteModal .modal-body { padding: 1rem; }
+        #scmsDeleteModal .modal-footer { flex-wrap: wrap; gap: 8px; }
+    }
+
+    @media (max-width: 380px) {
+        .scms-stat-card { padding: 12px; }
+        .scms-stat-num { font-size: 1.3rem; }
+        .scms-title-wrap h1 { font-size: 1.1rem !important; }
+        .scms-svc-tagline, .scms-svc-slug { max-width: 120px; }
+        .scms-tab-btn, .scms-tab-btn[style] { font-size: .7rem !important; padding: 6px 10px !important; }
+    }
 </style>
 
 <div class="scms-main-wrap">
@@ -723,32 +844,32 @@ require_once __DIR__ . '/templates/header.php';
         </div>
     </div>
 
-    <!-- Live Statistics Dashboard -->
+    <!-- Live Statistics Dashboard (Fixed Layout) -->
     <div class="scms-stats-grid">
         <div class="scms-stat-card">
             <div class="scms-stat-icon pink"><i class="bi bi-boxes"></i></div>
-            <div>
+            <div class="scms-stat-content">
                 <div class="scms-stat-num"><?= $totalServices ?></div>
                 <div class="scms-stat-lbl">Total Services</div>
             </div>
         </div>
         <div class="scms-stat-card">
             <div class="scms-stat-icon green"><i class="bi bi-check2-circle"></i></div>
-            <div>
+            <div class="scms-stat-content">
                 <div class="scms-stat-num"><?= $publishedServices ?></div>
                 <div class="scms-stat-lbl">Published &amp; Live</div>
             </div>
         </div>
         <div class="scms-stat-card">
             <div class="scms-stat-icon amber"><i class="bi bi-pencil-square"></i></div>
-            <div>
+            <div class="scms-stat-content">
                 <div class="scms-stat-num"><?= $draftServices ?></div>
                 <div class="scms-stat-lbl">Drafts / Inactive</div>
             </div>
         </div>
         <div class="scms-stat-card">
             <div class="scms-stat-icon blue"><i class="bi bi-tag-fill"></i></div>
-            <div>
+            <div class="scms-stat-content">
                 <div class="scms-stat-num">6</div>
                 <div class="scms-stat-lbl">Active Categories</div>
             </div>
@@ -801,9 +922,6 @@ require_once __DIR__ . '/templates/header.php';
                     <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
                 <?php endif; ?>
 
-                <?php
-// Template holding both the Delhi SEO 12-tab CMS and the standard CMS
-?>
                 <input type="hidden" name="is_delhi_seo" value="<?= $isDelhiSeo ? '1' : '0' ?>">
 
                 <?php if ($isDelhiSeo): ?>
@@ -850,7 +968,7 @@ require_once __DIR__ . '/templates/header.php';
 
                         <div class="scms-form-group">
                             <label>Hero Checkmark Bullets (One per line)</label>
-                            <?php 
+                            <?php
                             $bLines = !empty($item['hero_bullets']) && is_array($item['hero_bullets']) ? implode("\n", $item['hero_bullets']) : "Enhance Google Rankings for relevant, high-value keywords\nBring in Targeted Organic Traffic from ready-to-buy customers\nIncrease website leads and enquiries with search optimisation\nCreate Long-Term Visibility by following a sustainable organic strategy";
                             ?>
                             <textarea name="hero_bullets_text" class="scms-form-control" rows="4"><?= htmlspecialchars($bLines) ?></textarea>
@@ -885,10 +1003,10 @@ require_once __DIR__ . '/templates/header.php';
 
                         <div class="scms-form-group">
                             <label>Author Avatar Image</label>
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-3 flex-wrap">
                                 <?php $avVal = $item['founder_avatar'] ?? '/assets/images/jitin-madaan-avatar.png'; ?>
                                 <img src="<?= htmlspecialchars($avVal) ?>" alt="Avatar" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; border: 2px solid #C4007A;">
-                                <div class="flex-grow-1">
+                                <div class="flex-grow-1" style="min-width:0;flex:1 1 200px;">
                                     <input type="text" name="founder_avatar" class="scms-form-control mb-1" value="<?= htmlspecialchars($avVal) ?>">
                                     <input type="file" name="founder_avatar_file" class="form-control form-control-sm" accept="image/*">
                                 </div>
@@ -921,7 +1039,7 @@ require_once __DIR__ . '/templates/header.php';
                                     </div>
                                     <div class="col-md-2 text-center">
                                         <?php if (!empty($b['logo'])): ?>
-                                            <img src="<?= htmlspecialchars($b['logo']) ?>" alt="Preview" style="max-height: 34px; max-width: 80px; object-fit: contain;">
+                                            <img src="<?= htmlspecialchars($b['logo']) ?>" alt="Preview" style="max-height: 34px; max-width: 100%; object-fit: contain;">
                                         <?php endif; ?>
                                     </div>
                                 </div>
@@ -976,7 +1094,7 @@ require_once __DIR__ . '/templates/header.php';
                             </div>
                             <div class="col-md-4 text-center">
                                 <?php $spImg = $item['spring_serp_image'] ?? '/assets/images/spring-sourcing-fair-serp-highlight.png'; ?>
-                                <img src="<?= htmlspecialchars($spImg) ?>" alt="Preview" style="max-height: 90px; border-radius: 8px; border: 1.5px solid #C4007A;">
+                                <img src="<?= htmlspecialchars($spImg) ?>" alt="Preview" style="max-height: 90px; max-width: 100%; border-radius: 8px; border: 1.5px solid #C4007A;">
                             </div>
                         </div>
 
@@ -1024,7 +1142,7 @@ require_once __DIR__ . '/templates/header.php';
 
                         <div class="scms-form-group">
                             <label>10 Key Deliverables Checklist (One per line)</label>
-                            <?php 
+                            <?php
                             $tListText = !empty($takeaways['checklist']) && is_array($takeaways['checklist']) ? implode("\n", $takeaways['checklist']) : '';
                             ?>
                             <textarea name="takeaway_checklist_text" class="scms-form-control" rows="8"><?= htmlspecialchars($tListText) ?></textarea>
@@ -1038,7 +1156,7 @@ require_once __DIR__ . '/templates/header.php';
                         </div>
                         <div class="scms-form-group">
                             <label>7 Steps (Comma-separated)</label>
-                            <?php 
+                            <?php
                             $appSteps = !empty($takeaways['approach_steps']) && is_array($takeaways['approach_steps']) ? implode(', ', $takeaways['approach_steps']) : 'Research, Strategy, Optimisation, Content, Authority, Measurement, Growth';
                             ?>
                             <input type="text" name="approach_steps" class="scms-form-control" value="<?= htmlspecialchars($appSteps) ?>">
@@ -1058,7 +1176,7 @@ require_once __DIR__ . '/templates/header.php';
                             </div>
                             <div class="col-md-4 text-center">
                                 <?php $sImg = $item['serp_image'] ?? '/assets/images/seo-takeaways-preview.png'; ?>
-                                <img src="<?= htmlspecialchars($sImg) ?>" alt="Preview" style="max-height: 90px; border-radius: 8px; border: 1.5px solid #C4007A;">
+                                <img src="<?= htmlspecialchars($sImg) ?>" alt="Preview" style="max-height: 90px; max-width: 100%; border-radius: 8px; border: 1.5px solid #C4007A;">
                             </div>
                         </div>
                     </div>
@@ -1166,10 +1284,10 @@ require_once __DIR__ . '/templates/header.php';
 
                         <div class="scms-form-group">
                             <label>Strategist High-Resolution Photo</label>
-                            <div class="d-flex align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-3 flex-wrap">
                                 <?php $fImg = $item['founder_image'] ?? '/assets/images/jitin-madaan.png'; ?>
                                 <img src="<?= htmlspecialchars($fImg) ?>" alt="Photo" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover; border: 2px solid #C4007A;">
-                                <div class="flex-grow-1">
+                                <div class="flex-grow-1" style="min-width:0;flex:1 1 200px;">
                                     <input type="text" name="founder_image" class="scms-form-control mb-1" value="<?= htmlspecialchars($fImg) ?>">
                                     <input type="file" name="founder_image_file" class="form-control form-control-sm" accept="image/*">
                                 </div>
@@ -1302,7 +1420,7 @@ require_once __DIR__ . '/templates/header.php';
                         </div>
                         <div class="scms-form-group">
                             <label>Target Micro-Markets (Comma-separated)</label>
-                            <?php 
+                            <?php
                             $mks = !empty($wrappingUp['micro_markets']) && is_array($wrappingUp['micro_markets']) ? implode(', ', $wrappingUp['micro_markets']) : 'Pitampura, Rohini, Dwarka, Janakpuri, South Delhi, Connaught Place, Saket, Punjabi Bagh, Noida, Gurgaon, Faridabad, Ghaziabad';
                             ?>
                             <input type="text" name="wrap_markets" class="scms-form-control" value="<?= htmlspecialchars($mks) ?>">
@@ -1545,8 +1663,9 @@ require_once __DIR__ . '/templates/header.php';
                         </div>
                     </div>
                 <?php endif; ?>
-<!-- Submit Bar -->
-                <div class="d-flex align-items-center justify-content-between pt-4 mt-4 border-top">
+
+                <!-- Submit Bar -->
+                <div class="scms-submit-bar">
                     <a href="/admin/services.php" class="btn btn-outline-secondary">Cancel</a>
                     <button type="submit" class="scms-primary-btn">
                         <i class="bi bi-check-lg"></i> <?= $isNew ? 'Publish New Service' : 'Save Changes &amp; Update Live Page' ?>
@@ -1567,10 +1686,10 @@ require_once __DIR__ . '/templates/header.php';
                 <i class="bi bi-search"></i>
                 <input type="text" id="scmsSearch" class="scms-search-input" placeholder="Search services by title, slug, category..." onkeyup="scmsFilterTable()">
             </div>
-            <div class="scms-cat-pills">
-                <span class="scms-cat-pill active" onclick="scmsFilterCategory('all', this)">All (<?= count($servicesList) ?>)</span>
+            <div class="scms-cat-pills" role="tablist">
+                <span class="scms-cat-pill active" role="tab" onclick="scmsFilterCategory('all', this)">All (<?= count($servicesList) ?>)</span>
                 <?php foreach (['SEO', 'Web Development', 'Paid Advertising', 'Social Media', 'Branding'] as $cat): ?>
-                    <span class="scms-cat-pill" onclick="scmsFilterCategory('<?= htmlspecialchars($cat) ?>', this)"><?= htmlspecialchars($cat) ?></span>
+                    <span class="scms-cat-pill" role="tab" onclick="scmsFilterCategory('<?= htmlspecialchars($cat) ?>', this)"><?= htmlspecialchars($cat) ?></span>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -1599,11 +1718,11 @@ require_once __DIR__ . '/templates/header.php';
                                         <div class="scms-svc-icon-box">
                                             <i class="bi bi-<?= htmlspecialchars($svc['icon'] ?? 'sparkles') === 'sparkles' ? 'stars' : ($svc['icon'] ?? 'box') ?>"></i>
                                         </div>
-                                        <div>
+                                        <div style="min-width:0;">
                                             <div class="scms-svc-name">
-                                                <?= htmlspecialchars($svc['title'] ?? '') ?>
+                                                <span class="scms-svc-title-text"><?= htmlspecialchars($svc['title'] ?? '') ?></span>
                                                 <?php if (($svc['slug'] ?? '') === 'b2b-exhibition-seo'): ?>
-                                                    <span class="badge" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem; margin-left: 6px; vertical-align: middle;">★ FLAGSHIP</span>
+                                                    <span class="badge" style="background: linear-gradient(135deg, #C4007A, #E0398F); font-size: 0.65rem;">★ FLAGSHIP</span>
                                                 <?php endif; ?>
                                             </div>
                                             <div class="scms-svc-tagline"><?= htmlspecialchars($svc['tagline'] ?? '') ?></div>
@@ -1680,13 +1799,27 @@ require_once __DIR__ . '/templates/header.php';
 </div>
 
 <script>
-    // Tab switcher
+    // Tab switcher — scrolls tab strip & page on mobile
     function scmsSwitchTab(tabId, btn) {
         document.querySelectorAll('.scms-tab-pane').forEach(el => el.classList.add('d-none'));
         document.querySelectorAll('.scms-tab-btn').forEach(el => el.classList.remove('active'));
         const target = document.getElementById(tabId);
-        if (target) target.classList.remove('d-none');
-        if (btn) btn.classList.add('active');
+        if (target) {
+            target.classList.remove('d-none');
+            if (window.innerWidth < 768) {
+                const tabs = document.querySelector('.scms-tabs');
+                if (tabs) {
+                    const top = tabs.getBoundingClientRect().top + window.scrollY - 12;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            }
+        }
+        if (btn) {
+            btn.classList.add('active');
+            if (btn.parentElement) {
+                btn.scrollIntoView({ inline: 'nearest', block: 'nearest', behavior: 'smooth' });
+            }
+        }
     }
 
     // Live search filter
@@ -1724,6 +1857,7 @@ require_once __DIR__ . '/templates/header.php';
     // Add Dynamic Feature Repeater Box
     function scmsAddFeature() {
         const container = document.getElementById('scmsFeaturesContainer');
+        if (!container) return;
         const div = document.createElement('div');
         div.className = 'scms-repeater-box';
         div.innerHTML = `
@@ -1743,6 +1877,7 @@ require_once __DIR__ . '/templates/header.php';
     // Add Dynamic Process Repeater Box
     function scmsAddProcess() {
         const container = document.getElementById('scmsProcessContainer');
+        if (!container) return;
         const count = container.querySelectorAll('.scms-repeater-box').length + 1;
         const stepNum = count < 10 ? '0' + count : '' + count;
         const div = document.createElement('div');

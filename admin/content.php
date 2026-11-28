@@ -823,483 +823,369 @@ unset($_SESSION['cms_flash']);
 require_once __DIR__ . '/templates/header.php';
 ?>
 <!-- Bootstrap 5 + Icons + Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
-    /* Bootstrap reboot header ke links pe underline laga deta hai — usko hata diya */
-    a { text-decoration: none; }
-
+    /* ===== CONTENT MANAGER v2 — same layout as Services CMS ===== */
+    .cms-shell a { text-decoration: none; }
     .cms-shell {
-        --brand: #0E0E0E;
-        --brand-deep: #2A2A2A;
-        --brand-soft: #F1F1F1;
-        --brand-faint: #F7F7F7;
-
-        --bs-primary: var(--brand);
-        --bs-primary-rgb: 14, 14, 14;
-        --bs-link-color: var(--brand);
-        --bs-link-hover-color: var(--brand-deep);
-        --bs-body-font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
-
-        font-family: var(--bs-body-font-family);
-        letter-spacing: normal;
-        background: #E9ECEB;
-        color: #0E0E0E;
-        min-height: calc(100vh - 72px);
-        padding: 0 0 3rem;
+        --cms-ink: #0E0E0E;
+        --cms-lime: var(--adm-lime, #E6F73A);
+        --cms-red: var(--adm-red, #FF4B33);
+        --cms-line: #EDEDED;
+        font-family: var(--adm-font, 'Space Grotesk', system-ui, sans-serif);
+        color: var(--cms-ink);
+        background: transparent;
+        padding: 0 0 2rem;
     }
 
-    /* Brand buttons */
-    .cms-shell .btn-primary {
-        --bs-btn-bg: #E6F73A;
-        --bs-btn-border-color: #E6F73A;
-        --bs-btn-color: #0E0E0E;
-        --bs-btn-hover-bg: #D7E82C;
-        --bs-btn-hover-border-color: #D7E82C;
-        --bs-btn-hover-color: #0E0E0E;
-        --bs-btn-active-bg: #CEDC20;
-        --bs-btn-active-border-color: #CEDC20;
-        --bs-btn-active-color: #0E0E0E;
-        --bs-btn-disabled-bg: #E6F73A;
-        --bs-btn-disabled-border-color: #E6F73A;
-        --bs-btn-focus-shadow-rgb: 230, 247, 58;
-        font-weight: 600;
+    /* Title row */
+    .cms-header-row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 20px; }
+    .cms-title-wrap h1 { font-size: clamp(1.4rem, 2.4vw, 1.8rem); font-weight: 600; color: var(--cms-ink); margin: 0 0 4px; letter-spacing: -.02em; }
+    .cms-title-wrap p { font-size: .88rem; color: #777; margin: 0; max-width: 760px; }
+    .cms-add-btn { background: var(--cms-ink); color: #fff; border: 0; padding: 12px 26px; border-radius: 999px; font-weight: 600; font-size: .9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; transition: .2s; }
+    .cms-add-btn i { color: var(--cms-lime); }
+    .cms-add-btn:hover { background: #2a2a2a; color: var(--cms-lime); }
+
+    /* Stat cards (yellow / red / blue / black) */
+    .cms-stats-grid { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 20px; }
+    @media (min-width: 576px) { .cms-stats-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 992px) { .cms-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+    .cms-stat-card { border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: row-reverse; justify-content: space-between; align-items: flex-end; min-height: 112px; }
+    .cms-stat-card:nth-child(1) { background: var(--adm-yellow, #F2F23A); color: #0E0E0E; }
+    .cms-stat-card:nth-child(2) { background: var(--cms-red); color: #fff; }
+    .cms-stat-card:nth-child(3) { background: var(--adm-blue, #7B9CE8); color: #fff; }
+    .cms-stat-card:nth-child(4) { background: #0E0E0E; color: #fff; }
+    .cms-stat-icon { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; font-size: 1.05rem; background: rgba(255,255,255,.3); align-self: flex-start; }
+    .cms-stat-card:nth-child(1) .cms-stat-icon { background: rgba(0,0,0,.08); }
+    .cms-stat-num { font-size: 2.2rem; font-weight: 600; letter-spacing: -.03em; line-height: 1; }
+    .cms-stat-lbl { font-size: .82rem; font-weight: 500; opacity: .85; margin-top: 6px; }
+
+    /* Section picker + search bar (pill bar like Services CMS) */
+    .cms-bar { background: #fff; border: 1px solid var(--cms-line); border-radius: 999px; padding: 8px 10px 8px 12px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .cms-select-wrap { position: relative; flex: 0 1 340px; min-width: 220px; }
+    .cms-select-wrap > i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--cms-lime); pointer-events: none; z-index: 1; }
+    .cms-select { width: 100%; appearance: none; -webkit-appearance: none; background: var(--cms-ink); color: #fff; border: 0; border-radius: 999px; padding: 10px 40px 10px 40px; font-family: inherit; font-size: .86rem; font-weight: 600; cursor: pointer; outline: none; }
+    .cms-select option, .cms-select optgroup { background: #fff; color: #0E0E0E; font-weight: 500; }
+    .cms-select-wrap::after { content: '\F282'; font-family: 'bootstrap-icons'; position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--cms-lime); pointer-events: none; font-size: .8rem; }
+    .cms-search-form { position: relative; flex: 1; min-width: 220px; max-width: 420px; margin: 0; }
+    .cms-search-form i { position: absolute; left: 4px; top: 50%; transform: translateY(-50%); color: #999; }
+    .cms-search-form input { width: 100%; padding: 9px 0 9px 30px; border: 0; background: transparent; font-family: inherit; font-size: .88rem; outline: none; }
+    .cms-count-pill { background: var(--cms-ink); color: var(--cms-lime); border-radius: 999px; padding: 8px 16px; font-size: .78rem; font-weight: 600; white-space: nowrap; }
+
+    /* Main card */
+    .cms-card { background: #fff; border: 1px solid var(--cms-line); border-radius: 26px; box-shadow: none; }
+    .cms-shell .text-body-secondary { color: #777 !important; }
+    .cms-shell .bg-body-tertiary { background: #FAFAFA !important; }
+
+    /* Rows */
+    .cms-record { padding: 1rem 1.5rem; border-color: #F3F3F3; transition: background .15s; }
+    .cms-record:hover { background: #FAFAFA; }
+    .cms-record h3 { font-size: .98rem; font-weight: 600; margin: 0 0 .2rem; overflow-wrap: anywhere; }
+    .cms-record p { margin: 0; font-size: .84rem; color: #777; overflow-wrap: anywhere; }
+    .cms-thumb { width: 52px; height: 52px; flex: none; border-radius: 16px; object-fit: cover; }
+    .cms-thumb-ph { display: grid; place-items: center; border-radius: 50%; background: var(--cms-lime); color: var(--cms-ink); font-size: 1.2rem; }
+    .cms-shell .badge.bg-success-subtle { background: var(--cms-lime) !important; color: var(--cms-ink) !important; font-weight: 600; }
+    .cms-shell .badge.bg-secondary-subtle { background: #F1F1F1 !important; color: #666 !important; font-weight: 600; }
+    .cms-record-actions .btn { border: 0 !important; border-radius: 999px !important; background: #F4F4F4; color: var(--cms-ink); font-weight: 600; font-size: .8rem; padding: .45rem .95rem; box-shadow: none; transition: background .2s, color .2s; }
+    .cms-record-actions .btn:hover { background: var(--cms-ink); color: var(--cms-lime); }
+    .cms-record-actions .btn-outline-danger { background: #FFE3DF; color: #D6301A; }
+    .cms-record-actions .btn-outline-danger:hover { background: var(--cms-red); color: #fff; }
+    .cms-dir-item { border: 1px solid var(--cms-line); border-radius: 20px; padding: 1rem; height: 100%; transition: border-color .15s; }
+    .cms-dir-item:hover { border-color: var(--cms-ink); }
+    .cms-ico { color: var(--cms-ink); }
+
+    /* Buttons inside card / modal */
+    .cms-shell .btn-primary { background: var(--cms-ink); border: 0; color: #fff; border-radius: 999px; padding: .6rem 1.4rem; font-weight: 600; }
+    .cms-shell .btn-primary .bi { color: var(--cms-lime); }
+    .cms-shell .btn-primary:hover { background: #2a2a2a; color: var(--cms-lime); }
+    .cms-shell .btn-outline-secondary { border-radius: 999px; border-color: var(--cms-ink); color: var(--cms-ink); }
+    .cms-shell .btn-outline-secondary:hover { background: var(--cms-ink); color: #fff; }
+
+    /* Forms / modal */
+    .cms-shell .form-control, .cms-shell .form-select { border: 1px solid #E3E3E3; border-radius: 14px; padding: .6rem 1rem; font-size: .9rem; }
+    .cms-shell textarea.form-control { border-radius: 16px; }
+    .cms-shell .form-control:focus, .cms-shell .form-select:focus { border-color: var(--cms-ink); box-shadow: 0 0 0 3px rgba(230,247,58,.55); }
+    .cms-shell .form-label { font-size: .82rem; font-weight: 500 !important; color: #444; }
+    .cms-shell .form-text { font-size: .75rem; color: #8a8a8a; }
+    .cms-shell .form-check-input:checked { background-color: var(--cms-ink); border-color: var(--cms-ink); }
+    .cms-modal { border-radius: 26px; overflow: hidden; }
+    .cms-shell .alert { border-radius: 18px; }
+
+    @media (max-width: 767.98px) {
+        .cms-bar { border-radius: 26px; padding: 12px; }
+        .cms-select-wrap, .cms-search-form { flex: 1 1 100%; max-width: none; }
     }
-    .cms-shell .btn { font-weight: 600; }
-
-    /* Form focus ring in brand color */
-    .cms-shell .form-control:focus,
-    .cms-shell .form-select:focus {
-        border-color: #A5B20F;
-        box-shadow: 0 0 0 .22rem rgba(230, 247, 58, .28);
-    }
-    .cms-shell .form-check-input:checked { background-color: #0E0E0E; border-color: #0E0E0E; }
-    .cms-shell .form-check-input:focus { border-color: #A5B20F; box-shadow: 0 0 0 .22rem rgba(230, 247, 58, .28); }
-
-    /* Page title (header ka global h1 size override) */
-    .cms-shell .cms-title { font-size: 1.35rem !important; line-height: 1.3 !important; font-weight: 700 !important; letter-spacing: -.01em !important; margin: 0 0 .25rem !important; }
-
-    /* Cards */
-    .cms-card { border: 1px solid #EDEDED; border-radius: 26px; box-shadow: none; background: #fff; }
-
-    /* Sidebar */
-    @media (min-width: 992px) {
-        .cms-sticky { position: sticky; top: 88px; }
-        .cms-side { max-height: calc(100vh - 112px); overflow-y: auto; scrollbar-width: thin; }
-    }
-    .cms-side-title { font-size: .7rem; font-weight: 700; letter-spacing: .08em; color: #8d8590; padding: .25rem .75rem .5rem; }
-    .cms-link {
-        display: flex; align-items: center; gap: .65rem;
-        padding: .5rem .75rem; border-radius: .65rem;
-        color: #4b4452; font-size: .86rem; line-height: 1.3;
-        transition: background .15s, color .15s;
-    }
-    .cms-link:hover { background: #F7F7F7; color: #0E0E0E; }
-    .cms-link.active { background: #E6F73A; color: #0E0E0E; font-weight: 700; }
-    .cms-ico { width: 1.15rem; flex: none; text-align: center; color: #0E0E0E; }
-    .cms-count { margin-left: auto; font-size: .7rem; font-weight: 600; color: #777; background: #F1F1F1; border-radius: 50rem; padding: .12rem .5rem; }
-    .cms-link.active .cms-count { background: #0E0E0E; color: #E6F73A; }
-
-    .cms-group-toggle {
-        display: flex; align-items: center; gap: .65rem; width: 100%;
-        padding: .55rem .75rem; border: 0; background: transparent; border-radius: .65rem;
-        color: #29232d; font-weight: 700; font-size: .86rem; text-align: left;
-    }
-    .cms-group-toggle:hover { background: #f8f5f7; }
-    .cms-group-toggle .bi-chevron-down { margin-left: auto; font-size: .72rem; color: #928995; transition: transform .2s; }
-    .cms-group-toggle[aria-expanded="false"] .bi-chevron-down { transform: rotate(-90deg); }
-    .cms-children { margin: .15rem 0 .35rem 1.2rem; padding-left: .55rem; border-left: 1px solid #eee7ed; }
-
-    /* Records */
-    .cms-thumb { width: 56px; height: 56px; flex: none; border-radius: .75rem; object-fit: cover; }
-    .cms-thumb-ph { display: grid; place-items: center; background: var(--brand-soft); color: var(--brand); font-size: 1.35rem; }
-    .cms-record { padding: 1rem 1.25rem; transition: background .15s; }
-    .cms-record:hover { background: #fffafd; }
-    .cms-record h3 { font-size: 1rem; font-weight: 700; margin: 0 0 .2rem; overflow-wrap: anywhere; }
-    .cms-record p { margin: 0; font-size: .85rem; color: #6c6672; overflow-wrap: anywhere; }
-
-    /* Directory */
-    .cms-dir-item { border: 1px solid #eee9ed; border-radius: .85rem; padding: 1rem; height: 100%; transition: border-color .15s, box-shadow .15s; }
-    .cms-dir-item:hover { border-color: #e5c4d6; box-shadow: 0 4px 14px rgba(50, 28, 43, .05); }
-
-    .cms-modal { border-radius: 1rem; }
-
-    /* Tablet & below */
-    @media (max-width: 991.98px) {
-        .cms-shell { padding-top: 1rem; }
-    }
-
-    /* Mobile */
     @media (max-width: 575.98px) {
-        .cms-shell { padding-bottom: 2rem; }
-        .cms-shell .cms-title { font-size: 1.2rem !important; }
-        #cmsAddButton { width: 100%; }
-
+        .cms-add-btn { width: 100%; justify-content: center; }
         .cms-record { padding: .9rem; }
-        .cms-thumb { width: 44px; height: 44px; border-radius: .6rem; }
-        .cms-record h3 { font-size: .95rem; }
-        .cms-record p { font-size: .82rem; }
-
-        /* Edit / Publish / Delete: ek line me 3 equal buttons */
-        .cms-record-actions { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: .5rem; width: 100%; padding-top: .75rem; border-top: 1px solid #f1ecef; }
+        .cms-thumb { width: 44px; height: 44px; }
+        .cms-record-actions { display: grid !important; grid-template-columns: repeat(3, 1fr); gap: .5rem; width: 100%; padding-top: .75rem; border-top: 1px solid #F1F1F1; }
         .cms-record-actions form { display: block !important; }
-        .cms-record-actions .btn { width: 100%; padding: .4rem .25rem; font-size: .78rem; white-space: nowrap; }
-        .cms-record-actions .btn .bi { margin-right: .25rem !important; }
-
+        .cms-record-actions .btn { width: 100%; padding: .45rem .25rem; font-size: .78rem; white-space: nowrap; }
         .cms-shell .cms-modal { border-radius: 0; }
         .cms-shell .modal-body, .cms-shell .modal-header, .cms-shell .modal-footer { padding-left: 1rem !important; padding-right: 1rem !important; }
         .cms-shell .modal-footer .btn { flex: 1; }
     }
 </style>
 
+<?php
+// ---- helpers for the new layout (design only, no logic change) ----
+$cmsNoAddTypes = ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'];
+$cmsCanAdd = !$isRegistry && !in_array($sectionType, $cmsNoAddTypes, true);
+$statItems = count($items);
+$statPublished = count(array_filter($items, static function (array $row): bool { return !empty($row['is_active']); }));
+$statDrafts = $statItems - $statPublished;
+$statTotal = count($allItems);
+
+$cmsGroups = [];
+$homeOpts = [['registry:homepage', 'Section directory', null]];
+foreach ($homeSections as $hKey => $hSection) {
+    $hTarget = $hKey === 'hero' ? 'collection:hero_content' : ($hKey === 'partners' ? 'collection:partner' : ($hKey === 'about' ? 'collection:homepage_about' : ($hKey === 'visibility' ? 'collection:homepage_visibility' : 'registry:' . $hKey)));
+    $hCount = strpos($hTarget, 'collection:') === 0 ? (int) ($itemCountByType[substr($hTarget, 11)] ?? 0) : null;
+    $homeOpts[] = [$hTarget, $hSection[0], $hCount];
+}
+foreach (['service', 'testimonial', 'success_story'] as $hType) {
+    $homeOpts[] = ['collection:' . $hType, $collections[$hType]['label'], (int) ($itemCountByType[$hType] ?? 0)];
+}
+$homeOpts[] = ['page:index.php', 'Page content blocks', (int) ($itemCountByPage['index.php'] ?? 0)];
+$cmsGroups['Homepage'] = $homeOpts;
+foreach ($pages as $pFile => $pLabel) {
+    if ($pFile === 'index.php') continue;
+    $opts = [];
+    if ($pFile === 'about.php') $opts[] = ['collection:about_page', 'About page content', (int) ($itemCountByType['about_page'] ?? 0)];
+    elseif ($pFile === 'blog.php') $opts[] = ['collection:blog', 'Articles', (int) ($itemCountByType['blog'] ?? 0)];
+    elseif ($pFile === 'pricing.php') $opts[] = ['collection:pricing', 'Pricing plans', (int) ($itemCountByType['pricing'] ?? 0)];
+    elseif ($pFile === 'services.php') {
+        $opts[] = ['collection:services_page', 'What We Do page content', (int) ($itemCountByType['services_page'] ?? 0)];
+        $opts[] = ['collection:service_detail', 'Service detail pages', (int) ($itemCountByType['service_detail'] ?? 0)];
+    } elseif ($pFile === 'packages.php') $opts[] = ['collection:packages_page', 'Packages page content', (int) ($itemCountByType['packages_page'] ?? 0)];
+    elseif ($pFile === 'portfolio.php') {
+        $opts[] = ['collection:portfolio_page', 'Portfolio page settings', (int) ($itemCountByType['portfolio_page'] ?? 0)];
+        $opts[] = ['collection:portfolio_project', 'Portfolio projects', (int) ($itemCountByType['portfolio_project'] ?? 0)];
+    }
+    $opts[] = ['page:' . $pFile, 'Page content blocks', (int) ($itemCountByPage[$pFile] ?? 0)];
+    $cmsGroups[$pLabel] = $opts;
+}
+?>
+
 <div class="cms-shell">
-    <div class="container-xxl px-3 px-lg-4">
 
-        <?php if ($flash): ?>
-            <?php $flashClass = ($flash['kind'] ?? 'success') === 'error' ? 'danger' : 'success'; ?>
-            <div class="alert alert-<?= $flashClass ?> alert-dismissible fade show d-flex align-items-center shadow-sm" role="status">
-                <i class="bi bi-<?= $flashClass === 'danger' ? 'exclamation-triangle-fill' : 'check-circle-fill' ?> me-2"></i>
-                <div><?= e($flash['message'] ?? '') ?></div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        <?php endif; ?>
-
-        <!-- Mobile: sections menu (header ke Menu se alag) -->
-        <button class="btn btn-white bg-white border shadow-sm w-100 d-lg-none d-flex align-items-center gap-2 mb-3 py-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#cmsSidebar" aria-controls="cmsSidebar">
-            <i class="bi bi-layout-sidebar-inset" style="color:var(--brand)"></i>
-            <span class="text-truncate"><?= e($isRegistry ? 'Homepage Section Directory' : $sectionInfo['label']) ?></span>
-            <span class="ms-auto small text-body-secondary">Sections <i class="bi bi-chevron-down ms-1"></i></span>
-        </button>
-
-        <div class="row g-4 align-items-start">
-
-            <!-- ===== SIDEBAR ===== -->
-            <div class="col-lg-3">
-                <aside class="offcanvas-lg offcanvas-start cms-sticky" tabindex="-1" id="cmsSidebar" aria-label="Website sections">
-                    <div class="offcanvas-header border-bottom d-lg-none">
-                        <h5 class="offcanvas-title fw-bold">Website management</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#cmsSidebar" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body p-0">
-                        <nav class="cms-card cms-side p-2 w-100">
-                            <div class="cms-side-title d-none d-lg-block">WEBSITE MANAGEMENT</div>
-
-                            <a class="cms-link" href="/admin/dashboard.php">
-                                <span class="cms-ico"><i class="bi bi-house-door"></i></span>Dashboard
-                            </a>
-
-                            <!-- Homepage group -->
-                            <button class="cms-group-toggle mt-1" type="button" data-bs-toggle="collapse" data-bs-target="#grp-home" aria-expanded="true" aria-controls="grp-home">
-                                <span class="cms-ico"><i class="bi bi-house"></i></span>Homepage
-                                <i class="bi bi-chevron-down"></i>
-                            </button>
-                            <div class="collapse show" id="grp-home">
-                                <div class="cms-children">
-                                    <a class="cms-link <?= $selectedSection === 'registry:homepage' ? 'active' : '' ?>" href="?section=registry%3Ahomepage">
-                                        <span class="cms-ico"><i class="bi bi-grid-3x3-gap"></i></span>Section directory
-                                        <span class="cms-count"><?= count($homepageRecords) + 1 ?></span>
-                                    </a>
-                                    <?php foreach ($homeSections as $key => [$homeSectionLabel]): ?>
-                                        <?php $homeSectionTarget = $key === 'hero' ? 'collection:hero_content' : ($key === 'partners' ? 'collection:partner' : ($key === 'about' ? 'collection:homepage_about' : ($key === 'visibility' ? 'collection:homepage_visibility' : 'registry:' . $key))); ?>
-                                        <a class="cms-link <?= $selectedSection === $homeSectionTarget ? 'active' : '' ?>" href="?section=<?= rawurlencode($homeSectionTarget) ?>">
-                                            <span class="cms-ico"><i class="bi bi-dot fs-5"></i></span><?= e($homeSectionLabel) ?>
-                                            <?php if ($key === 'hero'): ?><span class="cms-count"><?= (int) ($itemCountByType['hero_content'] ?? 0) ?></span><?php endif; ?>
-                                            <?php if ($key === 'partners'): ?><span class="cms-count"><?= (int) ($itemCountByType['partner'] ?? 0) ?></span><?php endif; ?>
-                                            <?php if ($key === 'about'): ?><span class="cms-count"><?= (int) ($itemCountByType['homepage_about'] ?? 0) ?></span><?php endif; ?>
-                                            <?php if ($key === 'visibility'): ?><span class="cms-count"><?= (int) ($itemCountByType['homepage_visibility'] ?? 0) ?></span><?php endif; ?>
-                                        </a>
-                                    <?php endforeach; ?>
-                                    <?php foreach (['service', 'testimonial', 'success_story'] as $type): ?>
-                                        <?php $collection = $collections[$type]; ?>
-                                        <a class="cms-link <?= $selectedSection === 'collection:' . $type ? 'active' : '' ?>" href="?section=collection%3A<?= e($type) ?>">
-                                            <span class="cms-ico"><?= e($collection['icon']) ?></span><?= e($collection['label']) ?>
-                                            <span class="cms-count"><?= (int) ($itemCountByType[$type] ?? 0) ?></span>
-                                        </a>
-                                    <?php endforeach; ?>
-                                    <a class="cms-link <?= $selectedSection === 'page:index.php' ? 'active' : '' ?>" href="?section=page%3Aindex.php">
-                                        <span class="cms-ico"><i class="bi bi-file-earmark-text"></i></span>Page content blocks
-                                        <span class="cms-count"><?= (int) ($itemCountByPage['index.php'] ?? 0) ?></span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- Other pages -->
-                            <?php foreach ($pages as $pageFile => $pageLabel): ?>
-                                <?php if ($pageFile === 'index.php') continue; ?>
-                                <?php
-                                $groupId = 'grp-' . preg_replace('/[^a-z0-9]+/i', '-', $pageFile);
-                                $isSelectedPage = $selectedSection === 'page:' . $pageFile
-                                    || ($pageFile === 'about.php' && $selectedSection === 'collection:about_page')
-                                    || ($pageFile === 'blog.php' && $selectedSection === 'collection:blog')
-                                    || ($pageFile === 'pricing.php' && $selectedSection === 'collection:pricing')
-                                    || ($pageFile === 'services.php' && $selectedSection === 'collection:services_page')
-                                    || ($pageFile === 'packages.php' && $selectedSection === 'collection:packages_page')
-                                    || ($pageFile === 'portfolio.php' && in_array($selectedSection, ['collection:portfolio_page', 'collection:portfolio_project'], true));
-                                ?>
-                                <button class="cms-group-toggle" type="button" data-bs-toggle="collapse" data-bs-target="#<?= e($groupId) ?>" aria-expanded="<?= $isSelectedPage ? 'true' : 'false' ?>" aria-controls="<?= e($groupId) ?>">
-                                    <span class="cms-ico"><i class="bi bi-file-earmark-text"></i></span><?= e($pageLabel) ?>
-                                    <i class="bi bi-chevron-down"></i>
-                                </button>
-                                <div class="collapse <?= $isSelectedPage ? 'show' : '' ?>" id="<?= e($groupId) ?>">
-                                    <div class="cms-children">
-                                        <?php if ($pageFile === 'about.php'): ?>
-                                            <a class="cms-link <?= $selectedSection === 'collection:about_page' ? 'active' : '' ?>" href="?section=collection%3Aabout_page">
-                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>About page content
-                                                <span class="cms-count"><?= (int) ($itemCountByType['about_page'] ?? 0) ?></span>
-                                            </a>
-                                        <?php elseif ($pageFile === 'blog.php'): ?>
-                                            <a class="cms-link <?= $selectedSection === 'collection:blog' ? 'active' : '' ?>" href="?section=collection%3Ablog">
-                                                <span class="cms-ico"><i class="bi bi-journal-text"></i></span>Articles
-                                                <span class="cms-count"><?= (int) ($itemCountByType['blog'] ?? 0) ?></span>
-                                            </a>
-                                        <?php elseif ($pageFile === 'pricing.php'): ?>
-                                            <a class="cms-link <?= $selectedSection === 'collection:pricing' ? 'active' : '' ?>" href="?section=collection%3Apricing">
-                                                <span class="cms-ico"><i class="bi bi-currency-rupee"></i></span>Pricing plans
-                                                <span class="cms-count"><?= (int) ($itemCountByType['pricing'] ?? 0) ?></span>
-                                            </a>
-                                        <?php elseif ($pageFile === 'services.php'): ?>
-                                            <a class="cms-link <?= $selectedSection === 'collection:services_page' ? 'active' : '' ?>" href="?section=collection%3Aservices_page">
-                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>What We Do page content
-                                                <span class="cms-count"><?= (int) ($itemCountByType['services_page'] ?? 0) ?></span>
-                                            </a>
-                                            <a class="cms-link <?= $selectedSection === 'collection:service_detail' ? 'active' : '' ?>" href="?section=collection%3Aservice_detail">
-                                                <span class="cms-ico"><i class="bi bi-arrow-up-right-square"></i></span>Service detail pages
-                                                <span class="cms-count"><?= (int) ($itemCountByType['service_detail'] ?? 0) ?></span>
-                                            </a>
-                                        <?php elseif ($pageFile === 'packages.php'): ?>
-                                            <a class="cms-link <?= $selectedSection === 'collection:packages_page' ? 'active' : '' ?>" href="?section=collection%3Apackages_page">
-                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Packages page content
-                                                <span class="cms-count"><?= (int) ($itemCountByType['packages_page'] ?? 0) ?></span>
-                                            </a>
-                                        <?php elseif ($pageFile === 'portfolio.php'): ?>
-                                            <a class="cms-link <?= $selectedSection === 'collection:portfolio_page' ? 'active' : '' ?>" href="?section=collection%3Aportfolio_page">
-                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Portfolio page settings
-                                                <span class="cms-count"><?= (int) ($itemCountByType['portfolio_page'] ?? 0) ?></span>
-                                            </a>
-                                            <a class="cms-link <?= $selectedSection === 'collection:portfolio_project' ? 'active' : '' ?>" href="?section=collection%3Aportfolio_project">
-                                                <span class="cms-ico"><i class="bi bi-briefcase"></i></span>Portfolio projects
-                                                <span class="cms-count"><?= (int) ($itemCountByType['portfolio_project'] ?? 0) ?></span>
-                                            </a>
-                                        <?php endif; ?>
-                                        <?php if (isset($servicePageRedirects['page:' . $pageFile])): 
-                                            $sSlug = $servicePageRedirects['page:' . $pageFile];
-                                        ?>
-                                            <a class="cms-link fw-bold" style="color:#0E0E0E; background:#E6F73A; border:1px solid #D7E82C;" href="/admin/services.php?slug=<?= urlencode($sSlug) ?>">
-                                                <span class="cms-ico"><i class="bi bi-pencil-square"></i></span>Edit Full Service CMS
-                                                <span class="badge" style="background:#0E0E0E; color:#E6F73A; font-size:0.65rem;">Page Editor</span>
-                                            </a>
-                                        <?php else: ?>
-                                            <a class="cms-link <?= $selectedSection === 'page:' . $pageFile ? 'active' : '' ?>" href="?section=page%3A<?= rawurlencode($pageFile) ?>">
-                                                <span class="cms-ico"><i class="bi bi-plus-lg"></i></span>Page content blocks
-                                                <span class="cms-count"><?= (int) ($itemCountByPage[$pageFile] ?? 0) ?></span>
-                                            </a>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            <?php endforeach; ?>
-                        </nav>
-                    </div>
-                </aside>
-            </div>
-
-            <!-- ===== MAIN ===== -->
-            <div class="col-lg-9">
-                <section class="cms-card overflow-hidden" aria-labelledby="cmsSectionTitle">
-
-                    <!-- Head -->
-                    <div class="d-flex flex-wrap align-items-start justify-content-between gap-3 p-3 p-md-4 border-bottom">
-                        <div class="d-flex align-items-start gap-3 flex-grow-1" style="min-width:0">
-                            <div style="min-width:0">
-                                <h1 class="cms-title" id="cmsSectionTitle"><?= e($isRegistry ? 'Homepage Section Directory' : $sectionInfo['label']) ?></h1>
-                                <p class="text-body-secondary mb-0"><?= e($sectionInfo['description']) ?></p>
-                            </div>
-                        </div>
-                        <?php if (!$isRegistry && !in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
-                            <button type="button" class="btn btn-primary px-3" id="cmsAddButton">
-                                <i class="bi bi-plus-lg me-1"></i> Add New
-                            </button>
-                        <?php endif; ?>
-                    </div>
-
-                    <?php if ($isRegistry): ?>
-                        <div class="p-3 p-md-4">
-                            <div class="row g-3">
-                                <?php if ($registryKey === 'homepage'): ?>
-                                    <?php foreach ($homepageRecords as $record): ?>
-                                        <?php $target = $homepageSectionTargets[$record['title']] ?? 'registry:homepage'; ?>
-                                        <div class="col-md-6">
-                                            <article class="cms-dir-item d-flex gap-3">
-                                                <span class="cms-ico fs-5"><i class="bi bi-stars"></i></span>
-                                                <div>
-                                                    <a class="fw-bold d-block mb-1" href="?section=<?= rawurlencode($target) ?>"><?= e($record['title']) ?></a>
-                                                    <p class="small text-body-secondary mb-0"><?= e($record['summary'] ?: 'Homepage section') ?></p>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    <?php endforeach; ?>
-                                    <div class="col-md-6">
-                                        <article class="cms-dir-item d-flex gap-3">
-                                            <span class="cms-ico fs-5"><i class="bi bi-stars"></i></span>
-                                            <div>
-                                                <a class="fw-bold d-block mb-1" href="?section=registry%3Afooter">Footer</a>
-                                                <p class="small text-body-secondary mb-0"><?= e($homeSections['footer'][1]) ?></p>
-                                            </div>
-                                        </article>
-                                    </div>
-                                <?php else: ?>
-                                    <div class="col-12">
-                                        <article class="cms-dir-item d-flex gap-3">
-                                            <span class="cms-ico fs-5"><i class="bi bi-stars"></i></span>
-                                            <div>
-                                                <strong class="d-block mb-1"><?= e($sectionInfo['label']) ?></strong>
-                                                <p class="small text-body-secondary mb-0"><?= e($sectionInfo['description']) ?></p>
-                                            </div>
-                                        </article>
-                                    </div>
-                                <?php endif; ?>
-                            </div>
-                            <div class="alert alert-warning small mt-4 mb-0">
-                                <i class="bi bi-info-circle me-1"></i>
-                                Sections backed by CMS records have their own Add, Edit, Publish, and Delete controls. Sections rendered directly in PHP are informational here because the existing CMS has no editable fields for them.
-                            </div>
-                        </div>
-                    <?php else: ?>
-
-                        <?php if ($sectionType === 'partner'): ?>
-                            <form method="POST" class="p-3 p-md-4 border-bottom" aria-labelledby="trustedPartnersSettingsTitle">
-                                <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
-                                <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
-                                <input type="hidden" name="action" value="save_partner_settings">
-                                <h2 class="h5 fw-bold mb-3" id="trustedPartnersSettingsTitle">Section text</h2>
-                                <div class="row g-3">
-                                    <?php foreach ([
-                                        'badge' => 'Badge',
-                                        'heading_prefix' => 'Heading — first part',
-                                        'heading_highlight' => 'Heading — highlighted part',
-                                        'all_projects_label' => 'All projects filter label',
-                                        'heading_suffix' => 'Heading — final part',
-                                    ] as $field => $label): ?>
-                                        <div class="col-md-6">
-                                            <label class="form-label fw-semibold" for="partner-setting-<?= e($field) ?>"><?= e($label) ?></label>
-                                            <input type="text" class="form-control" id="partner-setting-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($trustedPartnersSection[$field] ?? '') ?>">
-                                        </div>
-                                    <?php endforeach; ?>
-                                    <div class="col-12">
-                                        <label class="form-label fw-semibold" for="partner-setting-summary">Subtitle</label>
-                                        <textarea class="form-control" id="partner-setting-summary" name="summary" rows="2"><?= e($trustedPartnersSection['summary'] ?? '') ?></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i>Save section text</button>
-                                    </div>
-                                </div>
-                            </form>
-                        <?php endif; ?>
-
-                        <!-- Toolbar -->
-                        <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 px-3 px-md-4 py-3 border-bottom bg-body-tertiary bg-opacity-50">
-                            <form method="GET" action="/admin/content.php" class="flex-grow-1" style="max-width:380px">
-                                <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
-                                <label class="visually-hidden" for="cmsSearch">Search content</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-white"><i class="bi bi-search text-body-secondary"></i></span>
-                                    <input id="cmsSearch" type="search" name="q" class="form-control border-start-0" value="<?= e($search) ?>" placeholder="Search this section">
-                                </div>
-                            </form>
-                            <span class="badge rounded-pill text-bg-light border fw-semibold px-3 py-2"><?= count($items) ?> item<?= count($items) === 1 ? '' : 's' ?></span>
-                        </div>
-
-                        <?php if (!$items): ?>
-                            <div class="text-center py-5 px-3">
-                                <div class="d-inline-grid place-items-center rounded-4 mb-3 d-inline-flex align-items-center justify-content-center" style="width:56px;height:56px;background:var(--brand-soft);color:var(--brand);font-size:1.5rem">
-                                    <i class="bi bi-plus-lg"></i>
-                                </div>
-                                <h2 class="h5 fw-bold"><?= $search !== '' ? 'No matching content' : 'Nothing here yet' ?></h2>
-                                <p class="text-body-secondary mx-auto mb-3" style="max-width:420px">
-                                    <?= $search !== '' ? 'Try a different search term, or clear the search.' : 'Add content to this section to make it available on the public website.' ?>
-                                </p>
-                                <?php if ($search === '' && !in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
-                                    <button type="button" class="btn btn-primary" data-cms-add>
-                                        <i class="bi bi-plus-lg me-1"></i> Add your first item
-                                    </button>
-                                <?php else: ?>
-                                    <a class="btn btn-outline-secondary" href="?section=<?= rawurlencode($selectedSection) ?>">Clear search</a>
-                                <?php endif; ?>
-                            </div>
-                        <?php else: ?>
-                            <div class="list-group list-group-flush">
-                                <?php foreach ($items as $item): ?>
-                                    <?php $meta = json_decode($item['metadata'] ?? '', true); $meta = is_array($meta) ? $meta : []; ?>
-                                    <?php $description = $item['summary'] ?: ($item['body'] ?? ''); ?>
-                                    <article class="list-group-item cms-record d-flex flex-column flex-md-row align-items-md-center gap-3">
-                                        <div class="d-flex align-items-start gap-3 flex-grow-1" style="min-width:0">
-                                            <?php if (!empty($meta['image'])): ?>
-                                                <img class="cms-thumb" src="<?= e($meta['image']) ?>" alt="" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
-                                            <?php else: ?>
-                                                <span class="cms-thumb cms-thumb-ph" aria-hidden="true"><?= e($sectionInfo['icon']) ?></span>
-                                            <?php endif; ?>
-                                            <div style="min-width:0">
-                                                <h3><?= e($item['title']) ?></h3>
-                                                <p><?= e($description !== '' ? $description : 'No summary provided.') ?></p>
-                                                <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
-                                                    <?php if (!empty($item['is_active'])): ?>
-                                                        <span class="badge rounded-pill bg-success-subtle text-success-emphasis"><i class="bi bi-circle-fill me-1" style="font-size:.45rem;vertical-align:middle"></i>Published</span>
-                                                    <?php else: ?>
-                                                        <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis"><i class="bi bi-circle-fill me-1" style="font-size:.45rem;vertical-align:middle"></i>Draft</span>
-                                                    <?php endif; ?>
-                                                    <?php if ($sectionType === 'pricing' && !empty($meta['price'])): ?>
-                                                        <span class="small fw-semibold text-body-secondary"><?= e($meta['price']) ?></span>
-                                                    <?php endif; ?>
-                                                    <?php if ($sectionType === 'testimonial' && !empty($meta['role'])): ?>
-                                                        <span class="small text-body-secondary"><?= e($meta['role']) ?></span>
-                                                    <?php endif; ?>
-                                                    <?php if ($sectionType === 'testimonial'): ?>
-                                                        <span class="small text-warning-emphasis"><i class="bi bi-star-fill me-1"></i><?= (int) ($meta['rating'] ?? 5) ?>/5</span>
-                                                    <?php endif; ?>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="cms-record-actions d-flex flex-wrap align-items-center gap-2 flex-shrink-0">
-                                            <a class="btn btn-sm btn-outline-secondary" href="?section=<?= rawurlencode($selectedSection) ?>&amp;edit=<?= (int) $item['id'] ?>">
-                                                <i class="bi bi-pencil me-1"></i><?= $sectionType === 'hero_content' ? 'Edit Hero Content' : (in_array($sectionType, ['about_page', 'homepage_about'], true) ? 'Edit About Content' : ($sectionType === 'homepage_visibility' ? 'Edit Search Visibility Content' : ($sectionType === 'portfolio_page' ? 'Edit Portfolio Page Content' : ($sectionType === 'services_page' ? 'Edit What We Do Content' : ($sectionType === 'packages_page' ? 'Edit Packages Page Content' : 'Edit'))))) ?>
-                                            </a>
-                                            <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
-                                            <form method="POST" class="d-flex">
-                                                <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
-                                                <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
-                                                <input type="hidden" name="action" value="toggle">
-                                                <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
-                                                <button type="submit" class="btn btn-sm btn-light border">
-                                                    <i class="bi bi-<?= !empty($item['is_active']) ? 'eye-slash' : 'eye' ?> me-1"></i>
-                                                    <?= !empty($item['is_active']) ? 'Unpublish' : 'Publish' ?>
-                                                </button>
-                                            </form>
-                                            <form method="POST" class="d-flex" data-delete-form>
-                                                <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
-                                                <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
-                                                <input type="hidden" name="action" value="delete">
-                                                <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
-                                                <button type="submit" class="btn btn-sm btn-outline-danger">
-                                                    <i class="bi bi-trash me-1"></i> Delete
-                                                </button>
-                                            </form>
-                                            <?php endif; ?>
-                                        </div>
-                                    </article>
-                                <?php endforeach; ?>
-                            </div>
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </section>
-            </div>
+    <?php if ($flash): ?>
+        <?php $flashClass = ($flash['kind'] ?? 'success') === 'error' ? 'danger' : 'success'; ?>
+        <div class="alert alert-<?= $flashClass ?> alert-dismissible fade show d-flex align-items-center" role="status">
+            <i class="bi bi-<?= $flashClass === 'danger' ? 'exclamation-triangle-fill' : 'check-circle-fill' ?> me-2"></i>
+            <div><?= e($flash['message'] ?? '') ?></div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+    <?php endif; ?>
+
+    <!-- Title + Add button -->
+    <div class="cms-header-row">
+        <div class="cms-title-wrap">
+            <h1 id="cmsSectionTitle"><?= e($isRegistry ? 'Homepage Section Directory' : $sectionInfo['label']) ?></h1>
+            <p><?= e($sectionInfo['description']) ?></p>
+        </div>
+        <?php if ($cmsCanAdd): ?>
+            <button type="button" class="cms-add-btn" id="cmsAddButton"><i class="bi bi-plus-circle-fill"></i> Add New</button>
+        <?php endif; ?>
     </div>
 
-    <?php if (!$isRegistry): ?>
+    <!-- Stat cards -->
+    <div class="cms-stats-grid">
+        <div class="cms-stat-card"><div class="cms-stat-icon"><i class="bi bi-boxes"></i></div><div><div class="cms-stat-num"><?= $statItems ?></div><div class="cms-stat-lbl">Items in this section</div></div></div>
+        <div class="cms-stat-card"><div class="cms-stat-icon"><i class="bi bi-check2-circle"></i></div><div><div class="cms-stat-num"><?= $statPublished ?></div><div class="cms-stat-lbl">Published &amp; Live</div></div></div>
+        <div class="cms-stat-card"><div class="cms-stat-icon"><i class="bi bi-pencil-square"></i></div><div><div class="cms-stat-num"><?= $statDrafts ?></div><div class="cms-stat-lbl">Drafts / Inactive</div></div></div>
+        <div class="cms-stat-card"><div class="cms-stat-icon"><i class="bi bi-collection"></i></div><div><div class="cms-stat-num"><?= $statTotal ?></div><div class="cms-stat-lbl">Total content records</div></div></div>
+    </div>
+
+    <!-- Section picker + search -->
+    <div class="cms-bar">
+        <div class="cms-select-wrap">
+            <i class="bi bi-layout-text-sidebar-reverse"></i>
+            <select class="cms-select" aria-label="Choose website section" onchange="window.location.href='?section=' + encodeURIComponent(this.value)">
+                <?php foreach ($cmsGroups as $groupLabel => $groupOptions): ?>
+                    <optgroup label="<?= e($groupLabel) ?>">
+                        <?php foreach ($groupOptions as [$optValue, $optLabel, $optCount]): ?>
+                            <option value="<?= e($optValue) ?>" <?= $selectedSection === $optValue ? 'selected' : '' ?>><?= e($optLabel) ?><?= $optCount !== null ? ' (' . (int) $optCount . ')' : '' ?></option>
+                        <?php endforeach; ?>
+                    </optgroup>
+                <?php endforeach; ?>
+            </select>
+        </div>
+        <?php if (!$isRegistry): ?>
+            <form method="GET" action="/admin/content.php" class="cms-search-form">
+                <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
+                <label class="visually-hidden" for="cmsSearch">Search content</label>
+                <i class="bi bi-search"></i>
+                <input id="cmsSearch" type="search" name="q" value="<?= e($search) ?>" placeholder="Search this section...">
+            </form>
+            <span class="cms-count-pill"><?= count($items) ?> item<?= count($items) === 1 ? '' : 's' ?></span>
+        <?php endif; ?>
+    </div>
+
+    <!-- Content card -->
+    <section class="cms-card overflow-hidden" aria-labelledby="cmsSectionTitle">
+
+        <?php if ($isRegistry): ?>
+            <div class="p-3 p-md-4">
+                <div class="row g-3">
+                    <?php if ($registryKey === 'homepage'): ?>
+                        <?php foreach ($homepageRecords as $record): ?>
+                            <?php $target = $homepageSectionTargets[$record['title']] ?? 'registry:homepage'; ?>
+                            <div class="col-md-6">
+                                <article class="cms-dir-item d-flex gap-3">
+                                    <span class="cms-ico fs-5"><i class="bi bi-stars"></i></span>
+                                    <div>
+                                        <a class="fw-bold d-block mb-1" href="?section=<?= rawurlencode($target) ?>"><?= e($record['title']) ?></a>
+                                        <p class="small text-body-secondary mb-0"><?= e($record['summary'] ?: 'Homepage section') ?></p>
+                                    </div>
+                                </article>
+                            </div>
+                        <?php endforeach; ?>
+                        <div class="col-md-6">
+                            <article class="cms-dir-item d-flex gap-3">
+                                <span class="cms-ico fs-5"><i class="bi bi-stars"></i></span>
+                                <div>
+                                    <a class="fw-bold d-block mb-1" href="?section=registry%3Afooter">Footer</a>
+                                    <p class="small text-body-secondary mb-0"><?= e($homeSections['footer'][1]) ?></p>
+                                </div>
+                            </article>
+                        </div>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <article class="cms-dir-item d-flex gap-3">
+                                <span class="cms-ico fs-5"><i class="bi bi-stars"></i></span>
+                                <div>
+                                    <strong class="d-block mb-1"><?= e($sectionInfo['label']) ?></strong>
+                                    <p class="small text-body-secondary mb-0"><?= e($sectionInfo['description']) ?></p>
+                                </div>
+                            </article>
+                        </div>
+                    <?php endif; ?>
+                </div>
+                <div class="alert alert-warning small mt-4 mb-0">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Sections backed by CMS records have their own Add, Edit, Publish, and Delete controls. Sections rendered directly in PHP are informational here because the existing CMS has no editable fields for them.
+                </div>
+            </div>
+        <?php else: ?>
+
+            <?php if ($sectionType === 'partner'): ?>
+                <form method="POST" class="p-3 p-md-4 border-bottom" aria-labelledby="trustedPartnersSettingsTitle">
+                    <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
+                    <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
+                    <input type="hidden" name="action" value="save_partner_settings">
+                    <h2 class="h5 fw-bold mb-3" id="trustedPartnersSettingsTitle">Section text</h2>
+                    <div class="row g-3">
+                        <?php foreach ([
+                            'badge' => 'Badge',
+                            'heading_prefix' => 'Heading — first part',
+                            'heading_highlight' => 'Heading — highlighted part',
+                            'all_projects_label' => 'All projects filter label',
+                            'heading_suffix' => 'Heading — final part',
+                        ] as $field => $label): ?>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold" for="partner-setting-<?= e($field) ?>"><?= e($label) ?></label>
+                                <input type="text" class="form-control" id="partner-setting-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e($trustedPartnersSection[$field] ?? '') ?>">
+                            </div>
+                        <?php endforeach; ?>
+                        <div class="col-12">
+                            <label class="form-label fw-semibold" for="partner-setting-summary">Subtitle</label>
+                            <textarea class="form-control" id="partner-setting-summary" name="summary" rows="2"><?= e($trustedPartnersSection['summary'] ?? '') ?></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary"><i class="bi bi-check-lg me-1"></i>Save section text</button>
+                        </div>
+                    </div>
+                </form>
+            <?php endif; ?>
+
+            <?php if (!$items): ?>
+                <div class="text-center py-5 px-3">
+                    <div class="d-inline-flex align-items-center justify-content-center rounded-circle mb-3" style="width:56px;height:56px;background:var(--cms-lime);color:#0E0E0E;font-size:1.5rem">
+                        <i class="bi bi-plus-lg"></i>
+                    </div>
+                    <h2 class="h5 fw-bold"><?= $search !== '' ? 'No matching content' : 'Nothing here yet' ?></h2>
+                    <p class="text-body-secondary mx-auto mb-3" style="max-width:420px">
+                        <?= $search !== '' ? 'Try a different search term, or clear the search.' : 'Add content to this section to make it available on the public website.' ?>
+                    </p>
+                    <?php if ($search === '' && $cmsCanAdd): ?>
+                        <button type="button" class="btn btn-primary" data-cms-add>
+                            <i class="bi bi-plus-lg me-1"></i> Add your first item
+                        </button>
+                    <?php else: ?>
+                        <a class="btn btn-outline-secondary" href="?section=<?= rawurlencode($selectedSection) ?>">Clear search</a>
+                    <?php endif; ?>
+                </div>
+            <?php else: ?>
+                <div class="list-group list-group-flush">
+                    <?php foreach ($items as $item): ?>
+                        <?php $meta = json_decode($item['metadata'] ?? '', true); $meta = is_array($meta) ? $meta : []; ?>
+                        <?php $description = $item['summary'] ?: ($item['body'] ?? ''); ?>
+                        <article class="list-group-item cms-record d-flex flex-column flex-md-row align-items-md-center gap-3">
+                            <div class="d-flex align-items-start gap-3 flex-grow-1" style="min-width:0">
+                                <?php if (!empty($meta['image'])): ?>
+                                    <img class="cms-thumb" src="<?= e($meta['image']) ?>" alt="" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/placeholder.jpg'">
+                                <?php else: ?>
+                                    <span class="cms-thumb cms-thumb-ph" aria-hidden="true"><?= e($sectionInfo['icon']) ?></span>
+                                <?php endif; ?>
+                                <div style="min-width:0">
+                                    <h3><?= e($item['title']) ?></h3>
+                                    <p><?= e($description !== '' ? $description : 'No summary provided.') ?></p>
+                                    <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
+                                        <?php if (!empty($item['is_active'])): ?>
+                                            <span class="badge rounded-pill bg-success-subtle text-success-emphasis"><i class="bi bi-circle-fill me-1" style="font-size:.45rem;vertical-align:middle"></i>Published</span>
+                                        <?php else: ?>
+                                            <span class="badge rounded-pill bg-secondary-subtle text-secondary-emphasis"><i class="bi bi-circle-fill me-1" style="font-size:.45rem;vertical-align:middle"></i>Draft</span>
+                                        <?php endif; ?>
+                                        <?php if ($sectionType === 'pricing' && !empty($meta['price'])): ?>
+                                            <span class="small fw-semibold text-body-secondary"><?= e($meta['price']) ?></span>
+                                        <?php endif; ?>
+                                        <?php if ($sectionType === 'testimonial' && !empty($meta['role'])): ?>
+                                            <span class="small text-body-secondary"><?= e($meta['role']) ?></span>
+                                        <?php endif; ?>
+                                        <?php if ($sectionType === 'testimonial'): ?>
+                                            <span class="small text-warning-emphasis"><i class="bi bi-star-fill me-1"></i><?= (int) ($meta['rating'] ?? 5) ?>/5</span>
+                                        <?php endif; ?>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="cms-record-actions d-flex flex-wrap align-items-center gap-2 flex-shrink-0">
+                                <a class="btn btn-sm btn-outline-secondary" href="?section=<?= rawurlencode($selectedSection) ?>&amp;edit=<?= (int) $item['id'] ?>">
+                                    <i class="bi bi-pencil me-1"></i><?= $sectionType === 'hero_content' ? 'Edit Hero Content' : (in_array($sectionType, ['about_page', 'homepage_about'], true) ? 'Edit About Content' : ($sectionType === 'homepage_visibility' ? 'Edit Search Visibility Content' : ($sectionType === 'portfolio_page' ? 'Edit Portfolio Page Content' : ($sectionType === 'services_page' ? 'Edit What We Do Content' : ($sectionType === 'packages_page' ? 'Edit Packages Page Content' : 'Edit'))))) ?>
+                                </a>
+                                <?php if (!in_array($sectionType, $cmsNoAddTypes, true)): ?>
+                                <form method="POST" class="d-flex">
+                                    <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
+                                    <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
+                                    <input type="hidden" name="action" value="toggle">
+                                    <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
+                                    <button type="submit" class="btn btn-sm btn-light border">
+                                        <i class="bi bi-<?= !empty($item['is_active']) ? 'eye-slash' : 'eye' ?> me-1"></i>
+                                        <?= !empty($item['is_active']) ? 'Unpublish' : 'Publish' ?>
+                                    </button>
+                                </form>
+                                <form method="POST" class="d-flex" data-delete-form>
+                                    <input type="hidden" name="csrf_token" value="<?= e($_SESSION['cms_csrf_token']) ?>">
+                                    <input type="hidden" name="section" value="<?= e($selectedSection) ?>">
+                                    <input type="hidden" name="action" value="delete">
+                                    <input type="hidden" name="id" value="<?= (int) $item['id'] ?>">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">
+                                        <i class="bi bi-trash me-1"></i> Delete
+                                    </button>
+                                </form>
+                                <?php endif; ?>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+        <?php endif; ?>
+    </section>
+
+
+<?php if (!$isRegistry): ?>
         <?php $formMeta = $editingMetadata; ?>
         <!-- ===== ADD / EDIT MODAL ===== -->
         <div class="modal fade" id="cmsModal" tabindex="-1" aria-labelledby="cmsDialogTitle" aria-hidden="true">
@@ -1324,7 +1210,7 @@ require_once __DIR__ . '/templates/header.php';
                             <?php if (!in_array($sectionType, ['hero_content', 'about_page', 'homepage_about', 'homepage_visibility', 'services_page', 'packages_page', 'portfolio_page'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-title">Title / name</label>
-                                    <input type="text" class="form-control" id="f-title" name="title" required value="<?= e($editingItem['title'] ?? '') ?>">
+                                    <input type="text" class="form-control" id="f-title" name="title" required maxlength="250" value="<?= e($editingItem['title'] ?? '') ?>">
                                 </div>
                             <?php endif; ?>
 
@@ -1336,7 +1222,7 @@ require_once __DIR__ . '/templates/header.php';
                             <?php if (in_array($sectionType, ['blog', 'page', 'hero_content', 'service_detail'], true)): ?>
                                 <div class="col-12">
                                     <label class="form-label fw-semibold" for="f-body"><?= $sectionType === 'blog' ? 'Article content' : ($sectionType === 'hero_content' ? 'Main hero description' : ($sectionType === 'service_detail' ? 'Service overview' : 'Additional details')) ?></label>
-                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '7' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' data-character-limit="' . (int) $blogCharacterLimit . '" aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
+                                    <textarea class="form-control" id="f-body" name="body" rows="<?= $sectionType === 'hero_content' ? '5' : '6' ?>" <?= in_array($sectionType, ['blog', 'service_detail'], true) ? 'required' : '' ?><?= $sectionType === 'blog' ? ' data-character-limit="' . (int) $blogCharacterLimit . '" aria-describedby="blog-body-help"' : '' ?>><?= e($sectionType === 'blog' ? ($formMeta['body'] ?? $editingItem['body'] ?? '') : ($editingItem['body'] ?? '')) ?></textarea>
                                     <?php if ($sectionType === 'blog'): ?>
                                         <div class="form-text" id="blog-body-help">
                                             Use # Heading, ## Subheading, ### Small heading, blank lines between paragraphs, and - before list items.
@@ -1385,7 +1271,7 @@ require_once __DIR__ . '/templates/header.php';
                                             <textarea class="form-control" id="f-hero-<?= e($field) ?>" name="<?= e($field) ?>" rows="<?= in_array($field, ['benefits', 'service_options'], true) ? '5' : '2' ?>"><?= e($formMeta[$field] ?? '') ?></textarea>
                                             <?php if ($field === 'benefits' || $field === 'service_options'): ?><div class="form-text">One item per line. Remove a line to remove that item from the hero.</div><?php endif; ?>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-hero-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= $field === 'phone_number' ? 'inputmode="tel"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-hero-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" maxlength="250" <?= $field === 'phone_number' ? 'inputmode="tel"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1429,7 +1315,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <?php foreach ($aboutTextFields as $field => $label): ?>
                                     <div class="col-md-6">
                                         <label class="form-label fw-semibold" for="f-about-<?= e($field) ?>"><?= e($label) ?></label>
-                                        <input type="text" class="form-control" id="f-about-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                        <input type="text" class="form-control" id="f-about-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="col-12">
@@ -1488,7 +1374,7 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if ($field === 'usp_description'): ?>
                                             <textarea class="form-control" id="f-home-about-<?= e($field) ?>" name="<?= e($field) ?>" rows="3"><?= e($formMeta[$field] ?? '') ?></textarea>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-home-about-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= $field === 'cta_href' ? 'placeholder="/about.php"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-home-about-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e($formMeta[$field] ?? '') ?>" <?= $field === 'cta_href' ? 'placeholder="/about.php"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1534,9 +1420,9 @@ require_once __DIR__ . '/templates/header.php';
                                     <div class="<?= in_array($field, ['heading_prefix', 'heading_highlight'], true) ? 'col-md-6' : 'col-md-6' ?>">
                                         <label class="form-label fw-semibold" for="f-visibility-<?= e($field) ?>"><?= e($label) ?></label>
                                         <?php if ($field === 'quote_href'): ?>
-                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" placeholder="/contact.php">
+                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" placeholder="/contact.php">
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>">
+                                            <input type="text" class="form-control" id="f-visibility-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="250" value="<?= e((string) ($formMeta[$field] ?? '')) ?>">
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1591,7 +1477,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <?php foreach ($portfolioTextFields as $field => $label): ?>
                                     <div class="<?= in_array($field, ['cta_primary_href', 'cta_secondary_href'], true) ? 'col-md-6' : 'col-md-6' ?>">
                                         <label class="form-label fw-semibold" for="f-portfolio-<?= e($field) ?>"><?= e($label) ?></label>
-                                        <input type="text" class="form-control" id="f-portfolio-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                        <input type="text" class="form-control" id="f-portfolio-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
                                     </div>
                                 <?php endforeach; ?>
                                 <div class="col-12">
@@ -1726,7 +1612,7 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if (in_array($field, ['page_meta_description', 'website_description'], true)): ?>
                                             <textarea class="form-control" id="f-services-<?= e($field) ?>" name="<?= e($field) ?>" rows="3"><?= e($formMeta[$field] ?? '') ?></textarea>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-services-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-services-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e($formMeta[$field] ?? '') ?>" <?= strpos($field, '_href') !== false ? 'placeholder="/contact.php"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1797,7 +1683,7 @@ require_once __DIR__ . '/templates/header.php';
                                         <?php if (in_array($field, ['page_meta_description', 'addons_subtitle', 'faq_subtitle', 'cta_description'], true)): ?>
                                             <textarea class="form-control" id="f-packages-<?= e($field) ?>" name="<?= e($field) ?>" rows="2"><?= e($formMeta[$field] ?? '') ?></textarea>
                                         <?php else: ?>
-                                            <input type="text" class="form-control" id="f-packages-<?= e($field) ?>" name="<?= e($field) ?>" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= $field === 'cta_primary_href' ? 'placeholder="/contact.php"' : '' ?>>
+                                            <input type="text" class="form-control" id="f-packages-<?= e($field) ?>" name="<?= e($field) ?>" maxlength="1000" value="<?= e((string) ($formMeta[$field] ?? '')) ?>" <?= $field === 'cta_primary_href' ? 'placeholder="/contact.php"' : '' ?>>
                                         <?php endif; ?>
                                     </div>
                                 <?php endforeach; ?>
@@ -1828,7 +1714,7 @@ require_once __DIR__ . '/templates/header.php';
                             <?php elseif ($sectionType === 'service'): ?>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-icon">Icon or emoji</label>
-                                    <input type="text" class="form-control" id="f-icon" name="icon" value="<?= e($formMeta['icon'] ?? '') ?>">
+                                    <input type="text" class="form-control" id="f-icon" name="icon" value="<?= e($formMeta['icon'] ?? '') ?>" maxlength="80">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-href">Destination URL</label>
@@ -1855,7 +1741,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-service-tagline">Hero tagline</label>
-                                    <input type="text" class="form-control" id="f-service-tagline" name="tagline" required value="<?= e((string) ($formMeta['tagline'] ?? '')) ?>">
+                                    <input type="text" class="form-control" id="f-service-tagline" name="tagline" required maxlength="250" value="<?= e((string) ($formMeta['tagline'] ?? '')) ?>">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label fw-semibold" for="f-service-hero-description">Hero description</label>

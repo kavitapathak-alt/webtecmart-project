@@ -75,7 +75,7 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         }
         .adm-sidebar::-webkit-scrollbar { width: 0; }
         .adm-sidebar-brand { display: flex; align-items: center; gap: 12px; padding: 24px 24px 12px; text-decoration: none; color: #fff; }
-        .adm-sidebar-logo { width: 34px; height: 34px; border-radius: 50%; background: var(--adm-lime); color: var(--adm-ink); display: grid; place-items: center; font-weight: 700; }
+        .adm-sidebar-logo { width: 34px; height: 34px; border-radius: 50%; background: var(--adm-lime); color: var(--adm-ink); display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
         .adm-sidebar-title { font-size: 1.25rem; font-weight: 700; letter-spacing: -.02em; }
 
         .adm-nav-section { padding: 14px 14px 4px; }
@@ -92,9 +92,8 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         .adm-nav-link.active { color: var(--adm-lime); }
         .adm-nav-link.active i { color: var(--adm-lime); }
         .adm-nav-link.active::before { content: ''; position: absolute; left: -2px; top: 50%; width: 6px; height: 6px; margin-top: -3px; border-radius: 50%; background: var(--adm-lime); }
-        .adm-badge-count { background: #262626; color: #fff; font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+        .adm-badge-count { background: #262626; color: #fff; font-size: .7rem; font-weight: 600; padding: 2px 8px; border-radius: 99px; flex-shrink: 0; }
         .adm-nav-link.active .adm-badge-count { background: var(--adm-lime); color: var(--adm-ink); }
-
 
         .adm-sidebar-user { margin-top: auto; padding: 14px 18px 18px; display: flex; align-items: center; gap: 12px; border-top: 1px solid #222; }
         .adm-user-avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--adm-lime); color: var(--adm-ink); display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
@@ -102,38 +101,64 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
         .adm-user-name, .adm-user-email { margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .adm-user-name { font-size: .85rem; font-weight: 600; }
         .adm-user-email { font-size: .72rem; color: #8a8a8a; }
-        .adm-logout-btn { color: #8a8a8a; text-decoration: none; }
+        .adm-logout-btn { color: #8a8a8a; text-decoration: none; flex-shrink: 0; }
         .adm-logout-btn:hover { color: var(--adm-red); }
 
         /* ===== Main + pill top nav ===== */
         .adm-main { flex: 1; margin-left: calc(var(--adm-sidebar-w) + 32px); display: flex; flex-direction: column; min-width: 0; min-height: 100vh; }
         .adm-topbar { padding: 16px 32px 0 0; position: sticky; top: 0; z-index: 1020; }
+        
         .adm-pill {
             background: #fff; border-radius: 999px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; gap: 12px;
-            box-shadow: 0 2px 12px rgba(0,0,0,.04);
+            box-shadow: 0 2px 12px rgba(0,0,0,.04); width: 100%;
         }
-        .adm-toggle-btn { display: none; background: #fff; border: 1px solid var(--adm-border); border-radius: 50%; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; font-size: 1.25rem; }
-        .adm-pill-links { display: flex; gap: 4px; align-items: center; overflow-x: auto; }
-        .adm-pill-links a { text-decoration: none; color: var(--adm-ink); font-size: .88rem; font-weight: 500; padding: 10px 22px; border-radius: 999px; white-space: nowrap; }
+        
+        .adm-toggle-btn { display: none; background: #fff; border: 1px solid var(--adm-border); border-radius: 50%; width: 40px; height: 40px; align-items: center; justify-content: center; cursor: pointer; font-size: 1.25rem; flex-shrink: 0; }
+        
+        .adm-pill-links { display: flex; gap: 4px; align-items: center; overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; padding: 2px; }
+        .adm-pill-links::-webkit-scrollbar { display: none; }
+        .adm-pill-links a { text-decoration: none; color: var(--adm-ink); font-size: .88rem; font-weight: 500; padding: 10px 22px; border-radius: 999px; white-space: nowrap; transition: background 0.2s; }
         .adm-pill-links a:hover { background: #f1f1f1; }
         .adm-pill-links a.active { background: var(--adm-ink); color: #fff; }
-        .adm-pill-right { display: flex; align-items: center; gap: 10px; }
-        .adm-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--adm-border); background: #fff; display: grid; place-items: center; color: var(--adm-ink); text-decoration: none; position: relative; }
+        
+        .adm-pill-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+        .adm-icon-btn { width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--adm-border); background: #fff; display: grid; place-items: center; color: var(--adm-ink); text-decoration: none; position: relative; flex-shrink: 0; }
         .adm-icon-btn .dot { position: absolute; top: 9px; right: 10px; width: 8px; height: 8px; border-radius: 50%; background: var(--adm-red); border: 2px solid #fff; }
-        .adm-pill-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--adm-lime); display: grid; place-items: center; font-weight: 700; }
+        .adm-pill-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--adm-lime); display: grid; place-items: center; font-weight: 700; flex-shrink: 0; }
 
         .adm-body { flex: 1; padding: 20px 32px 40px 0; width: 100%; }
 
         .adm-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); backdrop-filter: blur(4px); z-index: 1030; opacity: 0; transition: opacity .3s; }
         .adm-overlay.open { display: block; opacity: 1; }
 
+        /* ============================================================
+           RESPONSIVE BREAKPOINTS
+           ============================================================ */
         @media (max-width: 991.98px) {
-            .adm-sidebar { transform: translateX(-120%); }
+            .adm-sidebar { transform: translateX(-120%); box-shadow: 10px 0 30px rgba(0,0,0,0.1); }
             .adm-sidebar.open { transform: translateX(0); }
             .adm-main { margin-left: 0; }
             .adm-toggle-btn { display: inline-flex; }
             .adm-topbar { padding: 12px 16px 0; }
             .adm-body { padding: 16px 16px 40px; }
+        }
+
+        /* Mobile Screens */
+        @media (max-width: 576px) {
+            .adm-topbar { padding: 10px 10px 0; }
+            .adm-pill { padding: 6px; gap: 8px; }
+            .adm-toggle-btn { width: 36px; height: 36px; font-size: 1.1rem; }
+            
+            .adm-pill-links { gap: 2px; }
+            .adm-pill-links a { font-size: .8rem; padding: 8px 14px; }
+            
+            .adm-pill-right { gap: 6px; }
+            .adm-icon-btn { width: 36px; height: 36px; font-size: 0.9rem; }
+            .adm-pill-avatar { width: 36px; height: 36px; font-size: 0.9rem; }
+            /* Hide globe icon on very small screens to save space */
+            .adm-icon-btn[title="Live Site"] { display: none; }
+            
+            .adm-body { padding: 12px 10px 30px; }
         }
     </style>
 </head>
@@ -204,7 +229,7 @@ $currentPageTitle = $pageTitles[$adminPage] ?? 'Admin Portal';
     <div class="adm-main">
         <header class="adm-topbar">
             <div class="adm-pill">
-                <div class="d-flex align-items-center gap-2" style="min-width:0">
+                <div class="d-flex align-items-center gap-2" style="min-width:0; flex:1;">
                     <button type="button" class="adm-toggle-btn" id="admSidebarToggle" aria-label="Toggle menu"><i class="bi bi-list"></i></button>
                     <nav class="adm-pill-links">
                         <a href="/admin/dashboard.php" class="<?= $adminPage === 'dashboard.php' ? 'active' : '' ?>">Home</a>
