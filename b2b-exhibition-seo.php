@@ -45,12 +45,20 @@ $keywords = [
     ['Technical SEO Services Delhi', 'webtecmart.com/technical-seo.php', '+19', '6,400/mo', 'Technical'],
 ];
 
-$faqs = [
+$defaultFaqs = [
     ['When should an exhibition organizer start SEO before the event dates?', 'Ideally 6 to 9 months prior to the event dates. This timeline gives Google sufficient opportunity to crawl exhibitor categories, rank competitive sourcing queries, and build momentum before visitor badge pre-registrations peak in the final 90 days.'],
     ['Can individual B2B exhibitors also benefit from exhibition SEO?', 'Absolutely. Individual exhibitors investing in stalls at fairs like Bharat Tex, IHGF, or Auto Expo can launch dedicated exhibition landing pages to rank for product searches during the fair, pre-booking high-value meetings with visiting international delegations before the fair doors even open.'],
     ['How did WebTecMart achieve 400% organic growth for Bharat Tex Fair?', 'We implemented a multi-tiered technical taxonomy, optimized over 200+ global textile keywords, built Event and Organization schema hierarchies, and executed digital PR that earned coverage from global trade portals, securing #1 Google rankings for high-intent search queries worldwide.'],
     ['How do you prevent trade show websites from losing rank once the fair ends?', 'We build evergreen URL structures alongside annual archive slugs. Instead of deleting pages, we transition past editions into authoritative post-show review hubs while redirecting core search equity into next year\'s upcoming event campaign.'],
+    ['Can exhibition SEO help sell out commercial exhibitor booths as well as attract visitors?', 'Yes. We target high-intent commercial exhibitor queries such as "book stall at trade expo", "exhibit at B2B fair", and product sourcing keywords to drive qualified inbound exhibitor leads directly to your sales team.'],
+    ['Do you implement Schema markup for Event dates, venues, tickets, and speaker schedules?', 'Yes. We embed Google-compliant Event Schema (JSON-LD) with start/end dates, venue geo-coordinates, ticket availability, speaker profiles, and organizer credentials for rich snippets in Google Search.'],
+    ['How do you target international trade buyers and global sourcing delegations?', 'We implement multi-regional hreflang tags, currency selectors, and international buyer keyword targeting to attract trade delegations from the Middle East, Europe, North America, and Asia.'],
+    ['Can you build an indexable exhibitor directory that drives long-tail search traffic?', 'Yes. We structure indexable exhibitor profile pages highlighting individual product catalogs and booth numbers, capturing thousands of niche B2B product search queries.'],
+    ['How do you track delegate registrations and exhibitor inquiries in GA4?', 'We configure GA4 custom event tracking for badge registrations, PDF brochure downloads, hall layout views, and exhibitor inquiry forms with automated attribution modeling.'],
+    ['What digital PR and trade media backlink strategies do you use for expos?', 'We secure editorial placements, press release syndication, and calendar listings across verified trade publications, government export boards, and industry associations.']
 ];
+
+$faqs = !empty($dbService['faqs']) ? $dbService['faqs'] : $defaultFaqs;
 
 $brandLogos = [
     ['name' => 'Informa Global', 'logo' => '/assets/images/logo-1.png'],
@@ -814,18 +822,48 @@ $brandLogos = [
                     <p>Answers to key questions asked by trade show organizers and international B2B exhibitors.</p>
                 </div>
                 <div>
-                    <?php foreach ($faqs as $i => $f): ?>
+                    <?php foreach ($faqs as $i => $f): 
+                        $q = (string)($f['q'] ?? $f['question'] ?? $f[0] ?? '');
+                        $a = (string)($f['a'] ?? $f['answer'] ?? $f[1] ?? '');
+                        if (empty($q)) continue;
+                    ?>
                         <div class="ev-faq-item<?= $i === 0 ? ' active' : '' ?>">
                             <button class="ev-faq-btn" onclick="toggleEvFaq(this)">
-                                <span><?= htmlspecialchars($f[0]) ?></span>
+                                <span><?= htmlspecialchars($q) ?></span>
                                 <span class="icon">+</span>
                             </button>
-                            <div class="ev-faq-answer"><?= htmlspecialchars($f[1]) ?></div>
+                            <div class="ev-faq-answer"><?= htmlspecialchars($a) ?></div>
                         </div>
                     <?php endforeach; ?>
                 </div>
             </div>
         </div>
+        <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                <?php 
+                $faqSchema = [];
+                foreach ($faqs as $f) {
+                    $q = (string)($f['q'] ?? $f['question'] ?? $f[0] ?? '');
+                    $a = (string)($f['a'] ?? $f['answer'] ?? $f[1] ?? '');
+                    if ($q) {
+                        $faqSchema[] = json_encode([
+                            '@type' => 'Question',
+                            'name' => $q,
+                            'acceptedAnswer' => [
+                                '@type' => 'Answer',
+                                'text' => $a
+                            ]
+                        ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+                    }
+                }
+                echo implode(",\n", $faqSchema);
+                ?>
+            ]
+        }
+        </script>
     </section>
 
     <!-- 7. CTA -->

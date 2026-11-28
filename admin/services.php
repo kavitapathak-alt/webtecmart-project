@@ -1694,6 +1694,7 @@ require_once __DIR__ . '/templates/header.php';
                                 <div class="scms-item-card p-3 mb-3 border rounded bg-white shadow-sm" id="scmsFaqRow_<?= $fIdx ?>">
                                     <div class="d-flex align-items-center justify-content-between mb-2">
                                         <div class="fw-bold small text-primary"><i class="bi bi-patch-question me-1"></i> FAQ Question #<?= $fIdx + 1 ?></div>
+                                        <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2" onclick="this.closest('.scms-item-card').remove()"><i class="bi bi-trash"></i></button>
                                     </div>
                                     <div class="mb-2">
                                         <label class="small text-muted">Question</label>
@@ -1706,6 +1707,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="scmsAddFaq()"><i class="bi bi-plus-lg me-1"></i> Add Another FAQ</button>
                     </div>
 
                     <!-- TAB 12: SEO METADATA -->
@@ -1851,7 +1853,11 @@ require_once __DIR__ . '/templates/header.php';
                     <div id="tab-faqs" class="scms-tab-pane d-none">
                         <div id="scmsFaqList">
                             <?php foreach ($faqs as $idx => $fq): ?>
-                                <div class="scms-item-card" id="scmsFaqRow_<?= $idx ?>">
+                                <div class="scms-item-card p-3 mb-3 border rounded bg-white shadow-sm" id="scmsFaqRow_<?= $idx ?>">
+                                    <div class="d-flex align-items-center justify-content-between mb-2">
+                                        <div class="fw-bold small text-primary"><i class="bi bi-patch-question me-1"></i> FAQ Question #<?= $idx + 1 ?></div>
+                                        <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2" onclick="this.closest('.scms-item-card').remove()"><i class="bi bi-trash"></i></button>
+                                    </div>
                                     <div class="mb-2">
                                         <input type="text" name="faq_questions[<?= $idx ?>]" class="scms-form-control fw-bold" value="<?= htmlspecialchars($fq['q'] ?? ($fq['question'] ?? '')) ?>" placeholder="Question">
                                     </div>
@@ -1861,6 +1867,7 @@ require_once __DIR__ . '/templates/header.php';
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2" onclick="scmsAddFaq()"><i class="bi bi-plus-lg me-1"></i> Add Another FAQ</button>
                     </div>
 
                     <!-- TAB 6: ADVANCE UI -->
@@ -2103,18 +2110,21 @@ require_once __DIR__ . '/templates/header.php';
 
     // Add Dynamic FAQ Repeater Box
     function scmsAddFaq() {
-        const container = document.getElementById('scmsFaqsContainer');
+        const container = document.getElementById('scmsFaqList') || document.getElementById('scmsFaqsContainer');
+        if (!container) return;
+        const count = container.querySelectorAll('.scms-item-card, .scms-repeater-box').length;
         const div = document.createElement('div');
-        div.className = 'scms-repeater-box';
+        div.className = 'scms-item-card p-3 mb-3 border rounded bg-white shadow-sm';
         div.innerHTML = `
-            <button type="button" class="del-btn" onclick="this.closest('.scms-repeater-box').remove()"><i class="bi bi-x"></i></button>
-            <div class="row">
-                <div class="col-12 mb-2 pe-5">
-                    <input type="text" name="faq_questions[]" class="scms-form-control fw-bold" placeholder="Question">
-                </div>
-                <div class="col-12">
-                    <textarea name="faq_answers[]" class="scms-form-control" rows="3" placeholder="Authoritative answer..."></textarea>
-                </div>
+            <div class="d-flex align-items-center justify-content-between mb-2">
+                <div class="fw-bold small text-primary"><i class="bi bi-patch-question me-1"></i> FAQ Question #${count + 1}</div>
+                <button type="button" class="btn btn-sm btn-outline-danger py-0 px-2" onclick="this.closest('.scms-item-card').remove()"><i class="bi bi-trash"></i></button>
+            </div>
+            <div class="mb-2">
+                <input type="text" name="faq_questions[]" class="scms-form-control fw-bold" placeholder="Question" required>
+            </div>
+            <div>
+                <textarea name="faq_answers[]" class="scms-form-control" rows="2" placeholder="Answer" required></textarea>
             </div>
         `;
         container.appendChild(div);

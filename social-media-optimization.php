@@ -73,6 +73,22 @@ $serviceData = [
             'q' => 'How do you measure success?',
             'a' => 'We track reach, engagement rate, follower growth, website clicks, leads, and sales — tied to the specific KPIs we set with you in the strategy phase. No vanity metrics, only numbers that matter.',
         ],
+        [
+            'q' => 'Can our team review and approve posts before publishing?',
+            'a' => 'Yes. We prepare monthly content calendars with completed designs and copy 7 to 10 days in advance for your review and approval before scheduling.',
+        ],
+        [
+            'q' => 'How do you grow authentic followers and avoid fake bots?',
+            'a' => 'We focus strictly on organic audience attraction: high-value carousel graphics, algorithm-favored video reels, niche community interactions, and targeted hashtag strategies. We never use fake followers or bots.',
+        ],
+        [
+            'q' => 'Do you offer personal branding for founders and executives on LinkedIn?',
+            'a' => 'Yes. We curate executive thought-leadership articles, opinion carousels, and networking strategies that position company leaders as industry authorities.',
+        ],
+        [
+            'q' => 'How do you handle comments and customer inquiries on our profiles?',
+            'a' => 'We monitor comments, mentions, and direct messages, providing friendly responses, filtering spam, and escalating high-priority customer inquiries directly to your sales team.',
+        ],
     ],
 ];
 

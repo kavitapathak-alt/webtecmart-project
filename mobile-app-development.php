@@ -79,6 +79,22 @@ From early-stage MVP prototypes to enterprise-grade mobile platforms, our in-hou
             'q' => 'Do you provide post-launch support and maintenance?',
             'a' => 'Yes. All our development packages include free post-launch support, followed by flexible ongoing maintenance retainers for OS upgrades, server monitoring, and feature additions.',
         ],
+        [
+            'q' => 'Can you build a custom web admin dashboard to manage app users and content?',
+            'a' => 'Yes. Every mobile application we develop comes with an intuitive, secure web-based admin control panel allowing your team to easily manage users, orders, notifications, and analytics.',
+        ],
+        [
+            'q' => 'How do you handle app security and user data privacy?',
+            'a' => 'We implement end-to-end data encryption, SSL certificate pinning, secure JWT authentication tokens, and adhere to OWASP Mobile Security guidelines to safeguard user data.',
+        ],
+        [
+            'q' => 'Can you integrate payment gateways and push notifications?',
+            'a' => 'Yes. We seamlessly integrate Razorpay, Stripe, PayU, Apple Pay, Google Pay, Firebase Cloud Messaging (FCM) for push notifications, and SMS/WhatsApp OTP authentication.',
+        ],
+        [
+            'q' => 'How do you test apps to ensure zero crashes across devices?',
+            'a' => 'We perform thorough automated and manual QA across 50+ real iOS and Android smartphone models, testing memory consumption, battery usage, network latency, and responsive UI scaling.',
+        ],
     ],
 ];
 
